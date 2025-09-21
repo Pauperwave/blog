@@ -22,3 +22,8 @@ logs
 .env
 .env.*
 !.env.example
+
+# TODOs
+.devcontainer/
+.github/
+LICENSE.md
