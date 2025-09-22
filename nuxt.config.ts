@@ -1,6 +1,9 @@
+import tailwindcss from '@tailwindcss/vite'
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
+
   devtools: {
     enabled: true,
 
@@ -25,7 +28,10 @@ export default defineNuxtConfig({
     '@nuxtjs/device',
     '@nuxtjs/seo',
     '@vite-pwa/nuxt',
-    '@nuxtjs/fontaine'
+    '@nuxtjs/fontaine',
+    '@nuxtjs/color-mode',
+    '@nuxt/icon',
+    '@nuxt/fonts',
   ],
 
   i18n: {
@@ -37,5 +43,16 @@ export default defineNuxtConfig({
       { code: 'en', iso: 'en-US', file: 'en.ts' },
       { code: 'it', iso: 'it-IT', file: 'it.ts' },
     ],
+  },
+
+  content: {
+    build: {
+      markdown: {
+        toc: {
+          depth: 3, // include h3 headings
+          searchDepth: 2
+        }
+      }
+    }
   },
 })
