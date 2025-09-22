@@ -1,0 +1,1 @@
+// DELETE /tournaments/:id

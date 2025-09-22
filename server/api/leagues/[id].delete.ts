@@ -1,0 +1,1 @@
+// DELETE /leagues/:id 
