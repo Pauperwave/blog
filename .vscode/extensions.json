@@ -1,10 +1,17 @@
 {
   "recommendations": [
-    "vue.volar",
+    "antfu.iconify",
+    "antfu.vite",
     "bradlc.vscode-tailwindcss",
     "esbenp.prettier-vscode",
-    "antfu.iconify",
     "formulahendry.auto-close-tag",
-    "formulahendry.auto-rename-tag"
+    "formulahendry.auto-rename-tag",
+    "github.vscode-github-actions",
+    "ms-vscode-remote.remote-containers",
+    "nuxtr.nuxt-vscode-extentions",
+    "usernamehw.errorlens",
+    "vitest.explorer",
+    "vue.volar",
+    "wix.vscode-import-cost",
   ]
 }
