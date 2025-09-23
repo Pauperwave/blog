@@ -1,5 +1,5 @@
 ---
-title: "Top 8 Pauperiadi II, IPT Ferrara"
+title: "2025-09-21 Top 8 Pauperiadi II, IPT Ferrara"
 description: "Decklists and report from the Top 8 of the Pauperiadi II, IPT Ferrara event held on 21 September 2025."
 authors: ["Bragioto Pietro"]
 date: 2025-09-22
@@ -7,7 +7,7 @@ updatedAt: 2025-09-22
 draft: false
 tags: ["tournament", "report", "decklists", "pauper", "ipt", "ferrara"]
 hero: {
-  image: "content/assets/2025-09-21-banner-pauperiadi-2025_lungo.webp",
+  image: "content/assets/banner/2025-09-21-banner-pauperiadi-2025_lungo.webp",
   alt: "Top 8 Pauperiadi II, IPT Ferrara",
   caption: "Top 8 Pauperiadi II, IPT Ferrara"
 }
@@ -33,6 +33,48 @@ title: Nuxt Architecture.
 | **Struttura**    | 7 turni di svizzera + Top 8 a eliminazione diretta                              |
 
 ## Decklists
+
+::decklist
+---
+name: Familiar
+author: Andrea Landi
+position: Winner
+description: A control deck leveraging the power of flicker effects and card draw.
+---
+-- Creatures
+4 God-Pharaoh's Faithful
+4 Sunscape Familiar
+3 Sea Gate Oracle
+3 Archaeomancer
+2 Murmuring Mystic
+3 Mulldrifter
+-- Instants
+2 Ephemerate
+4 Snap
+1 Ghostly Flicker
+2 Prohibit
+1 Negate
+1 Glorious Gale
+3 Meeting of Minds
+-- Sorceries
+4 Preordain
+4 Lorien Revealed
+-- Lands
+4 Azorius Chancery
+1 Idyllic Beachfront
+3 Contaminated Landscape
+8 Island
+2 Plains
+1 Mortuary Mire
+-- Sideboard
+3 Hydroblast
+2 Negate
+2 Circle of Protection: Blue
+2 Stonehorn Dignitary
+2 Last Breath
+2 Envelop
+2 Ride's End
+::
 
 <!-- <Decklist :name="Familiar" :author="Andrea Landi" :position="Winner"
   :description="A control deck leveraging the power of flicker effects and card draw."
