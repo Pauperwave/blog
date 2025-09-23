@@ -1,7 +1,7 @@
 ---
 title: "Top 8 Pauperiadi II, IPT Ferrara"
 description: "Decklists and report from the Top 8 of the Pauperiadi II, IPT Ferrara event held on 21 September 2025."
-authors: ["Bragiotto Pietro"]
+authors: ["Bragioto Pietro"]
 date: 2025-09-22
 updatedAt: 2025-09-22
 draft: false
