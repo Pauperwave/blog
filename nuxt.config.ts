@@ -3,7 +3,6 @@ import tailwindcss from '@tailwindcss/vite'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
-
   devtools: {
     enabled: true,
 
@@ -11,7 +10,12 @@ export default defineNuxtConfig({
       enabled: true
     }
   },
-
+  css: ['~/assets/css/main.css'],
+  vite: {
+    plugins: [
+      tailwindcss()
+    ]
+  },
   modules: [
     '@nuxt/content',
     '@nuxt/eslint',
@@ -33,7 +37,6 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@vite-pwa/nuxt',
   ],
-
   i18n: {
     defaultLocale: 'it',
     strategy: 'prefix_except_default',
@@ -44,7 +47,6 @@ export default defineNuxtConfig({
       { code: 'it', iso: 'it-IT', file: 'it.ts' },
     ],
   },
-
   content: {
     build: {
       markdown: {

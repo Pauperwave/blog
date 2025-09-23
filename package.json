@@ -16,6 +16,8 @@
     "@nuxt/image": "1.11.0",
     "@nuxt/scripts": "0.11.13",
     "@nuxt/ui": "3.3.4",
+    "@tailwindcss/vite": "^4.1.13",
+    "tailwindcss": "^4.1.13",
     "@unhead/vue": "^2.0.17",
     "better-sqlite3": "^12.3.0",
     "dayjs": "^1.11.18",
