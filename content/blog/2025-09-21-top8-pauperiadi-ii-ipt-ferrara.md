@@ -41,14 +41,15 @@ author: Andrea Landi
 position: Winner
 description: A control deck leveraging the power of flicker effects and card draw.
 ---
--- Creatures
+# Creatures
 4 God-Pharaoh's Faithful
 4 Sunscape Familiar
 3 Sea Gate Oracle
 3 Archaeomancer
 2 Murmuring Mystic
 3 Mulldrifter
--- Instants
+
+# Instants
 2 Ephemerate
 4 Snap
 1 Ghostly Flicker
@@ -56,17 +57,20 @@ description: A control deck leveraging the power of flicker effects and card dra
 1 Negate
 1 Glorious Gale
 3 Meeting of Minds
--- Sorceries
+
+# Sorceries
 4 Preordain
 4 Lorien Revealed
--- Lands
+
+# Lands
 4 Azorius Chancery
 1 Idyllic Beachfront
 3 Contaminated Landscape
 8 Island
 2 Plains
 1 Mortuary Mire
--- Sideboard
+
+# Sideboard
 3 Hydroblast
 2 Negate
 2 Circle of Protection: Blue
