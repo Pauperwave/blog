@@ -1,5 +1,5 @@
 ---
-title: "2025-07-21 Top 4 carte Pauper di Edge of Eternities"
+title: "Top 4 carte Pauper di Edge of Eternities"
 description: ""
 authors: ["Bragioto Pietro"]
 date: 2025-07-21
