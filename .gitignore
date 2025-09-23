@@ -27,6 +27,4 @@ logs
 .devcontainer/
 .github/
 LICENSE.md
-app/components/CardFan.vue
-app/components/Decklist.vue
-app/components/IconCard.vue
+app/components/blog/*.vue
