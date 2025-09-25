@@ -31,6 +31,14 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@vite-pwa/nuxt',
   ],
+  vite: {
+    plugins: [
+      tailwindcss()
+    ]
+  },
+  eslint: {
+    checker: true // run eslint during dev and build
+  },
   content: {
     build: {
       markdown: {
@@ -42,11 +50,6 @@ export default defineNuxtConfig({
     }
   },
   css: ['~/assets/css/main.css'],
-  vite: {
-    plugins: [
-      tailwindcss()
-    ]
-  },
   // Nuxt UI Prefix
   // ui: {
   //   colorMode: true,
