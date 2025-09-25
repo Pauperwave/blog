@@ -16,6 +16,7 @@ export default defineNuxtConfig({
     '@nuxt/scripts',
     '@nuxt/test-utils',
     '@nuxt/ui',
+    '@compodium/nuxt',
     '@nuxt/icon',
     '@nuxt/fonts',
     '@nuxtjs/i18n',

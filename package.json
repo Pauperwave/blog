@@ -11,20 +11,22 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@compodium/nuxt": "0.1.0-beta.12",
     "@nuxt/content": "3.7.1",
     "@nuxt/eslint": "1.9.0",
     "@nuxt/image": "1.11.0",
+    "@nuxt/kit": "^4.1.2",
     "@nuxt/scripts": "0.11.13",
     "@nuxt/ui": "3.3.4",
     "@tailwindcss/vite": "^4.1.13",
     "@unhead/vue": "^2.0.17",
-    "better-sqlite3": "^12.3.0",
+    "better-sqlite3": "^12.4.1",
     "dayjs": "^1.11.18",
     "eslint": "^9.36.0",
     "nuxt": "^4.1.2",
     "pinia": "^3.0.3",
     "tailwindcss": "^4.1.13",
-    "vue": "^3.5.21",
+    "vue": "^3.5.22",
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
@@ -43,7 +45,7 @@
     "happy-dom": "^18.0.1",
     "magic-regexp": "^0.10.0",
     "pinia-plugin-persistedstate": "^4.5.0",
-    "playwright-core": "^1.55.0",
+    "playwright-core": "^1.55.1",
     "typescript": "^5.9.2",
     "vite-plugin-pwa": "^1.0.3",
     "vitest": "^3.2.4",
