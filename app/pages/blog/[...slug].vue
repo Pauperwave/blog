@@ -6,6 +6,8 @@ const { data: post } = await useAsyncData(`blog-${slug}`, () => {
 </script>
 
 <template>
-    <!-- Render the blog post as Prose & Vue components -->
-    <ContentRenderer :value="post" />
+    <!-- Render the blog post with Tailwind typography -->
+    <article class="prose prose-lg max-w-none">
+        <ContentRenderer :value="post" />
+    </article>
 </template>
