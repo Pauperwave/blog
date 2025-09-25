@@ -1,0 +1,76 @@
+---
+title: "Component Testing"
+description: ""
+authors: ["Emanuele Nardi"]
+date: 2025-09-25
+updatedAt: 2025-09-25
+draft: true
+tags: ["commander"]
+hero: {
+    image: "content/assets/art/Tezzeret-Chris-Rahn.webp",
+    alt: "Top 4 carte Pauper di Edge of Eternities",
+    caption: "Top 4 carte Pauper di Edge of Eternities"
+}
+---
+# Component Testing
+
+Testando vari componenti.
+
+::magic-cards
+Cat Collector
+Grand Crescendo
+Happily Ever After
+Resistant reunited
+United Battlefront
+Gorilla Titan
+Life Burst
+::
+
+## Reverse engineering on a Nuxt Component
+
+original markdown on the magic.wizards.com blog
+```html
+<magic-cards config="fan" as="div" collection="" overall-arch="20.5" max-card-size="" force-swiper-on-mobile="" mobile-breakpoint="768" data-v-app="" style="--43a19d5c: 185.5;">
+    <div class="_wrap_jih3n_1" data-magic-cards-v="3.1.3" data-cards-length="0">
+        <!---->
+        <div>
+            <magic-card face="https://media.wizards.com/2024/dft/jX9KWo03DWpL/en_269991e62b.png" caption="" as="div" width="auto" data-v-app=""></magic-card>
+            <magic-card face="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=208273&amp;type=card" caption="" as="div" width="auto" data-v-app=""></magic-card>
+            <magic-card face="https://media.wizards.com/2025/tdm/en_6021f86e4f.webp" caption="" as="div" width="auto" data-v-app=""></magic-card>
+            <magic-card face="https://media.wizards.com/2023/cmm/en_50f86461c6.png" caption="" as="div" width="auto" data-v-app=""></magic-card>
+            <magic-card face="https://media.wizards.com/2023/cmm/en_718e76e3f4.png" caption="" as="div" width="auto" data-v-app=""></magic-card>
+        </div>
+        <div class="_swiperBoundary_jih3n_18 _visible_jih3n_14 _swiperBoundaryBeginning_jih3n_143">
+            <swiper-container slides-per-view="auto" space-between="12" centered-slides="false">
+                <template shadowrootmode="open">
+                    <div class="swiper swiper-initialized swiper-horizontal swiper-backface-hidden" part="container">
+                        <slot name="container-start"></slot>
+                        <div class="swiper-wrapper" part="wrapper" id="swiper-wrapper-c1059fbd859541ba2" aria-live="polite">
+                            <slot></slot>
+                        </div>
+                        <slot name="container-end"></slot>
+                        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                    </div>
+                </template>
+            </swiper-container>
+        </div>
+        <div class="_container_jih3n_6">
+        </div>
+        <!---->
+    </div>
+</magic-cards>
+```
+
+in production html
+
+```html
+<magic-cards config=fan as=div collection overall-arch="20.5" max-card-size force-swiper-on-mobile mobile-breakpoint="768" data-v-app style="--43a19d5c: 265;">
+    <div class="_wrap_jih3n_1" data-magic-cards-v="3.1.3" data-cards-length=5>
+        <div class="_swiperBoundary_jih3n_18 _swiperBoundaryBeginning_jih3n_143">
+            <swipe-container slides-per-view="auto" space-betweem="12" centered-slides=false></swipe-container>
+        </div>
+        <div>
+        </div>
+    </div>
+</magic-cards>
+```
