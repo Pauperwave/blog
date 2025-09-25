@@ -6,17 +6,19 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview",
+    "lint": "eslint .",
     "postinstall": "nuxt prepare",
-    "test": "vitest"
+    "preview": "nuxt preview",
+    "test": "vitest",
+    "typecheck": "nuxt typecheck"
   },
   "dependencies": {
     "@compodium/nuxt": "0.1.0-beta.12",
     "@nuxt/content": "3.7.1",
     "@nuxt/eslint": "1.9.0",
     "@nuxt/image": "1.11.0",
-    "@nuxt/kit": "^4.1.2",
-    "@nuxt/scripts": "0.11.13",
+    "@nuxt/kit": "4.1.2",
+    "@nuxt/scripts": "0.12.1",
     "@nuxt/ui": "4.0.0",
     "@tailwindcss/vite": "^4.1.13",
     "@unhead/vue": "^2.0.17",
