@@ -4,14 +4,10 @@
     <NuxtWelcome />
   </div> -->
   <NuxtLayout>
-    <UApp>
-      <header>
-        Header content
-      </header>
+    <main class="container mx-auto p-4">
+      <!-- <TheHeader /> -->
       <NuxtPage />
-      <footer>
-        Footer content
-      </footer>
-    </UApp>
+      <!-- <TheFooter /> -->
+    </main>
   </NuxtLayout>
 </template>
