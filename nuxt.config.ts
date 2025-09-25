@@ -5,16 +5,9 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: {
     enabled: true,
-
     timeline: {
       enabled: true
     }
-  },
-  css: ['~/assets/css/main.css'],
-  vite: {
-    plugins: [
-      tailwindcss()
-    ]
   },
   modules: [
     '@nuxt/content',
@@ -37,16 +30,6 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@vite-pwa/nuxt',
   ],
-  i18n: {
-    defaultLocale: 'it',
-    strategy: 'prefix_except_default',
-    langDir: 'locales/',
-    locales: [
-      { code: 'de', iso: 'de-DE', file: 'de.ts' },
-      { code: 'en', iso: 'en-US', file: 'en.ts' },
-      { code: 'it', iso: 'it-IT', file: 'it.ts' },
-    ],
-  },
   content: {
     build: {
       markdown: {
@@ -56,5 +39,26 @@ export default defineNuxtConfig({
         }
       }
     }
+  },
+  css: ['~/assets/css/main.css'],
+  vite: {
+    plugins: [
+      tailwindcss()
+    ]
+  },
+  // Nuxt UI Prefix
+  // ui: {
+  //   colorMode: true,
+  //   fonts: true
+  // },
+  i18n: {
+    defaultLocale: 'it',
+    strategy: 'prefix_except_default',
+    langDir: 'locales/',
+    locales: [
+      { code: 'de', iso: 'de-DE', file: 'de.ts' },
+      { code: 'en', iso: 'en-US', file: 'en.ts' },
+      { code: 'it', iso: 'it-IT', file: 'it.ts' },
+    ],
   },
 })
