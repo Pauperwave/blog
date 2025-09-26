@@ -5,9 +5,9 @@
   </div> -->
   <NuxtLayout>
     <main class="container mx-auto p-4">
-      <TheHeader />
+      <BlogHeader />
       <NuxtPage />
-      <TheFooter />
+      <BlogFooter />
     </main>
   </NuxtLayout>
 </template>
