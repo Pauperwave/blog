@@ -137,6 +137,6 @@ watch(rawText, async (raw) => {
         >
       </div>
     </div>
-    <div v-else-if="!loading" class="text-gray-500 mt-4">Nessuna carta caricata</div>
+    <div v-else-if="!loading" class="text-2xl font-sans font-bold text-indigo-500">Nessuna carta caricata</div>
   </div>
 </template>
