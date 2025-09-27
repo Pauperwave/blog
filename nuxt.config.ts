@@ -38,9 +38,6 @@ export default defineNuxtConfig({
       tailwindcss()
     ]
   },
-  // eslint: {
-  //   checker: true // run eslint during dev and build
-  // },
   content: {
     build: {
       markdown: {
@@ -52,11 +49,6 @@ export default defineNuxtConfig({
     }
   },
   css: ['~/assets/css/main.css'],
-  // Nuxt UI Prefix
-  // ui: {
-  //   colorMode: true,
-  //   fonts: true
-  // },
   i18n: {
     defaultLocale: 'it',
     strategy: 'prefix_except_default',
@@ -67,4 +59,10 @@ export default defineNuxtConfig({
       { code: 'it', iso: 'it-IT', file: 'it.ts' },
     ],
   },
+  dayjs: {
+    locales: ['en', 'it', 'de'],
+    plugins: ['relativeTime', 'utc', 'timezone'],
+    defaultLocale: 'it',
+    defaultTimezone: 'Europe/Rome',
+  }
 })
