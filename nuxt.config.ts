@@ -30,6 +30,7 @@ export default defineNuxtConfig({
     '@formkit/auto-animate',
     '@vueuse/nuxt',
     '@vite-pwa/nuxt',
+    'nuxt-swiper',
   ],
   vite: {
     plugins: [
