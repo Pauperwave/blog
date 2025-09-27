@@ -66,6 +66,13 @@ export default defineNuxtConfig({
     ],
   },
   
+  /**
+   * Alias 'dayjs' to ensure proper resolution of the Day.js library.
+   * @see: https://github.com/nuxt/nuxt/issues/29084
+   */
+  alias: {
+    'dayjs': 'dayjs'
+  },
   dayjs: {
     locales: ['en', 'it', 'de'],
     plugins: ['relativeTime', 'utc', 'timezone'],
