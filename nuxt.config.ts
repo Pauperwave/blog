@@ -31,6 +31,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@vite-pwa/nuxt',
     'nuxt-swiper',
+    'dayjs-nuxt',
   ],
   vite: {
     plugins: [
