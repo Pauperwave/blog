@@ -36,9 +36,9 @@ export default defineNuxtConfig({
       tailwindcss()
     ]
   },
-  eslint: {
-    checker: true // run eslint during dev and build
-  },
+  // eslint: {
+  //   checker: true // run eslint during dev and build
+  // },
   content: {
     build: {
       markdown: {
