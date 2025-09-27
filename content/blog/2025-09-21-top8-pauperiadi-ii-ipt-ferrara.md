@@ -13,15 +13,7 @@ hero: {
 }
 ---
 
-# Top 8 Pauperiadi II, IPT Ferrara
-
-::icon-card
----
-icon: IconNuxt
-description: Harness the full power of Nuxt and the Nuxt ecosystem.
-title: Nuxt Architecture.
----
-::
+# {{ $doc.title }}
 
 |                  |                                                                                 |
 |------------------|---------------------------------------------------------------------------------|
@@ -34,14 +26,14 @@ title: Nuxt Architecture.
 
 ## Decklists
 
-::decklist
+<!-- ::decklist
 ---
 name: Familiar
 author: Andrea Landi
 position: Winner
 description: A control deck leveraging the power of flicker effects and card draw.
 ---
-# Creatures
+#Creatures
 4 God-Pharaoh's Faithful
 4 Sunscape Familiar
 3 Sea Gate Oracle
@@ -49,7 +41,7 @@ description: A control deck leveraging the power of flicker effects and card dra
 2 Murmuring Mystic
 3 Mulldrifter
 
-# Instants
+#Instants
 2 Ephemerate
 4 Snap
 1 Ghostly Flicker
@@ -58,11 +50,11 @@ description: A control deck leveraging the power of flicker effects and card dra
 1 Glorious Gale
 3 Meeting of Minds
 
-# Sorceries
+#Sorceries
 4 Preordain
 4 Lorien Revealed
 
-# Lands
+#Lands
 4 Azorius Chancery
 1 Idyllic Beachfront
 3 Contaminated Landscape
@@ -70,7 +62,7 @@ description: A control deck leveraging the power of flicker effects and card dra
 2 Plains
 1 Mortuary Mire
 
-# Sideboard
+#Sideboard
 3 Hydroblast
 2 Negate
 2 Circle of Protection: Blue
@@ -78,7 +70,7 @@ description: A control deck leveraging the power of flicker effects and card dra
 2 Last Breath
 2 Envelop
 2 Ride's End
-::
+:: -->
 
 <!-- <Decklist :name="Familiar" :author="Andrea Landi" :position="Winner"
   :description="A control deck leveraging the power of flicker effects and card draw."

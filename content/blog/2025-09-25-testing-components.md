@@ -12,18 +12,28 @@ hero: {
     caption: "Top 4 carte Pauper di Edge of Eternities"
 }
 ---
-# Component Testing
+
+# {{ $doc.title }}
 
 Testando vari componenti.
 
+<!-- togli fan alla fine e crea un componente unico che dipende da quante carte mostri -->
 ::magic-cards
-Cat Collector
-Grand Crescendo
-Happily Ever After
-Resistant reunited
-United Battlefront
-Gorilla Titan
-Life Burst
+Agate Instigator (BLC) 21
+Impact Tremors (FDN) 717
+Molten Gatekeeper (MH3) 128
+General Kreat, the Boltbringer (J25) 48
+Purphoros, God of the Forge (CMM) 246
+Weftstalker Ardent (EOE) 169
+::
+
+::magic-cards
+Shocking Sharpshooter (TDM) 121
+Witty Roastmaster (SNC) 131
+::
+
+::magic-cards
+Shocking Sharpshooter (TDM) 121
 ::
 
 ## Reverse engineering on a Nuxt Component
