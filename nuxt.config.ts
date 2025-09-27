@@ -3,12 +3,14 @@ import tailwindcss from '@tailwindcss/vite'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
+  
   devtools: {
     enabled: true,
     timeline: {
       enabled: true
     }
   },
+
   modules: [
     '@nuxt/content',
     '@nuxt/eslint',
@@ -33,11 +35,13 @@ export default defineNuxtConfig({
     'nuxt-swiper',
     'dayjs-nuxt',
   ],
+
   vite: {
     plugins: [
       tailwindcss()
     ]
   },
+
   content: {
     build: {
       markdown: {
@@ -48,7 +52,9 @@ export default defineNuxtConfig({
       }
     }
   },
+
   css: ['~/assets/css/main.css'],
+  
   i18n: {
     defaultLocale: 'it',
     strategy: 'prefix_except_default',
@@ -59,10 +65,17 @@ export default defineNuxtConfig({
       { code: 'it', iso: 'it-IT', file: 'it.ts' },
     ],
   },
+  
   dayjs: {
     locales: ['en', 'it', 'de'],
     plugins: ['relativeTime', 'utc', 'timezone'],
     defaultLocale: 'it',
     defaultTimezone: 'Europe/Rome',
-  }
+  },
+
+  piniaPluginPersistedstate: {
+    storage: 'localStorage',
+    key: 'pinia-persisted-state_%id',
+    debug: true,
+  },
 })
