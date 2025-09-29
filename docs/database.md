@@ -56,24 +56,6 @@ create index IF not exists idx_blog_posts_author_uuid
 
 ### 1. Pauperwave domain
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 - `pauperwave_associates`: Stores information about associates in the PauperWave community.
 
 ```sql
@@ -171,20 +153,6 @@ ORDER BY surname_score DESC, name_score DESC
 LIMIT 5;
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 - `pauperwave_associate_renewals`: Tracks renewals for PauperWave associates.
 
 ```sql
@@ -266,7 +234,6 @@ create table public.pauperwave_payments (
     )
   )
 ) TABLESPACE pg_default;
-
 
 -- 2. Indexes for faster lookups
 create index IF not exists idx_pauperwave_payments_associate_id on public.pauperwave_payments using btree (associate_id) TABLESPACE pg_default;
