@@ -56,24 +56,6 @@ create index IF not exists idx_blog_posts_author_uuid
 
 ### 1. Pauperwave domain
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 - `pauperwave_associates`: Stores information about associates in the PauperWave community.
 
 ```sql
@@ -170,20 +152,6 @@ WHERE (lower(unaccent(coalesce(a.surname,''))) % p.s_surname) -- trigram match o
 ORDER BY surname_score DESC, name_score DESC
 LIMIT 5;
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 - `pauperwave_associate_renewals`: Tracks renewals for PauperWave associates.
 
