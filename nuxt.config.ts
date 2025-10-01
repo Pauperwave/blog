@@ -32,6 +32,7 @@ export default defineNuxtConfig({
     'magic-regexp',
     '@formkit/auto-animate',
     '@vueuse/nuxt',
+    '@vueuse/motion/nuxt',
     '@vite-pwa/nuxt',
     'nuxt-swiper',
     'dayjs-nuxt',
