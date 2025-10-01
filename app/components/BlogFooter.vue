@@ -4,19 +4,21 @@
       <div class="footer-section brand-social">
         <h3 class="brand-name">Pauperwave APS</h3>
         <div class="social-icons">
-          <NuxtLink to="https://facebook.com/pauperwave" target="_blank" aria-label="Facebook">
+          <NuxtLink to="https://facebook.com/pauperwave" target="_blank" rel="noopener noreferrer"
+            aria-label="Facebook">
             <Icon name="fa7-brands:facebook" />
           </NuxtLink>
-          <NuxtLink to="https://instagram.com/pauperwave" target="_blank" aria-label="Instagram">
+          <NuxtLink to="https://instagram.com/pauperwave" target="_blank" rel="noopener noreferrer"
+            aria-label="Instagram">
             <Icon name="fa7-brands:instagram" />
           </NuxtLink>
-          <NuxtLink to="https://youtube.com/@pauperwave" target="_blank" aria-label="YouTube">
+          <NuxtLink to="https://youtube.com/@pauperwave" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
             <Icon name="fa7-brands:youtube" />
           </NuxtLink>
-          <NuxtLink to="https://x.com/pauperwave" target="_blank" aria-label="X">
+          <NuxtLink to="https://x.com/pauperwave" target="_blank" rel="noopener noreferrer" aria-label="X">
             <Icon name="fa7-brands:x-twitter" />
           </NuxtLink>
-          <NuxtLink to="https://t.me/pauperwave" target="_blank" aria-label="Telegram">
+          <NuxtLink to="https://t.me/pauperwave" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
             <Icon name="fa7-brands:telegram" />
           </NuxtLink>
         </div>
@@ -35,17 +37,15 @@
         <NuxtLink to="#">Privacy Policy</NuxtLink>
       </div>
     </div>
-    <p class="text-xs text-center">Pauperwave non costituisce testata giornalistica e non ha carattere periodico essendo
+    <p class="text-xs text-center">
+      Pauperwave non costituisce testata giornalistica e non ha carattere periodico essendo
       aggiornato secondo disponibilità degli autori. Pertanto non può essere considerato in alcun modo un prodotto
       editoriale ai sensi della L. n. 62 del 7/3/2001. Il copyright di tutte le carte presentate su questo sito
       appartiene alla Wizards of the Coast. Le immagini delle carte sono recuperate dal sito deckbox.org. Questo sito
-      non è prodotto, affiliato o supportato dalla Wizards of the Coast.</p>
+      non è prodotto, affiliato o supportato dalla Wizards of the Coast.
+    </p>
   </footer>
 </template>
-
-<script lang="ts" setup>
-
-</script>
 
 <style scoped>
 .footer-container {
@@ -57,12 +57,16 @@
   font-family: Arial, sans-serif;
 }
 
-.footer-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  max-width: 1200px;
-  margin: 0 auto;
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .legal-links {
+    align-items: center;
+  }
 }
 
 .footer-section {
@@ -71,8 +75,6 @@
 }
 
 .footer-disclaimer {
-  /* font-size: 0.8em;
-  opacity: 0.8; */
   color: white;
 }
 
@@ -85,6 +87,11 @@
   font-size: 1.5em;
   margin-bottom: 10px;
   font-weight: 700;
+}
+
+.social-icons {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .social-icons a {
