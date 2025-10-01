@@ -15,5 +15,6 @@
     "vitest.explorer",
     "vue.volar",
     "wix.vscode-import-cost",
+    "nuxt.mdc",
   ]
 }
