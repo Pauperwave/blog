@@ -235,7 +235,6 @@ create table public.pauperwave_payments (
   )
 ) TABLESPACE pg_default;
 
-
 -- 2. Indexes for faster lookups
 create index IF not exists idx_pauperwave_payments_associate_id on public.pauperwave_payments using btree (associate_id) TABLESPACE pg_default;
 
