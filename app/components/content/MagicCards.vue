@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { ref, watch, onMounted } from 'vue'
 
 /** Parsed slot text structure */
 interface ParsedCard {
@@ -25,6 +24,16 @@ const error = ref<string | null>(null)
 
 const slotText = ref<HTMLElement | null>(null)
 const rawText = ref('')
+
+const containerRef = ref(null)
+const swiper = useSwiper(containerRef)
+
+const onSwiper = (swiper) => {
+    console.log(swiper);
+  };
+  const onSlideChange = () => {
+    console.log('slide change');
+  };
 
 /** Parse slot text into name + optional set + collector */
 function parseSlotText(raw: string): ParsedCard[] {
@@ -86,6 +95,10 @@ onMounted(() => {
   
   update()
   
+  // Access Swiper instance
+  // Read more about Swiper instance: https://swiperjs.com/swiper-api#methods--properties
+  console.log(swiper.instance)
+  
   // const observer = new MutationObserver(update)
   // observer.observe(slotText.value, { childList: true, subtree: true, characterData: true })
 })
@@ -138,5 +151,29 @@ watch(rawText, async (raw) => {
       </div>
     </div>
     <div v-else-if="!loading" class="text-2xl font-sans font-bold text-indigo-500">Nessuna carta caricata</div>
+
+  <ClientOnly>
+    <swiper-container ref="containerRef">
+        <swiper
+    :slides-per-view="3"
+    :space-between="50"
+    @swiper="onSwiper"
+    @slideChange="onSlideChange"
+  >
+      <swiper-slide
+        v-for="(card, idx) in cardData"
+        :key="idx"
+      >
+        <img
+          v-if="card.image_uris?.normal"
+          :src="card.image_uris.normal"
+          :alt="card.name"
+          class="rounded-lg shadow-md hover:scale-105 transition-transform"
+        >
+      </swiper-slide>
+        </swiper>
+    </swiper-container>
+  </ClientOnly>
+
   </div>
 </template>
