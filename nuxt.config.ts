@@ -36,7 +36,6 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
     'nuxt-swiper',
     'dayjs-nuxt',
-    'nuxt-lucide-icons',
   ],
 
   vite: {
@@ -70,6 +69,21 @@ export default defineNuxtConfig({
       { code: 'en', iso: 'en-US', file: 'en.ts' },
       { code: 'it', iso: 'it-IT', file: 'it.ts' },
     ],
+  },
+
+  routeRules: {
+    '/api/**': {
+      cors: true
+    }
+  },
+
+  eslint: {
+    config: {
+      stylistic: {
+        commaDangle: 'never',
+        braceStyle: '1tbs'
+      }
+    }
   },
 
   /**
