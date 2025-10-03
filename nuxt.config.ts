@@ -3,7 +3,7 @@ import tailwindcss from '@tailwindcss/vite'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
-  
+
   devtools: {
     enabled: true,
     timeline: {
@@ -57,7 +57,10 @@ export default defineNuxtConfig({
   },
 
   css: ['~/assets/css/main.css'],
-  
+  ui: {
+    prefix: 'Nuxt'
+  },
+
   i18n: {
     defaultLocale: 'it',
     strategy: 'prefix_except_default',
@@ -68,7 +71,7 @@ export default defineNuxtConfig({
       { code: 'it', iso: 'it-IT', file: 'it.ts' },
     ],
   },
-  
+
   /**
    * Alias 'dayjs' to ensure proper resolution of the Day.js library.
    * @see: https://github.com/nuxt/nuxt/issues/29084
