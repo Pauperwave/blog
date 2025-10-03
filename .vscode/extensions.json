@@ -16,5 +16,6 @@
     "vue.volar",
     "wix.vscode-import-cost",
     "nuxt.mdc",
+    "editorconfig.editorconfig",
   ]
 }
