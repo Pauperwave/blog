@@ -13,7 +13,10 @@ pnpm i tailwindcss @tailwindcss/vite
 pnpm add -D @iconify-json/fa7-brands
 ```
 
-[Get started with Motion](https://motion.vueuse.org/getting-started/nuxt)
+- [motion.dev](https://motion.dev/docs/vue)
+- 
+- [Get started with Motion](https://motion.vueuse.org/getting-started/nuxt)
+- [Installation](https://motion.unovue.com/getting-started/installation)
 
 ```bash
 pnpm add @vueuse/motion
