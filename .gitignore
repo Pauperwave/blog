@@ -28,3 +28,4 @@ logs
 .github/
 LICENSE.md
 app/components/blog/*.vue
+renovate.json
