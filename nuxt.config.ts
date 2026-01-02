@@ -4,30 +4,30 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineNuxtConfig({
 
   modules: [
-    '@nuxtjs/sitemap',
+    // '@nuxtjs/sitemap',
     '@nuxt/content',
     '@nuxt/eslint',
-    '@nuxt/image',
-    '@nuxt/scripts',
-    '@nuxt/test-utils',
+    // '@nuxt/image',
+    // '@nuxt/scripts',
+    // '@nuxt/test-utils',
     '@nuxt/ui',
-    '@compodium/nuxt',
+    // '@compodium/nuxt',
     '@nuxt/icon',
-    '@nuxt/fonts',
+    // '@nuxt/fonts',
     // '@nuxtjs/i18n',
-    '@nuxtjs/device',
+    // '@nuxtjs/device',
     '@nuxtjs/seo',
-    '@nuxtjs/fontaine',
-    '@nuxtjs/color-mode',
-    '@pinia/nuxt',
+    // '@nuxtjs/fontaine',
+    // '@nuxtjs/color-mode',
+    // '@pinia/nuxt',
     // 'pinia-plugin-persistedstate',
-    'magic-regexp',
-    '@formkit/auto-animate',
-    '@vueuse/nuxt',
-    '@vueuse/motion/nuxt',
-    '@vite-pwa/nuxt',
-    'nuxt-swiper',
-    'dayjs-nuxt'
+    // 'magic-regexp',
+    // '@formkit/auto-animate',
+    // '@vueuse/nuxt',
+    // '@vueuse/motion/nuxt',
+    // '@vite-pwa/nuxt',
+    'nuxt-swiper'
+    // 'dayjs-nuxt'
   ],
 
   devtools: {
@@ -72,12 +72,12 @@ export default defineNuxtConfig({
       tailwindcss()
     ]
   },
-  dayjs: {
-    locales: ['en', 'it', 'de'],
-    plugins: ['relativeTime', 'utc', 'timezone'],
-    defaultLocale: 'it',
-    defaultTimezone: 'Europe/Rome'
-  },
+  // dayjs: {
+  //   locales: ['en', 'it', 'de'],
+  //   plugins: ['relativeTime', 'utc', 'timezone'],
+  //   defaultLocale: 'it',
+  //   defaultTimezone: 'Europe/Rome'
+  // },
 
   eslint: {
     config: {
