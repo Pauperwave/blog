@@ -2,7 +2,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2025-07-15',
+
   modules: [
     '@nuxtjs/sitemap',
     '@nuxt/content',
@@ -37,11 +37,7 @@ export default defineNuxtConfig({
     }
   },
 
-  vite: {
-    plugins: [
-      tailwindcss()
-    ]
-  },
+  css: ['~/assets/css/main.css'],
 
   content: {
     build: {
@@ -53,27 +49,30 @@ export default defineNuxtConfig({
       }
     }
   },
-
-  css: ['~/assets/css/main.css'],
   ui: {
     prefix: 'Nuxt'
   },
 
-  i18n: {
-    defaultLocale: 'it',
-    strategy: 'prefix_except_default',
-    langDir: 'locales/',
-    locales: [
-      { code: 'de', iso: 'de-DE', file: 'de.ts' },
-      { code: 'en', iso: 'en-US', file: 'en.ts' },
-      { code: 'it', iso: 'it-IT', file: 'it.ts' }
-    ]
+  /**
+   * Alias 'dayjs' to ensure proper resolution of the Day.js library.
+   * @see: https://github.com/nuxt/nuxt/issues/29084
+   */
+  alias: {
+    dayjs: 'dayjs'
   },
 
-  routeRules: {
-    '/api/**': {
-      cors: true
-    }
+  compatibilityDate: '2025-07-15',
+
+  vite: {
+    plugins: [
+      tailwindcss()
+    ]
+  },
+  dayjs: {
+    locales: ['en', 'it', 'de'],
+    plugins: ['relativeTime', 'utc', 'timezone'],
+    defaultLocale: 'it',
+    defaultTimezone: 'Europe/Rome'
   },
 
   eslint: {
@@ -85,18 +84,15 @@ export default defineNuxtConfig({
     }
   },
 
-  /**
-   * Alias 'dayjs' to ensure proper resolution of the Day.js library.
-   * @see: https://github.com/nuxt/nuxt/issues/29084
-   */
-  alias: {
-    dayjs: 'dayjs'
-  },
-  dayjs: {
-    locales: ['en', 'it', 'de'],
-    plugins: ['relativeTime', 'utc', 'timezone'],
+  i18n: {
     defaultLocale: 'it',
-    defaultTimezone: 'Europe/Rome'
+    strategy: 'prefix_except_default',
+    langDir: 'locales/',
+    locales: [
+      { code: 'de', iso: 'de-DE', file: 'de.ts' },
+      { code: 'en', iso: 'en-US', file: 'en.ts' },
+      { code: 'it', iso: 'it-IT', file: 'it.ts' }
+    ]
   },
 
   piniaPluginPersistedstate: {
