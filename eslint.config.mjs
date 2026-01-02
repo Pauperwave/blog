@@ -8,7 +8,7 @@ export default withNuxt(
       'flat/strongly-recommended': 'error',
       'vue/multi-word-component-names': 'error',
       'no-console': 'warn',
-      'no-debugger': 'error',
+      'no-debugger': 'error'
     }
   },
   {

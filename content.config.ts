@@ -27,7 +27,7 @@ export default defineContentConfig({
             caption: z.string().optional()
           })
         })
-      }),
+      })
     )
   }
 })

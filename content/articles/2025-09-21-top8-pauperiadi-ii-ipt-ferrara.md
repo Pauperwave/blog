@@ -7,9 +7,9 @@ updatedAt: 2025-09-22
 draft: false
 tags: ["tournament", "report", "decklists", "pauper", "ipt", "ferrara"]
 hero: {
-    image: "/assets/articles/banner/2025-09-21-banner-pauperiadi-2025_lungo.webp",
-    alt: "Top 8 Pauperiadi II, IPT Ferrara",
-    caption: "Top 8 Pauperiadi II, IPT Ferrara"
+  image: "/assets/articles/banner/2025-09-21-banner-pauperiadi-2025_lungo.webp",
+  alt: "Top 8 Pauperiadi II, IPT Ferrara",
+  caption: "Top 8 Pauperiadi II, IPT Ferrara"
 }
 ---
 

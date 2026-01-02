@@ -7,13 +7,13 @@ date: 2025-09-25
 updatedAt: 2025-09-25
 draft: true
 tags:
-    - commander
-    - standard
-    - pauper
+  - commander
+  - standard
+  - pauper
 hero: {
-    image: "/assets/articles/art/Tezzeret-Chris-Rahn.webp",
-    alt: "Top 4 carte Pauper di Edge of Eternities",
-    caption: "Top 4 carte Pauper di Edge of Eternities"
+  image: "/assets/articles/art/Tezzeret-Chris-Rahn.webp",
+  alt: "Top 4 carte Pauper di Edge of Eternities",
+  caption: "Top 4 carte Pauper di Edge of Eternities"
 }
 ---
 
