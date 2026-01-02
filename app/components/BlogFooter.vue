@@ -2,23 +2,48 @@
   <footer class="footer-container">
     <div class="footer-content">
       <div class="footer-section brand-social">
-        <h3 class="brand-name">Pauperwave APS</h3>
+        <h3 class="brand-name">
+          Pauperwave APS
+        </h3>
         <div class="social-icons">
-          <NuxtLink to="https://facebook.com/pauperwave" target="_blank" rel="noopener noreferrer"
-            aria-label="Facebook">
+          <NuxtLink
+            to="https://facebook.com/pauperwave"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Facebook"
+          >
             <Icon name="fa7-brands:facebook" />
           </NuxtLink>
-          <NuxtLink to="https://instagram.com/pauperwave" target="_blank" rel="noopener noreferrer"
-            aria-label="Instagram">
+          <NuxtLink
+            to="https://instagram.com/pauperwave"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+          >
             <Icon name="fa7-brands:instagram" />
           </NuxtLink>
-          <NuxtLink to="https://youtube.com/@pauperwave" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <NuxtLink
+            to="https://youtube.com/@pauperwave"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="YouTube"
+          >
             <Icon name="fa7-brands:youtube" />
           </NuxtLink>
-          <NuxtLink to="https://x.com/pauperwave" target="_blank" rel="noopener noreferrer" aria-label="X">
+          <NuxtLink
+            to="https://x.com/pauperwave"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="X"
+          >
             <Icon name="fa7-brands:x-twitter" />
           </NuxtLink>
-          <NuxtLink to="https://t.me/pauperwave" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+          <NuxtLink
+            to="https://t.me/pauperwave"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Telegram"
+          >
             <Icon name="fa7-brands:telegram" />
           </NuxtLink>
         </div>
