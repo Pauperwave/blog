@@ -5,18 +5,18 @@ const swiper = useSwiper(containerRef, {
   effect: 'creative',
   loop: true,
   autoplay: {
-    delay: 5000,
+    delay: 5000
   },
   creativeEffect: {
     prev: {
       shadow: true,
-      translate: [0, 0, -400],
+      translate: [0, 0, -400]
     },
     next: {
       shadow: true,
-      translate: [0, 0, -400],
-    },
-  },
+      translate: [0, 0, -400]
+    }
+  }
 })
 
 onMounted(() => {
@@ -26,7 +26,10 @@ onMounted(() => {
 
 <template>
   <ClientOnly>
-    <swiper-container ref="containerRef" :init="false">
+    <swiper-container
+      ref="containerRef"
+      :init="false"
+    >
       <swiper-slide
         v-for="(slide, idx) in slides"
         :key="idx"
