@@ -1,14 +1,14 @@
 <script lang="ts" setup>
-import { useSlots } from 'vue'
+// import { useSlots } from 'vue'
 
 const props = defineProps<{
   name?: string
   score?: number
 }>()
 
-const name = computed(() => props.name ?? "Nome della persona che valuta")
+const name = computed(() => props.name ?? 'Nome della persona che valuta')
 
-const slots = useSlots()
+// const slots = useSlots()
 </script>
 
 <template>

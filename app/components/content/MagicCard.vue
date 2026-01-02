@@ -24,7 +24,7 @@ function parseSlotText(raw: string): ParsedCard {
     return {
       name: matchFull[1]!.trim(),
       set: matchFull[2],
-      collector: matchFull[3],
+      collector: matchFull[3]
     }
   }
 
@@ -34,7 +34,7 @@ function parseSlotText(raw: string): ParsedCard {
   if (matchSet) {
     return {
       name: matchSet[1]!.trim(),
-      set: matchSet[2],
+      set: matchSet[2]
     }
   }
 
@@ -55,7 +55,7 @@ onMounted(() => {
     observer.observe(slotText.value, {
       childList: true,
       subtree: true,
-      characterData: true,
+      characterData: true
     })
   }
 })
@@ -104,16 +104,32 @@ watch(cardName, async (raw) => {
     class="p-2 max-w-sm rounded flex flex-col items-center"
   >
     <!-- Slot text wrapper for MutationObserver -->
-    <span ref="slotText" class="hidden">
+    <span
+      ref="slotText"
+      class="hidden"
+    >
       <slot />
     </span>
 
     <!-- States -->
-    <div v-if="loading" class="mt-2 text-gray-500 text-sm">Caricamento...</div>
+    <div
+      v-if="loading"
+      class="mt-2 text-gray-500 text-sm"
+    >
+      Caricamento...
+    </div>
 
-    <div v-else-if="error" class="mt-2 text-red-600 text-sm">{{ error }}</div>
+    <div
+      v-else-if="error"
+      class="mt-2 text-red-600 text-sm"
+    >
+      {{ error }}
+    </div>
 
-    <div v-else-if="cardData" class="mt-2 text-center">
+    <div
+      v-else-if="cardData"
+      class="mt-2 text-center"
+    >
       <img
         v-if="cardData.image_uris?.normal"
         :src="cardData.image_uris.normal"

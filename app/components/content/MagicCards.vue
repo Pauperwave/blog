@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-
 /** Parsed slot text structure */
 interface ParsedCard {
   name: string
@@ -29,11 +28,11 @@ const containerRef = ref(null)
 const swiper = useSwiper(containerRef)
 
 const onSwiper = (swiper) => {
-    console.log(swiper);
-  };
-  const onSlideChange = () => {
-    console.log('slide change');
-  };
+  console.log(swiper)
+}
+const onSlideChange = () => {
+  console.log('slide change')
+}
 
 /** Parse slot text into name + optional set + collector */
 function parseSlotText(raw: string): ParsedCard[] {
@@ -41,13 +40,13 @@ function parseSlotText(raw: string): ParsedCard[] {
     .split('\n')
     .map(line => line.trim())
     .filter(Boolean)
-    .map<ParsedCard>(line => {
+    .map<ParsedCard>((line) => {
       const full = line.match(/^(.+?)\s+\(([A-Za-z0-9]+)\)\s+(\d+)$/)
       if (full) {
         return {
           name: full[1]!,
           set: full[2]!.toLowerCase(),
-          collector_number: full[3],
+          collector_number: full[3]
         } satisfies ParsedCard
       }
 
@@ -55,14 +54,13 @@ function parseSlotText(raw: string): ParsedCard[] {
       if (set) {
         return {
           name: set[1]!,
-          set: set[2]!.toLowerCase(),
+          set: set[2]!.toLowerCase()
         } satisfies ParsedCard
       }
 
       return { name: line } satisfies ParsedCard
     })
 }
-
 
 /** Fetch a single card from Scryfall */
 async function fetchCard(card: ParsedCard): Promise<ScryfallCard | null> {
@@ -92,13 +90,13 @@ onMounted(() => {
   const update = () => {
     rawText.value = slotText.value?.textContent?.trim() || ''
   }
-  
+
   update()
-  
+
   // Access Swiper instance
   // Read more about Swiper instance: https://swiperjs.com/swiper-api#methods--properties
   console.log(swiper.instance)
-  
+
   // const observer = new MutationObserver(update)
   // observer.observe(slotText.value, { childList: true, subtree: true, characterData: true })
 })
@@ -129,19 +127,41 @@ watch(rawText, async (raw) => {
 <template>
   <div>
     <!-- Slot che contiene i nomi delle carte -->
-    <div ref="slotText" class="hidden">
+    <div
+      ref="slotText"
+      class="hidden"
+    >
       <slot mdc-unwrap="p" />
     </div>
 
     <!-- Stati di caricamento / errore -->
-    <div v-if="loading" class="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
-      <div v-for="n in 6" :key="n" class="h-48 bg-gray-300 animate-pulse rounded-lg" />
+    <div
+      v-if="loading"
+      class="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2"
+    >
+      <div
+        v-for="n in 6"
+        :key="n"
+        class="h-48 bg-gray-300 animate-pulse rounded-lg"
+      />
     </div>
-    <div v-if="error" class="text-red-500 mt-4">{{ error }}</div>
+    <div
+      v-if="error"
+      class="text-red-500 mt-4"
+    >
+      {{ error }}
+    </div>
 
     <!-- Carte renderizzate -->
-    <div v-if="cardData?.length" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 mt-4">
-      <div v-for="card in cardData" :key="card.id" class="flex flex-col items-center">
+    <div
+      v-if="cardData?.length"
+      class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 mt-4"
+    >
+      <div
+        v-for="card in cardData"
+        :key="card.id"
+        class="flex flex-col items-center"
+      >
         <img
           v-if="card.image_uris?.normal"
           :src="card.image_uris.normal"
@@ -150,30 +170,34 @@ watch(rawText, async (raw) => {
         >
       </div>
     </div>
-    <div v-else-if="!loading" class="text-2xl font-sans font-bold text-indigo-500">Nessuna carta caricata</div>
+    <div
+      v-else-if="!loading"
+      class="text-2xl font-sans font-bold text-indigo-500"
+    >
+      Nessuna carta caricata
+    </div>
 
-  <ClientOnly>
-    <swiper-container ref="containerRef">
+    <ClientOnly>
+      <swiper-container ref="containerRef">
         <swiper
-    :slides-per-view="3"
-    :space-between="50"
-    @swiper="onSwiper"
-    @slideChange="onSlideChange"
-  >
-      <swiper-slide
-        v-for="(card, idx) in cardData"
-        :key="idx"
-      >
-        <img
-          v-if="card.image_uris?.normal"
-          :src="card.image_uris.normal"
-          :alt="card.name"
-          class="rounded-lg shadow-md hover:scale-105 transition-transform"
+          :slides-per-view="3"
+          :space-between="50"
+          @swiper="onSwiper"
+          @slide-change="onSlideChange"
         >
-      </swiper-slide>
+          <swiper-slide
+            v-for="(card, idx) in cardData"
+            :key="idx"
+          >
+            <img
+              v-if="card.image_uris?.normal"
+              :src="card.image_uris.normal"
+              :alt="card.name"
+              class="rounded-lg shadow-md hover:scale-105 transition-transform"
+            >
+          </swiper-slide>
         </swiper>
-    </swiper-container>
-  </ClientOnly>
-
+      </swiper-container>
+    </ClientOnly>
   </div>
 </template>
