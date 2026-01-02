@@ -39,6 +39,9 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
+  // https://nuxtseo.com/docs/robots/guides/disable-indexing
+  site: { indexable: false },
+
   content: {
     build: {
       markdown: {
@@ -49,6 +52,7 @@ export default defineNuxtConfig({
       }
     }
   },
+
   ui: {
     prefix: 'Nuxt'
   },
@@ -57,9 +61,9 @@ export default defineNuxtConfig({
    * Alias 'dayjs' to ensure proper resolution of the Day.js library.
    * @see: https://github.com/nuxt/nuxt/issues/29084
    */
-  alias: {
-    dayjs: 'dayjs'
-  },
+  // alias: {
+  //   dayjs: 'dayjs'
+  // },
 
   compatibilityDate: '2025-07-15',
 
@@ -99,5 +103,5 @@ export default defineNuxtConfig({
     storage: 'localStorage',
     key: 'pinia-persisted-state_%id',
     debug: true
-  },
+  }
 })
