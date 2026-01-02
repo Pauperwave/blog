@@ -22,7 +22,6 @@ hero: {
 
 Testando vari componenti.
 
-<!-- togli fan alla fine e crea un componente unico che dipende da quante carte mostri -->
 ::magic-cards
 Agate Instigator (BLC) 21
 Impact Tremors (FDN) 717
@@ -37,9 +36,11 @@ Agate Instigator
 Impact Tremors (FDN) 717
 Molten Gatekeeper
 General Kreat, the Boltbringer
-Purphoros, God of the Forge (CMM) 246
+Purphoros, God of the Forge (fca)
 Weftstalker Ardent
 ::
+
+Sto descrivendo una carta [[General Kreat, the Boltbringer]] e mi riferisco a [[Purphoros, God of the Forge]]
 
 ::magic-cards
 Shocking Sharpshooter
