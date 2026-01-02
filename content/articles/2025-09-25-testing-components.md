@@ -1,7 +1,7 @@
 ---
 title: "Component Testing"
 subtitle: "Learning by doing"
-description: "Descrizione molto lunga dell'articolo"
+description: "Prova dei componenti all'interno di un articolo."
 author: "Emanuele Nardi"
 date: 2025-09-25
 updatedAt: 2025-09-25
@@ -17,11 +17,23 @@ hero: {
 # {{ $doc.title }}
 
 {{ $doc.description }}
-{{ $doc.tags.map(tag => `#${tag}`).join(' ') }}
-{{ $doc.tags }}
+<!-- {{ $doc.tags.map(tag => `#${tag}`).join(' ') }} -->
+<!-- {{ $doc.tags }} -->
 
-Testando vari componenti.
+## Test dei componenti
 
+Qui vado a fare un esempio di utilizzo del componente "magic-cards" all'interno di un articolo.
+
+```markdown
+::magic-cards
+Agate Instigator (BLC) 21
+Impact Tremors (FDN) 717
+Molten Gatekeeper (MH3) 128
+General Kreat, the Boltbringer (J25) 48
+Purphoros, God of the Forge (CMM) 246
+Weftstalker Ardent (EOE) 169
+::
+```
 ::magic-cards
 Agate Instigator (BLC) 21
 Impact Tremors (FDN) 717
@@ -31,6 +43,19 @@ Purphoros, God of the Forge (CMM) 246
 Weftstalker Ardent (EOE) 169
 ::
 
+Posso evitare di specificare l'espansione e il numero della carta quando l'illustrazione è univoca.
+Nota come per "Purphoros, God of the Forge" ci sono due versioni diverse dell'illustrazione.
+In questo caso abbiamo specificato l'espansione (`fca`) per evitare ambiguità.
+```markdown
+::magic-cards
+Agate Instigator
+Impact Tremors (FDN) 717
+Molten Gatekeeper
+General Kreat, the Boltbringer
+Purphoros, God of the Forge (fca)
+Weftstalker Ardent
+::
+```
 ::magic-cards
 Agate Instigator
 Impact Tremors (FDN) 717
@@ -40,22 +65,29 @@ Purphoros, God of the Forge (fca)
 Weftstalker Ardent
 ::
 
+Il componente è dinamico e supporta un qualsiasi numero di carte.
+Anche se è consigliabile che il numero di carte non sia eccessivo, fra 1 e 7 carte è un numero ragionevole.
+Le illustrazioni delle carte sono prese da Scryfall.
+::magic-cards
+Shocking Sharpshooter
+Witty Roastmaster
+Warleader's Call
+::
+
+::magic-cards
+Shocking Sharpshooter
+Witty Roastmaster
+::
+
+::magic-cards
+Warleader's Call
+::
+
+# Test del link delle carte
+
 Sto descrivendo una carta [[General Kreat, the Boltbringer]] e mi riferisco a [[Purphoros, God of the Forge]]
 
-::magic-cards
-Shocking Sharpshooter
-Witty Roastmaster
-Warleader's Call
-::
-
-::magic-cards
-Shocking Sharpshooter
-Witty Roastmaster
-::
-
-::magic-cards
-Warleader's Call
-::
+# Basic usage of the Swiper component
 
 ::test-swiper-basic-usage
 ::
