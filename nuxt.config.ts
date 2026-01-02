@@ -86,22 +86,22 @@ export default defineNuxtConfig({
         braceStyle: '1tbs'
       }
     }
-  },
-
-  i18n: {
-    defaultLocale: 'it',
-    strategy: 'prefix_except_default',
-    langDir: 'locales/',
-    locales: [
-      { code: 'de', iso: 'de-DE', file: 'de.ts' },
-      { code: 'en', iso: 'en-US', file: 'en.ts' },
-      { code: 'it', iso: 'it-IT', file: 'it.ts' }
-    ]
-  },
-
-  piniaPluginPersistedstate: {
-    storage: 'localStorage',
-    key: 'pinia-persisted-state_%id',
-    debug: true
   }
+
+  // i18n: {
+  //   defaultLocale: 'it',
+  //   strategy: 'prefix_except_default',
+  //   langDir: 'locales/',
+  //   locales: [
+  //     { code: 'de', iso: 'de-DE', file: 'de.ts' },
+  //     { code: 'en', iso: 'en-US', file: 'en.ts' },
+  //     { code: 'it', iso: 'it-IT', file: 'it.ts' }
+  //   ]
+  // },
+
+  // piniaPluginPersistedstate: {
+  //   storage: 'localStorage',
+  //   key: 'pinia-persisted-state_%id',
+  //   debug: true
+  // }
 })
