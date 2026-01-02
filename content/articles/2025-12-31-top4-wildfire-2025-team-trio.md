@@ -1,26 +1,15 @@
 ---
-title: "NEW"
+title: "Decklist component testing"
 subtitle: "Learning by doing"
 description: "Prova dei componenti all'interno di un articolo."
 author: "Emanuele Nardi"
 date: 2025-09-25
-updatedAt: 2025-09-25
+updatedAt: 2025-12-31
 draft: true
-tags: ["commander", "standard", "pauper"]
-hero: {
-  image: "/assets/articles/art/Tezzeret-Chris-Rahn.webp",
-  alt: "Top 4 carte Pauper di Edge of Eternities",
-  caption: "Top 4 carte Pauper di Edge of Eternities"
-}
+tags: ["pauper", "top"]
 ---
 
-Teams: 11
-
-Date: 28 Dicemeber 2025
-
-## Affinity by Tommaso D'eva, Seat A
-
-::magic-decklist{name="Affinity" author="Tommaso D'eva" position="Seat A"}
+::magic-decklist{name="Grixis Affinity" author="Tommaso D'eva" position="Seat A"}
 
 #main
 ## Creatures
