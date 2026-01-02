@@ -3,14 +3,6 @@ import tailwindcss from '@tailwindcss/vite'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
-
-  devtools: {
-    enabled: true,
-    timeline: {
-      enabled: true
-    }
-  },
-
   modules: [
     '@nuxtjs/sitemap',
     '@nuxt/content',
@@ -35,8 +27,15 @@ export default defineNuxtConfig({
     '@vueuse/motion/nuxt',
     '@vite-pwa/nuxt',
     'nuxt-swiper',
-    'dayjs-nuxt',
+    'dayjs-nuxt'
   ],
+
+  devtools: {
+    enabled: true,
+    timeline: {
+      enabled: true
+    }
+  },
 
   vite: {
     plugins: [
@@ -67,8 +66,8 @@ export default defineNuxtConfig({
     locales: [
       { code: 'de', iso: 'de-DE', file: 'de.ts' },
       { code: 'en', iso: 'en-US', file: 'en.ts' },
-      { code: 'it', iso: 'it-IT', file: 'it.ts' },
-    ],
+      { code: 'it', iso: 'it-IT', file: 'it.ts' }
+    ]
   },
 
   routeRules: {
@@ -91,18 +90,18 @@ export default defineNuxtConfig({
    * @see: https://github.com/nuxt/nuxt/issues/29084
    */
   alias: {
-    'dayjs': 'dayjs'
+    dayjs: 'dayjs'
   },
   dayjs: {
     locales: ['en', 'it', 'de'],
     plugins: ['relativeTime', 'utc', 'timezone'],
     defaultLocale: 'it',
-    defaultTimezone: 'Europe/Rome',
+    defaultTimezone: 'Europe/Rome'
   },
 
   piniaPluginPersistedstate: {
     storage: 'localStorage',
     key: 'pinia-persisted-state_%id',
-    debug: true,
+    debug: true
   },
 })
