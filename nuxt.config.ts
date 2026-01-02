@@ -2,7 +2,6 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-
   modules: [
     // '@nuxtjs/sitemap',
     '@nuxt/content',
@@ -29,7 +28,6 @@ export default defineNuxtConfig({
     'nuxt-swiper'
     // 'dayjs-nuxt'
   ],
-
   devtools: {
     enabled: true,
     timeline: {
@@ -55,6 +53,10 @@ export default defineNuxtConfig({
 
   ui: {
     prefix: 'Nuxt'
+  },
+
+  routeRules: {
+    '/articles/**': { prerender: true }
   },
 
   /**
