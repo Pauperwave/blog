@@ -1,1 +1,0 @@
-// PATCH /tournaments/:id
