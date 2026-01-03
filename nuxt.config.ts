@@ -51,9 +51,9 @@ export default defineNuxtConfig({
     }
   },
 
-  ui: {
-    prefix: 'Nuxt'
-  },
+  // ui: {
+  //   prefix: 'Nuxt'
+  // },
 
   routeRules: {
     '/articles/**': { prerender: true }
