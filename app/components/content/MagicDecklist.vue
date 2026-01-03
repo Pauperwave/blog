@@ -17,6 +17,7 @@ const hoveredCard = ref<string | null>(null)
 const decklistWrapper = ref<HTMLElement | null>(null)
 const showModal = ref(false)
 const isMobile = ref(false)
+const copySuccess = ref(false)
 
 // Check if we're on mobile
 const checkMobile = () => {
@@ -32,14 +33,14 @@ const extractCardName = (text: string): string => {
 // Function to extract quantity from list item text
 const extractQuantity = (text: string): number => {
   const match = text.match(/^(\d+)\s+/)
-  return match ? parseInt(match[1], 10) : 0
+  return match ? parseInt(match[1]!, 10) : 0
 }
 
 // Function to calculate total cards in a section
 const calculateSectionTotal = (heading: HTMLElement): number => {
   let total = 0
   let nextElement = heading.nextElementSibling
-  
+
   // Traverse siblings until we hit another heading or run out of elements
   while (nextElement && nextElement.tagName !== 'H2') {
     if (nextElement.tagName === 'UL') {
@@ -51,20 +52,20 @@ const calculateSectionTotal = (heading: HTMLElement): number => {
     }
     nextElement = nextElement.nextElementSibling
   }
-  
+
   return total
 }
 
 // Function to add card counts to headings
 const addCardCounts = () => {
   if (!decklistWrapper.value) return
-  
+
   const headings = decklistWrapper.value.querySelectorAll('.main-deck h2, .sideboard h2')
-  
+
   headings.forEach((heading) => {
     const headingElement = heading as HTMLElement
     const total = calculateSectionTotal(headingElement)
-    
+
     // Check if count is already added
     if (!headingElement.querySelector('.card-count')) {
       const countSpan = document.createElement('span')
@@ -73,6 +74,69 @@ const addCardCounts = () => {
       headingElement.appendChild(countSpan)
     }
   })
+}
+
+// Function to copy decklist to clipboard
+const copyDecklist = async () => {
+  if (!decklistWrapper.value) return
+
+  let decklistText = `${props.name}`
+  if (props.author) decklistText += `\n${props.author}`
+  if (props.position) decklistText += ` - ${props.position}`
+  decklistText += '\n\n'
+
+  // Get main deck
+  const mainDeck = decklistWrapper.value.querySelector('.main-deck')
+  if (mainDeck) {
+    const sections = mainDeck.querySelectorAll('h2')
+    sections.forEach((heading) => {
+      const headingText = heading.textContent?.replace(/\s*\(\d+\)/, '') || ''
+      decklistText += `${headingText}\n`
+
+      let nextElement = heading.nextElementSibling
+      while (nextElement && nextElement.tagName !== 'H2') {
+        if (nextElement.tagName === 'UL') {
+          const listItems = nextElement.querySelectorAll('li')
+          listItems.forEach((li) => {
+            decklistText += `${li.textContent}\n`
+          })
+        }
+        nextElement = nextElement.nextElementSibling
+      }
+      decklistText += '\n'
+    })
+  }
+
+  // Get sideboard
+  const sideboard = decklistWrapper.value.querySelector('.sideboard')
+  if (sideboard) {
+    const sections = sideboard.querySelectorAll('h2')
+    sections.forEach((heading) => {
+      const headingText = heading.textContent?.replace(/\s*\(\d+\)/, '') || ''
+      decklistText += `${headingText}\n`
+
+      let nextElement = heading.nextElementSibling
+      while (nextElement && nextElement.tagName !== 'H2') {
+        if (nextElement.tagName === 'UL') {
+          const listItems = nextElement.querySelectorAll('li')
+          listItems.forEach((li) => {
+            decklistText += `${li.textContent}\n`
+          })
+        }
+        nextElement = nextElement.nextElementSibling
+      }
+    })
+  }
+
+  try {
+    await navigator.clipboard.writeText(decklistText)
+    copySuccess.value = true
+    setTimeout(() => {
+      copySuccess.value = false
+    }, 2000)
+  } catch (err) {
+    console.error('Failed to copy:', err)
+  }
 }
 
 // Handle card hover
@@ -97,11 +161,11 @@ const setupHoverListeners = () => {
 
   // Find all list items in the decklist
   const listItems = decklistWrapper.value.querySelectorAll('.main-deck li, .sideboard li')
-  
+
   listItems.forEach((item) => {
     const element = item as HTMLElement
     const cardName = extractCardName(element.textContent || '')
-    
+
     if (isMobile.value) {
       // On mobile, use click instead of hover
       element.addEventListener('click', () => {
@@ -116,7 +180,7 @@ const setupHoverListeners = () => {
       element.addEventListener('mouseenter', () => handleCardHover(cardName))
       element.addEventListener('mouseleave', () => handleCardHover(null))
     }
-    
+
     // Add a class for styling
     element.classList.add('card-item')
   })
@@ -170,15 +234,15 @@ const getCardImageUrl = (cardName: string): string => {
 <template>
   <div ref="decklistWrapper" class="decklist-wrapper bg-yellow-600/80 rounded-lg overflow-hidden mx-auto">
     <!-- Header -->
-    <header class="border-b border-amber-900/30 p-3">
-      <h2 class="text-2xl font-bold text-amber-950">
+    <header class="border-b border-amber-900/30 p-3 relative">
+      <h2 class="text-2xl font-bold text-amber-950 pr-12">
         {{ title }}
       </h2>
       <p
         v-if="props.author"
-        class="text-sm text-gray-800"
+        class="text-md text-gray-900"
       >
-        By {{ props.author }}
+        {{ props.author }}
       </p>
       <p
         v-if="props.description"
@@ -186,6 +250,21 @@ const getCardImageUrl = (cardName: string): string => {
       >
         {{ props.description }}
       </p>
+
+      <!-- Copy Button -->
+      <button
+        class="copy-button"
+        :class="{ 'copy-success': copySuccess }"
+        :title="copySuccess ? 'Copied!' : 'Copy decklist'"
+        @click="copyDecklist"
+      >
+        <svg v-if="!copySuccess" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+        </svg>
+        <svg v-else class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+      </button>
     </header>
 
     <!-- Three-column layout -->
@@ -205,12 +284,12 @@ const getCardImageUrl = (cardName: string): string => {
         <div v-if="hoveredCard" class="preview-content">
           <!-- Card image from Scryfall -->
           <div class="card-image-container">
-            <img 
+            <img
               :src="getCardImageUrl(hoveredCard)" 
               :alt="hoveredCard"
               class="card-image rounded-lg shadow-lg w-full"
               @error="(e) => (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22280%22%3E%3Crect width=%22200%22 height=%22280%22 fill=%22%23ddd%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%23999%22%3ENo Image%3C/text%3E%3C/svg%3E'"
-            />
+            >
           </div>
         </div>
         <div v-else class="text-gray-600 text-center text-sm py-8">
@@ -225,19 +304,19 @@ const getCardImageUrl = (cardName: string): string => {
     <!-- Mobile Modal -->
     <Teleport to="body">
       <Transition name="modal">
-        <div 
+        <div
           v-if="showModal && hoveredCard && isMobile"
           class="modal-overlay"
           @click="closeModal"
         >
           <div class="modal-content" @click.stop>
             <div class="modal-card">
-              <img 
+              <img
                 :src="getCardImageUrl(hoveredCard)" 
                 :alt="hoveredCard"
                 class="modal-card-image"
                 @error="(e) => (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22280%22%3E%3Crect width=%22200%22 height=%22280%22 fill=%22%23ddd%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%23999%22%3ENo Image%3C/text%3E%3C/svg%3E'"
-              />
+              >
             </div>
           </div>
         </div>
@@ -261,6 +340,34 @@ const getCardImageUrl = (cardName: string): string => {
 .card-preview {
   max-height: calc(100vh - 200px);
   overflow-y: auto;
+}
+
+/* Copy Button Styles */
+.copy-button {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: rgba(120, 53, 15, 0.2);
+  border: 1px solid rgba(120, 53, 15, 0.3);
+  border-radius: 0.375rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #78350f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.copy-button:hover {
+  background: rgba(120, 53, 15, 0.3);
+  border-color: rgba(120, 53, 15, 0.5);
+}
+
+.copy-button.copy-success {
+  background: rgba(22, 163, 74, 0.2);
+  border-color: rgba(22, 163, 74, 0.3);
+  color: #16a34a;
 }
 
 /* Style card list items to be interactive */
