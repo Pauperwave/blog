@@ -12,12 +12,13 @@ const title = computed(() => {
   return props.position ? `${props.name} — ${props.position}` : props.name
 })
 
-// Track the currently hovered card
 const hoveredCard = ref<string | null>(null)
-const decklistWrapper = ref<HTMLElement | null>(null)
+const decklistContent = ref<HTMLElement | null>(null)
 const showModal = ref(false)
 const isMobile = ref(false)
-const copySuccess = ref(false)
+
+// Use Nuxt UI Toast composable
+const toast = useToast()
 
 // Check if we're on mobile
 const checkMobile = () => {
@@ -26,7 +27,6 @@ const checkMobile = () => {
 
 // Function to extract card name from list item text (removes quantity)
 const extractCardName = (text: string): string => {
-  // Remove leading numbers and spaces (e.g., "4 Myr Enforcer" -> "Myr Enforcer")
   return text.replace(/^\d+\s+/, '').trim()
 }
 
@@ -41,7 +41,6 @@ const calculateSectionTotal = (heading: HTMLElement): number => {
   let total = 0
   let nextElement = heading.nextElementSibling
 
-  // Traverse siblings until we hit another heading or run out of elements
   while (nextElement && nextElement.tagName !== 'H2') {
     if (nextElement.tagName === 'UL') {
       const listItems = nextElement.querySelectorAll('li')
@@ -58,15 +57,14 @@ const calculateSectionTotal = (heading: HTMLElement): number => {
 
 // Function to add card counts to headings
 const addCardCounts = () => {
-  if (!decklistWrapper.value) return
+  if (!decklistContent.value) return
 
-  const headings = decklistWrapper.value.querySelectorAll('.main-deck h2, .sideboard h2')
+  const headings = decklistContent.value.querySelectorAll('.main-deck h2, .sideboard h2')
 
   headings.forEach((heading) => {
     const headingElement = heading as HTMLElement
     const total = calculateSectionTotal(headingElement)
 
-    // Check if count is already added
     if (!headingElement.querySelector('.card-count')) {
       const countSpan = document.createElement('span')
       countSpan.className = 'card-count'
@@ -78,7 +76,7 @@ const addCardCounts = () => {
 
 // Function to copy decklist to clipboard
 const copyDecklist = async () => {
-  if (!decklistWrapper.value) return
+  if (!decklistContent.value) return
 
   let decklistText = `${props.name}`
   if (props.author) decklistText += `\n${props.author}`
@@ -86,7 +84,7 @@ const copyDecklist = async () => {
   decklistText += '\n\n'
 
   // Get main deck
-  const mainDeck = decklistWrapper.value.querySelector('.main-deck')
+  const mainDeck = decklistContent.value.querySelector('.main-deck')
   if (mainDeck) {
     const sections = mainDeck.querySelectorAll('h2')
     sections.forEach((heading) => {
@@ -108,7 +106,7 @@ const copyDecklist = async () => {
   }
 
   // Get sideboard
-  const sideboard = decklistWrapper.value.querySelector('.sideboard')
+  const sideboard = decklistContent.value.querySelector('.sideboard')
   if (sideboard) {
     const sections = sideboard.querySelectorAll('h2')
     sections.forEach((heading) => {
@@ -130,12 +128,22 @@ const copyDecklist = async () => {
 
   try {
     await navigator.clipboard.writeText(decklistText)
-    copySuccess.value = true
-    setTimeout(() => {
-      copySuccess.value = false
-    }, 2000)
+
+    // Use Nuxt UI Toast instead of local state
+    toast.add({
+      title: 'Copied!',
+      description: 'Decklist copied to clipboard',
+      icon: 'i-lucide-check',
+      color: 'success'
+    })
   } catch (err) {
     console.error('Failed to copy:', err)
+    toast.add({
+      title: 'Failed to copy',
+      description: 'Could not copy decklist to clipboard',
+      icon: 'i-lucide-x',
+      color: 'error'
+    })
   }
 }
 
@@ -157,18 +165,31 @@ const closeModal = () => {
 
 // Setup hover listeners on mount
 const setupHoverListeners = () => {
-  if (!decklistWrapper.value) return
+  if (!decklistContent.value) return
 
-  // Find all list items in the decklist
-  const listItems = decklistWrapper.value.querySelectorAll('.main-deck li, .sideboard li')
+  const listItems = decklistContent.value.querySelectorAll('.main-deck li, .sideboard li')
 
   listItems.forEach((item) => {
     const element = item as HTMLElement
-    const cardName = extractCardName(element.textContent || '')
+    const fullText = element.textContent || ''
+    const cardName = extractCardName(fullText)
+    const quantity = fullText.match(/^(\d+\s+)/)?.[0] || ''
+
+    // Restructure the list item to separate quantity from card name
+    const quantitySpan = document.createElement('span')
+    quantitySpan.className = 'card-quantity'
+    quantitySpan.textContent = quantity
+
+    const cardLink = document.createElement('span')
+    cardLink.className = 'card-name-link'
+    cardLink.textContent = cardName
+
+    element.textContent = ''
+    element.appendChild(quantitySpan)
+    element.appendChild(cardLink)
 
     if (isMobile.value) {
-      // On mobile, use click instead of hover
-      element.addEventListener('click', () => {
+      cardLink.addEventListener('click', () => {
         if (hoveredCard.value === cardName && showModal.value) {
           closeModal()
         } else {
@@ -176,21 +197,19 @@ const setupHoverListeners = () => {
         }
       })
     } else {
-      // On desktop, use hover
-      element.addEventListener('mouseenter', () => handleCardHover(cardName))
-      element.addEventListener('mouseleave', () => handleCardHover(null))
+      cardLink.addEventListener('mouseenter', () => handleCardHover(cardName))
+      cardLink.addEventListener('mouseleave', () => handleCardHover(null))
     }
 
-    // Add a class for styling
     element.classList.add('card-item')
   })
 }
 
 // Cleanup listeners
 const cleanupHoverListeners = () => {
-  if (!decklistWrapper.value) return
+  if (!decklistContent.value) return
 
-  const listItems = decklistWrapper.value.querySelectorAll('.card-item')
+  const listItems = decklistContent.value.querySelectorAll('.card-item')
   listItems.forEach((item) => {
     const element = item as HTMLElement
     element.replaceWith(element.cloneNode(true))
@@ -202,7 +221,6 @@ const handleResize = () => {
   const wasMobile = isMobile.value
   checkMobile()
   if (wasMobile !== isMobile.value) {
-    // Re-setup listeners when switching between mobile/desktop
     cleanupHoverListeners()
     setTimeout(setupHoverListeners, 100)
   }
@@ -211,7 +229,6 @@ const handleResize = () => {
 onMounted(() => {
   checkMobile()
   window.addEventListener('resize', handleResize)
-  // Use setTimeout to ensure DOM is fully rendered
   setTimeout(() => {
     addCardCounts()
     setupHoverListeners()
@@ -223,116 +240,109 @@ onBeforeUnmount(() => {
   window.removeEventListener('resize', handleResize)
 })
 
-// Optional: Function to get card image URL (you can integrate with Scryfall API)
 const getCardImageUrl = (cardName: string): string => {
-  // Replace spaces with + for URL encoding
   const encodedName = encodeURIComponent(cardName)
   return `https://api.scryfall.com/cards/named?format=image&exact=${encodedName}`
 }
 </script>
 
 <template>
-  <div ref="decklistWrapper" class="decklist-wrapper bg-yellow-600/80 rounded-lg overflow-hidden mx-auto">
-    <!-- Header -->
-    <header class="border-b border-amber-900/30 p-3 relative">
+  <UCard
+    class="decklist-wrapper bg-yellow-600/80 mx-auto"
+    :ui="{
+      root: 'overflow-hidden',
+      header: 'relative',
+      body: 'p-0'
+    }"
+  >
+    <!-- Header Slot -->
+    <template #header>
       <h2 class="text-2xl font-bold text-amber-950 pr-12">
         {{ title }}
       </h2>
-      <p
-        v-if="props.author"
-        class="text-md text-gray-900"
-      >
+      <p v-if="props.author" class="text-md text-gray-900">
         {{ props.author }}
       </p>
-      <p
-        v-if="props.description"
-        class="mt-2 text-gray-800"
-      >
+      <p v-if="props.description" class="mt-2 text-gray-800">
         {{ props.description }}
       </p>
 
-      <!-- Copy Button -->
-      <button
-        class="copy-button"
-        :class="{ 'copy-success': copySuccess }"
-        :title="copySuccess ? 'Copied!' : 'Copy decklist'"
+      <!-- Copy Button using UButton -->
+      <UButton
+        icon="i-lucide-copy"
+        color="neutral"
+        variant="ghost"
+        size="sm"
+        square
+        class="absolute top-4 end-4"
+        title="Copy decklist"
         @click="copyDecklist"
-      >
-        <svg v-if="!copySuccess" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-        </svg>
-        <svg v-else class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-        </svg>
-      </button>
-    </header>
+      />
+    </template>
 
-    <!-- Three-column layout -->
-    <div class="decklist-grid">
-      <!-- Main Deck (Left) -->
-      <div class="main-deck prose prose-sm max-w-none p-3">
-        <slot name="main" />
-      </div>
-
-      <!-- Sideboard (Middle) -->
-      <div class="sideboard prose prose-sm max-w-none p-3">
-        <slot name="sideboard" />
-      </div>
-
-      <!-- Card Preview (Right) - Hidden on small screens -->
-      <div class="card-preview p-3 bg-amber-950/10 rounded sticky top-4">
-        <div v-if="hoveredCard" class="preview-content">
-          <!-- Card image from Scryfall -->
-          <div class="card-image-container">
-            <img
-              :src="getCardImageUrl(hoveredCard)" 
-              :alt="hoveredCard"
-              class="card-image rounded-lg shadow-lg w-full"
-              @error="(e) => (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22280%22%3E%3Crect width=%22200%22 height=%22280%22 fill=%22%23ddd%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%23999%22%3ENo Image%3C/text%3E%3C/svg%3E'"
-            >
-          </div>
+    <!-- Body Slot - Three-column layout -->
+    <template #default>
+      <div ref="decklistContent" class="decklist-grid">
+        <!-- Main Deck (Left) -->
+        <div class="main-deck prose prose-sm max-w-none p-3">
+          <slot name="main" />
         </div>
-        <div v-else class="text-gray-600 text-center text-sm py-8">
-          <svg class="w-16 h-16 mx-auto mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-          </svg>
-          <p>Hover over a card to preview</p>
-        </div>
-      </div>
-    </div>
 
-    <!-- Mobile Modal -->
-    <Teleport to="body">
-      <Transition name="modal">
-        <div
-          v-if="showModal && hoveredCard && isMobile"
-          class="modal-overlay"
-          @click="closeModal"
-        >
-          <div class="modal-content" @click.stop>
-            <div class="modal-card">
+        <!-- Sideboard (Middle) -->
+        <div class="sideboard prose prose-sm max-w-none p-3">
+          <slot name="sideboard" />
+        </div>
+
+        <!-- Card Preview (Right) - Hidden on small screens -->
+        <div class="card-preview p-3 bg-amber-950/10 rounded sticky top-4">
+          <div v-if="hoveredCard" class="preview-content">
+            <div class="card-image-container">
               <img
-                :src="getCardImageUrl(hoveredCard)" 
+                :src="getCardImageUrl(hoveredCard)"
                 :alt="hoveredCard"
-                class="modal-card-image"
+                class="card-image rounded-lg shadow-lg w-full"
                 @error="(e) => (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22280%22%3E%3Crect width=%22200%22 height=%22280%22 fill=%22%23ddd%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%23999%22%3ENo Image%3C/text%3E%3C/svg%3E'"
               >
             </div>
           </div>
+          <div v-else class="text-gray-600 text-center text-sm py-8">
+            <UIcon name="i-lucide-image" class="w-16 h-16 mx-auto mb-2 opacity-50" />
+            <p>Hover over a card to preview</p>
+          </div>
         </div>
-      </Transition>
-    </Teleport>
-  </div>
+      </div>
+    </template>
+  </UCard>
+
+  <!-- Mobile Modal using UModal -->
+  <UModal
+    v-model:open="showModal"
+    :ui="{
+      content: 'bg-transparent shadow-none ring-0',
+      overlay: 'bg-black/80'
+    }"
+  >
+    <template #content>
+      <div v-if="hoveredCard" class="flex items-center justify-center p-4">
+        <img
+          :src="getCardImageUrl(hoveredCard)"
+          :alt="hoveredCard"
+          class="max-w-full max-h-[85vh] rounded-lg shadow-2xl"
+          @error="(e) => (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22280%22%3E%3Crect width=%22200%22 height=%22280%22 fill=%22%23ddd%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%23999%22%3ENo Image%3C/text%3E%3C/svg%3E'"
+        >
+      </div>
+    </template>
+  </UModal>
 </template>
 
 <style scoped>
 .decklist-wrapper {
-  max-width: 1200px;
+  max-width: 900px;
 }
 
 .decklist-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1.5fr;
+  grid-template-columns: 1fr 1fr 1.5fr;
   gap: 0.25rem;
   min-height: 500px;
 }
@@ -342,37 +352,26 @@ const getCardImageUrl = (cardName: string): string => {
   overflow-y: auto;
 }
 
-/* Copy Button Styles */
-.copy-button {
-  position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
-  background: rgba(120, 53, 15, 0.2);
-  border: 1px solid rgba(120, 53, 15, 0.3);
-  border-radius: 0.375rem;
-  padding: 0.5rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  color: #78350f;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.copy-button:hover {
-  background: rgba(120, 53, 15, 0.3);
-  border-color: rgba(120, 53, 15, 0.5);
-}
-
-.copy-button.copy-success {
-  background: rgba(22, 163, 74, 0.2);
-  border-color: rgba(22, 163, 74, 0.3);
-  color: #16a34a;
-}
-
 /* Style card list items to be interactive */
 :deep(.card-item) {
+  display: flex;
+}
+
+:deep(.card-quantity) {
+  margin-right: 0.5rem;
+  color: #1c1917;
+  /* min-width: 1rem; */
+  font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+}
+
+:deep(.card-name-link) {
   cursor: pointer;
+  color: #4714ff;
+  text-decoration: underline;
+}
+
+:deep(.card-name-link) {
+  text-decoration-color: #4714ff;
 }
 
 /* Remove bullet points and tighten spacing */
@@ -388,7 +387,7 @@ const getCardImageUrl = (cardName: string): string => {
 :deep(.sideboard li) {
   margin: 0;
   padding: 0;
-  line-height: 1.4;
+  line-height: 1.2;
   font-size: 0.95rem;
   color: #1c1917;
   font-weight: 500;
@@ -438,83 +437,28 @@ const getCardImageUrl = (cardName: string): string => {
   position: relative;
 }
 
-/* Modal Styles */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  padding: 1rem;
-}
-
-.modal-content {
-  position: relative;
-  max-width: 90vw;
-  max-height: 90vh;
-}
-
-.modal-card {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal-card-image {
-  max-width: 100%;
-  max-height: 85vh;
-  width: auto;
-  height: auto;
-  border-radius: 0.75rem;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-}
-
-/* Modal transitions */
-.modal-enter-active,
-.modal-leave-active {
-  transition: opacity 0.2s ease;
-}
-
-.modal-enter-active .modal-content,
-.modal-leave-active .modal-content {
-  transition: transform 0.2s ease;
-}
-
-.modal-enter-from,
-.modal-leave-to {
-  opacity: 0;
-}
-
-.modal-enter-from .modal-content,
-.modal-leave-to .modal-content {
-  transform: scale(0.9);
-}
-
 @media (max-width: 1400px) {
-  .decklist-wrapper {
-    max-width: 100%;
+  /* .decklist-wrapper {
+    max-width: 80%;
+  } */
+
+  .decklist-grid {
+    grid-template-columns: 1fr 1fr 1.5fr;
   }
 }
 
-/* Adjust column proportions between 768px and 1024px */
 @media (max-width: 1024px) {
   .decklist-grid {
-    grid-template-columns: 1.5fr 1fr 1.5fr;
+    grid-template-columns: 1fr 1fr 1.5fr;
   }
 }
 
 @media (max-width: 768px) {
   .decklist-grid {
     grid-template-columns: 1fr 1fr;
-    gap: 0.5rem;
+    /* gap: 0.5rem; */
   }
 
-  /* Hide card preview entirely on small screens */
   .card-preview {
     display: none;
   }
