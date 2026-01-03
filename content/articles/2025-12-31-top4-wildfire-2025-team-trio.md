@@ -196,6 +196,7 @@ tags: ["pauper", "top"]
 ::
 
 ::magic-decklist{name="Terror" author="Fabrizio Olmeda" position="Seat C"}
+#main
 ## Creatures
 - 4 Delver of Secrets
 - 4 Cryptic Serpent
@@ -347,6 +348,7 @@ tags: ["pauper", "top"]
 - 9 Swamp
 - 1 Forest
 
+#sideboard
 ## Sideboard
 - 4 Weather the Storm
 - 2 Drown in Sorrow
