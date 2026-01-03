@@ -17,6 +17,12 @@ const decklistContent = ref<HTMLElement | null>(null)
 const showModal = ref(false)
 const isMobile = ref(false)
 
+// Cache for card data (including mana cost)
+const cardDataCache = ref<Map<string, { manaCost: string, manaSymbols: Array<{ symbol: string, svgUri: string }> }>>(new Map())
+
+// Cache for mana symbol SVG URIs
+const manaSymbolCache = ref<Map<string, string>>(new Map())
+
 // Use Nuxt UI Toast composable
 const toast = useToast()
 
@@ -34,6 +40,83 @@ const extractCardName = (text: string): string => {
 const extractQuantity = (text: string): number => {
   const match = text.match(/^(\d+)\s+/)
   return match ? parseInt(match[1]!, 10) : 0
+}
+
+// Function to fetch mana symbol SVG URI from Scryfall
+const fetchManaSymbol = async (symbol: string): Promise<string> => {
+  // Check cache first
+  if (manaSymbolCache.value.has(symbol)) {
+    return manaSymbolCache.value.get(symbol)!
+  }
+
+  try {
+    const response = await fetch(`https://api.scryfall.com/symbology`)
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch symbology')
+    }
+
+    const data = await response.json()
+
+    // Cache all symbols at once
+    data.data.forEach((item: any) => {
+      manaSymbolCache.value.set(item.symbol, item.svg_uri)
+    })
+
+    return manaSymbolCache.value.get(symbol) || ''
+  } catch (error) {
+    console.error(`Error fetching mana symbol for ${symbol}:`, error)
+    return ''
+  }
+}
+
+// Function to parse mana cost and get symbol info
+const parseManaCost = (manaCost: string): string[] => {
+  if (!manaCost) return []
+  // Extract symbols like {W}, {U}, {B}, {R}, {G}, {1}, {2}, etc.
+  const symbols = manaCost.match(/\{[^}]+\}/g) || []
+  return symbols
+}
+
+// Function to fetch card data from Scryfall
+const fetchCardData = async (cardName: string): Promise<{ manaCost: string, manaSymbols: Array<{ symbol: string, svgUri: string }> }> => {
+  // Check cache first
+  if (cardDataCache.value.has(cardName)) {
+    return cardDataCache.value.get(cardName)!
+  }
+
+  try {
+    const encodedName = encodeURIComponent(cardName)
+    const response = await fetch(`https://api.scryfall.com/cards/named?exact=${encodedName}`)
+
+    if (!response.ok) {
+      throw new Error('Card not found')
+    }
+
+    const data = await response.json()
+    const manaCost = data.mana_cost || ''
+
+    // Parse mana cost and fetch symbol URIs
+    const symbols = parseManaCost(manaCost)
+    const manaSymbols = await Promise.all(
+      symbols.map(async (symbol) => {
+        const svgUri = await fetchManaSymbol(symbol)
+        return { symbol, svgUri }
+      })
+    )
+
+    const cardData = {
+      manaCost,
+      manaSymbols
+    }
+
+    // Cache the result
+    cardDataCache.value.set(cardName, cardData)
+    return cardData
+  } catch (error) {
+    console.error(`Error fetching card data for ${cardName}:`, error)
+    return { manaCost: '', manaSymbols: [] }
+  }
 }
 
 // Function to calculate total cards in a section
@@ -80,7 +163,6 @@ const copyDecklist = async () => {
 
   let decklistText = `${props.name}`
   if (props.author) decklistText += `\n${props.author}`
-  if (props.position) decklistText += ` - ${props.position}`
   decklistText += '\n\n'
 
   // Get main deck
@@ -96,7 +178,12 @@ const copyDecklist = async () => {
         if (nextElement.tagName === 'UL') {
           const listItems = nextElement.querySelectorAll('li')
           listItems.forEach((li) => {
-            decklistText += `${li.textContent}\n`
+            // Extract just the quantity and card name (without mana symbols)
+            const cardNameElement = li.querySelector('.card-name-link')
+            const quantityElement = li.querySelector('.card-quantity')
+            if (quantityElement && cardNameElement) {
+              decklistText += `${quantityElement.textContent}${cardNameElement.textContent}\n`
+            }
           })
         }
         nextElement = nextElement.nextElementSibling
@@ -118,7 +205,11 @@ const copyDecklist = async () => {
         if (nextElement.tagName === 'UL') {
           const listItems = nextElement.querySelectorAll('li')
           listItems.forEach((li) => {
-            decklistText += `${li.textContent}\n`
+            const cardNameElement = li.querySelector('.card-name-link')
+            const quantityElement = li.querySelector('.card-quantity')
+            if (quantityElement && cardNameElement) {
+              decklistText += `${quantityElement.textContent}${cardNameElement.textContent}\n`
+            }
           })
         }
         nextElement = nextElement.nextElementSibling
@@ -129,7 +220,6 @@ const copyDecklist = async () => {
   try {
     await navigator.clipboard.writeText(decklistText)
 
-    // Use Nuxt UI Toast instead of local state
     toast.add({
       title: 'Copied!',
       description: 'Decklist copied to clipboard',
@@ -164,10 +254,18 @@ const closeModal = () => {
 }
 
 // Setup hover listeners on mount
-const setupHoverListeners = () => {
+const setupHoverListeners = async () => {
   if (!decklistContent.value) return
 
   const listItems = decklistContent.value.querySelectorAll('.main-deck li, .sideboard li')
+
+  // Fetch symbology once for all cards
+  if (manaSymbolCache.value.size === 0) {
+    await fetchManaSymbol('{W}') // This will cache all symbols
+  }
+
+  // Fetch all card data in parallel
+  const fetchPromises: Promise<void>[] = []
 
   listItems.forEach((item) => {
     const element = item as HTMLElement
@@ -175,34 +273,64 @@ const setupHoverListeners = () => {
     const cardName = extractCardName(fullText)
     const quantity = fullText.match(/^(\d+\s+)/)?.[0] || ''
 
-    // Restructure the list item to separate quantity from card name
-    const quantitySpan = document.createElement('span')
-    quantitySpan.className = 'card-quantity'
-    quantitySpan.textContent = quantity
+    // Fetch card data
+    const fetchPromise = fetchCardData(cardName).then((cardData) => {
+      // Restructure the list item
+      const quantitySpan = document.createElement('span')
+      quantitySpan.className = 'card-quantity'
+      quantitySpan.textContent = quantity
 
-    const cardLink = document.createElement('span')
-    cardLink.className = 'card-name-link'
-    cardLink.textContent = cardName
+      const cardNameWrapper = document.createElement('span')
+      cardNameWrapper.className = 'card-name-wrapper'
 
-    element.textContent = ''
-    element.appendChild(quantitySpan)
-    element.appendChild(cardLink)
+      const cardLink = document.createElement('span')
+      cardLink.className = 'card-name-link'
+      cardLink.textContent = cardName
 
-    if (isMobile.value) {
-      cardLink.addEventListener('click', () => {
-        if (hoveredCard.value === cardName && showModal.value) {
-          closeModal()
-        } else {
-          handleCardHover(cardName)
-        }
-      })
-    } else {
-      cardLink.addEventListener('mouseenter', () => handleCardHover(cardName))
-      cardLink.addEventListener('mouseleave', () => handleCardHover(null))
-    }
+      cardNameWrapper.appendChild(cardLink)
 
-    element.classList.add('card-item')
+      // Create mana cost container
+      const manaCostContainer = document.createElement('span')
+      manaCostContainer.className = 'card-mana-cost'
+
+      if (cardData.manaSymbols.length > 0) {
+        cardData.manaSymbols.forEach(({ svgUri }) => {
+          if (svgUri) {
+            const manaImg = document.createElement('img')
+            manaImg.src = svgUri
+            manaImg.className = 'mana-symbol'
+            manaImg.alt = 'Mana symbol'
+            manaCostContainer.appendChild(manaImg)
+          }
+        })
+      }
+
+      element.textContent = ''
+      element.appendChild(quantitySpan)
+      element.appendChild(cardNameWrapper)
+      element.appendChild(manaCostContainer)
+
+      if (isMobile.value) {
+        cardLink.addEventListener('click', () => {
+          if (hoveredCard.value === cardName && showModal.value) {
+            closeModal()
+          } else {
+            handleCardHover(cardName)
+          }
+        })
+      } else {
+        cardLink.addEventListener('mouseenter', () => handleCardHover(cardName))
+        cardLink.addEventListener('mouseleave', () => handleCardHover(null))
+      }
+
+      element.classList.add('card-item')
+    })
+
+    fetchPromises.push(fetchPromise)
   })
+
+  // Wait for all cards to be fetched
+  await Promise.all(fetchPromises)
 }
 
 // Cleanup listeners
@@ -276,6 +404,7 @@ const getCardImageUrl = (cardName: string): string => {
         square
         class="absolute top-4 end-4"
         title="Copy decklist"
+        aria-label="Copy decklist to clipboard"
         @click="copyDecklist"
       />
     </template>
@@ -337,12 +466,12 @@ const getCardImageUrl = (cardName: string): string => {
 
 <style scoped>
 .decklist-wrapper {
-  max-width: 900px;
+  max-width: 1000px;
 }
 
 .decklist-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1.5fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 0.25rem;
   min-height: 500px;
 }
@@ -354,29 +483,55 @@ const getCardImageUrl = (cardName: string): string => {
 
 /* Style card list items to be interactive */
 :deep(.card-item) {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr 60px;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 :deep(.card-quantity) {
-  margin-right: 0.5rem;
+  /* border: white 2px solid; */
   color: #1c1917;
-  /* min-width: 1rem; */
   font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+}
+
+:deep(.card-name-wrapper) {
+  /* border: white 2px solid; */
+  min-width: 0;
+  overflow: hidden;
 }
 
 :deep(.card-name-link) {
   cursor: pointer;
   color: #4714ff;
   text-decoration: underline;
+  text-decoration-color: #4714ff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
 }
 
-:deep(.card-name-link) {
-  text-decoration-color: #4714ff;
+:deep(.card-mana-cost) {
+  /* border: white 2px solid; */
+  display: flex;
+  gap: 2px;
+  align-items: center;
+  width: 60px;
+  flex-wrap: wrap;
+}
+
+:deep(.mana-symbol) {
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  flex-shrink: 0;
 }
 
 /* Remove bullet points and tighten spacing */
 :deep(.main-deck ul),
 :deep(.sideboard ul) {
+  /* border: forestgreen 2px solid; */
   list-style-type: none;
   padding-left: 0;
   margin-top: 0.15rem;
@@ -385,8 +540,9 @@ const getCardImageUrl = (cardName: string): string => {
 
 :deep(.main-deck li),
 :deep(.sideboard li) {
+  /* border: yellow 2px solid; */
   margin: 0;
-  padding: 0;
+  /* padding: 0; */
   line-height: 1.2;
   font-size: 0.95rem;
   color: #1c1917;
@@ -438,10 +594,6 @@ const getCardImageUrl = (cardName: string): string => {
 }
 
 @media (max-width: 1400px) {
-  /* .decklist-wrapper {
-    max-width: 80%;
-  } */
-
   .decklist-grid {
     grid-template-columns: 1fr 1fr 1.5fr;
   }
@@ -456,7 +608,6 @@ const getCardImageUrl = (cardName: string): string => {
 @media (max-width: 768px) {
   .decklist-grid {
     grid-template-columns: 1fr 1fr;
-    /* gap: 0.5rem; */
   }
 
   .card-preview {
