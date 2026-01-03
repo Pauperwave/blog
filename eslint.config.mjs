@@ -7,14 +7,13 @@ export default withNuxt(
     rules: {
       'flat/strongly-recommended': 'error',
       'vue/multi-word-component-names': 'error',
+      'vue/no-multiple-template-root': 'off',
+      'vue/max-attributes-per-line': ['error', {
+        singleline: 3, // each prop on its own line
+        multiline: 1 // also applies to multi-line elements
+      }],
       'no-console': 'warn',
       'no-debugger': 'error'
-    }
-  },
-  {
-    files: ['*.vue'],
-    rules: {
-      'vue/multi-word-component-names': 'error'
     }
   },
   {
