@@ -578,7 +578,7 @@ const getCardImageUrl = (cardName: string): string => {
 
 @media (max-width: 768px) {
   .decklist-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 
   .card-preview {
