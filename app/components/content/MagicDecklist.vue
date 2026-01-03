@@ -17,6 +17,22 @@ const decklistContent = ref<HTMLElement | null>(null)
 const showModal = ref(false)
 const isMobile = ref(false)
 
+// Store processed card data
+interface CardItem {
+  quantity: string
+  name: string
+  manaSymbols: Array<{ symbol: string, svgUri: string }>
+}
+
+interface Section {
+  heading: string
+  count: number
+  cards: CardItem[]
+}
+
+const mainDeckSections = ref<Section[]>([])
+const sideboardSections = ref<Section[]>([])
+
 // Cache for card data (including mana cost)
 const cardDataCache = ref<Map<string, { manaCost: string, manaSymbols: Array<{ symbol: string, svgUri: string }> }>>(new Map())
 
@@ -37,9 +53,9 @@ const extractCardName = (text: string): string => {
 }
 
 // Function to extract quantity from list item text
-const extractQuantity = (text: string): number => {
-  const match = text.match(/^(\d+)\s+/)
-  return match ? parseInt(match[1]!, 10) : 0
+const extractQuantity = (text: string): string => {
+  const match = text.match(/^(\d+\s+)/)
+  return match ? match[1] : ''
 }
 
 // Function to fetch mana symbol SVG URI from Scryfall
@@ -51,13 +67,13 @@ const fetchManaSymbol = async (symbol: string): Promise<string> => {
 
   try {
     const response = await fetch(`https://api.scryfall.com/symbology`)
-
+    
     if (!response.ok) {
       throw new Error('Failed to fetch symbology')
     }
 
     const data = await response.json()
-
+    
     // Cache all symbols at once
     data.data.forEach((item: any) => {
       manaSymbolCache.value.set(item.symbol, item.svg_uri)
@@ -88,14 +104,14 @@ const fetchCardData = async (cardName: string): Promise<{ manaCost: string, mana
   try {
     const encodedName = encodeURIComponent(cardName)
     const response = await fetch(`https://api.scryfall.com/cards/named?exact=${encodedName}`)
-
+    
     if (!response.ok) {
       throw new Error('Card not found')
     }
 
     const data = await response.json()
     const manaCost = data.mana_cost || ''
-
+    
     // Parse mana cost and fetch symbol URIs
     const symbols = parseManaCost(manaCost)
     const manaSymbols = await Promise.all(
@@ -119,101 +135,99 @@ const fetchCardData = async (cardName: string): Promise<{ manaCost: string, mana
   }
 }
 
-// Function to calculate total cards in a section
-const calculateSectionTotal = (heading: HTMLElement): number => {
-  let total = 0
-  let nextElement = heading.nextElementSibling
-
-  while (nextElement && nextElement.tagName !== 'H2') {
-    if (nextElement.tagName === 'UL') {
-      const listItems = nextElement.querySelectorAll('li')
-      listItems.forEach((li) => {
-        const quantity = extractQuantity(li.textContent || '')
-        total += quantity
-      })
-    }
-    nextElement = nextElement.nextElementSibling
-  }
-
-  return total
-}
-
-// Function to add card counts to headings
-const addCardCounts = () => {
+// Function to process sections and extract card data
+const processSections = async () => {
   if (!decklistContent.value) return
 
-  const headings = decklistContent.value.querySelectorAll('.main-deck h2, .sideboard h2')
+  // Fetch symbology once for all cards
+  if (manaSymbolCache.value.size === 0) {
+    await fetchManaSymbol('{W}') // This will cache all symbols
+  }
 
-  headings.forEach((heading) => {
-    const headingElement = heading as HTMLElement
-    const total = calculateSectionTotal(headingElement)
+  // Process main deck
+  const mainDeckElement = decklistContent.value.querySelector('.main-deck')
+  if (mainDeckElement) {
+    mainDeckSections.value = await extractSections(mainDeckElement)
+  }
 
-    if (!headingElement.querySelector('.card-count')) {
-      const countSpan = document.createElement('span')
-      countSpan.className = 'card-count'
-      countSpan.textContent = ` (${total})`
-      headingElement.appendChild(countSpan)
+  // Process sideboard
+  const sideboardElement = decklistContent.value.querySelector('.sideboard')
+  if (sideboardElement) {
+    sideboardSections.value = await extractSections(sideboardElement)
+  }
+}
+
+// Extract sections from a deck element
+const extractSections = async (deckElement: Element): Promise<Section[]> => {
+  const sections: Section[] = []
+  const headings = deckElement.querySelectorAll('h2')
+
+  for (const heading of headings) {
+    const headingText = (heading.textContent || '').trim()
+    const cards: CardItem[] = []
+    let nextElement = heading.nextElementSibling
+
+    while (nextElement && nextElement.tagName !== 'H2') {
+      if (nextElement.tagName === 'UL') {
+        const listItems = nextElement.querySelectorAll('li')
+        
+        for (const li of listItems) {
+          const fullText = li.textContent || ''
+          const quantity = extractQuantity(fullText)
+          const cardName = extractCardName(fullText)
+          
+          if (cardName) {
+            const cardData = await fetchCardData(cardName)
+            cards.push({
+              quantity,
+              name: cardName,
+              manaSymbols: cardData.manaSymbols
+            })
+          }
+        }
+      }
+      nextElement = nextElement.nextElementSibling
     }
-  })
+
+    const count = cards.reduce((sum, card) => {
+      const qty = parseInt(card.quantity.trim()) || 0
+      return sum + qty
+    }, 0)
+
+    sections.push({
+      heading: headingText,
+      count,
+      cards
+    })
+  }
+
+  return sections
 }
 
 // Function to copy decklist to clipboard
 const copyDecklist = async () => {
-  if (!decklistContent.value) return
-
   let decklistText = `${props.name}`
   if (props.author) decklistText += `\n${props.author}`
+  if (props.position) decklistText += ` - ${props.position}`
   decklistText += '\n\n'
 
-  // Get main deck
-  const mainDeck = decklistContent.value.querySelector('.main-deck')
-  if (mainDeck) {
-    const sections = mainDeck.querySelectorAll('h2')
-    sections.forEach((heading) => {
-      const headingText = heading.textContent?.replace(/\s*\(\d+\)/, '') || ''
-      decklistText += `${headingText}\n`
-
-      let nextElement = heading.nextElementSibling
-      while (nextElement && nextElement.tagName !== 'H2') {
-        if (nextElement.tagName === 'UL') {
-          const listItems = nextElement.querySelectorAll('li')
-          listItems.forEach((li) => {
-            // Extract just the quantity and card name (without mana symbols)
-            const cardNameElement = li.querySelector('.card-name-link')
-            const quantityElement = li.querySelector('.card-quantity')
-            if (quantityElement && cardNameElement) {
-              decklistText += `${quantityElement.textContent}${cardNameElement.textContent}\n`
-            }
-          })
-        }
-        nextElement = nextElement.nextElementSibling
-      }
-      decklistText += '\n'
+  // Add main deck
+  mainDeckSections.value.forEach(section => {
+    decklistText += `${section.heading}\n`
+    section.cards.forEach(card => {
+      decklistText += `${card.quantity}${card.name}\n`
     })
-  }
+    decklistText += '\n'
+  })
 
-  // Get sideboard
-  const sideboard = decklistContent.value.querySelector('.sideboard')
-  if (sideboard) {
-    const sections = sideboard.querySelectorAll('h2')
-    sections.forEach((heading) => {
-      const headingText = heading.textContent?.replace(/\s*\(\d+\)/, '') || ''
-      decklistText += `${headingText}\n`
-
-      let nextElement = heading.nextElementSibling
-      while (nextElement && nextElement.tagName !== 'H2') {
-        if (nextElement.tagName === 'UL') {
-          const listItems = nextElement.querySelectorAll('li')
-          listItems.forEach((li) => {
-            const cardNameElement = li.querySelector('.card-name-link')
-            const quantityElement = li.querySelector('.card-quantity')
-            if (quantityElement && cardNameElement) {
-              decklistText += `${quantityElement.textContent}${cardNameElement.textContent}\n`
-            }
-          })
-        }
-        nextElement = nextElement.nextElementSibling
-      }
+  // Add sideboard
+  if (sideboardSections.value.length > 0) {
+    sideboardSections.value.forEach(section => {
+      decklistText += `${section.heading}\n`
+      section.cards.forEach(card => {
+        decklistText += `${card.quantity}${card.name}\n`
+      })
+      decklistText += '\n'
     })
   }
 
@@ -253,118 +267,21 @@ const closeModal = () => {
   hoveredCard.value = null
 }
 
-// Setup hover listeners on mount
-const setupHoverListeners = async () => {
-  if (!decklistContent.value) return
-
-  const listItems = decklistContent.value.querySelectorAll('.main-deck li, .sideboard li')
-
-  // Fetch symbology once for all cards
-  if (manaSymbolCache.value.size === 0) {
-    await fetchManaSymbol('{W}') // This will cache all symbols
-  }
-
-  // Fetch all card data in parallel
-  const fetchPromises: Promise<void>[] = []
-
-  listItems.forEach((item) => {
-    const element = item as HTMLElement
-    const fullText = element.textContent || ''
-    const cardName = extractCardName(fullText)
-    const quantity = fullText.match(/^(\d+\s+)/)?.[0] || ''
-
-    // Fetch card data
-    const fetchPromise = fetchCardData(cardName).then((cardData) => {
-      // Restructure the list item
-      const quantitySpan = document.createElement('span')
-      quantitySpan.className = 'card-quantity'
-      quantitySpan.textContent = quantity
-
-      const cardNameWrapper = document.createElement('span')
-      cardNameWrapper.className = 'card-name-wrapper'
-
-      const cardLink = document.createElement('span')
-      cardLink.className = 'card-name-link'
-      cardLink.textContent = cardName
-
-      cardNameWrapper.appendChild(cardLink)
-
-      // Create mana cost container
-      const manaCostContainer = document.createElement('span')
-      manaCostContainer.className = 'card-mana-cost'
-
-      if (cardData.manaSymbols.length > 0) {
-        cardData.manaSymbols.forEach(({ svgUri }) => {
-          if (svgUri) {
-            const manaImg = document.createElement('img')
-            manaImg.src = svgUri
-            manaImg.className = 'mana-symbol'
-            manaImg.alt = 'Mana symbol'
-            manaCostContainer.appendChild(manaImg)
-          }
-        })
-      }
-
-      element.textContent = ''
-      element.appendChild(quantitySpan)
-      element.appendChild(cardNameWrapper)
-      element.appendChild(manaCostContainer)
-
-      if (isMobile.value) {
-        cardLink.addEventListener('click', () => {
-          if (hoveredCard.value === cardName && showModal.value) {
-            closeModal()
-          } else {
-            handleCardHover(cardName)
-          }
-        })
-      } else {
-        cardLink.addEventListener('mouseenter', () => handleCardHover(cardName))
-        cardLink.addEventListener('mouseleave', () => handleCardHover(null))
-      }
-
-      element.classList.add('card-item')
-    })
-
-    fetchPromises.push(fetchPromise)
-  })
-
-  // Wait for all cards to be fetched
-  await Promise.all(fetchPromises)
-}
-
-// Cleanup listeners
-const cleanupHoverListeners = () => {
-  if (!decklistContent.value) return
-
-  const listItems = decklistContent.value.querySelectorAll('.card-item')
-  listItems.forEach((item) => {
-    const element = item as HTMLElement
-    element.replaceWith(element.cloneNode(true))
-  })
-}
-
 // Handle window resize
 const handleResize = () => {
-  const wasMobile = isMobile.value
   checkMobile()
-  if (wasMobile !== isMobile.value) {
-    cleanupHoverListeners()
-    setTimeout(setupHoverListeners, 100)
-  }
 }
 
 onMounted(() => {
   checkMobile()
   window.addEventListener('resize', handleResize)
+  // Wait for slots to render
   setTimeout(() => {
-    addCardCounts()
-    setupHoverListeners()
+    processSections()
   }, 100)
 })
 
 onBeforeUnmount(() => {
-  cleanupHoverListeners()
   window.removeEventListener('resize', handleResize)
 })
 
@@ -411,15 +328,90 @@ const getCardImageUrl = (cardName: string): string => {
 
     <!-- Body Slot - Three-column layout -->
     <template #default>
-      <div ref="decklistContent" class="decklist-grid">
+      <div class="decklist-grid">
         <!-- Main Deck (Left) -->
-        <div class="main-deck prose prose-sm max-w-none p-3">
-          <slot name="main" />
+        <div class="main-deck p-3">
+          <!-- Hidden slot for parsing original content -->
+          <div ref="decklistContent" class="hidden">
+            <div class="main-deck">
+              <slot name="main" />
+            </div>
+            <div class="sideboard">
+              <slot name="sideboard" />
+            </div>
+          </div>
+
+          <!-- Rendered deck list -->
+          <div v-for="section in mainDeckSections" :key="section.heading" class="section">
+            <h2 class="section-heading">
+              {{ section.heading }} <span class="card-count">({{ section.count }})</span>
+            </h2>
+            <ul class="card-list">
+              <li
+                v-for="(card, index) in section.cards"
+                :key="`${section.heading}-${index}`"
+                class="card-item"
+              >
+                <span class="card-quantity">{{ card.quantity }}</span>
+                <span class="card-name-wrapper">
+                  <span
+                    class="card-name-link"
+                    @mouseenter="!isMobile && handleCardHover(card.name)"
+                    @mouseleave="!isMobile && handleCardHover(null)"
+                    @click="isMobile && (hoveredCard === card.name && showModal ? closeModal() : handleCardHover(card.name))"
+                  >
+                    {{ card.name }}
+                  </span>
+                </span>
+                <span class="card-mana-cost">
+                  <img
+                    v-for="(symbol, idx) in card.manaSymbols"
+                    :key="idx"
+                    :src="symbol.svgUri"
+                    class="mana-symbol"
+                    alt="Mana symbol"
+                  >
+                </span>
+              </li>
+            </ul>
+          </div>
         </div>
 
         <!-- Sideboard (Middle) -->
-        <div class="sideboard prose prose-sm max-w-none p-3">
-          <slot name="sideboard" />
+        <div class="sideboard p-3">
+          <div v-for="section in sideboardSections" :key="section.heading" class="section">
+            <h2 class="section-heading">
+              {{ section.heading }} <span class="card-count">({{ section.count }})</span>
+            </h2>
+            <ul class="card-list">
+              <li
+                v-for="(card, index) in section.cards"
+                :key="`${section.heading}-${index}`"
+                class="card-item"
+              >
+                <span class="card-quantity">{{ card.quantity }}</span>
+                <span class="card-name-wrapper">
+                  <span
+                    class="card-name-link"
+                    @mouseenter="!isMobile && handleCardHover(card.name)"
+                    @mouseleave="!isMobile && handleCardHover(null)"
+                    @click="isMobile && (hoveredCard === card.name && showModal ? closeModal() : handleCardHover(card.name))"
+                  >
+                    {{ card.name }}
+                  </span>
+                </span>
+                <span class="card-mana-cost">
+                  <img
+                    v-for="(symbol, idx) in card.manaSymbols"
+                    :key="idx"
+                    :src="symbol.svgUri"
+                    class="mana-symbol"
+                    alt="Mana symbol"
+                  >
+                </span>
+              </li>
+            </ul>
+          </div>
         </div>
 
         <!-- Card Preview (Right) - Hidden on small screens -->
@@ -471,7 +463,7 @@ const getCardImageUrl = (cardName: string): string => {
 
 .decklist-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1.5fr;
   gap: 0.25rem;
   min-height: 500px;
 }
@@ -481,27 +473,62 @@ const getCardImageUrl = (cardName: string): string => {
   overflow-y: auto;
 }
 
-/* Style card list items to be interactive */
-:deep(.card-item) {
+.hidden {
+  display: none;
+}
+
+.section {
+  margin-bottom: 0.5rem;
+}
+
+.section-heading {
+  margin-top: 0.6rem;
+  margin-bottom: 0.15rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #292524;
+}
+
+.section-heading:first-child {
+  margin-top: 0;
+}
+
+.card-count {
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.card-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 0.15rem;
+  margin-bottom: 0.35rem;
+}
+
+.card-item {
   display: grid;
   grid-template-columns: auto 1fr 60px;
   align-items: center;
   gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  line-height: 1.2;
+  font-size: 0.95rem;
+  color: #1c1917;
+  font-weight: 500;
 }
 
-:deep(.card-quantity) {
-  /* border: white 2px solid; */
+.card-quantity {
   color: #1c1917;
   font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
 }
 
-:deep(.card-name-wrapper) {
-  /* border: white 2px solid; */
+.card-name-wrapper {
   min-width: 0;
   overflow: hidden;
 }
 
-:deep(.card-name-link) {
+.card-name-link {
   cursor: pointer;
   color: #4714ff;
   text-decoration: underline;
@@ -512,8 +539,7 @@ const getCardImageUrl = (cardName: string): string => {
   display: block;
 }
 
-:deep(.card-mana-cost) {
-  /* border: white 2px solid; */
+.card-mana-cost {
   display: flex;
   gap: 2px;
   align-items: center;
@@ -521,66 +547,11 @@ const getCardImageUrl = (cardName: string): string => {
   flex-wrap: wrap;
 }
 
-:deep(.mana-symbol) {
+.mana-symbol {
   width: 15px;
   height: 15px;
   display: inline-block;
   flex-shrink: 0;
-}
-
-/* Remove bullet points and tighten spacing */
-:deep(.main-deck ul),
-:deep(.sideboard ul) {
-  /* border: forestgreen 2px solid; */
-  list-style-type: none;
-  padding-left: 0;
-  margin-top: 0.15rem;
-  margin-bottom: 0.35rem;
-}
-
-:deep(.main-deck li),
-:deep(.sideboard li) {
-  /* border: yellow 2px solid; */
-  margin: 0;
-  /* padding: 0; */
-  line-height: 1.2;
-  font-size: 0.95rem;
-  color: #1c1917;
-  font-weight: 500;
-}
-
-/* Tighten heading spacing */
-:deep(.main-deck h2),
-:deep(.sideboard h2) {
-  margin-top: 0.6rem;
-  margin-bottom: 0.15rem;
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #292524;
-}
-
-:deep(.main-deck h2:first-child),
-:deep(.sideboard h2:first-child) {
-  margin-top: 0;
-}
-
-/* Style the card count */
-:deep(.card-count) {
-  font-weight: 500;
-  opacity: 0.8;
-}
-
-/* Reduce paragraph spacing */
-:deep(.main-deck p),
-:deep(.sideboard p) {
-  margin: 0.15rem 0;
-}
-
-/* Prevent word breaking */
-:deep(.main-deck),
-:deep(.sideboard) {
-  word-break: keep-all;
-  overflow-wrap: normal;
 }
 
 .card-image {
