@@ -44,5 +44,13 @@ export default defineNuxtConfig({
             },
         },
     },
-    modules: ["@nuxt/ui", "@nuxt/image", "@nuxtjs/mdc", "motion-v/nuxt", "@nuxt/content", "@nuxtjs/seo", "@vueuse/nuxt"],
+    modules: [
+        "@nuxt/ui",
+        "@nuxt/image",
+        "@nuxtjs/mdc",
+        "motion-v/nuxt",
+        "@nuxt/content",
+        "@nuxtjs/seo",
+        "@vueuse/nuxt"
+    ],
 });
