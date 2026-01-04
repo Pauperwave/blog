@@ -33,6 +33,15 @@
     "vue-router": "^4.6.4"
   },
   "devDependencies": {
+    "@iconify-json/ic": "^1.2.4",
+    "@iconify-json/logos": "^1.2.10",
+    "@iconify-json/lucide": "^1.2.82",
+    "@iconify-json/material-symbols": "^1.2.50",
+    "@iconify-json/material-symbols-light": "^1.2.50",
+    "@iconify-json/mdi": "^1.2.3",
+    "@iconify-json/mynaui": "^1.2.17",
+    "@iconify-json/simple-icons": "^1.2.64",
+    "@iconify-json/tabler": "^1.2.26",
     "@types/culori": "^4.0.1",
     "@types/leaflet": "^1.9.21",
     "@types/leaflet.markercluster": "^1.5.6",
