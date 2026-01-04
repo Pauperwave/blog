@@ -35,10 +35,12 @@ export default defineNuxtConfig({
         build: {
             markdown: {
                 toc: {
+                    // h4 headings are included
                     depth: 3,
                     searchDepth: 2,
                 },
                 remarkPlugins: {
+                    // we can add options here if needed
                     "remark-reading-time": {},
                 },
             },
