@@ -20,7 +20,24 @@ export default defineContentConfig({
                 }),
             })
         ),
-        decklists: defineCollection({
+        decks: defineCollection(
+            asSitemapCollection({
+                source: "decks/**/*.md",
+                type: "page",
+                schema: z.object({
+                    title: z.string(),
+                    date: z.date(),
+                    description: z.string(),
+                    tags: z.optional(z.array(z.string())),
+                    author: z.string(),
+                    author_avatar: z.string(),
+                    author_description: z.string(),
+                    thumbnail: z.string(),
+                    rawbody: z.string(),
+                }),
+            })
+        ),
+        decklists: defineCollection(
             asSitemapCollection({
                 source: "decklists/**/*.md",
                 type: "page",
@@ -36,8 +53,8 @@ export default defineContentConfig({
                     rawbody: z.string(),
                 }),
             })
-        }),
-        reports: defineCollection({
+        ),
+        reports: defineCollection(
             asSitemapCollection({
                 source: "reports/**/*.md",
                 type: "page",
@@ -53,8 +70,8 @@ export default defineContentConfig({
                     rawbody: z.string(),
                 }),
             })
-        }),
-        spoilers: defineCollection({
+        ),
+        spoilers: defineCollection(
             asSitemapCollection({
                 source: "spoilers/**/*.md",
                 type: "page",
@@ -70,6 +87,6 @@ export default defineContentConfig({
                     rawbody: z.string(),
                 }),
             })
-        }),
+        ),
     },
 });
