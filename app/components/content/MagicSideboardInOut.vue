@@ -35,7 +35,7 @@ const extractCardName = (text: string): string => {
 
 const extractQuantity = (text: string): string => {
   const match = text.match(/^(\d+)\s+/)
-  return match ? match[1] : ''
+  return match ? match[1]! : ''
 }
 
 const fetchManaSymbol = async (symbol: string): Promise<string> => {
@@ -222,8 +222,7 @@ onBeforeUnmount(() => {
   <UCard
     class="sideboard-guide-wrapper mx-auto"
     :ui="{
-      root: 'overflow-hidden',
-      body: 'p-0'
+      root: 'overflow-hidden'
     }"
   >
     <template #header>
@@ -236,7 +235,7 @@ onBeforeUnmount(() => {
             {{ props.description }}
           </p>
         </div>
-        <div class="flex items-center gap-2 text-sm text-gray-400">
+        <!-- <div class="flex items-center gap-2 text-sm text-gray-400">
           <span class="flex items-center gap-1">
             <UIcon name="i-lucide-plus" class="size-4 text-green-500" />
             <span>{{ totalIn }}</span>
@@ -245,13 +244,13 @@ onBeforeUnmount(() => {
             <UIcon name="i-lucide-minus" class="size-4 text-red-500" />
             <span>{{ totalOut }}</span>
           </span>
-        </div>
+        </div> -->
       </div>
     </template>
 
     <template #default>
       <!-- Hidden content for parsing -->
-      <div ref="decklistContent" style="position: absolute; left: -9999px;">
+      <div ref="decklistContent" class="hidden">
         <div class="cards-in">
           <slot name="in" />
         </div>
@@ -377,7 +376,7 @@ onBeforeUnmount(() => {
         </div>
 
         <!-- Card Preview (Right) -->
-        <div class="card-preview bg-amber-950/10 rounded sticky top-4">
+        <div class="card-preview bg-amber-950/10 rounded sticky">
           <div v-if="hoveredCard" class="preview-content">
             <div class="card-image-container">
               <img
@@ -406,7 +405,7 @@ onBeforeUnmount(() => {
     }"
   >
     <template #content>
-      <div v-if="hoveredCard" class="flex items-center justify-center p-4">
+      <div v-if="hoveredCard" class="flex items-center justify-center">
         <img
           :src="getCardImageUrl(hoveredCard)"
           :alt="hoveredCard"
@@ -430,7 +429,7 @@ onBeforeUnmount(() => {
 }
 
 .cards-section {
-  padding: 1rem;
+  padding: .5rem;
 }
 
 .section-header {
