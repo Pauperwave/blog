@@ -21,16 +21,18 @@
         <u-page-header :title="data?.title" :description="data?.description" headline="Blog">
             <div class="flex items-end flex-wrap gap-4 justify-between mt-4">
                 <div class="flex flex-col gap-4">
-                    <u-user
+                    <div class="flex flex-row gap-2 items-center flex-wrap">
+                        <UBadge v-for="tag in data?.tags" color="primary" variant="soft">
+                            {{ tag }}
+                        </UBadge>
+                    </div>
+                    <UUser
                         :name="data?.author"
                         :description="data?.author_description"
                         :avatar="{ src: data?.author_avatar }"
                         class="cursor-default"
                         @click="() => authorEl?.scrollIntoView()"
-                    ></u-user>
-                    <div class="flex flex-row gap-2 items-center flex-wrap">
-                        <u-badge v-for="k in data?.tags" color="primary" variant="soft">{{ k }}</u-badge>
-                    </div>
+                    />
                 </div>
                 <div class="flex flex-row items-center gap-4">
                     <p class="flex flex-row items-center gap-1 typ-sublabel">
