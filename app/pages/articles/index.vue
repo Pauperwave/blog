@@ -1,7 +1,7 @@
 <template>
     <u-page>
         <u-page-body>
-            <div class="flex justify-between gap-2 w-full items-center flex-wrap">
+            <!-- <div class="flex justify-between gap-2 w-full items-center flex-wrap">
                 <u-form-field>
                     <template #label> A complete, responsive, aesthetic and SEO optimized Blog. </template>
                     <template #description>
@@ -18,9 +18,9 @@
                     to="https://www.youtube.com/playlist?list=PLy6JsnZbXr8wztuwuDfNZmfKziSDVy9CM"
                     target="_blank"
                 ></u-button>
-            </div>
-            <u-separator></u-separator>
-            <u-field-group class="">
+            </div> -->
+            <!-- <u-separator></u-separator> -->
+            <!-- <u-field-group class="">
                 <u-content-search-button variant="outline">
                     <div class="flex items-center gap-4">
                         Search
@@ -30,19 +30,19 @@
                         </div>
                     </div>
                 </u-content-search-button>
-            </u-field-group>
-            <client-only>
+            </u-field-group> -->
+            <!-- <client-only>
                 <u-content-search v-model:search-term="query" shortcut="meta_k" :files="files" :navigation="navigation" :fuse="{ resultLimit: 42 }"></u-content-search>
-            </client-only>
-            <u-empty
+            </client-only> -->
+            <UEmpty
                 v-if="(articles?.length ?? 0) <= 0"
                 title="No interesting material yet"
                 description="Give me some time to create some boring stuff."
                 variant="naked"
                 :actions="[{ label: 'Go back home', to: '/' }]"
             >
-            </u-empty>
-            <u-blog-posts v-else>
+            </UEmpty>
+            <UBlogPosts v-else>
                 <u-blog-post
                     v-for="article in articles"
                     :title="article.title"
@@ -54,7 +54,7 @@
                     :to="article.path"
                     variant="naked"
                 ></u-blog-post>
-            </u-blog-posts>
+            </UBlogPosts>
         </u-page-body>
     </u-page>
 </template>
