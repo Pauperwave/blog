@@ -71,11 +71,14 @@ description: A deck leveraging the synergy between Caw-Blade and Basilisk Gate t
 - 2 Palace Sentinels
 ::
 
-The main deck idea is very simple: the three decks I expected to see the most at Geddon were, in order, Mono Red, Jund, and Terror. Therefore, I needed to create a list that would win as consistently as possible against Mono Red and Terror, while also trying to make the Jund matchup at least playable.
+The main deck idea is very simple: the three decks I expected to see the most at Geddon were, in order, Mono Red, Jund, and Terror.
+Therefore, I needed to create a list that would win as consistently as possible against Mono Red and Terror, while also trying to make the Jund matchup at least playable.
 
-The side deck follows the same logic: I want to win against the format's tiers, those expected to be most present, and then compete against the rest. During the report, we'll look at the various side decks and how I set up the matchups during the tournament.
+The side deck follows the same logic: I want to win against the format's tiers, those expected to be most present, and then compete against the rest.
+During the report, we'll look at the various side decks and how I set up the matchups during the tournament.
 
-Explaining every single choice here would seem misleading and a departure from the purpose of this report. However, if more people were interested, I might consider creating a more detailed guide to the deck, perhaps involving other fans of the archetype!
+Explaining every single choice here would seem misleading and a departure from the purpose of this report.
+However, if more people were interested, I might consider creating a more detailed guide to the deck, perhaps involving other fans of the archetype!
 
 # Tournament
 
@@ -169,6 +172,8 @@ crop:
 ---
 ::
 
+## Day 2
+
 ### Round 9: UW Familiar
 
 ::MagicCardArtCrop
@@ -245,3 +250,15 @@ crop:
   position: top
 ---
 ::
+
+## Final Thoughts
+
+A fantastic weekend, both from a Magic and gathering perspective.
+I think I've already talked enough about the tournament: a splendid atmosphere and impeccable organization characterized these days.
+Boose, as always, confirms himself as a cornerstone for this format, thanks to the dedication and energy he constantly invests in supporting it.
+
+As for the gathering, I want to thank all my league teammates, without whom this trip would not have been so fun and exciting.
+A special thanks to the guys from the Lega Pauper Pisa, with whom we've now developed a truly friendly relationship and it's always a pleasure to spend evenings together; and to the guys from the Lega Medievalle Garfagnana, with whom, after the trip to Katowice, the bond has further strengthened.
+
+Thanks also to Marco Candela and Isaac Rancic, my teammates in the Sunday Trio, who had to witness all the slaps I took.
+
