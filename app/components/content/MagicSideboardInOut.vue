@@ -454,7 +454,6 @@ onBeforeUnmount(() => {
 
 .section-header h4 {
   font-size: 1rem;
-  color: white;
 }
 
 .card-count {
@@ -524,7 +523,6 @@ onBeforeUnmount(() => {
 }
 
 .card-quantity {
-  color: white;
   font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
   font-weight: 600;
 }
