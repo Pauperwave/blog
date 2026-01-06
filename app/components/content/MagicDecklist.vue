@@ -56,7 +56,7 @@ const extractCardName = (text: string): string => {
 // Function to extract quantity from list item text
 const extractQuantity = (text: string): string => {
   const match = text.match(/^(\d+\s+)/)
-  return match ? match[1] : ''
+  return match ? match[1]! : ''
 }
 
 // Function to fetch mana symbol SVG URI from Scryfall
@@ -297,8 +297,7 @@ const getCardImageUrl = (cardName: string): string => {
     class="decklist-wrapper mx-auto"
     :ui="{
       root: 'overflow-hidden',
-      header: 'relative',
-      body: 'p-0'
+      header: 'relative'
     }"
   >
     <!-- Header Slot -->
@@ -306,13 +305,13 @@ const getCardImageUrl = (cardName: string): string => {
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
         <div>
           <h2 class="text-lg font-semibold">{{ props.name }}</h2>
-          <p class="text-md text-gray-400">{{ props.author }}</p>
+          <p class="text-md dark:text-gray-400">{{ props.author }}</p>
         </div>
-        <div v-if="props.placement" class="text-gray-200">
+        <div v-if="props.placement" class="dark:text-gray-500">
           {{ props.placement }}
         </div>
       </div>
-      <div v-if="props.description" class="mb-2 text-gray-500">
+      <div v-if="props.description" class="mb-2 dark:text-gray-500">
         {{ props.description }}
       </div>
       <div v-if="props.tags && props.tags.length" class="flex flex-wrap gap-1">
@@ -504,7 +503,6 @@ const getCardImageUrl = (cardName: string): string => {
   margin-bottom: 0.15rem;
   font-size: 1.05rem;
   font-weight: 700;
-  color: white;
 }
 
 .section-heading:first-child {
@@ -532,13 +530,12 @@ const getCardImageUrl = (cardName: string): string => {
   padding: 0;
   line-height: 1.4;
   font-size: 0.95rem;
-  color: #1c1917;
   font-weight: 500;
 }
 
 .card-quantity {
-  color: white;
   font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+  font-weight: 600;
 }
 
 /* .card-name-wrapper {
