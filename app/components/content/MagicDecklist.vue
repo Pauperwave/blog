@@ -209,7 +209,7 @@ const extractSections = async (deckElement: Element): Promise<Section[]> => {
 const copyDecklist = async () => {
   let decklistText = `${props.name}`
   if (props.author) decklistText += `\n${props.author}`
-  if (props.position) decklistText += ` - ${props.position}`
+  if (props.placement) decklistText += ` - ${props.placement}`
   decklistText += '\n\n'
 
   // Add main deck
@@ -429,7 +429,7 @@ const getCardImageUrl = (cardName: string): string => {
           </div>
           <div v-else class="text-gray-600 text-center text-sm py-8">
             <UIcon name="i-lucide-image" class="w-16 h-16 mx-auto mb-2 opacity-50" />
-            <p>Hover over a card to preview</p>
+            <p>Passa il mouse sopra una carta per visualizzarla</p>
           </div>
         </div>
       </div>
@@ -437,9 +437,8 @@ const getCardImageUrl = (cardName: string): string => {
 
     <template #footer>
       <UButton
-        icon="lucide:copy"
+        icon="i-lucide-copy"
         size="sm"
-        square
         variant="subtle"
         class="cursor-pointer"
         title="Copia decklist"
