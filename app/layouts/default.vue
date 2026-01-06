@@ -1,3 +1,13 @@
+<script lang="ts" setup>
+import type { NavigationMenuItem } from "@nuxt/ui";
+import appMeta from "~/app.meta";
+
+const navItems: NavigationMenuItem[] = [
+    { label: "YouTube channel", icon: "logos:youtube-icon", target: "_blank", to: "https://www.youtube.com/@matteo-beltrame" },
+    { label: "Repository", icon: "mdi:github", target: "_blank", to: "https://github.com/tratteo/nuxt_template" },
+];
+</script>
+
 <template>
     <u-app>
         <u-header mode="slideover">
@@ -17,7 +27,7 @@
                 <nuxt-page></nuxt-page>
             </u-container>
         </u-main>
-        <u-footer class="border-t border-t-default">
+        <!-- <u-footer class="border-t border-t-default">
             <template #bottom>
                 <u-container>
                     <u-footer-columns></u-footer-columns>
@@ -29,18 +39,6 @@
                     <copyable-text class="h-8 text-nowrap" :content="appMeta.author.email"></copyable-text>
                 </div>
             </template>
-        </u-footer>
+        </u-footer> -->
     </u-app>
 </template>
-
-<script lang="ts" setup>
-import type { NavigationMenuItem } from "@nuxt/ui";
-import appMeta from "~/app.meta";
-
-const navItems: NavigationMenuItem[] = [
-    { label: "YouTube channel", icon: "logos:youtube-icon", target: "_blank", to: "https://www.youtube.com/@matteo-beltrame" },
-    { label: "Repository", icon: "mdi:github", target: "_blank", to: "https://github.com/tratteo/nuxt_template" },
-];
-</script>
-
-<style></style>
