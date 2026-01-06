@@ -4,18 +4,18 @@
             <u-page-aside :ui="{ root: 'lg:col-span-3!' }">
                 <u-page-anchors
                     :links="[
-                        { label: 'YouTube tutorial', icon: 'mdi:youtube', to: 'https://www.youtube.com/@matteo-beltrame', target: '_blank' },
+                        { label: 'Canale YouTube', icon: 'mdi:youtube', to: 'https://www.youtube.com/@alessandromoretti1177', target: '_blank' },
                         { label: 'All articles', icon: 'material-symbols:article-rounded', to: '/articles/' },
                     ]"
                 ></u-page-anchors>
-                <u-separator type="dotted"></u-separator>
-                <u-content-toc v-if="data" :links="data.body.toc?.links" highlight></u-content-toc>
-                <u-field-group class="w-full">
+                <USeparator type="dotted" />
+                <UContentToc v-if="data" :links="data.body.toc?.links" highlight />
+                <!-- <u-field-group class="w-full">
                     <u-button @click="share" label="Share this article" icon="material-symbols:share" variant="subtle" color="neutral" class="grow"> </u-button>
                     <u-dropdown-menu :items="[{ label: 'Copy URL', icon: 'mdi:link-variant', onSelect: copyLink }]">
                         <u-button icon="i-lucide-chevron-down" variant="subtle" color="neutral"></u-button>
                     </u-dropdown-menu>
-                </u-field-group>
+                </u-field-group> -->
             </u-page-aside>
         </template>
         <u-page-header :title="data?.title" :description="data?.description" headline="Blog">
@@ -93,9 +93,10 @@ async function copyLink() {
     await clipboard.copy(window.location.href);
     toast.add({ title: "Copied to clipboad", icon: "material-symbols:check-circle-rounded", color: "success" });
 }
-async function share() {
-    await navigator.share({ url: route.fullPath });
-}
+
+// async function share() {
+//     await navigator.share({ url: route.fullPath });
+// }
 
 function updateMeta() {
     useSchemaOrg([
