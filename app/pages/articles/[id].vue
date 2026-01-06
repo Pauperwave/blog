@@ -45,8 +45,15 @@
 
         <u-content-toc v-if="data" :links="data.body.toc?.links" highlight class="lg:hidden"> </u-content-toc>
         <u-page-body>
+            <NuxtImg 
+                v-if="data?.thumbnail" 
+                :src="data.thumbnail" 
+                :alt="data.title"
+                class="w-full h-auto rounded-lg shadow-lg mb-8 aspect-16/9 object-cover"
+                loading="lazy"
+            />
             <content-renderer v-if="data" id="content" :value="data" class="markdown-content flex-1" />
-            <u-separator></u-separator>
+            <u-separator />
             <p class="font-semibold">Related articles</p>
             <u-blog-posts id="related-articles">
                 <u-blog-post
@@ -58,7 +65,7 @@
                     :date="article.date"
                     :to="article.path"
                     variant="subtle"
-                ></u-blog-post>
+                />
             </u-blog-posts>
 
             <u-content-surround :surround="surround"></u-content-surround>
