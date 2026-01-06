@@ -1,11 +1,20 @@
+<script lang="ts" setup>
+const props = defineProps<{
+    src: string;
+    name: string
+}>();
+</script>
+
 <template>
-    <u-card id="author-about" variant="soft" class="mt-16">
+    <UCard id="author-about" variant="soft" class="mt-16">
+
         <template #header>
-            <div class="flex flex-col gap-2">
-                <p class="font-bold text-highlighted">About the author</p>
+            <div class="flex flex-col">
+                <p class="font-bold text-highlighted">Riguardo l'autore</p>
                 <slot name="body"></slot>
             </div>
         </template>
+
         <template #footer>
             <div class="flex items-center gap-2">
                 <u-avatar :src="src"></u-avatar>
@@ -15,12 +24,9 @@
                 </div>
             </div>
         </template>
-    </u-card>
-</template>
 
-<script lang="ts" setup>
-const props = defineProps<{ src: string; name: string }>();
-</script>
+</UCard>
+</template>
 
 <style lang="css" scoped>
 @reference "~/assets/css/main.css";
