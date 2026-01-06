@@ -1,17 +1,17 @@
 export default {
-    id: "nuxt_template",
-    name: "Nuxt Template",
+    id: "pauperwave_blog",
+    name: "Pauperwave Blog",
     description: "Build your Nuxt fullstack web apps in a blink.",
     author: {
-        name: "Matteo Beltrame",
-        url: "https://tratteo.it",
-        image: "https://avatars.githubusercontent.com/u/31132987?v=4",
-        email: "bltmtt@gmail.com",
-        description: "Solopreneur in the making, I fired myself from everywhere to become my own boss and do the stuff that I love.",
-        jobTitle: "Entrepreneur",
+        name: "Emaneuele Nardi",
+        url: "https://emanuelenardi.com",
+        image: "https://avatars.githubusercontent.com/u/15109661?v=4",
+        email: "emanuelenardi.dev@gmail.com",
+        description: "",
+        jobTitle: "",
     },
     //TODO change this to the actual production ready url for your app!
-    url: "https://github.com/tratteo/nuxt_template",
+    url: "https://blog.pauperwave.org",
     icon: "/favicon.ico",
-    contactEmail: "bltmtt@gmail.com",
+    contactEmail: "pauperwave@gmail.com",
 };

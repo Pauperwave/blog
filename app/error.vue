@@ -2,7 +2,7 @@
     <u-app>
         <u-header mode="slideover">
             <template #left>
-                <u-user name="Nuxt template" to="/" :avatar="{ src: 'https://tratteo.it/favicon.svg' }"></u-user>
+                <u-user name="Pauperwave Blog" to="/" :avatar="{ src: 'https://avatars.githubusercontent.com/u/225214755?v=4' }"></u-user>
             </template>
         </u-header>
         <u-main class="px-4">

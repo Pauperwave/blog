@@ -3,8 +3,8 @@ import type { NavigationMenuItem } from "@nuxt/ui";
 import appMeta from "~/app.meta";
 
 const navItems: NavigationMenuItem[] = [
-    { label: "YouTube channel", icon: "logos:youtube-icon", target: "_blank", to: "https://www.youtube.com/@matteo-beltrame" },
-    { label: "Repository", icon: "mdi:github", target: "_blank", to: "https://github.com/tratteo/nuxt_template" },
+    { label: "YouTube channel", icon: "logos:youtube-icon", target: "_blank", to: "https://www.youtube.com/channel/UCw1eRvwu6cBZPdrLoBw1LWA" },
+    { label: "Repository", icon: "mdi:github", target: "_blank", to: "https://github.com/Pauperwave/blog" },
 ];
 </script>
 
@@ -12,7 +12,7 @@ const navItems: NavigationMenuItem[] = [
     <u-app>
         <u-header mode="slideover">
             <template #left>
-                <u-user name="Nuxt template" to="/" :avatar="{ src: 'https://tratteo.it/favicon.svg' }"></u-user>
+                <u-user name="Pauperwave Blog" to="/" :avatar="{ src: 'https://avatars.githubusercontent.com/u/225214755?v=4' }"></u-user>
             </template>
             <template #right>
                 <color-mode-button></color-mode-button>
