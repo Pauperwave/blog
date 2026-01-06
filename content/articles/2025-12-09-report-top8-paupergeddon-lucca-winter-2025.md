@@ -6,7 +6,7 @@ author: Bragioto Pietro
 author_avatar: /assets/avatars/bragioto.jpg
 author_description: "Scribacchino di liste"
 tags: [report, paupergeddon, lucca]
-thumbnail: /assets/articles/clb-346-basilisk-gate
+thumbnail: /assets/articles/arts/clb-346-basilisk-gate.jpeg
 ---
 
 # Introduzione

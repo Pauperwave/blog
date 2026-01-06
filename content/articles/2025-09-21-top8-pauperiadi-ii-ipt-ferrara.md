@@ -1,5 +1,15 @@
 ---
 title: "Top 8 Pauperiadi II, IPT Ferrara"
+description: Introduzione di Buonanotte a Pingers aka Passione Beyblade
+author: Bragioto Pietro
+date: 2025-12-06
+tags: [tutorial, deck]
+author_avatar: /assets/avatars/bragioto.jpg
+author_description: "Scribacchino di liste"
+thumbnail: /assets/articles/events/2025-09-21-banner-pauperiadi-2025_lungo.webp
+---
+<!-- ---
+title: "Top 8 Pauperiadi II, IPT Ferrara"
 description: "Decklists and report from the Top 8 of the Pauperiadi II, IPT Ferrara event held on 21 September 2025."
 author: "Bragioto Pietro"
 date: 2025-09-22
@@ -11,7 +21,7 @@ hero: {
   alt: "Top 8 Pauperiadi II, IPT Ferrara",
   caption: "Top 8 Pauperiadi II, IPT Ferrara"
 }
----
+--- -->
 
 # {{ $doc.title }}
 
