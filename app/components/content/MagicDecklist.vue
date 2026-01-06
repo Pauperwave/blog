@@ -207,28 +207,25 @@ const extractSections = async (deckElement: Element): Promise<Section[]> => {
 
 // Function to copy decklist to clipboard
 const copyDecklist = async () => {
-  let decklistText = `${props.name}`
-  if (props.author) decklistText += `\n${props.author}`
-  if (props.placement) decklistText += ` - ${props.placement}`
-  decklistText += '\n\n'
+  let decklistText = ''
 
   // Add main deck
   mainDeckSections.value.forEach((section) => {
-    decklistText += `${section.heading}\n`
+    // decklistText += `${section.heading}\n`
     section.cards.forEach((card) => {
       decklistText += `${card.quantity}${card.name}\n`
     })
-    decklistText += '\n'
+    // decklistText += '\n'
   })
 
   // Add sideboard
   if (sideboardSections.value.length > 0) {
+    decklistText += '\n'
     sideboardSections.value.forEach((section) => {
-      decklistText += `${section.heading}\n`
+      decklistText += `Sideboard:\n`
       section.cards.forEach((card) => {
         decklistText += `${card.quantity}${card.name}\n`
       })
-      decklistText += '\n'
     })
   }
 
