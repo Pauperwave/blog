@@ -5,11 +5,11 @@
                 <u-page-anchors
                     :links="[
                         { label: 'Canale YouTube', icon: 'mdi:youtube', to: 'https://www.youtube.com/@alessandromoretti1177', target: '_blank' },
-                        { label: 'All articles', icon: 'material-symbols:article-rounded', to: '/articles/' },
+                        { label: 'Tutti gli articoli', icon: 'material-symbols:article-rounded', to: '/articles/' },
                     ]"
                 ></u-page-anchors>
                 <USeparator type="dotted" />
-                <UContentToc v-if="data" :links="data.body.toc?.links" highlight />
+                <UContentToc v-if="data" :title="tocTitle" :links="data.body.toc?.links" highlight />
                 <!-- <u-field-group class="w-full">
                     <u-button @click="share" label="Share this article" icon="material-symbols:share" variant="subtle" color="neutral" class="grow"> </u-button>
                     <u-dropdown-menu :items="[{ label: 'Copy URL', icon: 'mdi:link-variant', onSelect: copyLink }]">
@@ -82,6 +82,7 @@ const route = useRoute();
 const authorEl = ref<HTMLElement | null>();
 const relatedArticlesEl = ref<HTMLElement | null>();
 // const readingTimeText = computed(() => (data.value?.meta as any).readingTime?.text);
+const tocTitle = computed(() => `In questo articolo`);
 const clipboard = useClipboard();
 const toast = useToast();
 
