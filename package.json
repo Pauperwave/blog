@@ -24,6 +24,7 @@
     "leaflet": "^1.9.4",
     "leaflet.markercluster": "^1.5.3",
     "lodash": "^4.17.21",
+    "mana-font": "^1.18.0",
     "motion-v": "^1.7.4",
     "nuxt": "^4.2.2",
     "remark-reading-time": "^2.0.2",
