@@ -39,10 +39,10 @@ export default defineNuxtConfig({
                     // depth: 3,
                     searchDepth: 2,
                 },
-                remarkPlugins: {
-                    // we can add options here if needed
-                    "remark-reading-time": {},
-                },
+                // remarkPlugins: {
+                //     // we can add options here if needed
+                //     "remark-reading-time": {},
+                // },
             },
         },
     },

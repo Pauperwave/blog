@@ -38,7 +38,7 @@
                     <p class="flex flex-row items-center gap-1 typ-sublabel">
                         <icon name="material-symbols:calendar-today-rounded" class="text-primary"></icon> {{ dayjs(data?.date).format("DD MMM YYYY") }}
                     </p>
-                    <p class="flex flex-row items-center gap-1 typ-sublabel"><icon name="material-symbols:alarm-rounded" class="text-primary"></icon> {{ readingTimeText }}</p>
+                    <!-- <p class="flex flex-row items-center gap-1 typ-sublabel"><icon name="material-symbols:alarm-rounded" class="text-primary"></icon> {{ readingTimeText }}</p> -->
                 </div>
             </div>
         </u-page-header>
@@ -81,7 +81,7 @@ import appMeta from "~/app.meta";
 const route = useRoute();
 const authorEl = ref<HTMLElement | null>();
 const relatedArticlesEl = ref<HTMLElement | null>();
-const readingTimeText = computed(() => (data.value?.meta as any).readingTime?.text);
+// const readingTimeText = computed(() => (data.value?.meta as any).readingTime?.text);
 const clipboard = useClipboard();
 const toast = useToast();
 

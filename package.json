@@ -27,7 +27,6 @@
     "mana-font": "^1.18.0",
     "motion-v": "^1.7.4",
     "nuxt": "^4.2.2",
-    "remark-reading-time": "^2.0.2",
     "sortablejs": "^1.15.6",
     "vue": "^3.5.26",
     "vue-echarts": "^8.0.1",
