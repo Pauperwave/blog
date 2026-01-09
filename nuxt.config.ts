@@ -36,7 +36,7 @@ export default defineNuxtConfig({
             markdown: {
                 toc: {
                     // h4 headings are included
-                    depth: 3,
+                    // depth: 3,
                     searchDepth: 2,
                 },
                 remarkPlugins: {
