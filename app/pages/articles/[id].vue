@@ -1,13 +1,14 @@
 <template>
-    <u-page :ui="{ center: 'lg:col-span-7!' }">
+    <UPage :ui="{ center: 'lg:col-span-7!' }">
+
         <template #right>
-            <u-page-aside :ui="{ root: 'lg:col-span-3!' }">
-                <u-page-anchors
+            <UPageAside :ui="{ root: 'lg:col-span-3!' }">
+                <UPageAnchors
                     :links="[
                         { label: 'Canale YouTube', icon: 'mdi:youtube', to: 'https://www.youtube.com/@alessandromoretti1177', target: '_blank' },
                         { label: 'Tutti gli articoli', icon: 'material-symbols:article-rounded', to: '/articles/' },
                     ]"
-                ></u-page-anchors>
+                />
                 <USeparator type="dotted" />
                 <UContentToc v-if="data" :title="tocTitle" :links="data.body.toc?.links" highlight />
                 <!-- <u-field-group class="w-full">
@@ -16,9 +17,10 @@
                         <u-button icon="i-lucide-chevron-down" variant="subtle" color="neutral"></u-button>
                     </u-dropdown-menu>
                 </u-field-group> -->
-            </u-page-aside>
+            </UPageAside>
         </template>
-        <u-page-header :title="data?.title" :description="data?.description" headline="Blog">
+
+        <UPageHeader :title="data?.title" :description="data?.description" headline="Blog">
             <div class="flex items-end flex-wrap gap-4 justify-between mt-4">
                 <div class="flex flex-col gap-4">
                     <div class="flex flex-row gap-2 items-center flex-wrap">
@@ -41,22 +43,23 @@
                     <!-- <p class="flex flex-row items-center gap-1 typ-sublabel"><icon name="material-symbols:alarm-rounded" class="text-primary"></icon> {{ readingTimeText }}</p> -->
                 </div>
             </div>
-        </u-page-header>
+        </UPageHeader>
 
-        <u-content-toc v-if="data" :links="data.body.toc?.links" highlight class="lg:hidden"> </u-content-toc>
-        <u-page-body>
+        <UContentToc v-if="data" :links="data.body.toc?.links" highlight class="lg:hidden" />
+
+        <UPageBody>
             <NuxtImg 
                 v-if="data?.thumbnail" 
                 :src="data.thumbnail" 
                 :alt="data.title"
-                class="w-full h-auto rounded-lg shadow-lg mb-8 aspect-16/9 object-cover"
+                class="w-full h-auto rounded-lg shadow-lg mb-8 aspect-video object-cover"
                 loading="lazy"
             />
-            <content-renderer v-if="data" id="content" :value="data" class="markdown-content flex-1" />
-            <u-separator />
-            <p class="font-semibold">Related articles</p>
-            <u-blog-posts id="related-articles">
-                <u-blog-post
+            <ContentRenderer v-if="data" id="content" :value="data" class="markdown-content flex-1" />
+            <USeparator />
+            <p class="font-semibold">{{ relatedArticlesString }}</p>
+            <UBlogPosts id="related-articles">
+                <UBlogPost
                     v-for="article in links"
                     :title="article.title"
                     :image="article.thumbnail"
@@ -66,11 +69,11 @@
                     :to="article.path"
                     variant="subtle"
                 />
-            </u-blog-posts>
+            </UBlogPosts>
 
-            <u-content-surround :surround="surround"></u-content-surround>
-        </u-page-body>
-    </u-page>
+            <UContentSurround :surround="surround" />
+        </UPageBody>
+    </UPage>
 </template>
 
 <script lang="ts" setup>
@@ -81,6 +84,10 @@ import appMeta from "~/app.meta";
 const route = useRoute();
 const authorEl = ref<HTMLElement | null>();
 const relatedArticlesEl = ref<HTMLElement | null>();
+
+// TODO mostrare solo articoli con tag simili
+const relatedArticlesString = "Altri articoli correlati"
+
 // const readingTimeText = computed(() => (data.value?.meta as any).readingTime?.text);
 const tocTitle = computed(() => `In questo articolo`);
 const clipboard = useClipboard();
@@ -99,10 +106,10 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
 
 updateMeta();
 
-async function copyLink() {
-    await clipboard.copy(window.location.href);
-    toast.add({ title: "Copied to clipboad", icon: "material-symbols:check-circle-rounded", color: "success" });
-}
+// async function copyLink() {
+//     await clipboard.copy(window.location.href);
+//     toast.add({ title: "Copied to clipboad", icon: "material-symbols:check-circle-rounded", color: "success" });
+// }
 
 // async function share() {
 //     await navigator.share({ url: route.fullPath });
