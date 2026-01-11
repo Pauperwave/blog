@@ -43,27 +43,27 @@
             >
             </UEmpty>
             <UBlogPosts v-else>
-            <UBlogPost
-                v-for="article in articles"
-                :key="article.path"
-                :title="article.title"
-                :image="article.thumbnail"
-                :authors="[{ name: article.author, avatar: { src: article.author_avatar }, description: article.author_description }]"
-                :badge="Math.abs(new Date().getTime() - new Date(article?.date).getTime()) < 8.64e7 * 7 ? { label: 'New', color: 'primary' } : undefined"
-                :date="article.date"
-                :to="article.path"
-                variant="naked"
-            >
-                <template #description>
-                    <p class="mt-1 text-base text-pretty">{{ article.description }}</p>
-                    <div class="flex flex-row gap-2 items-center flex-wrap mt-3">
-                        <UBadge v-for="tag in article.tags" :key="tag" color="primary" variant="soft">
-                            {{ tag }}
-                        </UBadge>
-                    </div>
-                </template>
-            </UBlogPost>
-        </UBlogPosts>
+                <UBlogPost
+                    v-for="article in articles"
+                    :key="article.path"
+                    :title="article.title"
+                    :image="article.thumbnail"
+                    :authors="[{ name: article.author, avatar: { src: article.author_avatar }, description: article.author_description }]"
+                    :badge="Math.abs(new Date().getTime() - new Date(article?.date).getTime()) < 8.64e7 * 7 ? { label: 'New', color: 'primary' } : undefined"
+                    :date="article.date"
+                    :to="article.path"
+                    variant="naked"
+                >
+                    <template #description>
+                        <p class="mt-1 text-base text-pretty">{{ article.description }}</p>
+                        <div class="flex flex-row gap-2 items-center flex-wrap mt-3">
+                            <UBadge v-for="tag in article.tags" :key="tag" color="primary" variant="soft">
+                                {{ tag }}
+                            </UBadge>
+                        </div>
+                    </template>
+                </UBlogPost>
+            </UBlogPosts>
         </u-page-body>
     </u-page>
 </template>
