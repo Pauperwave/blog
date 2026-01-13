@@ -10,7 +10,11 @@
                     ]"
                 />
                 <USeparator type="dotted" />
-                <UContentToc v-if="data" :title="tocTitle" :links="data.body.toc?.links" highlight />
+                <UContentToc
+                    v-if="data"
+                    :title="tocTitle"
+                    :links="data.body.toc?.links" highlight
+                />
                 <!-- <u-field-group class="w-full">
                     <u-button @click="share" label="Share this article" icon="material-symbols:share" variant="subtle" color="neutral" class="grow"> </u-button>
                     <u-dropdown-menu :items="[{ label: 'Copy URL', icon: 'mdi:link-variant', onSelect: copyLink }]">
@@ -20,11 +24,20 @@
             </UPageAside>
         </template>
 
-        <UPageHeader :title="data?.title" :description="data?.description" headline="Blog">
+        <UPageHeader
+            :title="data?.title"
+            :description="data?.description"
+            headline="Blog"
+        >
             <div class="flex items-end flex-wrap gap-4 justify-between mt-4">
                 <div class="flex flex-col gap-4">
                     <div class="flex flex-row gap-2 items-center flex-wrap">
-                        <UBadge v-for="tag in data?.tags" color="primary" variant="soft">
+                        <UBadge
+                            v-for="tag in data?.tags"
+                            key="tag"
+                            color="primary"
+                            variant="soft"
+                        >
                             {{ tag }}
                         </UBadge>
                     </div>
@@ -38,14 +51,18 @@
                 </div>
                 <div class="flex flex-row items-center gap-4">
                     <p class="flex flex-row items-center gap-1 typ-sublabel">
-                        <icon name="material-symbols:calendar-today-rounded" class="text-primary"></icon> {{ dayjs(data?.date).format("DD MMM YYYY") }}
+                        <icon name="material-symbols:calendar-today-rounded" class="text-primary" /> {{ dayjs(data?.date).format("DD MMM YYYY") }}
                     </p>
                     <!-- <p class="flex flex-row items-center gap-1 typ-sublabel"><icon name="material-symbols:alarm-rounded" class="text-primary"></icon> {{ readingTimeText }}</p> -->
                 </div>
             </div>
         </UPageHeader>
 
-        <UContentToc v-if="data" :links="data.body.toc?.links" highlight class="lg:hidden" />
+        <UContentToc
+            v-if="data"
+            :links="data.body.toc?.links"
+            highlight class="lg:hidden"
+        />
 
         <UPageBody>
             <NuxtImg 
@@ -55,16 +72,27 @@
                 class="w-full h-auto rounded-lg shadow-lg mb-8 aspect-video object-cover"
                 loading="lazy"
             />
-            <ContentRenderer v-if="data" id="content" :value="data" class="markdown-content flex-1" />
+
+            <ContentRenderer
+                v-if="data" id="content"
+                :value="data"
+                class="markdown-content flex-1"
+            />
             <USeparator />
-            <p class="font-semibold">{{ relatedArticlesString }}</p>
+            <p class="font-semibold">
+                {{ relatedArticlesString }}
+            </p>
             <UBlogPosts id="related-articles">
                 <UBlogPost
                     v-for="article in links"
                     :title="article.title"
                     :image="article.thumbnail"
-                    :authors="[{ name: article.author, avatar: { src: article.author_avatar }, description: article.author_description }]"
-                    :badge="Math.abs(new Date().getTime() - new Date(article?.date).getTime()) < 8.64e7 * 7 ? { label: 'New', color: 'primary' } : undefined"
+                    :authors="[{
+                        name: article.author,
+                        avatar: { src: article.author_avatar },
+                        description: article.author_description
+                    }]"
+                    :badge="getBadge(article.date)"
                     :date="article.date"
                     :to="article.path"
                     variant="subtle"
@@ -87,6 +115,11 @@ const relatedArticlesEl = ref<HTMLElement | null>();
 
 // TODO mostrare solo articoli con tag simili
 const relatedArticlesString = "Altri articoli correlati"
+const getBadge = (date: string) => {
+    return Math.abs(new Date().getTime() - new Date(date).getTime()) < 8.64e7 * 7
+        ? { label: "New", color: "primary" as const }
+        : undefined;
+};
 
 // const readingTimeText = computed(() => (data.value?.meta as any).readingTime?.text);
 const tocTitle = computed(() => `In questo articolo`);

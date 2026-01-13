@@ -1,6 +1,6 @@
 <template>
-    <u-page>
-        <u-page-body>
+    <UPage>
+        <UPageBody>
             <!-- <div class="flex justify-between gap-2 w-full items-center flex-wrap">
                 <u-form-field>
                     <template #label> A complete, responsive, aesthetic and SEO optimized Blog. </template>
@@ -64,8 +64,8 @@
                     </template>
                 </UBlogPost>
             </UBlogPosts>
-        </u-page-body>
-    </u-page>
+        </UPageBody>
+    </UPage>
 </template>
 
 <script lang="ts" setup>
