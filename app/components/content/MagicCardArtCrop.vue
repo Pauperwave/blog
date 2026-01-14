@@ -111,7 +111,7 @@ const artCropUrl = computed(() => {
 })
 
 const heightClass = computed(() => {
-  if (!props.crop) return '' // No fixed height - show full art crop
+  if (!props.crop) return 'h-96' // No fixed height - show full art crop
   
   const heights = {
     small: 'h-32',
@@ -123,7 +123,7 @@ const heightClass = computed(() => {
 })
 
 const positionClass = computed(() => {
-  if (!props.crop) return '' // No object positioning needed
+  if (!props.crop) return 'object-top' // No object positioning needed
   
   const positions = {
     top: 'object-top',
