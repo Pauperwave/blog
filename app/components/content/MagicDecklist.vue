@@ -178,7 +178,7 @@
 <script setup lang="ts">
 const props = defineProps<{
   name: string
-  player: string
+  player?: string
   description?: string
   placement?: string
   tags?: string[]
