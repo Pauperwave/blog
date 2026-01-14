@@ -11,7 +11,7 @@
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
         <div>
           <h2 class="text-lg font-semibold">{{ props.name }}</h2>
-          <p class="text-md dark:text-gray-400">{{ props.author }}</p>
+          <p class="text-md dark:text-gray-400">{{ props.player }}</p>
         </div>
         <div v-if="props.placement" class="dark:text-gray-500">
           {{ props.placement }}
@@ -178,7 +178,7 @@
 <script setup lang="ts">
 const props = defineProps<{
   name: string
-  author: string
+  player: string
   description?: string
   placement?: string
   tags?: string[]
