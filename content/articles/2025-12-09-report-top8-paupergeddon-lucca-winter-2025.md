@@ -38,43 +38,41 @@ author: Edoardo Bardi
 position: Top 8 Paupergeddon Lucca Winter 2025
 description: A deck leveraging the synergy between Caw-Blade and Basilisk Gate to control the board and generate value.
 ---
-#main
-## Creatures
-- 4 Sacred Cat
-- 4 Squadron Hawk
-- 3 Outlaw Medic
-- 1 Guardian of the Guildpact
+Creatures
+4 Sacred Cat
+4 Squadron Hawk
+3 Outlaw Medic
+1 Guardian of the Guildpact
 
-## Instants
-- 4 Brainstorm
-- 4 Counterspell
-- 3 Thraben Charm
-- 4 Prismatic Strands
+Instants
+4 Brainstorm
+4 Counterspell
+3 Thraben Charm
+4 Prismatic Strands
 
-## Sorceries
-- 4 Lórien Revealed
+Sorceries
+4 Lórien Revealed
 
-## Enchantment
-- 4 Journey to Nowhere
-- 4 The Modern Age
+Enchantment
+4 Journey to Nowhere
+4 The Modern Age
 
-## Lands
-- 4 Sea Gate
-- 4 Citadel Gate
-- 2 Azorius Guildgate
-- 2 Heap Gate
-- 4 Basilisk Gate
-- 1 Idyllic Beachfront
-- 4 Island
+Lands
+4 Sea Gate
+4 Citadel Gate
+2 Azorius Guildgate
+2 Heap Gate
+4 Basilisk Gate
+1 Idyllic Beachfront
+4 Island
 
-#sideboard
-## Sideboard
-- 4 Blue Elemental Blast
-- 1 Hydroblast
-- 4 Red Elemental Blast
-- 2 Dispel
-- 2 Essence Scatter
-- 2 Palace Sentinels
+Sideboard
+4 Blue Elemental Blast
+1 Hydroblast
+4 Red Elemental Blast
+2 Dispel
+2 Essence Scatter
+2 Palace Sentinels
 ::
 
 The main deck idea is very simple: the three decks I expected to see the most at Geddon were, in order, Mono Red, Jund, and Terror.
@@ -159,9 +157,9 @@ matchup: Bogles
 description: 
 ---
 #in
-- 2 Essence Scatter
+2 Essence Scatter
 #out
-- 2 Outlaw Medic
+2 Outlaw Medic
 ::
 
 #### Game 2
@@ -667,4 +665,3 @@ As for the gathering, I want to thank all my league teammates, without whom this
 A special thanks to the guys from the Lega Pauper Pisa, with whom we've now developed a truly friendly relationship and it's always a pleasure to spend evenings together; and to the guys from the Lega Medievalle Garfagnana, with whom, after the trip to Katowice, the bond has further strengthened.
 
 Thanks also to Marco Candela and Isaac Rancic, my teammates in the Sunday Trio, who had to witness all the slaps I took.
-
