@@ -17,29 +17,18 @@ export interface ParsedManaCost {
   manaSymbols: ManaSymbol[]
 }
 
-// Lazy-loaded database module and instance
+// Lazy-loaded database class and instance
 let Database: any = null
 let dbInstance: any = null
 
 /**
- * Initialize database class (lazy load bun:sqlite)
- */
-async function initDatabase() {
-  if (!Database) {
-    try {
-      const bunSqlite = await import('bun:sqlite')
-      Database = bunSqlite.Database
-    } catch {
-      throw new Error('Database is only available in Bun runtime')
-    }
-  }
-}
-
-/**
- * Get database instance (singleton)
+ * Get database instance (singleton with lazy import)
  */
 async function getDatabase() {
-  await initDatabase()
+  if (!Database) {
+    const { Database: DB } = await import('bun:sqlite')
+    Database = DB
+  }
   
   if (!dbInstance) {
     const dbPath = join(process.cwd(), 'server', 'database', 'cards.db')
