@@ -26,4 +26,8 @@ node_modules
 .env.*
 !.env.example
 
+# Scryfall bulk data cache
+server/database/cards.db
+server/database/oracle-cards.json
+
 
