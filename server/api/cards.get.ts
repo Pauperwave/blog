@@ -5,7 +5,7 @@
 
 import { getCardsByNames, getParsedManaCost } from '../utils/card-database'
 
-export default defineEventHandler((event) => {
+export default defineEventHandler(async (event) => {
   const query = getQuery(event)
   const namesParam = query.names as string | undefined
   
@@ -24,13 +24,13 @@ export default defineEventHandler((event) => {
   }
   
   // Get cards from database
-  const cardsMap = getCardsByNames(names)
+  const cardsMap = await getCardsByNames(names)
   
   // Transform to response format with parsed mana costs
   const response: Record<string, any> = {}
   
   for (const [name, card] of cardsMap.entries()) {
-    const parsedMana = getParsedManaCost(card.manaCost)
+    const parsedMana = await getParsedManaCost(card.manaCost)
     
     response[name] = {
       name: card.name,

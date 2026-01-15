@@ -3,7 +3,6 @@
  * Used by components to get card information without API calls
  */
 
-import { Database } from 'bun:sqlite'
 import { join } from 'path'
 import type { ManaSymbol } from '../../shared/types/decklist'
 
@@ -18,12 +17,29 @@ export interface ParsedManaCost {
   manaSymbols: ManaSymbol[]
 }
 
-let dbInstance: Database | null = null
+// Lazy-loaded database module and instance
+let Database: any = null
+let dbInstance: any = null
+
+/**
+ * Initialize database class (lazy load bun:sqlite)
+ */
+async function initDatabase() {
+  if (!Database) {
+    if (typeof Bun === 'undefined') {
+      throw new Error('Database is only available in Bun runtime')
+    }
+    const bunSqlite = await import('bun:sqlite')
+    Database = bunSqlite.Database
+  }
+}
 
 /**
  * Get database instance (singleton)
  */
-function getDatabase(): Database {
+async function getDatabase() {
+  await initDatabase()
+  
   if (!dbInstance) {
     const dbPath = join(process.cwd(), 'server', 'database', 'cards.db')
     dbInstance = new Database(dbPath, { readonly: true })
@@ -44,8 +60,8 @@ export function parseManaCost(manaCost: string): string[] {
 /**
  * Get card data by exact name
  */
-export function getCardByName(name: string): CardData | null {
-  const db = getDatabase()
+export async function getCardByName(name: string): Promise<CardData | null> {
+  const db = await getDatabase()
   
   const row = db.prepare(`
     SELECT * FROM cards WHERE name = ? LIMIT 1
@@ -63,8 +79,8 @@ export function getCardByName(name: string): CardData | null {
 /**
  * Get multiple cards by names (batch lookup)
  */
-export function getCardsByNames(names: string[]): Map<string, CardData> {
-  const db = getDatabase()
+export async function getCardsByNames(names: string[]): Promise<Map<string, CardData>> {
+  const db = await getDatabase()
   const result = new Map<string, CardData>()
   
   // Use parameterized query for safety
@@ -87,8 +103,8 @@ export function getCardsByNames(names: string[]): Map<string, CardData> {
 /**
  * Get mana symbol SVG URI
  */
-export function getManaSymbol(symbol: string): string | null {
-  const db = getDatabase()
+export async function getManaSymbol(symbol: string): Promise<string | null> {
+  const db = await getDatabase()
   
   const row = db.prepare(`
     SELECT svg_uri FROM mana_symbols WHERE symbol = ? LIMIT 1
@@ -102,10 +118,10 @@ export function getManaSymbol(symbol: string): string | null {
  */
 let manaSymbolCache: Map<string, string> | null = null
 
-export function getAllManaSymbols(): Map<string, string> {
+export async function getAllManaSymbols(): Promise<Map<string, string>> {
   if (manaSymbolCache) return manaSymbolCache
   
-  const db = getDatabase()
+  const db = await getDatabase()
   const rows = db.prepare('SELECT symbol, svg_uri FROM mana_symbols').all() as any[]
   
   manaSymbolCache = new Map()
@@ -119,9 +135,9 @@ export function getAllManaSymbols(): Map<string, string> {
 /**
  * Get parsed mana cost with SVG URIs
  */
-export function getParsedManaCost(manaCost: string): ParsedManaCost {
+export async function getParsedManaCost(manaCost: string): Promise<ParsedManaCost> {
   const symbols = parseManaCost(manaCost)
-  const symbolMap = getAllManaSymbols()
+  const symbolMap = await getAllManaSymbols()
   
   const manaSymbols: ManaSymbol[] = symbols.map(symbol => ({
     symbol,
