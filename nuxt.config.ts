@@ -55,4 +55,17 @@ export default defineNuxtConfig({
         "@nuxtjs/seo",
         "@vueuse/nuxt"
     ],
+    nitro: {
+        prerender: {
+            failOnError: false,
+        },
+    },
+    vite: {
+        ssr: {
+            external: ["bun:sqlite"],
+        },
+        optimizeDeps: {
+            exclude: ["bun:sqlite"],
+        },
+    },
 });
