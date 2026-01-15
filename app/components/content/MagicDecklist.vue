@@ -11,7 +11,9 @@
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
         <div>
           <h2 class="text-lg font-semibold">{{ props.name }}</h2>
-          <p class="text-md dark:text-gray-400">{{ props.player }}</p>
+          <p v-if="props.player" class="text-md dark:text-gray-400">
+            {{ props.player }}
+          </p>
         </div>
         <div v-if="props.placement" class="dark:text-gray-500">
           {{ props.placement }}
@@ -34,20 +36,32 @@
 
     <!-- Body Slot - Three-column layout -->
     <template #default>
-      <div class="decklist-grid">
+      <!-- Loading State -->
+      <div v-if="isLoading" class="flex items-center justify-center py-8">
+        <UIcon name="i-lucide-loader-2" class="w-8 h-8 animate-spin" />
+        <span class="ml-2">Loading deck...</span>
+      </div>
+
+      <!-- Error State -->
+      <div v-else-if="error" class="text-red-500 p-4">
+        <p><strong>Error loading decklist:</strong></p>
+        <p>{{ error }}</p>
+      </div>
+
+      <!-- Deck Content -->
+      <div v-else class="decklist-grid">
+        <!-- Hidden slot for parsing original content -->
+        <div ref="decklistContent" class="hidden">
+          <div class="main-deck">
+            <slot name="main" />
+          </div>
+          <div class="sideboard">
+            <slot name="sideboard" />
+          </div>
+        </div>
+
         <!-- Main Deck (Left) -->
         <div class="main-deck">
-          <!-- Hidden slot for parsing original content -->
-          <div ref="decklistContent" class="hidden">
-            <div class="main-deck">
-              <slot name="main" />
-            </div>
-            <div class="sideboard">
-              <slot name="sideboard" />
-            </div>
-          </div>
-
-          <!-- Rendered deck list -->
           <div v-for="section in mainDeckSections" :key="section.heading" class="section">
             <h2 class="section-heading">
               {{ section.heading }} <span class="card-count">({{ section.count }})</span>
@@ -149,6 +163,7 @@
         title="Copia decklist"
         aria-label="Copia decklist negli appunti"
         label="Copia per MTGO"
+        :disabled="isLoading"
         @click="copyDecklist"
       />
     </template>
@@ -176,6 +191,8 @@
 </template>
 
 <script setup lang="ts">
+import type { DeckSection, CardItem, ParsedCardLine } from '../../../shared/types/decklist'
+
 const props = defineProps<{
   name: string
   player?: string
@@ -184,36 +201,19 @@ const props = defineProps<{
   tags?: string[]
 }>()
 
-const title = computed(() => {
-  return props.placement ? `${props.name} — ${props.placement}` : props.name
-})
-
 const hoveredCard = ref<string | null>(null)
 const decklistContent = ref<HTMLElement | null>(null)
 const showModal = ref(false)
 const isMobile = ref(false)
+const isLoading = ref(true)
+const error = ref<string | null>(null)
 
 // Store processed card data
-interface CardItem {
-  quantity: string
-  name: string
-  manaSymbols: Array<{ symbol: string, svgUri: string }>
-}
+const mainDeckSections = ref<DeckSection[]>([])
+const sideboardSections = ref<DeckSection[]>([])
 
-interface Section {
-  heading: string
-  count: number
-  cards: CardItem[]
-}
-
-const mainDeckSections = ref<Section[]>([])
-const sideboardSections = ref<Section[]>([])
-
-// Cache for card data (including mana cost)
-const cardDataCache = ref<Map<string, { manaCost: string, manaSymbols: Array<{ symbol: string, svgUri: string }> }>>(new Map())
-
-// Cache for mana symbol SVG URIs
-const manaSymbolCache = ref<Map<string, string>>(new Map())
+// Card data cache (from API)
+const cardDataCache = ref<Map<string, any>>(new Map())
 
 // Use Nuxt UI Toast composable
 const toast = useToast()
@@ -223,124 +223,37 @@ const checkMobile = () => {
   isMobile.value = window.innerWidth <= 768
 }
 
-// Function to extract card name from list item text (removes quantity)
-const extractCardName = (text: string): string => {
-  return text.replace(/^\d+\s+/, '').trim()
+/**
+ * Parse a card line like "4 Lightning Bolt" or "- 4 Lightning Bolt"
+ */
+function parseCardLine(text: string): ParsedCardLine | null {
+  const trimmed = text.trim()
+  if (!trimmed) return null
+  
+  // Match patterns like:
+  // "4 Lightning Bolt"
+  // "- 4 Lightning Bolt"
+  // "4x Lightning Bolt"
+  const match = trimmed.match(/^-?\s*(\d+)x?\s+(.+)$/)
+  
+  if (!match) return null
+  
+  const quantity = parseInt(match[1]!, 10)
+  const name = match[2]!.trim()
+  
+  return { quantity, name }
 }
 
-// Function to extract quantity from list item text
-const extractQuantity = (text: string): string => {
-  const match = text.match(/^(\d+\s+)/)
-  return match ? match[1]! : ''
-}
-
-// Function to fetch mana symbol SVG URI from Scryfall
-const fetchManaSymbol = async (symbol: string): Promise<string> => {
-  // Check cache first
-  if (manaSymbolCache.value.has(symbol)) {
-    return manaSymbolCache.value.get(symbol)!
-  }
-
-  try {
-    const response = await fetch(`https://api.scryfall.com/symbology`)
-    
-    if (!response.ok) {
-      throw new Error('Failed to fetch symbology')
-    }
-
-    const data = await response.json()
-    
-    // Cache all symbols at once
-    data.data.forEach((item: any) => {
-      manaSymbolCache.value.set(item.symbol, item.svg_uri)
-    })
-
-    return manaSymbolCache.value.get(symbol) || ''
-  } catch (error) {
-    console.error(`Error fetching mana symbol for ${symbol}:`, error)
-    return ''
-  }
-}
-
-// Function to parse mana cost and get symbol info
-const parseManaCost = (manaCost: string): string[] => {
-  if (!manaCost) return []
-  // Extract symbols like {W}, {U}, {B}, {R}, {G}, {1}, {2}, etc.
-  const symbols = manaCost.match(/\{[^}]+\}/g) || []
-  return symbols
-}
-
-// Function to fetch card data from Scryfall
-const fetchCardData = async (cardName: string): Promise<{ manaCost: string, manaSymbols: Array<{ symbol: string, svgUri: string }> }> => {
-  // Check cache first
-  if (cardDataCache.value.has(cardName)) {
-    return cardDataCache.value.get(cardName)!
-  }
-
-  try {
-    const encodedName = encodeURIComponent(cardName)
-    const response = await fetch(`https://api.scryfall.com/cards/named?exact=${encodedName}`)
-    
-    if (!response.ok) {
-      throw new Error('Card not found')
-    }
-
-    const data = await response.json()
-    const manaCost = data.mana_cost || ''
-    
-    // Parse mana cost and fetch symbol URIs
-    const symbols = parseManaCost(manaCost)
-    const manaSymbols = await Promise.all(
-      symbols.map(async (symbol) => {
-        const svgUri = await fetchManaSymbol(symbol)
-        return { symbol, svgUri }
-      })
-    )
-
-    const cardData = {
-      manaCost,
-      manaSymbols
-    }
-
-    // Cache the result
-    cardDataCache.value.set(cardName, cardData)
-    return cardData
-  } catch (error) {
-    console.error(`Error fetching card data for ${cardName}:`, error)
-    return { manaCost: '', manaSymbols: [] }
-  }
-}
-
-// Function to process sections and extract card data
-const processSections = async () => {
-  if (!decklistContent.value) return
-
-  // Fetch symbology once for all cards
-  if (manaSymbolCache.value.size === 0) {
-    await fetchManaSymbol('{W}') // This will cache all symbols
-  }
-
-  // Process main deck
-  const mainDeckElement = decklistContent.value.querySelector('.main-deck')
-  if (mainDeckElement) {
-    mainDeckSections.value = await extractSections(mainDeckElement)
-  }
-
-  // Process sideboard
-  const sideboardElement = decklistContent.value.querySelector('.sideboard')
-  if (sideboardElement) {
-    sideboardSections.value = await extractSections(sideboardElement)
-  }
-}
-
-// Extract sections from a deck element
-const extractSections = async (deckElement: Element): Promise<Section[]> => {
-  const sections: Section[] = []
+/**
+ * Extract sections from a deck element
+ */
+function extractSectionsFromDOM(deckElement: Element): Array<{ heading: string; cardLines: ParsedCardLine[] }> {
+  const sections: Array<{ heading: string; cardLines: ParsedCardLine[] }> = []
   const headings = deckElement.querySelectorAll('h2')
 
   for (const heading of headings) {
     const headingText = (heading.textContent || '').trim()
-    const cards: CardItem[] = []
+    const cardLines: ParsedCardLine[] = []
     let nextElement = heading.nextElementSibling
 
     while (nextElement && nextElement.tagName !== 'H2') {
@@ -349,57 +262,162 @@ const extractSections = async (deckElement: Element): Promise<Section[]> => {
 
         for (const li of listItems) {
           const fullText = li.textContent || ''
-          const quantity = extractQuantity(fullText)
-          const cardName = extractCardName(fullText)
-
-          if (cardName) {
-            const cardData = await fetchCardData(cardName)
-            cards.push({
-              quantity,
-              name: cardName,
-              manaSymbols: cardData.manaSymbols
-            })
+          const parsed = parseCardLine(fullText)
+          
+          if (parsed) {
+            cardLines.push(parsed)
           }
         }
       }
       nextElement = nextElement.nextElementSibling
     }
 
-    const count = cards.reduce((sum, card) => {
-      const qty = parseInt(card.quantity.trim()) || 0
-      return sum + qty
-    }, 0)
-
-    sections.push({
-      heading: headingText,
-      count,
-      cards
-    })
+    if (cardLines.length > 0) {
+      sections.push({
+        heading: headingText,
+        cardLines
+      })
+    }
   }
 
   return sections
 }
 
-// Function to copy decklist to clipboard
-const copyDecklist = async () => {
+/**
+ * Fetch card data from our local API
+ */
+async function fetchCardDataBatch(cardNames: string[]): Promise<Map<string, any>> {
+  // Check cache first
+  const uncachedNames = cardNames.filter(name => !cardDataCache.value.has(name))
+  
+  if (uncachedNames.length === 0) {
+    return cardDataCache.value
+  }
+  
+  try {
+    const response = await $fetch('/api/cards', {
+      query: {
+        names: uncachedNames.join(',')
+      }
+    })
+    
+    // Cache the results
+    if (response && response.cards) {
+      for (const [name, data] of Object.entries(response.cards)) {
+        cardDataCache.value.set(name, data)
+      }
+    }
+    
+    return cardDataCache.value
+  } catch (err) {
+    console.error('Error fetching card data:', err)
+    throw err
+  }
+}
+
+/**
+ * Process sections and enrich with card data
+ */
+async function processSections() {
+  if (!decklistContent.value) {
+    error.value = 'Deck content not found'
+    isLoading.value = false
+    return
+  }
+
+  try {
+    // Extract sections from DOM
+    const mainDeckElement = decklistContent.value.querySelector('.main-deck')
+    const sideboardElement = decklistContent.value.querySelector('.sideboard')
+    
+    const mainSections = mainDeckElement ? extractSectionsFromDOM(mainDeckElement) : []
+    const sideSections = sideboardElement ? extractSectionsFromDOM(sideboardElement) : []
+    
+    // Collect all unique card names
+    const allCardNames = new Set<string>()
+    
+    for (const section of [...mainSections, ...sideSections]) {
+      for (const line of section.cardLines) {
+        allCardNames.add(line.name)
+      }
+    }
+    
+    // Fetch all card data in one batch
+    await fetchCardDataBatch(Array.from(allCardNames))
+    
+    // Build main deck sections
+    mainDeckSections.value = mainSections.map(section => {
+      const cards: CardItem[] = section.cardLines.map(line => {
+        const cardData = cardDataCache.value.get(line.name)
+        
+        return {
+          quantity: line.quantity,
+          name: line.name,
+          manaCost: cardData?.manaCost || '',
+          manaSymbols: cardData?.manaSymbols || [],
+          imageUrl: cardData?.imageUrl || ''
+        }
+      })
+      
+      const count = cards.reduce((sum, card) => sum + card.quantity, 0)
+      
+      return {
+        heading: section.heading,
+        count,
+        cards
+      }
+    })
+    
+    // Build sideboard sections
+    sideboardSections.value = sideSections.map(section => {
+      const cards: CardItem[] = section.cardLines.map(line => {
+        const cardData = cardDataCache.value.get(line.name)
+        
+        return {
+          quantity: line.quantity,
+          name: line.name,
+          manaCost: cardData?.manaCost || '',
+          manaSymbols: cardData?.manaSymbols || [],
+          imageUrl: cardData?.imageUrl || ''
+        }
+      })
+      
+      const count = cards.reduce((sum, card) => sum + card.quantity, 0)
+      
+      return {
+        heading: section.heading,
+        count,
+        cards
+      }
+    })
+    
+    isLoading.value = false
+  } catch (err) {
+    console.error('Error processing sections:', err)
+    error.value = err instanceof Error ? err.message : 'Unknown error'
+    isLoading.value = false
+  }
+}
+
+/**
+ * Copy decklist to clipboard (MTGO format)
+ */
+async function copyDecklist() {
   let decklistText = ''
 
   // Add main deck
   mainDeckSections.value.forEach((section) => {
-    // decklistText += `${section.heading}\n`
     section.cards.forEach((card) => {
-      decklistText += `${card.quantity}${card.name}\n`
+      decklistText += `${card.quantity} ${card.name}\n`
     })
-    // decklistText += '\n'
   })
 
   // Add sideboard
   if (sideboardSections.value.length > 0) {
-    decklistText += '\n'
+    decklistText += '\nSideboard:\n'
     sideboardSections.value.forEach((section) => {
-      decklistText += `Sideboard:\n`
       section.cards.forEach((card) => {
-        decklistText += `${card.quantity}${card.name}\n`
+        decklistText += `${card.quantity} ${card.name}\n`
       })
     })
   }
@@ -424,8 +442,10 @@ const copyDecklist = async () => {
   }
 }
 
-// Handle card hover
-const handleCardHover = (cardName: string | null) => {
+/**
+ * Handle card hover
+ */
+function handleCardHover(cardName: string | null) {
   hoveredCard.value = cardName
   if (isMobile.value && cardName) {
     showModal.value = true
@@ -434,34 +454,42 @@ const handleCardHover = (cardName: string | null) => {
   }
 }
 
-// Close modal
-const closeModal = () => {
+/**
+ * Close modal
+ */
+function closeModal() {
   showModal.value = false
   hoveredCard.value = null
 }
 
-// Handle window resize
-const handleResize = () => {
+/**
+ * Handle window resize
+ */
+function handleResize() {
   checkMobile()
+}
+
+/**
+ * Get card image URL
+ */
+function getCardImageUrl(cardName: string): string {
+  const cardData = cardDataCache.value.get(cardName)
+  return cardData?.imageUrl || `https://api.scryfall.com/cards/named?format=image&exact=${encodeURIComponent(cardName)}`
 }
 
 onMounted(() => {
   checkMobile()
   window.addEventListener('resize', handleResize)
-  // Wait for slots to render
-  setTimeout(() => {
+  
+  // Wait for slots to render, then process
+  nextTick(() => {
     processSections()
-  }, 100)
+  })
 })
 
 onBeforeUnmount(() => {
   window.removeEventListener('resize', handleResize)
 })
-
-const getCardImageUrl = (cardName: string): string => {
-  const encodedName = encodeURIComponent(cardName)
-  return `https://api.scryfall.com/cards/named?format=image&exact=${encodedName}`
-}
 </script>
 
 <style scoped>
@@ -470,11 +498,8 @@ const getCardImageUrl = (cardName: string): string => {
 }
 
 .decklist-grid {
-  /* remove later */
-  /* border: #4714ff 2px solid; */
   display: grid;
   grid-template-columns: 1fr 1fr 1.5fr;
-  /* gap: 0.25rem; */
   min-height: 500px;
 }
 
@@ -488,8 +513,6 @@ const getCardImageUrl = (cardName: string): string => {
 }
 
 .section {
-  /* remove later */
-  /* border: #4714ff 1px solid; */
   margin-bottom: 0.5rem;
 }
 
@@ -533,16 +556,10 @@ const getCardImageUrl = (cardName: string): string => {
   font-weight: 600;
 }
 
-/* .card-name-wrapper {
-  min-width: 0;
-  overflow: hidden;
-} */
-
 .card-name-link {
   cursor: pointer;
   color: #4714ff;
   text-decoration: underline;
-  /* text-decoration-color: #4714ff; */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
