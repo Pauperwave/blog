@@ -3,7 +3,7 @@ title: "MagicDecklist Component"
 description: Testing the MagicDecklist Component
 date: 2026-01-15
 tags: [test]
-author: Nardi Emanuele
+author: Emanuele Nardi
 draft: true
 ---
 
