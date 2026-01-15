@@ -1,17 +1,17 @@
 ---
 title: "Top 8 Pauperiadi II, IPT Ferrara"
 description: Introduzione di Buonanotte a Pingers aka Passione Beyblade
-author: Bragioto Pietro
+player: Bragioto Pietro
 date: 2025-12-06
 tags: [tutorial, deck]
-author_avatar: /assets/avatars/bragioto.jpg
-author_description: "Scribacchino di liste"
+player_avatar: /assets/avatars/bragioto.jpg
+player_description: "Scribacchino di liste"
 thumbnail: /assets/articles/events/2025-09-21-banner-pauperiadi-2025_lungo.webp
 ---
 <!-- ---
 title: "Top 8 Pauperiadi II, IPT Ferrara"
 description: "Decklists and report from the Top 8 of the Pauperiadi II, IPT Ferrara event held on 21 September 2025."
-author: "Bragioto Pietro"
+player: "Bragioto Pietro"
 date: 2025-09-22
 updatedAt: 2025-09-22
 draft: false
@@ -39,8 +39,8 @@ hero: {
 <!-- ::decklist
 ---
 name: Familiar
-author: Andrea Landi
-position: Winner
+player: Andrea Landi
+placement: Winner
 description: A control deck leveraging the power of flicker effects and card draw.
 ---
 #Creatures
@@ -82,7 +82,7 @@ description: A control deck leveraging the power of flicker effects and card dra
 2 Ride's End
 :: -->
 
-<!-- <Decklist :name="Familiar" :author="Andrea Landi" :position="Winner"
+<!-- <Decklist :name="Familiar" :player="Andrea Landi" :placement="Winner"
   :description="A control deck leveraging the power of flicker effects and card draw."
 >
 -- Creatures
@@ -120,7 +120,7 @@ description: A control deck leveraging the power of flicker effects and card dra
 2 Ride's End
 </Decklist> -->
 
-<!-- <Decklist :name="Jund" :author="Lorenzo Aldegheri" position="Finalist" >
+<!-- <Decklist :name="Jund" :player="Lorenzo Aldegheri" placement="Finalist" >
 -- Creatures
 3 Krark-Clan Shaman
 4 Gixian Infiltrator
@@ -160,7 +160,7 @@ description: A control deck leveraging the power of flicker effects and card dra
 1 Toxin Analysis
 </Decklist> -->
 
-<!-- <Decklist :name="Flicker Tron" :author="Tommaso Loss" position="Top 4">
+<!-- <Decklist :name="Flicker Tron" :player="Tommaso Loss" placement="Top 4">
 -- Creatures
 2 Mystidian Elder
 1 Murmuring Mystic
@@ -201,7 +201,7 @@ description: A control deck leveraging the power of flicker effects and card dra
 1 Heritage Reclamation
 </Decklist> -->
 
-<!-- <Decklist :name="Mono Red Rally" :author="Lorenzo Bachiorri" position="Top 4">
+<!-- <Decklist :name="Mono Red Rally" :player="Lorenzo Bachiorri" placement="Top 4">
 -- Creatures
 4 Voldaren Epicure
 4 Clockwork Percussionist
@@ -226,7 +226,7 @@ description: A control deck leveraging the power of flicker effects and card dra
 2 Flame Slash
 </Decklist> -->
 
-<!-- <Decklist :name="Flicker Tron" :author="Jacopo Gennari" position="Top 8">
+<!-- <Decklist :name="Flicker Tron" :player="Jacopo Gennari" placement="Top 8">
 -- Creatures
 2 Mystidian Elder
 1 Murmuring Mystic
@@ -267,7 +267,7 @@ description: A control deck leveraging the power of flicker effects and card dra
 1 Heritage Reclamation
 </Decklist> -->
 
-<!-- <Decklist :name="Jund" :author="Paolo Baroni" position="Top 8">
+<!-- <Decklist :name="Jund" :player="Paolo Baroni" placement="Top 8">
 -- Creatures
 2 Krark-Clan Shaman
 4 Gixian Infiltrator
@@ -300,7 +300,7 @@ description: A control deck leveraging the power of flicker effects and card dra
 2 Breath Weapon
 </Decklist> -->
 
-<!-- <Decklist :name="Flicker Tron" :author="Pietro Bragioto" position="Top 8">
+<!-- <Decklist :name="Flicker Tron" :player="Pietro Bragioto" placement="Top 8">
 -- Creatures
 2 Mystidian Elder
 3 Mnemonic Wall
@@ -340,7 +340,7 @@ description: A control deck leveraging the power of flicker effects and card dra
 1 Cast Down
 </Decklist> -->
 
-<!-- <Decklist :name="RG Monsters" :author="Fabio Romagnoli" position="Top 8">
+<!-- <Decklist :name="RG Monsters" :player="Fabio Romagnoli" placement="Top 8">
 -- Creatures
 4 Arbor Elf
 4 Eldrazi Repurposer
