@@ -26,11 +26,12 @@ let dbInstance: any = null
  */
 async function initDatabase() {
   if (!Database) {
-    if (typeof Bun === 'undefined') {
+    try {
+      const bunSqlite = await import('bun:sqlite')
+      Database = bunSqlite.Database
+    } catch {
       throw new Error('Database is only available in Bun runtime')
     }
-    const bunSqlite = await import('bun:sqlite')
-    Database = bunSqlite.Database
   }
 }
 
