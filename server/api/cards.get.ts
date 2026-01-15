@@ -1,0 +1,44 @@
+/**
+ * API endpoint to get card data by names
+ * GET /api/cards?names=Lightning+Bolt,Counterspell
+ */
+
+import { getCardsByNames, getParsedManaCost } from '../utils/card-database'
+
+export default defineEventHandler((event) => {
+  const query = getQuery(event)
+  const namesParam = query.names as string | undefined
+  
+  if (!namesParam) {
+    throw createError({
+      statusCode: 400,
+      message: 'Missing "names" parameter'
+    })
+  }
+  
+  // Parse comma-separated names
+  const names = namesParam.split(',').map(n => n.trim()).filter(Boolean)
+  
+  if (names.length === 0) {
+    return { cards: {} }
+  }
+  
+  // Get cards from database
+  const cardsMap = getCardsByNames(names)
+  
+  // Transform to response format with parsed mana costs
+  const response: Record<string, any> = {}
+  
+  for (const [name, card] of cardsMap.entries()) {
+    const parsedMana = getParsedManaCost(card.manaCost)
+    
+    response[name] = {
+      name: card.name,
+      manaCost: card.manaCost,
+      manaSymbols: parsedMana.manaSymbols,
+      imageUrl: card.imageUrl
+    }
+  }
+  
+  return { cards: response }
+})
