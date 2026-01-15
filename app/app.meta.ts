@@ -10,7 +10,6 @@ export default {
         description: "",
         jobTitle: "",
     },
-    //TODO change this to the actual production ready url for your app!
     url: "https://blog.pauperwave.org",
     icon: "/favicon.ico",
     contactEmail: "pauperwave@gmail.com",
