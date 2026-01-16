@@ -78,7 +78,7 @@ Siamo passati dalle blaste che aiutavano i mazzi reattivi ai giorni d'oggi dove 
 
 Mono Red Madness è l'esempio perfetto: la sua più grande debolezza sono i counter sui peschini e 8 :CardTooltip{name="Pyroblast"} al posto di qualche botto sono il miglior modo di fronteggiare gli U-Based dato che fare peschino :CardTooltip{name="Pyroblast"} di terzo è spesso chiave di volta della partita, counterarare una:CardTooltip{name="Hydroblast"} su Cecchino o Kessig è sfizioso, distruggere un terror o chiudere la ripartenza ad oppo dopo uno scambio di risorse counterando Lorien è la ciliegina.
 
-Nel mentre Terror aumenta a sua volta le:CardTooltip{name="Hydroblast"} per fronteggiare le 8 :CardTooltip{name="Pyroblast"} dei mazzi mono rossi, per poter andare a contrastare il peschino protetto di madness o la presenza in board di [Pingers](2025-12-06-tutorial-pingers) che si sta dimostrando uan vera spina nel fianco se ingrana.
+Nel mentre Terror aumenta a sua volta le :CardTooltip{name="Hydroblast"} per fronteggiare le 8 :CardTooltip{name="Pyroblast"} dei mazzi mono rossi, per poter andare a contrastare il peschino protetto di madness o la presenza in board di [Pingers](2025-12-06-tutorial-pingers) che si sta dimostrando uan vera spina nel fianco se ingrana.
 
 ::MagicCardArtCrop
 ---
