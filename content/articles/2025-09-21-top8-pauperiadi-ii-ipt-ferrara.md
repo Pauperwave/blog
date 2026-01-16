@@ -37,6 +37,8 @@ hero: {
 
 ## Decklists
 
+Trigger build
+
 <!-- ::decklist
 ---
 name: Familiar
