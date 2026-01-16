@@ -45,7 +45,7 @@ Nel primo periodo l'evoluzione del meta sembrava dare ragione a questa visione, 
 
 Le blaste in tutto questo periodo avevano spesso la funzione di rallenatare le partite andando a rafforzare il post side di mazzi a più colori a scapito dei mazzi dritti: nello specifico della prima frangia facevano parte Affinity, Tron, Ux Faeries, Boros in contrasto a Mono Red Burn e Mono U Faeries.
 
-Affinity, che riesce tuttora a compensare allo svantaggio tempo delle Tapland con risposte economiche di cui:CardTooltip{name="Hydroblast"} e pyro fanno da regine, è l'esempio perfetto di come questo genere di carte in side possa mettere una pezza alle debolezze strutturali del mazzo andando al contempo a costituire un hate devastante e mirato.
+Affinity, che riesce tuttora a compensare allo svantaggio tempo delle Tapland con risposte economiche di cui :CardTooltip{name="Hydroblast"} e :CardTooltip{name="Pyroblast"} fanno da regine, è l'esempio perfetto di come questo genere di carte in side possa mettere una pezza alle debolezze strutturali del mazzo andando al contempo a costituire un hate devastante e mirato.
 
 ::MagicCardArtCrop
 ---
