@@ -2,6 +2,7 @@
 title: "Report Top 8 Paupergeddon Lucca Winter 2025"
 description: Edoardo Bardi with Caw Gates
 date: 2025-12-06
+category: report
 tags: [report, paupergeddon, lucca]
 author: Bragioto Pietro
 author_avatar: /assets/avatars/bragioto.jpg

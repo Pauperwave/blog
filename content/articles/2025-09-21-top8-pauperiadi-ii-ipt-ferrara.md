@@ -1,11 +1,12 @@
 ---
 title: "Top 8 Pauperiadi II, IPT Ferrara"
 description: Introduzione di Buonanotte a Pingers aka Passione Beyblade
-player: Bragioto Pietro
+author: Bragioto Pietro
 date: 2025-12-06
-tags: [tutorial, deck]
-player_avatar: /assets/avatars/bragioto.jpg
-player_description: "Scribacchino di liste"
+category: tutorial
+tags: [monored]
+author_avatar: /assets/avatars/bragioto.jpg
+author_description: "Scribacchino di liste"
 thumbnail: /assets/articles/events/2025-09-21-banner-pauperiadi-2025_lungo.webp
 ---
 <!-- ---

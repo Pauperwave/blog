@@ -6,7 +6,8 @@ author_avatar: /assets/avatars/bragioto.jpg
 author_description: "Scribacchino di liste"
 date: 2026-01-14
 updatedAt: 2026-01-14
-tags: [top8, decklist]
+category: decklist
+tags: [top8]
 draft: true
 thumbnail: /assets/articles/events/2025-09-21-banner-pauperiadi-2025_lungo.webp
 ---

@@ -2,8 +2,12 @@
 title: "MagicDecklist Component"
 description: Testing the MagicDecklist Component
 date: 2026-01-15
+category: article
 tags: [test]
 author: Emanuele Nardi
+author_avatar: /assets/avatars/trat.jpg
+author_description: "Developer"
+thumbnail: /assets/articles/why-you-should-train.jpeg
 draft: true
 ---
 
