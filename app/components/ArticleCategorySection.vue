@@ -25,10 +25,10 @@ const getArticleBadge = (date: string) => {
     <section v-if="articles.length" class="space-y-6">
         <div class="flex items-center justify-between">
             <h2 class="text-3xl font-bold">{{ title }}</h2>
-            <u-button :to="`/articles?category=${category}`" variant="link" size="sm">
+            <UButton :to="`/articles?category=${category}`" variant="link" size="sm">
                 {{ viewAllText }}
-                <animated-arrow></animated-arrow>
-            </u-button>
+                <AnimatedArrow />
+            </UButton>
         </div>
         <UBlogPosts>
             <UBlogPost v-for="article in articles.slice(0, maxItems)" :key="article._id" :title="article.title"
