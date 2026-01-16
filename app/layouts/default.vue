@@ -9,36 +9,36 @@ const navItems: NavigationMenuItem[] = [
 </script>
 
 <template>
-    <u-app>
-        <u-header mode="slideover">
+    <UApp>
+        <UHeader mode="slideover">
             <template #left>
-                <u-user name="Pauperwave Blog" to="/" :avatar="{ src: 'https://avatars.githubusercontent.com/u/225214755?v=4' }"></u-user>
+                <UUser name="Pauperwave Blog" to="/" :avatar="{ src: 'https://avatars.githubusercontent.com/u/225214755?v=4' }"></UUser>
             </template>
             <template #right>
-                <color-mode-button></color-mode-button>
+                <ColorModeButton></ColorModeButton>
             </template>
-            <u-navigation-menu :items="navItems"></u-navigation-menu>
+            <UNavigationMenu :items="navItems"></UNavigationMenu>
             <template #body>
-                <u-navigation-menu :items="navItems"></u-navigation-menu>
+                <UNavigationMenu :items="navItems"></UNavigationMenu>
             </template>
-        </u-header>
-        <u-main>
-            <u-container>
-                <nuxt-page></nuxt-page>
-            </u-container>
-        </u-main>
-        <!-- <u-footer class="border-t border-t-default">
+        </UHeader>
+        <UMain>
+            <UContainer>
+                <NuxtPage />
+            </UContainer>
+        </UMain>
+        <!-- <UFooter class="border-t border-t-default">
             <template #bottom>
-                <u-container>
-                    <u-footer-columns></u-footer-columns>
-                </u-container>
+                <UContainer>
+                    <UFooterColumns />
+                </UContainer>
             </template>
             <template #left>
                 <div class="flex flex-col items-stretch gap-4">
-                    <u-user name="Created by Matteo Beltrame" :avatar="{ src: 'https://tratteo.it/favicon.svg' }"></u-user>
-                    <copyable-text class="h-8 text-nowrap" :content="appMeta.author.email"></copyable-text>
+                    <UUser name="Created by Matteo Beltrame" :avatar="{ src: 'https://tratteo.it/favicon.svg' }"></UUser>
+                    <CopyableText class="h-8 text-nowrap" :content="appMeta.author.email" />
                 </div>
             </template>
-        </u-footer> -->
-    </u-app>
+        </UFooter> -->
+    </UApp>
 </template>
