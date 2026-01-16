@@ -9,7 +9,7 @@
                 <div class="flex-1 flex flex-col gap-4 justify-between">
                     <p class="text-5xl font-bold">{{ title }}</p>
                     <div v-if="author" class="flex flex-row items-center justify-start gap-3">
-                        <img class="rounded-full" :src="author.image" width="100" height="100" alt="" />
+                        <img class="rounded-full" :src="author.image" :width="100" :height="100" alt="" />
                         <p class="font-bold text-2xl opacity-75">{{ author.name }}</p>
                     </div>
                 </div>
