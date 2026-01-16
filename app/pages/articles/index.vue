@@ -10,7 +10,7 @@ const selectedCategory = ref<string | null>(
 );
 
 const categoryLabels: Record<string, string> = {
-    article: 'Article',
+    article: 'Articoli',
     tutorial: 'Tutorial',
     decklist: 'Decklist',
     report: 'Report',
@@ -36,35 +36,23 @@ watch(selectedCategory, (newCategory) => {
         <UPageBody>
             <!-- Category Filter -->
             <div class="flex items-center gap-4 mb-6 flex-wrap">
-                <u-button
-                    v-for="(label, category) in { null: 'All', ...categoryLabels }"
-                    :key="category"
+                <UButton v-for="(label, category) in { null: 'All', ...categoryLabels }" :key="category"
                     :variant="selectedCategory === category ? 'solid' : 'outline'"
-                    @click="selectedCategory = category"
-                >
+                    @click="selectedCategory = category === 'null' ? null : category">
                     {{ label }}
-                </u-button>
+                </UButton>
             </div>
 
-            <UEmpty
-                v-if="(filteredArticles?.length ?? 0) <= 0"
-                title="No articles found"
-                description="No articles match the selected category."
-                variant="naked"
+            <UEmpty v-if="(filteredArticles?.length ?? 0) <= 0" title="No articles found"
+                description="No articles match the selected category." variant="naked"
                 :actions="[{ label: 'Go back home', to: '/' }]">
             </UEmpty>
             <UBlogPosts v-else>
-                <UBlogPost
-                    v-for="article in filteredArticles"
-                    :key="article.path"
-                    :title="article.title"
+                <UBlogPost v-for="article in filteredArticles" :key="article.path" :title="article.title"
                     :image="article.thumbnail"
                     :authors="[{ name: article.author, avatar: { src: article.author_avatar }, description: article.author_description }]"
                     :badge="Math.abs(new Date().getTime() - new Date(article?.date).getTime()) < 8.64e7 * 7 ? { label: 'New', color: 'primary' } : undefined"
-                    :date="article.date"
-                    :to="article.path"
-                    variant="naked"
-                >
+                    :date="article.date" :to="article.path" variant="naked">
                     <template #description>
                         <p class="mt-1 text-base text-pretty">
                             {{ article.description }}
@@ -73,12 +61,7 @@ watch(selectedCategory, (newCategory) => {
                             <UBadge color="neutral" variant="soft">
                                 {{ categoryLabels[article.category] }}
                             </UBadge>
-                            <UBadge
-                                v-for="tag in article.tags"
-                                :key="tag"
-                                color="primary"
-                                variant="soft"
-                            >
+                            <UBadge v-for="tag in article.tags" :key="tag" color="primary" variant="soft">
                                 {{ tag }}
                             </UBadge>
                         </div>
