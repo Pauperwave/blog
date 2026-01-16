@@ -7,7 +7,7 @@ category: tutorial
 tags: [monored]
 author_avatar: /assets/avatars/bragioto.jpg
 author_description: "Scribacchino di liste"
-thumbnail: /assets/articles/events/2025-09-21-banner-pauperiadi-2025_lungo.webp
+thumbnail: /assets/articles/events/2025-09-21-banner-pauperiadi-2025_lungo.jpg
 ---
 <!-- ---
 title: "Top 8 Pauperiadi II, IPT Ferrara"
@@ -18,7 +18,7 @@ updatedAt: 2025-09-22
 draft: false
 tags: ["tournament", "report", "decklists", "pauper", "ipt", "ferrara"]
 hero: {
-  image: "/assets/articles/banner/2025-09-21-banner-pauperiadi-2025_lungo.webp",
+  image: "/assets/articles/events/2025-09-21-banner-pauperiadi-2025_lungo.jpg",
   alt: "Top 8 Pauperiadi II, IPT Ferrara",
   caption: "Top 8 Pauperiadi II, IPT Ferrara"
 }
