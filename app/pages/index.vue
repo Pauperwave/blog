@@ -1,38 +1,196 @@
-<template>
-    <div class="flex flex-col gap-8 items-stretch mt-4 w-full mx-auto">
-        <u-form-field label="Integrations and packages" description="Here you find all the packages integrated into this template">
-            <div class="flex items-stretch gap-2 w-full justify-start flex-wrap">
-                <u-button to="/leaflet" variant="soft" label="Nuxt + Leaflet" icon="simple-icons:leaflet"></u-button>
-                <u-button to="/charts" variant="soft" label="Nuxt + Echarts" icon="simple-icons:apacheecharts"></u-button>
-                <u-button to="/motion" variant="soft" label="Nuxt + Motion" icon="tabler:brand-framer-motion"></u-button>
-            </div>
-        </u-form-field>
-        <u-form-field label="Components & Systems" description="Here you find all implemented components and different systems">
-            <div class="flex items-stretch gap-2 w-full justify-start flex-wrap">
-                <u-button to="/modal" variant="soft" label="Nuxt + Modals" icon="material-symbols-light:select-window-2"></u-button>
-                <u-button to="/components" variant="soft" label="Implemented UI components" icon="mynaui:click-solid"></u-button>
-            </div>
-        </u-form-field>
-
-        <u-form-field label="Nuxt UI Pro Blog">
-            <template #hint>
-                <u-button variant="link" size="sm" class="group" to="https://nuxt.com/blog/nuxt-ui-v4" target="_blank">
-                    Read the blog post
-                    <animated-arrow></animated-arrow>
-                </u-button>
-            </template>
-            <template #description>
-                <p>Nuxt UI Pro has become 100% free! This blog is implemented using the new Nuxt UI components.</p>
-            </template>
-            <div class="flex items-stretch gap-2 w-full justify-start flex-wrap">
-                <u-button to="/articles" variant="soft" label="Go to NuxtUI blog" icon="material-symbols-light:article-rounded"></u-button>
-            </div>
-        </u-form-field>
-    </div>
-</template>
-
 <script lang="ts" setup>
-const mounted = useMounted();
+const { data: allArticles } = await useAsyncData('home-articles', () =>
+    queryCollection('articles').order('date', 'DESC').all()
+);
+
+const articlesByCategory = computed(() => {
+    const categories = {
+        article: [] as any[],
+        tutorial: [] as any[],
+        decklist: [] as any[],
+        report: [] as any[],
+        spoiler: [] as any[]
+    };
+
+    allArticles.value?.forEach((article: any) => {
+        if (article.category && categories[article.category as keyof typeof categories]) {
+            categories[article.category as keyof typeof categories].push(article);
+        }
+    });
+
+    return categories;
+});
 </script>
 
-<style></style>
+<template>
+    <UPage>
+        <UPageBody>
+            <div class="flex flex-col gap-12 items-stretch w-full">
+                <!-- Articles Section -->
+                <section v-if="articlesByCategory.article.length" class="space-y-6">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-3xl font-bold">Ultimi articoli</h2>
+                        <u-button to="/articles?category=article" variant="link" size="sm">
+                            Vedi tutti
+                            <animated-arrow></animated-arrow>
+                        </u-button>
+                    </div>
+                    <UBlogPosts>
+                        <UBlogPost
+                            v-for="article in articlesByCategory.article.slice(0, 3)"
+                            :key="article._id"
+                            :title="article.title"
+                            :image="article.thumbnail"
+                            :authors="[{ name: article.author, avatar: { src: article.author_avatar }, description: article.author_description }]"
+                            :badge="Math.abs(new Date().getTime() - new Date(article?.date).getTime()) < 8.64e7 * 7 ? { label: 'New', color: 'primary' } : undefined"
+                            :date="article.date"
+                            :to="article.path"
+                            variant="naked"
+                        >
+                            <template #description>
+                                <p class="mt-1 text-base text-pretty">{{ article.description }}</p>
+                                <div class="flex flex-row gap-2 items-center flex-wrap mt-3">
+                                    <UBadge v-for="tag in article.tags" :key="tag" color="primary" variant="soft">
+                                        {{ tag }}
+                                    </UBadge>
+                                </div>
+                            </template>
+                        </UBlogPost>
+                    </UBlogPosts>
+                </section>
+
+                <!-- Tutorials Section -->
+                <section v-if="articlesByCategory.tutorial.length" class="space-y-6">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-3xl font-bold">Tutorial</h2>
+                        <u-button to="/articles?category=tutorial" variant="link" size="sm">
+                            Vedi tutti
+                            <animated-arrow></animated-arrow>
+                        </u-button>
+                    </div>
+                    <UBlogPosts>
+                        <UBlogPost
+                            v-for="article in articlesByCategory.tutorial.slice(0, 3)"
+                            :key="article._id"
+                            :title="article.title"
+                            :image="article.thumbnail"
+                            :authors="[{ name: article.author, avatar: { src: article.author_avatar }, description: article.author_description }]"
+                            :badge="Math.abs(new Date().getTime() - new Date(article?.date).getTime()) < 8.64e7 * 7 ? { label: 'New', color: 'primary' } : undefined"
+                            :date="article.date"
+                            :to="article.path"
+                            variant="naked"
+                        >
+                            <template #description>
+                                <p class="mt-1 text-base text-pretty">{{ article.description }}</p>
+                                <div class="flex flex-row gap-2 items-center flex-wrap mt-3">
+                                    <UBadge v-for="tag in article.tags" :key="tag" color="primary" variant="soft">
+                                        {{ tag }}
+                                    </UBadge>
+                                </div>
+                            </template>
+                        </UBlogPost>
+                    </UBlogPosts>
+                </section>
+
+                <!-- Decklists Section -->
+                <section v-if="articlesByCategory.decklist.length" class="space-y-6">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-3xl font-bold">Top Decklists</h2>
+                        <u-button to="/articles?category=decklist" variant="link" size="sm">
+                            Vedi tutti
+                            <animated-arrow></animated-arrow>
+                        </u-button>
+                    </div>
+                    <UBlogPosts>
+                        <UBlogPost
+                            v-for="article in articlesByCategory.decklist.slice(0, 3)"
+                            :key="article._id"
+                            :title="article.title"
+                            :image="article.thumbnail"
+                            :authors="[{ name: article.author, avatar: { src: article.author_avatar }, description: article.author_description }]"
+                            :badge="Math.abs(new Date().getTime() - new Date(article?.date).getTime()) < 8.64e7 * 7 ? { label: 'New', color: 'primary' } : undefined"
+                            :date="article.date"
+                            :to="article.path"
+                            variant="naked"
+                        >
+                            <template #description>
+                                <p class="mt-1 text-base text-pretty">{{ article.description }}</p>
+                                <div class="flex flex-row gap-2 items-center flex-wrap mt-3">
+                                    <UBadge v-for="tag in article.tags" :key="tag" color="primary" variant="soft">
+                                        {{ tag }}
+                                    </UBadge>
+                                </div>
+                            </template>
+                        </UBlogPost>
+                    </UBlogPosts>
+                </section>
+
+                <!-- Reports Section -->
+                <section v-if="articlesByCategory.report.length" class="space-y-6">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-3xl font-bold">Resoconti dei tornei</h2>
+                        <u-button to="/articles?category=report" variant="link" size="sm">
+                            Vedi tutti
+                            <animated-arrow></animated-arrow>
+                        </u-button>
+                    </div>
+                    <UBlogPosts>
+                        <UBlogPost
+                            v-for="article in articlesByCategory.report.slice(0, 3)"
+                            :key="article._id"
+                            :title="article.title"
+                            :image="article.thumbnail"
+                            :authors="[{ name: article.author, avatar: { src: article.author_avatar }, description: article.author_description }]"
+                            :badge="Math.abs(new Date().getTime() - new Date(article?.date).getTime()) < 8.64e7 * 7 ? { label: 'New', color: 'primary' } : undefined"
+                            :date="article.date"
+                            :to="article.path"
+                            variant="naked"
+                        >
+                            <template #description>
+                                <p class="mt-1 text-base text-pretty">{{ article.description }}</p>
+                                <div class="flex flex-row gap-2 items-center flex-wrap mt-3">
+                                    <UBadge v-for="tag in article.tags" :key="tag" color="primary" variant="soft">
+                                        {{ tag }}
+                                    </UBadge>
+                                </div>
+                            </template>
+                        </UBlogPost>
+                    </UBlogPosts>
+                </section>
+
+                <!-- Spoilers Section -->
+                <section v-if="articlesByCategory.spoiler.length" class="space-y-6">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-3xl font-bold">Spoilers & Set Reviews</h2>
+                        <u-button to="/articles?category=spoiler" variant="link" size="sm">
+                            Vedi tutti
+                            <animated-arrow></animated-arrow>
+                        </u-button>
+                    </div>
+                    <UBlogPosts>
+                        <UBlogPost
+                            v-for="article in articlesByCategory.spoiler.slice(0, 3)"
+                            :key="article._id"
+                            :title="article.title"
+                            :image="article.thumbnail"
+                            :authors="[{ name: article.author, avatar: { src: article.author_avatar }, description: article.author_description }]"
+                            :badge="Math.abs(new Date().getTime() - new Date(article?.date).getTime()) < 8.64e7 * 7 ? { label: 'New', color: 'primary' } : undefined"
+                            :date="article.date"
+                            :to="article.path"
+                            variant="naked"
+                        >
+                            <template #description>
+                                <p class="mt-1 text-base text-pretty">{{ article.description }}</p>
+                                <div class="flex flex-row gap-2 items-center flex-wrap mt-3">
+                                    <UBadge v-for="tag in article.tags" :key="tag" color="primary" variant="soft">
+                                        {{ tag }}
+                                    </UBadge>
+                                </div>
+                            </template>
+                        </UBlogPost>
+                    </UBlogPosts>
+                </section>
+            </div>
+        </UPageBody>
+    </UPage>
+</template>

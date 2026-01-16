@@ -1,50 +1,61 @@
+<script lang="ts" setup>
+const route = useRoute();
+
+const { data: articles } = await useAsyncData("articles-index", () =>
+    queryCollection("articles").order("date", "DESC").all()
+);
+
+const selectedCategory = ref<string | null>(
+    route.query.category ? String(route.query.category) : null
+);
+
+const categoryLabels: Record<string, string> = {
+    article: 'Article',
+    tutorial: 'Tutorial',
+    decklist: 'Decklist',
+    report: 'Report',
+    spoiler: 'Spoiler'
+};
+
+const filteredArticles = computed(() => {
+    if (!articles.value) return [];
+    if (!selectedCategory.value) return articles.value;
+
+    return articles.value.filter(article => article.category === selectedCategory.value);
+});
+
+// Update URL when category changes
+watch(selectedCategory, (newCategory) => {
+    const query = newCategory ? { category: newCategory } : {};
+    navigateTo({ query }, { replace: true });
+});
+</script>
+
 <template>
     <UPage>
         <UPageBody>
-            <!-- <div class="flex justify-between gap-2 w-full items-center flex-wrap">
-                <u-form-field>
-                    <template #label> A complete, responsive, aesthetic and SEO optimized Blog. </template>
-                    <template #description>
-                        <p>
-                            In this series of tutorials, we implemented a blog from scratch. We added cool features such as responsive Table of Content with microinteractions and
-                            made the blog SEO ready. <br />
-                        </p>
-                    </template>
-                </u-form-field>
+            <!-- Category Filter -->
+            <div class="flex items-center gap-4 mb-6 flex-wrap">
                 <u-button
-                    label="Check out the playlist"
-                    icon="logos:youtube-icon"
-                    color="neutral"
-                    to="https://www.youtube.com/playlist?list=PLy6JsnZbXr8wztuwuDfNZmfKziSDVy9CM"
-                    target="_blank"
-                ></u-button>
-            </div> -->
-            <!-- <u-separator></u-separator> -->
-            <!-- <u-field-group class="">
-                <u-content-search-button variant="outline">
-                    <div class="flex items-center gap-4">
-                        Search
-                        <div class="flex gap-1 items-center">
-                            <u-kbd variant="soft">CTRL</u-kbd>
-                            <u-kbd variant="soft">K</u-kbd>
-                        </div>
-                    </div>
-                </u-content-search-button>
-            </u-field-group> -->
-            <!-- <client-only>
-                <u-content-search v-model:search-term="query" shortcut="meta_k" :files="files" :navigation="navigation" :fuse="{ resultLimit: 42 }"></u-content-search>
-            </client-only> -->
+                    v-for="(label, category) in { null: 'All', ...categoryLabels }"
+                    :key="category"
+                    :variant="selectedCategory === category ? 'solid' : 'outline'"
+                    @click="selectedCategory = category"
+                >
+                    {{ label }}
+                </u-button>
+            </div>
+
             <UEmpty
-                v-if="(articles?.length ?? 0) <= 0"
-                title="No interesting material yet"
-                description="Give me some time to create some boring stuff."
+                v-if="(filteredArticles?.length ?? 0) <= 0"
+                title="No articles found"
+                description="No articles match the selected category."
                 variant="naked"
-                :actions="[{ label: 'Go back home', to: '/' }]"
-            >
+                :actions="[{ label: 'Go back home', to: '/' }]">
             </UEmpty>
             <UBlogPosts v-else>
                 <UBlogPost
-                    v-for="article in articles"
+                    v-for="article in filteredArticles"
                     :key="article.path"
                     :title="article.title"
                     :image="article.thumbnail"
@@ -55,9 +66,19 @@
                     variant="naked"
                 >
                     <template #description>
-                        <p class="mt-1 text-base text-pretty">{{ article.description }}</p>
+                        <p class="mt-1 text-base text-pretty">
+                            {{ article.description }}
+                        </p>
                         <div class="flex flex-row gap-2 items-center flex-wrap mt-3">
-                            <UBadge v-for="tag in article.tags" :key="tag" color="primary" variant="soft">
+                            <UBadge color="neutral" variant="soft">
+                                {{ categoryLabels[article.category] }}
+                            </UBadge>
+                            <UBadge
+                                v-for="tag in article.tags"
+                                :key="tag"
+                                color="primary"
+                                variant="soft"
+                            >
                                 {{ tag }}
                             </UBadge>
                         </div>
@@ -67,16 +88,3 @@
         </UPageBody>
     </UPage>
 </template>
-
-<script lang="ts" setup>
-const { data: articles } = await useAsyncData("articles-home", () => queryCollection("articles").all());
-// const { data: navigation } = await useAsyncData("navigation", () => queryCollectionNavigation("articles"));
-// const { data: files } = useLazyAsyncData("search", () => queryCollectionSearchSections("articles"), {
-//     server: false,
-// });
-// const query = ref("");
-</script>
-
-<!-- <style lang="css" scoped>
-@reference "~/assets/css/main.css";
-</style> -->

@@ -11,74 +11,7 @@ export default defineContentConfig({
                     title: z.string(),
                     date: z.date(),
                     description: z.string(),
-                    tags: z.optional(z.array(z.string())),
-                    author: z.string(),
-                    author_avatar: z.string(),
-                    author_description: z.string(),
-                    thumbnail: z.string(),
-                    rawbody: z.string(),
-                }),
-            })
-        ),
-        decks: defineCollection(
-            asSitemapCollection({
-                source: "decks/**/*.md",
-                type: "page",
-                schema: z.object({
-                    title: z.string(),
-                    date: z.date(),
-                    description: z.string(),
-                    tags: z.optional(z.array(z.string())),
-                    author: z.string(),
-                    author_avatar: z.string(),
-                    author_description: z.string(),
-                    thumbnail: z.string(),
-                    rawbody: z.string(),
-                }),
-            })
-        ),
-        decklists: defineCollection(
-            asSitemapCollection({
-                source: "decklists/**/*.md",
-                type: "page",
-                schema: z.object({
-                    title: z.string(),
-                    date: z.date(),
-                    description: z.string(),
-                    tags: z.optional(z.array(z.string())),
-                    author: z.string(),
-                    author_avatar: z.string(),
-                    author_description: z.string(),
-                    thumbnail: z.string(),
-                    rawbody: z.string(),
-                }),
-            })
-        ),
-        reports: defineCollection(
-            asSitemapCollection({
-                source: "reports/**/*.md",
-                type: "page",
-                schema: z.object({
-                    title: z.string(),
-                    date: z.date(),
-                    description: z.string(),
-                    tags: z.optional(z.array(z.string())),
-                    author: z.string(),
-                    author_avatar: z.string(),
-                    author_description: z.string(),
-                    thumbnail: z.string(),
-                    rawbody: z.string(),
-                }),
-            })
-        ),
-        spoilers: defineCollection(
-            asSitemapCollection({
-                source: "spoilers/**/*.md",
-                type: "page",
-                schema: z.object({
-                    title: z.string(),
-                    date: z.date(),
-                    description: z.string(),
+                    category: z.enum(["article", "tutorial", "decklist", "report", "spoiler"]),
                     tags: z.optional(z.array(z.string())),
                     author: z.string(),
                     author_avatar: z.string(),
