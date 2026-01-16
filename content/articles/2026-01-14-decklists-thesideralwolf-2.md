@@ -1,14 +1,13 @@
 ---
-title: "Top 8 - TheSideralWolf - Tournament Series Pauper #2"
+title: "TheSideralWolf - Tournament Series Pauper #2"
 description: "liste"
+category: decklists
+tags: [top8]
+date: 2026-01-14
+updatedAt: 2026-01-14
 author: Bragioto Pietro
 author_avatar: /assets/avatars/bragioto.jpg
 author_description: "Scribacchino di liste"
-date: 2026-01-14
-updatedAt: 2026-01-14
-category: decklist
-tags: [top8]
-draft: true
 thumbnail: /assets/articles/arts/Bonebind-Orator.jpg
 ---
 

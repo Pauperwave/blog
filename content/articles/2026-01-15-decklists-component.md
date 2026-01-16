@@ -1,14 +1,31 @@
 ---
 title: "MagicDecklist Component"
-description: Testing the MagicDecklist Component
-date: 2026-01-15
-category: article
+description: "Testing the MagicDecklist Component"
+category: decklists
 tags: [test]
+date: 2026-01-15
+updatedAt: 2026-01-15
 author: Emanuele Nardi
 author_avatar: /assets/avatars/trat.jpg
 author_description: "Developer"
 thumbnail: /assets/articles/arts/Portent-of-Calamity.jpg
 ---
+
+<!-- ---
+title: "Top 8 Pauperiadi II, IPT Ferrara"
+description: "Decklists and report from the Top 8 of the Pauperiadi II, IPT Ferrara event held on 21 September 2025."
+category: decklists
+tags: [test]
+author: "Bragioto Pietro"
+date: 2025-09-22
+updatedAt: 2025-09-22
+hero: {
+    image: "/assets/articles/events/2025-09-21-banner-pauperiadi-2025_lungo.jpg",
+    alt: "Top 8 Pauperiadi II, IPT Ferrara",
+    caption: "Top 8 Pauperiadi II, IPT Ferrara"
+}
+draft: true
+--- -->
 
 # Decklist
 

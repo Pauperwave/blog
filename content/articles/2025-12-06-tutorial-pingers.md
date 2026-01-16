@@ -1,10 +1,11 @@
 ---
 title: "Mazzo Pingers"
-description: Introduzione di Buonanotte a Pingers aka Passione Beyblade
-author: Bragioto Pietro
-date: 2025-12-06
+description: "Introduzione di Buonanotte a Pingers aka Passione Beyblade"
 category: tutorial
-tags: [monored, pingers]
+tags: [pingers, monored]
+date: 2025-12-06
+updatedAt: 2025-12-06
+author: Bragioto Pietro
 author_avatar: /assets/avatars/bragioto.jpg
 author_description: "Scribacchino di liste"
 thumbnail: /assets/articles/arts/inr-174-thermo-alchemist.jpeg
