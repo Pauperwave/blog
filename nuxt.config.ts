@@ -43,6 +43,12 @@ export default defineNuxtConfig({
         "@vueuse/nuxt"
     ],
     vite: {
+        css: {
+            devSourcemap: true, // Keep sourcemaps in development for debugging
+        },
+        build: {
+            sourcemap: false, // Disable sourcemaps in production to eliminate Tailwind warnings
+        },
         ssr: {
             external: ["bun:sqlite"],
         },
