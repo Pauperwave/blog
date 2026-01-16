@@ -42,6 +42,9 @@ export default defineNuxtConfig({
         "@nuxtjs/seo",
         "@vueuse/nuxt"
     ],
+    icon: {
+        collections: ['lucide', 'simple-icons']
+    },
     vite: {
         css: {
             devSourcemap: true, // Keep sourcemaps in development for debugging
