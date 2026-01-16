@@ -35,12 +35,13 @@ export default defineNuxtConfig({
         },
     },
     modules: [
-        "@nuxt/ui",
-        "@nuxt/image",
-        "@nuxtjs/mdc",
-        "@nuxt/content",
-        "@nuxtjs/seo",
-        "@vueuse/nuxt"
+      "@nuxt/ui",
+      "@nuxt/image",
+      "@nuxtjs/mdc",
+      "@nuxt/content",
+      "@nuxtjs/seo",
+      "@vueuse/nuxt",
+      "nuxt-swiper",
     ],
     icon: {
         collections: ['lucide', 'simple-icons']
