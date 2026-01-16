@@ -7,8 +7,7 @@ tags: [test]
 author: Emanuele Nardi
 author_avatar: /assets/avatars/trat.jpg
 author_description: "Developer"
-thumbnail: /assets/articles/why-you-should-train.jpeg
-draft: true
+thumbnail: /assets/articles/arts/Portent-of-Calamity.jpg
 ---
 
 # Decklist

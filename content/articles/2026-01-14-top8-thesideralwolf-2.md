@@ -9,7 +9,7 @@ updatedAt: 2026-01-14
 category: decklist
 tags: [top8]
 draft: true
-thumbnail: /assets/articles/events/2025-09-21-banner-pauperiadi-2025_lungo.webp
+thumbnail: /assets/articles/arts/Bonebind-Orator.jpg
 ---
 
 ## Intestazione di secondo livello
