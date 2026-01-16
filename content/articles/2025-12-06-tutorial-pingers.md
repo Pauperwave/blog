@@ -1,6 +1,6 @@
 ---
 title: "Mazzo Pingers"
-description: "Introduzione di Buonanotte a Pingers aka Passione Beyblade"
+description: "Introduzione a Pingers"
 category: tutorial
 tags: [pingers, monored]
 date: 2025-12-06
