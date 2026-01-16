@@ -61,7 +61,7 @@ crop:
 Il meta odierno è costituito da qualche Tier 1 e una selva caotica di Tier 1,5 e Tier 2, una vera e propria giungla come il formato Modern ai tempi d'oro del 2017-18.
 Rispetto al primo periodo dopo l'unificazione, si può notare che i mazzi monocolor come Terror, Mono Red e Elfi hanno acquisito una fetta importante nella zona alta della piramide, proponendo manabase stappate e potenti piani proattivi.
 
-Secondo la logica dei detrattori, non dovrebbe esserci alcun problema con Mono Red e Mono Blu così in alto dato che il Pauper ha accesso a 8:CardTooltip{name="Hydroblast"} e 8 pyro, tuttavia, più che la concorrenza, sono i monocolor stessi a sfruttare le potenziali 8 blaste sia per proteggersi che per combattere la controparte.
+Secondo la logica dei detrattori, non dovrebbe esserci alcun problema con Mono Red e Mono Blu così in alto dato che il Pauper ha accesso a 8 :CardTooltip{name="Hydroblast"} e 8 :CardTooltip{name="Pyroblast"}, tuttavia, più che la concorrenza, sono i monocolor stessi a sfruttare le potenziali 8 blaste sia per proteggersi che per combattere la controparte.
 
 Jund, Tron, Affinity, Familiar e Cawgate sono tutti esempi di alta fascia che non possono permettersi di alzare troppo le blaste perchè, essendo mazzi spesso nel ruolo reatttivo, devono avere risposte variegate per un meta variegato e spesso non possono andare oltre le 4-5 Hydro/Pyro.
 Non ci sono solo Mono Red e Terror da rispettare ma anche mazzi proattivi come Elfi, Spia, Monsters per restare sui Tier 1.5, Mono U Faeries, Bogle e Mono White se si comincia a guardare ai tier 2; per non parlare del rispetto da dare ad altri mazzi reattivi ossia tra di loro
