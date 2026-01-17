@@ -8,7 +8,7 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
         <!-- Brand & Social Section -->
         <div class="flex flex-col items-center md:items-start text-center md:text-left">
-          <h3 class="text-2xl font-bold text-white mb-2">
+          <h3 class="text-2xl font-bold mb-2">
             Pauperwave APS
           </h3>
           <div class="flex gap-2 flex-wrap justify-center md:justify-start">
@@ -61,7 +61,7 @@
         </div>
 
         <!-- Company Info Section -->
-        <div class="text-white text-sm leading-relaxed text-center md:text-left">
+        <div class="text-sm leading-relaxed text-center md:text-left">
           <p>Pauperwave APS</p>
           <p>Associazione di Promozione Sociale</p>
           <p>Sede: via Benacense II, n. 77/bis</p>
@@ -76,21 +76,21 @@
             label="Cookie Policy"
             color="neutral"
             variant="link"
-            class="text-white underline"
+            class="underline"
           />
           <UButton
             to="#"
             label="Privacy Policy"
             color="neutral"
             variant="link"
-            class="text-white underline"
+            class="underline"
           />
         </div>
       </div>
     </template>
 
     <template #bottom>
-      <p class="text-xs text-center text-white">
+      <p class="text-xs text-center">
         Pauperwave non costituisce testata giornalistica e non ha carattere periodico essendo
         aggiornato secondo disponibilità degli autori. Pertanto non può essere considerato in alcun modo un prodotto
         editoriale ai sensi della L. n. 62 del 7/3/2001. Il copyright di tutte le carte presentate su questo sito
