@@ -126,15 +126,41 @@ const tocTitle = computed(() => `In questo articolo`);
 const clipboard = useClipboard();
 const toast = useToast();
 
-const { data } = await useAsyncData(route.path, () => queryCollection("articles").path(route.path).first());
-const { data: links } = await useAsyncData(`linked-${route.path}`, async () => {
-    const res = await queryCollection("articles").where("path", "NOT LIKE", data.value?.path).all();
-    return l.orderBy(res, (a) => l.intersection(a.tags, data.value?.tags).length, "desc").slice(0, 5);
+const { data } = await useAsyncData(route.path, async () => {
+    // Try each collection until we find the article
+    const collections = ["articles", "tutorials", "decklists", "reports", "spoilers"];
+    for (const collection of collections) {
+        const result = await queryCollection(collection as any).path(route.path).first();
+        if (result) return result;
+    }
+    return null;
 });
-const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
-    return queryCollectionItemSurroundings("articles", route.path, {
-        fields: ["description"],
-    });
+const { data: links } = await useAsyncData(`linked-${route.path}`, async () => {
+    const [articlesData, tutorialsData, decklistsData, reportsData, spoilersData] = await Promise.all([
+        queryCollection("articles").all(),
+        queryCollection("tutorials").all(),
+        queryCollection("decklists").all(),
+        queryCollection("reports").all(),
+        queryCollection("spoilers").all(),
+    ]);
+    const allArticles = [...articlesData, ...tutorialsData, ...decklistsData, ...reportsData, ...spoilersData]
+        .filter(a => a.path !== data.value?.path && a.draft !== true);
+    return l.orderBy(allArticles, (a) => l.intersection(a.tags, data.value?.tags).length, "desc").slice(0, 5);
+});
+const { data: surround } = await useAsyncData(`${route.path}-surround`, async () => {
+    // Try to find surroundings in each collection
+    const collections = ["articles", "tutorials", "decklists", "reports", "spoilers"];
+    for (const collection of collections) {
+        try {
+            const result = await queryCollectionItemSurroundings(collection as any, route.path, {
+                fields: ["description"],
+            });
+            if (result) return result;
+        } catch (e) {
+            // Continue to next collection if not found
+        }
+    }
+    return null;
 });
 
 updateMeta();

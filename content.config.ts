@@ -18,7 +18,10 @@ export default defineContentConfig({
     collections: {
         articles: defineCollection(
             asSitemapCollection({
-                source: "content/blog/articles/**/*.md",
+                source: {
+                    include: "blog/articles/**/*.md",
+                    prefix: "/articles"
+                },
                 type: "page",
                 schema: baseContentSchema.extend({
                     category: z.literal("article").default("article"),
@@ -27,7 +30,10 @@ export default defineContentConfig({
         ),
         tutorials: defineCollection(
             asSitemapCollection({
-                source: "content/blog/tutorials/**/*.md",
+                source: {
+                    include: "blog/tutorials/**/*.md",
+                    prefix: "/articles"
+                },
                 type: "page",
                 schema: baseContentSchema.extend({
                     category: z.literal("tutorial").default("tutorial"),
@@ -36,7 +42,10 @@ export default defineContentConfig({
         ),
         decklists: defineCollection(
             asSitemapCollection({
-                source: "content/blog/decklists/**/*.md",
+                source: {
+                    include: "blog/decklists/**/*.md",
+                    prefix: "/articles"
+                },
                 type: "page",
                 schema: baseContentSchema.extend({
                     category: z.literal("decklist").default("decklist"),
@@ -45,7 +54,10 @@ export default defineContentConfig({
         ),
         reports: defineCollection(
             asSitemapCollection({
-                source: "content/blog/reports/**/*.md",
+                source: {
+                    include: "blog/reports/**/*.md",
+                    prefix: "/articles"
+                },
                 type: "page",
                 schema: baseContentSchema.extend({
                     category: z.literal("report").default("report"),
@@ -54,7 +66,10 @@ export default defineContentConfig({
         ),
         spoilers: defineCollection(
             asSitemapCollection({
-                source: "content/blog/spoilers/**/*.md",
+                source: {
+                    include: "blog/spoilers/**/*.md",
+                    prefix: "/articles"
+                },
                 type: "page",
                 schema: baseContentSchema.extend({
                     category: z.literal("spoiler").default("spoiler"),

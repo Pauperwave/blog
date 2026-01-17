@@ -1,9 +1,21 @@
 <script lang="ts" setup>
 const route = useRoute();
 
-const { data: articles } = await useAsyncData("articles-index", () =>
-    queryCollection("articles").order("date", "DESC").all()
-);
+// Query all collections and combine them
+const { data: articles } = await useAsyncData("articles-index", async () => {
+    const [articlesData, tutorialsData, decklistsData, reportsData, spoilersData] = await Promise.all([
+        queryCollection("articles").all(),
+        queryCollection("tutorials").all(),
+        queryCollection("decklists").all(),
+        queryCollection("reports").all(),
+        queryCollection("spoilers").all(),
+    ]);
+    
+    // Combine all articles, filter out drafts, and sort by date
+    const allArticles = [...articlesData, ...tutorialsData, ...decklistsData, ...reportsData, ...spoilersData]
+        // .filter(article => article.draft !== true);
+    return allArticles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+});
 
 const selectedCategory = ref<string | null>(
     route.query.category ? String(route.query.category) : null
@@ -58,9 +70,9 @@ watch(selectedCategory, (newCategory) => {
                             {{ article.description }}
                         </p>
                         <div class="flex flex-row gap-2 items-center flex-wrap mt-3">
-                            <UBadge color="neutral" variant="soft">
+                            <!-- <UBadge color="neutral" variant="soft">
                                 {{ categoryLabels[article.category] }}
-                            </UBadge>
+                            </UBadge> -->
                             <UBadge v-for="tag in article.tags" :key="tag" color="primary" variant="soft">
                                 {{ tag }}
                             </UBadge>
