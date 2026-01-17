@@ -10,7 +10,6 @@
         "@nuxtjs/mdc": "^0.19.2",
         "@nuxtjs/seo": "^3.3.0",
         "dayjs": "^1.11.19",
-        "lodash": "^4.17.21",
         "mana-font": "^1.18.0",
         "nuxt": "^4.2.2",
         "nuxt-swiper": "2.0.1",
