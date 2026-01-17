@@ -74,15 +74,6 @@ const { data: links } = await useAsyncData(`linked-${route.path}`, async () => {
 
 updateMeta();
 
-// async function copyLink() {
-//     await clipboard.copy(window.location.href);
-//     toast.add({ title: "Copied to clipboad", icon: "material-symbols:check-circle-rounded", color: "success" });
-// }
-
-// async function share() {
-//     await navigator.share({ url: route.fullPath });
-// }
-
 function updateMeta() {
     useSchemaOrg([
         defineArticle({
@@ -144,12 +135,6 @@ onMounted(() => {
                     :title="tocTitle"
                     :links="data.body.toc?.links" highlight
                 />
-                <!-- <u-field-group class="w-full">
-                    <u-button @click="share" label="Share this article" icon="material-symbols:share" variant="subtle" color="neutral" class="grow"> </u-button>
-                    <u-dropdown-menu :items="[{ label: 'Copy URL', icon: 'mdi:link-variant', onSelect: copyLink }]">
-                        <u-button icon="i-lucide-chevron-down" variant="subtle" color="neutral"></u-button>
-                    </u-dropdown-menu>
-                </u-field-group> -->
             </UPageAside>
         </template>
 

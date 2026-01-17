@@ -1,29 +1,31 @@
 <script lang="ts" setup>
+import { PAUPERWAVE_SOCIAL_LINKS } from '~/constants/social-links'
+
 const socialLinks = [
   {
     icon: "i-simple-icons-facebook",
-    link: "https://facebook.com/pauperwave",
+    link: PAUPERWAVE_SOCIAL_LINKS.facebook,
     label: "Facebook"
   },
   {
     icon: "i-simple-icons-instagram",
-    link: "https://instagram.com/pauperwave_official",
+    link: PAUPERWAVE_SOCIAL_LINKS.instagram,
     label: "Instagram"
   },
   {
     icon: "i-simple-icons-youtube",
-    link: "https://youtube.com/@pauperwave",
+    link: PAUPERWAVE_SOCIAL_LINKS.youtube,
     label: "YouTube"
   },
   {
-    icon: "i-simple-icons-x",
-    link: "https://x.com/pauperwave",
-    label: "X"
+    icon: "i-simple-icons-telegram",
+    link: PAUPERWAVE_SOCIAL_LINKS.telegram,
+    label: "Telegram"
   },
   {
-    icon: "i-simple-icons-telegram",
-    link: "https://t.me/pauperwave_official",
-    label: "Telegram"
+    icon: "i-simple-icons-github",
+    link: PAUPERWAVE_SOCIAL_LINKS.github,
+    label: "GitHub"
   }
 ];
 </script>
