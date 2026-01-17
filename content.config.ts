@@ -6,12 +6,12 @@ const baseContentSchema = z.object({
     title: z.string(),
     date: z.date(),
     description: z.string(),
-    tags: z.optional(z.array(z.string())),
+    tags: z.optional(z.array(z.string())).default([]),
     author: z.string(),
     author_avatar: z.string(),
     author_description: z.string(),
+    draft: z.optional(z.boolean()).default(false),
     thumbnail: z.string(),
-    rawbody: z.string(),
 });
 
 export default defineContentConfig({
