@@ -1,8 +1,7 @@
 <template>
   <UFooter
     :ui="{
-      top: 'py-8 border-t-2 border-white',
-      bottom: 'py-4'
+      top: 'border-t-2 border-white'
     }"
   >
     <template #top>
