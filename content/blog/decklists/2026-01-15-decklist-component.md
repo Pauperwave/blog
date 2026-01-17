@@ -1,7 +1,6 @@
 ---
 title: "MagicDecklist Component"
 description: "Testing the MagicDecklist Component"
-category: decklists
 tags: [test]
 date: 2026-01-15
 updatedAt: 2026-01-15

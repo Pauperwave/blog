@@ -1,7 +1,6 @@
 ---
 title: "TheSideralWolf - Tournament Series Pauper #2"
 description: "liste"
-category: decklists
 tags: [top8]
 date: 2026-01-14
 updatedAt: 2026-01-14

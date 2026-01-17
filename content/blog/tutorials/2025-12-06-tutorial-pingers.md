@@ -1,7 +1,6 @@
 ---
 title: "Mazzo Pingers"
 description: "Introduzione a Pingers"
-category: tutorial
 tags: [pingers, monored]
 date: 2025-12-06
 updatedAt: 2025-12-06
