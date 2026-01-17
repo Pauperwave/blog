@@ -1,3 +1,132 @@
+<script lang="ts" setup>
+import dayjs from "dayjs";
+import "dayjs/locale/it";
+import l from "lodash";
+
+// Set Italian locale for dayjs
+dayjs.locale('it');
+import appMeta from "~/app.meta";
+import type { ArticlesCollectionItem, TutorialsCollectionItem, DecklistsCollectionItem, ReportsCollectionItem, SpoilersCollectionItem } from '#content';
+
+// Union type for all article types
+type AnyArticle = 
+    | ArticlesCollectionItem 
+    | TutorialsCollectionItem 
+    | DecklistsCollectionItem 
+    | ReportsCollectionItem 
+    | SpoilersCollectionItem;
+
+const route = useRoute();
+const authorEl = ref<HTMLElement | null>();
+const relatedArticlesEl = ref<HTMLElement | null>();
+
+// TODO mostrare solo articoli con tag simili
+const relatedArticlesString = "Altri articoli correlati"
+const getBadge = (date: string) => {
+    return Math.abs(new Date().getTime() - new Date(date).getTime()) < 8.64e7 * 7
+        ? { label: "New", color: "primary" as const }
+        : undefined;
+};
+
+// const readingTimeText = computed(() => (data.value?.meta as any).readingTime?.text);
+const tocTitle = computed(() => `In questo articolo`);
+const clipboard = useClipboard();
+const toast = useToast();
+
+const { data } = await useAsyncData(route.path, async () => {
+    // Try each collection until we find the article
+    const collections = ["articles", "tutorials", "decklists", "reports", "spoilers"];
+    for (const collection of collections) {
+        const result = await queryCollection(collection as any).path(route.path).first();
+        if (result) return result;
+    }
+    return null;
+});
+const { data: links } = await useAsyncData(`linked-${route.path}`, async () => {
+    const [articlesData, tutorialsData, decklistsData, reportsData, spoilersData] = await Promise.all([
+        queryCollection("articles").all(),
+        queryCollection("tutorials").all(),
+        queryCollection("decklists").all(),
+        queryCollection("reports").all(),
+        queryCollection("spoilers").all(),
+    ]);
+    // Using concat() for better performance with large datasets (1000+ articles)
+    const allArticles: AnyArticle[] = (articlesData as AnyArticle[])
+        .concat(tutorialsData as AnyArticle[], decklistsData as AnyArticle[], reportsData as AnyArticle[], spoilersData as AnyArticle[])
+        .filter(a => a.path !== data.value?.path && a.draft !== true);
+    return l.orderBy(allArticles, (a) => l.intersection(a.tags, data.value?.tags).length, "desc").slice(0, 5);
+});
+// const { data: surround } = await useAsyncData(`${route.path}-surround`, async () => {
+//     // Try to find surroundings in each collection
+//     const collections = ["articles", "tutorials", "decklists", "reports", "spoilers"];
+//     for (const collection of collections) {
+//         try {
+//             const result = await queryCollectionItemSurroundings(collection as any, route.path, {
+//                 fields: ["description"],
+//             });
+//             if (result) return result;
+//         } catch (e) {
+//             // Continue to next collection if not found
+//         }
+//     }
+//     return null;
+// });
+
+updateMeta();
+
+// async function copyLink() {
+//     await clipboard.copy(window.location.href);
+//     toast.add({ title: "Copied to clipboad", icon: "material-symbols:check-circle-rounded", color: "success" });
+// }
+
+// async function share() {
+//     await navigator.share({ url: route.fullPath });
+// }
+
+function updateMeta() {
+    useSchemaOrg([
+        defineArticle({
+            headline: data.value?.title,
+            description: data.value?.description,
+            image: data.value?.thumbnail,
+            datePublished: dayjs(data.value?.date, "YYYY-MM-DD").toDate().toString(),
+            keywords: data.value?.tags,
+            author: {
+                name: data.value?.author,
+                description: data.value?.author_description,
+                image: data.value?.author_avatar,
+            },
+            publisher: definePerson({
+                name: appMeta.author.name,
+                description: appMeta.author.description,
+                image: appMeta.author.image,
+                url: appMeta.author.url,
+            }),
+        }),
+    ]);
+
+    useSeoMeta({
+        title: data.value?.title,
+        description: data.value?.description,
+    });
+
+    defineOgImageComponent("Article", {
+        thumbnail: data.value?.thumbnail,
+        title: data.value?.title,
+        author: {
+            name: data.value?.author,
+            image: data.value?.author_avatar,
+        },
+    });
+}
+
+onMounted(() => {
+    const contentEl = document.getElementById("content");
+    authorEl.value = contentEl?.querySelector("#author-about");
+    relatedArticlesEl.value = document.documentElement?.querySelector("#related-articles") as HTMLElement | undefined;
+});
+</script>
+
 <template>
     <UPage :ui="{ center: 'lg:col-span-7!' }">
 
@@ -99,139 +228,10 @@
                 />
             </UBlogPosts>
 
-            <UContentSurround :surround="surround" />
+            <!-- <UContentSurround :surround="surround" /> -->
         </UPageBody>
     </UPage>
 </template>
-
-<script lang="ts" setup>
-import dayjs from "dayjs";
-import "dayjs/locale/it";
-import l from "lodash";
-
-// Set Italian locale for dayjs
-dayjs.locale('it');
-import appMeta from "~/app.meta";
-import type { ArticlesCollectionItem, TutorialsCollectionItem, DecklistsCollectionItem, ReportsCollectionItem, SpoilersCollectionItem } from '#content';
-
-// Union type for all article types
-type AnyArticle = 
-    | ArticlesCollectionItem 
-    | TutorialsCollectionItem 
-    | DecklistsCollectionItem 
-    | ReportsCollectionItem 
-    | SpoilersCollectionItem;
-
-const route = useRoute();
-const authorEl = ref<HTMLElement | null>();
-const relatedArticlesEl = ref<HTMLElement | null>();
-
-// TODO mostrare solo articoli con tag simili
-const relatedArticlesString = "Altri articoli correlati"
-const getBadge = (date: string) => {
-    return Math.abs(new Date().getTime() - new Date(date).getTime()) < 8.64e7 * 7
-        ? { label: "New", color: "primary" as const }
-        : undefined;
-};
-
-// const readingTimeText = computed(() => (data.value?.meta as any).readingTime?.text);
-const tocTitle = computed(() => `In questo articolo`);
-const clipboard = useClipboard();
-const toast = useToast();
-
-const { data } = await useAsyncData(route.path, async () => {
-    // Try each collection until we find the article
-    const collections = ["articles", "tutorials", "decklists", "reports", "spoilers"];
-    for (const collection of collections) {
-        const result = await queryCollection(collection as any).path(route.path).first();
-        if (result) return result;
-    }
-    return null;
-});
-const { data: links } = await useAsyncData(`linked-${route.path}`, async () => {
-    const [articlesData, tutorialsData, decklistsData, reportsData, spoilersData] = await Promise.all([
-        queryCollection("articles").all(),
-        queryCollection("tutorials").all(),
-        queryCollection("decklists").all(),
-        queryCollection("reports").all(),
-        queryCollection("spoilers").all(),
-    ]);
-    // Using concat() for better performance with large datasets (1000+ articles)
-    const allArticles: AnyArticle[] = (articlesData as AnyArticle[])
-        .concat(tutorialsData as AnyArticle[], decklistsData as AnyArticle[], reportsData as AnyArticle[], spoilersData as AnyArticle[])
-        .filter(a => a.path !== data.value?.path && a.draft !== true);
-    return l.orderBy(allArticles, (a) => l.intersection(a.tags, data.value?.tags).length, "desc").slice(0, 5);
-});
-const { data: surround } = await useAsyncData(`${route.path}-surround`, async () => {
-    // Try to find surroundings in each collection
-    const collections = ["articles", "tutorials", "decklists", "reports", "spoilers"];
-    for (const collection of collections) {
-        try {
-            const result = await queryCollectionItemSurroundings(collection as any, route.path, {
-                fields: ["description"],
-            });
-            if (result) return result;
-        } catch (e) {
-            // Continue to next collection if not found
-        }
-    }
-    return null;
-});
-
-updateMeta();
-
-// async function copyLink() {
-//     await clipboard.copy(window.location.href);
-//     toast.add({ title: "Copied to clipboad", icon: "material-symbols:check-circle-rounded", color: "success" });
-// }
-
-// async function share() {
-//     await navigator.share({ url: route.fullPath });
-// }
-
-function updateMeta() {
-    useSchemaOrg([
-        defineArticle({
-            headline: data.value?.title,
-            description: data.value?.description,
-            image: data.value?.thumbnail,
-            datePublished: dayjs(data.value?.date, "YYYY-MM-DD").toDate().toString(),
-            keywords: data.value?.tags,
-            author: {
-                name: data.value?.author,
-                description: data.value?.author_description,
-                image: data.value?.author_avatar,
-            },
-            publisher: definePerson({
-                name: appMeta.author.name,
-                description: appMeta.author.description,
-                image: appMeta.author.image,
-                url: appMeta.author.url,
-            }),
-        }),
-    ]);
-
-    useSeoMeta({
-        title: data.value?.title,
-        description: data.value?.description,
-    });
-
-    defineOgImageComponent("Article", {
-        thumbnail: data.value?.thumbnail,
-        title: data.value?.title,
-        author: {
-            name: data.value?.author,
-            image: data.value?.author_avatar,
-        },
-    });
-}
-
-onMounted(() => {
-    const contentEl = document.getElementById("content");
-    authorEl.value = contentEl?.querySelector("#author-about");
-    relatedArticlesEl.value = document.documentElement?.querySelector("#related-articles") as HTMLElement | undefined;
-});
-</script>
 
 <style lang="css">
 @reference "~/assets/css/main.css";
