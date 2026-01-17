@@ -1,0 +1,12 @@
+---
+title: "Kamigawa Neon Dinasty"
+description: "Spoiler article for Kamigawa Neon Dinasty"
+tags: [spoiler]
+date: 2022-02-05
+updatedAt: 2022-02-05
+author: Bragioto Pietro
+author_avatar: /assets/avatars/bragioto.jpg
+author_description: "Scribacchino di liste"
+thumbnail: /assets/articles/arts/placeholder.jpg
+draft: true
+---
