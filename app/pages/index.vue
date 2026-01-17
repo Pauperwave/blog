@@ -63,8 +63,12 @@ const sections: Array<{ title: string; category: CategoryType }> = [
 
 <template>
     <UPage>
-        <UPageBody>
-            <div class="flex flex-col gap-2 items-stretch w-full">
+        <UPageBody
+            :ui="{
+                body: 'space-y-0 my-0'
+            }"
+        >
+            <!-- <div id="home-articles" class="border border-8 border-amber-100 flex flex-col gap-2 items-stretch w-full"> -->
                 <ArticleCategorySection
                     v-for="section in sections"
                     :key="section.category"
@@ -72,8 +76,7 @@ const sections: Array<{ title: string; category: CategoryType }> = [
                     :category="section.category"
                     :articles="articlesByCategory[section.category]"
                 />
-            </div>
+            <!-- </div> -->
         </UPageBody>
-        <BlogFooter />
     </UPage>
 </template>
