@@ -1,55 +1,76 @@
 <script lang="ts" setup>
-const { data: allArticles } = await useAsyncData('home-articles', () =>
-    queryCollection('articles').order('date', 'DESC').all()
-);
+import type { ArticlesCollectionItem, TutorialsCollectionItem, DecklistsCollectionItem, ReportsCollectionItem, SpoilersCollectionItem } from '#content';
+
+// Union type for all article types
+type AnyArticle = 
+    | ArticlesCollectionItem 
+    | TutorialsCollectionItem 
+    | DecklistsCollectionItem 
+    | ReportsCollectionItem 
+    | SpoilersCollectionItem;
+
+// Define valid category types
+type CategoryType = 'article' | 'tutorial' | 'decklist' | 'report' | 'spoiler';
+
+// Query all collections and combine them
+const { data: allArticles } = await useAsyncData('home-articles', async () => {
+    const [articlesData, tutorialsData, decklistsData, reportsData, spoilersData] = await Promise.all([
+        queryCollection('articles').all(),
+        queryCollection('tutorials').all(),
+        queryCollection('decklists').all(),
+        queryCollection('reports').all(),
+        queryCollection('spoilers').all(),
+    ]);
+    
+    // Combine all articles, filter out drafts, and sort by date
+    // Using concat() for better performance with large datasets (1000+ articles)
+    const combined: AnyArticle[] = (articlesData as ArticlesCollectionItem[])
+        .concat(tutorialsData as TutorialsCollectionItem[],
+                decklistsData as DecklistsCollectionItem[],
+                reportsData as ReportsCollectionItem[],
+                spoilersData as SpoilersCollectionItem[])
+        .filter(article => article.draft !== true);
+    return combined.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+});
 
 const articlesByCategory = computed(() => {
-    const categories = {
-        article: [] as any[],
-        tutorial: [] as any[],
-        decklist: [] as any[],
-        report: [] as any[],
-        spoiler: [] as any[]
+    const categories: Record<CategoryType, AnyArticle[]> = {
+        article: [],
+        tutorial: [],
+        decklist: [],
+        report: [],
+        spoiler: []
     };
 
-    allArticles.value?.forEach((article: any) => {
-        if (article.category && categories[article.category as keyof typeof categories]) {
-            categories[article.category as keyof typeof categories].push(article);
+    allArticles.value?.forEach((article) => {
+        if (article.category && categories[article.category as CategoryType]) {
+            categories[article.category as CategoryType].push(article);
         }
     });
 
     return categories;
 });
+
+// Define the order and configuration of sections
+const sections: Array<{ title: string; category: CategoryType }> = [
+    { title: 'Ultimi articoli', category: 'article' },
+    { title: 'Top Decklists', category: 'decklist' },
+    { title: 'Resoconti dei tornei', category: 'report' },
+    { title: 'Spoilers & Set Reviews', category: 'spoiler' },
+    { title: 'Tutorial', category: 'tutorial' },
+];
 </script>
 
 <template>
     <UPage>
         <UPageBody>
-            <div class="flex flex-col gap-12 items-stretch w-full">
+            <div class="flex flex-col gap-2 items-stretch w-full">
                 <ArticleCategorySection
-                    title="Ultimi articoli"
-                    category="article"
-                    :articles="articlesByCategory.article"
-                />
-                <ArticleCategorySection
-                    title="Spoilers & Set Reviews"
-                    category="spoiler"
-                    :articles="articlesByCategory.spoiler"
-                />
-                <ArticleCategorySection
-                    title="Tutorial"
-                    category="tutorial"
-                    :articles="articlesByCategory.tutorial"
-                />
-                <ArticleCategorySection
-                    title="Resoconti dei tornei"
-                    category="report"
-                    :articles="articlesByCategory.report"
-                />
-                <ArticleCategorySection
-                    title="Top Decklists"
-                    category="decklist"
-                    :articles="articlesByCategory.decklist"
+                    v-for="section in sections"
+                    :key="section.category"
+                    :title="section.title"
+                    :category="section.category"
+                    :articles="articlesByCategory[section.category]"
                 />
             </div>
         </UPageBody>

@@ -19,6 +19,10 @@ const isNewArticle = (date: string) => {
 const getArticleBadge = (date: string) => {
     return isNewArticle(date) ? { label: 'New', color: 'primary' as const } : undefined;
 };
+
+const formatArticleDate = (date: string) => {
+    return formatDateIT(date);
+};
 </script>
 
 <template>
@@ -34,7 +38,7 @@ const getArticleBadge = (date: string) => {
             <UBlogPost v-for="article in articles.slice(0, maxItems)" :key="article._id" :title="article.title"
                 :image="article.thumbnail"
                 :authors="[{ name: article.author, avatar: { src: article.author_avatar }, description: article.author_description }]"
-                :badge="getArticleBadge(article.date)" :date="article.date" :to="article.path" variant="naked">
+                :badge="getArticleBadge(article.date)" :date="formatArticleDate(article.date)" :to="article.path" variant="naked">
                 <template #description>
                     <p class="mt-1 text-base text-pretty">{{ article.description }}</p>
                     <div class="flex flex-row gap-2 items-center flex-wrap mt-3">

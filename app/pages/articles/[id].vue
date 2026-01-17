@@ -51,7 +51,7 @@
                 </div>
                 <div class="flex flex-row items-center gap-4">
                     <p class="flex flex-row items-center gap-1 typ-sublabel">
-                        <icon name="material-symbols:calendar-today-rounded" class="text-primary" /> {{ dayjs(data?.date).format("DD MMM YYYY") }}
+                        <icon name="material-symbols:calendar-today-rounded" class="text-primary" /> {{ formatDateWithMonthIT(data?.date) }}
                     </p>
                     <!-- <p class="flex flex-row items-center gap-1 typ-sublabel"><icon name="material-symbols:alarm-rounded" class="text-primary"></icon> {{ readingTimeText }}</p> -->
                 </div>
@@ -93,7 +93,7 @@
                         description: article.author_description
                     }]"
                     :badge="getBadge(article.date)"
-                    :date="article.date"
+                    :date="formatDateIT(article.date)"
                     :to="article.path"
                     variant="subtle"
                 />
@@ -106,8 +106,21 @@
 
 <script lang="ts" setup>
 import dayjs from "dayjs";
+import "dayjs/locale/it";
 import l from "lodash";
+
+// Set Italian locale for dayjs
+dayjs.locale('it');
 import appMeta from "~/app.meta";
+import type { ArticlesCollectionItem, TutorialsCollectionItem, DecklistsCollectionItem, ReportsCollectionItem, SpoilersCollectionItem } from '#content';
+
+// Union type for all article types
+type AnyArticle = 
+    | ArticlesCollectionItem 
+    | TutorialsCollectionItem 
+    | DecklistsCollectionItem 
+    | ReportsCollectionItem 
+    | SpoilersCollectionItem;
 
 const route = useRoute();
 const authorEl = ref<HTMLElement | null>();
@@ -143,7 +156,9 @@ const { data: links } = await useAsyncData(`linked-${route.path}`, async () => {
         queryCollection("reports").all(),
         queryCollection("spoilers").all(),
     ]);
-    const allArticles = [...articlesData, ...tutorialsData, ...decklistsData, ...reportsData, ...spoilersData]
+    // Using concat() for better performance with large datasets (1000+ articles)
+    const allArticles: AnyArticle[] = (articlesData as AnyArticle[])
+        .concat(tutorialsData as AnyArticle[], decklistsData as AnyArticle[], reportsData as AnyArticle[], spoilersData as AnyArticle[])
         .filter(a => a.path !== data.value?.path && a.draft !== true);
     return l.orderBy(allArticles, (a) => l.intersection(a.tags, data.value?.tags).length, "desc").slice(0, 5);
 });

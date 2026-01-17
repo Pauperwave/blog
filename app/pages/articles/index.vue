@@ -1,4 +1,14 @@
 <script lang="ts" setup>
+import type { ArticlesCollectionItem, TutorialsCollectionItem, DecklistsCollectionItem, ReportsCollectionItem, SpoilersCollectionItem } from '#content';
+
+// Union type for all article types
+type AnyArticle = 
+    | ArticlesCollectionItem 
+    | TutorialsCollectionItem 
+    | DecklistsCollectionItem 
+    | ReportsCollectionItem 
+    | SpoilersCollectionItem;
+
 const route = useRoute();
 
 // Query all collections and combine them
@@ -12,8 +22,10 @@ const { data: articles } = await useAsyncData("articles-index", async () => {
     ]);
     
     // Combine all articles, filter out drafts, and sort by date
-    const allArticles = [...articlesData, ...tutorialsData, ...decklistsData, ...reportsData, ...spoilersData]
-        // .filter(article => article.draft !== true);
+    // Using concat() for better performance with large datasets (1000+ articles)
+    const allArticles: AnyArticle[] = (articlesData as AnyArticle[])
+        .concat(tutorialsData as AnyArticle[], decklistsData as AnyArticle[], reportsData as AnyArticle[], spoilersData as AnyArticle[])
+        .filter(article => article.draft !== true);
     return allArticles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 });
 
@@ -64,7 +76,7 @@ watch(selectedCategory, (newCategory) => {
                     :image="article.thumbnail"
                     :authors="[{ name: article.author, avatar: { src: article.author_avatar }, description: article.author_description }]"
                     :badge="Math.abs(new Date().getTime() - new Date(article?.date).getTime()) < 8.64e7 * 7 ? { label: 'New', color: 'primary' } : undefined"
-                    :date="article.date" :to="article.path" variant="naked">
+                    :date="formatDateIT(article.date)" :to="article.path" variant="naked">
                     <template #description>
                         <p class="mt-1 text-base text-pretty">
                             {{ article.description }}
