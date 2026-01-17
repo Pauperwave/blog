@@ -81,14 +81,7 @@ const socialLinks = [
         <div class="flex flex-col text-sm items-center md:items-end justify-center md:justify-start text-center md:text-right">
           <UButton
             to="#"
-            label="Cookie Policy"
-            color="neutral"
-            variant="link"
-            class="underline"
-          />
-          <UButton
-            to="#"
-            label="Privacy Policy"
+            label="Codice di Condotta"
             color="neutral"
             variant="link"
             class="underline"
@@ -100,85 +93,15 @@ const socialLinks = [
     <template #bottom>
       <UContainer>
         <div class="space-y-8">
-          <!-- Originale (senza max-width) -->
-          <div>
-            <p class="text-xs font-bold text-center mb-2">Originale (larghezza piena UContainer)</p>
-            <p class="text-xs text-center">
-              Pauperwave non costituisce testata giornalistica e non ha carattere periodico essendo
-              aggiornato secondo disponibilità degli autori. Pertanto non può essere considerato in alcun modo un prodotto
-              editoriale ai sensi della L. n. 62 del 7/3/2001. Il copyright di tutte le carte presentate su questo sito
-              appartiene alla Wizards of the Coast. Le immagini delle carte sono recuperate dal sito deckbox.org. Questo sito
-              non è prodotto, affiliato o supportato dalla Wizards of the Coast.
-            </p>
-          </div>
-
-          <UDivider />
-
-          <!-- Opzione 1: max-w-4xl (~896px) -->
-          <div>
-            <p class="text-xs font-bold text-center mb-2">Opzione 1: max-w-4xl (~896px)</p>
-            <p class="text-xs text-center max-w-4xl mx-auto">
-              Pauperwave non costituisce testata giornalistica e non ha carattere periodico essendo
-              aggiornato secondo disponibilità degli autori. Pertanto non può essere considerato in alcun modo un prodotto
-              editoriale ai sensi della L. n. 62 del 7/3/2001. Il copyright di tutte le carte presentate su questo sito
-              appartiene alla Wizards of the Coast. Le immagini delle carte sono recuperate dal sito deckbox.org. Questo sito
-              non è prodotto, affiliato o supportato dalla Wizards of the Coast.
-            </p>
-          </div>
-
-          <UDivider />
-
-          <!-- Opzione 2: max-w-3xl (~768px) -->
-          <div>
-            <p class="text-xs font-bold text-center mb-2">Opzione 2: max-w-3xl (~768px)</p>
-            <p class="text-xs text-center max-w-3xl mx-auto">
-              Pauperwave non costituisce testata giornalistica e non ha carattere periodico essendo
-              aggiornato secondo disponibilità degli autori. Pertanto non può essere considerato in alcun modo un prodotto
-              editoriale ai sensi della L. n. 62 del 7/3/2001. Il copyright di tutte le carte presentate su questo sito
-              appartiene alla Wizards of the Coast. Le immagini delle carte sono recuperate dal sito deckbox.org. Questo sito
-              non è prodotto, affiliato o supportato dalla Wizards of the Coast.
-            </p>
-          </div>
-
-          <UDivider />
 
           <!-- Opzione 3: max-w-2xl (~672px) -->
           <div>
-            <p class="text-xs font-bold text-center mb-2">Opzione 3: max-w-2xl (~672px)</p>
             <p class="text-xs text-center max-w-2xl mx-auto">
-              Pauperwave non costituisce testata giornalistica e non ha carattere periodico essendo
-              aggiornato secondo disponibilità degli autori. Pertanto non può essere considerato in alcun modo un prodotto
-              editoriale ai sensi della L. n. 62 del 7/3/2001. Il copyright di tutte le carte presentate su questo sito
-              appartiene alla Wizards of the Coast. Le immagini delle carte sono recuperate dal sito deckbox.org. Questo sito
-              non è prodotto, affiliato o supportato dalla Wizards of the Coast.
-            </p>
-          </div>
+              Pauperwave non costituisce testata giornalistica e non ha carattere periodico essendo aggiornato secondo disponibilità degli autori. Pertanto non può essere considerato in alcun modo un prodotto editoriale ai sensi della <ULink to="https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2001-03-07;62" target="_blank">L. n. 62 del 7/3/2001</ULink>.
 
-          <UDivider />
-
-          <!-- Opzione 4: max-w-xl (~576px) -->
-          <div>
-            <p class="text-xs font-bold text-center mb-2">Opzione 4: max-w-xl (~576px)</p>
-            <p class="text-xs text-center max-w-xl mx-auto">
-              Pauperwave non costituisce testata giornalistica e non ha carattere periodico essendo
-              aggiornato secondo disponibilità degli autori. Pertanto non può essere considerato in alcun modo un prodotto
-              editoriale ai sensi della L. n. 62 del 7/3/2001. Il copyright di tutte le carte presentate su questo sito
-              appartiene alla Wizards of the Coast. Le immagini delle carte sono recuperate dal sito deckbox.org. Questo sito
-              non è prodotto, affiliato o supportato dalla Wizards of the Coast.
-            </p>
-          </div>
-
-          <UDivider />
-
-          <!-- Opzione 5: max-w-lg (~512px) -->
-          <div>
-            <p class="text-xs font-bold text-center mb-2">Opzione 5: max-w-lg (~512px)</p>
-            <p class="text-xs text-center max-w-lg mx-auto">
-              Pauperwave non costituisce testata giornalistica e non ha carattere periodico essendo
-              aggiornato secondo disponibilità degli autori. Pertanto non può essere considerato in alcun modo un prodotto
-              editoriale ai sensi della L. n. 62 del 7/3/2001. Il copyright di tutte le carte presentate su questo sito
-              appartiene alla Wizards of the Coast. Le immagini delle carte sono recuperate dal sito deckbox.org. Questo sito
-              non è prodotto, affiliato o supportato dalla Wizards of the Coast.
+              Il copyright di tutte le carte presentate su questo sito appartiene alla <ULink to="https://company.wizards.com/" target="_blank">Wizards of the Coast</ULink>.
+              
+              Le immagini delle carte sono recuperate da <ULink to="https://scryfall.com" target="_blank">Scryfall</ULink>. Questo sito non è prodotto, affiliato o supportato dalla <ULink to="https://company.wizards.com/" target="_blank">Wizards of the Coast</ULink>.
             </p>
           </div>
         </div>
