@@ -2,11 +2,11 @@
 import type { ArticlesCollectionItem, TutorialsCollectionItem, DecklistsCollectionItem, ReportsCollectionItem, SpoilersCollectionItem } from '#content';
 
 // Union type for all article types
-type AnyArticle = 
-    | ArticlesCollectionItem 
-    | TutorialsCollectionItem 
-    | DecklistsCollectionItem 
-    | ReportsCollectionItem 
+type AnyArticle =
+    | ArticlesCollectionItem
+    | TutorialsCollectionItem
+    | DecklistsCollectionItem
+    | ReportsCollectionItem
     | SpoilersCollectionItem;
 
 // Define valid category types
@@ -21,14 +21,14 @@ const { data: allArticles } = await useAsyncData('home-articles', async () => {
         queryCollection('reports').all(),
         queryCollection('spoilers').all(),
     ]);
-    
+
     // Combine all articles, filter out drafts, and sort by date
     // Using concat() for better performance with large datasets (1000+ articles)
     const combined: AnyArticle[] = (articlesData as ArticlesCollectionItem[])
         .concat(tutorialsData as TutorialsCollectionItem[],
-                decklistsData as DecklistsCollectionItem[],
-                reportsData as ReportsCollectionItem[],
-                spoilersData as SpoilersCollectionItem[])
+            decklistsData as DecklistsCollectionItem[],
+            reportsData as ReportsCollectionItem[],
+            spoilersData as SpoilersCollectionItem[])
         .filter(article => article.draft !== true);
     return combined.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 });
@@ -74,5 +74,6 @@ const sections: Array<{ title: string; category: CategoryType }> = [
                 />
             </div>
         </UPageBody>
+        <BlogFooter />
     </UPage>
 </template>
