@@ -22,7 +22,7 @@
               aria-label="Facebook"
             />
             <UButton
-              to="https://instagram.com/pauperwave"
+              to="https://instagram.com/pauperwave_official"
               target="_blank"
               icon="i-simple-icons-instagram"
               color="neutral"
@@ -49,7 +49,7 @@
               aria-label="X"
             />
             <UButton
-              to="https://t.me/pauperwave"
+              to="https://t.me/pauperwave_official"
               target="_blank"
               icon="i-simple-icons-telegram"
               color="neutral"
