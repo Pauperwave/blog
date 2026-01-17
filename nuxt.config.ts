@@ -44,7 +44,7 @@ export default defineNuxtConfig({
       "nuxt-swiper",
     ],
     icon: {
-        collections: ['lucide', 'simple-icons']
+        collections: ['lucide', 'simple-icons', 'logos', 'mdi']
     },
     vite: {
         css: {
