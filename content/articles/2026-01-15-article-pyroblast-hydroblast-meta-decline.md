@@ -91,7 +91,7 @@ crop:
 
 ## Conclusione
 
-Siamo arrivati ad un punto dove l'hot take è maturato e la possibilità di giocare 8 :CardTooltip{name="Pyroblast"} e 8 :CardTooltip{name="Hydroblast"} difende l'oppressore anzichè combatterlo promuovendo uno stile di gioco sempre più drittoe aggressivo andando sempre più spesso a rompere la _color pie_ trasformando i post side sempre più spesso in una poco interessante guerra di blaste.
+Siamo arrivati ad un punto dove l'_hot take_ è maturato e la possibilità di giocare 8 :CardTooltip{name="Pyroblast"} e 8 :CardTooltip{name="Hydroblast"} difende l'oppressore anzichè combatterlo promuovendo uno stile di gioco sempre più drittoe aggressivo andando sempre più spesso a rompere la _color pie_ trasformando i post side sempre più spesso in una poco interessante guerra di blaste.
 
 Noto a più riprese come ultimamente lo spazio di side a disposizione di [Pingers](2025-12-06-tutorial-pingers), ma soprattutto di Mono U Terror sia cannibalizzato dal dover giocare forzatamente dalle 6 blaste in sù precludendomi la possibilità di carte più spicy ed incastri di gran lunga più interessanti e stimolanti.
 

@@ -33,8 +33,8 @@ defineProps<{
     thumbnail?: string | undefined;
     author?:
         | {
-              image: string;
-              name: string;
+            image: string;
+            name: string;
           }
         | undefined;
 }>();
