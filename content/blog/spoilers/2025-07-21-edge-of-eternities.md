@@ -1,12 +1,11 @@
 ---
 title: "Edge Of Eternities"
-description: "Spoiler article for Edge Of Eternities"
-tags: [spoiler]
+description: "Spoilered Pauper cards in Edge Of Eternities"
+tags: [EOE]
 date: 2025-07-21
 updatedAt: 2025-07-21
-author: Bragioto Pietro
+author: Pietro Bragioto
 author_avatar: /assets/avatars/bragioto.jpg
 author_description: "Scribacchino di liste"
-thumbnail: /assets/articles/arts/placeholder.jpg
-draft: true
+thumbnail: /assets/articles/sets/edge-of-eternities.jpg
 ---
