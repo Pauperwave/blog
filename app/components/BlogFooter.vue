@@ -1,7 +1,7 @@
 <template>
   <UFooter
     :ui="{
-      top: 'border-t-2 border-white'
+      top: 'border-t-2 border-gray-900 dark:border-white'
     }"
   >
     <template #top>
