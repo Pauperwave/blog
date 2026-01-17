@@ -3,8 +3,8 @@ import type { NavigationMenuItem } from "@nuxt/ui";
 import appMeta from "~/app.meta";
 
 const navItems: NavigationMenuItem[] = [
-    { label: "YouTube channel", icon: "logos:youtube-icon", target: "_blank", to: "https://www.youtube.com/@alessandromoretti1177" },
-    { label: "Repository", icon: "mdi:github", target: "_blank", to: "https://github.com/Pauperwave/blog" },
+    { label: "YouTube channel", icon: "logos:youtube-icon", target: "_blank", to: "https://www.youtube.com/@pauperwave" },
+    { label: "Repository", icon: "mdi:github", target: "_blank", to: "https://github.com/Pauperwave/test" },
 ];
 </script>
 

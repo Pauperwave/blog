@@ -1,7 +1,7 @@
 export default {
     id: "pauperwave_blog",
     name: "Pauperwave Blog",
-    description: "Build your Nuxt fullstack web apps in a blink.",
+    description: "A blog about Magic The Gathering Pauper format.",
     author: {
         name: "Emaneuele Nardi",
         url: "https://emanuelenardi.com",
