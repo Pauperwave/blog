@@ -1,3 +1,33 @@
+<script lang="ts" setup>
+const socialLinks = [
+  {
+    icon: "i-simple-icons-facebook",
+    link: "https://facebook.com/pauperwave",
+    label: "Facebook"
+  },
+  {
+    icon: "i-simple-icons-instagram",
+    link: "https://instagram.com/pauperwave_official",
+    label: "Instagram"
+  },
+  {
+    icon: "i-simple-icons-youtube",
+    link: "https://youtube.com/@pauperwave",
+    label: "YouTube"
+  },
+  {
+    icon: "i-simple-icons-x",
+    link: "https://x.com/pauperwave",
+    label: "X"
+  },
+  {
+    icon: "i-simple-icons-telegram",
+    link: "https://t.me/pauperwave_official",
+    label: "Telegram"
+  }
+];
+</script>
+
 <template>
   <UFooter
     :ui="{
@@ -12,51 +42,19 @@
             Pauperwave APS
           </h3>
           <div class="flex gap-2 flex-wrap justify-center md:justify-start">
-            <UButton
-              to="https://facebook.com/pauperwave"
-              target="_blank"
-              icon="i-simple-icons-facebook"
-              color="neutral"
-              variant="ghost"
-              size="sm"
-              aria-label="Facebook"
-            />
-            <UButton
-              to="https://instagram.com/pauperwave_official"
-              target="_blank"
-              icon="i-simple-icons-instagram"
-              color="neutral"
-              variant="ghost"
-              size="sm"
-              aria-label="Instagram"
-            />
-            <UButton
-              to="https://youtube.com/@pauperwave"
-              target="_blank"
-              icon="i-simple-icons-youtube"
-              color="neutral"
-              variant="ghost"
-              size="sm"
-              aria-label="YouTube"
-            />
-            <UButton
-              to="https://x.com/pauperwave"
-              target="_blank"
-              icon="i-simple-icons-x"
-              color="neutral"
-              variant="ghost"
-              size="sm"
-              aria-label="X"
-            />
-            <UButton
-              to="https://t.me/pauperwave_official"
-              target="_blank"
-              icon="i-simple-icons-telegram"
-              color="neutral"
-              variant="ghost"
-              size="sm"
-              aria-label="Telegram"
-            />
+            <div class="flex gap-2 flex-wrap justify-center md:justify-start">
+              <UButton
+                v-for="(social, index) in socialLinks"
+                :key="index"
+                :icon="social.icon"
+                color="neutral"
+                variant="ghost"
+                :to="social.link"
+                target="_blank"
+                size="sm"
+                :aria-label="social.label"
+              />
+            </div>
           </div>
         </div>
 
