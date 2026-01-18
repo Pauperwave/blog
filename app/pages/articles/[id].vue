@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import dayjs from "dayjs";
 import "dayjs/locale/it";
-import l from "lodash";
+import { intersection, orderBy } from "~/utils/array";
 
 // Set Italian locale for dayjs
 dayjs.locale('it');
@@ -20,7 +20,8 @@ const route = useRoute();
 const authorEl = ref<HTMLElement | null>();
 const relatedArticlesEl = ref<HTMLElement | null>();
 
-// TODO mostrare solo articoli con tag simili
+// TODO: Related articles currently show top 5 by tag intersection (line 57).
+// Consider filtering to only show articles with at least 1 common tag to reduce noise.
 const relatedArticlesString = "Altri articoli correlati"
 const getBadge = (date: string) => {
     return Math.abs(new Date().getTime() - new Date(date).getTime()) < 8.64e7 * 7
@@ -54,7 +55,7 @@ const { data: links } = await useAsyncData(`linked-${route.path}`, async () => {
     const allArticles: AnyArticle[] = (articlesData as AnyArticle[])
         .concat(tutorialsData as AnyArticle[], decklistsData as AnyArticle[], reportsData as AnyArticle[], spoilersData as AnyArticle[])
         .filter(a => a.path !== data.value?.path && a.draft !== true);
-    return l.orderBy(allArticles, (a) => l.intersection(a.tags, data.value?.tags).length, "desc").slice(0, 5);
+    return orderBy(allArticles, (a) => intersection(a.tags, data.value?.tags || []).length, "desc").slice(0, 5);
 });
 // const { data: surround } = await useAsyncData(`${route.path}-surround`, async () => {
 //     // Try to find surroundings in each collection
