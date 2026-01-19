@@ -12,6 +12,7 @@ const baseContentSchema = z.object({
     author_description: z.string(),
     draft: z.optional(z.boolean()).default(false),
     thumbnail: z.string(),
+    published: z.boolean().default(false)
 });
 
 export default defineContentConfig({
