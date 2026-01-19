@@ -7,6 +7,6 @@ updatedAt: 2019-06-30
 author: Bragioto Pietro
 author_avatar: /assets/avatars/bragioto.jpg
 author_description: "Scribacchino di liste"
-thumbnail: /arts/placeholder.jpg
+thumbnail: /assets/blog/arts/Bonebind-Orator.jpg
 published: true
 ---

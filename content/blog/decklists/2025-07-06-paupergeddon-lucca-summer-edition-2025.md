@@ -1,6 +1,7 @@
 ---
 title: "Paupergeddon Lucca Summer Edition 2025"
-tags: [top8]
+description: "Decklists Top 8"
+tags: [top8, paupergeddon]
 date: 2025-07-06
 updatedAt: 2025-07-06
 author: Bragioto Pietro

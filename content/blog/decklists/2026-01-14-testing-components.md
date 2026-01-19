@@ -1,7 +1,7 @@
 ---
 title: "TheSideralWolf - Tournament Series Pauper #2"
-description: "liste"
-tags: [top8]
+description: "Decklists Top 8"
+tags: [test]
 date: 2026-01-14
 updatedAt: 2026-01-14
 author: Bragioto Pietro

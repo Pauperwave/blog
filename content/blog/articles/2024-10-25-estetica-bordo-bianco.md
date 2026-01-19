@@ -1,1 +1,0 @@
-https://www.pauperwave.com/introduzione-allestetica-del-bordo-bianco/
