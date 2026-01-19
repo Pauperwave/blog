@@ -100,16 +100,23 @@ function updateMeta() {
     useSeoMeta({
         title: data.value?.title,
         description: data.value?.description,
+        ogImage: data.value?.thumbnail,
+        ogImageWidth: 1200,
+        ogImageHeight: 630,
+        twitterCard: 'summary_large_image',
+        twitterImage: data.value?.thumbnail,
     });
 
-    defineOgImageComponent("Article", {
-        thumbnail: data.value?.thumbnail,
-        title: data.value?.title,
-        author: {
-            name: data.value?.author,
-            image: data.value?.author_avatar,
-        },
-    });
+    // Note: defineOgImageComponent is disabled in nuxt.config.ts
+    // We use static thumbnails for OG images instead of dynamic generation
+    // defineOgImageComponent("Article", {
+    //     thumbnail: data.value?.thumbnail,
+    //     title: data.value?.title,
+    //     author: {
+    //         name: data.value?.author,
+    //         image: data.value?.author_avatar,
+    //     },
+    // });
 }
 
 onMounted(() => {
