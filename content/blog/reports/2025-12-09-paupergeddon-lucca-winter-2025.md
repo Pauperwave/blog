@@ -7,7 +7,8 @@ updatedAt: 2025-12-06
 author: Bragioto Pietro
 author_avatar: /assets/avatars/bragioto.jpg
 author_description: "Scribacchino di liste"
-thumbnail: /assets/articles/arts/clb-346-basilisk-gate.jpeg
+thumbnail: /assets/blog/arts/clb-346-basilisk-gate.jpeg
+published: true
 ---
 
 # Introduzione

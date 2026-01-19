@@ -7,10 +7,24 @@ updatedAt: 2026-01-17
 author: Pietro Bragioto
 author_avatar: /assets/avatars/bragioto.jpg
 author_description: "Scribacchino di liste"
-thumbnail: /assets/articles/sets/lorwyn-eclipsed.jpg
+thumbnail: /assets/blog/sets/lorwyn-eclipsed.jpg
+published: true
 ---
 
-La ricerca [`set:ecl legal:pauper -is:reprint`](https://scryfall.com/search?q=set%3Aecl+legal%3Apauper&order=set&as=grid&unique=cards) restituisce 78 nuove carte Pauper in Lorwyn Eclipsed.
+La ricerca [`set:ecl legal:pauper -is:reprint`](https://scryfall.com/search?q=set%3Aecl+legal%3Apauper+-is%3Areprint&unique=cards&as=grid&order=set) restituisce 78 nuove carte Pauper in [Lorwyn Eclipsed](https://scryfall.com/sets/ecl).
 
 Ma quante di queste carte sono effettivamente giocabili nei mazzi Pauper competitivi?
 
+Ne abbiamo selezionate 8 che meritano attenzione:
+
+
+
+## 8. Flickerwisp
+
+::MagicCardDisplay
+---
+card: Flaring Cinder (ECL)
+---
+::
+
+madness deck

@@ -7,7 +7,8 @@ updatedAt: 2026-01-15
 author: Bragioto Pietro
 author_avatar: /assets/avatars/bragioto.jpg
 author_description: "Scribacchino di liste"
-thumbnail: /assets/articles/arts/cmm-81-counterspell.jpg
+thumbnail: /assets/blog/arts/cmm-81-counterspell.jpg
+published: true
 ---
 
 # Introduzione

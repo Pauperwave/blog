@@ -7,6 +7,6 @@ updatedAt: 2021-09-15
 author: Bragioto Pietro
 author_avatar: /assets/avatars/bragioto.jpg
 author_description: "Scribacchino di liste"
-thumbnail: /assets/articles/arts/placeholder.jpg
-draft: true
+thumbnail: /assets/blog/sets/innistrad-midnight-hunt.jpeg
+published: true
 ---

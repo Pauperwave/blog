@@ -7,7 +7,8 @@ updatedAt: 2026-01-14
 author: Bragioto Pietro
 author_avatar: /assets/avatars/bragioto.jpg
 author_description: "Scribacchino di liste"
-thumbnail: /assets/articles/arts/Bonebind-Orator.jpg
+thumbnail: /assets/blog/arts/Bonebind-Orator.jpg
+published: true
 ---
 
 ## Intestazione di secondo livello

@@ -7,6 +7,6 @@ updatedAt: 2020-09-11
 author: Bragioto Pietro
 author_avatar: /assets/avatars/bragioto.jpg
 author_description: "Scribacchino di liste"
-thumbnail: /assets/articles/arts/placeholder.jpg
-draft: true
+thumbnail: /assets/blog/sets/zendikar-rising.jpeg
+published: true
 ---

@@ -7,6 +7,6 @@ updatedAt: 2021-11-06
 author: Bragioto Pietro
 author_avatar: /assets/avatars/bragioto.jpg
 author_description: "Scribacchino di liste"
-thumbnail: /assets/articles/arts/placeholder.jpg
-draft: true
+thumbnail: /assets/blog/sets/innistrad-crimson-vow.jpeg
+published: true
 ---

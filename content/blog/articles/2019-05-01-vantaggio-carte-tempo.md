@@ -1,0 +1,1 @@
+https://www.pauperwave.com/vantaggio-carte-e-vantaggio-tempo-in-pauper/

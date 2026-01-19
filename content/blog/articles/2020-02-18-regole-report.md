@@ -1,0 +1,1 @@
+https://www.pauperwave.com/regole-di-buon-senso-per-i-report/

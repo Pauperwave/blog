@@ -7,6 +7,6 @@ updatedAt: 2023-01-30
 author: Bragioto Pietro
 author_avatar: /assets/avatars/bragioto.jpg
 author_description: "Scribacchino di liste"
-thumbnail: /assets/articles/arts/placeholder.jpg
-draft: true
+thumbnail: /assets/blog/sets/phyrexia-all-will-be-one.jpg
+published: true
 ---

@@ -7,5 +7,6 @@ updatedAt: 2025-07-21
 author: Pietro Bragioto
 author_avatar: /assets/avatars/bragioto.jpg
 author_description: "Scribacchino di liste"
-thumbnail: /assets/articles/sets/edge-of-eternities.jpg
+thumbnail: /assets/blog/sets/edge-of-eternities.jpg
+published: true
 ---
