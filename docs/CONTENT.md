@@ -271,7 +271,8 @@ author_description: "Giocatore competitivo di Pauper dal 2019"
 Hero image displayed at top of article and in previews.
 
 ```yaml
-thumbnail: "/assets/articles/article-slug-hero.jpg"
+thumbnail: "/arts/counterspell.jpg"
+# Or use other aliases: /sets/, /events/, /articles/, /blog/
 ```
 
 **Image requirements:**
@@ -279,13 +280,44 @@ thumbnail: "/assets/articles/article-slug-hero.jpg"
 - Dimensions: 1200x630px (Facebook/OG image ratio)
 - Aspect ratio: 1.91:1 (16:9 is acceptable)
 - File size: < 200KB
-- Location: `public/assets/articles/`
+- Location: `public/assets/blog/[subdirectory]/`
+
+**Path Aliases:**
+
+The project uses `@nuxt/image` with pre-configured aliases for cleaner paths:
+
+| Alias | Resolves To | Use For |
+|-------|-------------|---------|
+| `/arts/*` | `/assets/blog/arts/*` | Card artwork and general art |
+| `/sets/*` | `/assets/blog/sets/*` | Magic set images |
+| `/events/*` | `/assets/blog/events/*` | Event banners and photos |
+| `/articles/*` | `/assets/blog/articles/*` | Article-specific images |
+| `/blog/*` | `/assets/blog/*` | Any blog asset |
+
+**Examples:**
+```yaml
+# Card artwork
+thumbnail: /arts/counterspell.jpg
+
+# Set image
+thumbnail: /sets/lorwyn-eclipsed.jpg
+
+# Event banner
+thumbnail: /events/paupergeddon-lucca-2025.jpg
+
+# Article-specific image
+thumbnail: /articles/meta-analysis.jpg
+```
 
 **Naming convention:**
 ```
-article-slug-hero.jpg
-tutorial-pingers-hero.jpg
+# Use descriptive names with card set codes when possible
+cmm-81-counterspell.jpg
+inr-174-thermo-alchemist.jpeg
+
+# Or descriptive names for original content
 paupergeddon-lucca-2025-hero.jpg
+meta-analysis-diagram.jpg
 ```
 
 ---
@@ -544,47 +576,287 @@ export default defineEventHandler(async (event) => {
 
 ## Images
 
+### Image Configuration
+
+The project uses `@nuxt/image` (v2.0.0) with pre-configured path aliases and presets for optimal performance.
+
+### Path Aliases
+
+Use these shorter paths instead of full paths:
+
+| Alias | Resolves To | Use For |
+|-------|-------------|---------|
+| `/arts/*` | `/assets/blog/arts/*` | Card artwork and general art |
+| `/sets/*` | `/assets/blog/sets/*` | Magic set images |
+| `/events/*` | `/assets/blog/events/*` | Event banners and photos |
+| `/articles/*` | `/assets/blog/articles/*` | Article-specific images |
+| `/blog/*` | `/assets/blog/*` | Any blog asset |
+
+**Benefits:**
+- ✅ Shorter, cleaner paths
+- ✅ Easy to refactor and maintain
+- ✅ Consistent across the project
+- ✅ Automatic image optimization
+
+### Image Presets
+
+Pre-configured optimization settings for different use cases:
+
+**`thumbnail` Preset** - For hero images and OG images:
+- Size: 1200×630px
+- Format: WebP (automatic conversion)
+- Quality: 80%
+- Fit: Cover
+
+**`card` Preset** - For article listing cards:
+- Size: 600×315px
+- Format: WebP (automatic conversion)
+- Quality: 75%
+- Fit: Cover
+
 ### Image Locations
 
 ```
 public/
 ├── assets/
-│   ├── blog/           # Blog-specific images
-│   │   ├── articles/   # Article hero images & inline images
-│   │   ├── tutorials/  # Tutorial hero images & inline images
-│   │   ├── decklists/  # Decklist hero images & inline images
-│   │   ├── reports/    # Report hero images & inline images
-│   │   └── spoilers/   # Spoiler hero images & inline images
-│   └──  authors/       # Author avatars
+│   ├── blog/           # Blog assets (use aliases to reference)
+│   │   ├── articles/   # Article-specific images
+│   │   ├── arts/       # Card artwork and general art
+│   │   ├── events/     # Event banners and photos
+│   │   └── sets/       # Magic set images
+│   └── avatars/        # Author avatars (no alias needed)
+```
+
+### Using Images in Frontmatter
+
+```yaml
+---
+title: "Article Title"
+thumbnail: /arts/counterspell.jpg  # ✅ Use alias path
+# NOT: /assets/blog/arts/counterspell.jpg  # ❌ Don't use full path
+---
+```
+
+**More examples:**
+```yaml
+# Card artwork
+thumbnail: /arts/cmm-81-counterspell.jpg
+
+# Set image
+thumbnail: /sets/lorwyn-eclipsed.jpg
+
+# Event banner
+thumbnail: /events/paupergeddon-lucca-2025.jpg
+
+# Article-specific image
+thumbnail: /articles/meta-analysis.jpg
 ```
 
 ### Using Images in Content
 
-#### Standard Images
+#### Standard Markdown Images
 
 ```markdown
-![Alt text describing the image](/assets/articles/image.jpg)
+![Alt text describing the image](/arts/counterspell.jpg)
 ```
 
-#### Optimized Images (Nuxt Image)
+#### NuxtImg Component (Recommended)
 
-For better performance, use the `NuxtImg` component:
+For better performance, use the `NuxtImg` component with presets:
 
+**Basic Usage:**
 ```vue
 <NuxtImg 
-  src="/assets/articles/image.jpg" 
-  alt="Description"
-  width="800"
-  height="450"
+  src="/arts/counterspell.jpg" 
+  alt="Counterspell artwork"
   loading="lazy"
 />
 ```
 
+**With Thumbnail Preset (Recommended for hero images):**
+```vue
+<NuxtImg 
+  src="/arts/counterspell.jpg"
+  preset="thumbnail"
+  alt="Counterspell artwork"
+  loading="lazy"
+/>
+```
+
+**With Card Preset (For listing previews):**
+```vue
+<NuxtImg 
+  src="/arts/counterspell.jpg"
+  preset="card"
+  alt="Counterspell artwork"
+  loading="lazy"
+/>
+```
+
+**With Custom Modifiers:**
+```vue
+<NuxtImg 
+  src="/arts/counterspell.jpg"
+  alt="Counterspell artwork"
+  width="800"
+  height="450"
+  format="webp"
+  quality="85"
+  fit="cover"
+  loading="lazy"
+/>
+```
+
+**Using MDC Syntax in Markdown:**
+```markdown
+::NuxtImg
+---
+src: /arts/counterspell.jpg
+alt: Counterspell card artwork
+preset: thumbnail
+loading: lazy
+---
+::
+```
+
 **Benefits:**
-- Automatic format conversion (WebP)
-- Responsive sizing
-- Lazy loading
-- Better Core Web Vitals scores
+- ✅ Automatic WebP conversion
+- ✅ Responsive image sizing
+- ✅ Lazy loading support
+- ✅ Optimized for Core Web Vitals
+- ✅ On-demand image processing
+- ✅ Automatic caching
+
+---
+
+### OG Images (Social Media Previews)
+
+The project uses **static thumbnails** for Open Graph images (social media previews).
+
+#### How It Works
+
+When you share an article on social media (Twitter, Facebook, LinkedIn), the thumbnail image from your frontmatter appears as the preview image.
+
+**Architecture:**
+1. Your `thumbnail` field in frontmatter becomes the OG image
+2. `useSeoMeta()` automatically sets `og:image` meta tags
+3. No dynamic generation needed - fast and reliable
+4. Works perfectly with static site generation (`nuxt generate`)
+
+#### Requirements for OG Images
+
+**Dimensions:**
+- Recommended: 1200×630px (1.91:1 aspect ratio)
+- Minimum: 600×315px
+- Maximum: 8MB file size
+
+**Format:**
+- JPG or PNG (both work)
+- Optimized/compressed before upload
+- Use descriptive filenames
+
+**Path:**
+- Must use image aliases (e.g., `/arts/counterspell.jpg`)
+- File must exist in `public/assets/blog/[subdirectory]/`
+
+#### Example Social Share Appearance
+
+When someone shares your article:
+
+```
+┌──────────────────────────────────┐
+│  [Card Artwork - Full Width]      │
+│                                   │
+│  Pyroblast e Hydroblast:          │
+│  La Combo Vincente...             │
+│                                   │
+│  pauper.it                        │
+└──────────────────────────────────┘
+```
+
+#### Testing OG Images
+
+Before publishing, verify your OG images render correctly:
+
+**Tools:**
+- **Facebook Sharing Debugger:** https://developers.facebook.com/tools/debug/
+- **Twitter Card Validator:** https://cards-dev.twitter.com/validator
+- **LinkedIn Post Inspector:** https://www.linkedin.com/post-inspector/
+- **OpenGraph.xyz:** https://www.opengraph.xyz/
+
+**Testing Process:**
+1. Deploy your changes to Vercel (or preview URL)
+2. Copy the full article URL
+3. Paste into one of the tools above
+4. Verify:
+   - Image loads correctly
+   - Dimensions are correct (1200×630px)
+   - Title and description appear
+   - No errors or warnings
+
+**Common Issues:**
+
+| Issue | Solution |
+|-------|----------|
+| Image not showing | Verify thumbnail path uses alias (e.g., `/arts/image.jpg`) |
+| Wrong image displays | Clear social media cache using debugger tools |
+| Image too small | Ensure thumbnail is at least 600×315px |
+| Broken image | Check that file exists in `public/assets/blog/` |
+
+#### Frontmatter Example
+
+```yaml
+---
+title: "Pyroblast e Hydroblast: La Combo Vincente"
+description: "Un'analisi approfondita su come Pyroblast e Hydroblast stanno rivoluzionando il meta Pauper."
+thumbnail: /arts/cmm-81-counterspell.jpg  # ← This becomes the OG image
+date: 2026-01-15
+tags: [pauper, meta, sideboard]
+---
+```
+
+**Generated HTML meta tags:**
+```html
+<meta property="og:image" content="/arts/cmm-81-counterspell.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="/arts/cmm-81-counterspell.jpg">
+```
+
+#### Why Static Thumbnails?
+
+The project uses static thumbnails instead of dynamically generated OG images because:
+
+✅ **Simple & Reliable** - No complex image generation at build time  
+✅ **Fast Builds** - No SSR required, works with `nuxt generate`  
+✅ **Great Visual Appeal** - Card artwork is eye-catching on social media  
+✅ **Optimal Dimensions** - Thumbnails already follow 1200×630px guidelines  
+✅ **Easy to Test** - Standard image files, easy to verify  
+✅ **Vercel-Friendly** - Perfect for static site deployment  
+
+#### Alternative: Branded OG Images (Not Currently Used)
+
+If you need branded OG images with custom layouts (logo, title overlay, author info):
+
+1. Enable OG Image module in `nuxt.config.ts`:
+   ```typescript
+   ogImage: {
+       enabled: true,
+       // Add prerendering config
+   }
+   ```
+
+2. Uncomment `defineOgImageComponent()` in `app/pages/articles/[id].vue`
+
+3. The template is available at `app/components/og_image/article.vue`
+
+**Trade-offs:**
+- ⚠️ Requires SSR or build-time prerendering
+- ⚠️ Slower builds (generates images for each article)
+- ⚠️ More complex configuration
+- ✅ Custom branding and consistent design
+- ✅ Can include logo, author info, formatted titles
 
 ### Image Guidelines
 
