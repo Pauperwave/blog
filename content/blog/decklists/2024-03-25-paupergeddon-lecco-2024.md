@@ -1,0 +1,1 @@
+https://www.pauperwave.com/top-8-top-16-paupergeddon-lecco-2024/
