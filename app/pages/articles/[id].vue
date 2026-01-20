@@ -2,19 +2,16 @@
 import dayjs from "dayjs";
 import "dayjs/locale/it";
 import { intersection, orderBy } from "~/utils/array";
+import { 
+  type AnyArticle, 
+  queryAllCollections, 
+  combineArticles, 
+  getCollectionNames
+} from '~/constants/content-config';
 
 // Set Italian locale for dayjs
 dayjs.locale('it');
 import appMeta from "~/app.meta";
-import type { ArticlesCollectionItem, TutorialsCollectionItem, DecklistsCollectionItem, ReportsCollectionItem, SpoilersCollectionItem } from '#content';
-
-// Union type for all article types
-type AnyArticle = 
-    | ArticlesCollectionItem 
-    | TutorialsCollectionItem 
-    | DecklistsCollectionItem 
-    | ReportsCollectionItem 
-    | SpoilersCollectionItem;
 
 const route = useRoute();
 const authorEl = ref<HTMLElement | null>();
@@ -36,25 +33,21 @@ const toast = useToast();
 
 const { data } = await useAsyncData(route.path, async () => {
     // Try each collection until we find the article
-    const collections = ["articles", "tutorials", "decklists", "reports", "spoilers"];
+    const collections = getCollectionNames();
     for (const collection of collections) {
         const result = await queryCollection(collection as any).path(route.path).first();
         if (result) return result;
     }
     return null;
 });
+
 const { data: links } = await useAsyncData(`linked-${route.path}`, async () => {
-    const [articlesData, tutorialsData, decklistsData, reportsData, spoilersData] = await Promise.all([
-        queryCollection("articles").all(),
-        queryCollection("tutorials").all(),
-        queryCollection("decklists").all(),
-        queryCollection("reports").all(),
-        queryCollection("spoilers").all(),
-    ]);
-    // Using concat() for better performance with large datasets (1000+ articles)
-    const allArticles: AnyArticle[] = (articlesData as AnyArticle[])
-        .concat(tutorialsData as AnyArticle[], decklistsData as AnyArticle[], reportsData as AnyArticle[], spoilersData as AnyArticle[])
+    const collectionsData = await queryAllCollections();
+    
+    // Combine all articles and filter
+    const allArticles: AnyArticle[] = combineArticles(collectionsData)
         .filter(a => a.path !== data.value?.path && a.draft !== true);
+    
     return orderBy(allArticles, (a) => intersection(a.tags, data.value?.tags || []).length, "desc").slice(0, 5);
 });
 // const { data: surround } = await useAsyncData(`${route.path}-surround`, async () => {

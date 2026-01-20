@@ -1,31 +1,21 @@
 <script lang="ts" setup>
-import type { ArticlesCollectionItem, TutorialsCollectionItem, DecklistsCollectionItem, ReportsCollectionItem, SpoilersCollectionItem } from '#content';
-
-// Union type for all article types
-type AnyArticle = 
-    | ArticlesCollectionItem 
-    | TutorialsCollectionItem 
-    | DecklistsCollectionItem 
-    | ReportsCollectionItem 
-    | SpoilersCollectionItem;
+import { 
+  type AnyArticle, 
+  queryAllCollections, 
+  combineArticles, 
+  CATEGORY_LABELS
+} from '~/constants/content-config';
 
 const route = useRoute();
 
 // Query all collections and combine them
 const { data: articles } = await useAsyncData("articles-index", async () => {
-    const [articlesData, tutorialsData, decklistsData, reportsData, spoilersData] = await Promise.all([
-        queryCollection("articles").all(),
-        queryCollection("tutorials").all(),
-        queryCollection("decklists").all(),
-        queryCollection("reports").all(),
-        queryCollection("spoilers").all(),
-    ]);
+    const collectionsData = await queryAllCollections();
     
     // Combine all articles, filter out drafts, and sort by date
-    // Using concat() for better performance with large datasets (1000+ articles)
-    const allArticles: AnyArticle[] = (articlesData as AnyArticle[])
-        .concat(tutorialsData as AnyArticle[], decklistsData as AnyArticle[], reportsData as AnyArticle[], spoilersData as AnyArticle[])
+    const allArticles: AnyArticle[] = combineArticles(collectionsData)
         .filter(article => article.draft !== true);
+    
     return allArticles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 });
 
@@ -33,13 +23,7 @@ const selectedCategory = ref<string | null>(
     route.query.category ? String(route.query.category) : null
 );
 
-const categoryLabels: Record<string, string> = {
-    article: 'Articoli',
-    tutorial: 'Tutorial',
-    decklist: 'Decklist',
-    report: 'Report',
-    spoiler: 'Spoiler'
-};
+const categoryLabels = CATEGORY_LABELS;
 
 const filteredArticles = computed(() => {
     if (!articles.value) return [];
