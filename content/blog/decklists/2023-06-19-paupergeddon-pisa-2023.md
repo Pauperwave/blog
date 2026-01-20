@@ -67,7 +67,6 @@ Sideboard
 1 Unexpected Fangs
 ::
 
-
 ::MagicDecklist
 ---
 name: Altar Tron
@@ -121,7 +120,6 @@ Sideboard
 1 Weather the Storm
 ::
 
-
 ::MagicDecklist
 ---
 name: Boros Synth
@@ -167,7 +165,6 @@ Sideboard
 2 Dust to Dust
 1 Krark-Clan Shaman
 ::
-
 
 ::MagicDecklist
 ---
@@ -222,7 +219,6 @@ Sideboard
 1 Suffocating Fumes
 ::
 
-
 ::MagicDecklist
 ---
 name: Affinity
@@ -273,7 +269,6 @@ Sideboard
 1 Turn Aside
 ::
 
-
 ::MagicDecklist
 ---
 name: Boros Synth
@@ -319,7 +314,6 @@ Sideboard
 1 Krark-Clan Shaman
 ::
 
-
 ::MagicDecklist
 ---
 name: Mono U Faeries
@@ -355,7 +349,6 @@ Sideboard
 3 Relic of Progenitus
 2 Spire Golem
 ::
-
 
 ::MagicDecklist
 ---

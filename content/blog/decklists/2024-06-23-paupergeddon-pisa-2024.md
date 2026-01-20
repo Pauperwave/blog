@@ -57,7 +57,6 @@ Sideboard
 2 Gorilla Shaman
 ::
 
-
 ::MagicDecklist
 ---
 name: RG Ponza
@@ -96,7 +95,6 @@ Sideboard
 2 Gorilla Shaman
 2 Breath Weapon
 ::
-
 
 ::MagicDecklist
 ---
@@ -145,7 +143,6 @@ Sideboard
 3 Gorilla Shaman
 1 Krark-Clan Shaman
 ::
-
 
 ::MagicDecklist
 ---
@@ -198,7 +195,6 @@ Sideboard
 1 Masked Vandal
 ::
 
-
 ::MagicDecklist
 ---
 name: Walls
@@ -244,7 +240,6 @@ Sideboard
 1 Shield-Wall Sentinel
 ::
 
-
 ::MagicDecklist
 ---
 name: BR Madness
@@ -287,7 +282,6 @@ Sideboard
 1 Makeshift Munitions
 ::
 
-
 ::MagicDecklist
 ---
 name: Mono Red Kuldotha
@@ -325,7 +319,6 @@ Sideboard
 4 Smash to Smithereens
 3 End the Festivities
 ::
-
 
 ::MagicDecklist
 ---

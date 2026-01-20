@@ -61,7 +61,6 @@ Sideboard
 3 Troublemaker Ouphe
 ::
 
-
 ::MagicDecklist
 ---
 name: Jund Glee
@@ -106,7 +105,6 @@ Sideboard
 3 Troublemaker Ouphe
 ::
 
-
 ::MagicDecklist
 ---
 name: Dredge
@@ -147,7 +145,6 @@ Sideboard
 1 Gnaw to the Bone
 ::
 
-
 ::MagicDecklist
 ---
 name: U Faeries
@@ -182,7 +179,6 @@ Sideboard
 2 Bind the Monster
 1 Steel Sabotage
 ::
-
 
 ::MagicDecklist
 ---
@@ -233,7 +229,6 @@ Sideboard
 2 Duress
 ::
 
-
 ::MagicDecklist
 ---
 name: Jund
@@ -283,7 +278,6 @@ Sideboard
 1 Krark-Clan Shaman
 ::
 
-
 ::MagicDecklist
 ---
 name: U Terror
@@ -324,7 +318,6 @@ Sideboard
 2 Dispel
 2 Nullify
 ::
-
 
 ::MagicDecklist
 ---

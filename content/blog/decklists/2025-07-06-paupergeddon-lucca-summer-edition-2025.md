@@ -60,7 +60,6 @@ Sideboard
 2 Standard Bearer
 ::
 
-
 ::MagicDecklist
 ---
 name: U Terror
@@ -95,7 +94,6 @@ Sideboard
 4 Annul
 3 Gut Shot
 ::
-
 
 ::MagicDecklist
 ---
@@ -136,7 +134,6 @@ Sideboard
 1 Relic of Progenitus
 1 Wrenn's Resolve
 ::
-
 
 ::MagicDecklist
 ---
@@ -184,7 +181,6 @@ Sideboard
 1 Scattershot
 ::
 
-
 ::MagicDecklist
 ---
 name: U Terror
@@ -218,7 +214,6 @@ Sideboard
 4 Gut Shot
 4 Annul
 ::
-
 
 ::MagicDecklist
 ---
@@ -260,7 +255,6 @@ Sideboard
 1 Life Goes On
 ::
 
-
 ::MagicDecklist
 ---
 name: Monsters
@@ -298,7 +292,6 @@ Sideboard
 2 Deglamer
 2 Relic of Progenitus
 ::
-
 
 ::MagicDecklist
 ---

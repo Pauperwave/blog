@@ -59,7 +59,6 @@ Sideboard
 1 Snuff Out
 ::
 
-
 ::MagicDecklist
 ---
 name: Jund
@@ -108,7 +107,6 @@ Sideboard
 2 Thorn of the Black Rose
 2 Troublemaker Ouphe
 ::
-
 
 ::MagicDecklist
 ---
@@ -164,7 +162,6 @@ Sideboard
 1 Thorn of the Black Rose
 ::
 
-
 ::MagicDecklist
 ---
 name: U Faeries
@@ -203,7 +200,6 @@ Sideboard
 1 Cogwork Wrestler
 1 Dispel
 ::
-
 
 ::MagicDecklist
 ---
@@ -253,7 +249,6 @@ Sideboard
 1 Last Rites
 1 Life Goes On
 ::
-
 
 ::MagicDecklist
 ---
@@ -305,7 +300,6 @@ Sideboard
 1 Snuff Out
 ::
 
-
 ::MagicDecklist
 ---
 name: BGr Glee
@@ -352,7 +346,6 @@ Sideboard
 1 Sandstorm
 1 Vines of Vastwood
 ::
-
 
 ::MagicDecklist
 ---

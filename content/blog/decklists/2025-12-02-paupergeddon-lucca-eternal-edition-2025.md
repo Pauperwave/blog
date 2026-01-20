@@ -48,7 +48,6 @@ Sideboard
 1 Flaring Pain
 ::
 
-
 ::MagicDecklist
 ---
 name: Familiars
@@ -93,7 +92,6 @@ Sideboard
 1 Thraben Charm
 ::
 
-
 ::MagicDecklist
 ---
 name: Cawgate
@@ -137,7 +135,6 @@ Sideboard
 2 Remove Soul
 ::
 
-
 ::MagicDecklist
 ---
 name: R Madness
@@ -174,7 +171,6 @@ Sideboard
 1 Faerie Macabre
 1 Electrickery
 ::
-
 
 ::MagicDecklist
 ---
@@ -217,7 +213,6 @@ Sideboard
 1 Ram Through
 ::
 
-
 ::MagicDecklist
 ---
 name: UB Terror
@@ -258,7 +253,6 @@ Sideboard
 2 Unexpected Fangs
 1 Arms of Hadar
 ::
-
 
 ::MagicDecklist
 ---
@@ -303,7 +297,6 @@ Sideboard
 2 Essence Scatter
 2 Palace Sentinels
 ::
-
 
 ::MagicDecklist
 ---

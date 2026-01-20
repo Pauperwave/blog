@@ -66,7 +66,6 @@ Sideboard
 1 Aethertow
 ::
 
-
 ::MagicDecklist
 ---
 name: Jeskai
@@ -115,7 +114,6 @@ Sideboard
 1 Cast into the Fire
 1 Dawnbringer Cleric
 ::
-
 
 ::MagicDecklist
 ---
@@ -166,7 +164,6 @@ Sideboard
 1 Unexpected Fangs
 ::
 
-
 ::MagicDecklist
 ---
 name: UW Glitter
@@ -210,7 +207,6 @@ Sideboard
 2 Obsidian Acolyte
 2 Standard Bearer
 ::
-
 
 ::MagicDecklist
 ---
@@ -257,7 +253,6 @@ Sideboard
 2 Dawnbringer Cleric
 ::
 
-
 ::MagicDecklist
 ---
 name: UW Glitter
@@ -301,7 +296,6 @@ Sideboard
 2 Obsidian Acolyte
 2 Standard Bearer
 ::
-
 
 ::MagicDecklist
 ---
@@ -348,7 +342,6 @@ Sideboard
 1 Suffocating Fumes
 1 Diabolic Edict
 ::
-
 
 ::MagicDecklist
 ---

@@ -61,7 +61,6 @@ Sideboard
 3 Relic of Progenitus
 ::
 
-
 ::MagicDecklist
 ---
 name: Gardens
@@ -104,7 +103,6 @@ Sideboard
 3 Weather the Storm
 2 Duress
 ::
-
 
 ::MagicDecklist
 ---
@@ -150,7 +148,6 @@ Sideboard
 2 Chainer's Edict
 2 Duress
 ::
-
 
 ::MagicDecklist
 ---
@@ -198,7 +195,6 @@ Sideboard
 1 Dispel
 ::
 
-
 ::MagicDecklist
 ---
 name: Mono Red Kuldotha
@@ -236,7 +232,6 @@ Sideboard
 1 Flaring Pain
 ::
 
-
 ::MagicDecklist
 ---
 name: Gardens
@@ -273,7 +268,6 @@ Sideboard
 2 End the Festivities
 1 Flaring Pain
 ::
-
 
 ::MagicDecklist
 ---
@@ -321,7 +315,6 @@ Sideboard
 2 Essence Scatter
 1 Last Breath
 ::
-
 
 ::MagicDecklist
 ---
