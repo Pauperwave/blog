@@ -12,6 +12,11 @@ published: true
 
 https://www.pauperwave.com/paupergeddon-pisa-2023-top8-metagame/
 
+Players: 481
+Location: Stazione Leopolda, Pisa
+Date: 17-18/06/2023
+Tournament Structure: 12 Rounds of Swiss + Single Elimination Top 8
+
 ::MagicDecklist
 ---
 name: Affinity
