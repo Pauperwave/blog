@@ -8,6 +8,7 @@ author: Bragioto Pietro
 author_avatar: /assets/avatars/bragioto.jpg
 author_description: "Scribacchino di liste"
 thumbnail: /assets/blog/arts/inr-174-thermo-alchemist.jpeg
+published: true
 ---
 
 ## Introduzione
