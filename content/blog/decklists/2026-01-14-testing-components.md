@@ -1,9 +1,9 @@
 ---
-title: "TheSideralWolf - Tournament Series Pauper #2"
+title: "TESTING COMPONENTS"
 description: "Decklists Top 8"
 tags: [test]
 date: 2026-01-14
-updatedAt: 2026-01-14
+updatedAt: 2026-01-22T01:00:00
 author: Bragioto Pietro
 author_avatar: /assets/avatars/bragioto.jpg
 author_description: "Scribacchino di liste"
@@ -104,3 +104,25 @@ crop:
 card: Suplex
 ---
 ::
+
+## Testing CardTooltip New Syntax
+
+### Simple Card Syntax
+This is a test of the new simple syntax: [[Lightning Bolt]] is a classic red instant card.
+
+Multiple cards in one line: [[Counterspell]], [[Lightning Bolt]], and [[Giant Growth]] are iconic.
+
+### Card with Set Code Syntax
+This tests the set-specific syntax: [[Lightning Bolt | lea]] is from Alpha edition.
+
+Another example: [[Counterspell | ice]] from Ice Age has beautiful art.
+
+### Mixed Syntax
+Cards with punctuation: [[Jace, the Mind Sculptor]] and [[Karn, Scion of Urza]].
+
+Combining set codes: [[Black Lotus | lea]] versus [[Black Lotus | vma]].
+
+### Backward Compatibility
+Old syntax still works: :CardTooltip{name="Force of Will"}
+
+All three syntaxes together: [[Lightning Bolt]], [[Counterspell | ice]], and :CardTooltip{name="Dark Ritual"}.
