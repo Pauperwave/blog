@@ -17,9 +17,7 @@ Ma quante di queste carte sono effettivamente giocabili nei mazzi Pauper competi
 
 Ne abbiamo selezionate 8 che meritano attenzione:
 
-
-
-## 8. Flickerwisp
+## 8. Flaring Cinder
 
 ::MagicCardDisplay
 ---
@@ -27,4 +25,60 @@ card: Flaring Cinder (ECL)
 ---
 ::
 
-madness deck
+madness deck?
+
+## 7. 
+
+::MagicCardDisplay
+---
+card: Flaring Cinder (ECL)
+---
+::
+
+## 6. 
+
+::MagicCardDisplay
+---
+card: Flaring Cinder (ECL)
+---
+::
+
+## 5. 
+
+::MagicCardDisplay
+---
+card: Flaring Cinder (ECL)
+---
+::
+
+## 4. 
+
+::MagicCardDisplay
+---
+card: Flaring Cinder (ECL)
+---
+::
+
+## 3. 
+
+::MagicCardDisplay
+---
+card: Flaring Cinder (ECL)
+---
+::
+
+## 2. 
+
+::MagicCardDisplay
+---
+card: Flaring Cinder (ECL)
+---
+::
+
+## 1. 
+
+::MagicCardDisplay
+---
+card: Flaring Cinder (ECL)
+---
+::

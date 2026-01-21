@@ -1,5 +1,5 @@
 ---
-title: "Limitate in Magic: The Eresia o Svolta?"
+title: "Limitate in Magic: Eresia o Svolta?"
 authors: "Pietro Bragioto"
 date: 2025-10-09
 updatedAt: 2025-10-09

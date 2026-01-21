@@ -1,13 +1,13 @@
 ---
-title: ""
+title: "Vantaggio Carte e Vantaggio Tempo in Pauper"
 description: ""
-tags: []
-date:
-updatedAt:
-author: Pietro Bragioto
-author_avatar: /assets/avatars/bragioto.jpg
+tags: [meta]
+date: 2019-05-01
+updatedAt: 2019-05-01
+author: Alessandro Moretti
+author_avatar: /assets/avatars/moretti.png
 author_description: "Scribacchino di liste"
-thumbnail: /assets/blog/arts/Bonebind-Orator.jpg
+thumbnail: /assets/blog/arts/vma-70-frantic-search.jpg
 published: true
 ---
 
