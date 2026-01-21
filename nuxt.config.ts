@@ -30,10 +30,6 @@ export default defineNuxtConfig({
                     // depth: 3,
                     searchDepth: 2,
                 },
-                // remarkPlugins: {
-                //     // we can add options here if needed
-                //     "remark-reading-time": {},
-                // },
             },
         },
     },
@@ -45,6 +41,7 @@ export default defineNuxtConfig({
       "@nuxtjs/seo",
       "@vueuse/nuxt",
       "nuxt-swiper",
+      "./modules/card-tooltip-transformer",
     ],
     icon: {
         collections: ['lucide', 'simple-icons', 'logos', 'mdi']
