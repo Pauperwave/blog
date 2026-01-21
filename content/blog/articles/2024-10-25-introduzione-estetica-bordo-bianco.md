@@ -17,7 +17,7 @@ published: true
 
 ::image-caption
 ---
-src: /assets/blog/articles/white-border/rubber.jpeg
+src: /assets/blog/articles/white-border/rubber.jpg
 alt: "Gomma Faber Castell"
 caption: "Il case sigillato delle Faber Castell, lo aprirò quando finirò il sacchetto nel retro"
 ---
@@ -27,7 +27,7 @@ caption: "Il case sigillato delle Faber Castell, lo aprirò quando finirò il sa
 
 ::image-caption
 ---
-src: /assets/blog/articles/white-border/rules.jpeg
+src: /assets/blog/articles/white-border/rules.jpg
 alt: "Righello e strumenti per la precisione"
 caption: "Inserisci didascalia"
 ---
@@ -37,7 +37,7 @@ caption: "Inserisci didascalia"
 
 ::image-caption
 ---
-src: /assets/blog/articles/white-border/notebook.jpeg
+src: /assets/blog/articles/white-border/notebook.jpg
 alt: "Scotch e quaderno per annotazioni"
 caption: "Il quadernino compagno di mille battaglie, dalla superficie segnata dal tempo e da mille escoriazioni"
 ---
@@ -47,7 +47,7 @@ caption: "Il quadernino compagno di mille battaglie, dalla superficie segnata da
 
 ::image-caption
 ---
-src: /assets/blog/articles/white-border/knife-and-carving.jpeg
+src: /assets/blog/articles/white-border/knife-and-carving.jpg
 alt: "Coltello e tecnica di intaglio"
 caption: "La vecchia e fedele lama con due tagli, una gomma nuova ed una verso il fine vita"
 ---
@@ -61,7 +61,7 @@ caption: "La vecchia e fedele lama con due tagli, una gomma nuova ed una verso i
 
 ::image-caption
 ---
-src: /assets/blog/articles/white-border/the-process.jpeg
+src: /assets/blog/articles/white-border/the-process.jpg
 alt: "Il processo di rimozione del bordo bianco"
 caption: "Impugnatura predefinita: medio poggiato sul dorso per impedire oscillazioni verticali"
 ---
@@ -71,7 +71,7 @@ caption: "Impugnatura predefinita: medio poggiato sul dorso per impedire oscilla
 
 ::image-caption
 ---
-src: /assets/blog/articles/white-border/worn-corner.jpeg
+src: /assets/blog/articles/white-border/worn-corner.jpg
 alt: "Dettaglio degli angoli e danni"
 caption: "Inserisci didascalia"
 ---
@@ -83,7 +83,7 @@ caption: "Inserisci didascalia"
 
 ::image-caption
 ---
-src: /assets/blog/articles/white-border/different-layouts.jpeg
+src: /assets/blog/articles/white-border/different-layouts.jpg
 alt: "Confronto tra diversi layout di carte"
 caption: "Inserisci didascalia"
 ---
@@ -93,7 +93,7 @@ caption: "Inserisci didascalia"
 
 ::image-caption
 ---
-src: /assets/blog/articles/white-border/scotch-method-only.jpeg
+src: /assets/blog/articles/white-border/scotch-method-only.jpg
 alt: "Metodo usando solo scotch"
 caption: "Inserisci didascalia"
 ---
@@ -115,7 +115,7 @@ caption: "Inserisci didascalia"
 
 ::image-caption
 ---
-src: /assets/blog/articles/white-border/basic-lands.jpeg
+src: /assets/blog/articles/white-border/basic-lands.jpg
 alt: "Terre base con bordo personalizzato"
 caption: "Inserisci didascalia"
 ---
@@ -131,7 +131,7 @@ caption: "Inserisci didascalia"
 
 ::image-caption
 ---
-src: /assets/blog/articles/white-border/tools.jpeg
+src: /assets/blog/articles/white-border/tools.jpg
 alt: "Strumenti necessari per il processo"
 caption: "Inserisci didascalia"
 ---
@@ -154,6 +154,6 @@ images:
   - /assets/blog/articles/white-border/deck-1.jpg
   - /assets/blog/articles/white-border/deck-2.jpg
   - /assets/blog/articles/white-border/deck-3.jpg
-  - /assets/blog/articles/white-border/deck-4.jpeg
+  - /assets/blog/articles/white-border/deck-4.jpg
 ---
 ::
