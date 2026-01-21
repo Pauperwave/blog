@@ -1,7 +1,7 @@
 ---
 title: "Introduzione all'Estetica del Bordo Bianco"
 description: ""
-tags: []
+tags: [meta]
 date: 2024-10-25
 updatedAt: 2024-10-25
 author: Pietro Bragioto
@@ -18,8 +18,8 @@ published: true
 ::image-caption
 ---
 src: /assets/blog/articles/white-border/rubber.jpeg
-alt: Gomma Faber Castell
-caption: Il case sigillato delle Faber Castell, lo aprirò quando finirò il sacchetto nel retro
+alt: "Gomma Faber Castell"
+caption: "Il case sigillato delle Faber Castell, lo aprirò quando finirò il sacchetto nel retro"
 ---
 ::
 
@@ -28,7 +28,8 @@ caption: Il case sigillato delle Faber Castell, lo aprirò quando finirò il sac
 ::image-caption
 ---
 src: /assets/blog/articles/white-border/rules.jpeg
-alt: Righello e strumenti per la precisione
+alt: "Righello e strumenti per la precisione"
+caption: "Inserisci didascalia"
 ---
 ::
 
@@ -37,8 +38,8 @@ alt: Righello e strumenti per la precisione
 ::image-caption
 ---
 src: /assets/blog/articles/white-border/notebook.jpeg
-alt: Scotch e quaderno per annotazioni
-caption: Il quadernino compagno di mille battaglie, dalla superficie segnata dal tempo e da mille escoriazioni
+alt: "Scotch e quaderno per annotazioni"
+caption: "Il quadernino compagno di mille battaglie, dalla superficie segnata dal tempo e da mille escoriazioni"
 ---
 ::
 
@@ -47,8 +48,8 @@ caption: Il quadernino compagno di mille battaglie, dalla superficie segnata dal
 ::image-caption
 ---
 src: /assets/blog/articles/white-border/knife-and-carving.jpeg
-alt: Coltello e tecnica di intaglio
-caption: La vecchia e fedele lama con due tagli, una gomma nuova ed una verso il fine vita
+alt: "Coltello e tecnica di intaglio"
+caption: "La vecchia e fedele lama con due tagli, una gomma nuova ed una verso il fine vita"
 ---
 ::
 
@@ -61,8 +62,8 @@ caption: La vecchia e fedele lama con due tagli, una gomma nuova ed una verso il
 ::image-caption
 ---
 src: /assets/blog/articles/white-border/the-process.jpeg
-alt: Il processo di rimozione del bordo bianco
-caption: Impugnatura predefinita: medio poggiato sul dorso per impedire oscillazioni verticali
+alt: "Il processo di rimozione del bordo bianco"
+caption: "Impugnatura predefinita: medio poggiato sul dorso per impedire oscillazioni verticali"
 ---
 ::
 
@@ -71,7 +72,8 @@ caption: Impugnatura predefinita: medio poggiato sul dorso per impedire oscillaz
 ::image-caption
 ---
 src: /assets/blog/articles/white-border/worn-corner.jpeg
-alt: Dettaglio degli angoli e danni
+alt: "Dettaglio degli angoli e danni"
+caption: "Inserisci didascalia"
 ---
 ::
 
@@ -82,7 +84,8 @@ alt: Dettaglio degli angoli e danni
 ::image-caption
 ---
 src: /assets/blog/articles/white-border/different-layouts.jpeg
-alt: Confronto tra diversi layout di carte
+alt: "Confronto tra diversi layout di carte"
+caption: "Inserisci didascalia"
 ---
 ::
 
@@ -91,7 +94,8 @@ alt: Confronto tra diversi layout di carte
 ::image-caption
 ---
 src: /assets/blog/articles/white-border/scotch-method-only.jpeg
-alt: Metodo usando solo scotch
+alt: "Metodo usando solo scotch"
+caption: "Inserisci didascalia"
 ---
 ::
 
@@ -104,35 +108,40 @@ alt: Metodo usando solo scotch
 ::image-caption
 ---
 src: /assets/blog/articles/white-border/album.jpg
-alt: Album di carte con bordo bianco rimosso
+alt: "Album di carte con bordo bianco rimosso"
+caption: "Inserisci didascalia"
 ---
 ::
 
 ::image-caption
 ---
 src: /assets/blog/articles/white-border/basic-lands.jpeg
-alt: Terre base con bordo personalizzato
+alt: "Terre base con bordo personalizzato"
+caption: "Inserisci didascalia"
 ---
 ::
 
 ::image-caption
 ---
 src: /assets/blog/articles/white-border/island.jpg
-alt: Isola con bordo rimosso
+alt: "Isola con bordo rimosso"
+caption: "Inserisci didascalia"
 ---
 ::
 
 ::image-caption
 ---
 src: /assets/blog/articles/white-border/tools.jpeg
-alt: Strumenti necessari per il processo
+alt: "Strumenti necessari per il processo"
+caption: "Inserisci didascalia"
 ---
 ::
 
 ::image-caption
 ---
 src: /assets/blog/articles/white-border/unglued-basic-lands.jpg
-alt: Terre base Unglued
+alt: "Terre base Unglued"
+caption: "Inserisci didascalia"
 ---
 ::
 
