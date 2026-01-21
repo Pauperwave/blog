@@ -27,5 +27,3 @@ useSeoMeta({
     description: error.value?.statusMessage,
 });
 </script>
-
-<style lang="css"></style>

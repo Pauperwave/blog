@@ -28,8 +28,8 @@ const getBadge = (date: string) => {
 
 // const readingTimeText = computed(() => (data.value?.meta as any).readingTime?.text);
 const tocTitle = computed(() => `In questo articolo`);
-const clipboard = useClipboard();
-const toast = useToast();
+// const clipboard = useClipboard();
+// const toast = useToast();
 
 const { data } = await useAsyncData(route.path, async () => {
     // Try each collection until we find the article
@@ -222,8 +222,12 @@ onMounted(() => {
 <style lang="css">
 @reference "~/assets/css/main.css";
 
-@variant max-lg {
-    * {
+/* Create custom max-lg variant for screens smaller than 1024px */
+@custom-variant max-lg (@media (max-width: 1023px));
+
+/* Apply the variant to all elements in this component */
+* {
+    @variant max-lg {
         scroll-margin-top: calc(var(--ui-header-height) + 4rem) !important;
     }
 }
