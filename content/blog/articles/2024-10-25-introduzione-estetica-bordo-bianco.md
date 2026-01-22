@@ -50,7 +50,7 @@ Per i primi test può anche andare bene della famosa gomma Pellikan in parte ros
 
 Nell'ormai lontano 2018, anno della mia iniziazione all'estetica del bordo bianco da parte del mio compagno di merende Alessandro Moretti, adoperavo le Pellikan WB 40 e negli anni successivi ne comprai una discreta quantità, una cinquantina circa, che durò fino alla pandemia dove mi ritrovai con la scorta esaurita e con quella tipologia di gomme ormai fuori produzione.
 
-Dopo qualche ricerca trovai le Faber Castle 7016, -40 or-80, che mi arrivarono dopo qualche mese tramite Ali Express, visto che non ero riuscito a trovare la merce in Europa, queste erano più dure e meno maneggevoli nello sbiancamento delle Pellikan WB 40, ma avevano il grande pregio di prestarsi meglio alla pratica dell'intagliatura a coltello e di essere, quindi, maggiormente riutilizzabili ed adatte a sbiancamenti di grandi quantità di figurine.
+Dopo qualche ricerca trovai le Faber Castle `7016-40` o le `7016-80`, che mi arrivarono dopo qualche mese tramite Ali Express, visto che non ero riuscito a trovare la merce in Europa, queste erano più dure e meno maneggevoli nello sbiancamento delle Pellikan WB 40, ma avevano il grande pregio di prestarsi meglio alla pratica dell'intagliatura a coltello e di essere, quindi, maggiormente riutilizzabili ed adatte a sbiancamenti di grandi quantità di figurine.
 
 ## Righello e Manualità
 
