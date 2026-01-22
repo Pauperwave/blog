@@ -11,12 +11,12 @@ thumbnail: /assets/blog/arts/Bonebind-Orator.jpg
 published: true
 ---
 
-https://www.pauperwave.com/top-8-paupergeddon-pisa-2024/
-
-Players: 638
-Location: Pala Todisco, San Giuliano Terme, Pisa
-Date: 22-23 June 2024
-Structure: 12 Turns of Swiss + Top 8
+| Informazione | Dettagli |
+|---|---|
+| Giocatori | 638 |
+| Luogo | Pala Todisco, San Giuliano Terme, Pisa |
+| Data | 22-23 June 2024 |
+| Struttura del torneo | 12 Turns of Swiss + Top 8 |
 
 ::MagicDecklist
 ---

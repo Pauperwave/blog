@@ -1,5 +1,6 @@
 ---
 title: "Paupergeddon Roma 2023"
+description: "Decklists Top 8"
 tags: [top8]
 date: 2023-11-20
 updatedAt: 2023-11-20
@@ -10,12 +11,12 @@ thumbnail: /assets/blog/arts/Bonebind-Orator.jpg
 published: true
 ---
 
-https://www.pauperwave.com/top-32-metashare-paupergeddon-roma-2023/
-
-Players: 502
-Location: Roma, Mercure West Hotel
-Date: 19 Novembre 2023
-Structure: 12 Swiss Turns + Top 8
+| Informazione | Dettagli |
+|---|---|
+| Giocatori | 502 |
+| Luogo | Roma, Mercure West Hotel |
+| Data | 19 Novembre 2023 |
+| Struttura del torneo | 12 Swiss Turns + Top 8 |
 
 ::MagicDecklist
 ---
