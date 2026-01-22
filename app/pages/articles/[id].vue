@@ -54,7 +54,7 @@ const { data: links } = await useAsyncData(`linked-${route.path}`, async () => {
     
     // Combine all articles and filter
     const allArticles: AnyArticle[] = combineArticles(collectionsData)
-        .filter(a => a.path !== data.value?.path && a.draft !== true);
+        .filter(a => a.path !== data.value?.path && a.published !== true);
     
     return orderBy(allArticles, (a) => intersection(a.tags, data.value?.tags || []).length, "desc").slice(0, 5);
 });

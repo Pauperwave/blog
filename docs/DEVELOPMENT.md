@@ -390,7 +390,7 @@ const { data } = await useAsyncData('all-articles', async () => {
   // Combine all collections
   return articles
     .concat(tutorials, decklists, reports, spoilers)
-    .filter(a => a.draft !== true)
+    .filter(a => a.published !== true)
 })
 ```
 

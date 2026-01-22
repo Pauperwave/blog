@@ -104,7 +104,7 @@ author: string            # Author's name
 author_avatar: string     # Path to author image
 author_description: string # Author bio (one sentence)
 thumbnail: string         # Hero image path
-draft: boolean            # true = hidden, false = published
+published: true           # false = hidden (default), true = public
 ---
 ```
 
@@ -485,14 +485,14 @@ bun dev
 # Navigate to http://localhost:3000/articles/2026-01-17-mono-blue-control-guide
 ```
 
-#### 7. Set Draft Status
+#### 7. Set Published Status
 
 ```yaml
 # While writing
-draft: true
+published: true
 
 # When ready to publish
-draft: false
+published: false
 ```
 
 ---
