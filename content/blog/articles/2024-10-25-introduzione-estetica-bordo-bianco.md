@@ -255,7 +255,7 @@ Provare con scotch diversi come il normale non è consigliabile perché questi a
 
 ## Sbiancare o non sbiancare?
 
-Spesso subisco critiche sul valore delle carte che sbianco dato che certe staple Pauper sono salite di prezzo negli ultimi anni (Snuff Out, Dust to Dust, Kuldotha Rebirth ecc. ecc.) e data la mia passione per le terre base Unglued.
+Spesso subisco critiche sul valore delle carte che sbianco dato che certe staple Pauper sono salite di prezzo negli ultimi anni ([[Snuff Out]], [[Dust to Dust]], [[Kuldotha Rebirth]] ecc. ecc.) e data la mia passione per le terre base Unglued.
 
 Lo sbiancamento è visto al pari di un altered non gradita e, in caso di rivendita, la carta verrà considerata Damage o Heavy Damage: in pratica la carta sbiancata perde drasticamente quasi tutto il suo valore economico.
 
