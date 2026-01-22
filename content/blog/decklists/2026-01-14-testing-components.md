@@ -1,7 +1,7 @@
 ---
 title: "TESTING COMPONENTS"
-description: "Decklists Top 8"
-tags: [test]
+description: "Descrizione volutamente lunga per vedere come si comporta la griglia"
+tags: [top4, top8, to16, top32, paupergeddon, ipt, trio]
 date: 2026-01-14
 updatedAt: 2026-01-22T01:00:00
 author: Bragioto Pietro

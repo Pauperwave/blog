@@ -1,6 +1,7 @@
 ---
 title: "Paupergeddon Pisa 2023"
-tags: [top8]
+description: "Decklists Top 8"
+tags: [top8, paupergeddon]
 date: 2023-06-19
 updatedAt: 2023-06-19
 author: Bragioto Pietro
@@ -10,12 +11,12 @@ thumbnail: /assets/blog/arts/Bonebind-Orator.jpg
 published: true
 ---
 
-https://www.pauperwave.com/paupergeddon-pisa-2023-top8-metagame/
-
-Players: 481
-Location: Stazione Leopolda, Pisa
-Date: 17-18/06/2023
-Tournament Structure: 12 Rounds of Swiss + Single Elimination Top 8
+| Informazione | Dettagli |
+|---|---|
+| Giocatori | 481 |
+| Luogo | Stazione Leopolda, Pisa |
+| Data | 17-18/06/2023 |
+| Struttura del torneo | 12 Rounds of Swiss + Single Elimination Top 8 |
 
 ::MagicDecklist
 ---

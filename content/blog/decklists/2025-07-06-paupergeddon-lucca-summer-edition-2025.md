@@ -11,10 +11,12 @@ thumbnail: /assets/blog/arts/Bonebind-Orator.jpg
 published: true
 ---
 
-Players: 1076
-Location: Polo Fiere, Lucca
-Date: 5-6 July 2025
-Structure: 14 Rounds of Swiss + Single Elimination Top 8, 6-2 cut for Day 2
+| Informazione | Dettagli |
+|---|---|
+| Giocatori | 1076 |
+| Luogo | Polo Fiere, Lucca |
+| Data | 5-6 July 2025 |
+| Struttura del torneo | 14 Rounds of Swiss + Single Elimination Top 8, 6-2 cut for Day 2 |
 
 ::MagicDecklist
 ---

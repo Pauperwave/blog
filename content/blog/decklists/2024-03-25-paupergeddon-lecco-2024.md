@@ -1,6 +1,7 @@
 ---
 title: "Paupergeddon Lecco 2024"
-tags: [top8]
+description: "Decklists Top 8"
+tags: [top8, paupergeddon]
 date: 2024-03-25
 updatedAt: 2024-03-25
 author: Pietro Bragioto
@@ -10,12 +11,12 @@ thumbnail: /assets/blog/arts/Bonebind-Orator.jpg
 published: true
 ---
 
-https://www.pauperwave.com/top-8-top-16-paupergeddon-lecco-2024/
-
-Players: 688
-Location: Palataurus, Lecco
-Date: 23-24 March 2024
-Structure: 12 Swiss Rounds + Top 8
+| Informazione | Dettagli |
+|---|---|
+| Giocatori | 688 |
+| Luogo | Palataurus, Lecco |
+| Data | 23-24 March 2024 |
+| Struttura del torneo | 12 Swiss Rounds + Top 8 |
 
 ::MagicDecklist
 ---

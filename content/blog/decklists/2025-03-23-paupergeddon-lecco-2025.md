@@ -11,10 +11,12 @@ thumbnail: /assets/blog/arts/Bonebind-Orator.jpg
 published: true
 ---
 
-Players: 738
-Location: Palataurus, Lecco
-Date: 22-23/03/2025
-Structure: Close Decklist 13 Rounds of Swiss + Open Decklist Single Elimination Top 8
+| Informazione | Dettagli |
+|---|---|
+| Giocatori | 738 |
+| Luogo | Palataurus, Lecco |
+| Data | 22-23/03/2025 |
+| Struttura del torneo | Close Decklist 13 Rounds of Swiss + Open Decklist Single Elimination Top 8 |
 
 ::MagicDecklist
 ---

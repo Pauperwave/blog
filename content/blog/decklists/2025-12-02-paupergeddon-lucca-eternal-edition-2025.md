@@ -11,8 +11,10 @@ thumbnail: /assets/blog/events/paupergeddon-eternal-edition-2025.png
 published: true
 ---
 
-Players: 1012
-Structure: 14 Rounds of Swiss + Single Elimination Top 8, 8 Rounds cut for Day 2 = 18 Points
+| Informazione | Dettagli |
+|---|---|
+| Giocatori | 1012 |
+| Struttura del torneo | 14 Rounds of Swiss + Single Elimination Top 8, 8 Rounds cut for Day 2 = 18 Points |
 
 ::MagicDecklist
 ---

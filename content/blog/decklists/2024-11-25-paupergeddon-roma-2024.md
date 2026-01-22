@@ -11,9 +11,11 @@ thumbnail: /assets/blog/arts/Bonebind-Orator.jpg
 published: true
 ---
 
-Players: 690
-Date: 23-24 November 2024
-Structure: 13 Rounds of Swiss + Top 8 Single Elimination
+| Informazione | Dettagli |
+|---|---|
+| Giocatori | 690 |
+| Data | 23-24 November 2024 |
+| Struttura del torneo | 13 Rounds of Swiss + Top 8 Single Elimination |
 
 ::MagicDecklist
 ---
