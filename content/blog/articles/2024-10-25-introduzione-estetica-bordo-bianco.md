@@ -64,13 +64,10 @@ caption: "Inserisci didascalia"
 
 Generalmente come righello potete usare ciò che più vi aggrada, l'unico limite è la vostra manualità; ciononostante ritengo saggio lasciarvi delle linee guida per la sua scelta:
 
-- manico: indispensabile affinché non slitti durante lo sbiancamento restituendovi bordi irregolari indesiderati; 
-
-- bordi ribassati: non mi sono mai trovato granché bene con i bordi alti dei primi righelli metallici che utilizzavo durante le varie manovre di fino con la gomma;
-
-- trasparenza: mi piace vedere attraverso lo strumento per capire come sono posizionato rispetto il bordo interno della carta, tuttavia capisco che a molti possa dare fastidio e distrarre, soggettivo;
-
-- 20-30cm: lasciando da parte eventuali doppi sensi, troppo piccolo sfugge di mano ed è poco stabile, una lunghezza eccessiva, d'altra parte, rischia di essere poco maneggevole durante le rotazioni e poco pratica.
+- **manico**: indispensabile affinché non slitti durante lo sbiancamento restituendovi bordi irregolari indesiderati; 
+- **bordi ribassati**: non mi sono mai trovato granché bene con i bordi alti dei primi righelli metallici che utilizzavo durante le varie manovre di fino con la gomma;
+- **trasparenza**: mi piace vedere attraverso lo strumento per capire come sono posizionato rispetto il bordo interno della carta, tuttavia capisco che a molti possa dare fastidio e distrarre, soggettivo;
+- **20-30cm**: lasciando da parte eventuali doppi sensi, troppo piccolo sfugge di mano ed è poco stabile, una lunghezza eccessiva, d'altra parte, rischia di essere poco maneggevole durante le rotazioni e poco pratica.
 
 Molto importante citare l'usura del righello visto che solitamente si forma una conca verso la parte centrale non permettendovi più di tracciare linee di sbiancamento dritte ed essendo quindi deleterio.
 Oltre a consigliarvi l'ovvio ricambio dello strumento oltre un certo stato di usura e l'utilizzo di righelli nuovi per carte a cui tenete particolarmente, come possono essere per me le terre base Unglued, vi consiglio di adoperare uniformemente il righello quindi concentrarvi nello sbiancare spesso utilizzando le estremità, visto che spesso si sbianca usando la comoda parte centrale andando subito a formare la conca in mezzo sopracitata.
@@ -160,19 +157,15 @@ caption: "Impugnatura predefinita: medio poggiato sul dorso per impedire oscilla
 
 Il processo è abbastanza semplice da spiegare ma richiede una certa manualità che, come nella maggioranza delle faccende artigiane, si acquisisce attraversando svariati tentativi iniziali ed arrivando ad avere maggior sicurezza, pressione calibrata e fluidità nel condurre la gomma durante l'impresa.
 
-- 1. Preparare la base
-Come avevo già accennato nella presentazione degli strumenti, la prima cosa da fare è porre la nostra carta sulla struttura di scotch di carta costruita in cima al nostro quadernetto di supporto, un po' come un paziente che si adagia in sala operatoria o un paziente che si stende nel lettino dello psicologo, scegliete voi.
+1. **Preparare la base**: Come avevo già accennato nella presentazione degli strumenti, la prima cosa da fare è porre la nostra carta sulla struttura di scotch di carta costruita in cima al nostro quadernetto di supporto, un po' come un paziente che si adagia in sala operatoria o un paziente che si stende nel lettino dello psicologo, scegliete voi.
 
-- 2. Affilare le Armi
-La seconda cosa, prima di iniziare il vero e proprio sbiancamento, è preparare le gomme: affilarne una, se necessario, per la parte interna che deve essere precisa e restituire un tratto di confine netto senza zigzag o sfumature indesiderate, mentre si seleziona una gomma smussata per occuparti della parte esterna.
+2. **Affilare le Armi**: La seconda cosa, prima di iniziare il vero e proprio sbiancamento, è preparare le gomme: affilarne una, se necessario, per la parte interna che deve essere precisa e restituire un tratto di confine netto senza zigzag o sfumature indesiderate, mentre si seleziona una gomma smussata per occuparti della parte esterna.
 
--3. Puntare al cuore
-La prima sbiancatura riguarda il bordo interno ossia il confine tra il bordo nero che si vuole cancellare e il corpo della carta, si procede un lato alla volta cercando di stare abbastanza leggeri con la gomma in maniera da non creare un effetto solco ma abbastanza decisi da creare la polverina blu che si insinuerà tra la gomma e il confine del righello dandoci sbiancate più aderente possibile ad esso.
+3. **Puntare al cuore**: La prima sbiancatura riguarda il bordo interno ossia il confine tra il bordo nero che si vuole cancellare e il corpo della carta, si procede un lato alla volta cercando di stare abbastanza leggeri con la gomma in maniera da non creare un effetto solco ma abbastanza decisi da creare la polverina blu che si insinuerà tra la gomma e il confine del righello dandoci sbiancate più aderente possibile ad esso.
 In generale è buona regola cercare di stare più leggeri possibile anche se si dovesse impiegare più tempo nel processo, soprattutto per le prime volte dove si deve ancora capire come dosare le forze e non si ha troppa dimestichezza.
 Un avvertimento è necessario: non muovete troppo veloce la gomma nel raschiare, anche nel caso doveste stare leggeri, perché si rischia di strisciare la superficie lasciando una specie di bruciatura che in sostanza sono gli aloni scuri, la nostra bestia nera, l'arcinemica di un bordo bianco di classe.
 
--4. Occuparsi del resto
-Finita la parte interna, è tempo di switchare gomma ad una più arrotondata ma non abbastanza da dover cancellare con la parte bianca centrale perché quest'ultima non cancellerà in maniera pulita e quasi sicuramente creerà la bestia nera.
+4. **Occuparsi del resto**: Finita la parte interna, è tempo di switchare gomma ad una più arrotondata ma non abbastanza da dover cancellare con la parte bianca centrale perché quest'ultima non cancellerà in maniera pulita e quasi sicuramente creerà la bestia nera.
 Quando una gomma diventa piatta o nel caso la sua punta corrisponda con la parte centrale bianca, si considera a fine ciclo ed è necessario tagliarla col nostro fiero coltello o cutter, prima di lasciarci ingolosire da un ultimo giro e combinare danni.
 
 ## Angoli e danni
