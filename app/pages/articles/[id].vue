@@ -53,10 +53,25 @@ const { data: links } = await useAsyncData(`linked-${route.path}`, async () => {
     const collectionsData = await queryAllCollections();
     
     // Combine all articles and filter
-    const allArticles: AnyArticle[] = combineArticles(collectionsData)
-        .filter(a => a.path !== data.value?.path && a.published !== true);
+    const allArticles: AnyArticle[] = combineArticles(collectionsData);
     
-    return orderBy(allArticles, (a) => intersection(a.tags, data.value?.tags || []).length, "desc").slice(0, 5);
+    // console.log('[DEBUG] Total articles:', allArticles.length);
+    // console.log('[DEBUG] Current article path:', data.value?.path);
+    // console.log('[DEBUG] Current article tags:', data.value?.tags);
+    // console.log('[DEBUG] Published articles count:', allArticles.filter(a => a.published === true).length);
+    // console.log('[DEBUG] Sample article:', allArticles[0]);
+    
+    const filtered = allArticles.filter(a => a.path !== data.value?.path && a.published === true);
+    
+    // console.log('[DEBUG] Filtered articles count:', filtered.length);
+    
+    const sorted = orderBy(filtered, (a) => {
+        const commonTags = intersection(a.tags, data.value?.tags || []).length;
+        // console.log(`[DEBUG] Article ${a.path} has ${commonTags} common tags`);
+        return commonTags;
+    }, "desc");
+    
+    return sorted.slice(0, 5);
 });
 // const { data: surround } = await useAsyncData(`${route.path}-surround`, async () => {
 //     // Try to find surroundings in each collection
