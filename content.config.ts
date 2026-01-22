@@ -4,7 +4,7 @@ import { asSitemapCollection } from "@nuxtjs/sitemap/content";
 // Base schema for all content types
 const baseContentSchema = z.object({
     title: z.string(),
-    date: z.date(),
+    date: z.string(),
     description: z.string(),
     tags: z.optional(z.array(z.string())).default([]),
     author: z.string(),

@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-// import dayjs from "dayjs";
-// import "dayjs/locale/it";
 import { intersection, orderBy } from "~/utils/array";
 import { 
   type AnyArticle, 
@@ -9,8 +7,6 @@ import {
   getCollectionNames
 } from '~/constants/content-config';
 
-// // Set Italian locale for dayjs
-// dayjs.locale('it');
 import appMeta from "~/app.meta";
 
 const route = useRoute();
@@ -40,6 +36,18 @@ const { data } = await useAsyncData(route.path, async () => {
     }
     return null;
 });
+
+// Format date using useState to prevent hydration mismatch
+const formattedDate = useState(`article-date-${route.path}`, () => {
+  return data.value?.date ? formatDateIT(data.value.date) : 'Data non disponibile';
+});
+
+// Format related article dates using useState
+// const formatRelatedDate = (article: any) => {
+//     const key = `related-date-${article._id || article.path}`;
+//     console.log("[article] Formatting related date for key:", key);
+//     return useState(key, () => formatDateIT(article.date)).value;
+// };
 
 const { data: links } = await useAsyncData(`linked-${route.path}`, async () => {
     const collectionsData = await queryAllCollections();
@@ -164,12 +172,12 @@ onMounted(() => {
                         @click="() => authorEl?.scrollIntoView()"
                     />
                 </div>
-                <!-- <div class="flex flex-row items-center gap-4">
+                <div class="flex flex-row items-center gap-4">
                     <p class="flex flex-row items-center gap-1 typ-sublabel">
-                        <icon name="material-symbols:calendar-today-rounded" class="text-primary" /> {{ formatDateWithMonthIT(data?.date) }}
-                    </p> -->
+                        <icon name="material-symbols:calendar-today-rounded" class="text-primary" /> {{ formattedDate }}
+                    </p>
                     <!-- <p class="flex flex-row items-center gap-1 typ-sublabel"><icon name="material-symbols:alarm-rounded" class="text-primary"></icon> {{ readingTimeText }}</p> -->
-                <!-- </div> -->
+                </div>
             </div>
         </UPageHeader>
 

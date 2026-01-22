@@ -14,7 +14,7 @@ const { data: articles } = await useAsyncData("articles-index", async () => {
     
     // Combine all articles, filter out drafts, and sort by date
     const allArticles: AnyArticle[] = combineArticles(collectionsData)
-        .filter(article => article.draft !== true);
+        .filter(article => article.published !== false);
     
     return allArticles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 });
@@ -44,26 +44,35 @@ watch(selectedCategory, (newCategory) => {
         <UPageBody>
             <!-- Category Filter -->
             <div class="flex items-center gap-4 mb-6 flex-wrap">
-                <UButton v-for="(label, category) in { null: 'All', ...categoryLabels }" :key="category"
-                    :variant="selectedCategory === category ? 'solid' : 'outline'"
-                    @click="selectedCategory = category === 'null' ? null : category">
-                    {{ label }}
+                <UButton
+                  v-for="(label, category) in { null: 'All', ...categoryLabels }"
+                  :key="category"
+                  :variant="selectedCategory === category ? 'solid' : 'outline'"
+                  @click="selectedCategory = category === 'null' ? null : category">
+                  {{ label }}
                 </UButton>
             </div>
 
-            <UEmpty v-if="(filteredArticles?.length ?? 0) <= 0" title="No articles found"
-                description="No articles match the selected category." variant="naked"
-                :actions="[{ label: 'Go back home', to: '/' }]">
+            <UEmpty v-if="(filteredArticles?.length ?? 0) <= 0"
+              title="No articles found"
+              description="No articles match the selected category."
+              variant="naked"
+              :actions="[{ label: 'Go back home', to: '/' }]">
             </UEmpty>
             <UBlogPosts v-else class="gap-4 lg:gap-6 sm:grid-cols-3 lg:grid-cols-4">
-                <UBlogPost v-for="article in filteredArticles" :key="article.path" :title="article.title"
+                <UBlogPost v-for="article in filteredArticles"
+                    :key="article.path"
+                    :title="article.title"
                     :image="article.thumbnail"
                     :authors="[{ name: article.author, avatar: { src: article.author_avatar }, description: article.author_description }]"
                     :badge="Math.abs(new Date().getTime() - new Date(article?.date).getTime()) < 8.64e7 * 7 ? { label: 'New', color: 'primary' } : undefined"
+                    :date="article.date"
                     :to="article.path" variant="naked"
                     class="group border border-gray-200 dark:border-gray-800 rounded-xl p-4 hover:border-primary-500 dark:hover:border-primary-400 transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/10 dark:hover:shadow-primary-400/10 hover:-translate-y-1 hover:scale-[1.02] bg-white dark:bg-gray-900/50 backdrop-blur-sm"
                 >
-                    <!-- :date="formatDateIT(article.date)" -->
+                    <template #date>
+                        {{ useState(`article-date-${article.path}`, () => formatDateIT(article.date)).value }}
+                    </template>
                     <template #description>
                         <p class="mt-1 text-base text-pretty">
                             {{ article.description }}

@@ -327,12 +327,12 @@ meta-analysis-diagram.jpg
 Controls article visibility.
 
 ```yaml
-published: false  # Hidden from production, visible in dev (default)
+published: true  # Hidden from production, visible in dev (default)
 published: true   # Published and visible
 ```
 
 **Usage:**
-- Set `published: false` while writing (there is no necessity to commit unfinished articles)
+- Set `published: true` while writing (there is no necessity to commit unfinished articles)
 - Change to `published: true` when ready to publish
 - Not published articles are filtered in production builds
 

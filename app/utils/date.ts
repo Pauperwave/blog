@@ -1,24 +1,23 @@
-// import dayjs from 'dayjs';
-// import 'dayjs/locale/it';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import 'dayjs/locale/it';
 
-// // Set Italian locale globally
-// dayjs.locale('it');
+// Extend dayjs with UTC plugin
+dayjs.extend(utc);
 
-// /**
-//  * Format a date string to Italian format (DD/MM/YYYY)
-//  * @param date - The date string to format
-//  * @returns Formatted date string in Italian format
-//  */
-// export function formatDateIT(date: string | Date): string {
-//     return dayjs(date).format('DD/MM/YYYY');
-// }
-
-// /**
-//  * Format a date string to Italian format with month name (DD MMM YYYY)
-//  * @param date - The date string to format
-//  * @returns Formatted date string with Italian month name
-//  */
-// export function formatDateWithMonthIT(date: string | Date): string {
-//     return dayjs(date).format('DD MMM YYYY');
-// }
-
+/**
+ * Format a date to Italian format (DD MMMM YYYY)
+ * Always uses UTC to prevent timezone-based hydration mismatches
+ * @param date - Date object
+ * @returns Formatted date string (e.g., "22 gennaio 2026") or "Data non disponibile" if invalid
+ */
+export function formatDateIT(date: string): string {
+    if (!date) return 'Data non disponibile';
+    
+    try {
+        return dayjs.utc(date).locale('it').format('DD MMMM YYYY');
+    } catch (error) {
+        console.warn('Failed to format date:', date, error);
+        return 'Data non disponibile';
+    }
+}
