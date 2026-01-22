@@ -10,7 +10,6 @@ const baseContentSchema = z.object({
     author: z.string(),
     author_avatar: z.string(),
     author_description: z.string(),
-    draft: z.optional(z.boolean()).default(false),
     thumbnail: z.string(),
     published: z.boolean().default(false)
 });
