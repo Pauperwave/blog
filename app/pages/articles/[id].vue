@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import dayjs from "dayjs";
-import "dayjs/locale/it";
+// import dayjs from "dayjs";
+// import "dayjs/locale/it";
 import { intersection, orderBy } from "~/utils/array";
 import { 
   type AnyArticle, 
@@ -9,8 +9,8 @@ import {
   getCollectionNames
 } from '~/constants/content-config';
 
-// Set Italian locale for dayjs
-dayjs.locale('it');
+// // Set Italian locale for dayjs
+// dayjs.locale('it');
 import appMeta from "~/app.meta";
 
 const route = useRoute();
@@ -74,7 +74,7 @@ function updateMeta() {
             headline: data.value?.title,
             description: data.value?.description,
             image: data.value?.thumbnail,
-            datePublished: dayjs(data.value?.date, "YYYY-MM-DD").toDate().toString(),
+            // datePublished: dayjs(data.value?.date, "YYYY-MM-DD").toDate().toString(),
             keywords: data.value?.tags,
             author: {
                 name: data.value?.author,
@@ -164,12 +164,12 @@ onMounted(() => {
                         @click="() => authorEl?.scrollIntoView()"
                     />
                 </div>
-                <div class="flex flex-row items-center gap-4">
+                <!-- <div class="flex flex-row items-center gap-4">
                     <p class="flex flex-row items-center gap-1 typ-sublabel">
                         <icon name="material-symbols:calendar-today-rounded" class="text-primary" /> {{ formatDateWithMonthIT(data?.date) }}
-                    </p>
+                    </p> -->
                     <!-- <p class="flex flex-row items-center gap-1 typ-sublabel"><icon name="material-symbols:alarm-rounded" class="text-primary"></icon> {{ readingTimeText }}</p> -->
-                </div>
+                <!-- </div> -->
             </div>
         </UPageHeader>
 
@@ -208,7 +208,6 @@ onMounted(() => {
                         description: article.author_description
                     }]"
                     :badge="getBadge(article.date)"
-                    :date="formatDateIT(article.date)"
                     :to="article.path"
                     variant="subtle"
                 />

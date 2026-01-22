@@ -97,6 +97,12 @@ For detailed information, see:
 2. Add tests for new utility functions
 3. Update documentation if adding new patterns
 
+**Before any git operations:**
+1. Never push without explicit user permission
+2. Never push without testing with `bun dev` first
+3. Always test changes locally before committing
+4. Always ask for confirmation before pushing to remote
+
 **Performance considerations:**
 - Use native utilities over external libraries
 - Test with large datasets (500+ articles)

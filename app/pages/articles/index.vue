@@ -60,9 +60,10 @@ watch(selectedCategory, (newCategory) => {
                     :image="article.thumbnail"
                     :authors="[{ name: article.author, avatar: { src: article.author_avatar }, description: article.author_description }]"
                     :badge="Math.abs(new Date().getTime() - new Date(article?.date).getTime()) < 8.64e7 * 7 ? { label: 'New', color: 'primary' } : undefined"
-                    :date="formatDateIT(article.date)" :to="article.path" variant="naked"
+                    :to="article.path" variant="naked"
                     class="group border border-gray-200 dark:border-gray-800 rounded-xl p-4 hover:border-primary-500 dark:hover:border-primary-400 transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/10 dark:hover:shadow-primary-400/10 hover:-translate-y-1 hover:scale-[1.02] bg-white dark:bg-gray-900/50 backdrop-blur-sm"
                 >
+                    <!-- :date="formatDateIT(article.date)" -->
                     <template #description>
                         <p class="mt-1 text-base text-pretty">
                             {{ article.description }}
