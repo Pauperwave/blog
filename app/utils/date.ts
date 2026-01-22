@@ -1,25 +1,20 @@
 import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
 import itLocale from 'dayjs/locale/it';
-
-// Extend dayjs with UTC plugin
-dayjs.extend(utc);
 
 // Set Italian as the global locale to ensure it works during SSR
 dayjs.locale('it', itLocale);
 
 /**
  * Format a date to Italian format (DD MMMM YYYY)
- * Always uses UTC to prevent timezone-based hydration mismatches
- * @param date - Date object
+ * @param date - Date string in YYYY-MM-DD format
  * @returns Formatted date string (e.g., "22 gennaio 2026") or "Data non disponibile" if invalid
  */
 export function formatDateIT(date: string): string {
     if (!date) return 'Data non disponibile';
     
     try {
-        // Use Italian locale explicitly on the instance
-        return dayjs.utc(date).locale('it').format('DD MMMM YYYY');
+        // Parse and format the date in Italian locale
+        return dayjs(date).locale('it').format('DD MMMM YYYY');
     } catch (error) {
         console.warn('Failed to format date:', date, error);
         return 'Data non disponibile';
