@@ -1,9 +1,12 @@
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
-import 'dayjs/locale/it';
+import itLocale from 'dayjs/locale/it';
 
 // Extend dayjs with UTC plugin
 dayjs.extend(utc);
+
+// Set Italian as the global locale to ensure it works during SSR
+dayjs.locale('it', itLocale);
 
 /**
  * Format a date to Italian format (DD MMMM YYYY)
@@ -15,6 +18,7 @@ export function formatDateIT(date: string): string {
     if (!date) return 'Data non disponibile';
     
     try {
+        // Use Italian locale explicitly on the instance
         return dayjs.utc(date).locale('it').format('DD MMMM YYYY');
     } catch (error) {
         console.warn('Failed to format date:', date, error);
