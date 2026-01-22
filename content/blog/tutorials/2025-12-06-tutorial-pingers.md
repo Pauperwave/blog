@@ -4,7 +4,7 @@ description: "Introduzione a Pingers"
 tags: [pingers, monored]
 date: 2025-12-06
 updatedAt: 2025-12-06
-author: Bragioto Pietro
+author: "Pietro Bragioto"
 author_avatar: /assets/avatars/bragioto.jpg
 author_description: "Scribacchino di liste"
 thumbnail: /assets/blog/arts/inr-174-thermo-alchemist.jpeg
