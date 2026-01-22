@@ -17,7 +17,7 @@ const isNewArticle = (date: string) => {
 };
 
 const getArticleBadge = (date: string) => {
-  return isNewArticle(date) ? { label: 'New', color: 'primary' as const } : undefined;
+  return isNewArticle(date) ? { label: 'Nuovo', color: 'primary' as const } : undefined;
 };
 </script>
 
