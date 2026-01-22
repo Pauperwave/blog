@@ -1,7 +1,7 @@
 ---
 title: "Paupergeddon Roma 2023"
 description: "Decklists Top 8"
-tags: [top8]
+tags: [top8, paupergeddon]
 date: 2023-11-20
 updatedAt: 2023-11-20
 author: Bragioto Pietro
