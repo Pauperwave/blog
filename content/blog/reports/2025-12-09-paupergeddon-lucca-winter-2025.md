@@ -36,9 +36,9 @@ After a few reality checks by Tommaso, I was convinced it was the right deck and
 ::MagicDecklist
 ---
 name: Caw Gates
-author: Edoardo Bardi
-position: Top 8 Paupergeddon Lucca Winter 2025
+player: Edoardo Bardi
 description: A deck leveraging the synergy between Caw-Blade and Basilisk Gate to control the board and generate value.
+placement: Top 8 Paupergeddon Lucca Winter 2025
 ---
 Creatures
 4 Sacred Cat
@@ -196,7 +196,7 @@ description:
 #in
 4 Red Elemental Blast
 2 Dispel
-2 Palace Sentinel
+2 Palace Sentinels
 #out
 2 The Modern Age
 2 Prismatic Strands
