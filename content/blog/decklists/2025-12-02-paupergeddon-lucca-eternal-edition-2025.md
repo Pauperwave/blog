@@ -7,7 +7,7 @@ updatedAt: 2025-12-02
 author: Bragioto Pietro
 author_avatar: /assets/avatars/bragioto.jpg
 author_description: "Scribacchino di liste"
-thumbnail: /assets/blog/events/paupergeddon-eternal-edition-2025.avif
+thumbnail: /assets/blog/events/paupergeddon-eternal-edition-2025.png
 published: true
 ---
 
