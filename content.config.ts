@@ -19,6 +19,9 @@ export default defineContentConfig({
       source: 'authors/**.yml',
       schema: z.object({
         name: z.string(),
+        nickname: z.string().optional(),
+        description: z.string(),
+        bio: z.string().optional(),
         avatar: z.string(),
         url: z.string()
       })
