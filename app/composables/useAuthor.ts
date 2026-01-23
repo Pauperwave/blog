@@ -5,6 +5,13 @@ interface Author {
   bio?: string;
   url: string;
   nickname?: string;
+  socials?: {
+    twitter?: string;
+    github?: string;
+    youtube?: string;
+    twitch?: string;
+    website?: string;
+  };
 }
 
 /**
@@ -41,6 +48,7 @@ export const useAuthor = async (authorName: string): Promise<Author> => {
     description: author.description,
     bio: author.bio,
     url: author.url,
-    nickname: author.nickname
+    nickname: author.nickname,
+    socials: author.socials
   };
 };

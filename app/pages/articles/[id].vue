@@ -203,7 +203,8 @@ onMounted(() => {
                             name: authorData.name,
                             description: authorData.description,
                             avatar: authorData.avatar,
-                            url: authorData.url
+                            url: authorData.url,
+                            socials: authorData.socials
                         }"
                         variant="inline"
                         :clickable="false"

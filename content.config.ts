@@ -23,7 +23,14 @@ export default defineContentConfig({
         description: z.string(),
         bio: z.string().optional(),
         avatar: z.string(),
-        url: z.string()
+        url: z.string(),
+        socials: z.object({
+          twitter: z.string().optional(),
+          github: z.string().optional(),
+          youtube: z.string().optional(),
+          twitch: z.string().optional(),
+          website: z.string().optional()
+        }).optional()
       })
     }),
     articles: defineCollection(

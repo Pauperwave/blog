@@ -4,6 +4,13 @@ const props = defineProps<{
     name: string;
     description?: string;
     url?: string;
+    socials?: {
+        twitter?: string;
+        github?: string;
+        youtube?: string;
+        twitch?: string;
+        website?: string;
+    };
 }>();
 </script>
 
@@ -24,7 +31,8 @@ const props = defineProps<{
                         name: props.name,
                         avatar: props.src,
                         description: props.description,
-                        url: props.url
+                        url: props.url,
+                        socials: props.socials
                     }"
                     variant="inline"
                     :clickable="!!props.url"
