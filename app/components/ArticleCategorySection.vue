@@ -3,6 +3,7 @@ interface Props {
   title: string;
   category: string;
   articles: any[];
+  authorsMap: Record<string, any>;
   maxItems?: number;
   viewAllText?: string;
 }
@@ -35,7 +36,11 @@ const getArticleBadge = (date: string) => {
         :key="article._id"
         :title="article.title"
         :image="article.thumbnail"
-        :authors="[{ name: article.author, avatar: { src: article.author_avatar }, description: article.author_description }]"
+        :authors="[{ 
+          name: authorsMap[article.author]?.name || article.author, 
+          avatar: { src: authorsMap[article.author]?.avatar }, 
+          description: authorsMap[article.author]?.description 
+        }]"
         :badge="getArticleBadge(article.date)"
         :date="article.date"
         :to="article.path"

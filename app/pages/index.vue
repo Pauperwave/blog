@@ -19,6 +19,21 @@ const { data: allArticles } = await useAsyncData('home-articles', async () => {
   return combined.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 });
 
+// Fetch author data for all unique authors
+const authorsMap = ref<Record<string, any>>({});
+
+if (allArticles.value) {
+  const uniqueAuthors = [...new Set(allArticles.value.map(article => article.author))];
+  for (const authorName of uniqueAuthors) {
+    try {
+      const authorInfo = await useAuthor(authorName);
+      authorsMap.value[authorName] = authorInfo;
+    } catch (e) {
+      console.error(`Failed to load author data for ${authorName}:`, e);
+    }
+  }
+}
+
 const articlesByCategory = computed(() => {
   const categories = initializeCategories();
 
@@ -47,6 +62,7 @@ const sections = getHomeSections();
         :title="section.title"
         :category="section.category"
         :articles="articlesByCategory[section.category]"
+        :authors-map="authorsMap"
       />
       <!-- </div> -->
     </UPageBody>

@@ -19,6 +19,21 @@ const { data: articles } = await useAsyncData("articles-index", async () => {
     return allArticles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 });
 
+// Fetch author data for all unique authors
+const authorsMap = ref<Record<string, any>>({});
+
+if (articles.value) {
+    const uniqueAuthors = [...new Set(articles.value.map(article => article.author))];
+    for (const authorName of uniqueAuthors) {
+        try {
+            const authorInfo = await useAuthor(authorName);
+            authorsMap.value[authorName] = authorInfo;
+        } catch (e) {
+            console.error(`Failed to load author data for ${authorName}:`, e);
+        }
+    }
+}
+
 const selectedCategory = ref<string | null>(
     route.query.category ? String(route.query.category) : null
 );
@@ -64,7 +79,11 @@ watch(selectedCategory, (newCategory) => {
                     :key="article.path"
                     :title="article.title"
                     :image="article.thumbnail"
-                    :authors="[{ name: article.author, avatar: { src: article.author_avatar }, description: article.author_description }]"
+                    :authors="[{ 
+                        name: authorsMap[article.author]?.name || article.author, 
+                        avatar: { src: authorsMap[article.author]?.avatar }, 
+                        description: authorsMap[article.author]?.description 
+                    }]"
                     :badge="Math.abs(new Date().getTime() - new Date(article?.date).getTime()) < 8.64e7 * 7 ? { label: 'Nuovo', color: 'primary' } : undefined"
                     :date="article.date"
                     :to="article.path" variant="naked"

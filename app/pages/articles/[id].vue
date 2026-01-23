@@ -37,6 +37,9 @@ const { data } = await useAsyncData(route.path, async () => {
     return null;
 });
 
+// Fetch author data from authors collection
+const authorData = data.value?.author ? await useAuthor(data.value.author) : null;
+
 // Format date using useState to prevent hydration mismatch
 const formattedDate = useState(`article-date-${route.path}`, () => {
   return data.value?.date ? formatDateIT(data.value.date) : 'Data non disponibile';
@@ -73,6 +76,21 @@ const { data: links } = await useAsyncData(`linked-${route.path}`, async () => {
     
     return sorted.slice(0, 5);
 });
+
+// Fetch author data for related articles
+const relatedAuthorsMap = ref<Record<string, any>>({});
+
+if (links.value) {
+    const uniqueAuthors = [...new Set(links.value.map(article => article.author))];
+    for (const authorName of uniqueAuthors) {
+        try {
+            const authorInfo = await useAuthor(authorName);
+            relatedAuthorsMap.value[authorName] = authorInfo;
+        } catch (e) {
+            console.error(`Failed to load author data for ${authorName}:`, e);
+        }
+    }
+}
 // const { data: surround } = await useAsyncData(`${route.path}-surround`, async () => {
 //     // Try to find surroundings in each collection
 //     const collections = ["articles", "tutorials", "decklists", "reports", "spoilers"];
@@ -100,9 +118,9 @@ function updateMeta() {
             // datePublished: dayjs(data.value?.date, "YYYY-MM-DD").toDate().toString(),
             keywords: data.value?.tags,
             author: {
-                name: data.value?.author,
-                description: data.value?.author_description,
-                image: data.value?.author_avatar,
+                name: authorData?.name,
+                description: authorData?.description,
+                image: authorData?.avatar,
             },
             publisher: definePerson({
                 name: appMeta.author.name,
@@ -129,8 +147,8 @@ function updateMeta() {
     //     thumbnail: data.value?.thumbnail,
     //     title: data.value?.title,
     //     author: {
-    //         name: data.value?.author,
-    //         image: data.value?.author_avatar,
+    //         name: authorData?.name,
+    //         image: authorData?.avatar,
     //     },
     // });
 }
@@ -180,9 +198,9 @@ onMounted(() => {
                         </UBadge>
                     </div>
                     <UUser
-                        :name="data?.author"
-                        :description="data?.author_description"
-                        :avatar="{ src: data?.author_avatar }"
+                        :name="authorData?.name"
+                        :description="authorData?.description"
+                        :avatar="{ src: authorData?.avatar }"
                         class="cursor-default"
                         @click="() => authorEl?.scrollIntoView()"
                     />
@@ -226,9 +244,9 @@ onMounted(() => {
                     :title="article.title"
                     :image="article.thumbnail"
                     :authors="[{
-                        name: article.author,
-                        avatar: { src: article.author_avatar },
-                        description: article.author_description
+                        name: relatedAuthorsMap[article.author]?.name || article.author,
+                        avatar: { src: relatedAuthorsMap[article.author]?.avatar },
+                        description: relatedAuthorsMap[article.author]?.description
                     }]"
                     :badge="getBadge(article.date)"
                     :to="article.path"
