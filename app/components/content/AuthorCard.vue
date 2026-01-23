@@ -5,6 +5,13 @@ interface Author {
   avatar?: string;
   bio?: string;
   url?: string;
+  socials?: {
+    twitter?: string;
+    github?: string;
+    youtube?: string;
+    twitch?: string;
+    website?: string;
+  };
 }
 
 interface Props {
@@ -55,7 +62,8 @@ const shouldLink = computed(() => {
   <div
     v-if="variant === 'inline'"
     :class="[
-      'relative flex items-center gap-2',
+      'relative z-10 flex items-center gap-2 border-2 border-red-500 group/author-card pointer-events-auto',
+      'transition-all duration-300',
       props.class
     ]"
   >
@@ -66,20 +74,7 @@ const shouldLink = computed(() => {
       class="shrink-0"
     />
     
-    <div class="min-w-0">
-      <ULink
-        v-if="shouldLink"
-        :aria-label="author.name"
-        :to="isExternalLink ? undefined : author.url"
-        :href="isExternalLink ? author.url : undefined"
-        :target="linkTarget"
-        :rel="linkRel"
-        class="focus:outline-none peer"
-        raw
-      >
-        <span class="absolute inset-0" aria-hidden="true" />
-      </ULink>
-
+    <div class="min-w-0 flex-1">
       <p class="text-sm font-medium text-highlighted truncate">
         {{ author.name }}
       </p>
@@ -90,6 +85,75 @@ const shouldLink = computed(() => {
       >
         {{ author.description }}
       </p>
+
+      <!-- Social links row - appears on hover -->
+      <div 
+        v-if="author.socials"
+        class="flex items-center gap-2 mt-2 opacity-0 max-h-0 overflow-hidden group-hover/author-card:opacity-100 group-hover/author-card:max-h-10 transition-all duration-300"
+      >
+        <a
+          v-if="author.socials.twitter"
+          :href="author.socials.twitter"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-gray-500 hover:text-blue-400 transition-colors relative z-10"
+          @click.stop
+        >
+          <Icon name="mdi:twitter" class="w-4 h-4" />
+        </a>
+        <a
+          v-if="author.socials.github"
+          :href="author.socials.github"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors relative z-10"
+          @click.stop
+        >
+          <Icon name="mdi:github" class="w-4 h-4" />
+        </a>
+        <a
+          v-if="author.socials.youtube"
+          :href="author.socials.youtube"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-gray-500 hover:text-red-600 transition-colors relative z-10"
+          @click.stop
+        >
+          <Icon name="mdi:youtube" class="w-4 h-4" />
+        </a>
+        <a
+          v-if="author.socials.twitch"
+          :href="author.socials.twitch"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-gray-500 hover:text-purple-600 transition-colors relative z-10"
+          @click.stop
+        >
+          <Icon name="mdi:twitch" class="w-4 h-4" />
+        </a>
+        <a
+          v-if="author.socials.website"
+          :href="author.socials.website"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-gray-500 hover:text-primary transition-colors relative z-10"
+          @click.stop
+        >
+          <Icon name="mdi:web" class="w-4 h-4" />
+        </a>
+        
+        <!-- Divider -->
+        <div class="w-px h-4 bg-gray-300 dark:bg-gray-600 mx-1"></div>
+        
+        <!-- Link to author page -->
+        <NuxtLink
+          :to="`/authors/${author.name.toLowerCase().replace(/\s+/g, '-')}`"
+          class="text-xs text-primary hover:underline relative z-10"
+          @click.stop
+        >
+          Vedi profilo
+        </NuxtLink>
+      </div>
     </div>
   </div>
 

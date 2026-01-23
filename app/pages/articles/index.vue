@@ -105,7 +105,9 @@ watch(selectedCategory, (newCategory) => {
                             :author="{
                                 name: authorsMap[article.author]?.name || article.author,
                                 description: authorsMap[article.author]?.description,
-                                avatar: authorsMap[article.author]?.avatar
+                                avatar: authorsMap[article.author]?.avatar,
+                                bio: authorsMap[article.author]?.bio,
+                                socials: authorsMap[article.author]?.socials
                             }"
                             variant="inline"
                             :clickable="false"
