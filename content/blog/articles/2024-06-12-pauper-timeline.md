@@ -4,9 +4,7 @@ description: ""
 tags: [meta]
 date: 2024-06-12
 updatedAt: 2024-06-12
-author: "Pietro Bragioto"
-author_avatar: /assets/avatars/bragioto.jpg
-author_description: "Scribacchino di liste"
+author: Pietro Bragioto
 thumbnail: /assets/blog/arts/sarawinters-compulsiveresearch.jpg
 published: true
 ---

@@ -4,9 +4,7 @@ description: "Decklists Top 8"
 tags: [top8, paupergeddon]
 date: 2023-11-20
 updatedAt: 2023-11-20
-author: Bragioto Pietro
-author_avatar: /assets/avatars/bragioto.jpg
-author_description: "Scribacchino di liste"
+author: Pietro Bragioto
 thumbnail: /assets/blog/arts/Bonebind-Orator.jpg
 published: true
 ---

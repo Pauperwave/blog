@@ -4,9 +4,7 @@ description: "Descrizione volutamente lunga per vedere come si comporta la grigl
 tags: [top4, top8, to16, top32, paupergeddon, ipt, trio]
 date: 2026-01-14
 updatedAt: 2026-01-22T01:00:00
-author: Bragioto Pietro
-author_avatar: /assets/avatars/bragioto.jpg
-author_description: "Scribacchino di liste"
+author: Pietro Bragioto
 thumbnail: /assets/blog/arts/Bonebind-Orator.jpg
 published: true
 ---

@@ -5,8 +5,6 @@ tags: [ECL, set review]
 date: 2026-01-17
 updatedAt: 2026-01-17
 author: Pietro Bragioto
-author_avatar: /assets/avatars/bragioto.jpg
-author_description: "Scribacchino di liste"
 thumbnail: /assets/blog/sets/lorwyn-eclipsed.jpg
 published: true
 ---

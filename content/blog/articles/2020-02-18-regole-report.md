@@ -5,8 +5,6 @@ tags: [meta, report]
 date: 2020-02-18
 updatedAt: 2020-02-18
 author: Pietro Bragioto
-author_avatar: /assets/avatars/bragioto.jpg
-author_description: "Scribacchino di liste"
 thumbnail: /assets/blog/arts/m20-35-rule-of-law.jpg
 published: true
 ---

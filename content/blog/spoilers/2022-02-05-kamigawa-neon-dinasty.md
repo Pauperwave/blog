@@ -4,9 +4,7 @@ description: "Spoiler article for Kamigawa Neon Dinasty"
 tags: [spoiler]
 date: 2022-02-05
 updatedAt: 2022-02-05
-author: Bragioto Pietro
-author_avatar: /assets/avatars/bragioto.jpg
-author_description: "Scribacchino di liste"
+author: Pietro Bragioto
 thumbnail: /assets/blog/sets/kamigawa-neon-dinasty.jpeg
 published: true
 ---

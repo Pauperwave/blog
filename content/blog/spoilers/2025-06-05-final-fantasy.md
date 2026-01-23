@@ -4,9 +4,7 @@ description: "Spoiler article for Final Fantasy"
 tags: [spoiler]
 date: 2025-06-05
 updatedAt: 2025-06-05
-author: Bragioto Pietro
-author_avatar: /assets/avatars/bragioto.jpg
-author_description: "Scribacchino di liste"
+author: Pietro Bragioto
 thumbnail: /assets/blog/sets/final-fantasy.jpeg
 published: true
 ---

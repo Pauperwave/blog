@@ -4,9 +4,7 @@ description: "Spoiler article for Pauper Sanctioned"
 tags: [spoiler]
 date: 2019-06-30
 updatedAt: 2019-06-30
-author: Bragioto Pietro
-author_avatar: /assets/avatars/bragioto.jpg
-author_description: "Scribacchino di liste"
+author: Pietro Bragioto
 thumbnail: /assets/blog/arts/Bonebind-Orator.jpg
 published: true
 ---

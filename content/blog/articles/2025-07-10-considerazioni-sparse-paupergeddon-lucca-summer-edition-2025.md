@@ -4,9 +4,7 @@ description: ""
 tags: [meta,]
 date: 2025-07-10
 updatedAt: 2025-07-10
-author: "Pietro Bragioto"
-author_avatar: /assets/avatars/bragioto.jpg
-author_description: "Scribacchino di liste"
+author: Pietro Bragioto
 thumbnail: /assets/blog/arts/careful-consideration.jpg
 published: true
 ---

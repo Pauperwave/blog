@@ -4,9 +4,7 @@ description: "Spoiler article for Double Masters 2022"
 tags: [spoiler]
 date: 2022-06-26
 updatedAt: 2022-06-26
-author: Bragioto Pietro
-author_avatar: /assets/avatars/bragioto.jpg
-author_description: "Scribacchino di liste"
+author: Pietro Bragioto
 thumbnail: /assets/blog/sets/double-masters-2022.jpg
 published: true
 ---

@@ -4,9 +4,7 @@ description: "Esploriamo il concetto di 'limitate' in Magic: The Gathering e il 
 tags: ["meta analysis", "game mechanics"]
 date: 2025-10-09
 updatedAt: 2025-10-09
-author: "Pietro Bragioto"
-author_avatar: /assets/avatars/bragioto.jpg
-author_description: "Scribacchino di liste"
+author: Pietro Bragioto
 thumbnail: /assets/blog/articles/jinxs-monkey-bomb.jpg
 published: true
 ---

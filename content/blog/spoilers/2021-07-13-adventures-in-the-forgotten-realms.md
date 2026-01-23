@@ -4,9 +4,7 @@ description: "Spoiler article for Adventures In The Forgotten Realms"
 tags: [spoiler]
 date: 2021-07-13
 updatedAt: 2021-07-13
-author: Bragioto Pietro
-author_avatar: /assets/avatars/bragioto.jpg
-author_description: "Scribacchino di liste"
+author: Pietro Bragioto
 thumbnail: /assets/blog/sets/adventures-in-the-forgotten-realms.jpeg
 published: true
 ---
