@@ -197,11 +197,16 @@ onMounted(() => {
                             {{ tag }}
                         </UBadge>
                     </div>
-                    <UUser
-                        :name="authorData?.name"
-                        :description="authorData?.description"
-                        :avatar="{ src: authorData?.avatar }"
-                        class="cursor-default"
+                    <AuthorCard
+                        v-if="authorData"
+                        :author="{
+                            name: authorData.name,
+                            description: authorData.description,
+                            avatar: authorData.avatar,
+                            url: authorData.url
+                        }"
+                        variant="inline"
+                        :clickable="false"
                         @click="() => authorEl?.scrollIntoView()"
                     />
                 </div>
