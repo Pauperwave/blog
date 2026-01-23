@@ -79,11 +79,6 @@ watch(selectedCategory, (newCategory) => {
                     :key="article.path"
                     :title="article.title"
                     :image="article.thumbnail"
-                    :authors="[{ 
-                        name: authorsMap[article.author]?.name || article.author, 
-                        avatar: { src: authorsMap[article.author]?.avatar }, 
-                        description: authorsMap[article.author]?.description 
-                    }]"
                     :badge="Math.abs(new Date().getTime() - new Date(article?.date).getTime()) < 8.64e7 * 7 ? { label: 'Nuovo', color: 'primary' } : undefined"
                     :date="article.date"
                     :to="article.path" variant="naked"
@@ -104,6 +99,17 @@ watch(selectedCategory, (newCategory) => {
                                 {{ tag }}
                             </UBadge>
                         </div>
+                    </template>
+                    <template #authors>
+                        <AuthorCard
+                            :author="{
+                                name: authorsMap[article.author]?.name || article.author,
+                                description: authorsMap[article.author]?.description,
+                                avatar: authorsMap[article.author]?.avatar
+                            }"
+                            variant="inline"
+                            :clickable="false"
+                        />
                     </template>
                 </UBlogPost>
             </UBlogPosts>
