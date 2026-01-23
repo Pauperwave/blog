@@ -31,7 +31,9 @@ const getArticleBadge = (date: string) => {
       </UButton>
     </div>
     <UBlogPosts>
-      <UBlogPost v-for="article in articles.slice(0, maxItems)" :key="article._id" :title="article.title"
+      <UBlogPost v-for="article in articles.slice(0, maxItems)"
+        :key="article._id"
+        :title="article.title"
         :image="article.thumbnail"
         :authors="[{ name: article.author, avatar: { src: article.author_avatar }, description: article.author_description }]"
         :badge="getArticleBadge(article.date)"
