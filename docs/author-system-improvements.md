@@ -486,20 +486,329 @@ const filteredArticles = computed(() => {
 
 ---
 
+## 📊 Analytics & User Tracking
+
+### 15. PostHog Integration for User Behavior Analytics
+
+**Description**: Integrate PostHog to track user views, actions, and behavior across the site
+
+**Why PostHog**:
+- Open-source analytics platform
+- Privacy-friendly (GDPR compliant)
+- Self-hostable or cloud-hosted
+- Feature flags support
+- Session recordings
+- Heatmaps and user paths
+- No data sampling (unlike Google Analytics)
+- Free tier available
+
+**Official Website**: https://posthog.com/
+
+**What to Track**:
+
+**Page Views**:
+- Article views (by category, author, tags)
+- Author page views
+- Homepage visits
+- Articles index page views
+- Time spent on each page
+- Bounce rate per page type
+
+**User Actions**:
+- Search queries (what users search for)
+- Search result clicks
+- Filter usage (category, author filters)
+- Article card clicks
+- Author card clicks
+- "Vedi profilo" link clicks
+- Social media link clicks
+- Category counter card clicks
+- External link clicks (outbound tracking)
+- Share button clicks (if implemented)
+- "View All" button clicks
+
+**User Journey Tracking**:
+- Entry pages (where users land)
+- Exit pages (where users leave)
+- Navigation paths (how users move through site)
+- Conversion funnels (e.g., Homepage → Articles → Author Page)
+- Reading depth (scroll tracking on articles)
+
+**Engagement Metrics**:
+- Return visitor rate
+- Session duration
+- Pages per session
+- Most viewed articles
+- Most viewed authors
+- Popular categories
+- Popular tags
+- Peak usage times
+
+**Performance Insights**:
+- Which articles drive most traffic
+- Which authors are most popular
+- Which categories get most engagement
+- Drop-off points in user journeys
+- Search success vs. failure rates
+
+**Implementation Steps**:
+
+1. **Install PostHog**
+```bash
+npm install posthog-js
+# or
+yarn add posthog-js
+```
+
+2. **Create PostHog Plugin** (`plugins/posthog.client.ts`)
+```typescript
+import posthog from 'posthog-js'
+
+export default defineNuxtPlugin(() => {
+  const runtimeConfig = useRuntimeConfig()
+  const posthogClient = posthog.init(runtimeConfig.public.posthogKey, {
+    api_host: runtimeConfig.public.posthogHost || 'https://app.posthog.com',
+    capture_pageview: false, // We'll manually track page views
+    capture_pageleave: true,
+    loaded: (posthog) => {
+      if (import.meta.env.MODE === 'development') posthog.debug()
+    }
+  })
+
+  // Track page views
+  const router = useRouter()
+  router.afterEach((to) => {
+    nextTick(() => {
+      posthog.capture('$pageview', {
+        current_url: to.fullPath
+      })
+    })
+  })
+
+  return {
+    provide: {
+      posthog: () => posthogClient
+    }
+  }
+})
+```
+
+3. **Add Environment Variables** (`.env`)
+```bash
+NUXT_PUBLIC_POSTHOG_KEY=your_project_api_key
+NUXT_PUBLIC_POSTHOG_HOST=https://app.posthog.com
+```
+
+4. **Update nuxt.config.ts**
+```typescript
+export default defineNuxtConfig({
+  runtimeConfig: {
+    public: {
+      posthogKey: process.env.NUXT_PUBLIC_POSTHOG_KEY,
+      posthogHost: process.env.NUXT_PUBLIC_POSTHOG_HOST
+    }
+  }
+})
+```
+
+5. **Create Composable** (`composables/useTracking.ts`)
+```typescript
+export const useTracking = () => {
+  const { $posthog } = useNuxtApp()
+
+  const trackEvent = (eventName: string, properties?: Record<string, any>) => {
+    $posthog()?.capture(eventName, properties)
+  }
+
+  const trackArticleView = (article: any) => {
+    trackEvent('article_viewed', {
+      article_id: article.path,
+      article_title: article.title,
+      article_category: article.category,
+      article_author: article.author,
+      article_tags: article.tags
+    })
+  }
+
+  const trackAuthorView = (author: any) => {
+    trackEvent('author_page_viewed', {
+      author_name: author.name,
+      author_slug: getAuthorSlug(author.name)
+    })
+  }
+
+  const trackSearch = (query: string, resultCount: number) => {
+    trackEvent('search_performed', {
+      search_query: query,
+      result_count: resultCount
+    })
+  }
+
+  const trackFilter = (filterType: string, filterValue: string) => {
+    trackEvent('filter_applied', {
+      filter_type: filterType,
+      filter_value: filterValue
+    })
+  }
+
+  const trackClick = (elementType: string, elementId: string, metadata?: Record<string, any>) => {
+    trackEvent('element_clicked', {
+      element_type: elementType,
+      element_id: elementId,
+      ...metadata
+    })
+  }
+
+  return {
+    trackEvent,
+    trackArticleView,
+    trackAuthorView,
+    trackSearch,
+    trackFilter,
+    trackClick
+  }
+}
+```
+
+6. **Add Tracking to Components**
+
+**Articles Page** (`pages/articles/index.vue`):
+```vue
+<script setup>
+const { trackSearch, trackFilter } = useTracking()
+
+// Track search
+watch(debouncedSearch, (query) => {
+  if (query) {
+    trackSearch(query, filteredArticles.value.length)
+  }
+})
+
+// Track category filter
+watch(selectedCategory, (category) => {
+  if (category) {
+    trackFilter('category', category)
+  }
+})
+</script>
+```
+
+**Article Detail Page** (`pages/articles/[id].vue`):
+```vue
+<script setup>
+const { trackArticleView } = useTracking()
+
+onMounted(() => {
+  if (data.value) {
+    trackArticleView(data.value)
+  }
+})
+</script>
+```
+
+**Author Page** (`pages/authors/[slug].vue`):
+```vue
+<script setup>
+const { trackAuthorView, trackClick } = useTracking()
+
+onMounted(() => {
+  trackAuthorView(authorData)
+})
+
+// Track category card clicks
+const handleCategoryClick = (category: string, count: number) => {
+  trackClick('category_card', category, {
+    article_count: count,
+    author: authorData.name
+  })
+}
+</script>
+```
+
+**Author Card** (`components/content/AuthorCard.vue`):
+```vue
+<script setup>
+const { trackClick } = useTracking()
+
+const handleProfileClick = () => {
+  trackClick('author_profile_link', props.author.name, {
+    variant: props.variant
+  })
+}
+
+const handleSocialClick = (platform: string, url: string) => {
+  trackClick('social_link', platform, {
+    author: props.author.name,
+    url
+  })
+}
+</script>
+```
+
+**Privacy Considerations**:
+- Add cookie consent banner (if required by GDPR)
+- Link to privacy policy
+- Allow users to opt-out
+- Anonymize IP addresses
+- Don't track PII (personally identifiable information)
+
+**PostHog Features to Leverage**:
+- **Session Recordings**: Watch how users interact with your site
+- **Feature Flags**: A/B test new features before full rollout
+- **Cohorts**: Group users by behavior (e.g., "frequent readers")
+- **Retention Analysis**: Track returning visitors
+- **Funnel Analysis**: Optimize conversion paths
+- **Dashboards**: Create custom analytics dashboards
+
+**Useful PostHog Events to Set Up**:
+```typescript
+// Engagement milestones
+posthog.capture('user_engaged', { engagement_level: 'high' }) // 5+ page views
+posthog.capture('article_read_complete', { article_id, reading_time })
+
+// Content discovery
+posthog.capture('related_article_clicked', { from_article, to_article })
+posthog.capture('category_explored', { category, article_count_viewed })
+
+// Author discovery
+posthog.capture('author_discovered', { author, discovery_method: 'article_card' })
+posthog.capture('author_social_engagement', { author, platform })
+
+// Search behavior
+posthog.capture('search_abandoned', { query, result_count: 0 })
+posthog.capture('search_refined', { original_query, new_query })
+```
+
+**Implementation Complexity**: Medium
+**Estimated Time**: 2-3 hours for basic setup
+**Cost**: Free up to 1M events/month, then paid plans
+
+**Benefits**:
+- Data-driven decision making
+- Understand user behavior
+- Identify popular content
+- Optimize user experience
+- Track feature adoption
+- A/B testing capabilities
+- No dependency on Google Analytics
+
+---
+
 ## 🤔 Recommended Implementation Order
 
 If implementing multiple features, here's the suggested order:
 
-1. **Article Search Bar** - Immediate value, enhances content discovery
-2. **Authors Index Page** - Foundation for discovery
-3. **Author Filter on Articles** - Enhances existing filtering system
-4. **"View All" Button** - Completes user journey on author page
-5. **Author Badges** - Quick win, adds personality
-6. **Activity Timeline** - Visual engagement
-7. **Related Authors** - Cross-promotion
-8. **RSS Feeds** - Professional polish
-9. **Author Search** - Once author count grows (10+)
-10. **Co-Author Support** - If needed by content strategy
+1. **PostHog Analytics Integration** - Foundation for data-driven decisions (implement first!)
+2. **Article Search Bar** - Immediate value, enhances content discovery
+3. **Authors Index Page** - Foundation for discovery
+4. **Author Filter on Articles** - Enhances existing filtering system
+5. **"View All" Button** - Completes user journey on author page
+6. **Author Badges** - Quick win, adds personality
+7. **Activity Timeline** - Visual engagement
+8. **Related Authors** - Cross-promotion
+9. **RSS Feeds** - Professional polish
+10. **Author Search** - Once author count grows (10+)
+11. **Co-Author Support** - If needed by content strategy
 
 ---
 
