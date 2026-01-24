@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { data: page } = await useAsyncData('code-of-conduct', () => 
+const { data: page } = await useAsyncData('statute', () => 
   queryCollection('docs').where('id', '=', 'docs/statuto.md').first()
 )
 </script>
