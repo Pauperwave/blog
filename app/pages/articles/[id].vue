@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { intersection, orderBy } from "~/utils/array";
+import { intersection, orderByMultiple } from "~/utils/array";
 import { 
   type AnyArticle, 
   queryAllCollections, 
@@ -13,9 +13,6 @@ const route = useRoute();
 const authorEl = ref<HTMLElement | null>();
 const relatedArticlesEl = ref<HTMLElement | null>();
 
-// TODO: Related articles currently show top 5 by tag intersection (line 57).
-// Consider filtering to only show articles with at least 1 common tag to reduce noise.
-const relatedArticlesString = "Altri articoli correlati"
 const getBadge = (date: string) => {
     return Math.abs(new Date().getTime() - new Date(date).getTime()) < 8.64e7 * 7
         ? { label: "New", color: "primary" as const }
@@ -52,29 +49,40 @@ const formattedDate = useState(`article-date-${route.path}`, () => {
 //     return useState(key, () => formatDateIT(article.date)).value;
 // };
 
+// TODO: Related articles currently show top 3 by tag intersection and publication date
+const MAX_RELATED_ARTICLES = 5;
+const relatedArticlesString = "Altri articoli correlati"
+
 const { data: links } = await useAsyncData(`linked-${route.path}`, async () => {
-    const collectionsData = await queryAllCollections();
-    
-    // Combine all articles and filter
-    const allArticles: AnyArticle[] = combineArticles(collectionsData);
-    
-    // console.log('[DEBUG] Total articles:', allArticles.length);
-    // console.log('[DEBUG] Current article path:', data.value?.path);
-    // console.log('[DEBUG] Current article tags:', data.value?.tags);
-    // console.log('[DEBUG] Published articles count:', allArticles.filter(a => a.published === true).length);
-    // console.log('[DEBUG] Sample article:', allArticles[0]);
-    
-    const filtered = allArticles.filter(a => a.path !== data.value?.path && a.published === true);
-    
-    // console.log('[DEBUG] Filtered articles count:', filtered.length);
-    
-    const sorted = orderBy(filtered, (a) => {
-        const commonTags = intersection(a.tags, data.value?.tags || []).length;
-        // console.log(`[DEBUG] Article ${a.path} has ${commonTags} common tags`);
-        return commonTags;
-    }, "desc");
-    
-    return sorted.slice(0, 5);
+  const collectionsData = await queryAllCollections();
+  
+  // Combine all articles and filter
+  const allArticles: AnyArticle[] = combineArticles(collectionsData);
+  
+  const filtered = allArticles.filter(a => a.path !== data.value?.path && a.published === true);
+  
+  const withCommonTags = filtered.map(a => ({
+    article: a,
+    commonTags: intersection(a.tags, data.value?.tags || []).length
+  }));
+
+  let sorted = orderByMultiple(
+    withCommonTags, 
+    [
+      item => item.commonTags,
+      item => new Date(item.article.date).getTime()
+    ], 
+    ['desc', 'desc']
+  ).map(item => item.article);
+
+  // Fallback: se non ci sono articoli con tag comuni, mostra i più recenti
+  if (sorted.length < MAX_RELATED_ARTICLES) {
+    sorted = orderBy(filtered, a => new Date(a.date).getTime(), 'desc').slice(0, MAX_RELATED_ARTICLES);
+  }
+
+  // showing the top 3 by tag intersection and publication date
+  // console.log(sorted.slice(0, MAX_RELATED_ARTICLES))
+  return sorted.slice(0, MAX_RELATED_ARTICLES);
 });
 
 // Fetch author data for related articles
@@ -92,21 +100,25 @@ if (links.value) {
     }
 }
 
-// const { data: surround } = await useAsyncData(`${route.path}-surround`, async () => {
-//     // Try to find surroundings in each collection
-//     const collections = ["articles", "tutorials", "decklists", "reports", "spoilers"];
-//     for (const collection of collections) {
-//         try {
-//             const result = await queryCollectionItemSurroundings(collection as any, route.path, {
-//                 fields: ["description"],
-//             });
-//             if (result) return result;
-//         } catch (e) {
-//             // Continue to next collection if not found
-//         }
-//     }
-//     return null;
-// });
+const { data: surround } = await useAsyncData(`${route.path}-surround`, async () => {
+    const collections = getCollectionNames();
+    // console.log('[DEBUG] Collections:', collections);
+    // console.log('[DEBUG] Current path:', route.path);
+    
+    for (const collection of collections) {
+        // console.log(`[DEBUG] Trying collection: ${collection}`);
+        try {
+            const result = await queryCollectionItemSurroundings(collection as any, route.path, {
+                fields: ["description"],
+            });
+            // console.log(`[DEBUG] Result from ${collection}:`, result);
+            if (result) return result;
+        } catch (e) {
+            console.error(`[DEBUG] Error in collection ${collection}:`, e);
+        }
+    }
+    return undefined;
+});
 
 updateMeta();
 
@@ -116,6 +128,7 @@ function updateMeta() {
             headline: data.value?.title,
             description: data.value?.description,
             image: data.value?.thumbnail,
+            // TODO abbiamo rimosso la libreria dayjs
             // datePublished: dayjs(data.value?.date, "YYYY-MM-DD").toDate().toString(),
             keywords: data.value?.tags,
             author: {
@@ -142,23 +155,22 @@ function updateMeta() {
         twitterImage: data.value?.thumbnail,
     });
 
-    // Note: defineOgImageComponent is disabled in nuxt.config.ts
     // We use static thumbnails for OG images instead of dynamic generation
-    // defineOgImageComponent("Article", {
-    //     thumbnail: data.value?.thumbnail,
-    //     title: data.value?.title,
-    //     author: {
-    //         name: authorData?.name,
-    //         image: authorData?.avatar,
-    //     },
-    // });
+    defineOgImageComponent("Article", {
+        thumbnail: data.value?.thumbnail,
+        title: data.value?.title,
+        author: {
+            name: authorData?.name,
+            image: authorData?.avatar,
+        },
+    });
 }
 
-onMounted(() => {
-    const contentEl = document.getElementById("content");
-    authorEl.value = contentEl?.querySelector("#author-about");
-    relatedArticlesEl.value = document.documentElement?.querySelector("#related-articles") as HTMLElement | undefined;
-});
+// onMounted(() => {
+//   const contentEl = document.getElementById("content");
+//   authorEl.value = contentEl?.querySelector("#author-about");
+//   relatedArticlesEl.value = document.documentElement?.querySelector("#related-articles") as HTMLElement | undefined;
+// });
 </script>
 
 <template>
@@ -234,7 +246,7 @@ onMounted(() => {
                 :value="data"
                 class="markdown-content flex-1"
             />
-            <USeparator class="mb-4"/>
+            <USeparator class="mt-4 mb-4"/>
             <p class="font-semibold mb-4">
                 {{ relatedArticlesString }}
             </p>
@@ -253,8 +265,8 @@ onMounted(() => {
                     variant="subtle"
                 />
             </UBlogPosts>
-
-            <!-- <UContentSurround :surround="surround" /> -->
+            <USeparator class="mt-4 mb-4"/>
+            <UContentSurround :surround="surround" />
         </UPageBody>
     </UPage>
 </template>

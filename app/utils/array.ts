@@ -42,3 +42,36 @@ export function orderBy<T>(
         return 0;
     });
 }
+
+/**
+ * Orders an array by multiple computed values.
+ * 
+ * @param array - Array to sort
+ * @param iteratees - Array of functions that compute sort values
+ * @param orders - Array of sort directions corresponding to iteratees
+ * @returns New sorted array
+ * 
+ * @example
+ * orderByMultiple(
+ *   [{x: 1, y: 2}, {x: 1, y: 1}], 
+ *   [item => item.x, item => item.y], 
+ *   ['asc', 'desc']
+ * )
+ */
+export function orderByMultiple<T>(
+    array: T[], 
+    iteratees: ((item: T) => number | string)[], 
+    orders: ('asc' | 'desc')[]
+): T[] {
+    return [...array].sort((a, b) => {
+        for (let i = 0; i < iteratees.length; i++) {
+            const valA = iteratees[i](a);
+            const valB = iteratees[i](b);
+            const order = orders[i] || 'asc';
+            
+            if (valA < valB) return order === 'asc' ? -1 : 1;
+            if (valA > valB) return order === 'asc' ? 1 : -1;
+        }
+        return 0;
+    });
+}
