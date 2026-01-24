@@ -13,8 +13,6 @@ Siccome mi è stato chiesto svariate volte negli scorsi giorni cosa ne pensassi 
 
 ## Guardando la Top
 
-### 
-
 La top 8 è specchio di un meta dove anche le previsioni più scontate si perdono nella giungla, fatte a pezzi da build selvagge e variegate.
 0 High Tide, 0 Jund e 0 Mono Red Canonici in top 8: i 3 mazzi più attesi non sono arrivati fino alla fine, con Mono Red avente come rappresentate non la variante Pingers o Madness, bensì quella Rally rispolverata da un esponente polacco in modalità toro per tutto il weekend.
 
