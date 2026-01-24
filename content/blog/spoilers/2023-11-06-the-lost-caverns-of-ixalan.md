@@ -1,7 +1,7 @@
 ---
 title: "The Lost Caverns Of Ixalan"
 description: "Spoiler article for The Lost Caverns Of Ixalan"
-tags: [spoiler]
+tags: [set review]
 date: 2023-11-06
 updatedAt: 2023-11-06
 author: Pietro Bragioto

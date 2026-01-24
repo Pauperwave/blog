@@ -1,7 +1,7 @@
 ---
 title: "Zendikar Rising"
 description: "Spoiler article for Zendikar Rising"
-tags: [spoiler]
+tags: [set review]
 date: 2020-09-11
 updatedAt: 2020-09-11
 author: Pietro Bragioto

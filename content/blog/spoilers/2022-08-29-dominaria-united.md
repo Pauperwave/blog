@@ -1,7 +1,7 @@
 ---
 title: "Dominaria United"
 description: "Spoiler article for Dominaria United"
-tags: [spoiler]
+tags: [set review]
 date: 2022-08-29
 updatedAt: 2022-08-29
 author: Pietro Bragioto

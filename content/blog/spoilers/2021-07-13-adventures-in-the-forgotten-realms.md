@@ -1,7 +1,7 @@
 ---
 title: "Adventures In The Forgotten Realms"
 description: "Spoiler article for Adventures In The Forgotten Realms"
-tags: [spoiler]
+tags: [set review]
 date: 2021-07-13
 updatedAt: 2021-07-13
 author: Pietro Bragioto

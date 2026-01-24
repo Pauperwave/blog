@@ -1,7 +1,7 @@
 ---
 title: "Phyrexia All Will Be One"
 description: "Spoiler article for Phyrexia All Will Be One"
-tags: [spoiler]
+tags: [set review]
 date: 2023-01-30
 updatedAt: 2023-01-30
 author: Pietro Bragioto

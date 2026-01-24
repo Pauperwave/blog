@@ -1,7 +1,7 @@
 ---
 title: "Commander Masters"
 description: "Spoiler article for Commander Masters"
-tags: [spoiler]
+tags: [set review]
 date: 2023-07-26
 updatedAt: 2023-07-26
 author: Pietro Bragioto
