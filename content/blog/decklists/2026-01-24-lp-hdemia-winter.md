@@ -4,9 +4,7 @@ description: "Decklists Top 8"
 tags: [top8]
 date: 2026-01-24
 updatedAt: 2026-01-24
-author: Bragioto Pietro
-author_avatar: /assets/avatars/bragioto.jpg
-author_description: "Scribacchino di liste"
+author: Pietro Bragioto
 thumbnail: /assets/blog/events/paupergeddon-eternal-edition-2025.png
 published: true
 ---
@@ -46,7 +44,6 @@ Sideboard
 1 Island
 1 Tangled Islet
 ::
-
 
 ::MagicDecklist
 ---
@@ -92,7 +89,6 @@ Sideboard
 2 Relic of Progenitus
 ::
 
-
 ::MagicDecklist
 ---
 name: Ponza
@@ -133,7 +129,6 @@ Sideboard
 2 Cast into the Fire
 ::
 
-
 ::MagicDecklist
 ---
 name: U Terror
@@ -170,7 +165,6 @@ Sideboard
 1 Envelop
 ::
 
-
 ::MagicDecklist
 ---
 name: Elves
@@ -206,7 +200,6 @@ Sideboard
 2 Faerie Macabre
 1 Masked Vandal
 ::
-
 
 ::MagicDecklist
 ---
@@ -255,7 +248,6 @@ Sideboard
 1 Weather the Storm
 ::
 
-
 ::MagicDecklist
 ---
 name: UR Ctrl
@@ -300,7 +292,6 @@ Sideboard
 1 Suplex
 ::
 
-
 ::MagicDecklist
 ---
 name: BR Madness
@@ -339,4 +330,12 @@ Sideboard
 1 Electrickery
 1 End the Festivities
 1 Smash to Dust
+::
+
+::image-caption
+---
+src: /assets/blog/events/2025-09-21-banner-pauperiadi-2025_lungo.jpg
+alt: "Foto di gruppo"
+caption: "Foto di gruppo"
+---
 ::
