@@ -50,7 +50,7 @@ const formattedDate = useState(`article-date-${route.path}`, () => {
 // };
 
 // TODO: Related articles currently show top 3 by tag intersection and publication date
-const MAX_RELATED_ARTICLES = 5;
+const MAX_RELATED_ARTICLES = 3;
 const relatedArticlesString = "Altri articoli correlati"
 
 const { data: links } = await useAsyncData(`linked-${route.path}`, async () => {
