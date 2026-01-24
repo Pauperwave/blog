@@ -91,6 +91,7 @@ if (links.value) {
         }
     }
 }
+
 // const { data: surround } = await useAsyncData(`${route.path}-surround`, async () => {
 //     // Try to find surroundings in each collection
 //     const collections = ["articles", "tutorials", "decklists", "reports", "spoilers"];
@@ -171,7 +172,7 @@ onMounted(() => {
                         { label: 'Tutti gli articoli', icon: 'material-symbols:article-rounded', to: '/articles' },
                     ]"
                 />
-                <USeparator type="dotted" />
+                <USeparator type="dotted" class="mt-4"/>
                 <UContentToc
                     v-if="data"
                     :title="tocTitle"
@@ -217,31 +218,24 @@ onMounted(() => {
                     </p>
                     <!-- <p class="flex flex-row items-center gap-1 typ-sublabel"><icon name="material-symbols:alarm-rounded" class="text-primary"></icon> {{ readingTimeText }}</p> -->
                 </div>
+                <NuxtImg 
+                  v-if="data?.thumbnail" 
+                  :src="data.thumbnail" 
+                  :alt="data.title"
+                  class="w-full h-auto rounded-lg shadow-lg aspect-video object-cover"
+                  loading="lazy"
+                />
             </div>
         </UPageHeader>
 
-        <UContentToc
-            v-if="data"
-            :links="data.body.toc?.links"
-            highlight class="lg:hidden"
-        />
-
         <UPageBody>
-            <NuxtImg 
-                v-if="data?.thumbnail" 
-                :src="data.thumbnail" 
-                :alt="data.title"
-                class="w-full h-auto rounded-lg shadow-lg mb-8 aspect-video object-cover"
-                loading="lazy"
-            />
-
             <ContentRenderer
                 v-if="data" id="content"
                 :value="data"
                 class="markdown-content flex-1"
             />
-            <USeparator />
-            <p class="font-semibold">
+            <USeparator class="mb-4"/>
+            <p class="font-semibold mb-4">
                 {{ relatedArticlesString }}
             </p>
             <UBlogPosts id="related-articles">
