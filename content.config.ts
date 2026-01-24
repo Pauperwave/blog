@@ -14,6 +14,19 @@ const baseContentSchema = z.object({
 
 export default defineContentConfig({
   collections: {
+    docs: defineCollection(
+      asSitemapCollection({
+        source: {
+          include: "docs/**/*.md",
+          prefix: "/"
+        },
+        type: "page",
+        schema: z.object({
+          title: z.string(),
+          description: z.string()
+        }),
+      })
+    ),
     authors: defineCollection({
       type: 'data',
       source: 'authors/**.yml',

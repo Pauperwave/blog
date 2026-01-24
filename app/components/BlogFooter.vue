@@ -62,10 +62,13 @@ const socialLinks = [
           <p>C.F. 94047330223</p>
         </div>
 
+        <!--  -->
         <!-- Legal Links Section -->
-        <div
-          class="flex flex-col text-sm items-center md:items-end justify-center md:justify-start text-center md:text-right">
-          <UButton to="#" label="Codice di Condotta" color="neutral" variant="link" class="underline" />
+        <div class="flex flex-col text-sm items-center md:items-end justify-center md:justify-start text-center md:text-right">
+          <NuxtLink to="/docs/codice-di-condotta" color="neutral" variant="link" class="underline">Codice di Condotta</NuxtLink>
+          <NuxtLink to="/docs/statuto" color="neutral" variant="link" class="underline">Statuto dell'Associazione</NuxtLink>
+          <NuxtLink to="https://pauperwave.org" color="neutral" variant="link" class="underline">Chi siamo</NuxtLink>
+          <NuxtLink to="https://tinyurl.com/adesione-pauperwave" color="neutral" variant="link" class="underline">Associati ora</NuxtLink>
         </div>
       </div>
     </template>
