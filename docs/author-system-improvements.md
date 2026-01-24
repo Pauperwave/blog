@@ -490,6 +490,49 @@ const filteredArticles = computed(() => {
 
 ### 15. PostHog Integration for User Behavior Analytics
 
+Complete implementation guide including:
+
+📋 What to Track:
+- Page views (articles, authors, homepage)
+- User actions (search, filters, clicks, social links)
+- User journey tracking (entry/exit pages, navigation paths)
+- Engagement metrics (session duration, return visitors)
+- Performance insights (popular articles, authors, categories)
+
+💻 Full Implementation Code:
+- PostHog plugin setup
+- Environment configuration
+- Custom composable (useTracking.ts) with helper methods
+- Tracking examples for all major components
+
+🎯 Specific Events:
+- article_viewed - Track article engagement
+- author_page_viewed - Track author page visits
+- search_performed - Track search queries and results
+- filter_applied - Track filter usage
+- element_clicked - Track all clickable elements
+- Plus many more suggested events
+
+🔒 Privacy Considerations:
+- GDPR compliance notes
+- Cookie consent recommendations
+- IP anonymization
+- PII handling guidelines
+
+🚀 PostHog Features:
+- Session recordings
+- Feature flags for A/B testing
+- Cohorts and retention analysis
+- Funnel analysis
+- Custom dashboards
+
+📊 Benefits:
+- Data-driven decisions
+- Understand user behavior
+- Identify popular content
+- Optimize UX based on real data
+- Free up to 1M events/month
+
 **Description**: Integrate PostHog to track user views, actions, and behavior across the site
 
 **Why PostHog**:
