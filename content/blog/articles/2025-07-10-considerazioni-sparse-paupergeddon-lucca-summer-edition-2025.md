@@ -1,7 +1,7 @@
 ---
 title: "Considerazioni sparse sul Paupergeddon Lucca Summer Edition 2025"
 description: ""
-tags: [meta,]
+tags: [meta]
 date: 2025-07-10
 updatedAt: 2025-07-10
 author: Pietro Bragioto

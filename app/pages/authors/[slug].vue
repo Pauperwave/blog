@@ -52,7 +52,7 @@ const articleCounts = computed(() => {
 const totalArticles = computed(() => authorArticles.value?.length || 0);
 
 // Recent articles (limit to 10)
-const recentArticles = computed(() => authorArticles.value?.slice(0, 8) || []);
+const recentArticles = computed(() => authorArticles.value?.slice(0, 4) || []);
 
 // SEO meta tags
 useSeoMeta({
