@@ -23,6 +23,29 @@ if (!authorData) {
   });
 }
 
+interface Socials {
+  twitter?: string
+  github?: string
+  youtube?: string
+  twitch?: string
+  website?: string
+}
+
+type SocialKey = keyof Socials
+
+const socialLinks: Array<{
+  key: SocialKey
+  icon: string
+  label: string
+  hoverClass: string
+}> = [
+  { key: 'twitter', icon: 'i-mdi-twitter', label: 'Twitter', hoverClass: 'hover:text-blue-400' },
+  { key: 'github', icon: 'i-mdi-github', label: 'GitHub', hoverClass: 'hover:text-gray-900 dark:hover:text-white' },
+  { key: 'youtube', icon: 'i-mdi-youtube', label: 'YouTube', hoverClass: 'hover:text-red-600' },
+  { key: 'twitch', icon: 'i-mdi-twitch', label: 'Twitch', hoverClass: 'hover:text-purple-600' },
+  { key: 'website', icon: 'i-mdi-web', label: 'Website', hoverClass: 'hover:text-primary' }
+]
+
 // Query all articles and filter by this author
 const { data: authorArticles } = await useAsyncData(`author-articles-${slug}`, async () => {
   const collectionsData = await queryAllCollections();
@@ -51,7 +74,7 @@ const articleCounts = computed(() => {
 // Total articles count
 const totalArticles = computed(() => authorArticles.value?.length || 0);
 
-// Recent articles (limit to 10)
+// Recent articles (limit to 4)
 const recentArticles = computed(() => authorArticles.value?.slice(0, 4) || []);
 
 // SEO meta tags
@@ -94,65 +117,29 @@ useSeoMeta({
               <p v-if="authorData.bio" class="text-base text-gray-700 dark:text-gray-300">
                 {{ authorData.bio }}
               </p>
-              
+
               <!-- Social Links -->
               <div v-if="authorData.socials" class="flex items-center gap-4 flex-wrap">
-                <a
-                  v-if="authorData.socials.twitter"
-                  :href="authorData.socials.twitter"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="flex items-center gap-2 text-sm text-gray-600 hover:text-blue-400 transition-colors"
-                >
-                  <Icon name="mdi:twitter" class="w-5 h-5" />
-                  <span>Twitter</span>
-                </a>
-                <a
-                  v-if="authorData.socials.github"
-                  :href="authorData.socials.github"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 dark:hover:text-white transition-colors"
-                >
-                  <Icon name="mdi:github" class="w-5 h-5" />
-                  <span>GitHub</span>
-                </a>
-                <a
-                  v-if="authorData.socials.youtube"
-                  :href="authorData.socials.youtube"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="flex items-center gap-2 text-sm text-gray-600 hover:text-red-600 transition-colors"
-                >
-                  <Icon name="mdi:youtube" class="w-5 h-5" />
-                  <span>YouTube</span>
-                </a>
-                <a
-                  v-if="authorData.socials.twitch"
-                  :href="authorData.socials.twitch"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="flex items-center gap-2 text-sm text-gray-600 hover:text-purple-600 transition-colors"
-                >
-                  <Icon name="mdi:twitch" class="w-5 h-5" />
-                  <span>Twitch</span>
-                </a>
-                <a
-                  v-if="authorData.socials.website"
-                  :href="authorData.socials.website"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="flex items-center gap-2 text-sm text-gray-600 hover:text-primary transition-colors"
-                >
-                  <Icon name="mdi:web" class="w-5 h-5" />
-                  <span>Website</span>
-                </a>
+                <template v-for="social in socialLinks" :key="social.key">
+                  <ULink
+                    v-if="authorData.socials[social.key]"
+                    :to="authorData.socials[social.key]"
+                    target="_blank"
+                    external
+                    class="flex items-center gap-2 text-sm text-gray-600 transition-colors"
+                    :class="social.hoverClass"
+                  >
+                    <UIcon :name="social.icon" class="w-5 h-5" />
+                    <span>{{ social.label }}</span>
+                  </ULink>
+                </template>
               </div>
-              
+
               <!-- Article Stats -->
               <div class="flex items-center gap-6 flex-wrap">
                 <div class="flex items-center gap-2">
                   <Icon name="material-symbols:article-rounded" class="w-5 h-5 text-primary" />
+                  <!-- TODO trasformarlo in un bottone che rimanda alla pagina home principale con il filtro /articles?author=${getAuthorSlug(authorData.name)} -->
                   <span class="text-sm font-semibold">{{ totalArticles }} articoli totali</span>
                 </div>
               </div>
@@ -165,6 +152,7 @@ useSeoMeta({
       <div v-if="Object.keys(articleCounts).length > 0" class="mb-8">
         <h2 class="text-2xl font-bold mb-4">Articoli per categoria</h2>
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          <!-- TODO: :to="`/articles?category=${category}?author=${getAuthorSlug(authorData.name)}`" -->
           <NuxtLink
             v-for="(count, category) in articleCounts"
             :key="category"
@@ -189,6 +177,8 @@ useSeoMeta({
       <div v-if="recentArticles.length > 0">
         <h2 class="text-2xl font-bold mb-4">Ultimi articoli</h2>
         <UBlogPosts class="gap-4 lg:gap-6 sm:grid-cols-3 lg:grid-cols-4">
+          <!-- TODO astrarre la logica del badge "New" in quanto viene usata in diversi punti -->
+          <!-- TODO estrarre il componente UBlogPost in quanto il codice è ripetuto -->
           <UBlogPost
             v-for="article in recentArticles"
             :key="article.path"

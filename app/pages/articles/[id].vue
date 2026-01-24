@@ -10,8 +10,8 @@ import {
 import appMeta from "~/app.meta";
 
 const route = useRoute();
-const authorEl = ref<HTMLElement | null>();
-const relatedArticlesEl = ref<HTMLElement | null>();
+// const authorEl = ref<HTMLElement | null>();
+// const relatedArticlesEl = ref<HTMLElement | null>();
 
 const getBadge = (date: string) => {
     return Math.abs(new Date().getTime() - new Date(date).getTime()) < 8.64e7 * 7
@@ -211,17 +211,17 @@ function updateMeta() {
                         </UBadge>
                     </div>
                     <AuthorCard
-                        v-if="authorData"
-                        :author="{
-                            name: authorData.name,
-                            description: authorData.description,
-                            avatar: authorData.avatar,
-                            url: authorData.url,
-                            socials: authorData.socials
-                        }"
-                        variant="inline"
-                        :clickable="false"
-                        @click="() => authorEl?.scrollIntoView()"
+                      v-if="authorData"
+                      :author="{
+                        name: authorData.name,
+                        description: authorData.description,
+                        avatar: authorData.avatar,
+                        url: authorData.url,
+                        socials: authorData.socials
+                      }"
+                      variant="inline"
+                      :clickable="true"
+                      @click="navigateTo(`/authors/${getAuthorSlug(authorData.name)}`)"
                     />
                 </div>
                 <div class="flex flex-row items-center gap-4">

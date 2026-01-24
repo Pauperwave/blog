@@ -9,6 +9,8 @@ thumbnail: /assets/blog/events/paupergeddon-eternal-edition-2025.png
 published: true
 ---
 
+## Winner
+
 ::MagicDecklist
 ---
 name: Elves
@@ -44,6 +46,8 @@ Sideboard
 1 Island
 1 Tangled Islet
 ::
+
+## Finalist
 
 ::MagicDecklist
 ---
@@ -88,6 +92,8 @@ Sideboard
 2 Envelop
 2 Relic of Progenitus
 ::
+
+## Top 4
 
 ::MagicDecklist
 ---
@@ -164,6 +170,8 @@ Sideboard
 4 Gut Shot
 1 Envelop
 ::
+
+## Top 8
 
 ::MagicDecklist
 ---
@@ -332,10 +340,10 @@ Sideboard
 1 Smash to Dust
 ::
 
-::image-caption
+<!-- ::image-caption
 ---
-src: /assets/blog/events/2025-09-21-banner-pauperiadi-2025_lungo.jpg
+src: /assets/blog/events/filename.jpg
 alt: "Foto di gruppo"
 caption: "Foto di gruppo"
 ---
-::
+:: -->
