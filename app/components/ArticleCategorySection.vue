@@ -8,7 +8,7 @@ interface Props {
   viewAllText?: string;
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   maxItems: 3,
   viewAllText: 'Vedi tutti'
 });
@@ -32,7 +32,8 @@ const getArticleBadge = (date: string) => {
       </UButton>
     </div>
     <UBlogPosts>
-      <UBlogPost v-for="article in articles.slice(0, maxItems)"
+      <UBlogPost
+        v-for="article in articles.slice(0, maxItems)"
         :key="article._id"
         :title="article.title"
         :image="article.thumbnail"
@@ -61,7 +62,6 @@ const getArticleBadge = (date: string) => {
               bio: authorsMap[article.author]?.bio,
               socials: authorsMap[article.author]?.socials
             }"
-            variant="inline"
             :clickable="false"
           />
         </template>

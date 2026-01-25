@@ -1,8 +1,14 @@
 <template>
   <client-only v-if="!colorMode?.forced">
-    <u-switch checked-icon="i-lucide-moon" unchecked-icon="i-lucide-sun" v-model="isDark" color="neutral" size="sm"></u-switch>
+    <USwitch
+      v-model="isDark"
+      checked-icon="i-lucide-moon"
+      unchecked-icon="i-lucide-sun"
+      color="neutral"
+      size="sm"
+    />
     <template #fallback>
-      <div class="size-8"></div>
+      <div class="size-8" />
     </template>
   </client-only>
 </template>

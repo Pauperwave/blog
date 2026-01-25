@@ -15,7 +15,7 @@ const route = useRoute();
 
 const getBadge = (date: string) => {
     return Math.abs(new Date().getTime() - new Date(date).getTime()) < 8.64e7 * 7
-        ? { label: "New", color: "primary" as const }
+        ? { label: "Nuovo", color: "primary" as const }
         : undefined;
 };
 
@@ -203,7 +203,7 @@ function updateMeta() {
                     <div class="flex flex-row gap-2 items-center flex-wrap">
                         <UBadge
                             v-for="tag in data?.tags"
-                            key="tag"
+                            :key="tag"
                             color="primary"
                             variant="soft"
                         >
@@ -219,7 +219,6 @@ function updateMeta() {
                         url: authorData.url,
                         socials: authorData.socials
                       }"
-                      variant="inline"
                       :clickable="true"
                       @click="navigateTo(`/authors/${getAuthorSlug(authorData.name)}`)"
                     />
@@ -253,6 +252,7 @@ function updateMeta() {
             <UBlogPosts id="related-articles">
                 <UBlogPost
                     v-for="article in links"
+                    :key="article.path"
                     :title="article.title"
                     :image="article.thumbnail"
                     :authors="[{

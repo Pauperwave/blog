@@ -14,7 +14,7 @@
         :src="artCropUrl"
         :alt="caption || cardData?.name"
         :class="imageClasses"
-      />
+      >
       <figcaption 
         v-if="caption"
         class="text-sm text-center text-gray-600 dark:text-gray-400"

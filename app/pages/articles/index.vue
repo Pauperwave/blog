@@ -8,6 +8,12 @@ import {
 
 const route = useRoute();
 
+const getBadge = (date: string) => {
+    return Math.abs(new Date().getTime() - new Date(date).getTime()) < 8.64e7 * 7
+        ? { label: "Nuovo", color: "primary" as const }
+        : undefined;
+};
+
 // Query all collections and combine them
 const { data: articles } = await useAsyncData("articles-index", async () => {
     const collectionsData = await queryAllCollections();
@@ -68,21 +74,24 @@ watch(selectedCategory, (newCategory) => {
                 </UButton>
             </div>
 
-            <UEmpty v-if="(filteredArticles?.length ?? 0) <= 0"
+            <UEmpty
+              v-if="(filteredArticles?.length ?? 0) <= 0"
               title="No articles found"
               description="No articles match the selected category."
               variant="naked"
-              :actions="[{ label: 'Go back home', to: '/' }]">
-            </UEmpty>
+              :actions="[{ label: 'Go back home', to: '/' }]"
+            />
             <UBlogPosts v-else class="gap-4 lg:gap-6 sm:grid-cols-3 lg:grid-cols-4">
-                <UBlogPost v-for="article in filteredArticles"
-                    :key="article.path"
-                    :title="article.title"
-                    :image="article.thumbnail"
-                    :badge="Math.abs(new Date().getTime() - new Date(article?.date).getTime()) < 8.64e7 * 7 ? { label: 'Nuovo', color: 'primary' } : undefined"
-                    :date="article.date"
-                    :to="article.path" variant="naked"
-                    class="group border border-gray-200 dark:border-gray-800 rounded-xl p-4 hover:border-primary-500 dark:hover:border-primary-400 transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/10 dark:hover:shadow-primary-400/10 hover:-translate-y-1 hover:scale-[1.02] bg-white dark:bg-gray-900/50 backdrop-blur-sm"
+                <UBlogPost
+                  v-for="article in filteredArticles"
+                  :key="article.path"
+                  :title="article.title"
+                  :image="article.thumbnail"
+                  :badge="getBadge(article.date)"
+                  :date="article.date"
+                  :to="article.path"
+                  variant="naked"
+                  class="group border border-gray-200 dark:border-gray-800 rounded-xl p-4 hover:border-primary-500 dark:hover:border-primary-400 transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/10 dark:hover:shadow-primary-400/10 hover:-translate-y-1 hover:scale-[1.02] bg-white dark:bg-gray-900/50 backdrop-blur-sm"
                 >
                     <template #date>
                         {{ useState(`article-date-${article.path}`, () => formatDateIT(article.date)).value }}
@@ -109,7 +118,6 @@ watch(selectedCategory, (newCategory) => {
                                 bio: authorsMap[article.author]?.bio,
                                 socials: authorsMap[article.author]?.socials
                             }"
-                            variant="inline"
                             :clickable="false"
                         />
                     </template>

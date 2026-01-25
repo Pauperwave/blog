@@ -32,9 +32,12 @@ const socialLinks = [
 </script>
 
 <template>
-  <UFooter class="border-t border-t-default" :ui="{
-    bottom: 'py-0 pb-8 lg:py-0 lg:pb-8'
-  }">
+  <UFooter
+    class="border-t border-t-default"
+    :ui="{
+      bottom: 'py-0 pb-8 lg:py-0 lg:pb-8'
+    }"
+  >
     <template #default>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
         <!-- Brand & Social Section -->
@@ -44,8 +47,17 @@ const socialLinks = [
           </h3>
           <div class="flex gap-2 flex-wrap justify-center md:justify-start">
             <div class="flex gap-2 flex-wrap justify-center md:justify-start">
-              <UButton v-for="(social, index) in socialLinks" :key="index" :icon="social.icon" color="neutral"
-                variant="ghost" :to="social.link" target="_blank" size="sm" :aria-label="social.label" />
+              <UButton
+                v-for="(social, index) in socialLinks"
+                :key="index"
+                :icon="social.icon"
+                color="neutral"
+                variant="ghost"
+                :to="social.link"
+                target="_blank"
+                size="sm"
+                :aria-label="social.label"
+              />
             </div>
           </div>
           <div>
@@ -82,8 +94,7 @@ const socialLinks = [
             <p class="text-xs text-center max-w-2xl mx-auto">
               Pauperwave non costituisce testata giornalistica e non ha carattere periodico essendo aggiornato secondo
               disponibilità degli autori. Pertanto non può essere considerato in alcun modo un prodotto editoriale ai
-              sensi della <ULink to="https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2001-03-07;62"
-                target="_blank">L. n. 62 del 7/3/2001</ULink>.
+              sensi della <ULink to="https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2001-03-07;62" target="_blank">L. n. 62 del 7/3/2001</ULink>.
 
               Il copyright di tutte le carte presentate su questo sito appartiene alla <ULink
                 to="https://company.wizards.com/" target="_blank">Wizards of the Coast</ULink>.

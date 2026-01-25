@@ -2,7 +2,7 @@
     <u-app>
         <u-header mode="slideover">
             <template #left>
-                <u-user name="Pauperwave Blog" to="/" :avatar="{ src: 'https://avatars.githubusercontent.com/u/225214755?v=4' }"></u-user>
+                <UUser name="Pauperwave Blog" to="/" :avatar="{ src: 'https://avatars.githubusercontent.com/u/225214755?v=4' }" />
             </template>
         </u-header>
         <u-main class="px-4">

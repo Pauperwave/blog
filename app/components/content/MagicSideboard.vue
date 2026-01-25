@@ -325,7 +325,7 @@ const extractCards = async (element: Element): Promise<CardItem[]> => {
   const cards: CardItem[] = []
   
   // Try to find UL or just process all text content
-  let listItems = element.querySelectorAll('li')
+  const listItems = element.querySelectorAll('li')
   
   // If no LI elements, try to parse from text content directly
   if (listItems.length === 0) {
@@ -399,9 +399,9 @@ const totalOut = computed(() => {
   return cardsOut.value.reduce((sum, card) => sum + parseInt(card.quantity || '0'), 0)
 })
 
-const totalOutAlt = computed(() => {
-  return cardsOutAlt.value.reduce((sum, card) => sum + parseInt(card.quantity || '0'), 0)
-})
+// const totalOutAlt = computed(() => {
+//   return cardsOutAlt.value.reduce((sum, card) => sum + parseInt(card.quantity || '0'), 0)
+// })
 
 onMounted(() => {
   checkMobile()

@@ -1,50 +1,49 @@
 <script lang="ts" setup>
 const props = defineProps<{
-    src: string;
-    name: string;
-    description?: string;
-    url?: string;
-    socials?: {
-        twitter?: string;
-        github?: string;
-        youtube?: string;
-        twitch?: string;
-        website?: string;
-    };
+  src: string;
+  name: string;
+  description?: string;
+  url?: string;
+  socials?: {
+    twitter?: string;
+    github?: string;
+    youtube?: string;
+    twitch?: string;
+    website?: string;
+  };
 }>();
 </script>
 
 <template>
-    <UCard id="author-about" variant="soft" class="mt-16">
+  <UCard id="author-about" variant="soft" class="mt-16">
 
-        <template #header>
-            <div class="flex flex-col">
-                <p class="font-bold text-highlighted">Riguardo l'autore</p>
-                <slot name="body"></slot>
-            </div>
-        </template>
+    <template #header>
+      <div class="flex flex-col">
+        <p class="font-bold text-highlighted">Riguardo l'autore</p>
+        <slot name="body" />
+      </div>
+    </template>
 
-        <template #footer>
-            <div class="flex items-center gap-2">
-                <AuthorCard
-                    :author="{
-                        name: props.name,
-                        avatar: props.src,
-                        description: props.description,
-                        url: props.url,
-                        socials: props.socials
-                    }"
-                    variant="inline"
-                    :clickable="!!props.url"
-                    class="flex-1"
-                />
-                <div class="ml-auto flex items-center gap-2 justify-end">
-                    <slot name="actions"></slot>
-                </div>
-            </div>
-        </template>
+    <template #footer>
+      <div class="flex items-center gap-2">
+        <AuthorCard
+          :author="{
+            name: props.name,
+            avatar: props.src,
+            description: props.description,
+            url: props.url,
+            socials: props.socials
+          }"
+          :clickable="!!props.url"
+          class="flex-1"
+        />
+        <div class="ml-auto flex items-center gap-2 justify-end">
+          <slot name="actions" />
+        </div>
+      </div>
+    </template>
 
-</UCard>
+  </UCard>
 </template>
 
 <style lang="css" scoped>

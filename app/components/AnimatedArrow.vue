@@ -22,10 +22,10 @@ const rootClass = computed(() => {
 
 <template>
   <div class="flex flex-row items-center group" :class="rootClass">
-    <slot></slot>
+    <slot />
     <div class="icon-wrapper">
-      <div class="arrow-line"></div>
-      <icon class="arrow-head" name="ic:round-keyboard-arrow-right"></icon>
+      <div class="arrow-line" />
+      <icon class="arrow-head" name="ic:round-keyboard-arrow-right" />
     </div>
   </div>
 </template>

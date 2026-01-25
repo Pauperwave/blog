@@ -14,7 +14,7 @@
       :src="imageUrl"
       :alt="cardData?.name"
       class="rounded-lg shadow-lg max-w-sm mx-auto"
-    />
+    >
 
     <USkeleton 
       v-else 

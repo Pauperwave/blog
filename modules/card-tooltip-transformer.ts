@@ -11,7 +11,7 @@ export default defineNuxtModule({
       
       if (file.extension === '.md') {
         // Pattern for [[cardName | set]] (with pipe separator)
-        const patternWithSet = /\[\[([^\|\]]+)\s*\|\s*([^\]]+)\]\]/g
+        const patternWithSet = /\[\[([^|\]]+)\s*\|\s*([^\]]+)\]\]/g
         
         // Pattern for [[cardName]] (no set specified)
         const patternSimple = /\[\[([^\]]+)\]\]/g

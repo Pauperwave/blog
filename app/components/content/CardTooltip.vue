@@ -9,7 +9,7 @@
         :src="imageUrl" 
         :alt="name"
         class="w-48 h-auto rounded-lg shadow-xl"
-      />
+      >
     </template>
   </UTooltip>
 </template>

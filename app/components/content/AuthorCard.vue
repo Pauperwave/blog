@@ -23,9 +23,10 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  variant: 'full',
+  variant: 'inline',
   showBio: false,
   clickable: true,
+  class: ''
 });
 
 const isExternalLink = computed(() => {
@@ -157,8 +158,8 @@ const shouldLink = computed(() => {
 
   <!-- Compact and Full variants: keep original behavior -->
   <component
-    v-else
     :is="shouldLink ? (isExternalLink ? 'a' : 'NuxtLink') : 'div'"
+    v-else
     :href="shouldLink ? author.url : undefined"
     :to="shouldLink && !isExternalLink ? author.url : undefined"
     :target="linkTarget"

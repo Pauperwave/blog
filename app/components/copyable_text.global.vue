@@ -1,15 +1,15 @@
 <template>
   <u-field-group class="w-full">
-    <u-input :model-value="content" aria-label="Copy text" readonly class="w-full"> </u-input>
-    <u-button
-      @click="onClick"
+    <UInput :model-value="content" aria-label="Copy text" readonly class="w-full" />
+    <UButton
       type="button"
       variant="subtle"
       :color="copied ? 'success' : 'neutral'"
       size="sm"
       aria-label="copy content"
       :icon="copied ? 'material-symbols:check-circle-rounded' : 'material-symbols:content-copy-outline-rounded'"
-    ></u-button>
+      @click="onClick"
+    />
     <u-dropdown-menu v-if="(items?.length ?? 0) > 0" :items="props.items ?? []">
       <u-button color="neutral" variant="subtle" icon="i-lucide-chevron-down" size="sm" />
     </u-dropdown-menu>

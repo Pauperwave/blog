@@ -5,7 +5,7 @@ interface Props {
   caption?: string
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   alt: '',
   caption: ''
 })

@@ -22,9 +22,7 @@ interface Author {
  */
 export const useAuthor = async (authorName: string): Promise<Author> => {
   // Query all authors using the same pattern as other files
-  // @ts-ignore - useAsyncData type inference issue
-  const { data: authors } = await useAsyncData('all-authors', () => 
-    // @ts-ignore - queryCollection types are auto-generated
+  const { data: authors } = await useAsyncData('all-authors', () =>
     queryCollection('authors').all()
   );
 
@@ -32,13 +30,11 @@ export const useAuthor = async (authorName: string): Promise<Author> => {
     throw new Error(`Failed to load authors collection`);
   }
 
-  // @ts-ignore - authors.value type is generated at runtime
   const author = authors.value.find(
     (a: Author) => a.name.toLowerCase() === authorName.toLowerCase()
   );
 
   if (!author) {
-    // @ts-ignore - authors.value type is generated at runtime
     throw new Error(`Author "${authorName}" not found in authors collection. Available authors: ${authors.value.map((a: Author) => a.name).join(', ')}`);
   }
 

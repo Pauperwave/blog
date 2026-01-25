@@ -1,14 +1,12 @@
 <script setup lang="ts">
-const { data: page } = await useAsyncData('statute', () => 
+const { data: page } = await useAsyncData('statute', () =>
   queryCollection('docs').where('id', '=', 'docs/statuto.md').first()
 )
 </script>
 
 <template>
-  <template v-if="page">
-    <ContentToc :value="page" />
-  </template>
   <div v-if="page">
+    <ContentToc :value="page" />
     <ContentRenderer :value="page" />
   </div>
   <div v-else>
