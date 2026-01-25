@@ -32,8 +32,6 @@ Ci aspettiamo che i membri seguano queste regole in tutti gli ambiti della comun
 
 I moderatori saranno lieti di assistere i membri che subiscono molestie per farli sentire al sicuro nella comunità. Apprezziamo la vostra partecipazione.
 
-Se avete bisogno di una conversazione personale e privata con i moderatori, contattate una delle seguenti persone:
+<!-- Se avete bisogno di una conversazione personale e privata con i moderatori, contattate una delle seguenti persone: -->
 
-- Lorenzo Castelli
-- Marco Cazzola
 - Email: pauperwave@gmail.com
