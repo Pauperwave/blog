@@ -42,6 +42,7 @@ export default defineNuxtConfig({
       "@vueuse/nuxt",
       "nuxt-swiper",
       "./modules/card-tooltip-transformer",
+      '@nuxt/eslint',
     ],
     icon: {
         collections: ['lucide', 'simple-icons', 'logos', 'mdi']

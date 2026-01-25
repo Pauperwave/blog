@@ -18,11 +18,13 @@
   },
   "dependencies": {
     "@nuxt/content": "^3.11.0",
+    "@nuxt/eslint": "1.13.0",
     "@nuxt/image": "^2.0.0",
     "@nuxt/ui": "^4.3.0",
     "@nuxtjs/mdc": "^0.19.2",
     "@nuxtjs/seo": "^3.3.0",
     "dayjs": "^1.11.19",
+    "eslint": "^9.0.0",
     "mana-font": "^1.18.0",
     "nuxt": "^4.2.2",
     "nuxt-swiper": "2.0.1",
@@ -37,6 +39,7 @@
     "@vueuse/core": "^14.1.0",
     "@vueuse/nuxt": "^14.1.0",
     "happy-dom": "^20.3.1",
+    "typescript": "^5.9.3",
     "vitest": "^4.0.17"
   }
 }
