@@ -32,22 +32,35 @@ const getArticleBadge = (date: string) => {
       </UButton>
     </div>
     <UBlogPosts>
-      <UBlogPost v-for="article in articles.slice(0, maxItems)" :key="article._id" :title="article.title"
-        :image="article.thumbnail" :badge="getArticleBadge(article.date)" :date="article.date" :to="article.path"
-        variant="naked">
+      <UBlogPost
+        v-for="article in articles.slice(0, maxItems)"
+        :key="article._id"
+        :title="article.title"
+        :image="article.thumbnail"
+        :badge="getArticleBadge(article.date)"
+        :date="article.date"
+        :to="article.path"
+        variant="naked"
+      >
         <template #date>
           {{useState(`article-date-${article.path}`, () => formatDateIT(article.date)).value}}
         </template>
         <template #description>
           <p class="mt-1 text-base text-pretty">{{ article.description }}</p>
           <div class="flex flex-row gap-2 items-center flex-wrap mt-3">
-            <UBadge v-for="tag in article.tags" :key="tag" color="primary" variant="soft">
+            <UBadge
+              v-for="tag in article.tags"
+              :key="tag"
+              color="primary"
+              variant="soft"
+            >
               {{ tag }}
             </UBadge>
           </div>
         </template>
         <template #authors>
-          <AuthorCard :author="{
+          <AuthorCard
+:author="{
             name: authorsMap[article.author]?.name || article.author,
             description: authorsMap[article.author]?.description,
             avatar: authorsMap[article.author]?.avatar,
