@@ -4,7 +4,7 @@
  */
 
 import { join } from 'path'
-import type { ManaSymbol } from '../../shared/types/decklist'
+import type { ManaSymbol } from '#shared/types/decklist'
 
 export interface CardData {
   name: string

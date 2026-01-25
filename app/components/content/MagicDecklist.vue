@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { DeckSection, CardItem, ParsedCardLine } from '../../../shared/types/decklist'
+import type { DeckSection, CardItem, ParsedCardLine } from '#shared/types/decklist'
 
 const props = defineProps<{
   name: string
