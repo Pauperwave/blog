@@ -119,8 +119,3 @@ Another example: [[Counterspell | ice]] from Ice Age has beautiful art.
 Cards with punctuation: [[Jace, the Mind Sculptor]] and [[Karn, Scion of Urza]].
 
 Combining set codes: [[Black Lotus | lea]] versus [[Black Lotus | vma]].
-
-### Backward Compatibility
-Old syntax still works: :CardTooltip{name="Force of Will"}
-
-All three syntaxes together: [[Lightning Bolt]], [[Counterspell | ice]], and :CardTooltip{name="Dark Ritual"}.

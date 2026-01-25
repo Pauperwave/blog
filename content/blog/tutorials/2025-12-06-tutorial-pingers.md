@@ -153,7 +153,7 @@ description: Descrizione breve delle scelte di side
 
 ### Elfi
 
-Lui nel post side probabilmente riuscirà a stallarci la board ed i botti andranno unicamente su :CardTooltip{name="Timberwatch Elf"}, :CardTooltip{name="Priest of Titania"} o al più sui boppini per impedire una iniziativa di terzo. Meglio tenere :CardTooltip{name="Voldaren Epicure"} come drop a 1 che ci schioda la mano in caso di Flood che puntare sul Goblin che si troverà a fronteggiare i vari :CardTooltip{name="Masked Vandal"}, :CardTooltip{name="Vitu-Ghazi Inspector"} e :CardTooltip{name="Nylea's Disciple"}.
+Lui nel post side probabilmente riuscirà a stallarci la board ed i botti andranno unicamente su [[Timberwatch Elf]], [[Priest of Titania]] o al più sui boppini per impedire una iniziativa di terzo. Meglio tenere [[Voldaren Epicure]] come drop a 1 che ci schioda la mano in caso di Flood che puntare sul Goblin che si troverà a fronteggiare i vari [[Masked Vandal]], [[Vitu-Ghazi Inspector]] e [[Nylea's Disciple]].
 
 ::MagicSideboard
 ---

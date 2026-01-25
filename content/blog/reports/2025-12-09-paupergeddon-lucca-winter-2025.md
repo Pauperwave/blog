@@ -101,7 +101,7 @@ crop:
 
 #### Game 1
 
-I start the tournament with a mulligan to five and decide to keep a hand with a couple of :CardTooltip{name="The Modern Age"}, so I can quickly dig through the deck for generic answers or a :CardTooltip{name="Squadron Hawk"} that will allow me to recover my mulligan.
+I start the tournament with a mulligan to five and decide to keep a hand with a couple of [[The Modern Age]], so I can quickly dig through the deck for generic answers or a [[Squadron Hawk]] that will allow me to recover my mulligan.
 Unfortunately, I discover I'm up against Mono Red: I don't find any of the lifelink pieces and end up losing, despite an attempted air race.
 
 ::MagicSideboard
