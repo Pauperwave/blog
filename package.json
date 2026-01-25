@@ -14,7 +14,9 @@
     "postinstall": "nuxt prepare",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "test:run": "vitest run"
+    "test:run": "vitest run",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@nuxt/content": "^3.11.0",
@@ -25,6 +27,7 @@
     "@nuxtjs/seo": "^3.3.0",
     "dayjs": "^1.11.19",
     "eslint": "^9.0.0",
+    "magic-regexp": "^0.10.0",
     "mana-font": "^1.18.0",
     "nuxt": "^4.2.2",
     "nuxt-swiper": "2.0.1",

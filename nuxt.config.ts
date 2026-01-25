@@ -34,15 +34,16 @@ export default defineNuxtConfig({
         },
     },
     modules: [
-      "@nuxt/ui",
-      "@nuxt/image",
-      "@nuxtjs/mdc",
       "@nuxt/content",
+      "@nuxt/eslint",
+      "@nuxt/image",
+      "@nuxt/ui",
+      "@nuxtjs/mdc",
       "@nuxtjs/seo",
       "@vueuse/nuxt",
+      "magic-regexp/nuxt",
       "nuxt-swiper",
       "./modules/card-tooltip-transformer",
-      '@nuxt/eslint',
     ],
     icon: {
         collections: ['lucide', 'simple-icons', 'logos', 'mdi']
