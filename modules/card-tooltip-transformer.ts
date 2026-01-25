@@ -1,4 +1,5 @@
 import { defineNuxtModule } from '@nuxt/kit'
+import { createRegExp, exactly, oneOrMore, charNotIn, maybe, whitespace, global } from 'magic-regexp'
 
 export default defineNuxtModule({
   meta: {
@@ -11,10 +12,24 @@ export default defineNuxtModule({
       
       if (file.extension === '.md') {
         // Pattern for [[cardName | set]] (with pipe separator)
-        const patternWithSet = /\[\[([^|\]]+)\s*\|\s*([^\]]+)\]\]/g
+        const patternWithSet = createRegExp(
+          exactly('[['),
+          oneOrMore(charNotIn('|]')).groupedAs('name'),
+          maybe(whitespace),
+          exactly('|'),
+          maybe(whitespace),
+          oneOrMore(charNotIn(']')).groupedAs('set'),
+          exactly(']]'),
+          [global]
+        )
         
         // Pattern for [[cardName]] (no set specified)
-        const patternSimple = /\[\[([^\]]+)\]\]/g
+        const patternSimple = createRegExp(
+          exactly('[['),
+          oneOrMore(charNotIn(']')).groupedAs('name'),
+          exactly(']]'),
+          [global]
+        )
         
         // First, replace cards with set codes
         let content = file.body as string
@@ -35,8 +50,3 @@ export default defineNuxtModule({
     })
   }
 })
-
-
-
-
-
