@@ -21,11 +21,13 @@ useSeoMeta({
     </UHeader>
     <UMain class="px-4">
       <UContainer>
-        <UError :error="{
-          statusCode: error?.statusCode,
-          statusMessage: error?.statusMessage,
-          message: error?.message,
-        }" />
+        <UError
+          :error="{
+            statusCode: error?.statusCode,
+            statusMessage: error?.statusMessage,
+            message: error?.message,
+          }"
+        />
       </UContainer>
     </UMain>
   </UApp>

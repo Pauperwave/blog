@@ -40,13 +40,30 @@ const parsedImages = computed<ImageItem[]>(() => {
   <div class="my-6">
     <!-- Swiper Carousel -->
     <ClientOnly>
-      <div v-if="parsedImages.length > 0" class="swiper-carousel-wrapper">
-        <Swiper :modules="[Navigation, Pagination, Autoplay]" :slides-per-view="1" :space-between="20"
-          :navigation="true" :pagination="{ clickable: true }" :loop="true"
-          :autoplay="{ delay: 3000, disableOnInteraction: false }" class="rounded-lg min-h-100">
-          <SwiperSlide v-for="(image, idx) in parsedImages" :key="idx">
+      <div
+        v-if="parsedImages.length > 0"
+        class="swiper-carousel-wrapper"
+      >
+        <Swiper
+          :modules="[Navigation, Pagination, Autoplay]"
+          :slides-per-view="1"
+          :space-between="20"
+          :navigation="true"
+          :pagination="{ clickable: true }"
+          :loop="true"
+          :autoplay="{ delay: 3000, disableOnInteraction: false }"
+          class="rounded-lg min-h-100"
+        >
+          <SwiperSlide
+            v-for="(image, idx) in parsedImages"
+            :key="idx"
+          >
             <div class="flex justify-center items-center py-4 h-full">
-              <img :src="image.src" :alt="image.alt" class="rounded-lg shadow-lg max-h-150 w-auto object-contain">
+              <img
+                :src="image.src"
+                :alt="image.alt"
+                class="rounded-lg shadow-lg max-h-150 w-auto object-contain"
+              >
             </div>
           </SwiperSlide>
         </Swiper>
@@ -54,16 +71,26 @@ const parsedImages = computed<ImageItem[]>(() => {
 
       <!-- SSR Fallback: Show first image as placeholder -->
       <template #fallback>
-        <div v-if="parsedImages.length > 0" class="swiper-carousel-wrapper">
+        <div
+          v-if="parsedImages.length > 0"
+          class="swiper-carousel-wrapper"
+        >
           <div class="relative rounded-lg min-h-100 bg-gray-100 dark:bg-gray-800">
             <div class="flex justify-center items-center py-4 h-full">
-              <img :src="parsedImages[0]!.src" :alt="parsedImages[0]!.alt"
-                class="rounded-lg shadow-lg max-h-150 w-auto object-contain">
+              <img
+                :src="parsedImages[0]!.src"
+                :alt="parsedImages[0]!.alt"
+                class="rounded-lg shadow-lg max-h-150 w-auto object-contain"
+              >
             </div>
             <!-- Indicator that carousel is loading -->
             <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
-              <div v-for="idx in parsedImages.length" :key="idx" class="w-2 h-2 rounded-full"
-                :class="idx === 1 ? 'bg-blue-500' : 'bg-gray-300 dark:bg-gray-600'" />
+              <div
+                v-for="idx in parsedImages.length"
+                :key="idx"
+                class="w-2 h-2 rounded-full"
+                :class="idx === 1 ? 'bg-blue-500' : 'bg-gray-300 dark:bg-gray-600'"
+              />
             </div>
           </div>
         </div>

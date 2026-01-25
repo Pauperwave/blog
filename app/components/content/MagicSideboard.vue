@@ -228,10 +228,16 @@ onBeforeUnmount(() => {
     <template #header>
       <div class="flex items-center justify-between">
         <div>
-          <h3 v-if="props.matchup" class="text-lg font-semibold">
+          <h3
+            v-if="props.matchup"
+            class="text-lg font-semibold"
+          >
             vs {{ props.matchup }}
           </h3>
-          <p v-if="props.description" class="text-sm text-gray-400 mt-1">
+          <p
+            v-if="props.description"
+            class="text-sm text-gray-400 mt-1"
+          >
             {{ props.description }}
           </p>
         </div>
@@ -250,7 +256,10 @@ onBeforeUnmount(() => {
 
     <template #default>
       <!-- Hidden content for parsing -->
-      <div ref="decklistContent" class="hidden">
+      <div
+        ref="decklistContent"
+        class="hidden"
+      >
         <div class="cards-in">
           <slot name="in" />
         </div>
@@ -266,7 +275,10 @@ onBeforeUnmount(() => {
         <!-- Cards In (Left) -->
         <div class="cards-section in-section">
           <div class="section-header">
-            <UIcon name="i-lucide-plus-circle" class="size-5 text-green-500" />
+            <UIcon
+              name="i-lucide-plus-circle"
+              class="size-5 text-green-500"
+            />
             <h4 class="font-semibold">Sideboard In</h4>
             <span class="card-count">({{ totalIn }})</span>
           </div>
@@ -304,7 +316,10 @@ onBeforeUnmount(() => {
         <!-- Cards Out (Middle) -->
         <div class="cards-section out-section">
           <div class="section-header">
-            <UIcon name="i-lucide-minus-circle" class="size-5 text-red-500" />
+            <UIcon
+              name="i-lucide-minus-circle"
+              class="size-5 text-red-500"
+            />
             <h4 class="font-semibold">Sideboard Out</h4>
             <span class="card-count">({{ totalOut }})</span>
           </div>
@@ -377,7 +392,10 @@ onBeforeUnmount(() => {
 
         <!-- Card Preview (Right) -->
         <div class="card-preview bg-amber-950/10 rounded sticky">
-          <div v-if="hoveredCard" class="preview-content">
+          <div
+            v-if="hoveredCard"
+            class="preview-content"
+          >
             <div class="card-image-container">
               <img
                 :src="getCardImageUrl(hoveredCard)"
@@ -387,8 +405,14 @@ onBeforeUnmount(() => {
               >
             </div>
           </div>
-          <div v-else class="text-gray-600 text-center text-sm py-8">
-            <UIcon name="i-lucide-image" class="w-16 h-16 mx-auto mb-2 opacity-50" />
+          <div
+            v-else
+            class="text-gray-600 text-center text-sm py-8"
+          >
+            <UIcon
+              name="i-lucide-image"
+              class="w-16 h-16 mx-auto mb-2 opacity-50"
+            />
             <p>Passa il mouse sopra una carta per visualizzarla</p>
           </div>
         </div>
@@ -405,7 +429,10 @@ onBeforeUnmount(() => {
     }"
   >
     <template #content>
-      <div v-if="hoveredCard" class="flex items-center justify-center">
+      <div
+        v-if="hoveredCard"
+        class="flex items-center justify-center"
+      >
         <img
           :src="getCardImageUrl(hoveredCard)"
           :alt="hoveredCard"

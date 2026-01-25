@@ -15,7 +15,11 @@ const props = defineProps<{
 </script>
 
 <template>
-  <UCard id="author-about" variant="soft" class="mt-16">
+  <UCard
+    id="author-about"
+    variant="soft"
+    class="mt-16"
+  >
 
     <template #header>
       <div class="flex flex-col">
@@ -26,13 +30,17 @@ const props = defineProps<{
 
     <template #footer>
       <div class="flex items-center gap-2">
-        <AuthorCard :author="{
-          name: props.name,
-          avatar: props.src,
-          description: props.description,
-          url: props.url,
-          socials: props.socials
-        }" :clickable="!!props.url" class="flex-1" />
+        <AuthorCard
+          :author="{
+            name: props.name,
+            avatar: props.src,
+            description: props.description,
+            url: props.url,
+            socials: props.socials
+          }"
+          :clickable="!!props.url"
+          class="flex-1"
+        />
         <div class="ml-auto flex items-center gap-2 justify-end">
           <slot name="actions" />
         </div>

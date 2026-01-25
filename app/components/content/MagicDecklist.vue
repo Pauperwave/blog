@@ -313,18 +313,30 @@ onBeforeUnmount(() => {
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
         <div>
           <h2 class="text-lg font-semibold">{{ props.name }}</h2>
-          <p v-if="props.player" class="text-md dark:text-gray-400">
+          <p
+            v-if="props.player"
+            class="text-md dark:text-gray-400"
+          >
             {{ props.player }}
           </p>
         </div>
-        <div v-if="props.placement" class="dark:text-gray-500">
+        <div
+          v-if="props.placement"
+          class="dark:text-gray-500"
+        >
           {{ props.placement }}
         </div>
       </div>
-      <div v-if="props.description" class="mb-2 dark:text-gray-500">
+      <div
+        v-if="props.description"
+        class="mb-2 dark:text-gray-500"
+      >
         {{ props.description }}
       </div>
-      <div v-if="props.tags && props.tags.length" class="flex flex-wrap gap-1">
+      <div
+        v-if="props.tags && props.tags.length"
+        class="flex flex-wrap gap-1"
+      >
         <UButton
           v-for="(tag, index) in props.tags"
           :key="index"
@@ -339,21 +351,36 @@ onBeforeUnmount(() => {
     <!-- Body Slot - Three-column layout -->
     <template #default>
       <!-- Loading State -->
-      <div v-if="isLoading" class="flex items-center justify-center py-8">
-        <UIcon name="i-lucide-loader-2" class="w-8 h-8 animate-spin" />
+      <div
+        v-if="isLoading"
+        class="flex items-center justify-center py-8"
+      >
+        <UIcon
+          name="i-lucide-loader-2"
+          class="w-8 h-8 animate-spin"
+        />
         <span class="ml-2">Loading deck...</span>
       </div>
 
       <!-- Error State -->
-      <div v-else-if="error" class="text-red-500 p-4">
+      <div
+        v-else-if="error"
+        class="text-red-500 p-4"
+      >
         <p><strong>Error loading decklist:</strong></p>
         <p>{{ error }}</p>
       </div>
 
       <!-- Deck Content -->
-      <div v-else class="decklist-grid">
+      <div
+        v-else
+        class="decklist-grid"
+      >
         <!-- Hidden slot for parsing original content -->
-        <div ref="decklistContent" class="hidden">
+        <div
+          ref="decklistContent"
+          class="hidden"
+        >
           <div class="main-deck">
             <slot name="main" />
           </div>
@@ -364,7 +391,11 @@ onBeforeUnmount(() => {
 
         <!-- Main Deck (Left) -->
         <div class="main-deck">
-          <div v-for="section in mainDeckSections" :key="section.heading" class="section">
+          <div
+            v-for="section in mainDeckSections"
+            :key="section.heading"
+            class="section"
+          >
             <h2 class="section-heading">
               {{ section.heading }} <span class="card-count">({{ section.count }})</span>
             </h2>
@@ -401,7 +432,11 @@ onBeforeUnmount(() => {
 
         <!-- Sideboard (Middle) -->
         <div class="sideboard">
-          <div v-for="section in sideboardSections" :key="section.heading" class="section">
+          <div
+            v-for="section in sideboardSections"
+            :key="section.heading"
+            class="section"
+          >
             <h2 class="section-heading">
               {{ section.heading }} <span class="card-count">({{ section.count }})</span>
             </h2>
@@ -438,7 +473,10 @@ onBeforeUnmount(() => {
 
         <!-- Card Preview (Right) - Hidden on small screens -->
         <div class="card-preview bg-amber-950/10 rounded sticky top-4">
-          <div v-if="hoveredCard" class="preview-content">
+          <div
+            v-if="hoveredCard"
+            class="preview-content"
+          >
             <div class="card-image-container">
               <img
                 :src="getCardImageUrl(hoveredCard)"
@@ -448,8 +486,14 @@ onBeforeUnmount(() => {
               >
             </div>
           </div>
-          <div v-else class="text-gray-600 text-center text-sm py-8">
-            <UIcon name="i-lucide-image" class="w-16 h-16 mx-auto mb-2 opacity-50" />
+          <div
+            v-else
+            class="text-gray-600 text-center text-sm py-8"
+          >
+            <UIcon
+              name="i-lucide-image"
+              class="w-16 h-16 mx-auto mb-2 opacity-50"
+            />
             <p>Passa il mouse sopra una carta per visualizzarla</p>
           </div>
         </div>
@@ -480,7 +524,10 @@ onBeforeUnmount(() => {
     }"
   >
     <template #content>
-      <div v-if="hoveredCard" class="flex items-center justify-center p-4">
+      <div
+        v-if="hoveredCard"
+        class="flex items-center justify-center p-4"
+      >
         <img
           :src="getCardImageUrl(hoveredCard)"
           :alt="hoveredCard"

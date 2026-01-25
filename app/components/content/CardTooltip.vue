@@ -1,5 +1,8 @@
 <template>
-  <UTooltip :delay-duration="300" :content="{ side: 'top', sideOffset: 8 }">
+  <UTooltip
+    :delay-duration="300"
+    :content="{ side: 'top', sideOffset: 8 }"
+  >
     <span class="font-semibold text-primary cursor-help">
       {{ displayText }}
     </span>

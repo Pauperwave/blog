@@ -178,55 +178,100 @@ function updateMeta() {
 
     <template #right>
       <UPageAside :ui="{ root: 'lg:col-span-3!' }">
-        <UPageAnchors :links="[
-          { label: 'Canale YouTube', icon: 'mdi:youtube', to: 'https://www.youtube.com/@alessandromoretti1177', target: '_blank' },
-          { label: 'Tutti gli articoli', icon: 'material-symbols:article-rounded', to: '/articles' },
-        ]" />
-        <USeparator type="dotted" class="mt-4" />
-        <UContentToc v-if="data" :title="tocTitle" :links="data.body.toc?.links" highlight />
+        <UPageAnchors
+          :links="[
+            { label: 'Canale YouTube', icon: 'mdi:youtube', to: 'https://www.youtube.com/@alessandromoretti1177', target: '_blank' },
+            { label: 'Tutti gli articoli', icon: 'material-symbols:article-rounded', to: '/articles' },
+          ]"
+        />
+        <USeparator
+          type="dotted"
+          class="mt-4"
+        />
+        <UContentToc
+          v-if="data"
+          :title="tocTitle"
+          :links="data.body.toc?.links"
+          highlight
+        />
       </UPageAside>
     </template>
 
-    <UPageHeader :title="data?.title" :description="data?.description" headline="Blog">
+    <UPageHeader
+      :title="data?.title"
+      :description="data?.description"
+      headline="Blog"
+    >
       <div class="flex items-end flex-wrap gap-4 justify-between mt-4">
         <div class="flex flex-col gap-4">
           <div class="flex flex-row gap-2 items-center flex-wrap">
-            <UBadge v-for="tag in data?.tags" :key="tag" color="primary" variant="soft">
+            <UBadge
+              v-for="tag in data?.tags"
+              :key="tag"
+              color="primary"
+              variant="soft"
+            >
               {{ tag }}
             </UBadge>
           </div>
-          <AuthorCard v-if="authorData" :author="{
-            name: authorData.name,
-            description: authorData.description,
-            avatar: authorData.avatar,
-            url: authorData.url,
-            socials: authorData.socials
-          }" :clickable="true" @click="navigateTo(`/authors/${getAuthorSlug(authorData.name)}`)" />
+          <AuthorCard
+            v-if="authorData"
+            :author="{
+              name: authorData.name,
+              description: authorData.description,
+              avatar: authorData.avatar,
+              url: authorData.url,
+              socials: authorData.socials
+            }"
+            :clickable="true"
+            @click="navigateTo(`/authors/${getAuthorSlug(authorData.name)}`)"
+          />
         </div>
         <div class="flex flex-row items-center gap-4">
           <p class="flex flex-row items-center gap-1 typ-sublabel">
-            <icon name="material-symbols:calendar-today-rounded" class="text-primary" /> {{ formattedDate }}
+            <icon
+              name="material-symbols:calendar-today-rounded"
+              class="text-primary"
+            /> {{ formattedDate }}
           </p>
           <!-- <p class="flex flex-row items-center gap-1 typ-sublabel"><icon name="material-symbols:alarm-rounded" class="text-primary"></icon> {{ readingTimeText }}</p> -->
         </div>
-        <NuxtImg v-if="data?.thumbnail" :src="data.thumbnail" :alt="data.title"
-          class="w-full h-auto rounded-lg shadow-lg aspect-video object-cover" loading="lazy" />
+        <NuxtImg
+          v-if="data?.thumbnail"
+          :src="data.thumbnail"
+          :alt="data.title"
+          class="w-full h-auto rounded-lg shadow-lg aspect-video object-cover"
+          loading="lazy"
+        />
       </div>
     </UPageHeader>
 
     <UPageBody>
-      <ContentRenderer v-if="data" id="content" :value="data" class="markdown-content flex-1" />
+      <ContentRenderer
+        v-if="data"
+        id="content"
+        :value="data"
+        class="markdown-content flex-1"
+      />
       <USeparator class="mt-4 mb-4" />
       <p class="font-semibold mb-4">
         {{ relatedArticlesString }}
       </p>
       <UBlogPosts id="related-articles">
-        <UBlogPost v-for="article in links" :key="article.path" :title="article.title" :image="article.thumbnail"
+        <UBlogPost
+          v-for="article in links"
+          :key="article.path"
+          :title="article.title"
+          :image="article.thumbnail"
           :authors="[{
             name: relatedAuthorsMap[article.author]?.name || article.author,
             avatar: { src: relatedAuthorsMap[article.author]?.avatar },
             description: relatedAuthorsMap[article.author]?.description
-          }]" :badge="getBadge(article.date)" :to="article.path" variant="subtle" />
+          }]"
+          :badge="getBadge(article.date)"
+          :to="article.path"
+          variant="subtle"
+        />
       </UBlogPosts>
       <USeparator class="mt-4 mb-4" />
       <UContentSurround :surround="surround" />

@@ -114,19 +114,22 @@ watch(() => props.card, async () => {
 
 <template>
   <div class="my-8">
-    <UAlert v-if="error"
+    <UAlert
+      v-if="error"
       color="error"
       variant="soft"
       title="Card not found"
       :description="`Could not find card: ${card}`"
       icon="i-lucide-alert-circle"
     />
-    <img v-else-if="imageUrl && !loading"
+    <img
+      v-else-if="imageUrl && !loading"
       :src="imageUrl"
       :alt="cardData?.name"
       class="rounded-lg shadow-lg max-w-sm mx-auto"
     >
-    <USkeleton v-else
+    <USkeleton
+      v-else
       class="h-96 w-full max-w-sm mx-auto rounded-lg"
     />
   </div>

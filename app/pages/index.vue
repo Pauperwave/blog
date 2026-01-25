@@ -52,13 +52,19 @@ const sections = getHomeSections();
 
 <template>
   <UPage>
-    <UPageBody :ui="{
-      body: 'space-y-0 my-0'
-    }">
-      <!-- <div id="home-articles" class="border border-8 border-amber-100 flex flex-col gap-2 items-stretch w-full"> -->
-      <ArticleCategorySection v-for="section in sections" :key="section.category" :title="section.title"
-        :category="section.category" :articles="articlesByCategory[section.category]" :authors-map="authorsMap" />
-      <!-- </div> -->
+    <UPageBody
+      :ui="{
+        body: 'space-y-0 my-0'
+      }"
+    >
+      <ArticleCategorySection
+        v-for="section in sections"
+        :key="section.category"
+        :title="section.title"
+        :category="section.category"
+        :articles="articlesByCategory[section.category]"
+        :authors-map="authorsMap"
+      />
     </UPageBody>
   </UPage>
 </template>

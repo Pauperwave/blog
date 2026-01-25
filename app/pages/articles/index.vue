@@ -65,21 +65,38 @@ watch(selectedCategory, (newCategory) => {
     <UPageBody>
       <!-- Category Filter -->
       <div class="flex items-center gap-4 mb-6 flex-wrap">
-        <UButton v-for="(label, category) in { null: 'All', ...categoryLabels }" :key="category"
+        <UButton
+          v-for="(label, category) in { null: 'All', ...categoryLabels }"
+          :key="category"
           :variant="selectedCategory === category ? 'solid' : 'outline'"
-          @click="selectedCategory = category === 'null' ? null : category">
+          @click="selectedCategory = category === 'null' ? null : category"
+        >
           {{ label }}
         </UButton>
       </div>
 
-      <UEmpty v-if="(filteredArticles?.length ?? 0) <= 0" title="No articles found"
-        description="No articles match the selected category." variant="naked"
-        :actions="[{ label: 'Go back home', to: '/' }]" />
-      <UBlogPosts v-else class="gap-4 lg:gap-6 sm:grid-cols-3 lg:grid-cols-4">
-        <UBlogPost v-for="article in filteredArticles" :key="article.path" :title="article.title"
-          :image="article.thumbnail" :badge="getBadge(article.date)" :date="article.date" :to="article.path"
+      <UEmpty
+        v-if="(filteredArticles?.length ?? 0) <= 0"
+        title="No articles found"
+        description="No articles match the selected category."
+        variant="naked"
+        :actions="[{ label: 'Go back home', to: '/' }]"
+      />
+      <UBlogPosts
+        v-else
+        class="gap-4 lg:gap-6 sm:grid-cols-3 lg:grid-cols-4"
+      >
+        <UBlogPost
+          v-for="article in filteredArticles"
+          :key="article.path"
+          :title="article.title"
+          :image="article.thumbnail"
+          :badge="getBadge(article.date)"
+          :date="article.date"
+          :to="article.path"
           variant="naked"
-          class="group border border-gray-200 dark:border-gray-800 rounded-xl p-4 hover:border-primary-500 dark:hover:border-primary-400 transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/10 dark:hover:shadow-primary-400/10 hover:-translate-y-1 hover:scale-[1.02] bg-white dark:bg-gray-900/50 backdrop-blur-sm">
+          class="group border border-gray-200 dark:border-gray-800 rounded-xl p-4 hover:border-primary-500 dark:hover:border-primary-400 transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/10 dark:hover:shadow-primary-400/10 hover:-translate-y-1 hover:scale-[1.02] bg-white dark:bg-gray-900/50 backdrop-blur-sm"
+        >
           <template #date>
             {{useState(`article-date-${article.path}`, () => formatDateIT(article.date)).value}}
           </template>
@@ -88,19 +105,27 @@ watch(selectedCategory, (newCategory) => {
               {{ article.description }}
             </p>
             <div class="flex flex-row gap-2 items-center flex-wrap mt-3">
-              <UBadge v-for="tag in article.tags" :key="tag" color="primary" variant="soft">
+              <UBadge
+                v-for="tag in article.tags"
+                :key="tag"
+                color="primary"
+                variant="soft"
+              >
                 {{ tag }}
               </UBadge>
             </div>
           </template>
           <template #authors>
-            <AuthorCard :author="{
-              name: authorsMap[article.author]?.name || article.author,
-              description: authorsMap[article.author]?.description,
-              avatar: authorsMap[article.author]?.avatar,
-              bio: authorsMap[article.author]?.bio,
-              socials: authorsMap[article.author]?.socials
-            }" :clickable="false" />
+            <AuthorCard
+              :author="{
+                name: authorsMap[article.author]?.name || article.author,
+                description: authorsMap[article.author]?.description,
+                avatar: authorsMap[article.author]?.avatar,
+                bio: authorsMap[article.author]?.bio,
+                socials: authorsMap[article.author]?.socials
+              }"
+              :clickable="false"
+            />
           </template>
         </UBlogPost>
       </UBlogPosts>

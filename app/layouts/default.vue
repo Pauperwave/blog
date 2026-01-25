@@ -12,8 +12,11 @@ const navItems: NavigationMenuItem[] = [
   <UApp>
     <UHeader mode="slideover">
       <template #left>
-        <UUser name="Pauperwave Blog" to="/"
-          :avatar="{ src: 'https://avatars.githubusercontent.com/u/225214755?v=4' }" />
+        <UUser
+          name="Pauperwave Blog"
+          to="/"
+          :avatar="{ src: 'https://avatars.githubusercontent.com/u/225214755?v=4' }"
+        />
       </template>
       <template #right>
         <ColorModeButton />

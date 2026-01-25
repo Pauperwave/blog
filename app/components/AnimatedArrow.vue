@@ -21,11 +21,17 @@ const rootClass = computed(() => {
 </script>
 
 <template>
-  <div class="flex flex-row items-center group" :class="rootClass">
+  <div
+    class="flex flex-row items-center group"
+    :class="rootClass"
+  >
     <slot />
     <div class="icon-wrapper">
       <div class="arrow-line" />
-      <icon class="arrow-head" name="ic:round-keyboard-arrow-right" />
+      <icon
+        class="arrow-head"
+        name="ic:round-keyboard-arrow-right"
+      />
     </div>
   </div>
 </template>

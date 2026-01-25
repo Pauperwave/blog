@@ -23,10 +23,17 @@ const getArticleBadge = (date: string) => {
 </script>
 
 <template>
-  <section v-if="articles.length" class="space-y-6">
+  <section
+    v-if="articles.length"
+    class="space-y-6"
+  >
     <div class="flex items-center justify-between">
       <h2 class="text-3xl font-bold">{{ title }}</h2>
-      <UButton :to="`/articles?category=${category}`" variant="link" size="sm">
+      <UButton
+        :to="`/articles?category=${category}`"
+        variant="link"
+        size="sm"
+      >
         {{ viewAllText }}
         <AnimatedArrow />
       </UButton>
@@ -60,13 +67,15 @@ const getArticleBadge = (date: string) => {
         </template>
         <template #authors>
           <AuthorCard
-:author="{
-            name: authorsMap[article.author]?.name || article.author,
-            description: authorsMap[article.author]?.description,
-            avatar: authorsMap[article.author]?.avatar,
-            bio: authorsMap[article.author]?.bio,
-            socials: authorsMap[article.author]?.socials
-          }" :clickable="false" />
+            :author="{
+              name: authorsMap[article.author]?.name || article.author,
+              description: authorsMap[article.author]?.description,
+              avatar: authorsMap[article.author]?.avatar,
+              bio: authorsMap[article.author]?.bio,
+              socials: authorsMap[article.author]?.socials
+            }"
+            :clickable="false"
+          />
         </template>
       </UBlogPost>
     </UBlogPosts>

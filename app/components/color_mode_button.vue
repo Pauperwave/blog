@@ -13,7 +13,13 @@ const isDark = computed({
 
 <template>
   <client-only v-if="!colorMode?.forced">
-    <USwitch v-model="isDark" checked-icon="i-lucide-moon" unchecked-icon="i-lucide-sun" color="neutral" size="sm" />
+    <USwitch
+      v-model="isDark"
+      checked-icon="i-lucide-moon"
+      unchecked-icon="i-lucide-sun"
+      color="neutral"
+      size="sm"
+    />
     <template #fallback>
       <div class="size-8" />
     </template>

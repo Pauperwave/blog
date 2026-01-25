@@ -127,35 +127,74 @@ watch(rawText, async (raw) => {
 <template>
   <div>
     <!-- Slot che contiene i nomi delle carte -->
-    <div ref="slotText" class="hidden">
+    <div
+      ref="slotText"
+      class="hidden"
+    >
       <slot mdc-unwrap="p" />
     </div>
 
     <!-- Stati di caricamento / errore -->
-    <div v-if="loading" class="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
-      <div v-for="n in 6" :key="n" class="h-48 bg-gray-300 animate-pulse rounded-lg" />
+    <div
+      v-if="loading"
+      class="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2"
+    >
+      <div
+        v-for="n in 6"
+        :key="n"
+        class="h-48 bg-gray-300 animate-pulse rounded-lg"
+      />
     </div>
-    <div v-if="error" class="text-red-500 mt-4">
+    <div
+      v-if="error"
+      class="text-red-500 mt-4"
+    >
       {{ error }}
     </div>
 
     <!-- Carte renderizzate -->
-    <div v-if="cardData?.length" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 mt-4">
-      <div v-for="card in cardData" :key="card.id" class="flex flex-col items-center">
-        <img v-if="card.image_uris?.normal" :src="card.image_uris.normal" :alt="card.name"
-          class="rounded-lg shadow-md hover:scale-105 transition-transform">
+    <div
+      v-if="cardData?.length"
+      class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 mt-4"
+    >
+      <div
+        v-for="card in cardData"
+        :key="card.id"
+        class="flex flex-col items-center"
+      >
+        <img
+          v-if="card.image_uris?.normal"
+          :src="card.image_uris.normal"
+          :alt="card.name"
+          class="rounded-lg shadow-md hover:scale-105 transition-transform"
+        >
       </div>
     </div>
-    <div v-else-if="!loading" class="text-2xl font-sans font-bold text-indigo-500">
+    <div
+      v-else-if="!loading"
+      class="text-2xl font-sans font-bold text-indigo-500"
+    >
       Nessuna carta caricata
     </div>
 
     <ClientOnly>
       <swiper-container ref="containerRef">
-        <swiper :slides-per-view="3" :space-between="50" @swiper="onSwiper" @slide-change="onSlideChange">
-          <swiper-slide v-for="(card, idx) in cardData" :key="idx">
-            <img v-if="card.image_uris?.normal" :src="card.image_uris.normal" :alt="card.name"
-              class="rounded-lg shadow-md hover:scale-105 transition-transform">
+        <swiper
+          :slides-per-view="3"
+          :space-between="50"
+          @swiper="onSwiper"
+          @slide-change="onSlideChange"
+        >
+          <swiper-slide
+            v-for="(card, idx) in cardData"
+            :key="idx"
+          >
+            <img
+              v-if="card.image_uris?.normal"
+              :src="card.image_uris.normal"
+              :alt="card.name"
+              class="rounded-lg shadow-md hover:scale-105 transition-transform"
+            >
           </swiper-slide>
         </swiper>
       </swiper-container>
