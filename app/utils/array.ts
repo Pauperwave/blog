@@ -59,16 +59,16 @@ export function orderBy<T>(
  * )
  */
 export function orderByMultiple<T>(
-    array: T[], 
-    iteratees: ((item: T) => number | string)[], 
+    array: T[],
+    iteratees: ((item: T) => number | string)[],
     orders: ('asc' | 'desc')[]
 ): T[] {
     return [...array].sort((a, b) => {
-        for (let i = 0; i < iteratees.length; i++) {
-            const valA = iteratees[i](a);
-            const valB = iteratees[i](b);
-            const order = orders[i] || 'asc';
-            
+        for (const [i, iteratee] of iteratees.entries()) {
+            const valA = iteratee(a);
+            const valB = iteratee(b);
+            const order = orders[i] ?? 'asc';
+
             if (valA < valB) return order === 'asc' ? -1 : 1;
             if (valA > valB) return order === 'asc' ? 1 : -1;
         }
