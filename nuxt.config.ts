@@ -5,7 +5,10 @@ import appMeta from "./app/app.meta";
 export default defineNuxtConfig({
     compatibilityDate: "2025-07-15",
     devtools: { enabled: true },
-    css: ["~/assets/css/main.css"],
+    css: [
+      "~/assets/css/main.css",
+      "mana-font/css/mana.css"
+    ],
     fonts: {
         defaults: {
             weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
