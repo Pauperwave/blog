@@ -1,9 +1,9 @@
-<script lang="ts" setup>
-import { 
-  type AnyArticle, 
-  type CategoryType, 
-  queryAllCollections, 
-  combineArticles, 
+<script setup lang="ts">
+import {
+  type AnyArticle,
+  type CategoryType,
+  queryAllCollections,
+  combineArticles,
   getHomeSections,
   initializeCategories
 } from '~/constants/content-config';
@@ -11,11 +11,11 @@ import {
 // Query all collections and combine them
 const { data: allArticles } = await useAsyncData('home-articles', async () => {
   const collectionsData = await queryAllCollections();
-  
+
   // Combine all articles, filter out drafts, and sort by date
   const combined: AnyArticle[] = combineArticles(collectionsData)
     .filter(article => article.published !== false);
-  
+
   return combined.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 });
 
@@ -52,20 +52,12 @@ const sections = getHomeSections();
 
 <template>
   <UPage>
-    <UPageBody
-      :ui="{
-        body: 'space-y-0 my-0'
-      }"
-    >
+    <UPageBody :ui="{
+      body: 'space-y-0 my-0'
+    }">
       <!-- <div id="home-articles" class="border border-8 border-amber-100 flex flex-col gap-2 items-stretch w-full"> -->
-      <ArticleCategorySection
-        v-for="section in sections"
-        :key="section.category"
-        :title="section.title"
-        :category="section.category"
-        :articles="articlesByCategory[section.category]"
-        :authors-map="authorsMap"
-      />
+      <ArticleCategorySection v-for="section in sections" :key="section.category" :title="section.title"
+        :category="section.category" :articles="articlesByCategory[section.category]" :authors-map="authorsMap" />
       <!-- </div> -->
     </UPageBody>
   </UPage>

@@ -1,37 +1,4 @@
-<template>
-  <div class="my-8">
-    <UAlert 
-      v-if="error" 
-      color="error" 
-      variant="soft"
-      title="Card not found"
-      :description="`Could not find card: ${card}`"
-      icon="i-lucide-alert-circle"
-    />
-
-    <figure v-else-if="artCropUrl && !loading" class="space-y-2">
-      <img
-        :src="artCropUrl"
-        :alt="caption || cardData?.name"
-        :class="imageClasses"
-      >
-      <figcaption 
-        v-if="caption"
-        class="text-sm text-center text-gray-600 dark:text-gray-400"
-      >
-        {{ caption }}
-      </figcaption>
-    </figure>
-
-    <USkeleton 
-      v-else 
-      class="w-full rounded-xl aspect-5/3"
-      :class="heightClass"
-    />
-  </div>
-</template>
-
-<script lang="ts" setup>
+<script setup lang="ts">
 import { ref, watch, computed } from 'vue'
 
 interface ScryfallCard {
@@ -96,23 +63,23 @@ const parsedCard = computed(() => parseCardString(props.card))
 
 const artCropUrl = computed(() => {
   if (!cardData.value) return null
-  
+
   // Single-faced card
   if (cardData.value.image_uris?.art_crop) {
     return cardData.value.image_uris.art_crop
   }
-  
+
   // Double-faced card (use first face)
   if (cardData.value.card_faces?.[0]?.image_uris?.art_crop) {
     return cardData.value.card_faces[0].image_uris.art_crop
   }
-  
+
   return null
 })
 
 const heightClass = computed(() => {
   if (!props.crop) return '' // No fixed height - show full art crop
-  
+
   const heights = {
     small: 'h-32',
     medium: 'h-48',
@@ -124,7 +91,7 @@ const heightClass = computed(() => {
 
 const positionClass = computed(() => {
   if (!props.crop) return '' // No object positioning needed
-  
+
   const positions = {
     top: 'object-top',
     center: 'object-center',
@@ -135,18 +102,18 @@ const positionClass = computed(() => {
 
 const imageClasses = computed(() => {
   const classes = ['w-full', 'rounded-xl']
-  
+
   if (props.crop) {
     classes.push('object-cover', heightClass.value, positionClass.value)
   }
-  
+
   return classes.filter(Boolean).join(' ')
 })
 
 /** Fetch card info when card prop changes */
 watch(() => props.card, async () => {
   const parsed = parsedCard.value
-  
+
   if (!parsed.name) {
     cardData.value = null
     error.value = null
@@ -182,3 +149,32 @@ watch(() => props.card, async () => {
   }
 }, { immediate: true })
 </script>
+
+<template>
+  <div class="my-8">
+    <UAlert v-if="error"
+      color="error"
+      variant="soft"
+      title="Card not found"
+      :description="`Could not find card: ${card}`"
+      icon="i-lucide-alert-circle"
+    />
+    <figure v-else-if="artCropUrl && !loading"
+      class="space-y-2"
+    >
+      <img
+        :src="artCropUrl" :alt="caption || cardData?.name"
+        :class="imageClasses"
+      >
+      <figcaption v-if="caption"
+        class="text-sm text-center text-gray-600 dark:text-gray-400"
+      >
+        {{ caption }}
+      </figcaption>
+    </figure>
+    <USkeleton v-else
+      class="w-full rounded-xl aspect-5/3"
+      :class="heightClass"
+    />
+  </div>
+</template>

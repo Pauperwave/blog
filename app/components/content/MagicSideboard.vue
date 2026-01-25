@@ -1,202 +1,3 @@
-<template>
-  <UCard
-    class="sideboard-guide-wrapper mx-auto"
-    :ui="{
-      root: 'overflow-hidden'
-    }"
-  >
-    <template #header>
-      <div class="flex items-center justify-between">
-        <div>
-          <h3 v-if="props.matchup" class="text-lg font-semibold">
-            vs {{ props.matchup }}
-          </h3>
-          <p v-if="props.description" class="text-sm text-gray-400 mt-1">
-            {{ props.description }}
-          </p>
-        </div>
-        <!-- <div class="flex items-center gap-2 text-sm text-gray-400">
-          <span class="flex items-center gap-1">
-            <UIcon name="i-lucide-plus" class="size-4 text-green-500" />
-            <span>{{ totalIn }}</span>
-          </span>
-          <span class="flex items-center gap-1">
-            <UIcon name="i-lucide-minus" class="size-4 text-red-500" />
-            <span>{{ totalOut }}</span>
-          </span>
-        </div> -->
-      </div>
-    </template>
-
-    <template #default>
-      <!-- Hidden content for parsing -->
-      <div ref="decklistContent" class="hidden">
-        <div class="cards-in">
-          <slot name="in" />
-        </div>
-        <div class="cards-out">
-          <slot name="out" />
-        </div>
-        <div class="cards-out-alt">
-          <slot name="out-alt" />
-        </div>
-      </div>
-
-      <div class="sideboard-grid">
-        <!-- Cards In (Left) -->
-        <div class="cards-section in-section">
-          <div class="section-header">
-            <UIcon name="i-lucide-plus-circle" class="size-5 text-green-500" />
-            <h4 class="font-semibold">Sideboard In</h4>
-            <span class="card-count">({{ totalIn }})</span>
-          </div>
-          
-          <ul class="card-list">
-            <li
-              v-for="(card, index) in cardsIn"
-              :key="`in-${index}`"
-              class="card-item in-card"
-            >
-              <span class="card-quantity">{{ card.quantity }}</span>
-              <span class="card-name-wrapper">
-                <span
-                  class="card-name-link"
-                  @mouseenter="!isMobile && handleCardHover(card.name)"
-                  @mouseleave="!isMobile && handleCardHover(null)"
-                  @click="isMobile && (hoveredCard === card.name && showModal ? closeModal() : handleCardHover(card.name))"
-                >
-                  {{ card.name }}
-                </span>
-              </span>
-              <span class="card-mana-cost">
-                <img
-                  v-for="(symbol, idx) in card.manaSymbols"
-                  :key="idx"
-                  :src="symbol.svgUri"
-                  class="mana-symbol"
-                  alt="Mana symbol"
-                >
-              </span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Cards Out (Middle) -->
-        <div class="cards-section out-section">
-          <div class="section-header">
-            <UIcon name="i-lucide-minus-circle" class="size-5 text-red-500" />
-            <h4 class="font-semibold">Sideboard Out</h4>
-            <span class="card-count">({{ totalOut }})</span>
-          </div>
-          
-          <ul class="card-list">
-            <li
-              v-for="(card, index) in cardsOut"
-              :key="`out-${index}`"
-              class="card-item out-card"
-            >
-              <span class="card-quantity">{{ card.quantity }}</span>
-              <span class="card-name-wrapper">
-                <span
-                  class="card-name-link"
-                  @mouseenter="!isMobile && handleCardHover(card.name)"
-                  @mouseleave="!isMobile && handleCardHover(null)"
-                  @click="isMobile && (hoveredCard === card.name && showModal ? closeModal() : handleCardHover(card.name))"
-                >
-                  {{ card.name }}
-                </span>
-              </span>
-              <span class="card-mana-cost">
-                <img
-                  v-for="(symbol, idx) in card.manaSymbols"
-                  :key="idx"
-                  :src="symbol.svgUri"
-                  class="mana-symbol"
-                  alt="Mana symbol"
-                >
-              </span>
-            </li>
-          </ul>
-
-          <!-- Alternative section -->
-          <template v-if="hasAlternative">
-            <div class="alternative-divider">
-              <span class="alternative-label">Alternativa</span>
-            </div>
-            
-            <ul class="card-list">
-              <li
-                v-for="(card, index) in cardsOutAlt"
-                :key="`out-alt-${index}`"
-                class="card-item out-card"
-              >
-                <span class="card-quantity">{{ card.quantity }}</span>
-                <span class="card-name-wrapper">
-                  <span
-                    class="card-name-link"
-                    @mouseenter="!isMobile && handleCardHover(card.name)"
-                    @mouseleave="!isMobile && handleCardHover(null)"
-                    @click="isMobile && (hoveredCard === card.name && showModal ? closeModal() : handleCardHover(card.name))"
-                  >
-                    {{ card.name }}
-                  </span>
-                </span>
-                <span class="card-mana-cost">
-                  <img
-                    v-for="(symbol, idx) in card.manaSymbols"
-                    :key="idx"
-                    :src="symbol.svgUri"
-                    class="mana-symbol"
-                    alt="Mana symbol"
-                  >
-                </span>
-              </li>
-            </ul>
-          </template>
-        </div>
-
-        <!-- Card Preview (Right) -->
-        <div class="card-preview bg-amber-950/10 rounded sticky">
-          <div v-if="hoveredCard" class="preview-content">
-            <div class="card-image-container">
-              <img
-                :src="getCardImageUrl(hoveredCard)"
-                :alt="hoveredCard"
-                class="card-image rounded-lg shadow-lg w-full"
-                @error="(e) => (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22280%22%3E%3Crect width=%22200%22 height=%22280%22 fill=%22%23ddd%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%23999%22%3ENo Image%3C/text%3E%3C/svg%3E'"
-              >
-            </div>
-          </div>
-          <div v-else class="text-gray-600 text-center text-sm py-8">
-            <UIcon name="i-lucide-image" class="w-16 h-16 mx-auto mb-2 opacity-50" />
-            <p>Passa il mouse sopra una carta per visualizzarla</p>
-          </div>
-        </div>
-      </div>
-    </template>
-  </UCard>
-
-  <!-- Mobile Modal -->
-  <UModal
-    v-model:open="showModal"
-    :ui="{
-      content: 'bg-transparent shadow-none ring-0',
-      overlay: 'bg-black/80'
-    }"
-  >
-    <template #content>
-      <div v-if="hoveredCard" class="flex items-center justify-center">
-        <img
-          :src="getCardImageUrl(hoveredCard)"
-          :alt="hoveredCard"
-          class="max-w-full max-h-[85vh] rounded-lg shadow-2xl"
-          @error="(e) => (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22280%22%3E%3Crect width=%22200%22 height=%22280%22 fill=%22%23ddd%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%23999%22%3ENo Image%3C/text%3E%3C/svg%3E'"
-        >
-      </div>
-    </template>
-  </UModal>
-</template>
-
 <script setup lang="ts">
 const props = defineProps<{
   matchup?: string
@@ -416,6 +217,205 @@ onBeforeUnmount(() => {
   window.removeEventListener('resize', handleResize)
 })
 </script>
+
+<template>
+  <UCard
+    class="sideboard-guide-wrapper mx-auto"
+    :ui="{
+      root: 'overflow-hidden'
+    }"
+  >
+    <template #header>
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 v-if="props.matchup" class="text-lg font-semibold">
+            vs {{ props.matchup }}
+          </h3>
+          <p v-if="props.description" class="text-sm text-gray-400 mt-1">
+            {{ props.description }}
+          </p>
+        </div>
+        <!-- <div class="flex items-center gap-2 text-sm text-gray-400">
+          <span class="flex items-center gap-1">
+            <UIcon name="i-lucide-plus" class="size-4 text-green-500" />
+            <span>{{ totalIn }}</span>
+          </span>
+          <span class="flex items-center gap-1">
+            <UIcon name="i-lucide-minus" class="size-4 text-red-500" />
+            <span>{{ totalOut }}</span>
+          </span>
+        </div> -->
+      </div>
+    </template>
+
+    <template #default>
+      <!-- Hidden content for parsing -->
+      <div ref="decklistContent" class="hidden">
+        <div class="cards-in">
+          <slot name="in" />
+        </div>
+        <div class="cards-out">
+          <slot name="out" />
+        </div>
+        <div class="cards-out-alt">
+          <slot name="out-alt" />
+        </div>
+      </div>
+
+      <div class="sideboard-grid">
+        <!-- Cards In (Left) -->
+        <div class="cards-section in-section">
+          <div class="section-header">
+            <UIcon name="i-lucide-plus-circle" class="size-5 text-green-500" />
+            <h4 class="font-semibold">Sideboard In</h4>
+            <span class="card-count">({{ totalIn }})</span>
+          </div>
+          
+          <ul class="card-list">
+            <li
+              v-for="(card, index) in cardsIn"
+              :key="`in-${index}`"
+              class="card-item in-card"
+            >
+              <span class="card-quantity">{{ card.quantity }}</span>
+              <span class="card-name-wrapper">
+                <span
+                  class="card-name-link"
+                  @mouseenter="!isMobile && handleCardHover(card.name)"
+                  @mouseleave="!isMobile && handleCardHover(null)"
+                  @click="isMobile && (hoveredCard === card.name && showModal ? closeModal() : handleCardHover(card.name))"
+                >
+                  {{ card.name }}
+                </span>
+              </span>
+              <span class="card-mana-cost">
+                <img
+                  v-for="(symbol, idx) in card.manaSymbols"
+                  :key="idx"
+                  :src="symbol.svgUri"
+                  class="mana-symbol"
+                  alt="Mana symbol"
+                >
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Cards Out (Middle) -->
+        <div class="cards-section out-section">
+          <div class="section-header">
+            <UIcon name="i-lucide-minus-circle" class="size-5 text-red-500" />
+            <h4 class="font-semibold">Sideboard Out</h4>
+            <span class="card-count">({{ totalOut }})</span>
+          </div>
+          
+          <ul class="card-list">
+            <li
+              v-for="(card, index) in cardsOut"
+              :key="`out-${index}`"
+              class="card-item out-card"
+            >
+              <span class="card-quantity">{{ card.quantity }}</span>
+              <span class="card-name-wrapper">
+                <span
+                  class="card-name-link"
+                  @mouseenter="!isMobile && handleCardHover(card.name)"
+                  @mouseleave="!isMobile && handleCardHover(null)"
+                  @click="isMobile && (hoveredCard === card.name && showModal ? closeModal() : handleCardHover(card.name))"
+                >
+                  {{ card.name }}
+                </span>
+              </span>
+              <span class="card-mana-cost">
+                <img
+                  v-for="(symbol, idx) in card.manaSymbols"
+                  :key="idx"
+                  :src="symbol.svgUri"
+                  class="mana-symbol"
+                  alt="Mana symbol"
+                >
+              </span>
+            </li>
+          </ul>
+
+          <!-- Alternative section -->
+          <template v-if="hasAlternative">
+            <div class="alternative-divider">
+              <span class="alternative-label">Alternativa</span>
+            </div>
+            
+            <ul class="card-list">
+              <li
+                v-for="(card, index) in cardsOutAlt"
+                :key="`out-alt-${index}`"
+                class="card-item out-card"
+              >
+                <span class="card-quantity">{{ card.quantity }}</span>
+                <span class="card-name-wrapper">
+                  <span
+                    class="card-name-link"
+                    @mouseenter="!isMobile && handleCardHover(card.name)"
+                    @mouseleave="!isMobile && handleCardHover(null)"
+                    @click="isMobile && (hoveredCard === card.name && showModal ? closeModal() : handleCardHover(card.name))"
+                  >
+                    {{ card.name }}
+                  </span>
+                </span>
+                <span class="card-mana-cost">
+                  <img
+                    v-for="(symbol, idx) in card.manaSymbols"
+                    :key="idx"
+                    :src="symbol.svgUri"
+                    class="mana-symbol"
+                    alt="Mana symbol"
+                  >
+                </span>
+              </li>
+            </ul>
+          </template>
+        </div>
+
+        <!-- Card Preview (Right) -->
+        <div class="card-preview bg-amber-950/10 rounded sticky">
+          <div v-if="hoveredCard" class="preview-content">
+            <div class="card-image-container">
+              <img
+                :src="getCardImageUrl(hoveredCard)"
+                :alt="hoveredCard"
+                class="card-image rounded-lg shadow-lg w-full"
+                @error="(e) => (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22280%22%3E%3Crect width=%22200%22 height=%22280%22 fill=%22%23ddd%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%23999%22%3ENo Image%3C/text%3E%3C/svg%3E'"
+              >
+            </div>
+          </div>
+          <div v-else class="text-gray-600 text-center text-sm py-8">
+            <UIcon name="i-lucide-image" class="w-16 h-16 mx-auto mb-2 opacity-50" />
+            <p>Passa il mouse sopra una carta per visualizzarla</p>
+          </div>
+        </div>
+      </div>
+    </template>
+  </UCard>
+
+  <!-- Mobile Modal -->
+  <UModal
+    v-model:open="showModal"
+    :ui="{
+      content: 'bg-transparent shadow-none ring-0',
+      overlay: 'bg-black/80'
+    }"
+  >
+    <template #content>
+      <div v-if="hoveredCard" class="flex items-center justify-center">
+        <img
+          :src="getCardImageUrl(hoveredCard)"
+          :alt="hoveredCard"
+          class="max-w-full max-h-[85vh] rounded-lg shadow-2xl"
+          @error="(e) => (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22280%22%3E%3Crect width=%22200%22 height=%22280%22 fill=%22%23ddd%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%23999%22%3ENo Image%3C/text%3E%3C/svg%3E'"
+        >
+      </div>
+    </template>
+  </UModal>
+</template>
 
 <style scoped>
 .sideboard-guide-wrapper {

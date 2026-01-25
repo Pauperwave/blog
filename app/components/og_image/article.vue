@@ -1,26 +1,26 @@
 <!--
     OG Image Component - NOT CURRENTLY USED
-    
+
     This component is designed for dynamic OG image generation using @nuxtjs/og-image.
     However, the project currently uses STATIC THUMBNAILS for OG images instead.
-    
+
     Why static thumbnails?
     - Deployed as static site (nuxt generate) on Vercel
     - OG image module requires SSR for dynamic generation
     - Card art thumbnails (1200×630px) work perfectly as social previews
     - Faster builds, simpler deployment
-    
+
     To enable this component:
     1. Set ogImage: { enabled: true } in nuxt.config.ts
     2. Uncomment defineOgImageComponent() in app/pages/articles/[id].vue
     3. Switch to SSR deployment (nuxt build) or enable prerendering
-    
+
     Current OG image approach:
     - Uses thumbnail field from article frontmatter
     - Defined in useSeoMeta() with ogImage property
     - See: app/pages/articles/[id].vue lines ~100-110
 -->
-<script lang="ts" setup>
+<script setup lang="ts">
 import appMeta from "~/app.meta";
 defineProps<{
   title?: string;
@@ -56,7 +56,7 @@ defineProps<{
         <div class="absolute right-0 top-0 bottom-0 left-0">
           <!-- <img src="/assets/articles/hero_1.jpeg" class="w-full h-full object-cover" /> -->
         </div>
-        <img :src="thumbnail" class="w-full h-full object-cover rounded-l-2rem" >
+        <img :src="thumbnail" class="w-full h-full object-cover rounded-l-2rem">
       </div>
     </div>
   </div>

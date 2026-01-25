@@ -1,29 +1,4 @@
-<template>
-  <div class="my-8">
-    <UAlert 
-      v-if="error" 
-      color="error" 
-      variant="soft"
-      title="Card not found"
-      :description="`Could not find card: ${card}`"
-      icon="i-lucide-alert-circle"
-    />
-
-    <img
-      v-else-if="imageUrl && !loading"
-      :src="imageUrl"
-      :alt="cardData?.name"
-      class="rounded-lg shadow-lg max-w-sm mx-auto"
-    >
-
-    <USkeleton 
-      v-else 
-      class="h-96 w-full max-w-sm mx-auto rounded-lg"
-    />
-  </div>
-</template>
-
-<script lang="ts" setup>
+<script setup lang="ts">
 import { ref, watch, computed } from 'vue'
 
 interface ScryfallCard {
@@ -83,24 +58,24 @@ const parsedCard = computed(() => parseCardString(props.card))
 
 const imageUrl = computed(() => {
   if (!cardData.value) return null
-  
+
   // Single-faced card
   if (cardData.value.image_uris?.normal) {
     return cardData.value.image_uris.normal
   }
-  
+
   // Double-faced card (use first face)
   if (cardData.value.card_faces?.[0]?.image_uris?.normal) {
     return cardData.value.card_faces[0].image_uris.normal
   }
-  
+
   return null
 })
 
 /** Fetch card info when card prop changes */
 watch(() => props.card, async () => {
   const parsed = parsedCard.value
-  
+
   if (!parsed.name) {
     cardData.value = null
     error.value = null
@@ -136,3 +111,23 @@ watch(() => props.card, async () => {
   }
 }, { immediate: true })
 </script>
+
+<template>
+  <div class="my-8">
+    <UAlert v-if="error"
+      color="error"
+      variant="soft"
+      title="Card not found"
+      :description="`Could not find card: ${card}`"
+      icon="i-lucide-alert-circle"
+    />
+    <img v-else-if="imageUrl && !loading"
+      :src="imageUrl"
+      :alt="cardData?.name"
+      class="rounded-lg shadow-lg max-w-sm mx-auto"
+    >
+    <USkeleton v-else
+      class="h-96 w-full max-w-sm mx-auto rounded-lg"
+    />
+  </div>
+</template>

@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import type { NavigationMenuItem } from "@nuxt/ui";
 import { PAUPERWAVE_SOCIAL_LINKS } from "~/constants/social-links";
 
@@ -12,16 +12,17 @@ const navItems: NavigationMenuItem[] = [
   <UApp>
     <UHeader mode="slideover">
       <template #left>
-        <UUser
-          name="Pauperwave Blog"
-          to="/"
-          :avatar="{ src: 'https://avatars.githubusercontent.com/u/225214755?v=4' }"
-        />
+        <UUser name="Pauperwave Blog" to="/"
+          :avatar="{ src: 'https://avatars.githubusercontent.com/u/225214755?v=4' }" />
       </template>
       <template #right>
         <ColorModeButton />
       </template>
-      <UNavigationMenu :items="navItems" />
+      <!-- Desktop -->
+      <template #default>
+        <UNavigationMenu :items="navItems" />
+      </template>
+      <!-- Mobile slideover -->
       <template #body>
         <UNavigationMenu :items="navItems" />
       </template>

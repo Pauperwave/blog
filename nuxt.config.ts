@@ -92,12 +92,6 @@ export default defineNuxtConfig({
         },
         build: {
             sourcemap: false, // Disable sourcemaps in production to eliminate Tailwind warnings
-        },
-        ssr: {
-            external: ["bun:sqlite"],
-        },
-        optimizeDeps: {
-            exclude: ["bun:sqlite"],
-        },
-    },
+        }
+    }
 });

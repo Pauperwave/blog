@@ -82,7 +82,7 @@ function calculateTotal(items: any) {
 
 ```vue
 <!-- ✅ Good: Composition API with script setup -->
-<script lang="ts" setup>
+<script setup lang="ts">
 import { ref, computed } from 'vue'
 
 const count = ref(0)
@@ -100,7 +100,7 @@ export default {
 ```
 
 **Rules:**
-- Always use `<script lang="ts" setup>`
+- Always use `<script setup lang="ts">`
 - Use auto-imports for Nuxt/Vue APIs (no explicit imports needed)
 - Colocate component-specific logic, extract shared logic to `composables/`
 - Use `defineProps` and `defineEmits` for component API

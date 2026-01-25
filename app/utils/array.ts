@@ -11,8 +11,8 @@
  * intersection(['a', 'b'], ['b', 'c']) // ['b']
  */
 export function intersection<T>(arr1: T[], arr2: T[]): T[] {
-    const set = new Set(arr2);
-    return arr1.filter(x => set.has(x));
+  const set = new Set(arr2);
+  return arr1.filter(x => set.has(x));
 }
 
 /**
@@ -29,18 +29,18 @@ export function intersection<T>(arr1: T[], arr2: T[]): T[] {
  * orderBy([{x: 3}, {x: 1}, {x: 2}], item => item.x, 'desc') // [{x: 3}, {x: 2}, {x: 1}]
  */
 export function orderBy<T>(
-    array: T[], 
-    iteratee: (item: T) => number | string, 
-    order: 'asc' | 'desc' = 'asc'
+  array: T[],
+  iteratee: (item: T) => number | string,
+  order: 'asc' | 'desc' = 'asc'
 ): T[] {
-    return [...array].sort((a, b) => {
-        const valA = iteratee(a);
-        const valB = iteratee(b);
-        
-        if (valA < valB) return order === 'asc' ? -1 : 1;
-        if (valA > valB) return order === 'asc' ? 1 : -1;
-        return 0;
-    });
+  return [...array].sort((a, b) => {
+    const valA = iteratee(a);
+    const valB = iteratee(b);
+
+    if (valA < valB) return order === 'asc' ? -1 : 1;
+    if (valA > valB) return order === 'asc' ? 1 : -1;
+    return 0;
+  });
 }
 
 /**
@@ -59,19 +59,19 @@ export function orderBy<T>(
  * )
  */
 export function orderByMultiple<T>(
-    array: T[],
-    iteratees: ((item: T) => number | string)[],
-    orders: ('asc' | 'desc')[]
+  array: T[],
+  iteratees: ((item: T) => number | string)[],
+  orders: ('asc' | 'desc')[]
 ): T[] {
-    return [...array].sort((a, b) => {
-        for (const [i, iteratee] of iteratees.entries()) {
-            const valA = iteratee(a);
-            const valB = iteratee(b);
-            const order = orders[i] ?? 'asc';
+  return [...array].sort((a, b) => {
+    for (const [i, iteratee] of iteratees.entries()) {
+      const valA = iteratee(a);
+      const valB = iteratee(b);
+      const order = orders[i] ?? 'asc';
 
-            if (valA < valB) return order === 'asc' ? -1 : 1;
-            if (valA > valB) return order === 'asc' ? 1 : -1;
-        }
-        return 0;
-    });
+      if (valA < valB) return order === 'asc' ? -1 : 1;
+      if (valA > valB) return order === 'asc' ? 1 : -1;
+    }
+    return 0;
+  });
 }

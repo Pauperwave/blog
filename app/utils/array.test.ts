@@ -85,8 +85,8 @@ describe('array utilities', () => {
       ];
       const currentTags = ['pauper', 'modern'];
       const result = orderBy(
-        articles, 
-        a => intersection(a.tags, currentTags).length, 
+        articles,
+        a => intersection(a.tags, currentTags).length,
         'desc'
       );
       expect(result[0]?.title).toBe('Article B'); // 2 matches

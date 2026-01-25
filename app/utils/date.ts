@@ -10,13 +10,13 @@ dayjs.locale('it', itLocale);
  * @returns Formatted date string (e.g., "22 gennaio 2026") or "Data non disponibile" if invalid
  */
 export function formatDateIT(date: string): string {
-    if (!date) return 'Data non disponibile';
-    
-    try {
-        // Parse and format the date in Italian locale
-        return dayjs(date).locale('it').format('DD MMMM YYYY');
-    } catch (error) {
-        console.warn('Failed to format date:', date, error);
-        return 'Data non disponibile';
-    }
+  if (!date) return 'Data non disponibile';
+
+  try {
+    // Parse and format the date in Italian locale
+    return dayjs(date).locale('it').format('DD MMMM YYYY');
+  } catch (error) {
+    console.warn('Failed to format date:', date, error);
+    return 'Data non disponibile';
+  }
 }

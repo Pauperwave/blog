@@ -39,12 +39,12 @@ import type { ArticlesCollectionItem, TutorialsCollectionItem, DecklistsCollecti
  * Union type combining all article collection item types.
  * This allows functions to accept any content type while maintaining type safety.
  */
-export type AnyArticle = 
-    | ArticlesCollectionItem 
-    | TutorialsCollectionItem 
-    | DecklistsCollectionItem 
-    | ReportsCollectionItem 
-    | SpoilersCollectionItem;
+export type AnyArticle =
+  | ArticlesCollectionItem
+  | TutorialsCollectionItem
+  | DecklistsCollectionItem
+  | ReportsCollectionItem
+  | SpoilersCollectionItem;
 
 /**
  * Valid category type identifiers.
@@ -61,11 +61,11 @@ export type CategoryType = 'decklist' | 'article' | 'report' | 'spoiler' | 'tuto
  * Current order: decklist → article → report → spoiler → tutorial
  */
 export const CONTENT_TYPE_ORDER: readonly CategoryType[] = [
-    'decklist',
-    'article', 
-    'report',
-    'spoiler',
-    'tutorial'
+  'decklist',
+  'article',
+  'report',
+  'spoiler',
+  'tutorial'
 ] as const;
 
 /**
@@ -73,11 +73,11 @@ export const CONTENT_TYPE_ORDER: readonly CategoryType[] = [
  * Used in the articles index page filter buttons.
  */
 export const CATEGORY_LABELS: Record<CategoryType, string> = {
-    decklist: 'Decklist',
-    article: 'Articoli',
-    report: 'Report',
-    spoiler: 'Spoiler',
-    tutorial: 'Tutorial'
+  decklist: 'Decklist',
+  article: 'Articoli',
+  report: 'Report',
+  spoiler: 'Spoiler',
+  tutorial: 'Tutorial'
 } as const;
 
 /**
@@ -85,11 +85,11 @@ export const CATEGORY_LABELS: Record<CategoryType, string> = {
  * Maps each category to its display title on the home page.
  */
 export const HOME_SECTION_TITLES: Record<CategoryType, string> = {
-    decklist: 'Top Decklists',
-    article: 'Ultimi articoli',
-    report: 'Resoconti dei tornei',
-    spoiler: 'Spoilers & Set Reviews',
-    tutorial: 'Tutorial'
+  decklist: 'Top Decklists',
+  article: 'Ultimi articoli',
+  report: 'Resoconti dei tornei',
+  spoiler: 'Spoilers & Set Reviews',
+  tutorial: 'Tutorial'
 } as const;
 
 /**
@@ -97,11 +97,11 @@ export const HOME_SECTION_TITLES: Record<CategoryType, string> = {
  * Maps category types to their actual collection names in content.config.ts
  */
 export const COLLECTION_NAMES: Record<CategoryType, string> = {
-    decklist: 'decklists',
-    article: 'articles',
-    report: 'reports',
-    spoiler: 'spoilers',
-    tutorial: 'tutorials'
+  decklist: 'decklists',
+  article: 'articles',
+  report: 'reports',
+  spoiler: 'spoilers',
+  tutorial: 'tutorials'
 } as const;
 
 // ============================================================================
@@ -120,10 +120,10 @@ export const COLLECTION_NAMES: Record<CategoryType, string> = {
  * ```
  */
 export async function queryAllCollections() {
-    const queries = CONTENT_TYPE_ORDER.map(type => 
-        queryCollection(COLLECTION_NAMES[type] as any).all()
-    );
-    return await Promise.all(queries);
+  const queries = CONTENT_TYPE_ORDER.map(type =>
+    queryCollection(COLLECTION_NAMES[type] as any).all()
+  );
+  return await Promise.all(queries);
 }
 
 /**
@@ -139,13 +139,13 @@ export async function queryAllCollections() {
  * ```
  */
 export function combineArticles(collectionsData: any[][]): AnyArticle[] {
-    if (collectionsData.length === 0) return [];
-    
-    // Start with the first collection and concat the rest in order
-    return collectionsData.reduce((acc, data, index) => {
-        if (index === 0) return data as AnyArticle[];
-        return acc.concat(data as AnyArticle[]);
-    }, [] as AnyArticle[]);
+  if (collectionsData.length === 0) return [];
+
+  // Start with the first collection and concat the rest in order
+  return collectionsData.reduce((acc, data, index) => {
+    if (index === 0) return data as AnyArticle[];
+    return acc.concat(data as AnyArticle[]);
+  }, [] as AnyArticle[]);
 }
 
 /**
@@ -160,10 +160,10 @@ export function combineArticles(collectionsData: any[][]): AnyArticle[] {
  * ```
  */
 export function getHomeSections() {
-    return CONTENT_TYPE_ORDER.map(category => ({
-        title: HOME_SECTION_TITLES[category],
-        category
-    }));
+  return CONTENT_TYPE_ORDER.map(category => ({
+    title: HOME_SECTION_TITLES[category],
+    category
+  }));
 }
 
 /**
@@ -179,10 +179,10 @@ export function getHomeSections() {
  * ```
  */
 export function initializeCategories(): Record<CategoryType, AnyArticle[]> {
-    return CONTENT_TYPE_ORDER.reduce((acc, category) => {
-        acc[category] = [];
-        return acc;
-    }, {} as Record<CategoryType, AnyArticle[]>);
+  return CONTENT_TYPE_ORDER.reduce((acc, category) => {
+    acc[category] = [];
+    return acc;
+  }, {} as Record<CategoryType, AnyArticle[]>);
 }
 
 /**
@@ -198,5 +198,5 @@ export function initializeCategories(): Record<CategoryType, AnyArticle[]> {
  * ```
  */
 export function getCollectionNames(): string[] {
-    return CONTENT_TYPE_ORDER.map(type => COLLECTION_NAMES[type]);
+  return CONTENT_TYPE_ORDER.map(type => COLLECTION_NAMES[type]);
 }

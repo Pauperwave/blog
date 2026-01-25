@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 interface Props {
   title: string;
   category: string;
@@ -32,18 +32,11 @@ const getArticleBadge = (date: string) => {
       </UButton>
     </div>
     <UBlogPosts>
-      <UBlogPost
-        v-for="article in articles.slice(0, maxItems)"
-        :key="article._id"
-        :title="article.title"
-        :image="article.thumbnail"
-        :badge="getArticleBadge(article.date)"
-        :date="article.date"
-        :to="article.path"
-        variant="naked"
-      >
+      <UBlogPost v-for="article in articles.slice(0, maxItems)" :key="article._id" :title="article.title"
+        :image="article.thumbnail" :badge="getArticleBadge(article.date)" :date="article.date" :to="article.path"
+        variant="naked">
         <template #date>
-          {{ useState(`article-date-${article.path}`, () => formatDateIT(article.date)).value }}
+          {{useState(`article-date-${article.path}`, () => formatDateIT(article.date)).value}}
         </template>
         <template #description>
           <p class="mt-1 text-base text-pretty">{{ article.description }}</p>
@@ -54,16 +47,13 @@ const getArticleBadge = (date: string) => {
           </div>
         </template>
         <template #authors>
-          <AuthorCard
-            :author="{
-              name: authorsMap[article.author]?.name || article.author,
-              description: authorsMap[article.author]?.description,
-              avatar: authorsMap[article.author]?.avatar,
-              bio: authorsMap[article.author]?.bio,
-              socials: authorsMap[article.author]?.socials
-            }"
-            :clickable="false"
-          />
+          <AuthorCard :author="{
+            name: authorsMap[article.author]?.name || article.author,
+            description: authorsMap[article.author]?.description,
+            avatar: authorsMap[article.author]?.avatar,
+            bio: authorsMap[article.author]?.bio,
+            socials: authorsMap[article.author]?.socials
+          }" :clickable="false" />
         </template>
       </UBlogPost>
     </UBlogPosts>
