@@ -57,7 +57,7 @@ const socialLinks = [
         <div class="text-sm leading-relaxed text-center md:text-left">
           <p>Pauperwave APS</p>
           <p>Associazione di Promozione Sociale</p>
-          <p>Sede: via Benacense II, n. 77/bis</p>
+          <p>Sede: Viale Trento, 77</p>
           <p>Rovereto | Trentino A.A.</p>
           <p>C.F. 94047330223</p>
         </div>
