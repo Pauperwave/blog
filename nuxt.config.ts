@@ -7,7 +7,8 @@ export default defineNuxtConfig({
     devtools: { enabled: true },
     css: [
       "~/assets/css/main.css",
-      "mana-font/css/mana.css"
+      // ms-3 clash with tailwind
+      // "mana-font/css/mana.css"
     ],
     fonts: {
         defaults: {
@@ -50,13 +51,17 @@ export default defineNuxtConfig({
       'nuxt-studio'
     ],
     studio: {
-      route: '/admin', // default: '/_studio'
+      // Studio admin route (default: '/_studio')
+      route: '/admin',
+
+      // Git repository configuration (owner and repo are required)
       repository: {
         provider: 'github',
-        owner: 'Pauperwave',
-        repo: 'https://github.com/Pauperwave/test',
-        branch: 'main',
-        private: false
+        owner: 'Pauperwave', // your GitHub/GitLab username or organization
+        repo: 'https://github.com/Pauperwave/test', // your repository name
+        branch: 'main', // the branch to commit to (default: main)
+        rootDir: '', // subdirectory for monorepos (default: '')
+        private: true, // request access to private repos (default: true)
       },
       i18n: {
         defaultLocale: 'it'
