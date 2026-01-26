@@ -27,7 +27,7 @@ sitemap:
 1. L'Associazione fonda la propria attività istituzionale ed associativa sui principi costituzionali della democrazia, della partecipazione sociale e sull'attività di volontariato.
 2. L'Associazione si avvale in modo prevalente dell'attività di volontariato dei propri associati o delle persone aderenti agli enti associati.
 3. L'Associazione persegue, senza scopo di lucro, finalità civiche, solidaristiche e di utilità sociale, attraverso l'esercizio, in via esclusiva o principale, in favore dei propri associati, di loro familiari o di terzi, delle seguenti attività di interesse generale di cui all'art. 5, c. 1, lett. i) del Codice del Terzo settore, come di seguito elencate e specificate:
-   1. organizzazione e gestione di attività culturali, artistiche o ricreative di interesse sociale, incluse attività, anche editoriali, di promozione e diffusione della cultura e della pratica del volontariato e delle attività di interesse generale di cui al presente articolo;
+   1. organizzazione e gestione di attività culturali, artistiche o ricreative di interesse sociale, incluse attività, anche editoriali, di promozione e diffusione della cultura e della pratica del volontariato e delle attività di interesse generale di cui al presente articolo.
 
 ## Art. 3 – Finalità e attività
 
@@ -132,7 +132,7 @@ sitemap:
 3. L'Assemblea è convocata dal Presidente dell'Associazione, a seguito di delibera del Consiglio Direttivo, almeno una volta l'anno per l'approvazione del bilancio di esercizio. L'Assemblea può essere inoltre convocata:
    1. su richiesta motivata di almeno 1/3 (un terzo) dei membri del Consiglio Direttivo;
    2. su richiesta motivata ed indirizzata al Consiglio Direttivo da almeno 1/5 (un quinto) degli associati.
-      Nei casi di cui alle lettere `a)` e `b)` il Presidente deve provvedere alla convocazione dell'Assemblea, la quale deve svolgersi entro 30 (trenta) giorni dalla data della richiesta. Qualora il Presidente non provveda alla convocazione nei termini indicati, l'organo di controllo, se nominato, o il Vicepresidente o, in subordine, il consigliere più anziano di età, deve procedere in sua vece alla convocazione dell'Assemblea, la quale deve svolgersi entro 30 (trenta) giorni dalla scadenza del termine precedente.
+      Nei casi di cui alle lettere a) e b) il Presidente deve provvedere alla convocazione dell'Assemblea, la quale deve svolgersi entro 30 (trenta) giorni dalla data della richiesta. Qualora il Presidente non provveda alla convocazione nei termini indicati, l'organo di controllo, se nominato, o il Vicepresidente o, in subordine, il consigliere più anziano di età, deve procedere in sua vece alla convocazione dell'Assemblea, la quale deve svolgersi entro 30 (trenta) giorni dalla scadenza del termine precedente.
 4. La convocazione deve pervenire per iscritto agli associati tramite lettera o email o altro strumento telematico almeno 8 (otto) giorni prima della data della riunione. L'avviso deve indicare il luogo, il giorno e l'ora sia di prima che di seconda convocazione, oltre che gli argomenti all'ordine del giorno. L'adunanza di seconda convocazione deve essere fissata almeno 24 (ventiquattro) ore dopo la prima convocazione.
 5. L'Assemblea può riunirsi anche mediante videoconferenza, o in modalità mista, sempre che tutti i partecipanti siano identificati e sia loro consentito di seguire la discussione in modo simultaneo, di intervenire in tempo reale alla trattazione degli argomenti affrontati e di partecipare alla votazione. L'Assemblea si considera tenuta nel luogo in cui si trova il segretario verbalizzante, e dove non deve necessariamente trovarsi anche il Presidente; nel caso in cui il segretario e il Presidente della riunione si trovino in due luoghi diversi, la redazione del verbale avverrà comunque a cura del segretario, mentre la sottoscrizione avverrà successivamente. Se nel corso della riunione venisse sospeso il collegamento, la stessa verrà dichiarata sospesa dal Presidente o da colui che ne fa le veci, e le decisioni prese fino alla sospensione saranno valide.
 6. L'Assemblea è presieduta dal Presidente dell'Associazione o, in sua assenza, dal Vicepresidente o da altro associato indicato in sede di riunione assembleare.
@@ -150,9 +150,9 @@ sitemap:
    7. decidere sui ricorsi contro i provvedimenti di diniego di adesione e di esclusione dall'Associazione;
    8. approvare l'eventuale regolamento dei lavori assembleari e gli altri regolamenti predisposti dal Consiglio Direttivo per il funzionamento dell'Associazione;
    9. deliberare sulla responsabilità dei componenti degli organi sociali, ai sensi dell'art.28 del Codice del Terzo settore, e promuovere l'azione di responsabilità nei loro confronti;
-   10. deliberare su ogni altro argomento posto all'ordine del giorno o sottoposto al suo esame da parte del Consiglio Direttivo o da altro organo sociale.
-   11. L'Assemblea ordinaria in prima convocazione è validamente costituita con la presenza (di persona o per delega) della metà più uno degli associati aventi diritto di voto; in seconda convocazione è validamente costituita qualsiasi sia il numero degli associati presenti (di persona o per delega).
-   12. Le deliberazioni dell'Assemblea ordinaria sono prese a maggioranza dei voti degli associati presenti, sia in prima che in seconda convocazione.
+   10. deliberare su ogni altro argomento posto all'ordine del giorno o sottoposto al suo esame da parte del Consiglio Direttivo o da altro organo sociale;
+   11. l'Assemblea ordinaria in prima convocazione è validamente costituita con la presenza (di persona o per delega) della metà più uno degli associati aventi diritto di voto; in seconda convocazione è validamente costituita qualsiasi sia il numero degli associati presenti (di persona o per delega);
+   12. le deliberazioni dell'Assemblea ordinaria sono prese a maggioranza dei voti degli associati presenti, sia in prima che in seconda convocazione.
 
 ## Art. 14 – Assemblea straordinaria: competenze e quorum
 
@@ -192,23 +192,23 @@ Art.16 – Il Consiglio Direttivo: composizione e durata in carica
 ## Art.18 – Competenze del Consiglio Direttivo
 
 1. Il Consiglio Direttivo è investito dei più ampi poteri per l'amministrazione ordinaria e straordinaria dell'Associazione, ed in particolare ha il compito di:
-   a) curare l'esecuzione delle delibere dell'Assemblea degli associati;
-   b) redigere il bilancio di esercizio, da sottoporre all'approvazione dell'Assemblea;
-   c) redigere l'eventuale programma annuale e pluriennale di attività, da sottoporre all'approvazione dell'Assemblea;
-   d) redigere l'eventuale bilancio sociale, da sottoporre all'approvazione dell'Assemblea;
-   e) nominare il Presidente, il Vicepresidente, il Tesoriere e il Segretario dell'Associazione;
-   f) decidere sulle domande di adesione all'Associazione e sull'esclusione degli associati;
-   g) redigere gli eventuali regolamenti interni per il funzionamento dell'Associazione, da sottoporre all'approvazione dell'Assemblea;
-   h) decidere l'eventuale quota associativa annuale, determinandone l'ammontare;
-   i) provvedere, entro un termine congruo, ad informare gli associati in merito all'obbligo di versare la quota associativa entro il termine stabilito in statuto;
-   j) deliberare la convocazione dell'Assemblea;
-   k) decidere in merito agli eventuali rapporti di lavoro con i dipendenti, oltre che con collaboratori e consulenti esterni;
-   l) ratificare o respingere i provvedimenti adottati d'urgenza dal Presidente;
-   m) curare la tenuta dei libri sociali dell'Associazione;
-   n) deliberare l'eventuale svolgimento di attività diverse, e documentarne il carattere secondario e strumentale rispetto alle attività di interesse generale;
-   o) deliberare l'istituzione di sezioni o sedi secondarie, in Italia e all'estero;
-   p) adottare ogni altro provvedimento che sia ad esso attribuito dal presente Statuto o dai regolamenti interni;
-   q) adottare in generale tutti i provvedimenti e le misure necessarie all'attuazione delle finalità istituzionali, oltre che alla gestione e al corretto funzionamento dell'Associazione.
+   1. curare l'esecuzione delle delibere dell'Assemblea degli associati;
+   2. redigere il bilancio di esercizio, da sottoporre all'approvazione dell'Assemblea;
+   3. redigere l'eventuale programma annuale e pluriennale di attività, da sottoporre all'approvazione dell'Assemblea;
+   4. redigere l'eventuale bilancio sociale, da sottoporre all'approvazione dell'Assemblea;
+   5. nominare il Presidente, il Vicepresidente, il Tesoriere e il Segretario dell'Associazione;
+   6. decidere sulle domande di adesione all'Associazione e sull'esclusione degli associati;
+   7. redigere gli eventuali regolamenti interni per il funzionamento dell'Associazione, da sottoporre all'approvazione dell'Assemblea;
+   8. decidere l'eventuale quota associativa annuale, determinandone l'ammontare;
+   9. provvedere, entro un termine congruo, ad informare gli associati in merito all'obbligo di versare la quota associativa entro il termine stabilito in statuto;
+   10. deliberare la convocazione dell'Assemblea;
+   11. decidere in merito agli eventuali rapporti di lavoro con i dipendenti, oltre che con collaboratori e consulenti esterni;
+   12. ratificare o respingere i provvedimenti adottati d'urgenza dal Presidente;
+   13. curare la tenuta dei libri sociali dell'Associazione;
+   14. deliberare l'eventuale svolgimento di attività diverse, e documentarne il carattere secondario e strumentale rispetto alle attività di interesse generale;
+   15. deliberare l'istituzione di sezioni o sedi secondarie, in Italia e all'estero;
+   16. adottare ogni altro provvedimento che sia ad esso attribuito dal presente Statuto o dai regolamenti interni;
+   17. adottare in generale tutti i provvedimenti e le misure necessarie all'attuazione delle finalità istituzionali, oltre che alla gestione e al corretto funzionamento dell'Associazione.
 2. Il Consiglio Direttivo può attribuire ad uno o più dei suoi membri il potere di compiere determinati atti o categorie di atti in nome e per conto dell'Associazione.
 3. Il Segretario si occupa in generale della gestione dei libri sociali e svolge le mansioni a questo delegate dal Consiglio Direttivo o dal Presidente.
 
@@ -219,19 +219,19 @@ Art.16 – Il Consiglio Direttivo: composizione e durata in carica
 3. La carica di Presidente può essere revocata dal Consiglio Direttivo con le stesse modalità previste per l'elezione.
 4. La carica di Presidente si perde inoltre per dimissioni, rassegnate mediante comunicazione scritta al Consiglio Direttivo.
 5. Il Presidente ha la responsabilità generale della conduzione e del buon andamento dell'Associazione, ed in particolare ha il compito di:
-   a) firmare gli atti e i documenti che impegnano l'Associazione sia nei riguardi degli associati che dei terzi;
-   b) curare l'attuazione delle delibere dell'Assemblea e del Consiglio Direttivo;
-   c) adottare, in caso di necessità, provvedimenti d'urgenza, sottoponendoli entro 15 (quindici) giorni alla ratifica da parte del Consiglio Direttivo;
-   d) convocare e presiedere l'Assemblea degli associati e il Consiglio Direttivo.
+   1. firmare gli atti e i documenti che impegnano l'Associazione sia nei riguardi degli associati che dei terzi;
+   2. curare l'attuazione delle delibere dell'Assemblea e del Consiglio Direttivo;
+   3. adottare, in caso di necessità, provvedimenti d'urgenza, sottoponendoli entro 15 (quindici) giorni alla ratifica da parte del Consiglio Direttivo;
+   4. convocare e presiedere l'Assemblea degli associati e il Consiglio Direttivo.
 6. In caso di assenza o impedimento, il Presidente viene sostituito dal Vicepresidente. In caso di assenza o impedimento di quest'ultimo, spetta al Consiglio Direttivo conferire espressa delega ad altro consigliere.
 
 ## Art.20 – Cause di decadenza e sostituzione dei membri del Consiglio Direttivo
 
 1. La carica di consigliere si perde per:
-   a) dimissioni, rassegnate mediante comunicazione scritta al Consiglio Direttivo;
-   b) revoca da parte dell'Assemblea ordinaria, a seguito di comportamento contrastante con gli scopi dell'Associazione, persistenti violazioni degli obblighi statutari oppure per ogni altro comportamento lesivo degli interessi dell'Associazione;
-   c) sopraggiunte cause di incompatibilità, di cui all'art.16, c.3 del presente Statuto;
-   d) perdita della qualità di associato a seguito del verificarsi di una o più delle cause previste dall'art.8 del presente Statuto.
+   1. dimissioni, rassegnate mediante comunicazione scritta al Consiglio Direttivo;
+   2. revoca da parte dell'Assemblea ordinaria, a seguito di comportamento contrastante con gli scopi dell'Associazione, persistenti violazioni degli obblighi statutari oppure per ogni altro comportamento lesivo degli interessi dell'Associazione;
+   3. sopraggiunte cause di incompatibilità, di cui all'art.16, c.3 del presente Statuto;
+   4. perdita della qualità di associato a seguito del verificarsi di una o più delle cause previste dall'art.8 del presente Statuto.
 2. Nel caso in cui uno o più consiglieri cessino dall'incarico per uno dei motivi indicati al precedente comma, il Consiglio Direttivo provvede alla loro sostituzione alla prima Assemblea ordinaria utile. Fino alla nuova elezione il Consiglio Direttivo rimane nella composizione risultante a seguito dell'avvenuta cessazione. I consiglieri così eletti rimangono in carica fino alla scadenza del mandato del Consiglio Direttivo vigente.
 3. Nel caso in cui cessi dall'incarico la maggioranza dei consiglieri, l'intero Consiglio Direttivo si intenderà decaduto e il Presidente o, in subordine, il consigliere più anziano di età, dovrà convocare l'Assemblea ordinaria entro 30 (trenta) giorni dalla data in cui è stata formalizzata la cessazione, al fine di procedere ad una nuova elezione del Consiglio Direttivo. Fino all'elezione dei nuovi consiglieri, i consiglieri cessati rimangono in carica per l'attività di ordinaria amministrazione.
 
