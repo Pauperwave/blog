@@ -14,7 +14,7 @@ const { data: page } = await useAsyncData('statute', () =>
   </div>
 </template>
 
-<style scoped>
+<style>
 ol ol {
   list-style-type: lower-alpha;
 }
