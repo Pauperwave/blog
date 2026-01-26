@@ -162,7 +162,7 @@ sitemap:
 2. Per le modifiche statutarie, per la trasformazione, fusione o scissione dell'Associazione, l'Assemblea straordinaria in prima convocazione è validamente costituita con la presenza (di persona o per delega) di almeno 3/4 (tre quarti) degli associati aventi diritto di voto e delibera con il voto favorevole della maggioranza dei presenti; in seconda convocazione è validamente costituita con la presenza (di persona o per delega) di almeno la metà più uno degli associati aventi diritto di voto e delibera con il voto favorevole della maggioranza dei presenti.
 3. Per lo scioglimento dell'Associazione e la devoluzione del patrimonio, l'Assemblea straordinaria delibera, sia in prima che in seconda convocazione, con il voto favorevole di almeno 3/4 (tre quarti) degli associati aventi diritto di voto (presenti di persona o per delega).
 
-## Art.15 – L'Assemblea degli associati: regole di voto
+## Art. 15 – L'Assemblea degli associati: regole di voto
 
 1. Ciascun associato ha diritto ad un solo voto.
 2. L'esercizio del diritto di voto spetta agli associati fin dal momento della loro iscrizione nel libro degli associati, sempre che essi siano in regola con il versamento della eventuale quota associativa annuale.
@@ -170,14 +170,14 @@ sitemap:
 4. Per le votazioni si procede con voto palese. Per l'elezione delle cariche sociali, e comunque nei casi di votazioni riguardanti le persone, è facoltà procedere con il voto a scrutinio segreto quando ne faccia richiesta almeno 1/10 (un decimo) dei presenti.
 5. Il voto può essere espresso anche per corrispondenza o in modalità elettronica, purché sia possibile verificare l'identità dell'associato che partecipa e vota. Le relative modalità di esercizio devono essere disciplinate in apposito regolamento.
 
-Art.16 – Il Consiglio Direttivo: composizione e durata in carica
+## Art. 16 – Il Consiglio Direttivo: composizione e durata in carica
 
 1. Il Consiglio Direttivo è l'organo amministrativo dell'Associazione ed è eletto dall'Assemblea tra gli associati in regola con il versamento della eventuale quota associativa annuale.
 2. Il numero di consiglieri può variare da 3 (tre) a 7 (sette), secondo quanto stabilito dall'Assemblea all'atto della nomina e dei successivi rinnovi.
 3. Non può essere eletto consigliere, e se nominato decade dalla carica, il soggetto per cui ricorrono le condizioni di cui all'art.2382 del Codice civile e successive modifiche e/o integrazioni.
 4. I consiglieri durano in carica 4 (quattro) anni e sono rieleggibili. Almeno 30 (trenta) giorni prima della scadenza del mandato, il Presidente convoca l'Assemblea per l'elezione del nuovo Consiglio Direttivo.
 
-## Art.17 – Il Consiglio Direttivo: regole di convocazione, di funzionamento e di voto
+## Art. 17 – Il Consiglio Direttivo: regole di convocazione, di funzionamento e di voto
 
 1. Il Consiglio Direttivo è convocato dal Presidente ogni qualvolta egli lo ritenga opportuno o quando ne sia fatta richiesta da almeno 1/3 (un terzo) dei consiglieri. In quest'ultimo caso, il Presidente deve provvedere alla convocazione del Consiglio Direttivo, il quale deve svolgersi entro 20 (venti) giorni dalla data della richiesta. Qualora il Presidente non provveda alla convocazione nei termini indicati, l'organo di controllo, se nominato, o il Vicepresidente o, in subordine, il consigliere più anziano di età, deve procedere in sua vece alla convocazione del Consiglio Direttivo, il quale deve svolgersi entro 10 (dieci) giorni dalla scadenza del termine precedente.
 2. La prima riunione del Consiglio Direttivo successiva alla nuova elezione è convocata dal Presidente uscente o, in subordine, dal consigliere più anziano di età fra i nuovi eletti.
@@ -189,7 +189,7 @@ Art.16 – Il Consiglio Direttivo: composizione e durata in carica
 8. Le votazioni si effettuano con voto palese.
 9. Di ogni riunione consiliare viene redatto apposito verbale, sottoscritto dal Presidente e dal verbalizzante a ciò appositamente nominato. Il verbale è trascritto nel libro delle adunanze e delle deliberazioni del Consiglio Direttivo, conservato nella sede dell'Associazione.
 
-## Art.18 – Competenze del Consiglio Direttivo
+## Art. 18 – Competenze del Consiglio Direttivo
 
 1. Il Consiglio Direttivo è investito dei più ampi poteri per l'amministrazione ordinaria e straordinaria dell'Associazione, ed in particolare ha il compito di:
    1. curare l'esecuzione delle delibere dell'Assemblea degli associati;
@@ -212,7 +212,7 @@ Art.16 – Il Consiglio Direttivo: composizione e durata in carica
 2. Il Consiglio Direttivo può attribuire ad uno o più dei suoi membri il potere di compiere determinati atti o categorie di atti in nome e per conto dell'Associazione.
 3. Il Segretario si occupa in generale della gestione dei libri sociali e svolge le mansioni a questo delegate dal Consiglio Direttivo o dal Presidente.
 
-## Art.19 – Il Presidente: poteri e durata in carica
+## Art. 19 – Il Presidente: poteri e durata in carica
 
 1. Il Presidente è il legale rappresentante dell'Associazione e la rappresenta di fronte a terzi e in giudizio.
 2. Il Presidente dell'Associazione è nominato all'interno del Consiglio Direttivo.
@@ -225,7 +225,7 @@ Art.16 – Il Consiglio Direttivo: composizione e durata in carica
    4. convocare e presiedere l'Assemblea degli associati e il Consiglio Direttivo.
 6. In caso di assenza o impedimento, il Presidente viene sostituito dal Vicepresidente. In caso di assenza o impedimento di quest'ultimo, spetta al Consiglio Direttivo conferire espressa delega ad altro consigliere.
 
-## Art.20 – Cause di decadenza e sostituzione dei membri del Consiglio Direttivo
+## Art. 20 – Cause di decadenza e sostituzione dei membri del Consiglio Direttivo
 
 1. La carica di consigliere si perde per:
    1. dimissioni, rassegnate mediante comunicazione scritta al Consiglio Direttivo;
@@ -235,7 +235,7 @@ Art.16 – Il Consiglio Direttivo: composizione e durata in carica
 2. Nel caso in cui uno o più consiglieri cessino dall'incarico per uno dei motivi indicati al precedente comma, il Consiglio Direttivo provvede alla loro sostituzione alla prima Assemblea ordinaria utile. Fino alla nuova elezione il Consiglio Direttivo rimane nella composizione risultante a seguito dell'avvenuta cessazione. I consiglieri così eletti rimangono in carica fino alla scadenza del mandato del Consiglio Direttivo vigente.
 3. Nel caso in cui cessi dall'incarico la maggioranza dei consiglieri, l'intero Consiglio Direttivo si intenderà decaduto e il Presidente o, in subordine, il consigliere più anziano di età, dovrà convocare l'Assemblea ordinaria entro 30 (trenta) giorni dalla data in cui è stata formalizzata la cessazione, al fine di procedere ad una nuova elezione del Consiglio Direttivo. Fino all'elezione dei nuovi consiglieri, i consiglieri cessati rimangono in carica per l'attività di ordinaria amministrazione.
 
-## Art.21 – L'organo di controllo: composizione, durata in carica e funzionamento
+## Art. 21 – L'organo di controllo: composizione, durata in carica e funzionamento
 
 1. L'organo di controllo, qualora nominato, è formato da un unico componente, eletto dall'Assemblea, non necessariamente fra gli associati.
 2. Il componente dell'organo di controllo rimane in carica 4 (quattro) anni ed è rieleggibile.
@@ -243,7 +243,7 @@ Art.16 – Il Consiglio Direttivo: composizione e durata in carica
 4. Nel caso in cui, per dimissioni o altre cause, l'unico componente decada dall'incarico prima della scadenza del mandato, si provvede alla sostituzione dello stesso tramite una nuova elezione da parte dell'Assemblea.
 5. Il componente dell'organo di controllo, a cui si applica l'art.2399 del Codice civile, deve essere indipendente ed esercitare le sue funzioni in modo obiettivo ed imparziale. Non può ricoprire altre cariche all'interno dell'Associazione.
 
-## Art.22 – Competenze dell'organo di controllo
+## Art. 22 – Competenze dell'organo di controllo
 
 1. È compito dell'organo di controllo:
    1. vigilare sull'osservanza della legge e dello Statuto, e sul rispetto dei principi di corretta amministrazione;
@@ -255,7 +255,7 @@ Art.16 – Il Consiglio Direttivo: composizione e durata in carica
 2. Nei casi previsti dall'art.31, c.1 del Codice del Terzo settore, l'organo di controllo può esercitare anche la revisione legale dei conti.
 3. L'organo di controllo ha diritto di accesso alla documentazione dell'Associazione rilevante ai fini dell'espletamento del proprio mandato. Può in qualsiasi momento procedere ad atti di ispezione e controllo e, a tal fine, può chiedere ai consiglieri notizie sull'andamento delle operazioni sociali o su determinati affari.
 
-## Art.23 – L'organo di revisione
+## Art. 23 – L'organo di revisione
 
 1. L'organo di revisione, qualora nominato, è formato da un unico componente, eletto dall'Assemblea, non necessariamente fra gli associati. Il componente dell'organo di revisione deve essere iscritto al registro dei revisori legali dei conti.
 2. L'organo di revisione rimane in carica 4 (quattro) anni e il suo componente è rieleggibile.
@@ -266,7 +266,7 @@ Art.16 – Il Consiglio Direttivo: composizione e durata in carica
 
 # Titolo V: I libri sociali
 
-## Art.24 – Libri sociali e registri
+## Art. 24 – Libri sociali e registri
 
 1. L'Associazione deve tenere le seguenti scritture:
    1. il libro degli associati;
@@ -278,12 +278,12 @@ Art.16 – Il Consiglio Direttivo: composizione e durata in carica
 
 # Titolo VI: Norme sul patrimonio dell'Associazione e sul bilancio di esercizio
 
-## Art.25 – Destinazione del patrimonio ed assenza di scopo di lucro
+## Art. 25 – Destinazione del patrimonio ed assenza di scopo di lucro
 
 1. Il patrimonio dell'Associazione è utilizzato per lo svolgimento dell'attività statutaria ai fini dell'esclusivo perseguimento di finalità civiche, solidaristiche e di utilità sociale.
 2. È vietata la distribuzione, anche indiretta, di utili ed avanzi di gestione, fondi e riserve comunque denominate a fondatori, associati, lavoratori e collaboratori, consiglieri ed altri componenti degli organi sociali, anche nel caso di recesso o di ogni altra ipotesi di scioglimento individuale del rapporto associativo.
 
-## Art.26 – Risorse economiche
+## Art. 26 – Risorse economiche
 
 1. L'Associazione trae le risorse economiche per il funzionamento e per lo svolgimento delle proprie attività da:
    1. quote associative;
@@ -295,14 +295,14 @@ Art.16 – Il Consiglio Direttivo: composizione e durata in carica
    7. proventi da attività di interesse generale e da attività diverse ex art.6 del Codice del Terzo settore;
    8. ogni altra entrata ammessa ai sensi del Codice del Terzo settore e di altre norme competenti in materia.
 
-## Art.27 – Bilancio di esercizio
+## Art. 27 – Bilancio di esercizio
 
 1. L'esercizio sociale inizia il 1° gennaio e si conclude il 31 dicembre.
 2. Alla fine di ogni esercizio il Consiglio Direttivo deve procedere alla formazione del bilancio di esercizio, il quale deve essere approvato dall'Assemblea ordinaria. Quest'ultima deve essere convocata entro 120 (centoventi) giorni dalla chiusura dell'esercizio.
 
 # Titolo VII: Scioglimento dell'Associazione e devoluzione del patrimonio
 
-## Art.28 – Scioglimento e devoluzione del patrimonio
+## Art. 28 – Scioglimento e devoluzione del patrimonio
 
 1. Lo scioglimento dell'Associazione è deciso dall'Assemblea straordinaria secondo i quorum previsti dal presente Statuto.
 2. L'Assemblea che delibera lo scioglimento nomina anche uno o più liquidatori e delibera sulla destinazione del patrimonio residuo, il quale deve essere devoluto, previo parere positivo dell'Ufficio di cui all'art.45, c.1, del Codice del Terzo settore e salvo diversa destinazione imposta dalla legge, ad altri enti del Terzo settore o, in mancanza, alla Fondazione Italia Sociale, secondo quanto previsto dall'art.9 del Codice del Terzo settore.
