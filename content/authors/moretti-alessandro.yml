@@ -1,10 +1,8 @@
+avatar: /assets/avatars/moretti.png
+bio: Alessandro Moretti aka A_AdeptoTerra, una vera e propria istituzione nel panorama pauper italiano. Si diletta un sacco con la sua piattaforma preferita, ovvero twitch, dove periodicamente si cimenta in leghe con mazzi innovativi. Potete vedere tutto sul suo canale youtube, dove carica i video delle sue dirette.
+description: Presidente Pauperwave
 name: Alessandro Moretti
 nickname: AdeptoTerra
-description: "Presidente Pauperwave"
-bio: "Alessandro Moretti aka A_AdeptoTerra, una vera e propria istituzione nel panorama pauper italiano. Si diletta un sacco con la sua piattaforma preferita, ovvero twitch, dove periodicamente si cimenta in leghe con mazzi innovativi. Potete vedere tutto sul suo canale youtube, dove carica i video delle sue dirette."
-avatar: https://avatars.githubusercontent.com/u/7290030?v=4
-url: https://github.com/larbish
 socials:
-  github: https://github.com/larbish
   youtube: https://www.youtube.com/@alessandromoretti1177
   twitch: https://www.twitch.tv/a_adeptoterra
