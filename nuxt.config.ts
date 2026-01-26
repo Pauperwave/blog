@@ -47,7 +47,29 @@ export default defineNuxtConfig({
       "magic-regexp/nuxt",
       "nuxt-swiper",
       "./modules/card-tooltip-transformer",
+      'nuxt-studio'
     ],
+    studio: {
+      route: '/admin', // default: '/_studio'
+      repository: {
+        provider: 'github',
+        owner: 'Pauperwave',
+        repo: 'https://github.com/Pauperwave/test',
+        branch: 'main',
+        private: false
+      },
+      i18n: {
+        defaultLocale: 'it'
+      }
+    },
+    nitro: {
+      prerender: {
+        // Pre-render the homepage
+        routes: ['/'],
+        // Then crawl all the links on the page
+        crawlLinks: true
+      }
+    },
     icon: {
         collections: ['lucide', 'simple-icons', 'logos', 'mdi']
     },

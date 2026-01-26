@@ -30,6 +30,7 @@
     "magic-regexp": "^0.10.0",
     "mana-font": "^1.18.0",
     "nuxt": "^4.2.2",
+    "nuxt-studio": "1.2.0",
     "nuxt-swiper": "2.0.1",
     "unist-util-visit": "^5.0.0"
   },
