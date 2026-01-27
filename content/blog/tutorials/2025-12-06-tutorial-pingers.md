@@ -34,47 +34,40 @@ name: Pingers
 description: Descrizione anche molto lunga del mazzo
 author: Pietro Bragioto
 placement: 28° al Geddon 2025 Pauper Classic
-:tags: '["Pauper","Mono Red","Midrange"]'
 ---
-#main
-## Creatures
-- 4 Clockwork Percussionist
-- 4 Goblin Tomb Raider
-- 4 Voldaren Epicure
-- 4 Kessig Flamebreather
-- 3 Thermo-Alchemist
+Creatures
+4 Clockwork Percussionist
+4 Goblin Tomb Raider
+4 Voldaren Epicure
+4 Kessig Flamebreather
+3 Thermo-Alchemist
 
-## Planeswalkers
-- 2 Chandra, Acolyte of Flame
-- 1 Ral, Crackling Wit
+Sorceries
+4 Reckless Impulse
+4 Wrenn's Resolve
 
-## Sorceries
-- 4 Reckless Impulse
-- 4 Wrenn's Resolve
+Instants
+4 Lava Dart
+4 Galvanic Blast
+4 Lightning Bolt
 
-## Instants
-- 4 Lava Dart
-- 4 Galvanic Blast
-- 4 Lightning Bolt
+Artifacts
+2 Experimental Synthesizer
 
-## Artifacts
-- 2 Experimental Synthesizer
+Enchantments
+1 Bitterblossom
+1 Black Market Connections
 
-## Enchantments
-- 1 Bitterblossom
-- 1 Black Market Connections
+Lands
+4 Great Furnace
+15 Mountain
 
-## Lands
-- 4 Great Furnace
-- 15 Mountain
-
-#sideboard
-## Sideboard
-- 4 Pyroblast
-- 4 Red Elemental Blast
-- 4 Suplex
-- 3 Cast into the Fire
-- 4 Writhing Chrysalis
+Sideboard
+4 Pyroblast
+4 Red Elemental Blast
+4 Suplex
+3 Cast into the Fire
+4 Writhing Chrysalis
 ::
 
 Perchè giocare Mono Red Fair o Mono Red Midrange?
