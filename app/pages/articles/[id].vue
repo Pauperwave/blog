@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { intersection, orderByMultiple } from "~/utils/array";
+import type { Author } from '~/composables/useAuthor';
 import {
   type AnyArticle,
-  type CollectionName,
   queryAllCollections,
   combineArticles,
   getCollectionNames
@@ -29,7 +29,7 @@ const { data } = await useAsyncData(route.path, async () => {
   // Try each collection until we find the article
   const collections = getCollectionNames();
   for (const collection of collections) {
-    const result = await queryCollection(collection as CollectionName).path(route.path).first();
+    const result = await queryCollection(collection).path(route.path).first();
     if (result) return result;
   }
   return null;
@@ -87,8 +87,7 @@ const { data: links } = await useAsyncData(`linked-${route.path}`, async () => {
 });
 
 // Fetch author data for related articles
-
-const relatedAuthorsMap = ref<Record<string, any>>({});
+const relatedAuthorsMap = ref<Record<string, Author>>({});
 
 if (links.value) {
   const uniqueAuthors = [...new Set(links.value.map(article => article.author))];
@@ -110,7 +109,7 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, async ()
   for (const collection of collections) {
     // console.log(`[DEBUG] Trying collection: ${collection}`);
     try {
-      const result = await queryCollectionItemSurroundings(collection as any, route.path, {
+      const result = await queryCollectionItemSurroundings(collection, route.path, {
         fields: ["description"],
       });
       // console.log(`[DEBUG] Result from ${collection}:`, result);
