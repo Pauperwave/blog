@@ -4,7 +4,6 @@
  */
 
 import { join } from 'path'
-import type { ManaSymbol } from '#shared/types/decklist'
 
 export interface CardData {
   name: string
@@ -30,7 +29,7 @@ async function getDatabase() {
     const { Database: DB } = await import('bun:sqlite')
     Database = DB
   }
-  
+
   if (!dbInstance) {
     const dbPath = join(process.cwd(), 'server', 'database', 'cards.db')
     dbInstance = new Database(dbPath, { readonly: true })
@@ -53,13 +52,13 @@ export function parseManaCost(manaCost: string): string[] {
  */
 export async function getCardByName(name: string): Promise<CardData | null> {
   const db = await getDatabase()
-  
+
   const row = db.prepare(`
     SELECT * FROM cards WHERE name = ? LIMIT 1
   `).get(name) as any
-  
+
   if (!row) return null
-  
+
   return {
     name: row.name,
     manaCost: row.mana_cost || '',
@@ -73,13 +72,13 @@ export async function getCardByName(name: string): Promise<CardData | null> {
 export async function getCardsByNames(names: string[]): Promise<Map<string, CardData>> {
   const db = await getDatabase()
   const result = new Map<string, CardData>()
-  
+
   // Use parameterized query for safety
   const placeholders = names.map(() => '?').join(',')
   const query = `SELECT * FROM cards WHERE name IN (${placeholders})`
-  
+
   const rows = db.prepare(query).all(...names) as any[]
-  
+
   for (const row of rows) {
     result.set(row.name, {
       name: row.name,
@@ -87,7 +86,7 @@ export async function getCardsByNames(names: string[]): Promise<Map<string, Card
       imageUrl: row.image_url
     })
   }
-  
+
   return result
 }
 
@@ -96,11 +95,11 @@ export async function getCardsByNames(names: string[]): Promise<Map<string, Card
  */
 export async function getManaSymbol(symbol: string): Promise<string | null> {
   const db = await getDatabase()
-  
+
   const row = db.prepare(`
     SELECT svg_uri FROM mana_symbols WHERE symbol = ? LIMIT 1
   `).get(symbol) as any
-  
+
   return row?.svg_uri || null
 }
 
@@ -111,15 +110,15 @@ let manaSymbolCache: Map<string, string> | null = null
 
 export async function getAllManaSymbols(): Promise<Map<string, string>> {
   if (manaSymbolCache) return manaSymbolCache
-  
+
   const db = await getDatabase()
   const rows = db.prepare('SELECT symbol, svg_uri FROM mana_symbols').all() as any[]
-  
+
   manaSymbolCache = new Map()
   for (const row of rows) {
     manaSymbolCache.set(row.symbol, row.svg_uri)
   }
-  
+
   return manaSymbolCache
 }
 
@@ -129,12 +128,12 @@ export async function getAllManaSymbols(): Promise<Map<string, string>> {
 export async function getParsedManaCost(manaCost: string): Promise<ParsedManaCost> {
   const symbols = parseManaCost(manaCost)
   const symbolMap = await getAllManaSymbols()
-  
+
   const manaSymbols: ManaSymbol[] = symbols.map(symbol => ({
     symbol,
     svgUri: symbolMap.get(symbol) || ''
   }))
-  
+
   return {
     symbols,
     manaSymbols
