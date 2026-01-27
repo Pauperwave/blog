@@ -52,7 +52,6 @@ Lands
 4 Great Furnace
 1 Seat of the Synod
 
-
 Sideboard
 4 Obsidian Acolyte
 4 Crimson Acolyte
