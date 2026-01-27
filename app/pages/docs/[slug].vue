@@ -8,7 +8,8 @@ const { data } = await useAsyncData(`doc-${route.params.slug}`, () =>
   queryCollection('docs').where('id', '=', documentPath.value).first()
 )
 
-const tocTitle = computed(() => `In questo articolo`);
+const tocTitle = 'In questo articolo'
+const pageHeadline = 'Documenti'
 </script>
 
 <template>
@@ -37,7 +38,7 @@ const tocTitle = computed(() => `In questo articolo`);
     <UPageHeader
       :title="data?.title"
       :description="data?.description"
-      headline="Documenti"
+      :headline="pageHeadline"
     />
 
     <UPageBody>
