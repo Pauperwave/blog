@@ -38,6 +38,7 @@ export default defineNuxtConfig({
         },
     },
     modules: [
+      'nuxt-studio',
       "@nuxt/content",
       "@nuxt/eslint",
       "@nuxt/image",
@@ -48,7 +49,7 @@ export default defineNuxtConfig({
       "magic-regexp/nuxt",
       "nuxt-swiper",
       "./modules/card-tooltip-transformer",
-      'nuxt-studio'
+      "./modules/decklist-transformer"
     ],
     studio: {
       // Studio admin route (default: '/_studio')
