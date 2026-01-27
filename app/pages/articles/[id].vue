@@ -2,6 +2,7 @@
 import { intersection, orderByMultiple } from "~/utils/array";
 import {
   type AnyArticle,
+  type CollectionName,
   queryAllCollections,
   combineArticles,
   getCollectionNames
@@ -20,7 +21,7 @@ const getBadge = (date: string) => {
 };
 
 // const readingTimeText = computed(() => (data.value?.meta as any).readingTime?.text);
-const tocTitle = computed(() => `In questo articolo`);
+const tocTitle = 'In questo articolo'
 // const clipboard = useClipboard();
 // const toast = useToast();
 
@@ -28,7 +29,7 @@ const { data } = await useAsyncData(route.path, async () => {
   // Try each collection until we find the article
   const collections = getCollectionNames();
   for (const collection of collections) {
-    const result = await queryCollection(collection as any).path(route.path).first();
+    const result = await queryCollection(collection as CollectionName).path(route.path).first();
     if (result) return result;
   }
   return null;
@@ -86,6 +87,7 @@ const { data: links } = await useAsyncData(`linked-${route.path}`, async () => {
 });
 
 // Fetch author data for related articles
+
 const relatedAuthorsMap = ref<Record<string, any>>({});
 
 if (links.value) {

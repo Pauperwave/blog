@@ -53,6 +53,23 @@ export type AnyArticle =
 export type CategoryType = 'decklist' | 'article' | 'report' | 'spoiler' | 'tutorial';
 
 /**
+ * Actual collection names as they appear in queryCollection()
+ */
+export type CollectionName = 'decklists' | 'articles' | 'reports' | 'spoilers' | 'tutorials';
+
+/**
+ * Collection names as they appear in queryCollection() calls.
+ * Maps category types to their actual collection names in content.config.ts
+ */
+export const COLLECTION_NAMES: Record<CategoryType, CollectionName> = {
+  decklist: 'decklists',
+  article: 'articles',
+  report: 'reports',
+  spoiler: 'spoilers',
+  tutorial: 'tutorials'
+} as const;
+
+/**
  * The canonical order of content types throughout the application.
  * 
  * **To change the order site-wide, modify this array.**
@@ -92,18 +109,6 @@ export const HOME_SECTION_TITLES: Record<CategoryType, string> = {
   tutorial: 'Tutorial'
 } as const;
 
-/**
- * Collection names as they appear in queryCollection() calls.
- * Maps category types to their actual collection names in content.config.ts
- */
-export const COLLECTION_NAMES: Record<CategoryType, string> = {
-  decklist: 'decklists',
-  article: 'articles',
-  report: 'reports',
-  spoiler: 'spoilers',
-  tutorial: 'tutorials'
-} as const;
-
 // ============================================================================
 // Helper Functions
 // ============================================================================
@@ -121,7 +126,7 @@ export const COLLECTION_NAMES: Record<CategoryType, string> = {
  */
 export async function queryAllCollections() {
   const queries = CONTENT_TYPE_ORDER.map(type =>
-    queryCollection(COLLECTION_NAMES[type] as any).all()
+    queryCollection(COLLECTION_NAMES[type]).all()
   );
   return await Promise.all(queries);
 }
@@ -138,7 +143,7 @@ export async function queryAllCollections() {
  * const allArticles = combineArticles(collectionsData);
  * ```
  */
-export function combineArticles(collectionsData: any[][]): AnyArticle[] {
+export function combineArticles(collectionsData: AnyArticle[][]): AnyArticle[] {
   if (collectionsData.length === 0) return [];
 
   // Start with the first collection and concat the rest in order
@@ -197,6 +202,6 @@ export function initializeCategories(): Record<CategoryType, AnyArticle[]> {
  * // Returns: ['decklists', 'articles', 'reports', 'spoilers', 'tutorials']
  * ```
  */
-export function getCollectionNames(): string[] {
+export function getCollectionNames(): CollectionName[] {
   return CONTENT_TYPE_ORDER.map(type => COLLECTION_NAMES[type]);
 }
