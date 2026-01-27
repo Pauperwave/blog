@@ -101,6 +101,7 @@ async function downloadBulkData(downloadUri: string): Promise<void> {
   // Download and decompress
   const fileStream = createWriteStream(TEMP_FILE)
   await pipeline(
+    /* eslint-disable @typescript-eslint/no-explicit-any */
     response.body as any,
     fileStream
   )

@@ -27,6 +27,7 @@ export default defineEventHandler(async (event) => {
   const cardsMap = await getCardsByNames(names)
   
   // Transform to response format with parsed mana costs
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   const response: Record<string, any> = {}
   
   for (const [name, card] of cardsMap.entries()) {

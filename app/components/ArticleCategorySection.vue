@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import type { Author } from '~/composables/useAuthor';
+import type { AnyArticle } from '~/constants/content-config';
+
 interface Props {
   title: string;
   category: string;
-  articles: any[];
-  authorsMap: Record<string, any>;
+  articles: AnyArticle[];
+  authorsMap: Record<string, Author>;
   maxItems?: number;
   viewAllText?: string;
 }

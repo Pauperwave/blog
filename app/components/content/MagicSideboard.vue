@@ -48,6 +48,7 @@ const fetchManaSymbol = async (symbol: string): Promise<string> => {
     if (!response.ok) throw new Error('Failed to fetch symbology')
 
     const data = await response.json()
+    /* eslint-disable @typescript-eslint/no-explicit-any */
     data.data.forEach((item: any) => {
       manaSymbolCache.value.set(item.symbol, item.svg_uri)
     })

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { Author } from '~/composables/useAuthor';
 import {
   type AnyArticle,
   queryAllCollections,
@@ -26,7 +27,7 @@ const { data: articles } = await useAsyncData("articles-index", async () => {
 });
 
 // Fetch author data for all unique authors
-const authorsMap = ref<Record<string, any>>({});
+const authorsMap = ref<Record<string, Author>>({});
 
 if (articles.value) {
   const uniqueAuthors = [...new Set(articles.value.map(article => article.author))];

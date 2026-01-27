@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { DeckSection, CardItem, ParsedCardLine } from '#shared/types/decklist'
+import type { DeckSection, CardItem } from '#shared/types/decklist'
 
 const props = defineProps<{
   name: string
@@ -22,6 +22,7 @@ const mainDeckSections = ref<DeckSection[]>([])
 const sideboardSections = ref<DeckSection[]>([])
 
 // Card data cache (from API)
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const cardDataCache = ref<Map<string, any>>(new Map())
 
 // Use Nuxt UI Toast composable

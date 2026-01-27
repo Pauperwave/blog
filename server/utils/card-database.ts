@@ -18,6 +18,7 @@ export interface ParsedManaCost {
 }
 
 // Lazy-loaded database class and instance
+/* eslint-disable @typescript-eslint/no-explicit-any */
 let Database: any = null
 let dbInstance: any = null
 

@@ -7,6 +7,7 @@ export default defineNuxtModule({
   },
   setup(_options, nuxt) {
     // Hook into content:file:beforeParse to transform markdown before parsing
+    /* eslint-disable @typescript-eslint/no-explicit-any */
     nuxt.hook('content:file:beforeParse', (ctx: any) => {
       const file = ctx.file || ctx
       
