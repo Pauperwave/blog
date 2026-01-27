@@ -25,3 +25,9 @@ export interface ParsedCardLine {
   quantity: number
   name: string
 }
+
+export interface ParsedCard {
+  quantity: number
+  name: string
+  section: string
+}
