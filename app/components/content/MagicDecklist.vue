@@ -5,16 +5,10 @@ const props = defineProps<{
   name: string
   player?: string
   placement?: string
-  parsedCards?: string
-  sectionCounts?: string // proxy prop needed 
+  parsedCards?: string   // proxy prop injected from transformer
+  sectionCounts?: string // proxy prop injected from transformer
 }>()
 
-console.log('=== MagicDecklist Component - ALL PROPS ===')
-console.log('All props:', props)
-console.log('sectionCounts:', props.sectionCounts)
-console.log('==========================================')
-
-// Use plural forms - no need for mapping anymore
 const SECTIONS = ['Creatures', 'Instants', 'Sorceries', 'Artifacts', 'Enchantments', 'Lands', 'Sideboard'] as const
 
 const cardsBySection = computed(() => {
@@ -28,49 +22,34 @@ const cardsBySection = computed(() => {
 })
 
 const counts = computed(() => {
-  if (!props.sectionCounts) {
-    console.log('⚠️ No sectionCounts prop - calculating manually')
-    const counts: Record<string, number> = {}
-    for (const [section, cards] of Object.entries(cardsBySection.value)) {
-      counts[section] = cards.reduce((total, card) => total + card.quantity, 0)
-    }
-    return counts
-  }
-  
+  if (!props.sectionCounts) return {}
   try {
-    const parsed = JSON.parse(props.sectionCounts) as Record<string, number>
-    console.log('✅ Got sectionCounts from prop!', parsed)
-    return parsed
+    return JSON.parse(props.sectionCounts) as Record<string, number>
   } catch (e) {
-    console.error('❌ Failed to parse sectionCounts:', e)
-    const counts: Record<string, number> = {}
-    for (const [section, cards] of Object.entries(cardsBySection.value)) {
-      counts[section] = cards.reduce((total, card) => total + card.quantity, 0)
-    }
-    return counts
+    console.error('Failed to parse sectionCounts:', e)
+    return {}
   }
 })
-
-console.log('Final counts:', counts.value)
 </script>
 
 <template>
   <div class="decklist">
     <div class="decklist-header">
-      <h3>{{ name }}</h3>
+      <h3>Name: {{ name }}</h3>
       <div v-if="player" class="player">Player: {{ player }}</div>
-      <div v-if="placement" class="placement">{{ placement }}</div>
+      <div v-if="placement" class="placement">Placement: {{ placement }}</div>
     </div>
-    
+    <br>
     <div v-if="Object.keys(cardsBySection).length > 0" class="decklist-sections">
       <div v-for="section in SECTIONS" :key="section">
         <template v-if="cardsBySection[section] && cardsBySection[section].length > 0">
           <h4>{{ section }} ({{ counts[section] }})</h4>
           <ul>
             <li v-for="(card, idx) in cardsBySection[section]" :key="idx">
-              {{ card.quantity }} {{ card.name }}
+              {{ card.quantity }} {{ card.name }} {{ card.mana_cost }}
             </li>
           </ul>
+          <br>
         </template>
       </div>
     </div>

@@ -21,13 +21,15 @@ export default defineNuxtModule({
       ]
 
       if (file.extension === '.md' && allowedFolders.some(folder => file.path?.includes(folder))) {
-        console.log('[Decklist Transformer] Processing:', file.id)
+        // console.log('[Decklist Transformer] Processing:', file.id)
         const content = file.body
 
         // Check if content has MagicDecklist blocks (both formats)
         if (content.includes('::MagicDecklist') || content.includes('::magic-decklist')) {
-          console.log('[Decklist Transformer] Found MagicDecklist block')
+          // console.log(`=========================================================`)
+          // console.log('[Decklist Transformer] Found MagicDecklist block')
           file.body = transformDecklistBlocks(content)
+          // console.log(`=========================================================`)
         }
       }
     })
@@ -39,21 +41,22 @@ function transformDecklistBlocks(content: string): string {
   // Pattern: With frontmatter (case insensitive for component name)
   const blockWithFrontmatter = /::(MagicDecklist|magic-decklist)\s*\n---\n([\s\S]*?)\n---\n([\s\S]*?)::/gi
 
-  console.log('[Decklist Transformer] Attempting to transform...')
+  // console.log('[Decklist Transformer] Attempting to transform...')
 
-  let matchCount = 0
-  content = content.replace(blockWithFrontmatter, (componentName, frontmatter, decklistContent) => {
-    matchCount++
-    console.log(`[Decklist Transformer] Match #${matchCount} found!`)
-    console.log('[Decklist Transformer] Component name:', componentName)
-    console.log('[Decklist Transformer] Frontmatter:', frontmatter)
+  // let matchCount = 0
+  content = content.replace(blockWithFrontmatter, (match, componentName, frontmatter, decklistContent) => {
+    // matchCount++
+    // console.log(`[Decklist Transformer] Match #${matchCount} found!`)
+    // console.log('[Decklist Transformer] Match:\n', match)
+    // console.log('[Decklist Transformer] Component name:', componentName)
+    // console.log('[Decklist Transformer] Frontmatter:', frontmatter)
 
     const props = parseFrontmatter(frontmatter)
     const parsedCards = parseDecklist(decklistContent)
     const sectionCounts = calculateSectionCounts(parsedCards)
 
-    console.log('[Decklist Transformer] Parsed cards:', parsedCards)
-    console.log('[Decklist Transformer] Section counts:', sectionCounts)
+    // console.log('[Decklist Transformer] Parsed cards:', parsedCards)
+    // console.log('[Decklist Transformer] Section counts:', sectionCounts)
 
     const cardsJson = JSON.stringify(parsedCards).replace(/"/g, '&quot;')
     const countsJson = JSON.stringify(sectionCounts).replace(/"/g, '&quot;')
@@ -72,7 +75,8 @@ function transformDecklistBlocks(content: string): string {
     return result
   })
 
-  console.log(`[Decklist Transformer] Total matches found: ${matchCount}`)
+  // console.log(`=========================================================`)
+  // console.log(`[Decklist Transformer] Total matches found: ${matchCount}`)
 
   return content
 }
