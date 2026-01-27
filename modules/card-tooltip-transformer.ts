@@ -7,6 +7,8 @@ export default defineNuxtModule({
     name: 'card-tooltip-transformer'
   },
   setup(_options, nuxt) {
+    console.log('🚀 [Card Tooltip Transformer] MODULE LOADED!')
+
     // Hook into content:file:beforeParse to transform markdown before parsing
     /* eslint-disable @typescript-eslint/no-explicit-any */
     nuxt.hook('content:file:beforeParse', (ctx: any) => {
