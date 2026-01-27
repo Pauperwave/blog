@@ -1,12 +1,13 @@
 ---
-title: "Considerazioni sparse sul Paupergeddon Lucca Summer Edition 2025"
-description: ""
-tags: [meta]
-date: 2025-07-10
-updatedAt: 2025-07-10
+title: Considerazioni sparse sul Paupergeddon Lucca Summer Edition 2025
 author: Pietro Bragioto
-thumbnail: /assets/blog/arts/careful-consideration.jpg
+category: article
+date: 2025-07-10
 published: true
+tags:
+  - meta
+thumbnail: /assets/blog/arts/careful-consideration.jpg
+updatedAt: 2025-07-10
 ---
 
 Siccome mi è stato chiesto svariate volte negli scorsi giorni cosa ne pensassi del Geddon appena trascorso più o meno nel dettaglio, ho deciso di vomitare considerazioni alla rinfusa di seguito, sia riguardo all'evento in generale che alla parte meta / player.
@@ -14,66 +15,65 @@ Siccome mi è stato chiesto svariate volte negli scorsi giorni cosa ne pensassi 
 ## Guardando la Top
 
 La top 8 è specchio di un meta dove anche le previsioni più scontate si perdono nella giungla, fatte a pezzi da build selvagge e variegate.
-0 High Tide, 0 Jund e 0 Mono Red Canonici in top 8: i 3 mazzi più attesi non sono arrivati fino alla fine, con Mono Red avente come rappresentate non la variante Pingers o Madness, bensì quella Rally rispolverata da un esponente polacco in modalità toro per tutto il weekend.
+0 High Tide, 0 Jund e 0 Mono Red Canonici in top 8: i 3 mazzi più attesi non sono arrivati fino alla fine, con Mono Red avente come rappresentate non la variante [Pingers](/articles/2025-12-06-tutorial-pingers) o Madness, bensì quella Rally rispolverata da un esponente polacco in modalità toro per tutto il weekend.
 
-::MagicCardArtCrop
+::magic-card-art-crop
 ---
-card: Tolarian Terror
 crop:
   height: xl
   position: center
+card: Tolarian Terror
 ---
 ::
 
 Seguendo il pattern di Mono Red Rally, Terror finalmente rompe la maledizione italiana e riesce a piazzarne due nella top di un Geddon, due build, ispirate al player mtgo Luminati, che corrono scalze rinunciando alle storiche Deep Analysis per abbracciare la filosofia all in del mazzo tempo senza piani B.
 
-::MagicCardArtCrop
+::magic-card-art-crop
 ---
-card: Basilisk Gate
 crop:
   height: xl
   position: center
+card: Basilisk Gate
 ---
 ::
 
-Le reliquie nella side di un archetipo come UW Cawgate e i mono per di monarca e Okiba nel maindeck di Mardu Synth non fanno godere il mio concetto di deckbuilding premiante e rinforzano la concezione che nella giungla vale tutto.
+Le reliquie nella side di un archetipo come UW Cawgate e i mono per di monarca e \[\[Okiba-Gang Shinobi]] nel maindeck di Mardu Synth non fanno godere il mio concetto di deck building premiante e rinforzano la concezione che nella giungla vale tutto.
 
-::MagicCardArtCrop
+::magic-card-art-crop
 ---
-card: Writhing Chrysalis
 crop:
   height: xl
   position: center
+card: Writhing Chrysalis
 ---
 ::
 
 I due RG Monsters danno una solida alternativa a Mono Red per chi volesse giocare aggro in Pauper, senza essere messi sotto scacco da una Hydro di troppo o dalle solite Weather ormai onnipresenti nelle side, un'aggressione più pesante e difficile da contenere in mid.
 Questo approccio fa rivivere il Timmy player dentro di noi che si ritrova a giocare i mostri veri nel competitivo, cascando, slandando, emblemando ed idrando il prossimo.
 
-::MagicCardArtCrop
+::magic-card-art-crop
 ---
-card: Sacred Cat
 crop:
   height: xl
   position: top
+card: Sacred Cat
 ---
 ::
 
-La run miracolosa di Caw Gate, mazzo considerato fuori meta in ogni tierlist, evidenzia il concetto che un ottimo player ha sempre una piccola pissobilità di far avverare la "Cinderella Story" del suo pet deck.
-Anche in una top 8 che inizia con RG Monsters, la varianza può stravolgere un MU proibitivo e la buona sorte può regalare una strada spianata dove Mono Red Rally e Mono U Terror fanno solo da gradite comparse.
+La run miracolosa di Caw Gate, mazzo considerato fuori meta in ogni tierlist, evidenzia il concetto che un ottimo player ha sempre una piccola possibilità di far avverare la "Cinderella Story" del suo pet deck.--- Unknown node: hardBreak ---Anche in una top 8 che inizia con RG Monsters, la varianza può stravolgere un MU proibitivo e la buona sorte può regalare una strada spianata dove Mono Red Rally e Mono U Terror fanno solo da gradite comparse.
 
-::MagicCardArtCrop
+::magic-card-art-crop
 ---
-card: Ashnod's Altar
 crop:
   height: xl
   position: top
+card: Ashnod's Altar
 ---
 ::
 
 Altar Tron che chiude la Top 8 e ben due Familiars con un Izzet Terror sbarazzino presenti in Top 16 danno una immagine del formato incredibile per quanto riguarda il punto di vista di un player medio di una Lega Pauper locale che vede varietà e previsioni infrante da mazzi inattesi che vivono la loro giornata di gloria.
 
-Da un punto di vista strettamente competitivo dove si prediligono meta ristretti e prevedibili con scelte di deckbuilding e hard testing che danno un edge, questa top ha rappresentato un fallimento.
+Da un punto di vista strettamente competitivo dove si prediligono meta ristretti e prevedibili con scelte di *deck building* e *hard testing* che danno un edge, questa top ha rappresentato un fallimento.
 
 ## Conclusioni
 
@@ -89,7 +89,7 @@ Il Polo Fiere di Lucca si è rivelata una location adeguata all' alto numero di 
 
 Con il crescere dei numeri e dell'internazionalità dell'evento è necessario mantenere certi standard qualitativi, dopo la disfatta di Roma ho sentito deversi stranieri soddisfatti dalla location e questo vale più di molte polemiche.
 
-Impossibile che passi un'edizione del Geddon senza le relative polemiche, di cui parlererò in seguito, per ora non mi sono arrivate all'orecchio quelle a tema arbitrale sempre molto calde e variopinte nelle scorse edizioni: sono davvero sollevato per questa assenza dato che ultimamente non sembrava esserci tregua.
+Impossibile che passi un'edizione del Geddon senza le relative polemiche, di cui parlerò in seguito, per ora non mi sono arrivate all'orecchio quelle a tema arbitrale sempre molto calde e variopinte nelle scorse edizioni: sono davvero sollevato per questa assenza dato che ultimamente non sembrava esserci tregua.
 
 Mi sono sempre ritenuto una cartina di tornasole per quanto riguarda la temperatura ai Geddon, dopo aver avuto un poco memorabile calo di zuccheri ai Geddon in Uguzzone dei tempi d'oro ed avuto un mancamento in quell'inferno della Leopolda di ormai due anni fa, posso testimoniare che la temperatura nella location lucchese era più che onesta, l'aria condizionata c'era e nonostante le numerose persone la temperatura era abbastanza calda ma lungi dall'essere insostenibile.
 
@@ -99,7 +99,7 @@ Per questo, per una volta, non mi accodo alle polemiche sul troppo caldo durante
 
 L'altra polemica logistica riguardava la ristorazione all'evento: c'erano un bar all'interno del Polo ed uno esterno, per i critici troppo pochi per far fronte alla mole di gente presente e con code vertiginose per la colazione.
 
-Personalmente non ho vissuto questo disagio per il semplice fatto che ho fatto colazione in appartamento / al bar durante i giorni del Geddon, pranzando al più con un panino e frutta secca portate da supermercato, tuttavia ho assistito alla coda chilometrica pre evento per la colazione.
+Personalmente non ho vissuto questo disagio per il semplice fatto che ho fatto colazione in appartamento / al bar durante i giorni del Geddon, pranzando al più con un panino e frutta secca portate da supermercato, tuttavia ho assistito alla coda chilometrica pre-evento per la colazione.
 
 Detto ciò sono in una posizione abbastanza neutrale sulla polemica: non sono troppo convinto che aggiungere bar o punti ristoro per velocizzare eventuali code colazione sia la mossa del destino da un punto di vista logistico, ritengo che i bar siano da usufruire in caso di emergenza o sfizio e che non bisogni farci troppo affidamento per la propria alimentazione quotidiana.
 Polemica in un certo senso fondata ma che non mi tocca troppo e che lascia il tempo che trova.
@@ -117,7 +117,7 @@ Nel caso specifico, l'organizzatore titanico in questione è Boose: senza slavar
 Vorrei chiudere con una polemica personale, quella sui numeri del Pauper.
 Sento sempre più spesso durante le ultime edizioni porre l'accento e citare ad ogni occasione buona, i numeri in crescita dell'ultimo Geddon e del formato in generale.
 
-Di per sè, non c'è nulla di male nel farlo e quello che mi fa storcere il naso sta nella misura e nella costanza con cui ciò avviene: quando si dà troppa importanza ad un aspetto si dedica poco spazio mentale al resto.
+Di per sé, non c'è nulla di male nel farlo e quello che mi fa storcere il naso sta nella misura e nella costanza con cui ciò avviene: quando si dà troppa importanza ad un aspetto si dedica poco spazio mentale al resto.
 
 Questo inseguire numeri sempre più grandi con una mal celata smania di sbandierarli mi amareggia, un atteggiamento di qualcuno che sembra avere sempre qualcosa da dimostrare a una parte di community che ha sempre ritenuto questo qualcuno inferiore e non valevole.
 
@@ -127,6 +127,6 @@ Un piccolo appello per smettere di parlare del formato esclusivamente attraverso
 
 Probabilmente ciò non avverrà e ci si rifletterà solo quando un piccolo inciampo fermerà la corsa fine a se stessa costringendo ad osservare il panorama.
 
-::ArticleQuote
+::article-quote
 Al prossimo evento che, anche se non sarà sempre più big, sarà pur sempre Pauper.
 ::
