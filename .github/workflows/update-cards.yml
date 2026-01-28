@@ -1,0 +1,82 @@
+# .github/workflows/update-cards.yml
+name: Update Cards Database
+
+on:
+  schedule:
+    # Primo giorno di ogni mese alle 3:00 AM UTC
+    - cron: '0 3 1 * *'
+  
+  # Permette esecuzione manuale dal tab Actions
+  workflow_dispatch:
+
+jobs:
+  update-database:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      
+      - name: Install dependencies
+        run: bun install
+      
+      - name: Download and update cards database
+        run: bun run download-cards
+      
+      - name: Check if database changed
+        id: check_changes
+        run: |
+          if git diff --quiet server/database/cards.db; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No changes detected in database"
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Database has been updated"
+          fi
+      
+      - name: Get database stats
+        if: steps.check_changes.outputs.changed == 'true'
+        id: db_stats
+        run: |
+          CARDS_COUNT=$(bun run -e "import { Database } from 'bun:sqlite'; const db = new Database('./server/database/cards.db'); const result = db.prepare('SELECT COUNT(*) as count FROM cards').get(); console.log(result.count);")
+          DB_SIZE=$(du -h server/database/cards.db | cut -f1)
+          echo "cards_count=$CARDS_COUNT" >> $GITHUB_OUTPUT
+          echo "db_size=$DB_SIZE" >> $GITHUB_OUTPUT
+      
+      - name: Commit and push changes
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add server/database/cards.db
+          git commit -m "chore: update Pauper cards database
+
+          - Cards: ${{ steps.db_stats.outputs.cards_count }}
+          - Size: ${{ steps.db_stats.outputs.db_size }}
+          - Updated: $(date -u +"%Y-%m-%d %H:%M UTC")
+          
+          [automated monthly update]"
+          git push
+      
+      - name: Create summary
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          echo "## 🎴 Cards Database Updated" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Cards:** ${{ steps.db_stats.outputs.cards_count }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Size:** ${{ steps.db_stats.outputs.db_size }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Updated:** $(date -u +"%Y-%m-%d %H:%M UTC")" >> $GITHUB_STEP_SUMMARY
+      
+      - name: No changes summary
+        if: steps.check_changes.outputs.changed == 'false'
+        run: |
+          echo "## ℹ️ No Database Changes" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "The database is already up to date. No changes were made." >> $GITHUB_STEP_SUMMARY
