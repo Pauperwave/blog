@@ -26,7 +26,8 @@ node_modules
 !.env.example
 
 # Scryfall bulk data cache
-server/database/cards.db
+# Added pre-built Pauper cards database
+# server/database/cards.db
 server/database/oracle-cards.json
 
 

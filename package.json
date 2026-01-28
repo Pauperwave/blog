@@ -4,8 +4,9 @@
   "type": "module",
   "scripts": {
     "download-cards": "bun run scripts/download-bulk-data.ts",
-    "prebuild": "bun run download-cards",
+    "prebuild": "echo '✅ Using pre-built Pauper database'",
     "build": "nuxt build",
+    "update-cards": "bun run download-cards",
     "dev": "nuxt dev",
     "dev:clean": "rm -rf .nuxt .data && nuxt dev",
     "clean": "nuxt cleanup",
