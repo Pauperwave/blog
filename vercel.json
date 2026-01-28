@@ -1,4 +1,6 @@
 {
   "buildCommand": "bun run build",
-  "installCommand": "bun install"
+  "installCommand": "bun install",
+  "framework": "nuxtjs",
+  "outputDirectory": ".output/public"
 }

@@ -69,7 +69,7 @@ export default defineNuxtConfig({
       }
     },
     nitro: {
-      preset: 'bun',
+      preset: 'vercel',
       prerender: {
         // Pre-render the homepage
         routes: ['/'],
