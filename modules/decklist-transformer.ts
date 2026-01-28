@@ -1,4 +1,6 @@
 // ./modules/decklist-transformer.ts
+import { existsSync } from 'fs'
+import { join } from 'path'
 import { defineNuxtModule } from '@nuxt/kit'
 import { createRegExp, digit, whitespace, oneOrMore, char } from 'magic-regexp'
 import { getCardsByNames } from '../server/utils/card-database'
@@ -162,8 +164,18 @@ async function parseDecklist(rawText: string): Promise<Record<string, ParsedCard
     }
   }
 
-  // Batch lookup all cards from database
-  const cardDataMap = await getCardsByNames(Array.from(cardNames))
+  // Check if database exists
+  const dbPath = join(process.cwd(), 'server', 'database', 'cards.db')
+  const dbExists = existsSync(dbPath)
+  
+  let cardDataMap: Map<string, any> = new Map()
+  
+  if (dbExists) {
+    // Batch lookup all cards from database
+    cardDataMap = await getCardsByNames(Array.from(cardNames))
+  } else {
+    console.warn('⚠️ Database not found, skipping mana cost lookup')
+  }
 
   // Second pass: build the grouped structure with mana costs
   currentSection = 'Creatures'
