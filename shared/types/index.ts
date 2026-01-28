@@ -30,4 +30,5 @@ export interface ParsedCard {
   quantity: number
   name: string
   section: string
+  manaCost: string
 }

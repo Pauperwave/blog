@@ -1,6 +1,7 @@
 // ./modules/decklist-transformer.ts
 import { defineNuxtModule } from '@nuxt/kit'
 import { createRegExp, digit, whitespace, oneOrMore, char } from 'magic-regexp'
+import { getCardsByNames } from '../server/utils/card-database'
 
 export default defineNuxtModule({
   meta: {
@@ -10,7 +11,7 @@ export default defineNuxtModule({
     console.log('🚀 [Decklist Transformer] MODULE LOADED!')
 
     /* eslint-disable @typescript-eslint/no-explicit-any */
-    nuxt.hook('content:file:beforeParse', (ctx: any) => {
+    nuxt.hook('content:file:beforeParse', async (ctx: any) => {
       const file = ctx.file || ctx
 
       const allowedFolders = [
@@ -21,47 +22,49 @@ export default defineNuxtModule({
       ]
 
       if (file.extension === '.md' && allowedFolders.some(folder => file.path?.includes(folder))) {
-        // console.log('[Decklist Transformer] Processing:', file.id)
         const content = file.body
 
-        // Check if content has MagicDecklist blocks (both formats)
         if (content.includes('::MagicDecklist') || content.includes('::magic-decklist')) {
-          // console.log(`=========================================================`)
-          // console.log('[Decklist Transformer] Found MagicDecklist block')
-          file.body = transformDecklistBlocks(content)
-          // console.log(`=========================================================`)
+          file.body = await transformDecklistBlocks(content)
         }
       }
     })
   }
 })
 
-function transformDecklistBlocks(content: string): string {
-  // Match both ::MagicDecklist and ::magic-decklist
-  // Pattern: With frontmatter (case insensitive for component name)
+async function transformDecklistBlocks(content: string): Promise<string> {
   const blockWithFrontmatter = /::(MagicDecklist|magic-decklist)\s*\n---\n([\s\S]*?)\n---\n([\s\S]*?)::/gi
 
-  // console.log('[Decklist Transformer] Attempting to transform...')
+  const matches: Array<{ match: string, componentName: string, frontmatter: string, decklistContent: string, index: number }> = []
+  
+  let match
+  while ((match = blockWithFrontmatter.exec(content)) !== null) {
+    // Type guards for captured groups
+    if (!match[1] || !match[2] || !match[3]) continue
 
-  // let matchCount = 0
-  content = content.replace(blockWithFrontmatter, (match, componentName, frontmatter, decklistContent) => {
-    // matchCount++
-    // console.log(`[Decklist Transformer] Match #${matchCount} found!`)
-    // console.log('[Decklist Transformer] Match:\n', match)
-    // console.log('[Decklist Transformer] Component name:', componentName)
-    // console.log('[Decklist Transformer] Frontmatter:', frontmatter)
+    matches.push({
+      match: match[0],
+      componentName: match[1],
+      frontmatter: match[2],
+      decklistContent: match[3],
+      index: match.index
+    })
+  }
 
+  // Process matches in reverse order to maintain correct indices
+  for (let i = matches.length - 1; i >= 0; i--) {
+    const item = matches[i]
+    if (!item) continue // Type guard
+    
+    const { match, componentName, frontmatter, decklistContent, index } = item
+    
     const props = parseFrontmatter(frontmatter)
-    const parsedCards = parseDecklist(decklistContent)
+    const parsedCards = await parseDecklist(decklistContent)
     const sectionCounts = calculateSectionCounts(parsedCards)
-
-    // console.log('[Decklist Transformer] Parsed cards:', parsedCards)
-    // console.log('[Decklist Transformer] Section counts:', sectionCounts)
 
     const cardsJson = JSON.stringify(parsedCards).replace(/"/g, '&quot;')
     const countsJson = JSON.stringify(sectionCounts).replace(/"/g, '&quot;')
 
-    // Now push the props back into the markdown file
     const propStrings = []
     for (const [key, value] of Object.entries(props)) {
       if (typeof value === 'string') {
@@ -72,18 +75,13 @@ function transformDecklistBlocks(content: string): string {
     propStrings.push(`sectionCounts="${countsJson}"`)
 
     const result = `::${componentName}{${propStrings.join(' ')}}\n::`
-    return result
-  })
-
-  // console.log(`=========================================================`)
-  // console.log(`[Decklist Transformer] Total matches found: ${matchCount}`)
+    
+    content = content.substring(0, index) + result + content.substring(index + match.length)
+  }
 
   return content
 }
 
-/**
- * Parses YAML-like frontmatter into a key-value object
- */
 function parseFrontmatter(yaml: string): Record<string, string> {
   const props: Record<string, string> = {}
   const lines = yaml.split('\n')
@@ -106,7 +104,6 @@ const CARD_PATTERN = createRegExp(
   oneOrMore(char).grouped()
 )
 
-// Map input headers to plural forms
 const SECTION_HEADERS: Record<string, string> = {
   'Creatures': 'Creatures',
   'Instants': 'Instants',
@@ -117,7 +114,6 @@ const SECTION_HEADERS: Record<string, string> = {
   'Sideboard': 'Sideboard',
 }
 
-// Use plural forms for section order
 const SECTION_ORDER = [
   'Creatures',
   'Instants',
@@ -128,8 +124,14 @@ const SECTION_ORDER = [
   'Sideboard'
 ]
 
-function parseDecklist(rawText: string): Record<string, ParsedCard[]> {
-  // Use plural forms as keys
+interface ParsedCard {
+  quantity: number
+  name: string
+  section: string
+  manaCost: string
+}
+
+async function parseDecklist(rawText: string): Promise<Record<string, ParsedCard[]>> {
   const grouped: Record<string, ParsedCard[]> = {
     'Creatures': [],
     'Instants': [],
@@ -143,6 +145,8 @@ function parseDecklist(rawText: string): Record<string, ParsedCard[]> {
   let currentSection: keyof typeof grouped = 'Creatures'
   const lines = rawText.split('\n')
 
+  // First pass: collect all unique card names
+  const cardNames: Set<string> = new Set()
   for (const line of lines) {
     const trimmed = line.trim()
     if (!trimmed) continue
@@ -154,12 +158,36 @@ function parseDecklist(rawText: string): Record<string, ParsedCard[]> {
 
     const match = trimmed.match(CARD_PATTERN)
     if (match && match[1] && match[2]) {
+      cardNames.add(match[2])
+    }
+  }
+
+  // Batch lookup all cards from database
+  const cardDataMap = await getCardsByNames(Array.from(cardNames))
+
+  // Second pass: build the grouped structure with mana costs
+  currentSection = 'Creatures'
+  for (const line of lines) {
+    const trimmed = line.trim()
+    if (!trimmed) continue
+
+    if (SECTION_HEADERS[trimmed]) {
+      currentSection = SECTION_HEADERS[trimmed] as keyof typeof grouped
+      continue
+    }
+
+    const match = trimmed.match(CARD_PATTERN)
+    if (match && match[1] && match[2]) {
+      const cardName = match[2]
+      const cardData = cardDataMap.get(cardName)
+      
       const section = grouped[currentSection]
       if (section) {
         section.push({
           quantity: parseInt(match[1], 10),
-          name: match[2],
-          section: currentSection
+          name: cardName,
+          section: currentSection,
+          manaCost: cardData?.manaCost || ''
         })
       }
     }
@@ -179,7 +207,6 @@ function parseDecklist(rawText: string): Record<string, ParsedCard[]> {
 function calculateSectionCounts(cardsBySection: Record<string, ParsedCard[]>): Record<string, number> {
   const counts: Record<string, number> = {}
 
-  // Keys are already plural, no mapping needed
   for (const [section, cards] of Object.entries(cardsBySection)) {
     counts[section] = cards.reduce((total, card) => total + card.quantity, 0)
   }

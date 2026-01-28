@@ -1,3 +1,4 @@
+// server\utils\card-database.ts
 /**
  * Card database utility for looking up card data from SQLite
  * Used by components to get card information without API calls

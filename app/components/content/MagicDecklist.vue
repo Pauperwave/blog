@@ -46,7 +46,7 @@ const counts = computed(() => {
           <h4>{{ section }} ({{ counts[section] }})</h4>
           <ul>
             <li v-for="(card, idx) in cardsBySection[section]" :key="idx">
-              {{ card.quantity }} {{ card.name }} {{ card.mana_cost }}
+              {{ card.quantity }} {{ card.name }} {{ card.manaCost }}
             </li>
           </ul>
           <br>
