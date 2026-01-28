@@ -1,3 +1,4 @@
+<!-- app\pages\articles\[id].vue -->
 <script setup lang="ts">
 import { intersection, orderByMultiple } from "~/utils/array";
 import type { Author } from '~/composables/useAuthor';
@@ -124,6 +125,43 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, async ()
 updateMeta();
 
 function updateMeta() {
+  // Debug: stampa tutti i valori
+  // console.log('=== META DEBUG ===');
+  // console.log('data.value:', data.value);
+  // console.log('authorData:', authorData);
+  // console.log('Fields check:');
+  // console.log('  - title:', data.value?.title || '❌ MISSING');
+  // console.log('  - description:', data.value?.description || '❌ MISSING');
+  // console.log('  - thumbnail:', data.value?.thumbnail || '❌ MISSING');
+  // console.log('  - date:', data.value?.date || '❌ MISSING');
+  // console.log('  - tags:', data.value?.tags || '❌ MISSING');
+  // console.log('  - author.name:', authorData?.name || '❌ MISSING');
+  // console.log('  - author.description:', authorData?.description || '❌ MISSING');
+  // console.log('  - author.avatar:', authorData?.avatar || '❌ MISSING');
+  // console.log('  - publisher.name:', appMeta.author.name || '❌ MISSING');
+  // console.log('  - publisher.description:', appMeta.author.description || '❌ MISSING');
+  // console.log('  - publisher.image:', appMeta.author.image || '❌ MISSING');
+  // console.log('  - publisher.url:', appMeta.author.url || '❌ MISSING');
+  // console.log('==================');
+
+  // if (!data.value) {
+  //   console.error('❌ No data available for meta tags');
+  //   return;
+  // }
+
+  // Lista dei campi mancanti
+  // const missingFields: string[] = [];
+  // if (!data.value.title) missingFields.push('title');
+  // if (!data.value.description) missingFields.push('description');
+  // if (!data.value.thumbnail) missingFields.push('thumbnail');
+  // if (!data.value.date) missingFields.push('date');
+  // if (!data.value.tags || data.value.tags.length === 0) missingFields.push('tags');
+  // if (!authorData?.name) missingFields.push('author.name');
+  
+  // if (missingFields.length > 0) {
+  //   console.warn('⚠️ Missing required fields:', missingFields.join(', '));
+  // }
+
   useSchemaOrg([
     defineArticle({
       headline: data.value?.title,

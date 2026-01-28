@@ -3,12 +3,11 @@ export default {
   name: "Pauperwave Blog",
   description: "A blog about Magic The Gathering Pauper format.",
   author: {
-    name: "Emaneuele Nardi",
-    url: "https://emanuelenardi.com",
-    image: "https://avatars.githubusercontent.com/u/15109661?v=4",
-    email: "emanuelenardi.dev@gmail.com",
-    description: "",
-    jobTitle: "",
+    name: "Pauperwave",
+    url: "https://pauperwave.org",
+    image: "https://avatars.githubusercontent.com/u/225214755?s=200&v=4",
+    email: "pauperwave@gmail.com",
+    description: "Associazione italiana senza scopo di lucro che promuove il formato Pauper e il gioco come strumento educativo e sociale."
   },
   url: "https://blog.pauperwave.org",
   icon: "/favicon.ico",
