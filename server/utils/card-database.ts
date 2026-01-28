@@ -42,7 +42,7 @@ async function getDatabase(): Promise<DatabaseInstance> {
       // Fallback to better-sqlite3 for Node.js (build time)
       const Database = (await import('better-sqlite3')).default
       dbInstance = new Database(dbPath, { readonly: true })
-      console.log('⚠️ Using better-sqlite3 (Node.js fallback)')
+      console.log('⚠️ Using better-sqlite3 (Node.js compatibily fallback)')
     }
   }
   return dbInstance
