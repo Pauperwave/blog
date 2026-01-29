@@ -5,29 +5,22 @@ const props = defineProps<{
 }>()
 
 const decklistContent = ref<HTMLElement | null>(null)
-const hoveredCard = ref<string | null>(null)
-const showModal = ref(false)
-const isMobile = ref(false)
 
 interface CardItem {
   quantity: string
   name: string
-  manaSymbols: Array<{ symbol: string, svgUri: string }>
+  imageUrl?: string
+  manaCost: string
 }
 
 const cardsIn = ref<CardItem[]>([])
 const cardsOut = ref<CardItem[]>([])
 const cardsOutAlt = ref<CardItem[]>([])
 
-// Reuse your cache system
-const cardDataCache = ref<Map<string, { manaCost: string, manaSymbols: Array<{ symbol: string, svgUri: string }> }>>(new Map())
-const manaSymbolCache = ref<Map<string, string>>(new Map())
+// Cache for card data (removed mana symbol cache)
+const cardDataCache = ref<Map<string, { manaCost: string, imageUrl: string }>>(new Map())
 
 const hasAlternative = computed(() => cardsOutAlt.value.length > 0)
-
-const checkMobile = () => {
-  isMobile.value = window.innerWidth <= 768
-}
 
 const extractCardName = (text: string): string => {
   return text.replace(/^\d+\s+/, '').trim()
@@ -38,34 +31,7 @@ const extractQuantity = (text: string): string => {
   return match ? match[1]! : ''
 }
 
-const fetchManaSymbol = async (symbol: string): Promise<string> => {
-  if (manaSymbolCache.value.has(symbol)) {
-    return manaSymbolCache.value.get(symbol)!
-  }
-
-  try {
-    const response = await fetch(`https://api.scryfall.com/symbology`)
-    if (!response.ok) throw new Error('Failed to fetch symbology')
-
-    const data = await response.json()
-    /* eslint-disable @typescript-eslint/no-explicit-any */
-    data.data.forEach((item: any) => {
-      manaSymbolCache.value.set(item.symbol, item.svg_uri)
-    })
-
-    return manaSymbolCache.value.get(symbol) || ''
-  } catch (error) {
-    console.error(`Error fetching mana symbol for ${symbol}:`, error)
-    return ''
-  }
-}
-
-const parseManaCost = (manaCost: string): string[] => {
-  if (!manaCost) return []
-  return manaCost.match(/\{[^}]+\}/g) || []
-}
-
-const fetchCardData = async (cardName: string): Promise<{ manaCost: string, manaSymbols: Array<{ symbol: string, svgUri: string }> }> => {
+const fetchCardData = async (cardName: string): Promise<{ manaCost: string, imageUrl: string }> => {
   if (cardDataCache.value.has(cardName)) {
     return cardDataCache.value.get(cardName)!
   }
@@ -79,30 +45,20 @@ const fetchCardData = async (cardName: string): Promise<{ manaCost: string, mana
     const data = await response.json()
     const manaCost = data.mana_cost || ''
     
-    const symbols = parseManaCost(manaCost)
-    const manaSymbols = await Promise.all(
-      symbols.map(async (symbol) => {
-        const svgUri = await fetchManaSymbol(symbol)
-        return { symbol, svgUri }
-      })
-    )
+    // Get the image URL for caching
+    const imageUrl = data.image_uris?.normal || data.image_uris?.large || ''
 
-    const cardData = { manaCost, manaSymbols }
+    const cardData = { manaCost, imageUrl }
     cardDataCache.value.set(cardName, cardData)
     return cardData
   } catch (error) {
     console.error(`Error fetching card data for ${cardName}:`, error)
-    return { manaCost: '', manaSymbols: [] }
+    return { manaCost: '', imageUrl: '' }
   }
 }
 
 const processCards = async () => {
   if (!decklistContent.value) return
-
-  // Fetch symbology once
-  if (manaSymbolCache.value.size === 0) {
-    await fetchManaSymbol('{W}')
-  }
 
   // Process "in" cards
   const inElement = decklistContent.value.querySelector('.cards-in')
@@ -146,7 +102,8 @@ const extractCards = async (element: Element): Promise<CardItem[]> => {
         cards.push({
           quantity,
           name: cardName,
-          manaSymbols: cardData.manaSymbols
+          imageUrl: cardData.imageUrl,
+          manaCost: cardData.manaCost
         })
       }
     }
@@ -161,36 +118,14 @@ const extractCards = async (element: Element): Promise<CardItem[]> => {
         cards.push({
           quantity,
           name: cardName,
-          manaSymbols: cardData.manaSymbols
+          imageUrl: cardData.imageUrl,
+          manaCost: cardData.manaCost
         })
       }
     }
   }
 
   return cards
-}
-
-const handleCardHover = (cardName: string | null) => {
-  hoveredCard.value = cardName
-  if (isMobile.value && cardName) {
-    showModal.value = true
-  } else if (!cardName) {
-    showModal.value = false
-  }
-}
-
-const closeModal = () => {
-  showModal.value = false
-  hoveredCard.value = null
-}
-
-const handleResize = () => {
-  checkMobile()
-}
-
-const getCardImageUrl = (cardName: string): string => {
-  const encodedName = encodeURIComponent(cardName)
-  return `https://api.scryfall.com/cards/named?format=image&exact=${encodedName}`
 }
 
 const totalIn = computed(() => {
@@ -201,21 +136,10 @@ const totalOut = computed(() => {
   return cardsOut.value.reduce((sum, card) => sum + parseInt(card.quantity || '0'), 0)
 })
 
-// const totalOutAlt = computed(() => {
-//   return cardsOutAlt.value.reduce((sum, card) => sum + parseInt(card.quantity || '0'), 0)
-// })
-
 onMounted(() => {
-  checkMobile()
-  window.addEventListener('resize', handleResize)
-  
-  setTimeout(() => {
+  nextTick(() => {
     processCards()
-  }, 100)
-})
-
-onBeforeUnmount(() => {
-  window.removeEventListener('resize', handleResize)
+  })
 })
 </script>
 
@@ -242,16 +166,6 @@ onBeforeUnmount(() => {
             {{ props.description }}
           </p>
         </div>
-        <!-- <div class="flex items-center gap-2 text-sm text-gray-400">
-          <span class="flex items-center gap-1">
-            <UIcon name="i-lucide-plus" class="size-4 text-green-500" />
-            <span>{{ totalIn }}</span>
-          </span>
-          <span class="flex items-center gap-1">
-            <UIcon name="i-lucide-minus" class="size-4 text-red-500" />
-            <span>{{ totalOut }}</span>
-          </span>
-        </div> -->
       </div>
     </template>
 
@@ -280,7 +194,9 @@ onBeforeUnmount(() => {
               name="i-lucide-plus-circle"
               class="size-5 text-green-500"
             />
-            <h4 class="font-semibold">Sideboard In</h4>
+            <h4 class="font-semibold">
+              Sideboard In
+            </h4>
             <span class="card-count">({{ totalIn }})</span>
           </div>
           
@@ -292,36 +208,23 @@ onBeforeUnmount(() => {
             >
               <span class="card-quantity">{{ card.quantity }}</span>
               <span class="card-name-wrapper">
-                <span
-                  class="card-name-link"
-                  @mouseenter="!isMobile && handleCardHover(card.name)"
-                  @mouseleave="!isMobile && handleCardHover(null)"
-                  @click="isMobile && (hoveredCard === card.name && showModal ? closeModal() : handleCardHover(card.name))"
-                >
-                  {{ card.name }}
-                </span>
+                <CardTooltip :name="card.name" :image="card.imageUrl" />
               </span>
-              <span class="card-mana-cost">
-                <img
-                  v-for="(symbol, idx) in card.manaSymbols"
-                  :key="idx"
-                  :src="symbol.svgUri"
-                  class="mana-symbol"
-                  alt="Mana symbol"
-                >
-              </span>
+              <ManaCost v-if="card.manaCost" :cost="card.manaCost" class="card-mana-cost" />
             </li>
           </ul>
         </div>
 
-        <!-- Cards Out (Middle) -->
+        <!-- Cards Out (Right) -->
         <div class="cards-section out-section">
           <div class="section-header">
             <UIcon
               name="i-lucide-minus-circle"
               class="size-5 text-red-500"
             />
-            <h4 class="font-semibold">Sideboard Out</h4>
+            <h4 class="font-semibold">
+              Sideboard Out
+            </h4>
             <span class="card-count">({{ totalOut }})</span>
           </div>
           
@@ -333,24 +236,9 @@ onBeforeUnmount(() => {
             >
               <span class="card-quantity">{{ card.quantity }}</span>
               <span class="card-name-wrapper">
-                <span
-                  class="card-name-link"
-                  @mouseenter="!isMobile && handleCardHover(card.name)"
-                  @mouseleave="!isMobile && handleCardHover(null)"
-                  @click="isMobile && (hoveredCard === card.name && showModal ? closeModal() : handleCardHover(card.name))"
-                >
-                  {{ card.name }}
-                </span>
+                <CardTooltip :name="card.name" :image="card.imageUrl" />
               </span>
-              <span class="card-mana-cost">
-                <img
-                  v-for="(symbol, idx) in card.manaSymbols"
-                  :key="idx"
-                  :src="symbol.svgUri"
-                  class="mana-symbol"
-                  alt="Mana symbol"
-                >
-              </span>
+              <ManaCost v-if="card.manaCost" :cost="card.manaCost" class="card-mana-cost" />
             </li>
           </ul>
 
@@ -368,96 +256,31 @@ onBeforeUnmount(() => {
               >
                 <span class="card-quantity">{{ card.quantity }}</span>
                 <span class="card-name-wrapper">
-                  <span
-                    class="card-name-link"
-                    @mouseenter="!isMobile && handleCardHover(card.name)"
-                    @mouseleave="!isMobile && handleCardHover(null)"
-                    @click="isMobile && (hoveredCard === card.name && showModal ? closeModal() : handleCardHover(card.name))"
-                  >
-                    {{ card.name }}
-                  </span>
+                  <CardTooltip :name="card.name" :image="card.imageUrl" />
                 </span>
-                <span class="card-mana-cost">
-                  <img
-                    v-for="(symbol, idx) in card.manaSymbols"
-                    :key="idx"
-                    :src="symbol.svgUri"
-                    class="mana-symbol"
-                    alt="Mana symbol"
-                  >
-                </span>
+                <ManaCost v-if="card.manaCost" :cost="card.manaCost" class="card-mana-cost" />
               </li>
             </ul>
           </template>
         </div>
-
-        <!-- Card Preview (Right) -->
-        <div class="card-preview bg-amber-950/10 rounded sticky">
-          <div
-            v-if="hoveredCard"
-            class="preview-content"
-          >
-            <div class="card-image-container">
-              <img
-                :src="getCardImageUrl(hoveredCard)"
-                :alt="hoveredCard"
-                class="card-image rounded-lg shadow-lg w-full"
-                @error="(e) => (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22280%22%3E%3Crect width=%22200%22 height=%22280%22 fill=%22%23ddd%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%23999%22%3ENo Image%3C/text%3E%3C/svg%3E'"
-              >
-            </div>
-          </div>
-          <div
-            v-else
-            class="text-gray-600 text-center text-sm py-8"
-          >
-            <UIcon
-              name="i-lucide-image"
-              class="w-16 h-16 mx-auto mb-2 opacity-50"
-            />
-            <p>Passa il mouse sopra una carta per visualizzarla</p>
-          </div>
-        </div>
       </div>
     </template>
   </UCard>
-
-  <!-- Mobile Modal -->
-  <UModal
-    v-model:open="showModal"
-    :ui="{
-      content: 'bg-transparent shadow-none ring-0',
-      overlay: 'bg-black/80'
-    }"
-  >
-    <template #content>
-      <div
-        v-if="hoveredCard"
-        class="flex items-center justify-center"
-      >
-        <img
-          :src="getCardImageUrl(hoveredCard)"
-          :alt="hoveredCard"
-          class="max-w-full max-h-[85vh] rounded-lg shadow-2xl"
-          @error="(e) => (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22280%22%3E%3Crect width=%22200%22 height=%22280%22 fill=%22%23ddd%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%23999%22%3ENo Image%3C/text%3E%3C/svg%3E'"
-        >
-      </div>
-    </template>
-  </UModal>
 </template>
 
 <style scoped>
 .sideboard-guide-wrapper {
-  max-width: 1000px;
+  max-width: 900px;
 }
 
 .sideboard-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1.5fr;
-  min-height: 300px;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
 }
 
 .cards-section {
-  padding: .5rem;
+  padding: 0;
 }
 
 .section-header {
@@ -501,7 +324,7 @@ onBeforeUnmount(() => {
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 0 0.75rem;
-  background: var(--ui-bg); /* Adjust this to match your card background color */
+  background: var(--ui-bg);
   color: rgb(239 68 68);
   font-size: 0.75rem;
   font-weight: 600;
@@ -517,7 +340,7 @@ onBeforeUnmount(() => {
 
 .card-item {
   display: grid;
-  grid-template-columns: auto 1fr 60px;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 0.5rem;
   padding: 0.35rem 0.5rem;
@@ -552,51 +375,21 @@ onBeforeUnmount(() => {
   font-weight: 600;
 }
 
-.card-name-link {
-  cursor: pointer;
-  color: #4714ff;
-  text-decoration: underline;
+.card-name-wrapper {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: block;
 }
 
 .card-mana-cost {
-  display: flex;
-  gap: 2px;
-  align-items: center;
-  width: 60px;
-  flex-wrap: wrap;
-}
-
-.mana-symbol {
-  width: 15px;
-  height: 15px;
-  display: inline-block;
-  flex-shrink: 0;
-}
-
-.card-preview {
-  max-height: calc(100vh - 200px);
-  overflow-y: auto;
-  padding: 1rem;
-}
-
-.card-image {
-  max-width: 100%;
-  height: auto;
-  display: block;
+  min-width: 60px;
+  justify-content: flex-end;
 }
 
 @media (max-width: 768px) {
   .sideboard-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
-  }
-
-  .card-preview {
-    display: none;
   }
 }
 </style>
