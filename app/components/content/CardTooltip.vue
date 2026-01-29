@@ -147,6 +147,8 @@ onBeforeUnmount(() => {
   <span 
     v-else
     class="font-semibold text-primary cursor-pointer underline"
+    role="button"
+    :aria-label="`View ${name} card image`"
     @click="handleClick"
   >
     {{ displayText }}
