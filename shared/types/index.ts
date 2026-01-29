@@ -31,4 +31,5 @@ export interface ParsedCard {
   name: string
   section: string
   manaCost: string
+  imageUrl: string
 }
