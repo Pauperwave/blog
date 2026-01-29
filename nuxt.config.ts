@@ -8,7 +8,7 @@ export default defineNuxtConfig({
     css: [
       "~/assets/css/main.css",
       // ms-3 clash with tailwind
-      // "mana-font/css/mana.css"
+      "mana-font/css/mana.css"
     ],
     fonts: {
         defaults: {
