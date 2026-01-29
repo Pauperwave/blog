@@ -1,16 +1,18 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 
 const props = defineProps<{
   name: string
   player?: string
   placement?: string
-  parsedCards?: string   // proxy prop injected from transformer
-  sectionCounts?: string // proxy prop injected from transformer
+  parsedCards?: string
+  sectionCounts?: string
 }>()
+
+const toast = useToast()
 
 const SECTIONS = ['Creatures', 'Instants', 'Sorceries', 'Artifacts', 'Enchantments', 'Lands', 'Sideboard'] as const
 
+// Parse data from transformer
 const cardsBySection = computed(() => {
   if (!props.parsedCards) return {}
   try {
@@ -30,28 +32,204 @@ const counts = computed(() => {
     return {}
   }
 })
+
+// Separate main deck and sideboard
+const mainDeckSections = computed(() => {
+  return SECTIONS.filter(s => s !== 'Sideboard' && cardsBySection.value[s]?.length > 0)
+})
+
+const sideboardSections = computed(() => {
+  return cardsBySection.value['Sideboard']?.length > 0 ? ['Sideboard'] : []
+})
+
+// Copy decklist to clipboard (MTGO format)
+async function copyDecklist() {
+  let decklistText = ''
+
+  // Add main deck
+  mainDeckSections.value.forEach((section) => {
+    cardsBySection.value[section]?.forEach((card) => {
+      decklistText += `${card.quantity} ${card.name}\n`
+    })
+  })
+
+  // Add sideboard
+  if (sideboardSections.value.length > 0) {
+    decklistText += '\nSideboard\n'
+    cardsBySection.value['Sideboard']?.forEach((card) => {
+      decklistText += `${card.quantity} ${card.name}\n`
+    })
+  }
+
+  try {
+    await navigator.clipboard.writeText(decklistText)
+
+    toast.add({
+      title: 'Copied!',
+      description: 'Decklist copied to clipboard',
+      icon: 'i-lucide-check',
+      color: 'success'
+    })
+  } catch (err) {
+    console.error('Failed to copy:', err)
+    toast.add({
+      title: 'Failed to copy',
+      description: 'Could not copy decklist to clipboard',
+      icon: 'i-lucide-x',
+      color: 'error'
+    })
+  }
+}
 </script>
 
 <template>
-  <div class="decklist">
-    <div class="decklist-header">
-      <h3>Name: {{ name }}</h3>
-      <div v-if="player" class="player">Player: {{ player }}</div>
-      <div v-if="placement" class="placement">Placement: {{ placement }}</div>
-    </div>
-    <br>
-    <div v-if="Object.keys(cardsBySection).length > 0" class="decklist-sections">
-      <div v-for="section in SECTIONS" :key="section">
-        <template v-if="cardsBySection[section] && cardsBySection[section].length > 0">
-          <h4>{{ section }} ({{ counts[section] }})</h4>
-          <ul>
-            <li v-for="(card, idx) in cardsBySection[section]" :key="idx">
-              {{ card.quantity }} {{ card.name }} {{ card.manaCost }}
-            </li>
-          </ul>
-          <br>
-        </template>
+  <UCard
+    class="decklist-wrapper mx-auto"
+    :ui="{
+      root: 'overflow-hidden',
+      header: 'relative'
+    }"
+  >
+    <!-- Header -->
+    <template #header>
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+        <div>
+          <h2 class="text-lg font-semibold">{{ name }}</h2>
+          <p v-if="player" class="text-md dark:text-gray-400">
+            {{ player }}
+          </p>
+        </div>
+        <div v-if="placement" class="dark:text-gray-500">
+          {{ placement }}
+        </div>
       </div>
-    </div>
-  </div>
+    </template>
+
+    <!-- Body - Two-column layout -->
+    <template #default>
+      <div class="decklist-grid">
+        <!-- Main Deck (Left) -->
+        <div class="main-deck">
+          <div v-for="section in mainDeckSections" :key="section" class="section">
+            <h2 class="section-heading">
+              {{ section }} <span class="card-count">({{ counts[section] }})</span>
+            </h2>
+            <ul class="card-list">
+              <li
+                v-for="(card, index) in cardsBySection[section]"
+                :key="`${section}-${index}`"
+                class="card-item"
+              >
+                <span class="card-quantity">{{ card.quantity }}</span>
+                <CardTooltip :name="card.name" :image="card.imageUrl" />
+                <ManaCost v-if="card.manaCost" :cost="card.manaCost" class="card-mana-cost" />
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Sideboard (Right) -->
+        <div class="sideboard">
+          <div v-for="section in sideboardSections" :key="section" class="section">
+            <h2 class="section-heading">
+              {{ section }} <span class="card-count">({{ counts[section] }})</span>
+            </h2>
+            <ul class="card-list">
+              <li
+                v-for="(card, index) in cardsBySection[section]"
+                :key="`${section}-${index}`"
+                class="card-item"
+              >
+                <span class="card-quantity">{{ card.quantity }}</span>
+                <CardTooltip :name="card.name" :image="card.imageUrl" />
+                <ManaCost v-if="card.manaCost" :cost="card.manaCost" class="card-mana-cost" />
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </template>
+
+    <!-- Footer -->
+    <template #footer>
+      <UButton
+        icon="i-lucide-copy"
+        size="sm"
+        variant="subtle"
+        class="cursor-pointer"
+        title="Copia decklist"
+        aria-label="Copia decklist negli appunti"
+        label="Copia per MTGO"
+        @click="copyDecklist"
+      />
+    </template>
+  </UCard>
 </template>
+
+<style scoped>
+.decklist-wrapper {
+  max-width: 900px;
+}
+
+.decklist-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.section {
+  margin-bottom: 0.5rem;
+}
+
+.section-heading {
+  margin-top: 0.6rem;
+  margin-bottom: 0.15rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.section-heading:first-child {
+  margin-top: 0;
+}
+
+.card-count {
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.card-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 0.15rem;
+  margin-bottom: 0.35rem;
+}
+
+.card-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  line-height: 1.4;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.card-quantity {
+  font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+  font-weight: 600;
+}
+
+.card-mana-cost {
+  min-width: 60px;
+  justify-content: flex-end;
+}
+
+@media (max-width: 768px) {
+  .decklist-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+</style>
