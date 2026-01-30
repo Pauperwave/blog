@@ -25,6 +25,7 @@ interface BulkDataInfo {
 interface ScryfallCard {
   id: string
   name: string
+  layout: string  // 👈 Aggiunto per debug
   mana_cost?: string
   type_line: string
   oracle_text?: string
@@ -170,14 +171,30 @@ async function importPauperCards(db: Database): Promise<void> {
   
   // Transform and insert cards
   const cardsToInsert: Card[] = pauperCards.map(card => {
-    // Handle double-faced cards
-    const manaCost = card.mana_cost || card.card_faces?.[0]?.mana_cost || ''
-    const imageUris = card.image_uris || card.card_faces?.[0]?.image_uris
+    let manaCost = ''
+    let imageUrl = ''
+    
+    // Priority 1: Top-level image_uris (normal, adventure, split, flip, etc.)
+    if (card.image_uris) {
+      manaCost = card.mana_cost || ''
+      imageUrl = card.image_uris.normal || card.image_uris.large || ''
+    }
+    // Priority 2: card_faces with images (transform, modal_dfc, reversible_card)
+    else if (card.card_faces && card.card_faces.length > 0 && card.card_faces[0].image_uris) {
+      manaCost = card.card_faces[0].mana_cost || card.mana_cost || ''
+      imageUrl = card.card_faces[0].image_uris.normal || 
+                 card.card_faces[0].image_uris.large || ''
+    }
+    // Fallback: no images found
+    else {
+      manaCost = card.mana_cost || ''
+      imageUrl = ''
+    }
     
     return {
       name: card.name,
       manaCost,
-      imageUrl: imageUris?.normal || imageUris?.large || ''
+      imageUrl
     }
   })
   
