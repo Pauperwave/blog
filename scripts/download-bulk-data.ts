@@ -25,7 +25,6 @@ interface BulkDataInfo {
 interface ScryfallCard {
   id: string
   name: string
-  layout: string  // 👈 Aggiunto per debug
   mana_cost?: string
   type_line: string
   oracle_text?: string
@@ -173,6 +172,12 @@ async function importPauperCards(db: Database): Promise<void> {
   const cardsToInsert: Card[] = pauperCards.map(card => {
     let manaCost = ''
     let imageUrl = ''
+
+    // Extract short name (first part before " // ")
+    // "Delver of Secrets // Insectile Aberration".split(' // ')[0]  // → "Delver of Secrets" ✅
+    // Sagu Wildling // Roost Seek
+    // The Modern Age // Vector Glider
+    const shortName = card.name.split(' // ')[0]
     
     // Priority 1: Top-level image_uris (normal, adventure, split, flip, etc.)
     if (card.image_uris) {
@@ -192,7 +197,7 @@ async function importPauperCards(db: Database): Promise<void> {
     }
     
     return {
-      name: card.name,
+      name: shortName,
       manaCost,
       imageUrl
     }
