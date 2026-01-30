@@ -87,11 +87,6 @@ const handleClick = () => {
   }
 }
 
-// Close modal
-const closeModal = () => {
-  showModal.value = false
-}
-
 // Handle window resize
 const handleResize = () => {
   checkMobile()
