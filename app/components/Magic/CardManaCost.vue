@@ -1,4 +1,4 @@
-<!-- components/ManaCost.vue -->
+<!-- app\components\Magic\CardManaCost.vue -->
 <script setup lang="ts">
 const props = defineProps<{
   cost: string  // Es: "{2}{U}{U}"
@@ -14,7 +14,7 @@ const symbols = computed(() => {
 
 <template>
   <span class="mana-cost">
-    <ManaSymbol
+    <MagicCardManaSymbol
       v-for="(symbol, idx) in symbols"
       :key="idx"
       :symbol="symbol"
