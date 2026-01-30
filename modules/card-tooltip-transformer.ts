@@ -13,8 +13,15 @@ export default defineNuxtModule({
     /* eslint-disable @typescript-eslint/no-explicit-any */
     nuxt.hook('content:file:beforeParse', (ctx: any) => {
       const file = ctx.file || ctx
-      
-      if (file.extension === '.md') {
+
+      const allowedFolders = [
+        'articles',
+        'decklists',
+        'reports',
+        'tutorials',
+      ]
+
+      if (file.extension === '.md' && allowedFolders.some(folder => file.path?.includes(folder))) {
         // Pattern for [[cardName | set]] (with pipe separator)
         const patternWithSet = createRegExp(
           exactly('[['),
@@ -40,13 +47,13 @@ export default defineNuxtModule({
         content = content.replace(patternWithSet, (_match: string, name: string, set: string) => {
           const cleanName = name.trim()
           const cleanSet = set.trim()
-          return `:CardTooltip{name="${cleanName}" set="${cleanSet}"}`
+          return `:MagicCardTooltip{name="${cleanName}" set="${cleanSet}"}`
         })
         
         // Then, replace simple card names
         content = content.replace(patternSimple, (_match: string, name: string) => {
           const cleanName = name.trim()
-          return `:CardTooltip{name="${cleanName}"}`
+          return `:MagicCardTooltip{name="${cleanName}"}`
         })
         
         file.body = content
