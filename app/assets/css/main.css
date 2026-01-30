@@ -1,3 +1,4 @@
+/* app\assets\css\main.css */
 @import "tailwindcss";
 @import "@nuxt/ui";
 @import "~/assets/css/typography.css";
@@ -11,7 +12,7 @@
 }
 
 * {
-    scrollbar-width: thin !important;
-    scroll-behavior: smooth;
-    scroll-margin-top: calc(var(--ui-header-height) + 1rem) !important;
+  scrollbar-width: thin !important;
+  scroll-behavior: smooth;
+  scroll-margin-top: calc(var(--ui-header-height) + 1rem) !important;
 }

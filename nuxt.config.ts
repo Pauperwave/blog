@@ -7,8 +7,6 @@ export default defineNuxtConfig({
     devtools: { enabled: true },
     css: [
       "~/assets/css/main.css",
-      // ms-3 clash with tailwind
-      "mana-font/css/mana.css"
     ],
     fonts: {
         defaults: {
@@ -49,7 +47,8 @@ export default defineNuxtConfig({
       "magic-regexp/nuxt",
       "nuxt-swiper",
       "./modules/card-tooltip-transformer",
-      "./modules/decklist-transformer"
+      "./modules/decklist-transformer",
+      "./modules/sideboard-guide-transformer"
     ],
     studio: {
       // Studio admin route (default: '/_studio')
