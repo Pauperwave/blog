@@ -30,6 +30,7 @@ export default defineNuxtModule({
 
         if (content.includes('::MagicDecklist') || content.includes('::magic-decklist')) {
           console.log(`\n📝 [Decklist Transformer] Processing file: ${file.path}`)
+
           file.body = await transformDecklistBlocks(content)
         }
       }
@@ -40,7 +41,13 @@ export default defineNuxtModule({
 async function transformDecklistBlocks(content: string): Promise<string> {
   const blockWithFrontmatter = /::(MagicDecklist|magic-decklist)\s*\n---\n([\s\S]*?)\n---\n([\s\S]*?)::/gi
 
-  const matches: Array<{ match: string, componentName: string, frontmatter: string, decklistContent: string, index: number }> = []
+  const matches: Array<{
+    match: string,
+    componentName: string,
+    frontmatter: string,
+    decklistContent: string,
+    index: number
+  }> = []
   
   let match
   while ((match = blockWithFrontmatter.exec(content)) !== null) {

@@ -25,12 +25,12 @@ export default defineNuxtModule({
         // 'docs',
       ]
 
-      // if (file.extension === '.md') {
       if (file.extension === '.md' && allowedFolders.some(folder => file.path?.includes(folder))) {
         const content = file.body
 
         if (content.includes('::MagicSideboardGuide') || content.includes('::magic-sideboard-guide')) {
           console.log(`\n📝 [Sideboard Guide Transformer] Processing file: ${file.path}`)
+
           file.body = await transformSideboardGuideBlocks(content)
         }
       }
