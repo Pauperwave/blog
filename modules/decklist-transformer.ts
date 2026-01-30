@@ -4,6 +4,7 @@ import { join } from 'path'
 import { defineNuxtModule } from '@nuxt/kit'
 import { createRegExp, digit, whitespace, oneOrMore, char } from 'magic-regexp'
 import { getCardsByNames } from '../server/utils/card-database'
+import type { ParsedCard } from '../shared/types/index.ts'
 
 export default defineNuxtModule({
   meta: {
@@ -28,6 +29,7 @@ export default defineNuxtModule({
         const content = file.body
 
         if (content.includes('::MagicDecklist') || content.includes('::magic-decklist')) {
+          console.log(`\n📝 [Decklist Transformer] Processing file: ${file.path}`)
           file.body = await transformDecklistBlocks(content)
         }
       }
@@ -158,7 +160,7 @@ async function parseDecklist(rawText: string): Promise<Record<string, ParsedCard
     }
   }
 
-  console.log(`   🔍 Found ${cardNames.size} unique card names`)
+  // console.log(`   🔍 Found ${cardNames.size} unique card names`)
 
   // Check if database exists
   const dbPath = join(process.cwd(), 'server', 'database', 'cards.db')
@@ -167,17 +169,17 @@ async function parseDecklist(rawText: string): Promise<Record<string, ParsedCard
   let cardDataMap: Map<string, any> = new Map()
   
   if (dbExists) {
-    console.log(`   💾 Loading card data from database...`)
+    // console.log(`   💾 Loading card data from database...`)
     // Batch lookup all cards from database
     cardDataMap = await getCardsByNames(Array.from(cardNames))
-    console.log(`   ✅ Loaded ${cardDataMap.size}/${cardNames.size} cards from database`)
+    // console.log(`   ✅ Loaded ${cardDataMap.size}/${cardNames.size} cards from database`)
     
     // Log missing cards
-    const missingCards = Array.from(cardNames).filter(name => !cardDataMap.has(name))
-    if (missingCards.length > 0) {
-      console.log(`   ⚠️  Missing from database (${missingCards.length}):`)
-      missingCards.forEach(name => console.log(`      └─ ${name}`))
-    }
+    // const missingCards = Array.from(cardNames).filter(name => !cardDataMap.has(name))
+    // if (missingCards.length > 0) {
+    //   console.log(`   ⚠️  Missing from database (${missingCards.length}):`)
+    //   missingCards.forEach(name => console.log(`      └─ ${name}`))
+    // }
   } else {
     console.warn('   ⚠️  Database not found, skipping mana cost lookup')
   }
@@ -220,15 +222,15 @@ async function parseDecklist(rawText: string): Promise<Record<string, ParsedCard
   }
 
   // 👇 LOG DETTAGLIATO DI parsedCards
-  console.log(`\n   🃏 Parsed Cards Detail:`)
-  for (const [section, cards] of Object.entries(result)) {
-    console.log(`\n      📂 ${section}:`)
-    cards.forEach(card => {
-      console.log(`         ${card.quantity}x ${card.name}`)
-      console.log(`            └─ Mana Cost: ${card.manaCost || '(none)'}`)
-      console.log(`            └─ Image: ${card.imageUrl ? '✅' : '❌'}`)
-    })
-  }
+  // console.log(`\n   🃏 Parsed Cards Detail:`)
+  // for (const [section, cards] of Object.entries(result)) {
+  //   console.log(`\n      📂 ${section}:`)
+  //   cards.forEach(card => {
+  //     console.log(`         ${card.quantity}x ${card.name}`)
+  //     console.log(`            └─ Mana Cost: ${card.manaCost || '(none)'}`)
+  //     console.log(`            └─ Image: ${card.imageUrl ? '✅' : '❌'}`)
+  //   })
+  // }
 
   return result
 }
