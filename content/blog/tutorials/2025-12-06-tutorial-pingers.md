@@ -99,7 +99,7 @@ Toccherò solo i _match-up_ principali visto che si tratta di una introduzione e
 
 8 risposte a Kessig di secondo e soprattutto 8 risposte valide a Sneaky Snacker di secondo (bolt davvero brutto, non lo conterei), perdiamo reach di danni ma teniamo ogni bestia per la lotta nel fango a cui puntiamo anche se i nostri drop a 2 traddano male con le sue risposte ossia Fiery Temper di Madness, Bolt e soprattutto Searing Blaze
 
-::MagicSideboard
+::magic-sideboard-guide
 ---
 matchup: Madness
 description: Descrizione breve delle scelte di side
@@ -114,7 +114,7 @@ description: Descrizione breve delle scelte di side
 
 Preferisco tenere le Galvaniche in quanto ottimisticamente traddano con una serpe se ci aggiungiamo un 1/1, Lava Dart è una considerazione se non crediamo in questa via e ci aspettiamo che tengano i Delver post side.
 
-::MagicSideboard
+::magic-sideboard-guide
 ---
 matchup: Terror
 description: Descrizione breve delle scelte di side
@@ -131,7 +131,7 @@ description: Descrizione breve delle scelte di side
 
 Lava Dart essenziale per scartarlo di Refurbished Familiar e gestirlo di Flashback, inoltre averlo al cimitero è la nostro assicurazione sulla vita contro la giocata di tossina su Thermo-Alchemist.
 
-::MagicSideboard
+::magic-sideboard-guide
 ---
 matchup: Jund / Affinity
 description: Descrizione breve delle scelte di side
@@ -148,7 +148,7 @@ description: Descrizione breve delle scelte di side
 
 Lui nel post side probabilmente riuscirà a stallarci la board ed i botti andranno unicamente su [[Timberwatch Elf]], [[Priest of Titania]] o al più sui boppini per impedire una iniziativa di terzo. Meglio tenere [[Voldaren Epicure]] come drop a 1 che ci schioda la mano in caso di Flood che puntare sul Goblin che si troverà a fronteggiare i vari [[Masked Vandal]], [[Vitu-Ghazi Inspector]] e [[Nylea's Disciple]].
 
-::MagicSideboard
+::magic-sideboard-guide
 ---
 matchup: Elfi
 description: Descrizione breve delle scelte di side
@@ -167,7 +167,7 @@ mu che può sembrare impossibile se approcciato nel modo sbagliato ossia con tro
 Suplex è un sogno bagnato gestendo le due vite del gattino in un colpo solo e la paura più grande del MU senza che questa peschi: la chiave del mu è puntare ad avere il controllo della board mentre si cerca di fare vantaggio carte, applicando una pressione costante e sperando che Cawgate non veda troppo liscio un quell'uno o due turni critici.
 Dreams of Suplex!
 
-::MagicSideboard
+::magic-sideboard-guide
 ---
 matchup: Cawgate
 description: Descrizione breve delle scelte di side
@@ -183,7 +183,7 @@ description: Descrizione breve delle scelte di side
 Fermare la sua aggressione iniziale tenendo un board pulito e proteggendo con le nostre Pyro i peschini o le trottole che stalleranno a terra mentre logoreranno i suoi punti vita.
 Valutabile di scendere ulteriormente di una Montagna e tenere 3 Epicurei preparandosi per il grind.
 
-::MagicSideboard
+::magic-sideboard-guide
 ---
 matchup: Mono U Faeries
 description: Descrizione breve delle scelte di side
@@ -203,7 +203,7 @@ description: Descrizione breve delle scelte di side
 
 Si tengono i botti che possono realisticamente gestire un early Suncape o Faithful, Clockwork non è una minaccia rilevante e potrà essere spess ignorata o blccata senza venire uccisa quindi non si tradurrà in una carta extra.
 
-::MagicSideboard
+::magic-sideboard-guide
 ---
 matchup: Familiar
 description: Descrizione breve delle scelte di side
@@ -220,7 +220,7 @@ description: Descrizione breve delle scelte di side
 
 Servirebbero wrattine in più ma abbiamo scelto la via dell'eroe a viso aperto senza sotterfugi, possiamo scendere di lande non slandabili perchè questo pseudo-mirror dove ci proviamo ad arroccare puntiamo a portarlo nel fango.
 
-::MagicSideboard
+::magic-sideboard-guide
 ---
 matchup: Mono Red Rally
 description: Descrizione breve delle scelte di side
