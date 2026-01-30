@@ -16,7 +16,7 @@ published: true
 | Data | 17-18/06/2023 |
 | Struttura del torneo | 12 Rounds of Swiss + Single Elimination Top 8 |
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Affinity
 player: Roberto Francini
@@ -66,7 +66,7 @@ Sideboard
 1 Unexpected Fangs
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Altar Tron
 player: Tommaso Loss
@@ -119,7 +119,7 @@ Sideboard
 1 Weather the Storm
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Boros Synth
 player: Emanuele Navarra
@@ -165,7 +165,7 @@ Sideboard
 1 Krark-Clan Shaman
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Affinity
 player: Mislav Dinarina
@@ -218,7 +218,7 @@ Sideboard
 1 Suffocating Fumes
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Affinity
 player: Filippo Spaggiari
@@ -268,7 +268,7 @@ Sideboard
 1 Turn Aside
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Boros Synth
 player: Andrea Mengucci
@@ -313,7 +313,7 @@ Sideboard
 1 Krark-Clan Shaman
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Mono U Faeries
 player: Andrea Beatrice
@@ -349,7 +349,7 @@ Sideboard
 2 Spire Golem
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Boros Synth
 player: Marco Casotto

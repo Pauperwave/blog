@@ -515,11 +515,11 @@ This will render the card image when the user hovers over the card name or touch
 Use `MagicDecklist` component for formatted decklists.
 
 ````markdown
-::MagicDecklist
+::magic-decklist
 ---
 name: "Mono Blue Control"
-description: "Decklist vincente di Alessandro Moretti al Paupergeddon Lucca Winter 2025"
 player: "Alessandro Moretti"
+description: "Decklist vincente di Alessandro Moretti al Paupergeddon Lucca Winter 2025"
 placement: "1° posto"
 ---
 Creatures

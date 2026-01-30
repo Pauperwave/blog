@@ -16,7 +16,7 @@ published: true
 | Data | 19 Novembre 2023 |
 | Struttura del torneo | 12 Swiss Turns + Top 8 |
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Jeskai Glitter
 player: Federico Alvisi
@@ -59,7 +59,7 @@ Sideboard
 3 Relic of Progenitus
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Gardens
 player: Tommaso Loss
@@ -102,7 +102,7 @@ Sideboard
 2 Duress
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Gardens
 player: James Truffaz
@@ -147,7 +147,7 @@ Sideboard
 2 Duress
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: UB Faeries
 player: Alessio Audizi
@@ -193,7 +193,7 @@ Sideboard
 1 Dispel
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Mono Red Kuldotha
 player: Diego Barbagelata
@@ -230,7 +230,7 @@ Sideboard
 1 Flaring Pain
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Gardens
 player: Stefano Mannella
@@ -267,7 +267,7 @@ Sideboard
 1 Flaring Pain
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Marco Trivella
 player: Familiars
@@ -314,7 +314,7 @@ Sideboard
 1 Last Breath
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Alessandro Moretti
 player: Familiars

@@ -16,7 +16,7 @@ published: true
 | Data | 23-24 March 2024 |
 | Struttura del torneo | 12 Swiss Rounds + Top 8 |
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Familiars
 player: Pietro Bragioto
@@ -65,7 +65,7 @@ Sideboard
 1 Aethertow
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Jeskai
 player: Gabriele Tocchi
@@ -114,7 +114,7 @@ Sideboard
 1 Dawnbringer Cleric
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: UB Faeries
 player: Fabrizio Campanino
@@ -163,7 +163,7 @@ Sideboard
 1 Unexpected Fangs
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: UW Glitter
 player: Raffaele Nobili
@@ -207,7 +207,7 @@ Sideboard
 2 Standard Bearer
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Boros Glitter
 player: Lapo Bartolini
@@ -252,7 +252,7 @@ Sideboard
 2 Dawnbringer Cleric
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: UW Glitter
 player: Domenico Cardona
@@ -296,7 +296,7 @@ Sideboard
 2 Standard Bearer
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: UB Faeries
 player: Andrea Ciccone
@@ -342,7 +342,7 @@ Sideboard
 1 Diabolic Edict
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Boros Glitter
 player: Gabriele Carini

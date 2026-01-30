@@ -28,11 +28,11 @@ Maybe blessed, maybe not.
 
 ## Il mazzo
 
-::MagicDecklist
+magic-decklist
 ---
 name: Pingers
+player: Pietro Bragioto
 description: Descrizione anche molto lunga del mazzo
-author: Pietro Bragioto
 placement: 28° al Geddon 2025 Pauper Classic
 ---
 Creatures

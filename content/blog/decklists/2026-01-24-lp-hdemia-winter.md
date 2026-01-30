@@ -11,7 +11,7 @@ published: true
 
 ## Winner
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Elves
 player: Lahiri Cristofori
@@ -49,7 +49,7 @@ Sideboard
 
 ## Finalist
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Cawgate
 player: Michele Barzanti
@@ -95,7 +95,7 @@ Sideboard
 
 ## Top 4
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Ponza
 player: Matteo Gulmini
@@ -135,7 +135,7 @@ Sideboard
 2 Cast into the Fire
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: U Terror
 player: Luca Toselli
@@ -173,7 +173,7 @@ Sideboard
 
 ## Top 8
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Elves
 player: Gader Diozzi
@@ -209,7 +209,7 @@ Sideboard
 1 Masked Vandal
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Black Fog
 player: Federico Lazzari
@@ -256,7 +256,7 @@ Sideboard
 1 Weather the Storm
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: UR Ctrl
 player: Francesco Pelacani
@@ -300,7 +300,7 @@ Sideboard
 1 Suplex
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: BR Madness
 player: Edoardo Borgatti

@@ -14,7 +14,7 @@ published: true
 | Giocatori | 1012 |
 | Struttura del torneo | 14 Rounds of Swiss + Single Elimination Top 8, 8 Rounds cut for Day 2 = 18 Points |
 
-::MagicDecklist
+::magic-decklist
 ---
 name: R Madness
 player: Giovanni Postorino
@@ -48,7 +48,7 @@ Sideboard
 1 Flaring Pain
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Familiars
 player: Lorenzo Bergamini
@@ -92,7 +92,7 @@ Sideboard
 1 Thraben Charm
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Cawgate
 player: Federico Pelliccia
@@ -135,7 +135,7 @@ Sideboard
 2 Remove Soul
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: R Madness
 player: Mikolaj Nowak
@@ -172,7 +172,7 @@ Sideboard
 1 Electrickery
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Monsters
 player: Walter Fragnelli
@@ -213,7 +213,7 @@ Sideboard
 1 Ram Through
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: UB Terror
 player: Michal Kowalczyk
@@ -254,7 +254,7 @@ Sideboard
 1 Arms of Hadar
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Cawgate
 player: Edoardo Bardi
@@ -298,7 +298,7 @@ Sideboard
 2 Palace Sentinels
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: U Terror
 player: Jiri Moravec

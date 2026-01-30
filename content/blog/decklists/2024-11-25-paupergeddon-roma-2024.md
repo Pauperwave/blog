@@ -15,7 +15,7 @@ published: true
 | Data | 23-24 November 2024 |
 | Struttura del torneo | 13 Rounds of Swiss + Top 8 Single Elimination |
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Jund
 player: Alessandro Piraccini
@@ -61,7 +61,7 @@ Sideboard
 3 Troublemaker Ouphe
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Jund Glee
 player: Franco Cicchini
@@ -105,7 +105,7 @@ Sideboard
 3 Troublemaker Ouphe
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Dredge
 player: Andrea Uccello
@@ -145,7 +145,7 @@ Sideboard
 1 Gnaw to the Bone
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: U Faeries
 player: Filip Skornicki
@@ -180,7 +180,7 @@ Sideboard
 1 Steel Sabotage
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Jund Glee
 player: Lorenzo Bergamini
@@ -229,7 +229,7 @@ Sideboard
 2 Duress
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Jund
 player: Matteo Cirigliano
@@ -278,7 +278,7 @@ Sideboard
 1 Krark-Clan Shaman
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: U Terror
 player: Giacomo Lancini
@@ -319,7 +319,7 @@ Sideboard
 2 Nullify
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: BG Glee
 player: Lorenzo Aldegheri

@@ -16,7 +16,7 @@ published: true
 | Data | 22-23 June 2024 |
 | Struttura del torneo | 12 Turns of Swiss + Top 8 |
 
-::MagicDecklist
+::magic-decklist
 ---
 name: BR Madness
 player: Filippo Pezza
@@ -55,7 +55,7 @@ Sideboard
 2 Gorilla Shaman
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: RG Ponza
 player: Giorgio Venditti
@@ -94,7 +94,7 @@ Sideboard
 2 Breath Weapon
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Affinity
 player: Franco Cicchini
@@ -142,7 +142,7 @@ Sideboard
 1 Krark-Clan Shaman
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Goblin Combo
 player: Lorenzo Aldegheri
@@ -193,7 +193,7 @@ Sideboard
 1 Masked Vandal
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Walls
 player: Gabriele Borghetti
@@ -238,7 +238,7 @@ Sideboard
 1 Shield-Wall Sentinel
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: BR Madness
 player: Andrea Imborgia
@@ -280,7 +280,7 @@ Sideboard
 1 Makeshift Munitions
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Mono Red Kuldotha
 player: Lapo Bartoli
@@ -318,7 +318,7 @@ Sideboard
 3 End the Festivities
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Jund Glee
 player: Salvatore Chiavazzo

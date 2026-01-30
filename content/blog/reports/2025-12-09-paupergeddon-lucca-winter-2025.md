@@ -31,7 +31,7 @@ After a few reality checks by Tommaso, I was convinced it was the right deck and
 
 # Decklist
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Caw Gates
 player: Edoardo Bardi

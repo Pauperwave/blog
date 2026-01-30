@@ -16,7 +16,7 @@ published: true
 | Data | 5-6 July 2025 |
 | Struttura del torneo | 14 Rounds of Swiss + Single Elimination Top 8, 6-2 cut for Day 2 |
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Cawgate
 player: Pietro Carocci
@@ -60,7 +60,7 @@ Sideboard
 2 Standard Bearer
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: U Terror
 player: Francesco Fiorenzoni
@@ -95,7 +95,7 @@ Sideboard
 3 Gut Shot
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Rally
 player: Franek Komsta 
@@ -135,7 +135,7 @@ Sideboard
 1 Wrenn's Resolve
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Altar Tron
 player: Francesco Foschi
@@ -181,7 +181,7 @@ Sideboard
 1 Scattershot
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: U Terror
 player: Riccardo Cestari
@@ -215,7 +215,7 @@ Sideboard
 4 Annul
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Monsters
 player: Tommaso Punis
@@ -255,7 +255,7 @@ Sideboard
 1 Life Goes On
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Monsters
 player: Francesco Zibella
@@ -293,7 +293,7 @@ Sideboard
 2 Relic of Progenitus
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Mardu Synth
 player: Jose Vidal Ros

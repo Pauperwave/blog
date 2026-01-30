@@ -16,7 +16,7 @@ published: true
 | Data | 22-23/03/2025 |
 | Struttura del torneo | Close Decklist 13 Rounds of Swiss + Open Decklist Single Elimination Top 8 |
 
-::MagicDecklist
+::magic-decklist
 ---
 name: B Pactoll
 player: Lorenzo Montana
@@ -59,7 +59,7 @@ Sideboard
 1 Snuff Out
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Jund
 player: Paolo Donfrancesco
@@ -108,7 +108,7 @@ Sideboard
 2 Troublemaker Ouphe
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Jund
 player: Ernesto Jacopo Varriale
@@ -162,7 +162,7 @@ Sideboard
 1 Thorn of the Black Rose
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: U Faeries
 player: Mattia Pesenti
@@ -201,7 +201,7 @@ Sideboard
 1 Dispel
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: BG Glee
 player: Adam Bazika
@@ -250,7 +250,7 @@ Sideboard
 1 Life Goes On
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Jund
 player: Fabio Lamonaca
@@ -300,7 +300,7 @@ Sideboard
 1 Snuff Out
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: BGr Glee
 player: Matteo Canfora
@@ -347,7 +347,7 @@ Sideboard
 1 Vines of Vastwood
 ::
 
-::MagicDecklist
+::magic-decklist
 ---
 name: Affinity
 player: Mislav Dinarina
