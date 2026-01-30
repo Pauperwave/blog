@@ -4,11 +4,11 @@ import { ref, watch, computed } from 'vue'
 interface ScryfallCard {
   name: string
   image_uris?: {
-    normal: string
+    art_crop: string
   }
   card_faces?: Array<{
     image_uris?: {
-      normal: string
+      art_crop: string
     }
   }>
 }
@@ -65,13 +65,13 @@ const artCropUrl = computed(() => {
   if (!cardData.value) return null
 
   // Single-faced card
-  if (cardData.value.image_uris?.normal) {
-    return cardData.value.image_uris.normal
+  if (cardData.value.image_uris?.art_crop) {
+    return cardData.value.image_uris.art_crop
   }
 
   // Double-faced card (use first face)
-  if (cardData.value.card_faces?.[0]?.image_uris?.normal) {
-    return cardData.value.card_faces[0].image_uris.normal
+  if (cardData.value.card_faces?.[0]?.image_uris?.art_crop) {
+    return cardData.value.card_faces[0].image_uris.art_crop
   }
 
   return null
