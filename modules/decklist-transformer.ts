@@ -17,6 +17,7 @@ export default defineNuxtModule({
       const file = ctx.file || ctx
 
       const allowedFolders = [
+        'docs',
         'articles',
         'decklists',
         'reports',
@@ -126,13 +127,6 @@ const SECTION_ORDER = [
   'Sideboard'
 ]
 
-interface ParsedCard {
-  quantity: number
-  name: string
-  section: string
-  manaCost: string
-}
-
 async function parseDecklist(rawText: string): Promise<Record<string, ParsedCard[]>> {
   const grouped: Record<string, ParsedCard[]> = {
     'Creatures': [],
@@ -164,6 +158,8 @@ async function parseDecklist(rawText: string): Promise<Record<string, ParsedCard
     }
   }
 
+  console.log(`   🔍 Found ${cardNames.size} unique card names`)
+
   // Check if database exists
   const dbPath = join(process.cwd(), 'server', 'database', 'cards.db')
   const dbExists = existsSync(dbPath)
@@ -171,10 +167,19 @@ async function parseDecklist(rawText: string): Promise<Record<string, ParsedCard
   let cardDataMap: Map<string, any> = new Map()
   
   if (dbExists) {
+    console.log(`   💾 Loading card data from database...`)
     // Batch lookup all cards from database
     cardDataMap = await getCardsByNames(Array.from(cardNames))
+    console.log(`   ✅ Loaded ${cardDataMap.size}/${cardNames.size} cards from database`)
+    
+    // Log missing cards
+    const missingCards = Array.from(cardNames).filter(name => !cardDataMap.has(name))
+    if (missingCards.length > 0) {
+      console.log(`   ⚠️  Missing from database (${missingCards.length}):`)
+      missingCards.forEach(name => console.log(`      └─ ${name}`))
+    }
   } else {
-    console.warn('⚠️ Database not found, skipping mana cost lookup')
+    console.warn('   ⚠️  Database not found, skipping mana cost lookup')
   }
 
   // Second pass: build the grouped structure with mana costs
@@ -212,6 +217,17 @@ async function parseDecklist(rawText: string): Promise<Record<string, ParsedCard
     if (cards && cards.length > 0) {
       result[section] = cards
     }
+  }
+
+  // 👇 LOG DETTAGLIATO DI parsedCards
+  console.log(`\n   🃏 Parsed Cards Detail:`)
+  for (const [section, cards] of Object.entries(result)) {
+    console.log(`\n      📂 ${section}:`)
+    cards.forEach(card => {
+      console.log(`         ${card.quantity}x ${card.name}`)
+      console.log(`            └─ Mana Cost: ${card.manaCost || '(none)'}`)
+      console.log(`            └─ Image: ${card.imageUrl ? '✅' : '❌'}`)
+    })
   }
 
   return result
