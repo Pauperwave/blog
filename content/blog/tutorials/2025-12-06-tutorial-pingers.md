@@ -28,7 +28,7 @@ Maybe blessed, maybe not.
 
 ## Il mazzo
 
-magic-decklist
+::magic-decklist
 ---
 name: Pingers
 player: Pietro Bragioto
