@@ -29,16 +29,14 @@ export default defineNuxtModule({
         const content = file.body
 
         if (content.includes('::MagicDecklist') || content.includes('::magic-decklist')) {
-          console.log(`\n📝 [Decklist Transformer] Processing file: ${file.path}`)
-
-          file.body = await transformDecklistBlocks(content)
+          file.body = await transformDecklistBlocks(content, file.path)
         }
       }
     })
   }
 })
 
-async function transformDecklistBlocks(content: string): Promise<string> {
+async function transformDecklistBlocks(content: string, filePath: string): Promise<string> {
   const blockWithFrontmatter = /::(MagicDecklist|magic-decklist)\s*\n---\n([\s\S]*?)\n---\n([\s\S]*?)::/gi
 
   const matches: Array<{
@@ -51,7 +49,6 @@ async function transformDecklistBlocks(content: string): Promise<string> {
   
   let match
   while ((match = blockWithFrontmatter.exec(content)) !== null) {
-    // Type guards for captured groups
     if (!match[1] || !match[2] || !match[3]) continue
 
     matches.push({
@@ -63,16 +60,26 @@ async function transformDecklistBlocks(content: string): Promise<string> {
     })
   }
 
+  if (matches.length === 0) return content
+
+  console.log(`\n📝 [Decklist Transformer] Processing file: ${filePath}`)
+  console.log(`   └─ Found ${matches.length} decklist block(s)`)
+
   // Process matches in reverse order to maintain correct indices
   for (let i = matches.length - 1; i >= 0; i--) {
     const item = matches[i]
-    if (!item) continue // Type guard
+    if (!item) continue
     
     const { match, componentName, frontmatter, decklistContent, index } = item
+    
+    console.log(`\n   🔄 Processing decklist ${matches.length - i}/${matches.length}`)
     
     const props = parseFrontmatter(frontmatter)
     const parsedCards = await parseDecklist(decklistContent)
     const sectionCounts = calculateSectionCounts(parsedCards)
+
+    // Log the transformation
+    logDecklistTransformation(props, parsedCards, sectionCounts)
 
     const cardsJson = JSON.stringify(parsedCards).replace(/"/g, '&quot;')
     const countsJson = JSON.stringify(sectionCounts).replace(/"/g, '&quot;')
@@ -90,6 +97,8 @@ async function transformDecklistBlocks(content: string): Promise<string> {
     
     content = content.substring(0, index) + result + content.substring(index + match.length)
   }
+
+  console.log(`   ✅ All decklists transformed successfully\n`)
 
   return content
 }
@@ -167,8 +176,6 @@ async function parseDecklist(rawText: string): Promise<Record<string, ParsedCard
     }
   }
 
-  // console.log(`   🔍 Found ${cardNames.size} unique card names`)
-
   // Check if database exists
   const dbPath = join(process.cwd(), 'server', 'database', 'cards.db')
   const dbExists = existsSync(dbPath)
@@ -176,17 +183,10 @@ async function parseDecklist(rawText: string): Promise<Record<string, ParsedCard
   let cardDataMap: Map<string, any> = new Map()
   
   if (dbExists) {
-    // console.log(`   💾 Loading card data from database...`)
-    // Batch lookup all cards from database
     cardDataMap = await getCardsByNames(Array.from(cardNames))
-    // console.log(`   ✅ Loaded ${cardDataMap.size}/${cardNames.size} cards from database`)
     
-    // Log missing cards
-    // const missingCards = Array.from(cardNames).filter(name => !cardDataMap.has(name))
-    // if (missingCards.length > 0) {
-    //   console.log(`   ⚠️  Missing from database (${missingCards.length}):`)
-    //   missingCards.forEach(name => console.log(`      └─ ${name}`))
-    // }
+    // Log database lookup results
+    logDatabaseLookup(cardNames, cardDataMap)
   } else {
     console.warn('   ⚠️  Database not found, skipping mana cost lookup')
   }
@@ -228,17 +228,6 @@ async function parseDecklist(rawText: string): Promise<Record<string, ParsedCard
     }
   }
 
-  // 👇 LOG DETTAGLIATO DI parsedCards
-  // console.log(`\n   🃏 Parsed Cards Detail:`)
-  // for (const [section, cards] of Object.entries(result)) {
-  //   console.log(`\n      📂 ${section}:`)
-  //   cards.forEach(card => {
-  //     console.log(`         ${card.quantity}x ${card.name}`)
-  //     console.log(`            └─ Mana Cost: ${card.manaCost || '(none)'}`)
-  //     console.log(`            └─ Image: ${card.imageUrl ? '✅' : '❌'}`)
-  //   })
-  // }
-
   return result
 }
 
@@ -250,4 +239,34 @@ function calculateSectionCounts(cardsBySection: Record<string, ParsedCard[]>): R
   }
 
   return counts
+}
+
+// ============================================================================
+// LOGGING FUNCTIONS
+// ============================================================================
+
+function logDatabaseLookup(cardNames: Set<string>, cardDataMap: Map<string, any>): void {
+  console.log(`   🔍 Found ${cardNames.size} unique card names`)
+  console.log(`   💾 Loaded ${cardDataMap.size}/${cardNames.size} cards from database`)
+  
+  const missingCards = Array.from(cardNames).filter(name => !cardDataMap.has(name))
+  if (missingCards.length > 0) {
+    console.log(`   ⚠️  Missing from database (${missingCards.length}):`)
+    missingCards.forEach(name => console.log(`      └─ ${name}`))
+  }
+}
+
+function logDecklistTransformation(
+  props: Record<string, string>,
+  parsedCards: Record<string, ParsedCard[]>,
+  sectionCounts: Record<string, number>
+): void {
+  console.log(`   📋 Frontmatter props:`, props)
+  console.log(`   📊 Section counts:`, sectionCounts)
+  console.log(`   🃏 Total cards by section:`)
+  
+  for (const [section, cards] of Object.entries(parsedCards)) {
+    const totalCount = sectionCounts[section] || 0
+    console.log(`      └─ ${section}: ${cards.length} unique cards (${totalCount} total)`)
+  }
 }
