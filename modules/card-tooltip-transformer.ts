@@ -18,6 +18,7 @@ export default defineNuxtModule({
         'articles',
         'decklists',
         'reports',
+        'spoilers',
         'tutorials',
       ]
 
