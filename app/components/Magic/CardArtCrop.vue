@@ -16,11 +16,16 @@ interface ScryfallCard {
 interface ParsedCard {
   name: string
   set?: string
-  collector?: string
+  collector_number?: string
 }
 
 const props = defineProps<{
   card: string
+  caption?: string
+  crop?: {
+    height?: 'small' | 'medium' | 'large' | 'xl'
+    position?: 'top' | 'center' | 'bottom'
+  }
 }>()
 
 const cardData = ref<ScryfallCard | null>(null)
@@ -36,7 +41,7 @@ function parseCardString(raw: string): ParsedCard {
     return {
       name: matchFull[1]!.trim(),
       set: matchFull[2],
-      collector: matchFull[3]
+      collector_number: matchFull[3]
     }
   }
 
@@ -56,7 +61,7 @@ function parseCardString(raw: string): ParsedCard {
 
 const parsedCard = computed(() => parseCardString(props.card))
 
-const imageUrl = computed(() => {
+const artCropUrl = computed(() => {
   if (!cardData.value) return null
 
   // Single-faced card
@@ -70,6 +75,39 @@ const imageUrl = computed(() => {
   }
 
   return null
+})
+
+const heightClass = computed(() => {
+  if (!props.crop) return '' // No fixed height - show full art crop
+
+  const heights = {
+    small: 'h-32',
+    medium: 'h-48',
+    large: 'h-64',
+    xl: 'h-96'
+  }
+  return heights[props.crop.height || 'medium']
+})
+
+const positionClass = computed(() => {
+  if (!props.crop) return '' // No object positioning needed
+
+  const positions = {
+    top: 'object-top',
+    center: 'object-center',
+    bottom: 'object-bottom'
+  }
+  return positions[props.crop.position || 'center']
+})
+
+const imageClasses = computed(() => {
+  const classes = ['w-full', 'rounded-xl']
+
+  if (props.crop) {
+    classes.push('object-cover', heightClass.value, positionClass.value)
+  }
+
+  return classes.filter(Boolean).join(' ')
 })
 
 /** Fetch card info when card prop changes */
@@ -88,9 +126,9 @@ watch(() => props.card, async () => {
   try {
     let url = ''
 
-    if (parsed.set && parsed.collector) {
+    if (parsed.set && parsed.collector_number) {
       // Case: set + collector → /cards/{set}/{collector}
-      url = `https://api.scryfall.com/cards/${parsed.set}/${parsed.collector}`
+      url = `https://api.scryfall.com/cards/${parsed.set}/${parsed.collector_number}`
     } else if (parsed.set) {
       // Case: set only → /cards/named?fuzzy=...&set=...
       url = `https://api.scryfall.com/cards/named?fuzzy=${encodeURIComponent(parsed.name)}&set=${parsed.set}`
@@ -122,15 +160,26 @@ watch(() => props.card, async () => {
       :description="`Could not find card: ${card}`"
       icon="i-lucide-alert-circle"
     />
-    <img
-      v-else-if="imageUrl && !loading"
-      :src="imageUrl"
-      :alt="cardData?.name"
-      class="rounded-lg shadow-lg max-w-sm mx-auto"
+    <figure
+      v-else-if="artCropUrl && !loading"
+      class="space-y-2"
     >
+      <img
+        :src="artCropUrl"
+        :alt="caption || cardData?.name"
+        :class="imageClasses"
+      >
+      <figcaption
+        v-if="caption"
+        class="text-sm text-center text-gray-600 dark:text-gray-400"
+      >
+        {{ caption }}
+      </figcaption>
+    </figure>
     <USkeleton
       v-else
-      class="h-96 w-full max-w-sm mx-auto rounded-lg"
+      class="w-full rounded-xl aspect-5/3"
+      :class="heightClass"
     />
   </div>
 </template>
