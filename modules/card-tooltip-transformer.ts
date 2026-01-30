@@ -16,10 +16,10 @@ export default defineNuxtModule({
 
       const allowedFolders = [
         'articles',
-        'decklists',
         'reports',
         'spoilers',
         'tutorials',
+        // 'docs',
       ]
 
       if (file.extension === '.md' && allowedFolders.some(folder => file.path?.includes(folder))) {
