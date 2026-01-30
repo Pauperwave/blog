@@ -19,6 +19,7 @@ export default defineNuxtModule({
 
       const allowedFolders = [
         'articles',
+        'decklists',
         'reports',
         // 'spoilers',
         'tutorials',
