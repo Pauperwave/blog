@@ -115,14 +115,10 @@ async function copyDecklist() {
               {{ section }} <span class="card-count">({{ counts[section] }})</span>
             </h2>
             <ul class="card-list">
-              <li
-                v-for="(card, index) in cardsBySection[section]"
-                :key="`${section}-${index}`"
-                class="card-item"
-              >
+              <li v-for="(card, index) in cardsBySection[section]" :key="`${section}-${index}`" class="card-item">
                 <span class="card-quantity">{{ card.quantity }}</span>
-                <CardTooltip :name="card.name" :image="card.imageUrl" />
-                <ManaCost v-if="card.manaCost" :cost="card.manaCost" class="card-mana-cost" />
+                <MagicCardTooltip :name="card.name" :image="card.imageUrl" />
+                <MagicCardManaCost v-if="card.manaCost" :cost="card.manaCost" class="card-mana-cost" />
               </li>
             </ul>
           </div>
@@ -135,14 +131,10 @@ async function copyDecklist() {
               {{ section }} <span class="card-count">({{ counts[section] }})</span>
             </h2>
             <ul class="card-list">
-              <li
-                v-for="(card, index) in cardsBySection[section]"
-                :key="`${section}-${index}`"
-                class="card-item"
-              >
+              <li v-for="(card, index) in cardsBySection[section]" :key="`${section}-${index}`" class="card-item">
                 <span class="card-quantity">{{ card.quantity }}</span>
-                <CardTooltip :name="card.name" :image="card.imageUrl" />
-                <ManaCost v-if="card.manaCost" :cost="card.manaCost" class="card-mana-cost" />
+                <MagicCardTooltip :name="card.name" :image="card.imageUrl" />
+                <MagicCardManaCost v-if="card.manaCost" :cost="card.manaCost" class="card-mana-cost" />
               </li>
             </ul>
           </div>
