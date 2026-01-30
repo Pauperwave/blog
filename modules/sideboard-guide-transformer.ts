@@ -18,10 +18,11 @@ export default defineNuxtModule({
       const file = ctx.file || ctx
 
       const allowedFolders = [
-        'docs',
         'articles',
         'reports',
+        // 'spoilers',
         'tutorials',
+        // 'docs',
       ]
 
       // if (file.extension === '.md') {
