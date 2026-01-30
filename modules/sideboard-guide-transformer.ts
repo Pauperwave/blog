@@ -29,16 +29,14 @@ export default defineNuxtModule({
         const content = file.body
 
         if (content.includes('::MagicSideboardGuide') || content.includes('::magic-sideboard-guide')) {
-          console.log(`\n📝 [Sideboard Guide Transformer] Processing file: ${file.path}`)
-
-          file.body = await transformSideboardGuideBlocks(content)
+          file.body = await transformSideboardGuideBlocks(content, file.path)
         }
       }
     })
   }
 })
 
-async function transformSideboardGuideBlocks(content: string): Promise<string> {
+async function transformSideboardGuideBlocks(content: string, filePath: string): Promise<string> {
   const blockWithFrontmatter = /::(MagicSideboardGuide|magic-sideboard-guide)\s*\n---\n([\s\S]*?)\n---\n([\s\S]*?)::/gi
 
   const matches: Array<{ 
@@ -62,6 +60,9 @@ async function transformSideboardGuideBlocks(content: string): Promise<string> {
     })
   }
 
+  if (matches.length === 0) return content
+
+  console.log(`\n📝 [Sideboard Guide Transformer] Processing file: ${filePath}`)
   console.log(`   └─ Found ${matches.length} sideboard guide block(s)`)
 
   // Process matches in reverse order to maintain correct indices
@@ -74,34 +75,10 @@ async function transformSideboardGuideBlocks(content: string): Promise<string> {
     console.log(`\n   🔄 Processing sideboard guide ${matches.length - i}/${matches.length}`)
     
     const props = parseFrontmatter(frontmatter)
-    console.log(`   📋 Frontmatter props:`, props)
-    
     const { cardsIn, cardsOut, cardsOutAlt } = await parseSideboardGuide(guideContent)
 
-    // 👇 LOG DETTAGLIATO DELL'OGGETTO FINALE
-    console.log(`\n   🎯 Final Parsed Object:`)
-    console.log(`      📥 Cards IN (${cardsIn.length} cards):`)
-    cardsIn.forEach(card => {
-      console.log(`         ${card.quantity}x ${card.name}`)
-      console.log(`            └─ Mana Cost: ${card.manaCost || '(none)'}`)
-      console.log(`            └─ Image: ${card.imageUrl ? '✅' : '❌'}`)
-    })
-    
-    console.log(`\n      📤 Cards OUT (${cardsOut.length} cards):`)
-    cardsOut.forEach(card => {
-      console.log(`         ${card.quantity}x ${card.name}`)
-      console.log(`            └─ Mana Cost: ${card.manaCost || '(none)'}`)
-      console.log(`            └─ Image: ${card.imageUrl ? '✅' : '❌'}`)
-    })
-    
-    if (cardsOutAlt.length > 0) {
-      console.log(`\n      🔄 Cards OUT (Alternative) (${cardsOutAlt.length} cards):`)
-      cardsOutAlt.forEach(card => {
-        console.log(`         ${card.quantity}x ${card.name}`)
-        console.log(`            └─ Mana Cost: ${card.manaCost || '(none)'}`)
-        console.log(`            └─ Image: ${card.imageUrl ? '✅' : '❌'}`)
-      })
-    }
+    // Log the transformation
+    logSideboardGuideTransformation(props, cardsIn, cardsOut, cardsOutAlt)
 
     const cardsInJson = JSON.stringify(cardsIn).replace(/"/g, '&quot;')
     const cardsOutJson = JSON.stringify(cardsOut).replace(/"/g, '&quot;')
@@ -120,8 +97,9 @@ async function transformSideboardGuideBlocks(content: string): Promise<string> {
     const result = `::${componentName}{${propStrings.join(' ')}}\n::`
     
     content = content.substring(0, index) + result + content.substring(index + match.length)
-    console.log(`   ✅ Sideboard guide transformed successfully\n`)
   }
+
+  console.log(`   ✅ All sideboard guides transformed successfully\n`)
 
   return content
 }
@@ -185,11 +163,6 @@ async function parseSideboardGuide(rawText: string): Promise<{
     }
   }
 
-  console.log(`   📦 Sections found:`)
-  console.log(`      └─ #in: ${sections.in.length} lines`)
-  console.log(`      └─ #out: ${sections.out.length} lines`)
-  console.log(`      └─ #out-alt: ${sections.outAlt.length} lines`)
-
   // Collect all unique card names
   const cardNames: Set<string> = new Set()
   for (const section of Object.values(sections)) {
@@ -201,8 +174,6 @@ async function parseSideboardGuide(rawText: string): Promise<{
     }
   }
 
-  console.log(`   🔍 Found ${cardNames.size} unique card names`)
-
   // Check if database exists
   const dbPath = join(process.cwd(), 'server', 'database', 'cards.db')
   const dbExists = existsSync(dbPath)
@@ -210,17 +181,10 @@ async function parseSideboardGuide(rawText: string): Promise<{
   let cardDataMap: Map<string, any> = new Map()
   
   if (dbExists) {
-    console.log(`   💾 Loading card data from database...`)
-    // Batch lookup all cards from database
     cardDataMap = await getCardsByNames(Array.from(cardNames))
-    console.log(`   ✅ Loaded ${cardDataMap.size}/${cardNames.size} cards from database`)
     
-    // Log missing cards
-    const missingCards = Array.from(cardNames).filter(name => !cardDataMap.has(name))
-    if (missingCards.length > 0) {
-      console.log(`   ⚠️  Missing from database (${missingCards.length}):`)
-      missingCards.forEach(name => console.log(`      └─ ${name}`))
-    }
+    // Log database lookup and sections
+    logSectionsAndDatabaseLookup(sections, cardNames, cardDataMap)
   } else {
     console.warn('   ⚠️  Database not found, skipping card data lookup')
   }
@@ -257,4 +221,61 @@ async function parseCardSection(
   }
 
   return cards
+}
+
+// ============================================================================
+// LOGGING FUNCTIONS
+// ============================================================================
+
+function logSectionsAndDatabaseLookup(
+  sections: { in: string[], out: string[], outAlt: string[] },
+  cardNames: Set<string>,
+  cardDataMap: Map<string, any>
+): void {
+  console.log(`   📦 Sections found:`)
+  console.log(`      └─ #in: ${sections.in.length} lines`)
+  console.log(`      └─ #out: ${sections.out.length} lines`)
+  console.log(`      └─ #out-alt: ${sections.outAlt.length} lines`)
+  
+  console.log(`   🔍 Found ${cardNames.size} unique card names`)
+  console.log(`   💾 Loaded ${cardDataMap.size}/${cardNames.size} cards from database`)
+  
+  const missingCards = Array.from(cardNames).filter(name => !cardDataMap.has(name))
+  if (missingCards.length > 0) {
+    console.log(`   ⚠️  Missing from database (${missingCards.length}):`)
+    missingCards.forEach(name => console.log(`      └─ ${name}`))
+  }
+}
+
+function logSideboardGuideTransformation(
+  props: Record<string, string>,
+  cardsIn: ParsedCard[],
+  cardsOut: ParsedCard[],
+  cardsOutAlt: ParsedCard[]
+): void {
+  console.log(`   📋 Frontmatter props:`, props)
+  console.log(`\n   🎯 Final Parsed Object:`)
+  
+  console.log(`      📥 Cards IN (${cardsIn.length} cards):`)
+  cardsIn.forEach(card => {
+    console.log(`         ${card.quantity}x ${card.name}`)
+    console.log(`            └─ Mana Cost: ${card.manaCost || '(none)'}`)
+    console.log(`            └─ Image: ${card.imageUrl ? '✅' : '❌'}`)
+  })
+  
+  console.log(`\n      📤 Cards OUT (${cardsOut.length} cards):`)
+  cardsOut.forEach(card => {
+    console.log(`         ${card.quantity}x ${card.name}`)
+    console.log(`            └─ Mana Cost: ${card.manaCost || '(none)'}`)
+    console.log(`            └─ Image: ${card.imageUrl ? '✅' : '❌'}`)
+  })
+  
+  if (cardsOutAlt.length > 0) {
+    console.log(`\n      🔄 Cards OUT (Alternative) (${cardsOutAlt.length} cards):`)
+    cardsOutAlt.forEach(card => {
+      console.log(`         ${card.quantity}x ${card.name}`)
+      console.log(`            └─ Mana Cost: ${card.manaCost || '(none)'}`)
+      console.log(`            └─ Image: ${card.imageUrl ? '✅' : '❌'}`)
+    })
+  }
 }
