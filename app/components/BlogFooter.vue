@@ -87,28 +87,41 @@ const socialLinks = [
             color="neutral"
             variant="link"
             class="underline"
-          >Codice di Condotta
+          >
+            Codice di Condotta
           </NuxtLink>
           <NuxtLink
             to="/docs/statuto"
             color="neutral"
             variant="link"
             class="underline"
-          >Statuto dell'Associazione
+          >
+            Statuto dell'Associazione
           </NuxtLink>
           <NuxtLink
             to="https://pauperwave.org"
             color="neutral"
             variant="link"
             class="underline"
-          >Chi siamo</NuxtLink>
+          >
+            Chi siamo
+          </NuxtLink>
           <NuxtLink
             to="https://tinyurl.com/adesione-pauperwave"
             color="neutral"
             variant="link"
             class="underline"
           >
-            Associati ora</NuxtLink>
+            Associati ora
+          </NuxtLink>
+          <NuxtLink
+            to="/docs/componenti"
+            color="neutral"
+            variant="link"
+            class="underline"
+          >
+            Componenti di scrittura
+          </NuxtLink>
         </div>
       </div>
     </template>
