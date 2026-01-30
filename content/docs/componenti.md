@@ -9,7 +9,11 @@ sitemap:
 
 # Componenti predefiniti
 
-[Prose Components](/docs/components/prose)
+```
+Link: [Prose Components](/articles/2026-01-17-lorwyn-eclipsed)
+```
+
+Link: [Prose Components](/articles/2026-01-17-lorwyn-eclipsed)
 
 > Block quote
 
