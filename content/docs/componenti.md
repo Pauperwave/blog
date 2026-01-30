@@ -427,6 +427,7 @@ TODO aggiungere spazio dopo e/o prima della card
 
 ---
 
+```md
 ::magic-decklist
 ---
 name: Elves
@@ -462,14 +463,15 @@ Sideboard
 1 Island
 1 Tangled Islet
 ::
+```
 
 ## `magic-sideboard-guide`
 
 ::warning
-Non disponible in `decklists`
+Non disponible in `decklists` e in `spoilers`.
 ::
 
-```text
+```md
 ::magic-sideboard-guide
 ---
 description: Descrizione breve delle scelte di side
@@ -477,28 +479,10 @@ matchup: Mono Red Rally
 ---
 #in
 3 Cast into the Fire
-
 #out
 3 Thermo-Alchemist
-
 #out-alt
 1 Thermo-Alchemist
 2 Great Furnace
 ::
 ```
-
-::magic-sideboard-guide
----
-description: Descrizione breve delle scelte di side
-matchup: Mono Red Rally
----
-#in
-3 Cast into the Fire
-
-#out
-3 Thermo-Alchemist
-
-#out-alt
-1 Thermo-Alchemist
-2 Great Furnace
-::
