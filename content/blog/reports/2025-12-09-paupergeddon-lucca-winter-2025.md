@@ -104,7 +104,7 @@ crop:
 I start the tournament with a mulligan to five and decide to keep a hand with a couple of [[The Modern Age]], so I can quickly dig through the deck for generic answers or a [[Squadron Hawk]] that will allow me to recover my mulligan.
 Unfortunately, I discover I'm up against Mono Red: I don't find any of the lifelink pieces and end up losing, despite an attempted air race.
 
-::MagicSideboard
+::magic-sideboard-guide
 ---
 matchup: Mono R Madness
 description: 
@@ -151,7 +151,7 @@ My opponent mulligans to six and keeps a hand with just one land and Abundant Gr
 On turn 2, he plays a creature but misses the land drop, which doesn't arrive until the next turn; by that point, however, I've already developed my game plan enough to control the game.
 I manage to lock with some Strands and have a very fast race in the air thanks to two Vector Gliders, finding Basilisk and thus closing the game.
 
-::MagicSideboard
+::magic-sideboard-guide
 ---
 matchup: Bogles
 description: 
@@ -186,7 +186,7 @@ My opponent is a Turin League mate and his hand is likely very reactive but lack
 On my third turn, I deploy the strongest play this deck can make against a control deck: Heap Gate.
 From there, I begin to generate a significant resource advantage, until the decisive turn, when I resolve five spells, including a Guardian of the Guildpact, closing the game.
 
-::MagicSideboard
+::magic-sideboard-guide
 ---
 matchup: UB Terror Sneaky
 description:
@@ -228,7 +228,7 @@ I open a hand with three lands, two Thraben Charms, and a few support cards; aft
 My opponent starts grinding his deck rapidly, and I use my Charms to buy time until I can get a Cat onto the board, which starts hitting for 6 a turn.
 I then set up the race in the air, protected by the Strands, which allow me to win the damage exchange.
 
-::MagicSideboard
+::magic-sideboard-guide
 ---
 matchup: Mono U Terror
 description:
@@ -267,7 +267,7 @@ The mirror is always a unique matchup, but a lot of fun to play.
 I manage to get off to a strong start with two Modern Ages on curve, allowing me to dig deep and quickly find several Basilisks.
 Meanwhile, my opponent is forced to slow down to look for land drops that continue to elude me, allowing him to take a decisive lead.
 
-::MagicSideboard
+::magic-sideboard-guide
 ---
 matchup: Caw Gate (mirror)
 description:
@@ -307,7 +307,7 @@ A matchup that, in effect, almost decides itself, given that the first game isn'
 My opponent offers Initiative on the third turn, while I had resolved a Squadron Hawk on turn two, probably hoping to close the game with damage before I could establish a "lock" with the Strands.
 That doesn't happen, however: I regain the Initiative on my turn and stick with it, managing to close the game with a Guardian boosted by three Basilisks, which deals 27 damage in a single attack.
 
-::MagicSideboard
+::magic-sideboard-guide
 ---
 matchup: Elves
 description:
@@ -331,7 +331,7 @@ I win on the third additional turn thanks to the Guardian's 20 damage.
 - Match: `2-0`
 - Score: `6-0`
 
-::MagicSideboard
+::magic-sideboard-guide
 ---
 matchup: Elves
 description:
@@ -371,7 +371,7 @@ I immediately realize it's Mono R Rally.
 I have a hand with three lands, two Sacred Cats, a Prismatic Strands, and another card.
 The game flows without any particular difficulty, and I win quite easily.
 
-::MagicSideboard
+::magic-sideboard-guide
 ---
 matchup: Mono R Rally
 description:
@@ -416,7 +416,7 @@ I'm on the play, which is a very positive thing for the matchup.
 My opponent mulligans to five, and already on turn three I start powering up the Sacred Cat and attacking.
 The race is completely on my side, and he never manages to recover the Cat, which quickly takes me ahead.
 
-::MagicSideboard
+::magic-sideboard-guide
 ---
 matchup: Mono U Fate
 description:
@@ -460,7 +460,7 @@ crop:
 A practically unwinnable game: I have too many useless cards and insufficient racing ability.
 I try to play for the first 6-7 turns, then concede to avoid wasting time.
 
-::MagicSideboard
+::magic-sideboard-guide
 ---
 matchup: UW Familiar
 description:
@@ -596,7 +596,7 @@ I have a somewhat weak hand, with too many tapped lands.
 I try to interact with his mana by using a TC on Utopia Sprawl to take away his red, but he untaps and plays Initiative while I'm without a board.
 I concede.
 
-::MagicSideboard
+::magic-sideboard-guide
 ---
 matchup: UW Familiar
 description:
