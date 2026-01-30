@@ -1,6 +1,10 @@
 ---
 title: Componenti disponibili in scrittura
 description: Descrizione dettagliata dei componenti disponibili durante la scrittura di un articolo
+sitemap:
+  loc: /componenti
+  images:
+    - loc: https://avatars.githubusercontent.com/u/225214755?s=200&v=4
 ---
 
 # Componenti predefiniti
@@ -9,7 +13,7 @@ description: Descrizione dettagliata dei componenti disponibili durante la scrit
 
 > Block quote
 
-```js [file.js]{2} meta-info=val
+```js [file.js] {2} meta-info=val
 export default () => {
   console.log('Code block')
 }
@@ -18,8 +22,11 @@ export default () => {
 `code`
 
 # H1 Heading
+
 ## H2 Heading
+
 ### H3 Heading
+
 #### H4 Heading
 
 Divider under.
@@ -28,15 +35,15 @@ Divider under.
 
 Divider above.
 
-![A Cool Image](https://avatars.githubusercontent.com/u/225214755?s=200&v=4)
+![A Cool Image](https://avatars.githubusercontent.com/u/225214755?s=200\&v=4)
 
 Se necessiti di specificare la larghezza di un'immagine, usa html
 
-```
+```text
 <img src="https://avatars.githubusercontent.com/u/225214755?s=200&v=4" alt="drawing" style="width:200px;"/>
 ```
 
-<img src="https://avatars.githubusercontent.com/u/225214755?s=200&v=4" alt="drawing" style="width:200px;"/>
+![drawing](https://avatars.githubusercontent.com/u/225214755?s=200\&v=4){style="width:200px;"}
 
 - Una
 - lista
@@ -49,21 +56,21 @@ Se necessiti di specificare la larghezza di un'immagine, usa html
 
 **Just a strong paragraph.**
 
-_Just an italic paragraph._
+*Just an italic paragraph.*
 
-::tip{}
+::tip
 Messaggio di nota.
 ::
 
-::caution{}
+::caution
 Coffee and tea dehydrate you – WRONG! While caffeine has mild diuretic effects, you're still getting net hydration. Your morning coffee counts, coffee addicts rejoice! ☕
 ::
 
-::note{}
+::note
 You are hereby granted permission to eat foods you enjoy without guilt. The stress from guilt might be worse for you than the occasional cookie. Mind = blown! 🍪
 ::
 
-::warning{}
+::warning
 Messaggio di allerta.
 ::
 
@@ -77,7 +84,22 @@ The people who seem most disciplined aren't superhuman – they've just made the
 | 2   | Wonderful | Data        |
 | 3   | Wonderful | Website     |
 
-::u-table{:data='[{"Time Period":"Week 1-2", "What Happens":"Feels hard, requires lots of willpower", "Example":"Every workout is a battle"}, {"Time Period":"Week 3-4", "What Happens":"Starts to feel slightly easier", "Example":"You remember to pack gym clothes"}, {"Time Period":"Week 5-8", "What Happens":"Becomes part of routine", "Example":"You feel weird on rest days"}, {"Time Period":"Month 3+", "What Happens":"Automatic behavior", "Example":"Working out feels as natural as brushing teeth"}]'}
+::u-table
+---
+data:
+  - Time Period: Week 1-2
+    What Happens: Feels hard, requires lots of willpower
+    Example: Every workout is a battle
+  - Time Period: Week 3-4
+    What Happens: Starts to feel slightly easier
+    Example: You remember to pack gym clothes
+  - Time Period: Week 5-8
+    What Happens: Becomes part of routine
+    Example: You feel weird on rest days
+  - Time Period: Month 3+
+    What Happens: Automatic behavior
+    Example: Working out feels as natural as brushing teeth
+---
 ::
 
 # Componenti personalizzati
@@ -87,65 +109,105 @@ The people who seem most disciplined aren't superhuman – they've just made the
 ```
 
 :magic-card-mana-symbol{symbol="w"}
+
 :magic-card-mana-symbol{symbol="u"}
+
 :magic-card-mana-symbol{symbol="b"}
+
 :magic-card-mana-symbol{symbol="r"}
+
 :magic-card-mana-symbol{symbol="g"}
+
 :magic-card-mana-symbol{symbol="c"}
 
 ---
 
 :magic-card-mana-symbol{symbol="w"}
+
 :magic-card-mana-symbol{symbol="u"}
+
 :magic-card-mana-symbol{symbol="b"}
+
 :magic-card-mana-symbol{symbol="r"}
+
 :magic-card-mana-symbol{symbol="g"}
+
 :magic-card-mana-symbol{symbol="c"}
 
 ---
 
 :magic-card-mana-symbol{symbol="X"}
+
 :magic-card-mana-symbol{symbol="0"}
+
 :magic-card-mana-symbol{symbol="1"}
+
 :magic-card-mana-symbol{symbol="2"}
+
 :magic-card-mana-symbol{symbol="3"}
+
 :magic-card-mana-symbol{symbol="4"}
+
 :magic-card-mana-symbol{symbol="5"}
+
 :magic-card-mana-symbol{symbol="6"}
+
 :magic-card-mana-symbol{symbol="7"}
+
 :magic-card-mana-symbol{symbol="8"}
+
 :magic-card-mana-symbol{symbol="9"}
+
 :magic-card-mana-symbol{symbol="10"}
 
 ---
 
 :magic-card-mana-symbol{symbol="W/U"}
+
 :magic-card-mana-symbol{symbol="W/B"}
+
 :magic-card-mana-symbol{symbol="U/B"}
+
 :magic-card-mana-symbol{symbol="U/R"}
+
 :magic-card-mana-symbol{symbol="B/R"}
+
 :magic-card-mana-symbol{symbol="B/G"}
+
 :magic-card-mana-symbol{symbol="R/G"}
+
 :magic-card-mana-symbol{symbol="R/W"}
+
 :magic-card-mana-symbol{symbol="G/W"}
+
 :magic-card-mana-symbol{symbol="G/U"}
 
 ---
 
 :magic-card-mana-symbol{symbol="creature"}
+
 :magic-card-mana-symbol{symbol="instant"}
+
 :magic-card-mana-symbol{symbol="sorcery"}
+
 :magic-card-mana-symbol{symbol="artifact"}
+
 :magic-card-mana-symbol{symbol="land"}
+
 :magic-card-mana-symbol{symbol="enchantment"}
 
 ---
 
 :magic-card-mana-symbol{symbol="P"}
+
 :magic-card-mana-symbol{symbol="W/P"}
+
 :magic-card-mana-symbol{symbol="U/P"}
+
 :magic-card-mana-symbol{symbol="B/P"}
+
 :magic-card-mana-symbol{symbol="R/P"}
+
 :magic-card-mana-symbol{symbol="G/P"}
 
 Per una lista completa consultare [Mana & Card Icons](https://mana.andrewgioia.com/icons.html)
@@ -237,7 +299,7 @@ In questo caso è possibile specificare in modo più immediato:
 :magic-card-art-crop{card="Repel Calamity"}
 ```
 
-::warning{}
+::warning
 Nota bene che in questo caso si usano solo un due punti, non due.
 ::
 
@@ -274,8 +336,8 @@ card: Repel Calamity
 ---
 card: Repel Calamity
 crop:
-height: small
-position: center
+  height: small
+  position: center
 ---
 ::
 ```
@@ -296,8 +358,8 @@ card: Repel Calamity
 ---
 card: Repel Calamity
 crop:
-height: small
-position: bottom
+  height: small
+  position: bottom
 ---
 ::
 ```
@@ -313,15 +375,101 @@ card: Repel Calamity
 
 ## `magic-decklist`
 
-:magic-decklist{name="Jund" player="Demetrio Morselli" section-counts="{"Creatures":12,"Instants":13,"Sorceries":4,"Artifacts":11,"Lands":20,"Sideboard":15}"}
+::magic-decklist
+---
+name: Elves
+player: Lahiri Cristofori
+placement: Winner
+---
+Creatures
+4 Arbor Elf
+4 Elvish Mystic
+4 Nyxborn Hydra
+4 Quirion Ranger
+4 Masked Vandal
+4 Priest of Titania
+4 Timberwatch Elf
+4 Avenging Hunter
+3 Sagu Wildling
+4 Generous Ent
+
+Sorceries
+4 Land Grant
+4 Winding Way
+4 Lead the Stampede
+
+Lands
+8 Forest
+1 Gingerbread Cabin
+
+Sideboard
+4 Spinewoods Paladin
+3 Faerie Macabre
+3 Hydroblast
+3 Monstrous Emergence
+1 Island
+1 Tangled Islet
+::
+
+TODO aggiungere spazio dopo e/o prima della card
+
+---
+
+:magic-card-tooltip{name="Delver of Secrets"}
+
+---
+
+:magic-card-tooltip{name="Wildling"}
+
+---
+
+:magic-card-tooltip{name="The Modern Age"}
+
+---
+
+::magic-decklist
+---
+name: Elves
+player: Lahiri Cristofori
+placement: Winner
+---
+Creatures
+4 Delver of Secrets
+4 Elvish Mystic
+4 Sagu Wildling
+4 The Modern Age
+4 Masked Vandal
+4 Priest of Titania
+4 Timberwatch Elf
+4 Avenging Hunter
+3 Sagu Wildling
+4 Generous Ent
+
+Sorceries
+4 Land Grant
+4 Winding Way
+4 Lead the Stampede
+
+Lands
+8 Forest
+1 Gingerbread Cabin
+
+Sideboard
+4 Spinewoods Paladin
+3 Faerie Macabre
+3 Hydroblast
+3 Monstrous Emergence
+1 Island
+1 Tangled Islet
+::
 
 ## `magic-sideboard-guide`
 
-::warning{}
+::warning
 Non disponible in `decklists`
 ::
 
-```
+```text
 ::magic-sideboard-guide
 ---
 description: Descrizione breve delle scelte di side
@@ -329,8 +477,10 @@ matchup: Mono Red Rally
 ---
 #in
 3 Cast into the Fire
+
 #out
 3 Thermo-Alchemist
+
 #out-alt
 1 Thermo-Alchemist
 2 Great Furnace
@@ -344,8 +494,10 @@ matchup: Mono Red Rally
 ---
 #in
 3 Cast into the Fire
+
 #out
 3 Thermo-Alchemist
+
 #out-alt
 1 Thermo-Alchemist
 2 Great Furnace
