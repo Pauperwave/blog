@@ -4,6 +4,7 @@ import { join } from 'path'
 import { defineNuxtModule } from '@nuxt/kit'
 import { createRegExp, digit, whitespace, oneOrMore, char } from 'magic-regexp'
 import { getCardsByNames } from '../server/utils/card-database'
+import type { ParsedCard } from '../shared/types/index.ts'
 
 export default defineNuxtModule({
   meta: {
@@ -23,10 +24,12 @@ export default defineNuxtModule({
         'tutorials',
       ]
 
+      // if (file.extension === '.md') {
       if (file.extension === '.md' && allowedFolders.some(folder => file.path?.includes(folder))) {
         const content = file.body
 
-        if (content.includes('::SideboardGuide') || content.includes('::sideboard-guide')) {
+        if (content.includes('::MagicSideboardGuide') || content.includes('::magic-sideboard-guide')) {
+          console.log(`\n📝 [Sideboard Guide Transformer] Processing file: ${file.path}`)
           file.body = await transformSideboardGuideBlocks(content)
         }
       }
@@ -58,6 +61,8 @@ async function transformSideboardGuideBlocks(content: string): Promise<string> {
     })
   }
 
+  console.log(`   └─ Found ${matches.length} sideboard guide block(s)`)
+
   // Process matches in reverse order to maintain correct indices
   for (let i = matches.length - 1; i >= 0; i--) {
     const item = matches[i]
@@ -65,8 +70,37 @@ async function transformSideboardGuideBlocks(content: string): Promise<string> {
     
     const { match, componentName, frontmatter, guideContent, index } = item
     
+    console.log(`\n   🔄 Processing sideboard guide ${matches.length - i}/${matches.length}`)
+    
     const props = parseFrontmatter(frontmatter)
+    console.log(`   📋 Frontmatter props:`, props)
+    
     const { cardsIn, cardsOut, cardsOutAlt } = await parseSideboardGuide(guideContent)
+
+    // 👇 LOG DETTAGLIATO DELL'OGGETTO FINALE
+    console.log(`\n   🎯 Final Parsed Object:`)
+    console.log(`      📥 Cards IN (${cardsIn.length} cards):`)
+    cardsIn.forEach(card => {
+      console.log(`         ${card.quantity}x ${card.name}`)
+      console.log(`            └─ Mana Cost: ${card.manaCost || '(none)'}`)
+      console.log(`            └─ Image: ${card.imageUrl ? '✅' : '❌'}`)
+    })
+    
+    console.log(`\n      📤 Cards OUT (${cardsOut.length} cards):`)
+    cardsOut.forEach(card => {
+      console.log(`         ${card.quantity}x ${card.name}`)
+      console.log(`            └─ Mana Cost: ${card.manaCost || '(none)'}`)
+      console.log(`            └─ Image: ${card.imageUrl ? '✅' : '❌'}`)
+    })
+    
+    if (cardsOutAlt.length > 0) {
+      console.log(`\n      🔄 Cards OUT (Alternative) (${cardsOutAlt.length} cards):`)
+      cardsOutAlt.forEach(card => {
+        console.log(`         ${card.quantity}x ${card.name}`)
+        console.log(`            └─ Mana Cost: ${card.manaCost || '(none)'}`)
+        console.log(`            └─ Image: ${card.imageUrl ? '✅' : '❌'}`)
+      })
+    }
 
     const cardsInJson = JSON.stringify(cardsIn).replace(/"/g, '&quot;')
     const cardsOutJson = JSON.stringify(cardsOut).replace(/"/g, '&quot;')
@@ -85,6 +119,7 @@ async function transformSideboardGuideBlocks(content: string): Promise<string> {
     const result = `::${componentName}{${propStrings.join(' ')}}\n::`
     
     content = content.substring(0, index) + result + content.substring(index + match.length)
+    console.log(`   ✅ Sideboard guide transformed successfully\n`)
   }
 
   return content
@@ -149,6 +184,11 @@ async function parseSideboardGuide(rawText: string): Promise<{
     }
   }
 
+  console.log(`   📦 Sections found:`)
+  console.log(`      └─ #in: ${sections.in.length} lines`)
+  console.log(`      └─ #out: ${sections.out.length} lines`)
+  console.log(`      └─ #out-alt: ${sections.outAlt.length} lines`)
+
   // Collect all unique card names
   const cardNames: Set<string> = new Set()
   for (const section of Object.values(sections)) {
@@ -160,6 +200,8 @@ async function parseSideboardGuide(rawText: string): Promise<{
     }
   }
 
+  console.log(`   🔍 Found ${cardNames.size} unique card names`)
+
   // Check if database exists
   const dbPath = join(process.cwd(), 'server', 'database', 'cards.db')
   const dbExists = existsSync(dbPath)
@@ -167,23 +209,33 @@ async function parseSideboardGuide(rawText: string): Promise<{
   let cardDataMap: Map<string, any> = new Map()
   
   if (dbExists) {
+    console.log(`   💾 Loading card data from database...`)
     // Batch lookup all cards from database
     cardDataMap = await getCardsByNames(Array.from(cardNames))
+    console.log(`   ✅ Loaded ${cardDataMap.size}/${cardNames.size} cards from database`)
+    
+    // Log missing cards
+    const missingCards = Array.from(cardNames).filter(name => !cardDataMap.has(name))
+    if (missingCards.length > 0) {
+      console.log(`   ⚠️  Missing from database (${missingCards.length}):`)
+      missingCards.forEach(name => console.log(`      └─ ${name}`))
+    }
   } else {
-    console.warn('⚠️ Database not found, skipping card data lookup')
+    console.warn('   ⚠️  Database not found, skipping card data lookup')
   }
 
   // Parse each section
-  const cardsIn = await parseCardSection(sections.in, cardDataMap)
-  const cardsOut = await parseCardSection(sections.out, cardDataMap)
-  const cardsOutAlt = await parseCardSection(sections.outAlt, cardDataMap)
+  const cardsIn = await parseCardSection(sections.in, cardDataMap, 'in')
+  const cardsOut = await parseCardSection(sections.out, cardDataMap, 'out')
+  const cardsOutAlt = await parseCardSection(sections.outAlt, cardDataMap, 'out-alt')
 
   return { cardsIn, cardsOut, cardsOutAlt }
 }
 
 async function parseCardSection(
   lines: string[], 
-  cardDataMap: Map<string, any>
+  cardDataMap: Map<string, any>,
+  section: string
 ): Promise<ParsedCard[]> {
   const cards: ParsedCard[] = []
 
@@ -194,8 +246,9 @@ async function parseCardSection(
       const cardData = cardDataMap.get(cardName)
       
       cards.push({
-        quantity: match[1],
+        quantity: parseInt(match[1], 10),
         name: cardName,
+        section: section || '',
         manaCost: cardData?.manaCost || '',
         imageUrl: cardData?.imageUrl || ''
       })
