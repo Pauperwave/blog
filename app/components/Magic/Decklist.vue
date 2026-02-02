@@ -225,7 +225,7 @@ async function copyDecklist() {
 
 .card-mana-cost {
   min-width: 60px;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 @media (max-width: 768px) {
