@@ -20,7 +20,6 @@ placement: Winner
 Creatures
 4 Arbor Elf
 4 Elvish Mystic
-4 Nyxborn Hydra
 4 Quirion Ranger
 4 Masked Vandal
 4 Priest of Titania
@@ -28,6 +27,7 @@ Creatures
 4 Avenging Hunter
 3 Sagu Wildling
 4 Generous Ent
+4 Nyxborn Hydra
 
 Sorceries
 4 Land Grant
@@ -35,8 +35,8 @@ Sorceries
 4 Lead the Stampede
 
 Lands
-8 Forest
 1 Gingerbread Cabin
+8 Forest
 
 Sideboard
 4 Spinewoods Paladin
@@ -103,7 +103,6 @@ placement: Top 4
 ---
 Creatures
 4 Arbor Elf
-1 Nyxborn Hydra
 3 Eldrazi Repurposer
 4 Writhing Chrysalis
 3 Avenging Hunter
@@ -111,6 +110,7 @@ Creatures
 1 Generous Ent
 1 Oliphaunt
 2 Annoyed Altisaur
+1 Nyxborn Hydra
 
 Sorceries
 2 Malevolent Rumble
@@ -184,7 +184,6 @@ Creatures
 3 Fyndhorn Elves
 4 Jaspera Sentinel
 3 Llanowar Elves
-4 Nyxborn Hydra
 4 Quirion Ranger
 2 Elvish Vanguard
 3 Masked Vandal
@@ -192,6 +191,7 @@ Creatures
 4 Wellwisher
 4 Timberwatch Elf
 2 Generous Ent
+4 Nyxborn Hydra
 
 Sorceries
 4 Winding Way

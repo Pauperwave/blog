@@ -221,8 +221,8 @@ Sorceries
 Lands
 1 Wooded Ridgeline
 2 Bountiful Landscape
-8 Forest
 1 Gingerbread Cabin
+8 Forest
 1 Mountain
 
 Sideboard

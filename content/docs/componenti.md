@@ -388,7 +388,6 @@ placement: Winner
 Creatures
 4 Arbor Elf
 4 Elvish Mystic
-4 Nyxborn Hydra
 4 Quirion Ranger
 4 Masked Vandal
 4 Priest of Titania
@@ -396,6 +395,7 @@ Creatures
 4 Avenging Hunter
 3 Sagu Wildling
 4 Generous Ent
+4 Nyxborn Hydra
 
 Sorceries
 4 Land Grant
@@ -403,8 +403,8 @@ Sorceries
 4 Lead the Stampede
 
 Lands
-8 Forest
 1 Gingerbread Cabin
+8 Forest
 
 Sideboard
 4 Spinewoods Paladin
@@ -456,8 +456,8 @@ Sorceries
 4 Lead the Stampede
 
 Lands
-8 Forest
 1 Gingerbread Cabin
+8 Forest
 
 Sideboard
 4 Spinewoods Paladin
