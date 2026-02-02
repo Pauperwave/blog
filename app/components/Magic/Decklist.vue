@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import MagicCardTypesIcon from './CardTypesIcon.vue'
 
 const props = defineProps<{
   name: string
@@ -112,6 +113,7 @@ async function copyDecklist() {
         <div class="main-deck">
           <div v-for="section in mainDeckSections" :key="section" class="section">
             <h2 class="section-heading">
+              <MagicCardTypesIcon :type="section" size="md" class="section-type-icon" />
               {{ section }} <span class="card-count">({{ counts[section] }})</span>
             </h2>
             <ul class="card-list">
@@ -128,6 +130,7 @@ async function copyDecklist() {
         <div class="sideboard">
           <div v-for="section in sideboardSections" :key="section" class="section">
             <h2 class="section-heading">
+              <MagicCardTypesIcon :type="section" size="md" class="section-type-icon" />
               {{ section }} <span class="card-count">({{ counts[section] }})</span>
             </h2>
             <ul class="card-list">
@@ -178,6 +181,13 @@ async function copyDecklist() {
   margin-bottom: 0.15rem;
   font-size: 1.05rem;
   font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.section-type-icon {
+  display: inline-flex;
 }
 
 .section-heading:first-child {
