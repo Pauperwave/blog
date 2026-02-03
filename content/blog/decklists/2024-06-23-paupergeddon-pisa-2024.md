@@ -18,7 +18,7 @@ published: true
 
 ::magic-decklist
 ---
-name: BR Madness
+name: Rakdos Madness
 player: Filippo Pezza
 placement: Winner
 ---
@@ -240,7 +240,7 @@ Sideboard
 
 ::magic-decklist
 ---
-name: BR Madness
+name: Rakdos Madness
 player: Andrea Imborgia
 placement: Top 8
 ---

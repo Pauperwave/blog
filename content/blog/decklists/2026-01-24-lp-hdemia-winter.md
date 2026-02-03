@@ -16,6 +16,7 @@ published: true
 name: Elves
 player: Lahiri Cristofori
 placement: Winner
+headerGradient: Simic
 ---
 Creatures
 4 Arbor Elf
@@ -54,6 +55,7 @@ Sideboard
 name: Cawgate
 player: Michele Barzanti
 placement: Finalist
+headerGradient: Jeskai
 ---
 Creatures
 4 Sacred Cat
@@ -100,6 +102,7 @@ Sideboard
 name: Ponza
 player: Matteo Gulmini
 placement: Top 4
+headerGradient: gruul
 ---
 Creatures
 4 Arbor Elf
@@ -140,6 +143,7 @@ Sideboard
 name: U Terror
 player: Luca Toselli
 placement: Top 4
+headerGradient: monoblue
 ---
 Creatures
 4 Delver of Secrets
@@ -178,6 +182,7 @@ Sideboard
 name: Elves
 player: Gader Diozzi
 placement: Top 8
+headerGradient: monogreen
 ---
 Creatures
 2 Birchlore Rangers
@@ -214,6 +219,7 @@ Sideboard
 name: Black Fog
 player: Federico Lazzari
 placement: Top 8
+headerGradient: Jund
 ---
 Creatures
 3 Crypt Rats
@@ -258,9 +264,10 @@ Sideboard
 
 ::magic-decklist
 ---
-name: UR Ctrl
+name: Izzet Control
 player: Francesco Pelacani
 placement: Top 8
+headerGradient: izzet
 ---
 Creatures
 2 Azure Fleet Admiral
@@ -302,9 +309,10 @@ Sideboard
 
 ::magic-decklist
 ---
-name: BR Madness
+name: Rakdos Madness
 player: Edoardo Borgatti
 placement: Top 8
+headerGradient: rakdos
 ---
 Creatures
 4 Voldaren Epicure
