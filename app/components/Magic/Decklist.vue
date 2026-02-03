@@ -7,11 +7,60 @@ const props = defineProps<{
   placement?: string
   parsedCards?: string
   sectionCounts?: string
+  headerGradient?: string
 }>()
 
 const toast = useToast()
 
 const SECTIONS = ['Creatures', 'Instants', 'Sorceries', 'Artifacts', 'Enchantments', 'Lands', 'Sideboard'] as const
+
+const GRADIENT_CLASSES: Record<string, string> = {
+  // Mono colors
+  monowhite: 'bg-gradient-to-r from-amber-100 via-amber-100 to-transparent',
+  monoblue: 'bg-gradient-to-r from-blue-600 via-blue-600 to-transparent',
+  monoblack: 'bg-gradient-to-r from-gray-950 via-gray-950 to-transparent',
+  monored: 'bg-gradient-to-r from-red-600 via-red-600 to-transparent',
+  monogreen: 'bg-gradient-to-r from-green-600 via-green-600 to-transparent',
+  colorless: 'bg-gradient-to-r from-gray-300 via-gray-300 to-transparent',
+
+  // Two-color combinations
+  gruul: 'bg-gradient-to-r from-red-600 to-green-600',
+  azorius: 'bg-gradient-to-r from-amber-100 to-blue-600',
+  dimir: 'bg-gradient-to-r from-blue-600 to-gray-950',
+  boros: 'bg-gradient-to-r from-red-600 to-amber-100',
+  golgari: 'bg-gradient-to-r from-gray-950 to-green-600',
+  izzet: 'bg-gradient-to-r from-blue-600 to-red-600',
+  orzhov: 'bg-gradient-to-r from-amber-100 to-gray-950',
+  rakdos: 'bg-gradient-to-r from-gray-950 to-red-600',
+  selesnya: 'bg-gradient-to-r from-green-600 to-amber-100',
+  simic: 'bg-gradient-to-r from-green-600 to-blue-600',
+
+  // Three-color combinations
+  esper: 'bg-gradient-to-r from-amber-100 via-blue-600 to-gray-950',
+  grixis: 'bg-gradient-to-r from-blue-600 via-gray-950 to-red-600',
+  jund: 'bg-gradient-to-r from-gray-950 via-red-600 to-green-600',
+  naya: 'bg-gradient-to-r from-red-600 via-green-600 to-amber-100',
+  bant: 'bg-gradient-to-r from-green-600 via-amber-100 to-blue-600',
+  mardu: 'bg-gradient-to-r from-amber-100 via-gray-950 to-red-600',
+  temur: 'bg-gradient-to-r from-blue-600 via-red-600 to-green-600',
+  sultai: 'bg-gradient-to-r from-gray-950 via-green-600 to-blue-600',
+  jeskai: 'bg-gradient-to-r from-red-600 via-amber-100 to-blue-600',
+  abzan: 'bg-gradient-to-r from-amber-100 via-gray-950 to-green-600'
+}
+
+const headerClass = computed(() => {
+  if (!props.headerGradient) return undefined
+  const key = props.headerGradient.trim().toLowerCase()
+  const result = GRADIENT_CLASSES[key]
+  
+  if (!result) {
+    console.warn('[Decklist] Unknown headerGradient key:', key)
+    return 'bg-gradient-to-r from-gray-300 via-gray-300 to-transparent'
+  }
+  
+  console.info('[Decklist] headerGradient class:', result, 'key:', key)
+  return result
+})
 
 // Parse data from transformer
 const cardsBySection = computed(() => {
@@ -85,24 +134,31 @@ async function copyDecklist() {
 
 <template>
   <UCard
-    class="decklist-wrapper mx-auto"
+    class="decklist-wrapper mx-auto mb-6"
     :ui="{
       root: 'overflow-hidden',
-      header: 'relative'
+      header: ['relative p-4', headerClass].filter(Boolean).join(' ')
     }"
   >
     <!-- Header -->
     <template #header>
-      <div class="header-bar">
-        <div class="header-top">
-          <h2 class="text-lg font-semibold header-title">{{ name }}</h2>
-          <div v-if="placement" class="placement font-semibold">
+      <div class="flex flex-col gap-1">
+        <div class="grid grid-cols-[1fr_auto] items-start gap-x-4 gap-y-2">
+          <div class="flex flex-col gap-1">
+            <h2 class="text-xl font-semibold leading-tight text-gray-900 dark:text-gray-100 m-0">
+              {{ name }}
+            </h2>
+            <p v-if="player" class="text-base leading-tight text-gray-700 dark:text-gray-300 m-0">
+              {{ player }}
+            </p>
+          </div>
+          <div
+            v-if="placement"
+            class="text-right text-base font-semibold text-gray-900 dark:text-gray-100"
+          >
             {{ placement }}
           </div>
         </div>
-        <p v-if="player" class="text-md dark:text-gray-400 header-player">
-          {{ player }}
-        </p>
       </div>
     </template>
 
@@ -226,38 +282,6 @@ async function copyDecklist() {
 .card-mana-cost {
   min-width: 60px;
   justify-content: flex-start;
-}
-
-
-.header-bar {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.35rem;
-}
-
-.header-top {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 0.75rem;
-}
-
-.header-title {
-  line-height: 1.2;
-}
-
-.placement {
-  text-align: right;
-}
-
-.header-player {
-  line-height: 1.2;
-}
-
-@media (min-width: 640px) {
-  .header-bar {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (max-width: 768px) {
