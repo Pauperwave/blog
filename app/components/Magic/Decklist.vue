@@ -93,16 +93,16 @@ async function copyDecklist() {
   >
     <!-- Header -->
     <template #header>
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-        <div>
-          <h2 class="text-lg font-semibold">{{ name }}</h2>
-          <p v-if="player" class="text-md dark:text-gray-400">
-            {{ player }}
-          </p>
+      <div class="header-bar">
+        <div class="header-top">
+          <h2 class="text-lg font-semibold header-title">{{ name }}</h2>
+          <div v-if="placement" class="placement font-semibold">
+            {{ placement }}
+          </div>
         </div>
-        <div v-if="placement" class="dark:text-gray-500">
-          {{ placement }}
-        </div>
+        <p v-if="player" class="text-md dark:text-gray-400 header-player">
+          {{ player }}
+        </p>
       </div>
     </template>
 
@@ -226,6 +226,38 @@ async function copyDecklist() {
 .card-mana-cost {
   min-width: 60px;
   justify-content: flex-start;
+}
+
+
+.header-bar {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.35rem;
+}
+
+.header-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.header-title {
+  line-height: 1.2;
+}
+
+.placement {
+  text-align: right;
+}
+
+.header-player {
+  line-height: 1.2;
+}
+
+@media (min-width: 640px) {
+  .header-bar {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 768px) {
