@@ -32,9 +32,9 @@
     "better-sqlite3": "^12.6.2",
     "dayjs": "^1.11.19",
     "eslint": "^9.0.0",
-    "html-to-image": "^1.11.13",
     "magic-regexp": "^0.10.0",
     "mana-font": "^1.18.0",
+    "modern-screenshot": "^4.6.8",
     "nuxt": "^4.2.2",
     "nuxt-studio": "1.2.0",
     "nuxt-swiper": "2.0.1"
