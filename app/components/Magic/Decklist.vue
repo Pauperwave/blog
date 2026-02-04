@@ -15,37 +15,63 @@ const toast = useToast()
 const SECTIONS = ['Creatures', 'Instants', 'Sorceries', 'Artifacts', 'Enchantments', 'Lands', 'Sideboard'] as const
 
 const GRADIENT_CLASSES: Record<string, string> = {
-  // Mono colors
-  monowhite: 'bg-gradient-to-r from-amber-100 via-amber-100 to-transparent',
-  monoblue: 'bg-gradient-to-r from-blue-600 via-blue-600 to-transparent',
-  monoblack: 'bg-gradient-to-r from-gray-950 via-gray-950 to-transparent',
-  monored: 'bg-gradient-to-r from-red-600 via-red-600 to-transparent',
-  monogreen: 'bg-gradient-to-r from-green-600 via-green-600 to-transparent',
-  colorless: 'bg-gradient-to-r from-gray-300 via-gray-300 to-transparent',
+  // Mono colors (colore pieno → trasparente)
+  monowhite:
+    'bg-[linear-gradient(to_right,theme(colors.amber.100)_0%,theme(colors.amber.100)_100%)]',
+  monoblue:
+    'bg-[linear-gradient(to_right,theme(colors.blue.600)_0%,theme(colors.blue.600)_100%)]',
+  monoblack:
+    'bg-[linear-gradient(to_right,theme(colors.gray.950)_0%,theme(colors.gray.950)_100%)]',
+  monored:
+    'bg-[linear-gradient(to_right,theme(colors.red.600)_0%,theme(colors.red.600)_100%)]',
+  monogreen:
+    'bg-[linear-gradient(to_right,theme(colors.green.600)_0%,theme(colors.green.600)_100%)]',
+  colorless:
+    'bg-[linear-gradient(to_right,theme(colors.gray.300)_0%,theme(colors.gray.300)_100%)]',
 
-  // Two-color combinations
-  gruul: 'bg-gradient-to-r from-red-600 to-green-600',
-  azorius: 'bg-gradient-to-r from-amber-100 to-blue-600',
-  dimir: 'bg-gradient-to-r from-blue-600 to-gray-950',
-  boros: 'bg-gradient-to-r from-red-600 to-amber-100',
-  golgari: 'bg-gradient-to-r from-gray-950 to-green-600',
-  izzet: 'bg-gradient-to-r from-blue-600 to-red-600',
-  orzhov: 'bg-gradient-to-r from-amber-100 to-gray-950',
-  rakdos: 'bg-gradient-to-r from-gray-950 to-red-600',
-  selesnya: 'bg-gradient-to-r from-green-600 to-amber-100',
-  simic: 'bg-gradient-to-r from-green-600 to-blue-600',
+  // Two-color combinations (50 / 50 netto)
+  gruul:
+    'bg-[linear-gradient(to_right,theme(colors.red.600)_0%,theme(colors.red.600)_50%,theme(colors.green.600)_50%,theme(colors.green.600)_100%)]',
+  azorius:
+    'bg-[linear-gradient(to_right,theme(colors.amber.100)_0%,theme(colors.amber.100)_50%,theme(colors.blue.600)_50%,theme(colors.blue.600)_100%)]',
+  dimir:
+    'bg-[linear-gradient(to_right,theme(colors.blue.600)_0%,theme(colors.blue.600)_50%,theme(colors.gray.950)_50%,theme(colors.gray.950)_100%)]',
+  boros:
+    'bg-[linear-gradient(to_right,theme(colors.red.600)_0%,theme(colors.red.600)_50%,theme(colors.amber.100)_50%,theme(colors.amber.100)_100%)]',
+  golgari:
+    'bg-[linear-gradient(to_right,theme(colors.gray.950)_0%,theme(colors.gray.950)_50%,theme(colors.green.600)_50%,theme(colors.green.600)_100%)]',
+  izzet:
+    'bg-[linear-gradient(to_right,theme(colors.blue.600)_0%,theme(colors.blue.600)_50%,theme(colors.red.600)_50%,theme(colors.red.600)_100%)]',
+  orzhov:
+    'bg-[linear-gradient(to_right,theme(colors.amber.100)_0%,theme(colors.amber.100)_50%,theme(colors.gray.950)_50%,theme(colors.gray.950)_100%)]',
+  rakdos:
+    'bg-[linear-gradient(to_right,theme(colors.gray.950)_0%,theme(colors.gray.950)_50%,theme(colors.red.600)_50%,theme(colors.red.600)_100%)]',
+  selesnya:
+    'bg-[linear-gradient(to_right,theme(colors.green.600)_0%,theme(colors.green.600)_50%,theme(colors.amber.100)_50%,theme(colors.amber.100)_100%)]',
+  simic:
+    'bg-[linear-gradient(to_right,theme(colors.green.600)_0%,theme(colors.green.600)_50%,theme(colors.blue.600)_50%,theme(colors.blue.600)_100%)]',
 
-  // Three-color combinations
-  esper: 'bg-gradient-to-r from-amber-100 via-blue-600 to-gray-950',
-  grixis: 'bg-gradient-to-r from-blue-600 via-gray-950 to-red-600',
-  jund: 'bg-gradient-to-r from-gray-950 via-red-600 to-green-600',
-  naya: 'bg-gradient-to-r from-red-600 via-green-600 to-amber-100',
-  bant: 'bg-gradient-to-r from-green-600 via-amber-100 to-blue-600',
-  mardu: 'bg-gradient-to-r from-amber-100 via-gray-950 to-red-600',
-  temur: 'bg-gradient-to-r from-blue-600 via-red-600 to-green-600',
-  sultai: 'bg-gradient-to-r from-gray-950 via-green-600 to-blue-600',
-  jeskai: 'bg-gradient-to-r from-red-600 via-amber-100 to-blue-600',
-  abzan: 'bg-gradient-to-r from-amber-100 via-gray-950 to-green-600'
+  // Three-color combinations (33 / 33 / 33 netto)
+  esper:
+    'bg-[linear-gradient(to_right,theme(colors.amber.100)_0%,theme(colors.amber.100)_33%,theme(colors.blue.600)_33%,theme(colors.blue.600)_66%,theme(colors.gray.950)_66%,theme(colors.gray.950)_100%)]',
+  grixis:
+    'bg-[linear-gradient(to_right,theme(colors.blue.600)_0%,theme(colors.blue.600)_33%,theme(colors.gray.950)_33%,theme(colors.gray.950)_66%,theme(colors.red.600)_66%,theme(colors.red.600)_100%)]',
+  jund:
+    'bg-[linear-gradient(to_right,theme(colors.gray.950)_0%,theme(colors.gray.950)_33%,theme(colors.red.600)_33%,theme(colors.red.600)_66%,theme(colors.green.600)_66%,theme(colors.green.600)_100%)]',
+  naya:
+    'bg-[linear-gradient(to_right,theme(colors.red.600)_0%,theme(colors.red.600)_33%,theme(colors.green.600)_33%,theme(colors.green.600)_66%,theme(colors.amber.100)_66%,theme(colors.amber.100)_100%)]',
+  bant:
+    'bg-[linear-gradient(to_right,theme(colors.green.600)_0%,theme(colors.green.600)_33%,theme(colors.amber.100)_33%,theme(colors.amber.100)_66%,theme(colors.blue.600)_66%,theme(colors.blue.600)_100%)]',
+  mardu:
+    'bg-[linear-gradient(to_right,theme(colors.amber.100)_0%,theme(colors.amber.100)_33%,theme(colors.gray.950)_33%,theme(colors.gray.950)_66%,theme(colors.red.600)_66%,theme(colors.red.600)_100%)]',
+  temur:
+    'bg-[linear-gradient(to_right,theme(colors.blue.600)_0%,theme(colors.blue.600)_33%,theme(colors.red.600)_33%,theme(colors.red.600)_66%,theme(colors.green.600)_66%,theme(colors.green.600)_100%)]',
+  sultai:
+    'bg-[linear-gradient(to_right,theme(colors.gray.950)_0%,theme(colors.gray.950)_33%,theme(colors.green.600)_33%,theme(colors.green.600)_66%,theme(colors.blue.600)_66%,theme(colors.blue.600)_100%)]',
+  jeskai:
+    'bg-[linear-gradient(to_right,theme(colors.red.600)_0%,theme(colors.red.600)_33%,theme(colors.amber.100)_33%,theme(colors.amber.100)_66%,theme(colors.blue.600)_66%,theme(colors.blue.600)_100%)]',
+  abzan:
+    'bg-[linear-gradient(to_right,theme(colors.amber.100)_0%,theme(colors.amber.100)_33%,theme(colors.gray.950)_33%,theme(colors.gray.950)_66%,theme(colors.green.600)_66%,theme(colors.green.600)_100%)]'
 }
 
 const headerClass = computed(() => {
