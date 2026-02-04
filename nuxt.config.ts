@@ -74,6 +74,10 @@ export default defineNuxtConfig({
         routes: ['/'],
         // Then crawl all the links on the page
         crawlLinks: true
+      },
+      routeRules: {
+        // Nuxt Studio admin - requires SSR
+        '/admin/**': { ssr: true },
       }
     },
     icon: {
