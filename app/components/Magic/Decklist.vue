@@ -12,6 +12,14 @@ const props = defineProps<{
 
 const toast = useToast()
 
+// Template ref for image generation
+const decklistCard = ref<HTMLElement>()
+
+// Share image composable
+const { downloadAsImage, copyToClipboard, isGenerating } = useShareImage({
+  watermarkLogo: '/logo/pauperwave.png'
+})
+
 const SECTIONS = ['Creatures', 'Instants', 'Sorceries', 'Artifacts', 'Enchantments', 'Lands', 'Sideboard'] as const
 
 const GRADIENT_CLASSES: Record<string, string> = {
@@ -83,8 +91,7 @@ const headerClass = computed(() => {
     console.warn('[Decklist] Unknown headerGradient key:', key)
     return 'bg-gradient-to-r from-gray-300 via-gray-300 to-transparent'
   }
-  
-  console.info('[Decklist] headerGradient class:', result, 'key:', key)
+
   return result
 })
 
@@ -156,14 +163,28 @@ async function copyDecklist() {
     })
   }
 }
+
+// Download decklist as image
+async function handleDownloadImage() {
+  if (!decklistCard.value) return
+  await downloadAsImage(decklistCard.value, props.name, props.player)
+}
+
+// Copy decklist image to clipboard
+async function handleCopyImage() {
+  if (!decklistCard.value) return
+  await copyToClipboard(decklistCard.value)
+}
 </script>
 
 <template>
   <UCard
+    ref="decklistCard"
     class="decklist-wrapper mx-auto mb-6"
     :ui="{
       root: 'overflow-hidden',
-      header: ['relative p-4', headerClass].filter(Boolean).join(' ')
+      header: ['relative p-4', headerClass].filter(Boolean).join(' '),
+      footer: 'data-html2canvas-ignore'
     }"
   >
     <!-- Header -->
@@ -229,16 +250,47 @@ async function copyDecklist() {
 
     <!-- Footer -->
     <template #footer>
-      <UButton
-        icon="i-lucide-copy"
-        size="sm"
-        variant="subtle"
-        class="cursor-pointer"
-        title="Copia decklist"
-        aria-label="Copia decklist negli appunti"
-        label="Copia per MTGO"
-        @click="copyDecklist"
-      />
+      <div class="flex gap-2 flex-wrap" data-html2canvas-ignore>
+        <!-- Copy text for MTGO -->
+        <UButton
+          icon="i-lucide-copy"
+          size="sm"
+          variant="subtle"
+          class="cursor-pointer"
+          title="Copia decklist"
+          aria-label="Copia decklist negli appunti"
+          label="Copia per MTGO"
+          @click="copyDecklist"
+        />
+        
+        <!-- Download as image -->
+        <UButton
+          icon="i-lucide-download"
+          size="sm"
+          variant="subtle"
+          class="cursor-pointer"
+          title="Scarica immagine"
+          aria-label="Scarica decklist come immagine"
+          label="Scarica Immagine"
+          :loading="isGenerating"
+          :disabled="isGenerating"
+          @click="handleDownloadImage"
+        />
+        
+        <!-- Copy image to clipboard -->
+        <UButton
+          icon="i-lucide-image"
+          size="sm"
+          variant="subtle"
+          class="cursor-pointer"
+          title="Copia immagine"
+          aria-label="Copia decklist come immagine negli appunti"
+          label="Copia Immagine"
+          :loading="isGenerating"
+          :disabled="isGenerating"
+          @click="handleCopyImage"
+        />
+      </div>
     </template>
   </UCard>
 </template>
