@@ -158,7 +158,6 @@ async function handleCopy() {
         <!-- Cancel button (left-aligned, subtle) -->
         <UButton
           label="Cancel"
-          color="gray"
           variant="subtle"
           @click="internalOpen = false"
         />
