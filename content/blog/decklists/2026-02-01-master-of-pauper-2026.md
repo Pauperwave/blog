@@ -5,13 +5,19 @@ tags: [top8]
 date: 2026-02-01
 updatedAt: 2026-02-08
 author: Pietro Bragioto
-thumbnail: 
+thumbnail: /assets/blog/arts/Bonebind-Orator.jpg
 published: true
 ---
 
-Players: 89
-Date: 1 February 2026
-Structure: 8 Rounds of Swiss + Single Elimination Top 8
+| Informazione | Dettagli |
+|---|---|
+| Giocatori | 89 |
+| Data | 1 Febbraio 2026 |
+| Struttura del torneo | 8 Rounds of Swiss + Single Elimination Top 8 |
+
+Players: 
+Date: 
+Structure: 
 
 ::magic-decklist
 ---

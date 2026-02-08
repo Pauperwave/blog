@@ -5,15 +5,17 @@ tags: [top8]
 date: 2026-02-01
 updatedAt: 2026-02-08
 author: Pietro Bragioto
-thumbnail: 
+thumbnail: /assets/blog/arts/Bonebind-Orator.jpg
 published: true
 ---
 
-Teams: 28
-Date: 1 February 2026
-Structure: 5 Rounds of Swiss
+| Informazione | Dettagli |
+|---|---|
+| Teams | 28 |
+| Data | 1 Febbraio 2026 |
+| Struttura del torneo | 5 Rounds of Swiss |
 
-##5-0: Loss - Palma - Montana
+## 5-0: Loss - Palma - Montana
 
 ::magic-decklist
 ---
@@ -142,8 +144,7 @@ Sideboard
 1 Krark-Clan Shaman
 ::
 
-
-##4-1: Ojama Delta Trio
+## 4-1: Ojama Delta Trio
 
 ::magic-decklist
 ---
@@ -272,8 +273,7 @@ Sideboard
 1 Murmuring Mystic
 ::
 
-
-##4-1: Barberi - Fava - Tarabella
+## 4-1: Barberi - Fava - Tarabella
 
 ::magic-decklist
 ---
@@ -388,8 +388,7 @@ Sideboard
 3 Cast into the Fire
 ::
 
-
-##4-1: Ierardi - Bozzolino - Geggero
+## 4-1: Ierardi - Bozzolino - Geggero
 
 ::magic-decklist
 ---
@@ -505,8 +504,7 @@ Sideboard
 1 Tangled Islet
 ::
 
-
-##4-1: Rosso - Pezza - Costanzi
+## 4-1: Rosso - Pezza - Costanzi
 
 ::magic-decklist
 ---
