@@ -149,7 +149,7 @@ Sideboard
 ---
 name: Gardens
 player: Francesco Cecchetti
-placement: 
+placement: 4-1
 headerGradient: golgari
 ---
 Creatures
@@ -194,7 +194,7 @@ Sideboard
 ---
 name: Esper Affinity
 player: Giorgio Omietti
-placement: 
+placement: 4-1
 headerGradient: esper
 ---
 Creatures
@@ -236,7 +236,7 @@ Sideboard
 ---
 name: U Terror
 player: Niccolò Pezzuolo
-placement: 
+placement: 4-1
 headerGradient: monoblue
 ---
 Creatures
@@ -279,7 +279,7 @@ Sideboard
 ---
 name: Monsters
 player: Simone Barberi
-placement: 
+placement: 4-1
 headerGradient: gruul
 ---
 Creatures
@@ -318,7 +318,7 @@ Sideboard
 ---
 name: U Terror
 player: Andrea Fava
-placement: 
+placement: 4-1
 headerGradient: monoblue
 ---
 Creatures
@@ -354,7 +354,7 @@ Sideboard
 ---
 name: Rally
 player: Stefano Tarabella
-placement: 
+placement: 4-1
 headerGradient: monored
 ---
 Creatures
@@ -395,7 +395,7 @@ Sideboard
 ---
 name: R Madness
 player: Enzo Ierardi
-placement: 
+placement: 4-1
 headerGradient: monored 
 ---
 Creatures
@@ -432,7 +432,7 @@ Sideboard
 ---
 name: U Terror
 player: Gabriele Bozzolino
-placement: 
+placement: 4-1
 headerGradient: mono blue
 ---
 Creatures
@@ -470,7 +470,7 @@ Sideboard
 ---
 name: Elves
 player: Alberto Gaggero
-placement: 
+placement: 4-1
 headerGradient: simic
 ---
 Creatures
@@ -512,7 +512,7 @@ Sideboard
 ---
 name: Cawgate
 player: Giovanni Rosso
-placement: 
+placement: 4-1
 headerGradient: azorius
 ---
 Creatures
@@ -557,7 +557,7 @@ Sideboard
 ---
 name: Pingers
 player: Filippo Pezza
-placement: 
+placement: 4-1
 headerGradient: monored
 ---
 Creatures
@@ -594,7 +594,7 @@ Sideboard
 ---
 name: Gardens
 player: Matteo Costanzi
-placement: 
+placement: 4-1
 headerGradient: golgari
 ---
 Creatures
