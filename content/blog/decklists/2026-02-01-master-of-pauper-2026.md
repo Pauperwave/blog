@@ -9,6 +9,10 @@ thumbnail:
 published: true
 ---
 
+Players: 89
+Date: 1 February 2026
+Structure: 8 Rounds of Swiss + Single Elimination Top 8
+
 ::magic-decklist
 ---
 name: Jund
