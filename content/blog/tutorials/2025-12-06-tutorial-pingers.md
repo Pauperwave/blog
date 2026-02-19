@@ -63,7 +63,6 @@ Sideboard
 4 Red Elemental Blast
 4 Suplex
 3 Cast into the Fire
-4 Writhing Chrysalis
 ::
 
 Perchè giocare Mono Red Fair o Mono Red Midrange?
