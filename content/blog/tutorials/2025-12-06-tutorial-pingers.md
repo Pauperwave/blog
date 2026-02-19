@@ -54,10 +54,6 @@ Instants
 Artifacts
 2 Experimental Synthesizer
 
-Enchantments
-1 Bitterblossom
-1 Black Market Connections
-
 Lands
 4 Great Furnace
 15 Mountain
