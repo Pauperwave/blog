@@ -432,7 +432,7 @@ Sideboard
 name: U Terror
 player: Gabriele Bozzolino
 placement: 4-1
-headerGradient: mono blue
+headerGradient: monoblue
 ---
 Creatures
 4 Delver of Secrets // Insectile Aberration
