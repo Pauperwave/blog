@@ -5,7 +5,7 @@ tags: [top8, paupergeddon]
 date: 2024-06-23
 updatedAt: 2024-06-23
 author: Pietro Bragioto
-thumbnail: /assets/blog/arts/Bonebind-Orator.jpg
+thumbnail: /assets/blog/arts/Pisa-2024.jpg
 published: true
 ---
 

@@ -5,7 +5,7 @@ tags: [top8, paupergeddon]
 date: 2025-03-23
 updatedAt: 2025-03-23
 author: Pietro Bragioto
-thumbnail: /assets/blog/arts/Bonebind-Orator.jpg
+thumbnail: /assets/blog/arts/Lecco-2025.jpg
 published: true
 ---
 

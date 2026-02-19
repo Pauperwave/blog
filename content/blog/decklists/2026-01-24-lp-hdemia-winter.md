@@ -5,7 +5,7 @@ tags: [top8]
 date: 2026-01-24
 updatedAt: 2026-01-24
 author: Pietro Bragioto
-thumbnail: /assets/blog/events/paupergeddon-eternal-edition-2025.png
+thumbnail: /assets/blog/events/H-Demia.jpg
 published: true
 ---
 
