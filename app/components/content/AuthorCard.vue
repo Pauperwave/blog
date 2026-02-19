@@ -63,7 +63,7 @@ const shouldLink = computed(() => {
   <div
     v-if="variant === 'inline'"
     :class="[
-      'relative z-10 flex items-center gap-2 border-2 border-red-500 group/author-card pointer-events-auto',
+      'relative z-10 flex items-center gap-2 group/author-card pointer-events-auto',
       'transition-all duration-300',
       props.class
     ]"
