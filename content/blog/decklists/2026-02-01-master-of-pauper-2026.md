@@ -171,7 +171,7 @@ Sorceries
 4 Ponder
 2 Deem Inferior
 1 Deep Analysis
-4 Lorien Revealed
+4 Lórien Revealed
 
 Lands
 16 Island

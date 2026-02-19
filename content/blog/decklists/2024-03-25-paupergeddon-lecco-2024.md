@@ -43,7 +43,7 @@ Instants
 Sorceries
 2 Merchant Scroll
 1 Step Through
-4 Lorien Revealed
+4 Lórien Revealed
 
 Lands
 4 Azorius Chancery
