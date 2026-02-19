@@ -15,9 +15,6 @@ const toast = useToast()
 // Template ref for image generation
 const decklistCard = ref<HTMLElement>()
 
-// Modal state for Instagram image generator
-const isImageModalOpen = ref(false)
-
 const SECTIONS = ['Creatures', 'Instants', 'Sorceries', 'Artifacts', 'Enchantments', 'Lands', 'Sideboard'] as const
 
 const GRADIENT_CLASSES: Record<string, string> = {
@@ -54,41 +51,6 @@ const GRADIENT_CLASSES: Record<string, string> = {
   abzan: 'bg-gradient-to-r from-amber-100 via-gray-950 to-green-600'
 }
 
-// Simple color map for Instagram backgrounds
-const DECK_COLORS: Record<string, string> = {
-  // Mono colors
-  monowhite: '#fef3c7',
-  monoblue: '#2563eb',
-  monoblack: '#0a0a0a',
-  monored: '#dc2626',
-  monogreen: '#16a34a',
-  colorless: '#d1d5db',
-  
-  // Two colors (just use the first one)
-  gruul: '#dc2626',        // Red
-  azorius: '#fef3c7',      // White
-  dimir: '#2563eb',        // Blue
-  boros: '#dc2626',        // Red
-  golgari: '#0a0a0a',      // Black
-  izzet: '#2563eb',        // Blue
-  orzhov: '#fef3c7',       // White
-  rakdos: '#0a0a0a',       // Black
-  selesnya: '#16a34a',     // Green
-  simic: '#16a34a',        // Green
-  
-  // Three colors (just use the first one)
-  esper: '#fef3c7',        // White
-  grixis: '#2563eb',       // Blue
-  jund: '#0a0a0a',         // Black
-  naya: '#dc2626',         // Red
-  bant: '#16a34a',         // Green
-  mardu: '#fef3c7',        // White
-  temur: '#2563eb',        // Blue
-  sultai: '#0a0a0a',       // Black
-  jeskai: '#dc2626',       // Red
-  abzan: '#fef3c7'         // White
-}
-
 const headerClass = computed(() => {
   if (!props.headerGradient) return undefined
   const key = props.headerGradient.trim().toLowerCase()
@@ -101,13 +63,6 @@ const headerClass = computed(() => {
   
   // console.info('[Decklist] headerGradient class:', result, 'key:', key)
   return result
-})
-
-// Get solid background color for Instagram images
-const solidBackgroundColor = computed(() => {
-  if (!props.headerGradient) return '#0f172a'
-  const key = props.headerGradient.trim().toLowerCase()
-  return DECK_COLORS[key] || '#0f172a'
 })
 
 // Parse data from transformer
@@ -177,21 +132,6 @@ async function copyDecklist() {
       color: 'error'
     })
   }
-}
-
-// Open Instagram share modal
-function handleShareToInstagram() {
-  if (!decklistCard.value) {
-    toast.add({
-      title: 'Error',
-      description: 'Decklist not ready for sharing',
-      icon: 'i-lucide-alert-circle',
-      color: 'error'
-    })
-    return
-  }
-  
-  isImageModalOpen.value = true
 }
 </script>
 
@@ -280,30 +220,9 @@ function handleShareToInstagram() {
           label="Copia per MTGO"
           @click="copyDecklist"
         />
-        
-        <!-- Share to Instagram -->
-        <UButton
-          icon="i-lucide-instagram"
-          size="sm"
-          variant="subtle"
-          class="cursor-pointer"
-          title="Condividi su Instagram"
-          aria-label="Condividi decklist su Instagram"
-          label="Condividi su Instagram"
-          @click="handleShareToInstagram"
-        />
       </div>
     </template>
   </UCard>
-
-  <!-- Instagram Image Preview Modal -->
-  <InstagramImagePreviewModal
-    v-model:open="isImageModalOpen"
-    :element="decklistCard"
-    :background-color="solidBackgroundColor"
-    :deck-name="name"
-    :player-name="player"
-  />
 </template>
 
 <style scoped>
