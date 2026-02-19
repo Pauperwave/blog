@@ -5,54 +5,56 @@ import appMeta from "./app/app.meta";
 export default defineNuxtConfig({
     compatibilityDate: "2025-07-15",
     devtools: { enabled: true },
-    css: [
-      "~/assets/css/main.css",
-    ],
     fonts: {
-        defaults: {
-            weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
-        },
+      defaults: {
+        weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
+      },
     },
     site: {
-        name: appMeta.name,
-        url: appMeta.url,
-        defaultLocale: "en",
+      name: appMeta.name,
+      url: appMeta.url,
+      defaultLocale: "en",
     },
     schemaOrg: {
-        identity: definePerson(appMeta.author),
+      identity: definePerson(appMeta.author),
     },
     // ogImage: {
-    //     enabled: false, // Using static thumbnails instead of dynamic OG image generation
-    // },
-    content: {
+      //     enabled: false, // Using static thumbnails instead of dynamic OG image generation
+      // },
+      content: {
         build: {
-            markdown: {
-                toc: {
-                    // h4 headings are included
-                    // depth: 3,
-                    searchDepth: 2,
-                },
+          markdown: {
+            toc: {
+              // h4 headings are included
+              // depth: 3,
+              searchDepth: 2,
             },
+          },
         },
-    },
-    modules: [
-      'nuxt-studio',
-      "@nuxt/content",
-      "@nuxt/eslint",
-      "@nuxt/image",
-      "@nuxt/ui",
-      "@nuxtjs/mdc",
-      "@nuxtjs/seo",
-      "@vueuse/nuxt",
-      "magic-regexp/nuxt",
-      "nuxt-swiper",
-      "./modules/card-tooltip-transformer",
-      "./modules/decklist-transformer",
-      "./modules/sideboard-guide-transformer"
-    ],
-    studio: {
-      // Studio admin route (default: '/_studio')
-      route: '/admin',
+      },
+      modules: [
+        'nuxt-studio',
+        "@nuxt/eslint",
+        "@nuxt/image",
+        "@nuxt/ui",
+        "@nuxt/content",
+        // Must come after @nuxt/ui
+        // https://ui.nuxt.com/docs/getting-started/integrations/content
+        "@nuxtjs/mdc",
+        "@nuxtjs/seo",
+        "@vueuse/nuxt",
+        "magic-regexp/nuxt",
+        "nuxt-swiper",
+        "./modules/card-tooltip-transformer",
+        "./modules/decklist-transformer",
+        "./modules/sideboard-guide-transformer"
+      ],
+      css: [
+        "~/assets/css/main.css",
+      ],
+      studio: {
+        // Studio admin route (default: '/_studio')
+        route: '/admin',
 
       // Git repository configuration (owner and repo are required)
       repository: {
