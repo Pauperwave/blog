@@ -5,7 +5,7 @@ tags: [top8, paupergeddon]
 date: 2023-11-20
 updatedAt: 2023-11-20
 author: Pietro Bragioto
-thumbnail: /assets/blog/arts/Roma-2023.jpg
+thumbnail: /assets/blog/arts/Roma-2023.jpeg
 published: true
 ---
 

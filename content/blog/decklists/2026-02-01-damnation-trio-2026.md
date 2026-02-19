@@ -5,7 +5,7 @@ tags: [top8]
 date: 2026-02-01
 updatedAt: 2026-02-08
 author: Pietro Bragioto
-thumbnail: /assets/blog/arts/Damnation-2026.jpg
+thumbnail: /assets/blog/arts/Damnation-2026.png
 published: true
 ---
 
