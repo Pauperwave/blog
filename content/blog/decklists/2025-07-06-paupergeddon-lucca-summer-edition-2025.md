@@ -5,7 +5,7 @@ tags: [top8, paupergeddon]
 date: 2025-07-06
 updatedAt: 2025-07-06
 author: Pietro Bragioto
-thumbnail: /assets/blog/arts/Lucca-2025.png
+thumbnail: /assets/blog/events/2025-07-04-paupergeddon-Lucca.png
 published: true
 ---
 

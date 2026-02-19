@@ -5,7 +5,7 @@ tags: [top8, paupergeddon]
 date: 2023-06-19
 updatedAt: 2023-06-19
 author: Pietro Bragioto
-thumbnail: /assets/blog/arts/Pisa-2023.jpg
+thumbnail: /assets/blog/events/2023-06-17-paupergeddon-Pisa.jpg
 published: true
 ---
 

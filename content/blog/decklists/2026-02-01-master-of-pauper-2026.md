@@ -5,7 +5,7 @@ tags: [top8]
 date: 2026-02-01
 updatedAt: 2026-02-08
 author: Pietro Bragioto
-thumbnail: /assets/blog/arts/Master-of-Pauper.jpeg
+thumbnail: /assets/blog/events/2026-02-01-master-of-pauper-vol-3-ipt-Torino.jpg
 published: true
 ---
 

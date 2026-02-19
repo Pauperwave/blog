@@ -5,7 +5,7 @@ tags: [top8, top16, top32, paupergeddon]
 date: 2025-12-02
 updatedAt: 2025-12-02
 author: Pietro Bragioto
-thumbnail: /assets/blog/events/Lucca-Eternal-2025.png
+thumbnail: /assets/blog/events/2025-11-30-paupergeddon-lucca-eternal.png
 published: true
 ---
 

@@ -5,7 +5,7 @@ tags: [top8, paupergeddon]
 date: 2024-03-25
 updatedAt: 2024-03-25
 author: Pietro Bragioto
-thumbnail: /assets/blog/arts/Lecco-2024.jpg
+thumbnail: /assets/blog/events/2024-03-24-paupergeddon-Lecco.jpg
 published: true
 ---
 
