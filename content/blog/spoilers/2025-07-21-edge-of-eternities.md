@@ -1,7 +1,8 @@
 ---
 title: "Edge Of Eternities"
 description: "Spoilered Pauper cards in Edge Of Eternities"
-tags: [set review]
+tags:
+  - set review
 date: 2025-07-21
 updatedAt: 2025-07-21
 author: Pietro Bragioto

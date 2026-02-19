@@ -1,7 +1,8 @@
 ---
 title: "Lorwyn Eclipsed"
 description: "Spoilered Pauper cards in Lorwyn Eclipsed"
-tags: [set review]
+tags:
+  - set review
 date: 2026-01-17
 updatedAt: 2026-01-17
 author: Pietro Bragioto

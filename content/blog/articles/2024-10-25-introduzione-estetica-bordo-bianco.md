@@ -1,7 +1,8 @@
 ---
 title: "Introduzione all'Estetica del Bordo Bianco"
 description: ""
-tags: [meta]
+tags:
+  - meta
 date: 2024-10-25
 updatedAt: 2024-10-25
 author: Pietro Bragioto

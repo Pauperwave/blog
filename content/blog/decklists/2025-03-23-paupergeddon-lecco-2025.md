@@ -1,7 +1,10 @@
 ---
 title: "Paupergeddon Lucca 2025"
 description: "Decklists Top 8"
-tags: [top8, paupergeddon]
+tags:
+  - top8
+  - paupergeddon
+  - Lecco
 date: 2025-03-23
 updatedAt: 2025-03-23
 author: Pietro Bragioto

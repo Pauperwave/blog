@@ -1,7 +1,8 @@
 ---
 title: "Pauper Timeline (2016-now)"
 description: ""
-tags: [meta]
+tags:
+  - meta
 date: 2024-06-12
 updatedAt: 2024-06-12
 author: Pietro Bragioto

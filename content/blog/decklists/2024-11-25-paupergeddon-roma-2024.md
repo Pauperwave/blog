@@ -1,7 +1,10 @@
 ---
 title: "Paupergeddon Roma 2024"
 description: "Decklists Top 8"
-tags: [top8, paupergeddon]
+tags:
+  - top8
+  - paupergeddon
+  - Roma
 date: 2024-11-25
 updatedAt: 2024-11-25
 author: Pietro Bragioto

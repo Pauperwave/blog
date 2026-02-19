@@ -1,7 +1,8 @@
 ---
 title: "Regole di Buon Senso per i Report"
 description: ""
-tags: [meta, report]
+tags:
+  - meta
 date: 2020-02-18
 updatedAt: 2020-02-18
 author: Pietro Bragioto

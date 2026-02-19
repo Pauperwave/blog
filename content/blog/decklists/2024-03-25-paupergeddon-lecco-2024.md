@@ -1,7 +1,10 @@
 ---
 title: "Paupergeddon Lecco 2024"
 description: "Decklists Top 8"
-tags: [top8, paupergeddon]
+tags:
+  - top8
+  - paupergeddon
+  - Lecco
 date: 2024-03-25
 updatedAt: 2024-03-25
 author: Pietro Bragioto

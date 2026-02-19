@@ -1,7 +1,8 @@
 ---
 title: "8 Pyro e 8 Hydro: libertà o declino?"
 description: "Riflessioni sull'impatto di Pyroblast e Hydroblast nel meta Pauper moderno"
-tags: [meta, analysis]
+tags:
+  - meta analysis
 date: 2026-01-15
 updatedAt: 2026-01-15
 author: Pietro Bragioto

@@ -1,7 +1,8 @@
 ---
 title: "March Of The Machine"
 description: "Spoiler article for March Of The Machine"
-tags: [set review]
+tags:
+  - set review
 date: 2023-04-09
 updatedAt: 2023-04-09
 author: Pietro Bragioto

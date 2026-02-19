@@ -1,7 +1,8 @@
 ---
 title: "I 7 Peccati Capitali di Magic"
 description: ""
-tags: [meta]
+tags:
+  - meta
 date: 2020-09-23
 updatedAt: 2020-09-23
 author: Pietro Bragioto

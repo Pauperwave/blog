@@ -1,7 +1,8 @@
 ---
 title: "Vantaggio Carte e Vantaggio Tempo in Pauper"
 description: ""
-tags: [meta]
+tags:
+  - meta
 date: 2019-05-01
 updatedAt: 2019-05-01
 author: Alessandro Moretti

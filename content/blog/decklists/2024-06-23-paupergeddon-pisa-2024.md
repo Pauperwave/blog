@@ -1,7 +1,10 @@
 ---
 title: "Paupergeddon Pisa 2024"
 description: "Decklists Top 8"
-tags: [top8, paupergeddon]
+tags:
+  - top8
+  - paupergeddon
+  - Pisa
 date: 2024-06-23
 updatedAt: 2024-06-23
 author: Pietro Bragioto

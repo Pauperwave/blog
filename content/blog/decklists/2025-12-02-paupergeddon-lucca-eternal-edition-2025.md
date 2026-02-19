@@ -1,7 +1,9 @@
 ---
 title: "Paupergeddon Lucca Eternal 2025"
 description: "Decklists Top 32"
-tags: [top8, top16, top32, paupergeddon]
+tags:
+  - top8
+  - paupergeddon
 date: 2025-12-02
 updatedAt: 2025-12-02
 author: Pietro Bragioto

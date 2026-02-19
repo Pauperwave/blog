@@ -1,7 +1,8 @@
 ---
 title: "LP H-Demia Winter 2025"
 description: "Decklists Top 8"
-tags: [top8]
+tags:
+  - top8
 date: 2026-01-24
 updatedAt: 2026-01-24
 author: Pietro Bragioto
