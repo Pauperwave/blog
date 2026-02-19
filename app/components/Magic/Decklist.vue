@@ -55,15 +55,29 @@ const headerClass = computed(() => {
   if (!props.headerGradient) return undefined
   const key = props.headerGradient.trim().toLowerCase()
   const result = GRADIENT_CLASSES[key]
-  
+
   if (!result) {
     console.warn('[Decklist] Unknown headerGradient key:', key)
     return 'bg-gradient-to-r from-gray-300 via-gray-300 to-transparent'
   }
-  
+
   // console.info('[Decklist] headerGradient class:', result, 'key:', key)
   return result
 })
+
+const LIGHT_GRADIENTS = new Set(['monowhite', 'azorius', 'orzhov', 'esper', 'mardu', 'abzan'])
+
+const normalizedGradient = computed(() => (props.headerGradient || '').trim().toLowerCase())
+
+const isLightGradient = computed(() => 
+  LIGHT_GRADIENTS.has(normalizedGradient.value)
+)
+
+const textClasses = computed(() => ({
+  heading: isLightGradient.value ? 'text-gray-900 dark:text-gray-900' : 'text-gray-900 dark:text-gray-100',
+  subheading: isLightGradient.value ? 'text-gray-700 dark:text-gray-700' : 'text-gray-700 dark:text-gray-300'
+}))
+
 
 // Parse data from transformer
 const cardsBySection = computed(() => {
@@ -150,10 +164,17 @@ async function copyDecklist() {
       <div class="flex flex-col gap-1">
         <div class="grid grid-cols-[1fr_auto] items-start gap-x-4 gap-y-2">
           <div class="flex flex-col gap-1">
-            <h2 class="text-xl font-semibold leading-tight text-gray-900 dark:text-gray-100 m-0">
+            <h2
+              class="text-xl font-semibold leading-tight m-0"
+              :class="textClasses.heading"
+            >
               {{ name }}
             </h2>
-            <p v-if="player" class="text-base leading-tight text-gray-700 dark:text-gray-300 m-0">
+            <p
+              v-if="player"
+              class="text-base leading-tight m-0"
+              :class="textClasses.subheading"
+            >
               {{ player }}
             </p>
           </div>
