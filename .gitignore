@@ -1,30 +1,13 @@
 # Nuxt dev/build outputs
-.output
 .data
 .nuxt
 .vercel
-.nitro
-.cache
-dist
-*ignored*
 
 # Node dependencies
 node_modules
 
-# Logs
-/logs/
-*.log
-
-# Misc
-.DS_Store
-.fleet
-.idea
-
 # Local env files
 .env
-.env*
-.env.*
-!.env.example
 
 # Scryfall bulk data cache
 # Added pre-built Pauper cards database
