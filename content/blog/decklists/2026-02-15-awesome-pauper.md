@@ -1,14 +1,14 @@
 ---
-title: ""
+title: "Top 8 - Awesome Pauper 2026 (IPT Milano)"
 description: "Decklists Top 8"
 tags:
   - top8
   - IPT
-  - Roma
-date: 
-updatedAt: 
+  - Milano
+date: 2026-02-23
+updatedAt: 2026-02-23
 author: Pietro Bragioto
-thumbnail: /assets/blog/events/
+thumbnail: \assets\blog\events\2026-02-15-awesome-pauper-ipt-Milano.jpg
 published: true
 ---
 

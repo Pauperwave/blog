@@ -1,14 +1,14 @@
 ---
-title: ""
+title: "Top 4 Team Trio Pauperfest 3 2026"
 description: "Decklists Top 8"
 tags:
   - top8
   - IPT
-  - Roma
-date: 
-updatedAt: 
+  - Milano
+date: 2026-02-23
+updatedAt: 2026-02-23
 author: Pietro Bragioto
-thumbnail: /assets/blog/events/
+thumbnail: \assets\blog\events\2026-02-21-22-Pauperfest-3.jpg
 published: true
 ---
 
@@ -18,11 +18,45 @@ published: true
 | Data |  |
 | Struttura del torneo |  |
 
+## 
+
 ::magic-decklist
 ---
 name: 
 player: 
 placement: Winner
+headerGradient: 
+---
+
+::
+
+::magic-decklist
+---
+name: 
+player: 
+placement: Winner
+headerGradient: 
+---
+
+::
+
+::magic-decklist
+---
+name: 
+player: 
+placement: Winner
+headerGradient: 
+---
+
+::
+
+##
+
+::magic-decklist
+---
+name: 
+player: 
+placement: Finalist
 headerGradient: 
 ---
 
@@ -42,6 +76,50 @@ headerGradient:
 ---
 name: 
 player: 
+placement: Finalist
+headerGradient: 
+---
+
+::
+
+##
+
+::magic-decklist
+---
+name: 
+player: 
+placement: Top 4
+headerGradient: 
+---
+
+::
+
+::magic-decklist
+---
+name: 
+player: 
+placement: Top 4
+headerGradient: 
+---
+
+::
+
+::magic-decklist
+---
+name: 
+player: 
+placement: Top 4
+headerGradient: 
+---
+
+::
+
+## 
+
+::magic-decklist
+---
+name: 
+player: 
 placement: Top 4
 headerGradient: 
 ---
@@ -62,37 +140,7 @@ headerGradient:
 ---
 name: 
 player: 
-placement: Top 8
-headerGradient: 
----
-
-::
-
-::magic-decklist
----
-name: 
-player: 
-placement: Top 8
-headerGradient: 
----
-
-::
-
-::magic-decklist
----
-name: 
-player: 
-placement: Top 8
-headerGradient: 
----
-
-::
-
-::magic-decklist
----
-name: 
-player: 
-placement: Top 8
+placement: Top 4
 headerGradient: 
 ---
 
