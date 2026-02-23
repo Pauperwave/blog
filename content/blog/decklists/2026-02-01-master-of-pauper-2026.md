@@ -275,7 +275,7 @@ headerGradient: golgari
 Creatures
 4 Saruli Caretaker
 3 Tinder Wall
-2 Elves of the Deep Shadow
+2 Elves of Deep Shadow
 4 Overgrown Battlement
 3 Wall of Roots
 3 Gatecreeper Vine
