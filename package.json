@@ -29,6 +29,7 @@
     "@nuxt/ui": "^4.3.0",
     "@nuxtjs/mdc": "^0.19.2",
     "@nuxtjs/seo": "^3.3.0",
+    "@vercel/analytics": "^1.6.1",
     "better-sqlite3": "^12.6.2",
     "dayjs": "^1.11.19",
     "eslint": "^9.0.0",
