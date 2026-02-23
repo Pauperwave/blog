@@ -8,7 +8,7 @@ tags:
 date: 2026-02-15
 updatedAt: 2026-02-23
 author: Pietro Bragioto
-thumbnail: \assets\blog\events\2026-02-15-pauperotti-ipt-Modena.jpg
+thumbnail: /assets/blog/events/2026-02-15-pauperotti-ipt-Modena.jpg
 published: true
 ---
 
