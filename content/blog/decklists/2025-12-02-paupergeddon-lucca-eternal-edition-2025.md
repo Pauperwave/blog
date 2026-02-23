@@ -117,7 +117,7 @@ Sorceries
 4 Lórien Revealed
 
 Enchantment
-4 The Modern Age
+4 The Modern Age // Vector Glider
 4 Journey to Nowhere
 
 Lands
@@ -279,7 +279,7 @@ Sorceries
 
 Enchantment
 4 Journey to Nowhere
-4 The Modern Age
+4 The Modern Age // Vector Glider
 
 Lands
 4 Sea Gate

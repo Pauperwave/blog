@@ -62,7 +62,7 @@ Creatures
 4 Sacred Cat
 2 Outlaw Medic
 4 Squadron Hawk
-4 The Modern Age
+4 The Modern Age // Vector Glider
 1 Guardian of the Guildpact
 
 Instants

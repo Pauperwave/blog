@@ -57,7 +57,7 @@ Sorceries
 
 Enchantment
 4 Journey to Nowhere
-4 The Modern Age
+4 The Modern Age // Vector Glider
 
 Lands
 4 Sea Gate
@@ -117,7 +117,7 @@ description:
 2 Dispel
 1 Palace Sentinels
 #out
-4 The Modern Age
+4 The Modern Age // Vector Glider
 3 Thraben Charm
 1 Guardian of the Guildpact
 ::
@@ -198,7 +198,7 @@ description:
 2 Dispel
 2 Palace Sentinels
 #out
-2 The Modern Age
+2 The Modern Age // Vector Glider
 2 Prismatic Strands
 3 Thraben Charm
 1 Outlaw Medic
@@ -239,7 +239,7 @@ description:
 4 Red Elemental Blast
 2 Dispel
 #out
-4 The Modern Age
+4 The Modern Age // Vector Glider
 1 Thraben Charm
 1 Outlaw Medic
 ::
@@ -383,7 +383,7 @@ description:
 1 Hydroblast
 2 Dispel
 #out
-3 The Modern Age
+3 The Modern Age // Vector Glider
 3 Thraben Charm
 1 Guardian of the Guildpact
 ::
