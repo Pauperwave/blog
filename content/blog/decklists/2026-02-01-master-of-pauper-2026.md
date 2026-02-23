@@ -284,7 +284,7 @@ Creatures
 4 Balustrade Spy
 4 Sagu Wildling
 4 Generous Ent
-1 Troll of Khazad-dum
+1 Troll of Khazad-dûm
 2 Lotleth Giant
 
 Sorceries
