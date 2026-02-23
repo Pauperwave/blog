@@ -51,8 +51,8 @@ defineProps<{
             <img
               class="rounded-full"
               :src="author.image"
-              :width=100
-              :height=100
+              width=auto
+              height=auto
               alt=""
             >
             <p class="font-bold text-2xl opacity-75">{{ author.name }}</p>
