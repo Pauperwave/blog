@@ -47,7 +47,7 @@ Artifacts
 4 Ichor Wellspring
 
 Lands
-4 Khalni Gardens
+4 Khalni Garden
 12 Swamp
 4 Vault of Whispers
 
