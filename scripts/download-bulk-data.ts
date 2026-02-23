@@ -157,7 +157,7 @@ async function importPauperCards(db: Database): Promise<void> {
   
   // Filter Pauper-legal cards
   const pauperCards = allCards.filter(card => 
-    card.legalities.pauper === 'legal'
+    card.legalities.pauper === 'legal' || card.legalities.pauper === 'banned'
   )
   
   console.log(`✅ Found ${pauperCards.length} Pauper-legal cards out of ${allCards.length} total`)
