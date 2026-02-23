@@ -103,7 +103,7 @@ Sideboard
 name: R Madness
 player: Simone Toso
 placement: Top 4
-headerGradient: monoored
+headerGradient: monored
 ---
 Creatures
 4 Voldaren Epicure
