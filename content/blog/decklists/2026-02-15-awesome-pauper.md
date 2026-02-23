@@ -5,7 +5,7 @@ tags:
   - top8
   - IPT
   - Milano
-date: 2026-02-23
+date: 2026-02-15
 updatedAt: 2026-02-23
 author: Pietro Bragioto
 thumbnail: \assets\blog\events\2026-02-15-awesome-pauper-ipt-Milano.jpg
