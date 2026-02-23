@@ -13,5 +13,3 @@ node_modules
 # Added pre-built Pauper cards database
 # server/database/cards.db
 server/database/oracle-cards.json
-
-
