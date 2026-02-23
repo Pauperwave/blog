@@ -263,7 +263,7 @@ Sideboard
 name: R Madness
 player: Michele Barzanti
 placement: Top 4
-headerGradient: moonored
+headerGradient: monored
 ---
 Creatures
 4 Voldaren Epicure
