@@ -6,15 +6,10 @@ import {
   CATEGORY_LABELS,
   type CategoryType
 } from '~/constants/content-config';
+import { getRecentArticleBadge as getBadge } from '~/utils/article-badges';
 
 const route = useRoute();
 const slug = route.params.slug as string;
-
-const getBadge = (date: string) => {
-  return Math.abs(new Date().getTime() - new Date(date).getTime()) < 8.64e7 * 7
-    ? { label: "Nuovo", color: "primary" as const }
-    : undefined;
-};
 
 // Convert slug back to author name (e.g., "pietro-bragioto" -> "Pietro Bragioto")
 const authorName = getAuthorNameFromSlug(slug);

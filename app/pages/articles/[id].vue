@@ -8,18 +8,13 @@ import {
   combineArticles,
   getCollectionNames
 } from '~/constants/content-config';
+import { getRecentArticleBadge as getBadge } from '~/utils/article-badges';
 
 import appMeta from "~/app.meta";
 
 const route = useRoute();
 // const authorEl = ref<HTMLElement | null>();
 // const relatedArticlesEl = ref<HTMLElement | null>();
-
-const getBadge = (date: string) => {
-  return Math.abs(new Date().getTime() - new Date(date).getTime()) < 8.64e7 * 7
-    ? { label: "Nuovo", color: "primary" as const }
-    : undefined;
-};
 
 // const readingTimeText = computed(() => (data.value?.meta as any).readingTime?.text);
 const tocTitle = 'In questo articolo'

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Author } from '~/composables/useAuthor';
 import type { AnyArticle } from '~/constants/content-config';
+import { getRecentArticleBadge as getArticleBadge } from '~/utils/article-badges';
 
 interface Props {
   title: string;
@@ -15,14 +16,6 @@ withDefaults(defineProps<Props>(), {
   maxItems: 3,
   viewAllText: 'Vedi tutti'
 });
-
-const isNewArticle = (date: string) => {
-  return Math.abs(new Date().getTime() - new Date(date).getTime()) < 8.64e7 * 7;
-};
-
-const getArticleBadge = (date: string) => {
-  return isNewArticle(date) ? { label: 'Nuovo', color: 'primary' as const } : undefined;
-};
 </script>
 
 <template>

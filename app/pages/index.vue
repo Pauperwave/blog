@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Author } from '~/composables/useAuthor';
 import { getAuthorSlug } from '~/composables/useAuthorSlug';
+import { getRecentArticleBadge as getArticleBadge, isRecentArticle } from '~/utils/article-badges';
 import {
   type AnyArticle,
   type CategoryType,
@@ -38,12 +39,6 @@ if (allArticles.value) {
   }
 }
 
-const isNewArticle = (date: string) =>
-  Math.abs(new Date().getTime() - new Date(date).getTime()) < 8.64e7 * 7;
-
-const getArticleBadge = (date: string) =>
-  isNewArticle(date) ? { label: 'Nuovo', color: 'primary' as const } : undefined;
-
 const getThumbnailSrc = (thumbnail: unknown) => {
   if (typeof thumbnail === 'string') return thumbnail;
   if (
@@ -75,7 +70,7 @@ const articlesByCategory = computed(() => {
 const featuredArticle = computed(() => articles.value[0] || null);
 const heroSecondaryArticles = computed(() => articles.value.slice(1, 4));
 const latestArticles = computed(() => articles.value.slice(0, 6));
-const freshThisWeekCount = computed(() => articles.value.filter(article => isNewArticle(article.date)).length);
+const freshThisWeekCount = computed(() => articles.value.filter(article => isRecentArticle(article.date)).length);
 const activeAuthorsCount = computed(() => new Set(articles.value.map(article => article.author)).size);
 
 const categoryHighlights = computed(() =>
