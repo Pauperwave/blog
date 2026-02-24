@@ -7,6 +7,7 @@ const baseContentSchema = z.object({
   date: z.string(),
   description: z.string(),
   tags: z.optional(z.array(z.string())).default([]),
+  locations: z.optional(z.array(z.string())).default([]),
   author: z.string(), // Just the name
   thumbnail: z.string(),
   published: z.boolean().default(false)
