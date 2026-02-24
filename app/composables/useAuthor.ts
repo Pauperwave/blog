@@ -24,18 +24,18 @@ export const useAuthor = async (authorName: string): Promise<Author> => {
   // Query all authors using the same pattern as other files
   const { data: authors } = await useAsyncData('all-authors', () =>
     queryCollection('authors').all()
-  );
+  )
 
   if (!authors.value) {
-    throw new Error(`Failed to load authors collection`);
+    throw new Error(`Failed to load authors collection`)
   }
 
   const author = authors.value.find(
     (a: Author) => a.name.toLowerCase() === authorName.toLowerCase()
-  );
+  )
 
   if (!author) {
-    throw new Error(`Author "${authorName}" not found in authors collection. Available authors: ${authors.value.map((a: Author) => a.name).join(', ')}`);
+    throw new Error(`Author "${authorName}" not found in authors collection. Available authors: ${authors.value.map((a: Author) => a.name).join(', ')}`)
   }
 
   return {
@@ -46,5 +46,5 @@ export const useAuthor = async (authorName: string): Promise<Author> => {
     url: author.url,
     nickname: author.nickname,
     socials: author.socials
-  };
-};
+  }
+}

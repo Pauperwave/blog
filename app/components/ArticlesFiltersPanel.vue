@@ -39,20 +39,20 @@ interface Props {
   tagFilterOptions: TagFilterOption[]
 }
 
-const props = defineProps<Props>();
+const props = defineProps<Props>()
 
 const emit = defineEmits<{
   (e: 'set-category' | 'set-author' | 'set-location' | 'set-tag', value: string | null): void
   (e: 'clear-all'): void
-}>();
+}>()
 
-const normalizeFilterValue = (value: string) => value.trim().toLocaleLowerCase('it');
+const normalizeFilterValue = (value: string) => value.trim().toLocaleLowerCase('it')
 
 const isSelectedLocationValue = (location: string) =>
-  !!props.selectedLocation && normalizeFilterValue(location) === normalizeFilterValue(props.selectedLocation);
+  !!props.selectedLocation && normalizeFilterValue(location) === normalizeFilterValue(props.selectedLocation)
 
 const isSelectedTagValue = (tag: string) =>
-  !!props.selectedTag && normalizeFilterValue(tag) === normalizeFilterValue(props.selectedTag);
+  !!props.selectedTag && normalizeFilterValue(tag) === normalizeFilterValue(props.selectedTag)
 </script>
 
 <template>

@@ -5,23 +5,23 @@ import {
   combineArticles,
   CATEGORY_LABELS,
   type CategoryType
-} from '~/constants/content-config';
-import { getRecentArticleBadge as getBadge } from '~/utils/article-badges';
+} from '~/constants/content-config'
+import { getRecentArticleBadge as getBadge } from '~/utils/article-badges'
 
-const route = useRoute();
-const slug = route.params.slug as string;
+const route = useRoute()
+const slug = route.params.slug as string
 
 // Convert slug back to author name (e.g., "pietro-bragioto" -> "Pietro Bragioto")
-const authorName = getAuthorNameFromSlug(slug);
+const authorName = getAuthorNameFromSlug(slug)
 
 // Fetch author data
-const authorData = await useAuthor(authorName);
+const authorData = await useAuthor(authorName)
 
 if (!authorData) {
   throw createError({
     statusCode: 404,
     message: `Author "${authorName}" not found`
-  });
+  })
 }
 
 interface Socials {
@@ -49,34 +49,34 @@ const socialLinks: Array<{
 
 // Query all articles and filter by this author
 const { data: authorArticles } = await useAsyncData(`author-articles-${slug}`, async () => {
-  const collectionsData = await queryAllCollections();
+  const collectionsData = await queryAllCollections()
   const allArticles: AnyArticle[] = combineArticles(collectionsData)
     .filter(article =>
       article.published !== false &&
       article.author.toLowerCase() === authorName.toLowerCase()
-    );
+    )
 
-  return allArticles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-});
+  return allArticles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+})
 
 // Count articles by category
 const articleCounts = computed(() => {
-  if (!authorArticles.value) return {};
+  if (!authorArticles.value) return {}
 
-  const counts: Record<string, number> = {};
+  const counts: Record<string, number> = {}
   authorArticles.value.forEach(article => {
-    const category = article.category;
-    counts[category] = (counts[category] || 0) + 1;
-  });
+    const category = article.category
+    counts[category] = (counts[category] || 0) + 1
+  })
 
-  return counts;
-});
+  return counts
+})
 
 // Total articles count
-const totalArticles = computed(() => authorArticles.value?.length || 0);
+const totalArticles = computed(() => authorArticles.value?.length || 0)
 
 // Recent articles (limit to 4)
-const recentArticles = computed(() => authorArticles.value?.slice(0, 4) || []);
+const recentArticles = computed(() => authorArticles.value?.slice(0, 4) || [])
 
 // SEO meta tags
 useSeoMeta({
@@ -85,7 +85,7 @@ useSeoMeta({
   ogTitle: `${authorData.name} - Autore`,
   ogDescription: authorData.bio || authorData.description,
   ogImage: authorData.avatar,
-});
+})
 </script>
 
 <template>

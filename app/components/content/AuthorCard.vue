@@ -27,35 +27,35 @@ const props = withDefaults(defineProps<Props>(), {
   showBio: false,
   clickable: true,
   class: ''
-});
+})
 
 const isExternalLink = computed(() => {
-  return props.author.url?.startsWith('http');
-});
+  return props.author.url?.startsWith('http')
+})
 
 const linkTarget = computed(() => {
-  return isExternalLink.value ? '_blank' : undefined;
-});
+  return isExternalLink.value ? '_blank' : undefined
+})
 
 const linkRel = computed(() => {
-  return isExternalLink.value ? 'noopener noreferrer' : undefined;
-});
+  return isExternalLink.value ? 'noopener noreferrer' : undefined
+})
 
 const avatarSize = computed(() => {
   switch (props.variant) {
     case 'compact':
-      return 'sm';
+      return 'sm'
     case 'inline':
-      return 'md';
+      return 'md'
     case 'full':
     default:
-      return 'lg';
+      return 'lg'
   }
-});
+})
 
 const shouldLink = computed(() => {
-  return props.clickable && props.author.url;
-});
+  return props.clickable && props.author.url
+})
 </script>
 
 <template>

@@ -1,5 +1,5 @@
-import { defineCollection, defineContentConfig, z } from "@nuxt/content";
-import { asSitemapCollection } from "@nuxtjs/sitemap/content";
+import { defineCollection, defineContentConfig, z } from "@nuxt/content"
+import { asSitemapCollection } from "@nuxtjs/sitemap/content"
 
 // Base schema for all content types
 const baseContentSchema = z.object({
@@ -11,7 +11,7 @@ const baseContentSchema = z.object({
   author: z.string(), // Just the name
   thumbnail: z.string(),
   published: z.boolean().default(false)
-});
+})
 
 export default defineContentConfig({
   collections: {
@@ -108,4 +108,4 @@ export default defineContentConfig({
       })
     ),
   },
-});
+})

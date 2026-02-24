@@ -1,34 +1,34 @@
 <script setup lang="ts">
-import type { Author } from '~/composables/useAuthor';
+import type { Author } from '~/composables/useAuthor'
 import {
   type AnyArticle,
   queryAllCollections,
   combineArticles
-} from '~/constants/content-config';
-import { getRecentArticleBadge as getBadge } from '~/utils/article-badges';
+} from '~/constants/content-config'
+import { getRecentArticleBadge as getBadge } from '~/utils/article-badges'
 
 // Query all collections and combine them
 const { data: articles } = await useAsyncData("articles-index", async () => {
-  const collectionsData = await queryAllCollections();
+  const collectionsData = await queryAllCollections()
 
   // Combine all articles, filter out drafts, and sort by date
   const allArticles: AnyArticle[] = combineArticles(collectionsData)
-    .filter(article => article.published !== false);
+    .filter(article => article.published !== false)
 
-  return allArticles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-});
+  return allArticles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+})
 
 // Fetch author data for all unique authors
-const authorsMap = ref<Record<string, Author>>({});
+const authorsMap = ref<Record<string, Author>>({})
 
 if (articles.value) {
-  const uniqueAuthors = [...new Set(articles.value.map(article => article.author))];
+  const uniqueAuthors = [...new Set(articles.value.map(article => article.author))]
   for (const authorName of uniqueAuthors) {
     try {
-      const authorInfo = await useAuthor(authorName);
-      authorsMap.value[authorName] = authorInfo;
+      const authorInfo = await useAuthor(authorName)
+      authorsMap.value[authorName] = authorInfo
     } catch (e) {
-      console.error(`Failed to load author data for ${authorName}:`, e);
+      console.error(`Failed to load author data for ${authorName}:`, e)
     }
   }
 }
@@ -54,7 +54,7 @@ const {
   setLocationFilter,
   setTagFilter,
   clearAllFilters
-} = useArticlesFilters({ articles, authorsMap });
+} = useArticlesFilters({ articles, authorsMap })
 </script>
 
 <template>

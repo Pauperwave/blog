@@ -1,23 +1,23 @@
 <script setup lang="ts">
-import type { ButtonProps } from "@nuxt/ui";
+import type { ButtonProps } from "@nuxt/ui"
 
 const props = defineProps<{
   size?: ButtonProps["size"]
-}>();
+}>()
 
 const size = computed(() => {
-  if (!props.size) return "20px";
-  if (["xs", "sm"].includes(props.size)) return "16px";
-  if (["lg", "xl"].includes(props.size)) return "24px";
-  return "20px";
-});
+  if (!props.size) return "20px"
+  if (["xs", "sm"].includes(props.size)) return "16px"
+  if (["lg", "xl"].includes(props.size)) return "24px"
+  return "20px"
+})
 
 const rootClass = computed(() => {
-  if (!props.size) return "gap-3";
-  if (["xs", "sm"].includes(props.size)) return "gap-2";
-  if (["lg", "xl"].includes(props.size)) return "gap-4";
-  return "gap-3";
-});
+  if (!props.size) return "gap-3"
+  if (["xs", "sm"].includes(props.size)) return "gap-2"
+  if (["lg", "xl"].includes(props.size)) return "gap-4"
+  return "gap-3"
+})
 </script>
 
 <template>

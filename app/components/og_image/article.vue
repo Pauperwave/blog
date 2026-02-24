@@ -21,7 +21,7 @@
     - See: app/pages/articles/[id].vue lines ~100-110
 -->
 <script setup lang="ts">
-import appMeta from "~/app.meta";
+import appMeta from "~/app.meta"
 defineProps<{
   title?: string;
   thumbnail?: string | undefined;
@@ -31,7 +31,7 @@ defineProps<{
     name: string;
   }
   | undefined;
-}>();
+}>()
 </script>
 
 <template>

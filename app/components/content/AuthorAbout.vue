@@ -11,7 +11,7 @@ const props = defineProps<{
     twitch?: string;
     website?: string;
   };
-}>();
+}>()
 </script>
 
 <template>

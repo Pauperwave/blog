@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { BadgeProps } from '@nuxt/ui';
-import type { Author } from '~/composables/useAuthor';
-import type { AnyArticle } from '~/constants/content-config';
+import type { BadgeProps } from '@nuxt/ui'
+import type { Author } from '~/composables/useAuthor'
+import type { AnyArticle } from '~/constants/content-config'
 
 interface Props {
   article: AnyArticle
@@ -14,7 +14,7 @@ const props = withDefaults(defineProps<Props>(), {
   authorData: null,
   topicTags: () => [],
   badge: undefined
-});
+})
 </script>
 
 <template>

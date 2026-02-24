@@ -1,5 +1,5 @@
-import { definePerson } from "nuxt-schema-org/schema";
-import appMeta from "./app/app.meta";
+import { definePerson } from "nuxt-schema-org/schema"
+import appMeta from "./app/app.meta"
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -131,4 +131,4 @@ export default defineNuxtConfig({
             sourcemap: false, // Disable sourcemaps in production to eliminate Tailwind warnings
         }
     }
-});
+})

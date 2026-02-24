@@ -12,4 +12,4 @@ export default {
   url: "https://blog.pauperwave.org",
   icon: "/favicon.ico",
   contactEmail: "pauperwave@gmail.com",
-};
+}

@@ -1,18 +1,18 @@
 <!-- app\pages\articles\[id].vue -->
 <script setup lang="ts">
-import { intersection, orderByMultiple } from "~/utils/array";
-import type { Author } from '~/composables/useAuthor';
+import { intersection, orderByMultiple } from "~/utils/array"
+import type { Author } from '~/composables/useAuthor'
 import {
   type AnyArticle,
   queryAllCollections,
   combineArticles,
   getCollectionNames
-} from '~/constants/content-config';
-import { getRecentArticleBadge as getBadge } from '~/utils/article-badges';
+} from '~/constants/content-config'
+import { getRecentArticleBadge as getBadge } from '~/utils/article-badges'
 
-import appMeta from "~/app.meta";
+import appMeta from "~/app.meta"
 
-const route = useRoute();
+const route = useRoute()
 // const authorEl = ref<HTMLElement | null>();
 // const relatedArticlesEl = ref<HTMLElement | null>();
 
@@ -23,21 +23,21 @@ const tocTitle = 'In questo articolo'
 
 const { data } = await useAsyncData(route.path, async () => {
   // Try each collection until we find the article
-  const collections = getCollectionNames();
+  const collections = getCollectionNames()
   for (const collection of collections) {
-    const result = await queryCollection(collection).path(route.path).first();
-    if (result) return result;
+    const result = await queryCollection(collection).path(route.path).first()
+    if (result) return result
   }
-  return null;
-});
+  return null
+})
 
 // Fetch author data from authors collection
-const authorData = data.value?.author ? await useAuthor(data.value.author) : null;
+const authorData = data.value?.author ? await useAuthor(data.value.author) : null
 
 // Format date using useState to prevent hydration mismatch
 const formattedDate = useState(`article-date-${route.path}`, () => {
-  return data.value?.date ? formatDateIT(data.value.date) : 'Data non disponibile';
-});
+  return data.value?.date ? formatDateIT(data.value.date) : 'Data non disponibile'
+})
 
 // Format related article dates using useState
 // const formatRelatedDate = (article: any) => {
@@ -47,21 +47,21 @@ const formattedDate = useState(`article-date-${route.path}`, () => {
 // };
 
 // TODO: Related articles currently show top 3 by tag intersection and publication date
-const MAX_RELATED_ARTICLES = 3;
+const MAX_RELATED_ARTICLES = 3
 const relatedArticlesString = "Altri articoli correlati"
 
 const { data: links } = await useAsyncData(`linked-${route.path}`, async () => {
-  const collectionsData = await queryAllCollections();
+  const collectionsData = await queryAllCollections()
 
   // Combine all articles and filter
-  const allArticles: AnyArticle[] = combineArticles(collectionsData);
+  const allArticles: AnyArticle[] = combineArticles(collectionsData)
 
-  const filtered = allArticles.filter(a => a.path !== data.value?.path && a.published === true);
+  const filtered = allArticles.filter(a => a.path !== data.value?.path && a.published === true)
 
   const withCommonTags = filtered.map(a => ({
     article: a,
     commonTags: intersection(a.tags, data.value?.tags || []).length
-  }));
+  }))
 
   let sorted = orderByMultiple(
     withCommonTags,
@@ -70,35 +70,35 @@ const { data: links } = await useAsyncData(`linked-${route.path}`, async () => {
       item => new Date(item.article.date).getTime()
     ],
     ['desc', 'desc']
-  ).map(item => item.article);
+  ).map(item => item.article)
 
   // Fallback: se non ci sono articoli con tag comuni, mostra i più recenti
   if (sorted.length < MAX_RELATED_ARTICLES) {
-    sorted = orderBy(filtered, a => new Date(a.date).getTime(), 'desc').slice(0, MAX_RELATED_ARTICLES);
+    sorted = orderBy(filtered, a => new Date(a.date).getTime(), 'desc').slice(0, MAX_RELATED_ARTICLES)
   }
 
   // showing the top 3 by tag intersection and publication date
   // console.log(sorted.slice(0, MAX_RELATED_ARTICLES))
-  return sorted.slice(0, MAX_RELATED_ARTICLES);
-});
+  return sorted.slice(0, MAX_RELATED_ARTICLES)
+})
 
 // Fetch author data for related articles
-const relatedAuthorsMap = ref<Record<string, Author>>({});
+const relatedAuthorsMap = ref<Record<string, Author>>({})
 
 if (links.value) {
-  const uniqueAuthors = [...new Set(links.value.map(article => article.author))];
+  const uniqueAuthors = [...new Set(links.value.map(article => article.author))]
   for (const authorName of uniqueAuthors) {
     try {
-      const authorInfo = await useAuthor(authorName);
-      relatedAuthorsMap.value[authorName] = authorInfo;
+      const authorInfo = await useAuthor(authorName)
+      relatedAuthorsMap.value[authorName] = authorInfo
     } catch (e) {
-      console.error(`Failed to load author data for ${authorName}:`, e);
+      console.error(`Failed to load author data for ${authorName}:`, e)
     }
   }
 }
 
 const { data: surround } = await useAsyncData(`${route.path}-surround`, async () => {
-  const collections = getCollectionNames();
+  const collections = getCollectionNames()
   // console.log('[DEBUG] Collections:', collections);
   // console.log('[DEBUG] Current path:', route.path);
 
@@ -107,17 +107,17 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, async ()
     try {
       const result = await queryCollectionItemSurroundings(collection, route.path, {
         fields: ["description"],
-      });
+      })
       // console.log(`[DEBUG] Result from ${collection}:`, result);
-      if (result) return result;
+      if (result) return result
     } catch (e) {
-      console.error(`[DEBUG] Error in collection ${collection}:`, e);
+      console.error(`[DEBUG] Error in collection ${collection}:`, e)
     }
   }
-  return undefined;
-});
+  return undefined
+})
 
-updateMeta();
+updateMeta()
 
 function updateMeta() {
   // Debug: stampa tutti i valori
@@ -177,7 +177,7 @@ function updateMeta() {
         url: appMeta.author.url,
       }),
     }),
-  ]);
+  ])
 
   useSeoMeta({
     title: data.value?.title,
@@ -187,7 +187,7 @@ function updateMeta() {
     ogImageHeight: 630,
     twitterCard: 'summary_large_image',
     twitterImage: data.value?.thumbnail,
-  });
+  })
 
   // We use static thumbnails for OG images instead of dynamic generation
   defineOgImageComponent("Article", {
@@ -197,7 +197,7 @@ function updateMeta() {
       name: authorData?.name,
       image: authorData?.avatar,
     },
-  });
+  })
 }
 
 // onMounted(() => {

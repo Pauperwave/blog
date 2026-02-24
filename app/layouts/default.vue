@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from "@nuxt/ui";
+import type { NavigationMenuItem } from "@nuxt/ui"
 
 const navItems: NavigationMenuItem[] = [
   { label: "Autori", icon: "mdi:account-group", to: "/authors" },
-];
+]
 </script>
 
 <template>

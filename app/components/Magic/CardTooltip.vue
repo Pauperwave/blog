@@ -21,7 +21,7 @@ const imageUrl = computed(() => {
   }
 
   console.log(`❌ Calling Scryfall API: ${props.name}`)
-  console.log({ name: props.name, image: props.image });
+  console.log({ name: props.name, image: props.image })
   const baseUrl = 'https://api.scryfall.com/cards/named'
   const params = new URLSearchParams({
     exact: props.name,

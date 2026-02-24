@@ -11,8 +11,8 @@
  * intersection(['a', 'b'], ['b', 'c']) // ['b']
  */
 export function intersection<T>(arr1: T[], arr2: T[]): T[] {
-  const set = new Set(arr2);
-  return arr1.filter(x => set.has(x));
+  const set = new Set(arr2)
+  return arr1.filter(x => set.has(x))
 }
 
 /**
@@ -34,13 +34,13 @@ export function orderBy<T>(
   order: 'asc' | 'desc' = 'asc'
 ): T[] {
   return [...array].sort((a, b) => {
-    const valA = iteratee(a);
-    const valB = iteratee(b);
+    const valA = iteratee(a)
+    const valB = iteratee(b)
 
-    if (valA < valB) return order === 'asc' ? -1 : 1;
-    if (valA > valB) return order === 'asc' ? 1 : -1;
-    return 0;
-  });
+    if (valA < valB) return order === 'asc' ? -1 : 1
+    if (valA > valB) return order === 'asc' ? 1 : -1
+    return 0
+  })
 }
 
 /**
@@ -65,13 +65,13 @@ export function orderByMultiple<T>(
 ): T[] {
   return [...array].sort((a, b) => {
     for (const [i, iteratee] of iteratees.entries()) {
-      const valA = iteratee(a);
-      const valB = iteratee(b);
-      const order = orders[i] ?? 'asc';
+      const valA = iteratee(a)
+      const valB = iteratee(b)
+      const order = orders[i] ?? 'asc'
 
-      if (valA < valB) return order === 'asc' ? -1 : 1;
-      if (valA > valB) return order === 'asc' ? 1 : -1;
+      if (valA < valB) return order === 'asc' ? -1 : 1
+      if (valA > valB) return order === 'asc' ? 1 : -1
     }
-    return 0;
-  });
+    return 0
+  })
 }

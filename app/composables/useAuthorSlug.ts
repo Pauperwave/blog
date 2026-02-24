@@ -4,8 +4,8 @@
  * @returns URL-friendly slug (e.g., "pietro-bragioto")
  */
 export const getAuthorSlug = (authorName: string): string => {
-  return authorName.toLowerCase().replace(/\s+/g, '-');
-};
+  return authorName.toLowerCase().replace(/\s+/g, '-')
+}
 
 /**
  * Converts a slug back to a properly capitalized author name
@@ -16,5 +16,5 @@ export const getAuthorNameFromSlug = (slug: string): string => {
   return slug
     .split('-')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
-};
+    .join(' ')
+}

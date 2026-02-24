@@ -1,10 +1,10 @@
 <script setup lang="ts">
-const error = useError();
+const error = useError()
 
 useSeoMeta({
   title: error.value?.statusCode.toString(),
   description: error.value?.statusMessage,
-});
+})
 </script>
 
 

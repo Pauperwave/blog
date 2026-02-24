@@ -3,6 +3,10 @@ import withNuxt from './.nuxt/eslint.config.mjs'
 
 export default withNuxt({
   rules: {
+    // niente ; dove non serve
+    semi: [ 'error', 'never' ],
+    'no-extra-semi': 'error',
+
     'vue/block-order': [
       'error',
       {

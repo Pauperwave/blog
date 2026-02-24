@@ -33,7 +33,7 @@
 
 // @ts-expect-error - '#content' is a Nuxt virtual module with auto-generated types from content.config.ts
 // These types are created at build time by @nuxt/content and are not available to static analysis
-import type { ArticlesCollectionItem, TutorialsCollectionItem, DecklistsCollectionItem, ReportsCollectionItem, SpoilersCollectionItem } from '#content';
+import type { ArticlesCollectionItem, TutorialsCollectionItem, DecklistsCollectionItem, ReportsCollectionItem, SpoilersCollectionItem } from '#content'
 
 /**
  * Union type combining all article collection item types.
@@ -67,7 +67,7 @@ export const COLLECTION_NAMES: Record<CategoryType, CollectionName> = {
   report: 'reports',
   spoiler: 'spoilers',
   tutorial: 'tutorials'
-} as const;
+} as const
 
 /**
  * The canonical order of content types throughout the application.
@@ -83,7 +83,7 @@ export const CONTENT_TYPE_ORDER: readonly CategoryType[] = [
   'report',
   'spoiler',
   'tutorial'
-] as const;
+] as const
 
 /**
  * Category labels for display in Italian.
@@ -95,7 +95,7 @@ export const CATEGORY_LABELS: Record<CategoryType, string> = {
   report: 'Report',
   spoiler: 'Spoiler',
   tutorial: 'Tutorial'
-} as const;
+} as const
 
 /**
  * Section titles for the home page.
@@ -107,7 +107,7 @@ export const HOME_SECTION_TITLES: Record<CategoryType, string> = {
   report: 'Resoconti dei tornei',
   spoiler: 'Spoilers & Set Reviews',
   tutorial: 'Tutorial'
-} as const;
+} as const
 
 // ============================================================================
 // Helper Functions
@@ -127,8 +127,8 @@ export const HOME_SECTION_TITLES: Record<CategoryType, string> = {
 export async function queryAllCollections() {
   const queries = CONTENT_TYPE_ORDER.map(type =>
     queryCollection(COLLECTION_NAMES[type]).all()
-  );
-  return await Promise.all(queries);
+  )
+  return await Promise.all(queries)
 }
 
 /**
@@ -144,13 +144,13 @@ export async function queryAllCollections() {
  * ```
  */
 export function combineArticles(collectionsData: AnyArticle[][]): AnyArticle[] {
-  if (collectionsData.length === 0) return [];
+  if (collectionsData.length === 0) return []
 
   // Start with the first collection and concat the rest in order
   return collectionsData.reduce((acc, data, index) => {
-    if (index === 0) return data as AnyArticle[];
-    return acc.concat(data as AnyArticle[]);
-  }, [] as AnyArticle[]);
+    if (index === 0) return data as AnyArticle[]
+    return acc.concat(data as AnyArticle[])
+  }, [] as AnyArticle[])
 }
 
 /**
@@ -168,7 +168,7 @@ export function getHomeSections() {
   return CONTENT_TYPE_ORDER.map(category => ({
     title: HOME_SECTION_TITLES[category],
     category
-  }));
+  }))
 }
 
 /**
@@ -185,9 +185,9 @@ export function getHomeSections() {
  */
 export function initializeCategories(): Record<CategoryType, AnyArticle[]> {
   return CONTENT_TYPE_ORDER.reduce((acc, category) => {
-    acc[category] = [];
-    return acc;
-  }, {} as Record<CategoryType, AnyArticle[]>);
+    acc[category] = []
+    return acc
+  }, {} as Record<CategoryType, AnyArticle[]>)
 }
 
 /**
@@ -203,5 +203,5 @@ export function initializeCategories(): Record<CategoryType, AnyArticle[]> {
  * ```
  */
 export function getCollectionNames(): CollectionName[] {
-  return CONTENT_TYPE_ORDER.map(type => COLLECTION_NAMES[type]);
+  return CONTENT_TYPE_ORDER.map(type => COLLECTION_NAMES[type])
 }

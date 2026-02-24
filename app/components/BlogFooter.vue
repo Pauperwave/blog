@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import appMeta from "~/app.meta";
+import appMeta from "~/app.meta"
 import { PAUPERWAVE_SOCIAL_LINKS } from '~/constants/social-links'
 
 const socialLinks = [
@@ -28,7 +28,7 @@ const socialLinks = [
     link: PAUPERWAVE_SOCIAL_LINKS.github,
     label: "GitHub"
   }
-];
+]
 </script>
 
 <template>

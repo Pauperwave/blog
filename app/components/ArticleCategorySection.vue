@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { Author } from '~/composables/useAuthor';
-import type { AnyArticle } from '~/constants/content-config';
-import { getRecentArticleBadge as getArticleBadge } from '~/utils/article-badges';
+import type { Author } from '~/composables/useAuthor'
+import type { AnyArticle } from '~/constants/content-config'
+import { getRecentArticleBadge as getArticleBadge } from '~/utils/article-badges'
 
 interface Props {
   title: string;
@@ -15,7 +15,7 @@ interface Props {
 withDefaults(defineProps<Props>(), {
   maxItems: 3,
   viewAllText: 'Vedi tutti'
-});
+})
 </script>
 
 <template>

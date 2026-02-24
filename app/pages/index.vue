@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { Author } from '~/composables/useAuthor';
-import { getAuthorSlug } from '~/composables/useAuthorSlug';
-import { getRecentArticleBadge as getArticleBadge, isRecentArticle } from '~/utils/article-badges';
+import type { Author } from '~/composables/useAuthor'
+import { getAuthorSlug } from '~/composables/useAuthorSlug'
+import { getRecentArticleBadge as getArticleBadge, isRecentArticle } from '~/utils/article-badges'
 import {
   type AnyArticle,
   type CategoryType,
@@ -11,67 +11,67 @@ import {
   combineArticles,
   getHomeSections,
   initializeCategories
-} from '~/constants/content-config';
+} from '~/constants/content-config'
 
 // Query all collections and combine them
 const { data: allArticles } = await useAsyncData('home-articles', async () => {
-  const collectionsData = await queryAllCollections();
+  const collectionsData = await queryAllCollections()
 
   // Combine all articles, filter out drafts, and sort by date
   const combined: AnyArticle[] = combineArticles(collectionsData)
-    .filter(article => article.published !== false);
+    .filter(article => article.published !== false)
 
-  return combined.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-});
+  return combined.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+})
 
 // Fetch author data for all unique authors
-const authorsMap = ref<Record<string, Author>>({});
+const authorsMap = ref<Record<string, Author>>({})
 
 if (allArticles.value) {
-  const uniqueAuthors = [...new Set(allArticles.value.map(article => article.author))];
+  const uniqueAuthors = [...new Set(allArticles.value.map(article => article.author))]
   for (const authorName of uniqueAuthors) {
     try {
-      const authorInfo = await useAuthor(authorName);
-      authorsMap.value[authorName] = authorInfo;
+      const authorInfo = await useAuthor(authorName)
+      authorsMap.value[authorName] = authorInfo
     } catch (e) {
-      console.error(`Failed to load author data for ${authorName}:`, e);
+      console.error(`Failed to load author data for ${authorName}:`, e)
     }
   }
 }
 
 const getThumbnailSrc = (thumbnail: unknown) => {
-  if (typeof thumbnail === 'string') return thumbnail;
+  if (typeof thumbnail === 'string') return thumbnail
   if (
     thumbnail
     && typeof thumbnail === 'object'
     && 'src' in thumbnail
     && typeof (thumbnail as { src?: unknown }).src === 'string'
   ) {
-    return (thumbnail as { src: string }).src;
+    return (thumbnail as { src: string }).src
   }
 
-  return undefined;
-};
+  return undefined
+}
 
-const articles = computed(() => allArticles.value || []);
+const articles = computed(() => allArticles.value || [])
 
 const articlesByCategory = computed(() => {
-  const categories = initializeCategories();
+  const categories = initializeCategories()
 
   allArticles.value?.forEach((article) => {
     if (article.category && categories[article.category as CategoryType]) {
-      categories[article.category as CategoryType].push(article);
+      categories[article.category as CategoryType].push(article)
     }
-  });
+  })
 
-  return categories;
-});
+  return categories
+})
 
-const featuredArticle = computed(() => articles.value[0] || null);
-const heroSecondaryArticles = computed(() => articles.value.slice(1, 4));
-const latestArticles = computed(() => articles.value.slice(0, 6));
-const freshThisWeekCount = computed(() => articles.value.filter(article => isRecentArticle(article.date)).length);
-const activeAuthorsCount = computed(() => new Set(articles.value.map(article => article.author)).size);
+const featuredArticle = computed(() => articles.value[0] || null)
+const heroSecondaryArticles = computed(() => articles.value.slice(1, 4))
+const latestArticles = computed(() => articles.value.slice(0, 6))
+const freshThisWeekCount = computed(() => articles.value.filter(article => isRecentArticle(article.date)).length)
+const activeAuthorsCount = computed(() => new Set(articles.value.map(article => article.author)).size)
 
 const categoryHighlights = computed(() =>
   CONTENT_TYPE_ORDER
@@ -82,18 +82,18 @@ const categoryHighlights = computed(() =>
       latest: articlesByCategory.value[category][0] || null
     }))
     .filter(item => item.count > 0)
-);
+)
 
 const topAuthors = computed(() => {
   const counts = articles.value.reduce((acc, article) => {
-    acc[article.author] = (acc[article.author] || 0) + 1;
-    return acc;
-  }, {} as Record<string, number>);
+    acc[article.author] = (acc[article.author] || 0) + 1
+    return acc
+  }, {} as Record<string, number>)
 
   return Object.entries(counts)
     .map(([authorKey, count]) => {
-      const authorInfo = authorsMap.value[authorKey];
-      const name = authorInfo?.name || authorKey;
+      const authorInfo = authorsMap.value[authorKey]
+      const name = authorInfo?.name || authorKey
 
       return {
         key: authorKey,
@@ -102,34 +102,34 @@ const topAuthors = computed(() => {
         count,
         avatar: authorInfo?.avatar,
         description: authorInfo?.description
-      };
+      }
     })
     .sort((a, b) => {
-      if (b.count !== a.count) return b.count - a.count;
-      return a.name.localeCompare(b.name, 'it');
+      if (b.count !== a.count) return b.count - a.count
+      return a.name.localeCompare(b.name, 'it')
     })
-    .slice(0, 6);
-});
+    .slice(0, 6)
+})
 
 const trendingTags = computed(() => {
   const tagCounts = articles.value.slice(0, 24).reduce((acc, article) => {
     article.tags?.forEach((tag) => {
-      acc[tag] = (acc[tag] || 0) + 1;
-    });
-    return acc;
-  }, {} as Record<string, number>);
+      acc[tag] = (acc[tag] || 0) + 1
+    })
+    return acc
+  }, {} as Record<string, number>)
 
   return Object.entries(tagCounts)
     .sort((a, b) => {
-      if (b[1] !== a[1]) return b[1] - a[1];
-      return a[0].localeCompare(b[0], 'it');
+      if (b[1] !== a[1]) return b[1] - a[1]
+      return a[0].localeCompare(b[0], 'it')
     })
     .slice(0, 10)
-    .map(([tag, count]) => ({ tag, count }));
-});
+    .map(([tag, count]) => ({ tag, count }))
+})
 
 // Get sections from centralized config
-const sections = getHomeSections();
+const sections = getHomeSections()
 </script>
 
 <template>

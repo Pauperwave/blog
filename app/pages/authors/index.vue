@@ -6,7 +6,7 @@ import {
   CONTENT_TYPE_ORDER,
   queryAllCollections,
   combineArticles
-} from '~/constants/content-config';
+} from '~/constants/content-config'
 
 interface AuthorRecord {
   name: string
@@ -48,51 +48,51 @@ const socialLinks: Array<{ key: SocialKey; icon: string; label: string }> = [
   { key: 'youtube', icon: 'mdi:youtube', label: 'YouTube' },
   { key: 'twitch', icon: 'mdi:twitch', label: 'Twitch' },
   { key: 'website', icon: 'mdi:web', label: 'Website' }
-];
+]
 
-const searchQuery = ref('');
-const showOnlyActive = ref(false);
-const sortMode = ref<SortMode>('articles');
+const searchQuery = ref('')
+const showOnlyActive = ref(false)
+const sortMode = ref<SortMode>('articles')
 
 const { data: authors } = await useAsyncData('authors-index', () =>
   queryCollection('authors').all()
-);
+)
 
 const { data: allArticles } = await useAsyncData('authors-index-articles', async () => {
-  const collectionsData = await queryAllCollections();
-  return combineArticles(collectionsData);
-});
+  const collectionsData = await queryAllCollections()
+  return combineArticles(collectionsData)
+})
 
 const publishedArticles = computed(() =>
   [...(allArticles.value || [])]
     .filter((article: AnyArticle) => article.published !== false)
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-);
+)
 
 const authorsWithStats = computed<AuthorWithStats[]>(() => {
-  if (!authors.value) return [];
+  if (!authors.value) return []
 
   return (authors.value as AuthorRecord[])
     .map((author) => {
       const authorArticles = publishedArticles.value.filter(
         article => article.author.toLowerCase() === author.name.toLowerCase()
-      );
+      )
 
-      const latestArticle = authorArticles[0];
+      const latestArticle = authorArticles[0]
       const categoryCounts = authorArticles.reduce((acc, article) => {
-        const category = article.category as CategoryType;
-        acc[category] = (acc[category] || 0) + 1;
-        return acc;
-      }, {} as Partial<Record<CategoryType, number>>);
+        const category = article.category as CategoryType
+        acc[category] = (acc[category] || 0) + 1
+        return acc
+      }, {} as Partial<Record<CategoryType, number>>)
 
       const categories = CONTENT_TYPE_ORDER
         .map(category => ({
           category,
           count: categoryCounts[category] || 0
         }))
-        .filter(item => item.count > 0);
+        .filter(item => item.count > 0)
 
-      const socialCount = socialLinks.filter(link => !!author.socials?.[link.key]).length;
+      const socialCount = socialLinks.filter(link => !!author.socials?.[link.key]).length
 
       return {
         ...author,
@@ -102,21 +102,21 @@ const authorsWithStats = computed<AuthorWithStats[]>(() => {
         latestArticlePath: latestArticle?.path,
         categories,
         socialCount
-      };
+      }
     })
     .sort((a, b) => {
-      if (b.articleCount !== a.articleCount) return b.articleCount - a.articleCount;
-      return a.name.localeCompare(b.name, 'it');
-    });
-});
+      if (b.articleCount !== a.articleCount) return b.articleCount - a.articleCount
+      return a.name.localeCompare(b.name, 'it')
+    })
+})
 
 const filteredAuthors = computed(() => {
-  const query = searchQuery.value.trim().toLowerCase();
+  const query = searchQuery.value.trim().toLowerCase()
 
-  let list = [...authorsWithStats.value];
+  let list = [...authorsWithStats.value]
 
   if (showOnlyActive.value) {
-    list = list.filter(author => author.articleCount > 0);
+    list = list.filter(author => author.articleCount > 0)
   }
 
   if (query) {
@@ -129,50 +129,50 @@ const filteredAuthors = computed(() => {
       ]
         .filter(Boolean)
         .join(' ')
-        .toLowerCase();
+        .toLowerCase()
 
-      return haystack.includes(query);
-    });
+      return haystack.includes(query)
+    })
   }
 
   if (sortMode.value === 'name') {
-    list.sort((a, b) => a.name.localeCompare(b.name, 'it'));
-    return list;
+    list.sort((a, b) => a.name.localeCompare(b.name, 'it'))
+    return list
   }
 
   if (sortMode.value === 'recent') {
     list.sort((a, b) => {
-      const aTime = a.latestArticleDate ? new Date(a.latestArticleDate).getTime() : 0;
-      const bTime = b.latestArticleDate ? new Date(b.latestArticleDate).getTime() : 0;
-      if (bTime !== aTime) return bTime - aTime;
-      if (b.articleCount !== a.articleCount) return b.articleCount - a.articleCount;
-      return a.name.localeCompare(b.name, 'it');
-    });
-    return list;
+      const aTime = a.latestArticleDate ? new Date(a.latestArticleDate).getTime() : 0
+      const bTime = b.latestArticleDate ? new Date(b.latestArticleDate).getTime() : 0
+      if (bTime !== aTime) return bTime - aTime
+      if (b.articleCount !== a.articleCount) return b.articleCount - a.articleCount
+      return a.name.localeCompare(b.name, 'it')
+    })
+    return list
   }
 
   list.sort((a, b) => {
-    if (b.articleCount !== a.articleCount) return b.articleCount - a.articleCount;
-    const aTime = a.latestArticleDate ? new Date(a.latestArticleDate).getTime() : 0;
-    const bTime = b.latestArticleDate ? new Date(b.latestArticleDate).getTime() : 0;
-    if (bTime !== aTime) return bTime - aTime;
-    return a.name.localeCompare(b.name, 'it');
-  });
+    if (b.articleCount !== a.articleCount) return b.articleCount - a.articleCount
+    const aTime = a.latestArticleDate ? new Date(a.latestArticleDate).getTime() : 0
+    const bTime = b.latestArticleDate ? new Date(b.latestArticleDate).getTime() : 0
+    if (bTime !== aTime) return bTime - aTime
+    return a.name.localeCompare(b.name, 'it')
+  })
 
-  return list;
-});
+  return list
+})
 
-const featuredAuthors = computed(() => filteredAuthors.value.slice(0, 2));
-const remainingAuthors = computed(() => filteredAuthors.value.slice(featuredAuthors.value.length));
+const featuredAuthors = computed(() => filteredAuthors.value.slice(0, 2))
+const remainingAuthors = computed(() => filteredAuthors.value.slice(featuredAuthors.value.length))
 
-const totalPublishedArticles = computed(() => publishedArticles.value.length);
+const totalPublishedArticles = computed(() => publishedArticles.value.length)
 const activeAuthors = computed(() =>
   authorsWithStats.value.filter(author => author.articleCount > 0).length
-);
+)
 const topAuthor = computed(() =>
   authorsWithStats.value.find(author => author.articleCount > 0) || authorsWithStats.value[0]
-);
-const newestPublishedArticle = computed(() => publishedArticles.value[0]);
+)
+const newestPublishedArticle = computed(() => publishedArticles.value[0])
 
 const overallCategoryStats = computed(() =>
   CONTENT_TYPE_ORDER
@@ -182,31 +182,31 @@ const overallCategoryStats = computed(() =>
     }))
     .filter(item => item.count > 0)
     .sort((a, b) => b.count - a.count)
-);
+)
 
 const hasActiveFilters = computed(() =>
   showOnlyActive.value || !!searchQuery.value.trim() || sortMode.value !== 'articles'
-);
+)
 
 const clearFilters = () => {
-  searchQuery.value = '';
-  showOnlyActive.value = false;
-  sortMode.value = 'articles';
-};
+  searchQuery.value = ''
+  showOnlyActive.value = false
+  sortMode.value = 'articles'
+}
 
 const setSortMode = (mode: SortMode) => {
-  sortMode.value = mode;
-};
+  sortMode.value = mode
+}
 
 const getVisibleSocials = (author: AuthorWithStats) =>
-  socialLinks.filter(link => !!author.socials?.[link.key]);
+  socialLinks.filter(link => !!author.socials?.[link.key])
 
 useSeoMeta({
   title: 'Autori',
   description: 'Scopri tutti gli autori del sito e i loro articoli pubblicati.',
   ogTitle: 'Autori',
   ogDescription: 'Scopri tutti gli autori del sito e i loro articoli pubblicati.'
-});
+})
 </script>
 
 <template>
