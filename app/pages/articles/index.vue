@@ -15,6 +15,8 @@ const getBadge = (date: string) => {
     : undefined;
 };
 
+const normalizeFilterValue = (value: string) => value.trim().toLocaleLowerCase('it');
+
 // Query all collections and combine them
 const { data: articles } = await useAsyncData("articles-index", async () => {
   const collectionsData = await queryAllCollections();
@@ -47,6 +49,9 @@ const selectedCategory = computed<string | null>(() =>
 const selectedAuthor = computed<string | null>(() =>
   route.query.author ? String(route.query.author) : null
 );
+const selectedLocation = computed<string | null>(() =>
+  route.query.location ? String(route.query.location) : null
+);
 const selectedTag = computed<string | null>(() =>
   route.query.tag ? String(route.query.tag) : null
 );
@@ -64,6 +69,24 @@ const selectedAuthorLabel = computed<string | null>(() => {
 
   return matchedAuthor?.name || getAuthorNameFromSlug(selectedAuthor.value);
 });
+const selectedLocationLabel = computed<string | null>(() => {
+  if (!selectedLocation.value) return null;
+
+  const matchedLocation = locationFilterOptions.value.find(
+    item => normalizeFilterValue(item.location) === normalizeFilterValue(selectedLocation.value)
+  );
+
+  return matchedLocation?.location || selectedLocation.value;
+});
+const selectedTagLabel = computed<string | null>(() => {
+  if (!selectedTag.value) return null;
+
+  const matchedTag = tagFilterOptions.value.find(
+    item => normalizeFilterValue(item.tag) === normalizeFilterValue(selectedTag.value)
+  );
+
+  return matchedTag?.tag || selectedTag.value;
+});
 
 const categoryFilterOptions = computed(() =>
   Object.entries(categoryLabels).map(([category, label]) => ({
@@ -72,6 +95,33 @@ const categoryFilterOptions = computed(() =>
     count: articles.value?.filter(article => article.category === category).length || 0
   }))
 );
+const locationFilterOptions = computed(() => {
+  if (!articles.value) return [];
+
+  const locationCounts = articles.value.reduce((acc, article) => {
+    article.locations?.forEach((location) => {
+      acc[location] = (acc[location] || 0) + 1;
+    });
+    return acc;
+  }, {} as Record<string, number>);
+
+  return Object.entries(locationCounts)
+    .map(([location, count]) => ({ location, count }))
+    .sort((a, b) => {
+      if (b.count !== a.count) return b.count - a.count;
+      return a.location.localeCompare(b.location, 'it');
+    });
+});
+
+const getArticleTopicTags = (article: AnyArticle) => {
+  const locationSet = new Set((article.locations || []).map(location => normalizeFilterValue(location)));
+  return (article.tags || []).filter(tag => !locationSet.has(normalizeFilterValue(tag)));
+};
+const isSelectedLocationValue = (location: string) =>
+  !!selectedLocation.value && normalizeFilterValue(location) === normalizeFilterValue(selectedLocation.value);
+const isSelectedTagValue = (tag: string) =>
+  !!selectedTag.value && normalizeFilterValue(tag) === normalizeFilterValue(selectedTag.value);
+
 const authorFilterOptions = computed(() => {
   if (!articles.value) return [];
 
@@ -99,7 +149,7 @@ const tagFilterOptions = computed(() => {
   if (!articles.value) return [];
 
   const tagCounts = articles.value.reduce((acc, article) => {
-    article.tags?.forEach((tag) => {
+    getArticleTopicTags(article).forEach((tag) => {
       acc[tag] = (acc[tag] || 0) + 1;
     });
     return acc;
@@ -113,7 +163,7 @@ const tagFilterOptions = computed(() => {
     });
 });
 const hasActiveFilters = computed(() =>
-  !!selectedCategory.value || !!selectedAuthor.value || !!selectedTag.value
+  !!selectedCategory.value || !!selectedAuthor.value || !!selectedLocation.value || !!selectedTag.value
 );
 
 const filteredArticles = computed(() => {
@@ -123,24 +173,32 @@ const filteredArticles = computed(() => {
     const matchesCategory = !selectedCategory.value || article.category === selectedCategory.value;
     const authorName = authorsMap.value[article.author]?.name || article.author;
     const matchesAuthor = !selectedAuthor.value || getAuthorSlug(authorName) === selectedAuthor.value;
-    const matchesTag = !selectedTag.value || article.tags?.some(tag => tag === selectedTag.value);
+    const matchesLocation = !selectedLocation.value || (article.locations || []).some(
+      location => normalizeFilterValue(location) === normalizeFilterValue(selectedLocation.value)
+    );
+    const matchesTag = !selectedTag.value || getArticleTopicTags(article).some(
+      tag => normalizeFilterValue(tag) === normalizeFilterValue(selectedTag.value)
+    );
 
-    return matchesCategory && matchesAuthor && matchesTag;
+    return matchesCategory && matchesAuthor && matchesLocation && matchesTag;
   });
 });
 
 const updateFilters = (next: {
   category?: string | null
   author?: string | null
+  location?: string | null
   tag?: string | null
 }) => {
   const category = next.category === undefined ? selectedCategory.value : next.category;
   const author = next.author === undefined ? selectedAuthor.value : next.author;
+  const location = next.location === undefined ? selectedLocation.value : next.location;
   const tag = next.tag === undefined ? selectedTag.value : next.tag;
 
   const query: Record<string, string> = {};
   if (category) query.category = category;
   if (author) query.author = author;
+  if (location) query.location = location;
   if (tag) query.tag = tag;
   navigateTo({ query }, { replace: true });
 };
@@ -153,12 +211,16 @@ const setAuthorFilter = (authorSlug: string | null) => {
   updateFilters({ author: authorSlug });
 };
 
+const setLocationFilter = (location: string | null) => {
+  updateFilters({ location });
+};
+
 const setTagFilter = (tag: string | null) => {
   updateFilters({ tag });
 };
 
 const clearAllFilters = () => {
-  updateFilters({ category: null, author: null, tag: null });
+  updateFilters({ category: null, author: null, location: null, tag: null });
 };
 </script>
 
@@ -206,37 +268,51 @@ const clearAllFilters = () => {
           </UBadge>
           <UBadge
             v-if="selectedAuthorLabel"
-            color="warning"
+            color="neutral"
             variant="soft"
           >
             Autore: {{ selectedAuthorLabel }}
+          </UBadge>
+          <UBadge
+            v-if="selectedLocationLabel"
+            color="warning"
+            variant="soft"
+          >
+            Luogo: {{ selectedLocationLabel }}
           </UBadge>
           <UBadge
             v-if="selectedTag"
             color="primary"
             variant="soft"
           >
-            Tag: {{ selectedTag }}
+            Tag: {{ selectedTagLabel }}
           </UBadge>
         </div>
 
         <div class="space-y-4">
           <div class="space-y-2">
-            <p class="text-xs uppercase tracking-[0.16em] text-gray-500 dark:text-gray-400">
-              Categoria
-            </p>
+            <div class="flex items-center justify-between gap-2 flex-wrap">
+              <p class="text-xs uppercase tracking-[0.16em] text-gray-500 dark:text-gray-400">
+                Categoria
+              </p>
+              <p class="text-xs text-gray-500 dark:text-gray-400">
+                {{ categoryFilterOptions.length }} categorie
+              </p>
+            </div>
             <div class="flex flex-wrap gap-2">
               <UButton
                 size="xs"
+                color="neutral"
                 :variant="selectedCategory === null ? 'solid' : 'outline'"
                 @click="setCategoryFilter(null)"
               >
-                Tutte
+                Tutte le categorie
               </UButton>
               <UButton
                 v-for="item in categoryFilterOptions"
                 :key="item.category"
                 size="xs"
+                color="neutral"
                 :variant="selectedCategory === item.category ? 'solid' : 'outline'"
                 @click="setCategoryFilter(item.category)"
               >
@@ -257,6 +333,7 @@ const clearAllFilters = () => {
             <div class="flex flex-wrap gap-2">
               <UButton
                 size="xs"
+                color="neutral"
                 :variant="selectedAuthor === null ? 'solid' : 'outline'"
                 @click="setAuthorFilter(null)"
               >
@@ -266,10 +343,42 @@ const clearAllFilters = () => {
                 v-for="author in authorFilterOptions"
                 :key="author.slug"
                 size="xs"
+                color="neutral"
                 :variant="selectedAuthor === author.slug ? 'solid' : 'outline'"
                 @click="setAuthorFilter(author.slug)"
               >
                 {{ author.name }} ({{ author.count }})
+              </UButton>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <div class="flex items-center justify-between gap-2 flex-wrap">
+              <p class="text-xs uppercase tracking-[0.16em] text-gray-500 dark:text-gray-400">
+                Luogo
+              </p>
+              <p class="text-xs text-gray-500 dark:text-gray-400">
+                {{ locationFilterOptions.length }} localita
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <UButton
+                size="xs"
+                color="warning"
+                :variant="selectedLocation === null ? 'solid' : 'outline'"
+                @click="setLocationFilter(null)"
+              >
+                Tutte le localita
+              </UButton>
+              <UButton
+                v-for="location in locationFilterOptions"
+                :key="location.location"
+                size="xs"
+                color="warning"
+                :variant="isSelectedLocationValue(location.location) ? 'solid' : 'outline'"
+                @click="setLocationFilter(location.location)"
+              >
+                {{ location.location }} ({{ location.count }})
               </UButton>
             </div>
           </div>
@@ -287,6 +396,7 @@ const clearAllFilters = () => {
               <div class="flex flex-wrap gap-2">
                 <UButton
                   size="xs"
+                  color="primary"
                   :variant="selectedTag === null ? 'solid' : 'outline'"
                   @click="setTagFilter(null)"
                 >
@@ -296,7 +406,8 @@ const clearAllFilters = () => {
                   v-for="tag in tagFilterOptions"
                   :key="tag.tag"
                   size="xs"
-                  :variant="selectedTag === tag.tag ? 'solid' : 'outline'"
+                  color="primary"
+                  :variant="isSelectedTagValue(tag.tag) ? 'solid' : 'outline'"
                   @click="setTagFilter(tag.tag)"
                 >
                   {{ tag.tag }} ({{ tag.count }})
@@ -338,8 +449,16 @@ const clearAllFilters = () => {
             </p>
             <div class="flex flex-row gap-2 items-center flex-wrap mt-3">
               <UBadge
-                v-for="tag in article.tags"
-                :key="tag"
+                v-for="location in article.locations || []"
+                :key="`${article.path}-location-${location}`"
+                color="warning"
+                variant="soft"
+              >
+                {{ location }}
+              </UBadge>
+              <UBadge
+                v-for="tag in getArticleTopicTags(article)"
+                :key="`${article.path}-tag-${tag}`"
                 color="primary"
                 variant="soft"
               >
