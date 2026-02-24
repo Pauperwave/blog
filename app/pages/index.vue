@@ -304,7 +304,7 @@ const sections = getHomeSections()
                 v-slot="{ navigate }"
               >
                 <UCard
-                  class="relative overflow-hidden border-gray-200 dark:border-gray-800 bg-white/85 dark:bg-gray-900/75 backdrop-blur-sm cursor-pointer transition-all duration-300 hover:border-primary-400 dark:hover:border-primary-500 hover:shadow-lg active:scale-[0.995]"
+                  class="relative overflow-hidden border border-gray-200 dark:border-gray-800 bg-white/85 dark:bg-gray-900/75 backdrop-blur-sm cursor-pointer transition-all duration-300 hover:border-primary-400 dark:hover:border-primary-500 hover:shadow-lg active:scale-[0.995]"
                   role="link"
                   tabindex="0"
                   @click="navigate"
