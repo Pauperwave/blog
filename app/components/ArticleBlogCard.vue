@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { BadgeProps } from '@nuxt/ui';
 import type { Author } from '~/composables/useAuthor';
 import type { AnyArticle } from '~/constants/content-config';
 
@@ -6,10 +7,7 @@ interface Props {
   article: AnyArticle
   authorData?: Author | null
   topicTags?: string[]
-  badge?: {
-    label: string
-    color: string
-  }
+  badge?: string | BadgeProps
 }
 
 const props = withDefaults(defineProps<Props>(), {
