@@ -83,7 +83,7 @@ const isSelectedTagValue = (tag: string) =>
 
     <div
       v-if="hasActiveFilters"
-      class="mb-4 flex items-center gap-2 flex-wrap rounded-lg border border-warning-200/60 dark:border-warning-800/40 bg-warning-50/50 dark:bg-warning-950/10 px-3 py-2"
+      class="mb-4 flex items-center gap-2 flex-wrap rounded-lg border border-yellow-300/70 dark:border-yellow-700/50 bg-warning-50/50 dark:bg-warning-950/10 px-3 py-2"
     >
       <span class="text-xs font-medium uppercase tracking-wide text-gray-600 dark:text-gray-300">
         Filtri attivi
@@ -104,7 +104,7 @@ const isSelectedTagValue = (tag: string) =>
       </UBadge>
       <UBadge
         v-if="selectedLocationLabel"
-        color="warning"
+        color="info"
         variant="soft"
       >
         Luogo: {{ selectedLocationLabel }}
@@ -193,7 +193,7 @@ const isSelectedTagValue = (tag: string) =>
         <div class="flex flex-wrap gap-2">
           <UButton
             size="xs"
-            color="warning"
+            color="info"
             :variant="selectedLocation === null ? 'solid' : 'outline'"
             @click="emit('set-location', null)"
           >
@@ -203,7 +203,7 @@ const isSelectedTagValue = (tag: string) =>
             v-for="location in locationFilterOptions"
             :key="location.location"
             size="xs"
-            color="warning"
+            color="info"
             :variant="isSelectedLocationValue(location.location) ? 'solid' : 'outline'"
             @click="emit('set-location', location.location)"
           >
