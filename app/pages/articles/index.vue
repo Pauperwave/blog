@@ -44,42 +44,129 @@ if (articles.value) {
 const selectedCategory = ref<string | null>(
   route.query.category ? String(route.query.category) : null
 );
+const selectedAuthor = computed<string | null>(() =>
+  route.query.author ? String(route.query.author) : null
+);
+const selectedAuthorLabel = computed<string | null>(() => {
+  if (!selectedAuthor.value) return null;
+
+  const matchedAuthor = Object.values(authorsMap.value).find(
+    author => getAuthorSlug(author.name) === selectedAuthor.value
+  );
+
+  return matchedAuthor?.name || getAuthorNameFromSlug(selectedAuthor.value);
+});
 
 const categoryLabels = CATEGORY_LABELS;
+const authorFilterOptions = computed(() => {
+  if (!articles.value) return [];
+
+  return [...new Set(articles.value.map(article => article.author))]
+    .map((authorKey) => {
+      const authorName = authorsMap.value[authorKey]?.name || authorKey;
+
+      return {
+        name: authorName,
+        slug: getAuthorSlug(authorName)
+      };
+    })
+    .sort((a, b) => a.name.localeCompare(b.name));
+});
 
 const filteredArticles = computed(() => {
   if (!articles.value) return [];
-  if (!selectedCategory.value) return articles.value;
 
-  return articles.value.filter(article => article.category === selectedCategory.value);
+  return articles.value.filter((article) => {
+    const matchesCategory = !selectedCategory.value || article.category === selectedCategory.value;
+    const authorName = authorsMap.value[article.author]?.name || article.author;
+    const matchesAuthor = !selectedAuthor.value || getAuthorSlug(authorName) === selectedAuthor.value;
+
+    return matchesCategory && matchesAuthor;
+  });
 });
 
 // Update URL when category changes
 watch(selectedCategory, (newCategory) => {
-  const query = newCategory ? { category: newCategory } : {};
+  const query: Record<string, string> = {};
+  if (newCategory) query.category = newCategory;
+  if (selectedAuthor.value) query.author = selectedAuthor.value;
   navigateTo({ query }, { replace: true });
 });
+
+const setAuthorFilter = (authorSlug: string | null) => {
+  const query: Record<string, string> = {};
+  if (selectedCategory.value) query.category = selectedCategory.value;
+  if (authorSlug) query.author = authorSlug;
+  navigateTo({ query }, { replace: true });
+};
+
+const clearAuthorFilter = () => {
+  setAuthorFilter(null);
+};
 </script>
 
 <template>
   <UPage>
     <UPageBody>
-      <!-- Category Filter -->
-      <div class="flex items-center gap-4 mb-6 flex-wrap">
-        <UButton
-          v-for="(label, category) in { null: 'All', ...categoryLabels }"
-          :key="category"
-          :variant="selectedCategory === category ? 'solid' : 'outline'"
-          @click="selectedCategory = category === 'null' ? null : category"
+      <section class="rounded-2xl border border-gray-200 dark:border-gray-800 bg-linear-to-b from-white to-gray-50 dark:from-gray-950 dark:to-gray-900 p-4 md:p-6 mb-6">
+        <!-- Category Filter -->
+        <div class="flex items-center gap-4 mb-4 flex-wrap">
+          <UButton
+            v-for="(label, category) in { null: 'All', ...categoryLabels }"
+            :key="category"
+            :variant="selectedCategory === category ? 'solid' : 'outline'"
+            @click="selectedCategory = category === 'null' ? null : category"
+          >
+            {{ label }}
+          </UButton>
+        </div>
+
+        <!-- Author Filter -->
+        <div class="flex items-center gap-3 flex-wrap">
+          <span class="text-sm text-gray-700 dark:text-gray-200">Author</span>
+          <UButton
+            size="xs"
+            :variant="selectedAuthor === null ? 'solid' : 'outline'"
+            @click="setAuthorFilter(null)"
+          >
+            All authors
+          </UButton>
+          <UButton
+            v-for="author in authorFilterOptions"
+            :key="author.slug"
+            size="xs"
+            :variant="selectedAuthor === author.slug ? 'solid' : 'outline'"
+            @click="setAuthorFilter(author.slug)"
+          >
+            {{ author.name }}
+          </UButton>
+        </div>
+
+        <div
+          v-if="selectedAuthor"
+          class="mt-4 flex items-center gap-3 flex-wrap rounded-lg border border-primary-200/60 dark:border-primary-800/60 bg-primary-50/60 dark:bg-primary-950/20 px-4 py-3"
         >
-          {{ label }}
-        </UButton>
-      </div>
+          <span class="text-sm text-gray-700 dark:text-gray-200">Filtering by author</span>
+          <UBadge
+            color="primary"
+            variant="soft"
+          >
+            {{ selectedAuthorLabel }}
+          </UBadge>
+          <UButton
+            size="xs"
+            variant="ghost"
+            @click="clearAuthorFilter"
+          >
+            Clear author filter
+          </UButton>
+        </div>
+      </section>
 
       <UEmpty
         v-if="(filteredArticles?.length ?? 0) <= 0"
         title="No articles found"
-        description="No articles match the selected category."
+        :description="selectedAuthorLabel ? `No articles match the selected filters for ${selectedAuthorLabel}.` : 'No articles match the selected category.'"
         variant="naked"
         :actions="[{ label: 'Go back home', to: '/' }]"
       />
