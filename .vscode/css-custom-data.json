@@ -1,0 +1,45 @@
+{
+  "version": 1.1,
+  "atDirectives": [
+    {
+      "name": "@apply",
+      "description": "Tailwind CSS directive to inline utility classes into a CSS rule."
+    },
+    {
+      "name": "@reference",
+      "description": "Tailwind CSS v4 directive to reference another stylesheet for directives like @apply in isolated contexts (e.g. Vue SFC scoped styles)."
+    },
+    {
+      "name": "@theme",
+      "description": "Tailwind CSS v4 directive to declare theme variables."
+    },
+    {
+      "name": "@utility",
+      "description": "Tailwind CSS v4 directive to define custom utilities."
+    },
+    {
+      "name": "@variant",
+      "description": "Tailwind CSS directive to apply a variant within custom CSS."
+    },
+    {
+      "name": "@custom-variant",
+      "description": "Tailwind CSS v4 directive to define custom variants."
+    },
+    {
+      "name": "@source",
+      "description": "Tailwind CSS v4 directive to register additional content sources."
+    },
+    {
+      "name": "@config",
+      "description": "Tailwind CSS directive to load a config file (legacy/compat usage)."
+    },
+    {
+      "name": "@plugin",
+      "description": "Tailwind CSS directive to load a plugin (legacy/compat usage)."
+    },
+    {
+      "name": "@tailwind",
+      "description": "Tailwind CSS v3 directive for injecting base/components/utilities."
+    }
+  ]
+}
