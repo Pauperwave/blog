@@ -18,7 +18,6 @@ const props = defineProps<{
   <UCard
     id="author-about"
     variant="soft"
-    class="mt-16"
   >
 
     <template #header>

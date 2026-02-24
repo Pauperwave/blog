@@ -287,6 +287,24 @@ function updateMeta() {
         :value="data"
         class="markdown-content flex-1"
       />
+      <template v-if="authorData">
+        <AuthorAbout
+          :src="authorData.avatar"
+          :name="authorData.name"
+          :description="authorData.description"
+          :url="authorData.url"
+          :socials="authorData.socials"
+        >
+          <template
+            v-if="authorData.bio"
+            #body
+          >
+            <p class="text-sm text-muted mt-2">
+              {{ authorData.bio }}
+            </p>
+          </template>
+        </AuthorAbout>
+      </template>
       <USeparator class="mt-4 mb-4" />
       <p class="font-semibold mb-4">
         {{ relatedArticlesString }}
