@@ -2,6 +2,12 @@ import type { Ref } from 'vue'
 import type { Author } from '~/composables/useAuthor'
 import { getAuthorNameFromSlug, getAuthorSlug } from '~/composables/useAuthorSlug'
 import { type AnyArticle, CATEGORY_LABELS } from '~/constants/content-config'
+import {
+  buildArticleTopicTags,
+  buildGlobalNormalizedLocationSet,
+  getArticleFilterStringArray,
+  normalizeArticleFilterValue
+} from '~/utils/article-filters'
 
 interface UseArticlesFiltersOptions {
   articles: Ref<AnyArticle[] | null | undefined>
@@ -19,29 +25,9 @@ interface PreparedArticleFilterData {
 export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersOptions) => {
   const route = useRoute()
 
-  const normalizeFilterValue = (value: string) => value.trim().toLocaleLowerCase('it')
-  const getStringArray = (value: unknown): string[] =>
-    Array.isArray(value) ? value.filter((item): item is string => typeof item === 'string') : []
-
-  const globalNormalizedLocationSet = computed(() => {
-    const normalizedLocations = new Set<string>()
-
-    articles.value?.forEach((article) => {
-      getStringArray(article.locations).forEach((location) => {
-        normalizedLocations.add(normalizeFilterValue(location))
-      })
-    })
-
-    return normalizedLocations
-  })
-
-  const buildArticleTopicTags = (article: AnyArticle) => {
-    const normalizedLocationSet = new Set(getStringArray(article.locations).map(location => normalizeFilterValue(location)))
-    return getStringArray(article.tags).filter((tag) => {
-      const normalizedTag = normalizeFilterValue(tag)
-      return !normalizedLocationSet.has(normalizedTag) && !globalNormalizedLocationSet.value.has(normalizedTag)
-    })
-  }
+  const globalNormalizedLocationSet = computed(() =>
+    buildGlobalNormalizedLocationSet(articles.value || [])
+  )
 
   const selectedCategory = computed<string | null>(() =>
     route.query.category ? String(route.query.category) : null
@@ -64,9 +50,11 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
     return articles.value.map((article) => {
       const authorName = authorsMap.value[article.author]?.name || article.author
       const authorSlug = getAuthorSlug(authorName)
-      const normalizedLocationSet = new Set(getStringArray(article.locations).map(location => normalizeFilterValue(location)))
-      const topicTags = buildArticleTopicTags(article)
-      const normalizedTopicTagSet = new Set(topicTags.map(tag => normalizeFilterValue(tag)))
+      const normalizedLocationSet = new Set(
+        getArticleFilterStringArray(article.locations).map(location => normalizeArticleFilterValue(location))
+      )
+      const topicTags = buildArticleTopicTags(article, globalNormalizedLocationSet.value)
+      const normalizedTopicTagSet = new Set(topicTags.map(tag => normalizeArticleFilterValue(tag)))
 
       return {
         article,
@@ -101,7 +89,7 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
 
       authorCounts[article.author] = (authorCounts[article.author] || 0) + 1
 
-      getStringArray(article.locations).forEach((location) => {
+      getArticleFilterStringArray(article.locations).forEach((location) => {
         locationCounts[location] = (locationCounts[location] || 0) + 1
       })
 
@@ -136,7 +124,7 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
   })
 
   const getArticleTopicTags = (article: AnyArticle) =>
-    preparedArticleFiltersByRef.value.get(article)?.topicTags || buildArticleTopicTags(article)
+    preparedArticleFiltersByRef.value.get(article)?.topicTags || buildArticleTopicTags(article, globalNormalizedLocationSet.value)
 
   const authorFilterOptions = computed<Array<{ name: string; slug: string; count: number }>>(() => {
     return (Object.entries(filterCounts.value.authorCounts) as Array<[string, number]>)
@@ -184,10 +172,10 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
 
   const selectedLocationLabel = computed<string | null>(() => {
     if (!selectedLocation.value) return null
-    const normalizedSelectedLocation = normalizeFilterValue(selectedLocation.value)
+    const normalizedSelectedLocation = normalizeArticleFilterValue(selectedLocation.value)
 
     const matchedLocation = locationFilterOptions.value.find(
-      item => normalizeFilterValue(item.location) === normalizedSelectedLocation
+      item => normalizeArticleFilterValue(item.location) === normalizedSelectedLocation
     )
 
     return matchedLocation?.location || selectedLocation.value
@@ -195,10 +183,10 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
 
   const selectedTagLabel = computed<string | null>(() => {
     if (!selectedTag.value) return null
-    const normalizedSelectedTag = normalizeFilterValue(selectedTag.value)
+    const normalizedSelectedTag = normalizeArticleFilterValue(selectedTag.value)
 
     const matchedTag = tagFilterOptions.value.find(
-      item => normalizeFilterValue(item.tag) === normalizedSelectedTag
+      item => normalizeArticleFilterValue(item.tag) === normalizedSelectedTag
     )
 
     return matchedTag?.tag || selectedTag.value
@@ -211,8 +199,8 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
   const filteredArticles = computed(() => {
     const category = selectedCategory.value
     const author = selectedAuthor.value
-    const normalizedSelectedLocation = selectedLocation.value ? normalizeFilterValue(selectedLocation.value) : null
-    const normalizedSelectedTag = selectedTag.value ? normalizeFilterValue(selectedTag.value) : null
+    const normalizedSelectedLocation = selectedLocation.value ? normalizeArticleFilterValue(selectedLocation.value) : null
+    const normalizedSelectedTag = selectedTag.value ? normalizeArticleFilterValue(selectedTag.value) : null
 
     const filtered: AnyArticle[] = []
 

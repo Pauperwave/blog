@@ -1,6 +1,6 @@
 <!-- app\pages\articles\[id].vue -->
 <script setup lang="ts">
-import { intersection, orderByMultiple } from "~/utils/array"
+import { intersection, orderBy, orderByMultiple } from "~/utils/array"
 import type { Author } from '~/composables/useAuthor'
 import {
   type AnyArticle,
@@ -9,6 +9,10 @@ import {
   getCollectionNames
 } from '~/constants/content-config'
 import { getRecentArticleBadge as getBadge } from '~/utils/article-badges'
+import {
+  buildGlobalNormalizedLocationSet,
+  getArticleTagFilterQuery
+} from '~/utils/article-filters'
 
 import appMeta from "~/app.meta"
 
@@ -50,13 +54,16 @@ const formattedDate = useState(`article-date-${route.path}`, () => {
 const MAX_RELATED_ARTICLES = 3
 const relatedArticlesString = "Altri articoli correlati"
 
-const { data: links } = await useAsyncData(`linked-${route.path}`, async () => {
+const { data: relatedArticlesData } = await useAsyncData(`linked-${route.path}`, async () => {
   const collectionsData = await queryAllCollections()
 
   // Combine all articles and filter
   const allArticles: AnyArticle[] = combineArticles(collectionsData)
+  const filterableArticles = allArticles.filter(a => a.published !== false)
+  const publishedArticles = allArticles.filter(a => a.published === true)
+  const globalNormalizedLocationSet = buildGlobalNormalizedLocationSet(filterableArticles)
 
-  const filtered = allArticles.filter(a => a.path !== data.value?.path && a.published === true)
+  const filtered = publishedArticles.filter(a => a.path !== data.value?.path)
 
   const withCommonTags = filtered.map(a => ({
     article: a,
@@ -79,7 +86,22 @@ const { data: links } = await useAsyncData(`linked-${route.path}`, async () => {
 
   // showing the top 3 by tag intersection and publication date
   // console.log(sorted.slice(0, MAX_RELATED_ARTICLES))
-  return sorted.slice(0, MAX_RELATED_ARTICLES)
+  return {
+    links: sorted.slice(0, MAX_RELATED_ARTICLES),
+    globalNormalizedLocationValues: Array.from(globalNormalizedLocationSet)
+  }
+})
+
+const links = computed(() => relatedArticlesData.value?.links || [])
+const globalNormalizedLocationSet = computed(
+  () => new Set(relatedArticlesData.value?.globalNormalizedLocationValues || [])
+)
+
+const getTagFilterLink = (tag: string) => ({
+  path: '/articles',
+  query: getArticleTagFilterQuery(data.value, tag, {
+    globalNormalizedLocationSet: globalNormalizedLocationSet.value
+  })
 })
 
 // Fetch author data for related articles
@@ -239,14 +261,20 @@ function updateMeta() {
       <div class="flex items-end flex-wrap gap-4 justify-between mt-4">
         <div class="flex flex-col gap-4">
           <div class="flex flex-row gap-2 items-center flex-wrap">
-            <UBadge
+            <NuxtLink
               v-for="tag in data?.tags"
               :key="tag"
-              color="primary"
-              variant="soft"
+              :to="getTagFilterLink(tag)"
+              class="rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
             >
-              {{ tag }}
-            </UBadge>
+              <UBadge
+                color="primary"
+                variant="soft"
+                class="cursor-pointer transition-opacity hover:opacity-80"
+              >
+                {{ tag }}
+              </UBadge>
+            </NuxtLink>
           </div>
           <AuthorCard
             v-if="authorData"
