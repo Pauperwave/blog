@@ -1,8 +1,8 @@
 ---
-title: "Top 4 Team Trio Pauperfest 3 2026"
+title: "Team Trio Pauperfest 3 2026"
 description: "Decklists Top 8"
 tags:
-  - top8
+  - top4
   - IPT
 locations:
   - Milano

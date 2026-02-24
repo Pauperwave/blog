@@ -1,5 +1,5 @@
 ---
-title: "Top 8 - Pauperotti and Friends 2026 (IPT Modena)"
+title: "Pauperotti and Friends 2026 (IPT Modena)"
 description: "Decklists Top 8"
 tags:
   - top8

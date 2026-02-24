@@ -4,6 +4,8 @@ description: "Decklists Top 32"
 tags:
   - top8
   - paupergeddon
+locations:
+  - Lucca
 date: 2025-12-02
 updatedAt: 2025-12-02
 author: Pietro Bragioto

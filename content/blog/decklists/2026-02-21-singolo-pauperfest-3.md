@@ -1,8 +1,9 @@
 ---
-title: "Top 8 and 16 - Pauperfest 3 2026 (SuperIPT Milano)"
+title: "Pauperfest 3 2026 (SuperIPT Milano)"
 description: "Decklists Top 8 and Top 16"
 tags:
   - top8
+  - top16
   - IPT
 locations:
   - Milano

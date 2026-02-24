@@ -1,8 +1,10 @@
 ---
-title: "Top 8 - LP Alto Adige and Südtirol Winter 2025"
+title: "LP Alto Adige and Südtirol Winter 2025"
 description: "Decklists Top 8"
 tags:
   - top8
+locations:
+  - Alto Adige
 date: 2026-02-22
 updatedAt: 2026-02-24
 author: Pietro Bragioto

@@ -1,5 +1,5 @@
 ---
-title: "Top 8 - Awesome Pauper 2026 (IPT Milano)"
+title: "Awesome Pauper 2026 (IPT Milano)"
 description: "Decklists Top 8"
 tags:
   - top8
