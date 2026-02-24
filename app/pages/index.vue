@@ -54,6 +54,30 @@ const getThumbnailSrc = (thumbnail: unknown) => {
 }
 
 const articles = computed(() => allArticles.value || [])
+const normalizeFilterValue = (value: string) => value.trim().toLocaleLowerCase('it')
+const getStringArray = (value: unknown): string[] =>
+  Array.isArray(value) ? value.filter((item): item is string => typeof item === 'string') : []
+const globalNormalizedLocationSet = computed(() => {
+  const normalizedLocations = new Set<string>()
+
+  articles.value.forEach((article) => {
+    getStringArray(article.locations).forEach((location) => {
+      normalizedLocations.add(normalizeFilterValue(location))
+    })
+  })
+
+  return normalizedLocations
+})
+const getArticleTopicTags = (article: AnyArticle) => {
+  const normalizedLocationSet = new Set(
+    getStringArray(article.locations).map(location => normalizeFilterValue(location))
+  )
+
+  return getStringArray(article.tags).filter((tag) => {
+    const normalizedTag = normalizeFilterValue(tag)
+    return !normalizedLocationSet.has(normalizedTag) && !globalNormalizedLocationSet.value.has(normalizedTag)
+  })
+}
 
 const articlesByCategory = computed(() => {
   const categories = initializeCategories()
@@ -112,20 +136,28 @@ const topAuthors = computed(() => {
 })
 
 const trendingTags = computed(() => {
-  const tagCounts = articles.value.slice(0, 24).reduce((acc, article) => {
-    article.tags?.forEach((tag) => {
+  const recentTagCounts = articles.value.slice(0, 24).reduce((acc, article) => {
+    getArticleTopicTags(article).forEach((tag) => {
       acc[tag] = (acc[tag] || 0) + 1
     })
     return acc
   }, {} as Record<string, number>)
 
-  return Object.entries(tagCounts)
+  const totalTagCounts = articles.value.reduce((acc, article) => {
+    getArticleTopicTags(article).forEach((tag) => {
+      acc[tag] = (acc[tag] || 0) + 1
+    })
+    return acc
+  }, {} as Record<string, number>)
+
+  return Object.entries(recentTagCounts)
+    .filter(([tag]) => (totalTagCounts[tag] || 0) > 5)
     .sort((a, b) => {
       if (b[1] !== a[1]) return b[1] - a[1]
       return a[0].localeCompare(b[0], 'it')
     })
     .slice(0, 10)
-    .map(([tag, count]) => ({ tag, count }))
+    .map(([tag]) => ({ tag, count: totalTagCounts[tag] || 0 }))
 })
 
 // Get sections from centralized config
@@ -144,12 +176,6 @@ const sections = getHomeSections()
           <div class="relative grid grid-cols-1 xl:grid-cols-[1.1fr_.9fr] gap-6 lg:gap-8">
             <div class="min-w-0">
               <div class="flex flex-wrap items-center gap-2 mb-4">
-                <UBadge
-                  color="primary"
-                  variant="soft"
-                >
-                  Pauperwave Blog
-                </UBadge>
                 <UBadge
                   color="neutral"
                   variant="subtle"
@@ -233,6 +259,40 @@ const sections = getHomeSections()
                     <span class="text-xs text-gray-500 dark:text-gray-400">{{ author.count }}</span>
                   </NuxtLink>
                 </div>
+                
+                <UCard
+                  v-if="trendingTags.length"
+                  class="mt-4 border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-900/65 backdrop-blur-sm"
+                >
+                  <div class="flex items-center justify-between gap-3 mb-4">
+                    <div>
+                      <p class="text-xs uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400 font-semibold">
+                        Tag recenti
+                      </p>
+                      <h2 class="text-lg font-bold text-gray-900 dark:text-white">
+                        Temi caldi
+                      </h2>
+                    </div>
+                  </div>
+
+                  <div class="flex flex-wrap gap-2">
+                    <NuxtLink
+                      v-for="item in trendingTags"
+                      :key="`tag-${item.tag}`"
+                      :to="{ path: '/articles', query: { tag: item.tag } }"
+                      :aria-label="`Filtra articoli per tag ${item.tag}`"
+                      class="inline-flex"
+                    >
+                      <UBadge
+                        color="primary"
+                        variant="subtle"
+                        class="cursor-pointer transition-colors hover:bg-primary-100 dark:hover:bg-primary-900/40"
+                      >
+                        {{ item.tag }} · {{ item.count }}
+                      </UBadge>
+                    </NuxtLink>
+                  </div>
+                </UCard>
               </div>
             </div>
 
@@ -357,120 +417,6 @@ const sections = getHomeSections()
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section class="grid grid-cols-1 lg:grid-cols-[1.1fr_.9fr] gap-6 mb-10">
-        <UCard class="border-gray-200 dark:border-gray-800">
-          <div class="flex items-center justify-between gap-3 mb-4">
-            <div>
-              <p class="text-xs uppercase tracking-[0.18em] text-primary font-semibold">
-                Ultime pubblicazioni
-              </p>
-              <h2 class="text-xl md:text-2xl font-bold">
-                Cosa leggere adesso
-              </h2>
-            </div>
-            <UButton
-              to="/articles"
-              variant="ghost"
-              size="sm"
-            >
-              Vedi archivio
-            </UButton>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <NuxtLink
-              v-for="article in latestArticles"
-              :key="`latest-${article._id}`"
-              :to="article.path"
-              class="group rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-primary-400 dark:hover:border-primary-500 transition-colors"
-            >
-              <div class="flex items-center gap-2 flex-wrap mb-2">
-                <UBadge
-                  color="neutral"
-                  variant="soft"
-                >
-                  {{ CATEGORY_LABELS[article.category as CategoryType] }}
-                </UBadge>
-                <span class="text-xs text-gray-500 dark:text-gray-400">
-                  {{ formatDateIT(article.date) }}
-                </span>
-              </div>
-
-              <h3 class="font-semibold text-gray-900 dark:text-white group-hover:text-primary transition-colors line-clamp-2">
-                {{ article.title }}
-              </h3>
-              <p class="mt-1 text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
-                {{ article.description }}
-              </p>
-              <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
-                {{ authorsMap[article.author]?.name || article.author }}
-              </p>
-            </NuxtLink>
-          </div>
-        </UCard>
-
-        <div class="grid grid-cols-1 gap-6">
-          <UCard class="border-gray-200 dark:border-gray-800">
-            <div class="flex items-center justify-between gap-3 mb-4">
-              <div>
-                <p class="text-xs uppercase tracking-[0.18em] text-primary font-semibold">
-                  Panorama
-                </p>
-                <h2 class="text-xl font-bold">
-                  Il blog in numeri
-                </h2>
-              </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-3">
-              <div class="rounded-xl border border-gray-200 dark:border-gray-800 p-4">
-                <p class="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">Contenuti</p>
-                <p class="mt-1 text-2xl font-bold">{{ articles.length }}</p>
-              </div>
-              <div class="rounded-xl border border-gray-200 dark:border-gray-800 p-4">
-                <p class="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">Autori attivi</p>
-                <p class="mt-1 text-2xl font-bold">{{ activeAuthorsCount }}</p>
-              </div>
-              <div class="rounded-xl border border-gray-200 dark:border-gray-800 p-4">
-                <p class="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">Categorie</p>
-                <p class="mt-1 text-2xl font-bold">{{ categoryHighlights.length }}</p>
-              </div>
-              <div class="rounded-xl border border-gray-200 dark:border-gray-800 p-4">
-                <p class="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">Nuovi 7g</p>
-                <p class="mt-1 text-2xl font-bold">{{ freshThisWeekCount }}</p>
-              </div>
-            </div>
-          </UCard>
-
-          <UCard
-            v-if="trendingTags.length"
-            class="border-gray-200 dark:border-gray-800"
-          >
-            <div class="flex items-center justify-between gap-3 mb-4">
-              <div>
-                <p class="text-xs uppercase tracking-[0.18em] text-primary font-semibold">
-                  Tag recenti
-                </p>
-                <h2 class="text-xl font-bold">
-                  Temi caldi
-                </h2>
-              </div>
-            </div>
-
-            <div class="flex flex-wrap gap-2">
-              <UBadge
-                v-for="item in trendingTags"
-                :key="`tag-${item.tag}`"
-                color="primary"
-                variant="subtle"
-              >
-                {{ item.tag }} · {{ item.count }}
-              </UBadge>
-            </div>
-          </UCard>
         </div>
       </section>
 

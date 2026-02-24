@@ -23,9 +23,24 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
   const getStringArray = (value: unknown): string[] =>
     Array.isArray(value) ? value.filter((item): item is string => typeof item === 'string') : []
 
+  const globalNormalizedLocationSet = computed(() => {
+    const normalizedLocations = new Set<string>()
+
+    articles.value?.forEach((article) => {
+      getStringArray(article.locations).forEach((location) => {
+        normalizedLocations.add(normalizeFilterValue(location))
+      })
+    })
+
+    return normalizedLocations
+  })
+
   const buildArticleTopicTags = (article: AnyArticle) => {
     const normalizedLocationSet = new Set(getStringArray(article.locations).map(location => normalizeFilterValue(location)))
-    return getStringArray(article.tags).filter(tag => !normalizedLocationSet.has(normalizeFilterValue(tag)))
+    return getStringArray(article.tags).filter((tag) => {
+      const normalizedTag = normalizeFilterValue(tag)
+      return !normalizedLocationSet.has(normalizedTag) && !globalNormalizedLocationSet.value.has(normalizedTag)
+    })
   }
 
   const selectedCategory = computed<string | null>(() =>
@@ -50,7 +65,7 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
       const authorName = authorsMap.value[article.author]?.name || article.author
       const authorSlug = getAuthorSlug(authorName)
       const normalizedLocationSet = new Set(getStringArray(article.locations).map(location => normalizeFilterValue(location)))
-      const topicTags = getStringArray(article.tags).filter(tag => !normalizedLocationSet.has(normalizeFilterValue(tag)))
+      const topicTags = buildArticleTopicTags(article)
       const normalizedTopicTagSet = new Set(topicTags.map(tag => normalizeFilterValue(tag)))
 
       return {
