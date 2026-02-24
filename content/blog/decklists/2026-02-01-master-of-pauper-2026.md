@@ -4,6 +4,7 @@ description: "Decklists Top 8"
 tags:
   - top8
   - IPT
+locations:
   - Torino
 date: 2026-02-01
 updatedAt: 2026-02-08

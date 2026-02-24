@@ -4,6 +4,7 @@ description: "Decklists Top 8"
 tags:
   - top8
   - paupergeddon
+locations:
   - Lecco
 date: 2025-03-23
 updatedAt: 2025-03-23

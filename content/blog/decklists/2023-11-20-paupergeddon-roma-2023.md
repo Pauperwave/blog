@@ -4,6 +4,7 @@ description: "Decklists Top 8"
 tags:
   - top8
   - paupergeddon
+locations:
   - Roma
 date: 2023-11-20
 updatedAt: 2023-11-20

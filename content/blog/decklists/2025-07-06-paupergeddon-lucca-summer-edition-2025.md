@@ -4,6 +4,7 @@ description: "Decklists Top 8"
 tags:
   - top8
   - paupergeddon
+locations:
   - Lucca
 date: 2025-07-06
 updatedAt: 2025-07-06
