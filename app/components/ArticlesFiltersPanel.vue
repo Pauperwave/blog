@@ -83,36 +83,36 @@ const isSelectedTagValue = (tag: string) =>
 
     <div
       v-if="hasActiveFilters"
-      class="mb-4 flex items-center gap-2 flex-wrap rounded-lg border border-yellow-300/70 dark:border-yellow-700/50 bg-warning-50/50 dark:bg-warning-950/10 px-3 py-2"
+      class="mb-4 flex items-center gap-2 flex-wrap rounded-lg border border-warning/40 dark:border-warning/50 bg-warning/10 dark:bg-warning/15 px-3 py-2 shadow-sm"
     >
-      <span class="text-xs font-medium uppercase tracking-wide text-gray-600 dark:text-gray-300">
+      <span class="rounded-md bg-warning/15 dark:bg-warning/20 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-warning">
         Filtri attivi
       </span>
       <UBadge
         v-if="selectedCategoryLabel"
         color="neutral"
-        variant="soft"
+        variant="solid"
       >
         Categoria: {{ selectedCategoryLabel }}
       </UBadge>
       <UBadge
         v-if="selectedAuthorLabel"
         color="neutral"
-        variant="soft"
+        variant="solid"
       >
         Autore: {{ selectedAuthorLabel }}
       </UBadge>
       <UBadge
         v-if="selectedLocationLabel"
         color="info"
-        variant="soft"
+        variant="solid"
       >
         Luogo: {{ selectedLocationLabel }}
       </UBadge>
       <UBadge
         v-if="selectedTagLabel"
         color="primary"
-        variant="soft"
+        variant="solid"
       >
         Tag: {{ selectedTagLabel }}
       </UBadge>
