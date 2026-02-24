@@ -19,6 +19,7 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:run": "vitest run",
+    "bench:filters": "bun run scripts/benchmark-article-filters.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
