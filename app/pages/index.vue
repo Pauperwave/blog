@@ -304,7 +304,7 @@ const sections = getHomeSections()
                 v-slot="{ navigate }"
               >
                 <UCard
-                  class="relative overflow-hidden border border-gray-200 dark:border-gray-800 bg-white/85 dark:bg-gray-900/75 backdrop-blur-sm cursor-pointer transition-all duration-300 hover:border-primary-400 dark:hover:border-primary-500 hover:shadow-lg active:scale-[0.995]"
+                  class="relative overflow-hidden rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 backdrop-blur-sm cursor-pointer transition-all duration-300 hover:border-primary-500 dark:hover:border-primary-400 hover:shadow-xl hover:shadow-primary-500/10 dark:hover:shadow-primary-400/10 hover:-translate-y-1 active:scale-[0.995]"
                   role="link"
                   tabindex="0"
                   @click="navigate"
@@ -383,7 +383,7 @@ const sections = getHomeSections()
                   v-for="article in heroSecondaryArticles"
                   :key="`hero-secondary-${article._id}`"
                   :to="article.path"
-                  class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-900/65 p-4 hover:border-primary-400 dark:hover:border-primary-500 transition-all hover:shadow-lg"
+                  class="group rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 backdrop-blur-sm p-4 hover:border-primary-500 dark:hover:border-primary-400 transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/10 dark:hover:shadow-primary-400/10 hover:-translate-y-1 hover:scale-[1.02]"
                 >
                   <div class="flex items-start justify-between gap-3">
                     <div class="min-w-0">
