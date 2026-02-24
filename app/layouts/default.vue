@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from "@nuxt/ui";
-import { PAUPERWAVE_SOCIAL_LINKS } from "~/constants/social-links";
 
 const navItems: NavigationMenuItem[] = [
-  { label: "YouTube channel", icon: "logos:youtube-icon", target: "_blank", to: PAUPERWAVE_SOCIAL_LINKS.youtube },
-  { label: "Repository", icon: "mdi:github", target: "_blank", to: PAUPERWAVE_SOCIAL_LINKS.github },
+  { label: "Autori", icon: "mdi:account-group", to: "/authors" },
 ];
 </script>
 
