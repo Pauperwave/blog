@@ -163,8 +163,14 @@ useSeoMeta({
                     name="material-symbols:article-rounded"
                     class="w-5 h-5 text-primary"
                   />
-                  <!-- TODO trasformarlo in un bottone che rimanda alla pagina home principale con il filtro /articles?author=${getAuthorSlug(authorData.name)} -->
-                  <span class="text-sm font-semibold">{{ totalArticles }} articoli totali</span>
+                  <UButton
+                    :to="`/articles?author=${getAuthorSlug(authorData.name)}`"
+                    variant="link"
+                    color="primary"
+                    class="p-0 text-sm font-semibold"
+                  >
+                    {{ totalArticles }} articoli totali
+                  </UButton>
                 </div>
               </div>
             </div>
@@ -179,11 +185,10 @@ useSeoMeta({
       >
         <h2 class="text-2xl font-bold mb-4">Articoli per categoria</h2>
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-          <!-- TODO: :to="`/articles?category=${category}?author=${getAuthorSlug(authorData.name)}`" -->
           <NuxtLink
             v-for="(count, category) in articleCounts"
             :key="category"
-            :to="`/articles?category=${category}`"
+            :to="`/articles?category=${category}&author=${getAuthorSlug(authorData.name)}`"
             class="block"
           >
             <UCard
