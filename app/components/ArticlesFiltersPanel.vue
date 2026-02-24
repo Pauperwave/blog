@@ -95,6 +95,7 @@ const isSelectedTagValue = (tag: string) =>
           <UButton
             size="xs"
             color="neutral"
+            class="cursor-pointer"
             :variant="selectedCategory === null ? 'solid' : 'outline'"
             @click="emit('set-category', null)"
           >
@@ -105,6 +106,7 @@ const isSelectedTagValue = (tag: string) =>
             :key="item.category"
             size="xs"
             color="neutral"
+            class="cursor-pointer"
             :variant="selectedCategory === item.category ? 'solid' : 'outline'"
             @click="emit('set-category', item.category)"
           >
@@ -126,6 +128,7 @@ const isSelectedTagValue = (tag: string) =>
           <UButton
             size="xs"
             color="neutral"
+            class="cursor-pointer"
             :variant="selectedAuthor === null ? 'solid' : 'outline'"
             @click="emit('set-author', null)"
           >
@@ -136,6 +139,7 @@ const isSelectedTagValue = (tag: string) =>
             :key="author.slug"
             size="xs"
             color="neutral"
+            class="cursor-pointer"
             :variant="selectedAuthor === author.slug ? 'solid' : 'outline'"
             @click="emit('set-author', author.slug)"
           >
@@ -157,6 +161,7 @@ const isSelectedTagValue = (tag: string) =>
           <UButton
             size="xs"
             color="info"
+            class="cursor-pointer"
             :variant="selectedLocation === null ? 'solid' : 'outline'"
             @click="emit('set-location', null)"
           >
@@ -167,6 +172,7 @@ const isSelectedTagValue = (tag: string) =>
             :key="location.location"
             size="xs"
             color="info"
+            class="cursor-pointer"
             :variant="isSelectedLocationValue(location.location) ? 'solid' : 'outline'"
             @click="emit('set-location', location.location)"
           >
@@ -189,6 +195,7 @@ const isSelectedTagValue = (tag: string) =>
             <UButton
               size="xs"
               color="primary"
+              class="cursor-pointer"
               :variant="selectedTag === null ? 'solid' : 'outline'"
               @click="emit('set-tag', null)"
             >
@@ -199,6 +206,7 @@ const isSelectedTagValue = (tag: string) =>
               :key="tag.tag"
               size="xs"
               color="primary"
+              class="cursor-pointer"
               :variant="isSelectedTagValue(tag.tag) ? 'solid' : 'outline'"
               @click="emit('set-tag', tag.tag)"
             >
@@ -220,6 +228,8 @@ const isSelectedTagValue = (tag: string) =>
         v-if="selectedCategoryLabel"
         color="neutral"
         variant="solid"
+        class="cursor-pointer transition-colors hover:bg-error/10 hover:text-error hover:ring hover:ring-inset hover:ring-error/25"
+        @click="emit('set-category', null)"
       >
         Categoria: {{ selectedCategoryLabel }}
       </UBadge>
@@ -227,6 +237,8 @@ const isSelectedTagValue = (tag: string) =>
         v-if="selectedAuthorLabel"
         color="neutral"
         variant="solid"
+        class="cursor-pointer transition-colors hover:bg-error/10 hover:text-error hover:ring hover:ring-inset hover:ring-error/25"
+        @click="emit('set-author', null)"
       >
         Autore: {{ selectedAuthorLabel }}
       </UBadge>
@@ -234,6 +246,8 @@ const isSelectedTagValue = (tag: string) =>
         v-if="selectedLocationLabel"
         color="info"
         variant="solid"
+        class="cursor-pointer transition-colors hover:bg-error/10 hover:text-error hover:ring hover:ring-inset hover:ring-error/25"
+        @click="emit('set-location', null)"
       >
         Luogo: {{ selectedLocationLabel }}
       </UBadge>
@@ -241,6 +255,8 @@ const isSelectedTagValue = (tag: string) =>
         v-if="selectedTagLabel"
         color="primary"
         variant="solid"
+        class="cursor-pointer transition-colors hover:bg-error/10 hover:text-error hover:ring hover:ring-inset hover:ring-error/25"
+        @click="emit('set-tag', null)"
       >
         Tag: {{ selectedTagLabel }}
       </UBadge>
