@@ -8,10 +8,25 @@ interface UseArticlesFiltersOptions {
   authorsMap: Ref<Record<string, Author>>
 }
 
+interface PreparedArticleFilterData {
+  article: AnyArticle
+  authorSlug: string
+  normalizedLocationSet: Set<string>
+  topicTags: string[]
+  normalizedTopicTagSet: Set<string>
+}
+
 export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersOptions) => {
   const route = useRoute();
 
   const normalizeFilterValue = (value: string) => value.trim().toLocaleLowerCase('it');
+  const getStringArray = (value: unknown): string[] =>
+    Array.isArray(value) ? value.filter((item): item is string => typeof item === 'string') : [];
+
+  const buildArticleTopicTags = (article: AnyArticle) => {
+    const normalizedLocationSet = new Set(getStringArray(article.locations).map(location => normalizeFilterValue(location)));
+    return getStringArray(article.tags).filter(tag => !normalizedLocationSet.has(normalizeFilterValue(tag)));
+  };
 
   const selectedCategory = computed<string | null>(() =>
     route.query.category ? String(route.query.category) : null
@@ -28,25 +43,76 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
 
   const categoryLabels = CATEGORY_LABELS;
 
+  const preparedArticleFilters = computed<PreparedArticleFilterData[]>(() => {
+    if (!articles.value) return [];
+
+    return articles.value.map((article) => {
+      const authorName = authorsMap.value[article.author]?.name || article.author;
+      const authorSlug = getAuthorSlug(authorName);
+      const normalizedLocationSet = new Set(getStringArray(article.locations).map(location => normalizeFilterValue(location)));
+      const topicTags = getStringArray(article.tags).filter(tag => !normalizedLocationSet.has(normalizeFilterValue(tag)));
+      const normalizedTopicTagSet = new Set(topicTags.map(tag => normalizeFilterValue(tag)));
+
+      return {
+        article,
+        authorSlug,
+        normalizedLocationSet,
+        topicTags,
+        normalizedTopicTagSet
+      };
+    });
+  });
+
+  const preparedArticleFiltersByRef = computed(() => {
+    const lookup = new WeakMap<AnyArticle, PreparedArticleFilterData>();
+
+    preparedArticleFilters.value.forEach((item) => {
+      lookup.set(item.article, item);
+    });
+
+    return lookup;
+  });
+
+  const filterCounts = computed(() => {
+    const categoryCounts: Record<string, number> = {};
+    const authorCounts: Record<string, number> = {};
+    const locationCounts: Record<string, number> = {};
+    const tagCounts: Record<string, number> = {};
+
+    preparedArticleFilters.value.forEach(({ article, topicTags }) => {
+      if (typeof article.category === 'string') {
+        categoryCounts[article.category] = (categoryCounts[article.category] || 0) + 1;
+      }
+
+      authorCounts[article.author] = (authorCounts[article.author] || 0) + 1;
+
+      getStringArray(article.locations).forEach((location) => {
+        locationCounts[location] = (locationCounts[location] || 0) + 1;
+      });
+
+      topicTags.forEach((tag) => {
+        tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+      });
+    });
+
+    return {
+      categoryCounts,
+      authorCounts,
+      locationCounts,
+      tagCounts
+    };
+  });
+
   const categoryFilterOptions = computed<Array<{ category: string; label: string; count: number }>>(() =>
     Object.entries(categoryLabels).map(([category, label]) => ({
       category,
       label,
-      count: articles.value?.filter(article => article.category === category).length || 0
+      count: filterCounts.value.categoryCounts[category] || 0
     }))
   );
 
   const locationFilterOptions = computed<Array<{ location: string; count: number }>>(() => {
-    if (!articles.value) return [];
-
-    const locationCounts = articles.value.reduce((acc, article) => {
-      article.locations?.forEach((location) => {
-        acc[location] = (acc[location] || 0) + 1;
-      });
-      return acc;
-    }, {} as Record<string, number>);
-
-    return (Object.entries(locationCounts) as Array<[string, number]>)
+    return (Object.entries(filterCounts.value.locationCounts) as Array<[string, number]>)
       .map(([location, count]) => ({ location, count }))
       .sort((a, b) => {
         if (b.count !== a.count) return b.count - a.count;
@@ -54,20 +120,11 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
       });
   });
 
-  const getArticleTopicTags = (article: AnyArticle) => {
-    const locationSet = new Set((article.locations || []).map(location => normalizeFilterValue(location)));
-    return (article.tags || []).filter(tag => !locationSet.has(normalizeFilterValue(tag)));
-  };
+  const getArticleTopicTags = (article: AnyArticle) =>
+    preparedArticleFiltersByRef.value.get(article)?.topicTags || buildArticleTopicTags(article);
 
   const authorFilterOptions = computed<Array<{ name: string; slug: string; count: number }>>(() => {
-    if (!articles.value) return [];
-
-    const authorCounts = articles.value.reduce((acc, article) => {
-      acc[article.author] = (acc[article.author] || 0) + 1;
-      return acc;
-    }, {} as Record<string, number>);
-
-    return (Object.entries(authorCounts) as Array<[string, number]>)
+    return (Object.entries(filterCounts.value.authorCounts) as Array<[string, number]>)
       .map(([authorKey, count]) => {
         const authorName = authorsMap.value[authorKey]?.name || authorKey;
 
@@ -84,22 +141,21 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
   });
 
   const tagFilterOptions = computed<Array<{ tag: string; count: number }>>(() => {
-    if (!articles.value) return [];
-
-    const tagCounts = articles.value.reduce((acc, article) => {
-      getArticleTopicTags(article).forEach((tag) => {
-        acc[tag] = (acc[tag] || 0) + 1;
-      });
-      return acc;
-    }, {} as Record<string, number>);
-
-    return (Object.entries(tagCounts) as Array<[string, number]>)
+    return (Object.entries(filterCounts.value.tagCounts) as Array<[string, number]>)
       .map(([tag, count]) => ({ tag, count }))
       .sort((a, b) => {
         if (b.count !== a.count) return b.count - a.count;
         return a.tag.localeCompare(b.tag, 'it');
       });
   });
+
+  const authorSlugToName = computed<Record<string, string>>(() =>
+    Object.values(authorsMap.value).reduce((acc, author) => {
+      const slug = getAuthorSlug(author.name);
+      if (!acc[slug]) acc[slug] = author.name;
+      return acc;
+    }, {} as Record<string, string>)
+  );
 
   const selectedCategoryLabel = computed<string | null>(() => {
     if (!selectedCategory.value) return null;
@@ -108,19 +164,15 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
 
   const selectedAuthorLabel = computed<string | null>(() => {
     if (!selectedAuthor.value) return null;
-
-    const matchedAuthor = Object.values(authorsMap.value).find(
-      author => getAuthorSlug(author.name) === selectedAuthor.value
-    );
-
-    return matchedAuthor?.name || getAuthorNameFromSlug(selectedAuthor.value);
+    return authorSlugToName.value[selectedAuthor.value] || getAuthorNameFromSlug(selectedAuthor.value);
   });
 
   const selectedLocationLabel = computed<string | null>(() => {
     if (!selectedLocation.value) return null;
+    const normalizedSelectedLocation = normalizeFilterValue(selectedLocation.value);
 
     const matchedLocation = locationFilterOptions.value.find(
-      item => normalizeFilterValue(item.location) === normalizeFilterValue(selectedLocation.value)
+      item => normalizeFilterValue(item.location) === normalizedSelectedLocation
     );
 
     return matchedLocation?.location || selectedLocation.value;
@@ -128,9 +180,10 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
 
   const selectedTagLabel = computed<string | null>(() => {
     if (!selectedTag.value) return null;
+    const normalizedSelectedTag = normalizeFilterValue(selectedTag.value);
 
     const matchedTag = tagFilterOptions.value.find(
-      item => normalizeFilterValue(item.tag) === normalizeFilterValue(selectedTag.value)
+      item => normalizeFilterValue(item.tag) === normalizedSelectedTag
     );
 
     return matchedTag?.tag || selectedTag.value;
@@ -141,21 +194,25 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
   );
 
   const filteredArticles = computed(() => {
-    if (!articles.value) return [];
+    const category = selectedCategory.value;
+    const author = selectedAuthor.value;
+    const normalizedSelectedLocation = selectedLocation.value ? normalizeFilterValue(selectedLocation.value) : null;
+    const normalizedSelectedTag = selectedTag.value ? normalizeFilterValue(selectedTag.value) : null;
 
-    return articles.value.filter((article) => {
-      const matchesCategory = !selectedCategory.value || article.category === selectedCategory.value;
-      const authorName = authorsMap.value[article.author]?.name || article.author;
-      const matchesAuthor = !selectedAuthor.value || getAuthorSlug(authorName) === selectedAuthor.value;
-      const matchesLocation = !selectedLocation.value || (article.locations || []).some(
-        location => normalizeFilterValue(location) === normalizeFilterValue(selectedLocation.value)
-      );
-      const matchesTag = !selectedTag.value || getArticleTopicTags(article).some(
-        tag => normalizeFilterValue(tag) === normalizeFilterValue(selectedTag.value)
-      );
+    const filtered: AnyArticle[] = [];
 
-      return matchesCategory && matchesAuthor && matchesLocation && matchesTag;
+    preparedArticleFilters.value.forEach((item) => {
+      const matchesCategory = !category || item.article.category === category;
+      const matchesAuthor = !author || item.authorSlug === author;
+      const matchesLocation = !normalizedSelectedLocation || item.normalizedLocationSet.has(normalizedSelectedLocation);
+      const matchesTag = !normalizedSelectedTag || item.normalizedTopicTagSet.has(normalizedSelectedTag);
+
+      if (matchesCategory && matchesAuthor && matchesLocation && matchesTag) {
+        filtered.push(item.article);
+      }
     });
+
+    return filtered;
   });
 
   const updateFilters = (next: {
