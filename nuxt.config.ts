@@ -32,7 +32,7 @@ export default defineNuxtConfig({
     site: {
       name: appMeta.name,
       url: appMeta.url,
-      defaultLocale: "en",
+      defaultLocale: "it",
     },
     schemaOrg: {
       identity: definePerson(appMeta.author),
@@ -103,9 +103,9 @@ export default defineNuxtConfig({
     },
     icon: {
         // Avoid remote icon JSON fetches on Vercel serverless builds (timeouts in CI logs).
-        serverBundle: {
-          collections: ['ic', 'lucide', 'simple-icons', 'logos', 'mdi', 'material-symbols']
-        },
+        // serverBundle: {
+        //   collections: ['ic', 'lucide', 'simple-icons', 'logos', 'mdi', 'material-symbols']
+        // },
         // Help Nuxt Icon resolve dashed collection names correctly.
         collections: ['ic', 'lucide', 'simple-icons', 'logos', 'mdi', 'material-symbols'],
         aliases: {
