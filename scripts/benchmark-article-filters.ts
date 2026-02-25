@@ -73,7 +73,7 @@ const DEFAULTS = {
   limit: 0
 } as const
 
-const normalizeFilterValue = (value: string) => value.trim().toLocaleLowerCase('it')
+const normalizeFilterValue = (value: string) => value.trim().toLowerCase()
 const getAuthorSlug = (authorName: string) => authorName.toLowerCase().replace(/\s+/g, '-')
 
 const getStringArray = (value: unknown): string[] =>

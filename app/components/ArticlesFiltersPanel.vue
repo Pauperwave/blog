@@ -46,7 +46,7 @@ const emit = defineEmits<{
   (e: 'clear-all'): void
 }>()
 
-const normalizeFilterValue = (value: string) => value.trim().toLocaleLowerCase('it')
+const normalizeFilterValue = (value: string) => value.trim().toLowerCase()
 
 const isSelectedLocationValue = (location: string) =>
   !!props.selectedLocation && normalizeFilterValue(location) === normalizeFilterValue(props.selectedLocation)

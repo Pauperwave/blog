@@ -54,7 +54,7 @@ const getThumbnailSrc = (thumbnail: unknown) => {
 }
 
 const articles = computed(() => allArticles.value || [])
-const normalizeFilterValue = (value: string) => value.trim().toLocaleLowerCase('it')
+const normalizeFilterValue = (value: string) => value.trim().toLowerCase()
 const getStringArray = (value: unknown): string[] =>
   Array.isArray(value) ? value.filter((item): item is string => typeof item === 'string') : []
 const globalNormalizedLocationSet = computed(() => {
@@ -269,7 +269,7 @@ const sections = getHomeSections()
                     <NuxtLink
                       v-for="item in trendingTags"
                       :key="`tag-${item.tag}`"
-                      :to="{ path: '/articles', query: { tag: item.tag } }"
+                      :to="{ path: '/articles', query: { tag: normalizeFilterValue(item.tag) } }"
                       :aria-label="`Filtra articoli per tag ${item.tag}`"
                       class="inline-flex items-center gap-2 rounded-full border border-gray-200 dark:border-gray-700 bg-white/70 dark:bg-gray-900/60 px-3 py-1.5 text-sm hover:border-primary-400 hover:text-primary transition-colors"
                     >
