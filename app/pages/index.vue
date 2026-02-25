@@ -413,26 +413,26 @@ const sections = getHomeSections()
             <p class="text-xs uppercase tracking-[0.18em] text-primary font-semibold">
               Esplora
             </p>
-            <h2 class="text-2xl md:text-3xl font-bold">
+            <h1 class="text-3xl md:text-3xl font-bold">
               Sezioni del blog
-            </h2>
+            </h1>
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+              Tutte le categorie, ordinate per priorità editoriale
+            </p>
           </div>
-          <p class="text-sm text-gray-600 dark:text-gray-400">
-            Tutte le categorie, ordinate per priorità editoriale
-          </p>
+        </div>
+        
+        <div class="space-y-12 pb-2">
+          <ArticleCategorySection
+            v-for="section in sections"
+            :key="section.category"
+            :title="section.title"
+            :category="section.category"
+            :articles="articlesByCategory[section.category]"
+            :authors-map="authorsMap"
+          />
         </div>
       </section>
-
-      <div class="space-y-12 pb-2">
-        <ArticleCategorySection
-          v-for="section in sections"
-          :key="section.category"
-          :title="section.title"
-          :category="section.category"
-          :articles="articlesByCategory[section.category]"
-          :authors-map="authorsMap"
-        />
-      </div>
     </UPageBody>
   </UPage>
 </template>

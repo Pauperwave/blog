@@ -24,7 +24,7 @@ withDefaults(defineProps<Props>(), {
     class="space-y-6"
   >
     <div class="flex items-center justify-between">
-      <h2 class="text-3xl font-bold">{{ title }}</h2>
+      <h2 class="text-2xl font-bold">{{ title }}</h2>
       <UButton
         :to="`/articles?category=${category}`"
         variant="link"
