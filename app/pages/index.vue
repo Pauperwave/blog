@@ -172,7 +172,7 @@ const sections = getHomeSections()
       }"
     >
       <section class="rounded-2xl border border-gray-200 dark:border-gray-800 bg-linear-to-b from-white to-gray-50 dark:from-gray-950 dark:to-gray-900 p-6 mb-6">
-        <div class="relative overflow-hidden">
+        <div class="relative overflow-visible">
           <div class="relative grid grid-cols-1 xl:grid-cols-[1.1fr_.9fr] gap-6 lg:gap-8">
             <div class="min-w-0">
               <div class="flex flex-wrap items-center gap-2 mb-4">
