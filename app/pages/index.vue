@@ -260,39 +260,28 @@ const sections = getHomeSections()
                   </NuxtLink>
                 </div>
                 
-                <UCard
+                <div
                   v-if="trendingTags.length"
-                  class="mt-4 border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-900/65 backdrop-blur-sm"
+                  class="mt-6"
                 >
-                  <div class="flex items-center justify-between gap-3 mb-4">
-                    <div>
-                      <p class="text-xs uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400 font-semibold">
-                        Tag recenti
-                      </p>
-                      <h2 class="text-lg font-bold text-gray-900 dark:text-white">
-                        Temi caldi
-                      </h2>
-                    </div>
-                  </div>
-
+                  <p class="text-xs uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400 mb-3">
+                    Tag recenti
+                  </p>
                   <div class="flex flex-wrap gap-2">
                     <NuxtLink
                       v-for="item in trendingTags"
                       :key="`tag-${item.tag}`"
                       :to="{ path: '/articles', query: { tag: item.tag } }"
                       :aria-label="`Filtra articoli per tag ${item.tag}`"
-                      class="inline-flex"
+                      class="inline-flex items-center gap-2 rounded-full border border-gray-200 dark:border-gray-700 bg-white/70 dark:bg-gray-900/60 px-3 py-1.5 text-sm hover:border-primary-400 hover:text-primary transition-colors"
                     >
-                      <UBadge
-                        color="primary"
-                        variant="subtle"
-                        class="cursor-pointer transition-colors hover:bg-primary-100 dark:hover:bg-primary-900/40"
-                      >
-                        {{ item.tag }} · {{ item.count }}
-                      </UBadge>
+                      <span>{{ item.tag }}</span>
+                      <span class="rounded-full bg-gray-100 dark:bg-gray-800 px-2 py-0.5 text-xs text-gray-700 dark:text-gray-300">
+                        {{ item.count }}
+                      </span>
                     </NuxtLink>
                   </div>
-                </UCard>
+                </div>
               </div>
             </div>
 
