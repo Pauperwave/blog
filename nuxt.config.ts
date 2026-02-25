@@ -102,7 +102,17 @@ export default defineNuxtConfig({
       }
     },
     icon: {
-        collections: ['lucide', 'simple-icons', 'logos', 'mdi']
+        // Avoid remote icon JSON fetches on Vercel serverless builds (timeouts in CI logs).
+        serverBundle: {
+          collections: ['ic', 'lucide', 'simple-icons', 'logos', 'mdi', 'material-symbols']
+        },
+        // Help Nuxt Icon resolve dashed collection names correctly.
+        collections: ['ic', 'lucide', 'simple-icons', 'logos', 'mdi', 'material-symbols'],
+        aliases: {
+          // Nuxt UI prose code blocks default to vscode-icons for file extensions.
+          // We don't ship that collection locally, so map the JS file icon to an installed icon.
+          'vscode-icons-file-type-js': 'lucide:file-code-2'
+        }
     },
     // image: {
     //     dir: 'public',
