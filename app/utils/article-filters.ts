@@ -7,7 +7,7 @@ type ArticleLocationFields = {
   locations?: unknown
 } | null | undefined
 
-export const normalizeArticleFilterValue = (value: string) => value.trim().toLocaleLowerCase('it')
+export const normalizeArticleFilterValue = (value: string) => value.trim().toLowerCase()
 
 export const getArticleFilterStringArray = (value: unknown): string[] =>
   Array.isArray(value) ? value.filter((item): item is string => typeof item === 'string') : []
@@ -55,9 +55,9 @@ export const getArticleTagFilterQuery = (
     )
 
     if (!isTopicTag) {
-      return { location: tag }
+      return { location: normalizedTag }
     }
   }
 
-  return { tag }
+  return { tag: normalizedTag }
 }
