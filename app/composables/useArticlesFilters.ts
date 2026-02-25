@@ -232,8 +232,8 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
     const query: Record<string, string> = {}
     if (category) query.category = category
     if (author) query.author = author
-    if (location) query.location = location
-    if (tag) query.tag = tag
+    if (location) query.location = normalizeArticleFilterValue(location)
+    if (tag) query.tag = normalizeArticleFilterValue(tag)
     navigateTo({ query }, { replace: true })
   }
 
