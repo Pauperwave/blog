@@ -1,5 +1,6 @@
 // ./modules/card-tooltip-transformer.ts
 import { defineNuxtModule } from '@nuxt/kit'
+import type { FileBeforeParseHook } from '@nuxt/content'
 import { createRegExp, exactly, oneOrMore, charNotIn, maybe, whitespace, global } from 'magic-regexp'
 
 export default defineNuxtModule({
@@ -9,9 +10,13 @@ export default defineNuxtModule({
   setup(_options, nuxt) {
     console.log('🚀 [Card Tooltip Transformer] MODULE LOADED!')
 
+    const hookContentBeforeParse = nuxt.hook as unknown as (
+      name: 'content:file:beforeParse',
+      handler: (ctx: FileBeforeParseHook) => void | Promise<void>
+    ) => void
+
     // Hook into content:file:beforeParse to transform markdown before parsing
-    /* eslint-disable @typescript-eslint/no-explicit-any */
-    nuxt.hook('content:file:beforeParse', (ctx: any) => {
+    hookContentBeforeParse('content:file:beforeParse', (ctx: FileBeforeParseHook) => {
       const file = ctx.file || ctx
 
       const allowedFolders = [

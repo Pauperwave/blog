@@ -2,6 +2,7 @@
 import { existsSync } from 'fs'
 import { join } from 'path'
 import { defineNuxtModule } from '@nuxt/kit'
+import type { FileBeforeParseHook } from '@nuxt/content'
 import { createRegExp, digit, whitespace, oneOrMore, char } from 'magic-regexp'
 import { getCardsByNames } from '../server/utils/card-database'
 import type { ParsedCard } from '../shared/types/index.ts'
@@ -13,8 +14,13 @@ export default defineNuxtModule({
   setup(_options, nuxt) {
     console.log('🚀 [Sideboard Guide Transformer] MODULE LOADED!')
 
+    const hookContentBeforeParse = nuxt.hook as unknown as (
+      name: 'content:file:beforeParse',
+      handler: (ctx: FileBeforeParseHook) => void | Promise<void>
+    ) => void
+
     /* eslint-disable @typescript-eslint/no-explicit-any */
-    nuxt.hook('content:file:beforeParse', async (ctx: any) => {
+    hookContentBeforeParse('content:file:beforeParse', async (ctx: FileBeforeParseHook) => {
       const file = ctx.file || ctx
 
       const allowedFolders = [

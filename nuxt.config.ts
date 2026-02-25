@@ -1,5 +1,24 @@
 import { definePerson } from "nuxt-schema-org/schema"
+import type { Plugin as VitePlugin } from "vite"
 import appMeta from "./app/app.meta"
+
+const quietNuxtAssetsRootProbePlugin: VitePlugin = {
+  name: "quiet-nuxt-assets-root-probe",
+  configureServer(server) {
+    server.middlewares.use((req, res, next) => {
+      const pathname = req.url?.split("?")[0]
+
+      if (pathname !== "/_nuxt" && pathname !== "/_nuxt/") {
+        next()
+        return
+      }
+
+      res.statusCode = 204
+      res.statusMessage = "No Content"
+      res.end()
+    })
+  }
+}
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -124,6 +143,7 @@ export default defineNuxtConfig({
         // }
     // },
     vite: {
+        plugins: [quietNuxtAssetsRootProbePlugin],
         css: {
             devSourcemap: true, // Keep sourcemaps in development for debugging
         },

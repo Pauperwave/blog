@@ -93,9 +93,7 @@ const articlesByCategory = computed(() => {
 
 const featuredArticle = computed(() => articles.value[0] || null)
 const heroSecondaryArticles = computed(() => articles.value.slice(1, 4))
-const latestArticles = computed(() => articles.value.slice(0, 6))
 const freshThisWeekCount = computed(() => articles.value.filter(article => isRecentArticle(article.date)).length)
-const activeAuthorsCount = computed(() => new Set(articles.value.map(article => article.author)).size)
 
 const categoryHighlights = computed(() =>
   CONTENT_TYPE_ORDER

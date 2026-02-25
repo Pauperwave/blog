@@ -19,20 +19,40 @@ export interface GeneratedImageResult {
   dataUrl: string
 }
 
+interface ElementLikeComponent {
+  $el?: unknown
+}
+
+interface RefLikeValue {
+  value?: unknown
+}
+
 /**
  * Get actual DOM element from Vue component or raw element
  */
-export function getHTMLElement(elementOrComponent: any): HTMLElement | null {
+export function getHTMLElement(elementOrComponent: unknown): HTMLElement | null {
   if (!elementOrComponent) return null
-  if (elementOrComponent.$el && elementOrComponent.$el instanceof HTMLElement) {
-    return elementOrComponent.$el
+
+  if (
+    typeof elementOrComponent === 'object'
+    && '$el' in elementOrComponent
+    && (elementOrComponent as ElementLikeComponent).$el instanceof HTMLElement
+  ) {
+    return (elementOrComponent as ElementLikeComponent).$el as HTMLElement
   }
+
   if (elementOrComponent instanceof HTMLElement) {
     return elementOrComponent
   }
-  if (elementOrComponent.value) {
-    return getHTMLElement(elementOrComponent.value)
+
+  if (
+    typeof elementOrComponent === 'object'
+    && 'value' in elementOrComponent
+    && (elementOrComponent as RefLikeValue).value
+  ) {
+    return getHTMLElement((elementOrComponent as RefLikeValue).value)
   }
+
   console.warn('Could not extract HTMLElement from:', elementOrComponent)
   return null
 }
@@ -42,7 +62,7 @@ export function getHTMLElement(elementOrComponent: any): HTMLElement | null {
  * Low-level utility - returns both blob and dataUrl for flexibility.
  */
 export async function generateImage(
-  elementOrComponent: any,
+  elementOrComponent: unknown,
   options: GenerateImageOptions
 ): Promise<GeneratedImageResult> {
   const { backgroundColor, width, height, contentWidth } = options
