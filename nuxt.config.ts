@@ -167,32 +167,39 @@ export default defineNuxtConfig({
                             return
                         }
 
-                        if (normalizedId.includes("/node_modules/nuxt-studio/")) {
-                            return "vendor-nuxt-studio"
-                        }
-
-                        if (normalizedId.includes("/node_modules/@nuxt/ui/") || normalizedId.includes("/node_modules/@iconify/")) {
-                            return "vendor-nuxt-ui"
-                        }
-
-                        if (normalizedId.includes("/node_modules/@nuxt/content/") || normalizedId.includes("/node_modules/@nuxtjs/mdc/")) {
-                            return "vendor-content"
-                        }
-
-                        if (normalizedId.includes("/node_modules/swiper/") || normalizedId.includes("/node_modules/nuxt-swiper/")) {
-                            return "vendor-swiper"
-                        }
-
-                        if (normalizedId.includes("/node_modules/@vueuse/")) {
-                            return "vendor-vueuse"
-                        }
-
-                        const [, packagePath = "misc"] = normalizedId.split("/node_modules/")
+                        const [, packagePath = ""] = normalizedId.split("/node_modules/")
+                        const packageSegments = packagePath.split("/")
                         const packageName = packagePath.startsWith("@")
-                          ? packagePath.split("/").slice(0, 2).join("-")
-                          : packagePath.split("/")[0]
+                          ? packageSegments.slice(0, 2).join("/")
+                          : (packageSegments[0] ?? "")
 
-                        return `vendor-${packageName.replace("@", "")}`
+                        if (!packageName) {
+                          return
+                        }
+
+                        // Nuxt/Vue runtime packages are tightly coupled and can form circular
+                        // graphs if forced into separate manual chunks.
+                        if (
+                          packageName === "nuxt" ||
+                          packageName === "nuxt-studio" ||
+                          packageName === "nuxt-swiper" ||
+                          packageName.startsWith("@nuxt/") ||
+                          packageName.startsWith("@nuxtjs/") ||
+                          packageName.startsWith("@vue/") ||
+                          packageName.startsWith("@vueuse/") ||
+                          packageName.startsWith("@unhead/") ||
+                          packageName.startsWith("@iconify/") ||
+                          packageName === "vue" ||
+                          packageName === "vue-router" ||
+                          packageName === "unhead"
+                        ) {
+                          return "vendor-framework"
+                        }
+
+                        // Split raw Swiper separately; keep the Nuxt wrapper with framework code.
+                        if (packageName === "swiper") {
+                          return "vendor-swiper"
+                        }
                     },
                 },
             },
