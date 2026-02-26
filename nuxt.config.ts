@@ -28,11 +28,11 @@ export default defineNuxtConfig({
       defaults: {
         weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
       },
-      providers: {
-        // Avoid remote metadata fetches in restricted/CI build environments.
-        google: false,
-        googleicons: false,
-      },
+      // providers: {
+      //   // Avoid remote metadata fetches in restricted/CI build environments.
+      //   google: false,
+      //   googleicons: false,
+      // },
     },
     site: {
       name: appMeta.name,
