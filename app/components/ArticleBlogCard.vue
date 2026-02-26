@@ -2,6 +2,7 @@
 import type { BadgeProps } from '@nuxt/ui'
 import type { Author } from '~/composables/useAuthor'
 import type { AnyArticle } from '~/constants/content-config'
+import { getArticleFilterLocation } from '~/utils/article-filters'
 
 interface Props {
   article: AnyArticle
@@ -20,6 +21,8 @@ const showAuthors = computed(() => {
   const category = props.article.category
   return category !== 'decklist' && category !== 'report'
 })
+
+const articleLocation = computed(() => getArticleFilterLocation(props.article))
 </script>
 
 <template>
@@ -41,12 +44,12 @@ const showAuthors = computed(() => {
       </p>
       <div class="flex flex-row gap-2 items-center flex-wrap mt-3">
         <UBadge
-          v-for="location in props.article.locations || []"
-          :key="`${props.article.path}-location-${location}`"
+          v-if="articleLocation"
+          :key="`${props.article.path}-location-${articleLocation}`"
           color="info"
           variant="soft"
         >
-          {{ location }}
+          {{ articleLocation }}
         </UBadge>
         <UBadge
           v-for="tag in props.topicTags"

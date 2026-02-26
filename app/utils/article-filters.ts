@@ -1,10 +1,10 @@
 type ArticleFilterFields = {
   tags?: unknown
-  locations?: unknown
+  location?: unknown
 } | null | undefined
 
 type ArticleLocationFields = {
-  locations?: unknown
+  location?: unknown
 } | null | undefined
 
 export const normalizeArticleFilterValue = (value: string) => value.trim().toLowerCase()
@@ -12,16 +12,23 @@ export const normalizeArticleFilterValue = (value: string) => value.trim().toLow
 export const getArticleFilterStringArray = (value: unknown): string[] =>
   Array.isArray(value) ? value.filter((item): item is string => typeof item === 'string') : []
 
-export const getNormalizedArticleLocationSet = (article: ArticleLocationFields) =>
-  new Set(getArticleFilterStringArray(article?.locations).map(location => normalizeArticleFilterValue(location)))
+export const getArticleFilterString = (value: unknown): string | null =>
+  typeof value === 'string' && value.trim().length > 0 ? value : null
+
+export const getArticleFilterLocation = (article: ArticleLocationFields): string | null =>
+  getArticleFilterString(article?.location)
+
+export const getNormalizedArticleLocation = (article: ArticleLocationFields): string | null => {
+  const location = getArticleFilterLocation(article)
+  return location ? normalizeArticleFilterValue(location) : null
+}
 
 export const buildGlobalNormalizedLocationSet = (articles: Iterable<ArticleLocationFields>) => {
   const normalizedLocations = new Set<string>()
 
   for (const article of articles) {
-    getArticleFilterStringArray(article?.locations).forEach((location) => {
-      normalizedLocations.add(normalizeArticleFilterValue(location))
-    })
+    const normalizedLocation = getNormalizedArticleLocation(article)
+    if (normalizedLocation) normalizedLocations.add(normalizedLocation)
   }
 
   return normalizedLocations
@@ -31,11 +38,11 @@ export const buildArticleTopicTags = (
   article: ArticleFilterFields,
   globalNormalizedLocationSet?: ReadonlySet<string>
 ) => {
-  const normalizedLocationSet = getNormalizedArticleLocationSet(article)
+  const normalizedLocation = getNormalizedArticleLocation(article)
 
   return getArticleFilterStringArray(article?.tags).filter((tag) => {
     const normalizedTag = normalizeArticleFilterValue(tag)
-    return !normalizedLocationSet.has(normalizedTag) && !globalNormalizedLocationSet?.has(normalizedTag)
+    return normalizedTag !== normalizedLocation && !globalNormalizedLocationSet?.has(normalizedTag)
   })
 }
 
@@ -46,8 +53,9 @@ export const getArticleTagFilterQuery = (
 ): { location: string } | { tag: string } => {
   const globalNormalizedLocationSet = options?.globalNormalizedLocationSet
   const normalizedTag = normalizeArticleFilterValue(tag)
+  const normalizedArticleLocation = getNormalizedArticleLocation(article)
   const isKnownLocationTag =
-    getNormalizedArticleLocationSet(article).has(normalizedTag) || !!globalNormalizedLocationSet?.has(normalizedTag)
+    normalizedArticleLocation === normalizedTag || !!globalNormalizedLocationSet?.has(normalizedTag)
 
   if (isKnownLocationTag) {
     const isTopicTag = buildArticleTopicTags(article, globalNormalizedLocationSet).some(

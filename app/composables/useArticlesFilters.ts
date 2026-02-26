@@ -5,7 +5,8 @@ import { type AnyArticle, CATEGORY_LABELS } from '~/constants/content-config'
 import {
   buildArticleTopicTags,
   buildGlobalNormalizedLocationSet,
-  getArticleFilterStringArray,
+  getArticleFilterLocation,
+  getNormalizedArticleLocation,
   normalizeArticleFilterValue
 } from '~/utils/article-filters'
 
@@ -17,7 +18,7 @@ interface UseArticlesFiltersOptions {
 interface PreparedArticleFilterData {
   article: AnyArticle
   authorSlug: string
-  normalizedLocationSet: Set<string>
+  normalizedLocation: string | null
   topicTags: string[]
   normalizedTopicTagSet: Set<string>
 }
@@ -50,16 +51,14 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
     return articles.value.map((article) => {
       const authorName = authorsMap.value[article.author]?.name || article.author
       const authorSlug = getAuthorSlug(authorName)
-      const normalizedLocationSet = new Set(
-        getArticleFilterStringArray(article.locations).map(location => normalizeArticleFilterValue(location))
-      )
+      const normalizedLocation = getNormalizedArticleLocation(article)
       const topicTags = buildArticleTopicTags(article, globalNormalizedLocationSet.value)
       const normalizedTopicTagSet = new Set(topicTags.map(tag => normalizeArticleFilterValue(tag)))
 
       return {
         article,
         authorSlug,
-        normalizedLocationSet,
+        normalizedLocation,
         topicTags,
         normalizedTopicTagSet
       }
@@ -89,9 +88,10 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
 
       authorCounts[article.author] = (authorCounts[article.author] || 0) + 1
 
-      getArticleFilterStringArray(article.locations).forEach((location) => {
+      const location = getArticleFilterLocation(article)
+      if (location) {
         locationCounts[location] = (locationCounts[location] || 0) + 1
-      })
+      }
 
       topicTags.forEach((tag) => {
         tagCounts[tag] = (tagCounts[tag] || 0) + 1
@@ -207,7 +207,7 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
     preparedArticleFilters.value.forEach((item) => {
       const matchesCategory = !category || item.article.category === category
       const matchesAuthor = !author || item.authorSlug === author
-      const matchesLocation = !normalizedSelectedLocation || item.normalizedLocationSet.has(normalizedSelectedLocation)
+      const matchesLocation = !normalizedSelectedLocation || item.normalizedLocation === normalizedSelectedLocation
       const matchesTag = !normalizedSelectedTag || item.normalizedTopicTagSet.has(normalizedSelectedTag)
 
       if (matchesCategory && matchesAuthor && matchesLocation && matchesTag) {
@@ -234,7 +234,7 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
     if (author) query.author = author
     if (location) query.location = normalizeArticleFilterValue(location)
     if (tag) query.tag = normalizeArticleFilterValue(tag)
-    navigateTo({ query }, { replace: true })
+    void navigateTo({ query }, { replace: true })
   }
 
   const setCategoryFilter = (category: string | null) => {
