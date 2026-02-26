@@ -64,30 +64,6 @@ const getThumbnailSrc = (thumbnail: unknown) => {
 }
 
 const articles = computed(() => allArticles.value || [])
-const normalizeFilterValue = (value: string) => value.trim().toLowerCase()
-const getStringArray = (value: unknown): string[] =>
-  Array.isArray(value) ? value.filter((item): item is string => typeof item === 'string') : []
-const globalNormalizedLocationSet = computed(() => {
-  const normalizedLocations = new Set<string>()
-
-  articles.value.forEach((article) => {
-    getStringArray(article.locations).forEach((location) => {
-      normalizedLocations.add(normalizeFilterValue(location))
-    })
-  })
-
-  return normalizedLocations
-})
-const getArticleTopicTags = (article: AnyArticle) => {
-  const normalizedLocationSet = new Set(
-    getStringArray(article.locations).map(location => normalizeFilterValue(location))
-  )
-
-  return getStringArray(article.tags).filter((tag) => {
-    const normalizedTag = normalizeFilterValue(tag)
-    return !normalizedLocationSet.has(normalizedTag) && !globalNormalizedLocationSet.value.has(normalizedTag)
-  })
-}
 
 const articlesByCategory = computed(() => {
   const categories = initializeCategories()
@@ -116,58 +92,6 @@ const categoryHighlights = computed(() =>
     .filter(item => item.count > 0)
 )
 
-const topAuthors = computed(() => {
-  const counts = articles.value.reduce((acc, article) => {
-    acc[article.author] = (acc[article.author] || 0) + 1
-    return acc
-  }, {} as Record<string, number>)
-
-  return Object.entries(counts)
-    .map(([authorKey, count]) => {
-      const authorInfo = authorsMap.value[authorKey]
-      const name = authorInfo?.name || authorKey
-
-      return {
-        key: authorKey,
-        name,
-        slug: getAuthorSlug(name),
-        count,
-        avatar: authorInfo?.avatar,
-        description: authorInfo?.description
-      }
-    })
-    .sort((a, b) => {
-      if (b.count !== a.count) return b.count - a.count
-      return a.name.localeCompare(b.name, 'it')
-    })
-    .slice(0, 6)
-})
-
-const trendingTags = computed(() => {
-  const recentTagCounts = articles.value.slice(0, 24).reduce((acc, article) => {
-    getArticleTopicTags(article).forEach((tag) => {
-      acc[tag] = (acc[tag] || 0) + 1
-    })
-    return acc
-  }, {} as Record<string, number>)
-
-  const totalTagCounts = articles.value.reduce((acc, article) => {
-    getArticleTopicTags(article).forEach((tag) => {
-      acc[tag] = (acc[tag] || 0) + 1
-    })
-    return acc
-  }, {} as Record<string, number>)
-
-  return Object.entries(recentTagCounts)
-    .filter(([tag]) => (totalTagCounts[tag] || 0) > 5)
-    .sort((a, b) => {
-      if (b[1] !== a[1]) return b[1] - a[1]
-      return a[0].localeCompare(b[0], 'it')
-    })
-    .slice(0, 10)
-    .map(([tag]) => ({ tag, count: totalTagCounts[tag] || 0 }))
-})
-
 // Get sections from centralized config
 const sections = getHomeSections()
 </script>
@@ -176,10 +100,10 @@ const sections = getHomeSections()
   <UPage>
     <UPageBody
       :ui="{
-        body: 'space-y-0 my-0'
+        base: 'mt-4 pb-0 space-y-0'
       }"
     >
-      <section class="rounded-2xl border border-gray-200 dark:border-gray-800 bg-linear-to-b from-white to-gray-50 dark:from-gray-950 dark:to-gray-900 p-6 mb-6">
+      <section class="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 p-6 mb-6">
         <div class="relative overflow-visible">
           <div class="relative grid grid-cols-1 xl:grid-cols-[1.1fr_.9fr] gap-6 lg:gap-8">
             <div class="min-w-0">
@@ -199,12 +123,12 @@ const sections = getHomeSections()
               </div>
 
               <h1 class="text-3xl md:text-5xl font-bold text-balance leading-tight text-gray-900 dark:text-white">
-                Pauper, meta e community:
-                <span class="text-primary">contenuti aggiornati ogni settimana</span>
+                Pauper, meta e community
+                <!-- <span class="text-primary">contenuti aggiornati ogni settimana</span> -->
               </h1>
 
               <p class="mt-4 text-base md:text-lg text-gray-700 dark:text-gray-300 max-w-2xl text-pretty">
-                Deck tech, report, tutorial e approfondimenti: esplora gli ultimi articoli, segui gli autori più attivi e entra subito nella sezione che ti interessa.
+                Decklists, report, tutorial e approfondimenti: esplora gli ultimi articoli, segui gli autori più attivi e entra subito nella sezione che ti interessa.
               </p>
 
               <div class="mt-5 flex flex-wrap gap-3">
@@ -225,10 +149,7 @@ const sections = getHomeSections()
                 </UButton>
               </div>
 
-              <div class="mt-6">
-                <p class="text-xs uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400 mb-3">
-                  Naviga per categoria
-                </p>
+              <div class="mt-4">
                 <div class="flex flex-wrap gap-2">
                   <NuxtLink
                     v-for="item in categoryHighlights"
@@ -241,54 +162,6 @@ const sections = getHomeSections()
                       {{ item.count }}
                     </span>
                   </NuxtLink>
-                </div>
-              </div>
-
-              <div
-                v-if="topAuthors.length"
-                class="mt-6"
-              >
-                <p class="text-xs uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400 mb-3">
-                  Autori più prolifici
-                </p>
-                <div class="flex flex-wrap gap-2">
-                  <NuxtLink
-                    v-for="author in topAuthors"
-                    :key="`hero-author-${author.key}`"
-                    :to="`/authors/${author.slug}`"
-                    class="inline-flex items-center gap-2 rounded-full border border-gray-200 dark:border-gray-700 bg-white/70 dark:bg-gray-900/60 px-2.5 py-1.5 hover:border-primary-400 transition-colors"
-                  >
-                    <UAvatar
-                      :src="author.avatar"
-                      :alt="author.name"
-                      size="sm"
-                    />
-                    <span class="text-sm text-gray-900 dark:text-gray-100">{{ author.name }}</span>
-                    <span class="text-xs text-gray-500 dark:text-gray-400">{{ author.count }}</span>
-                  </NuxtLink>
-                </div>
-                
-                <div
-                  v-if="trendingTags.length"
-                  class="mt-6"
-                >
-                  <p class="text-xs uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400 mb-3">
-                    Tag recenti
-                  </p>
-                  <div class="flex flex-wrap gap-2">
-                    <NuxtLink
-                      v-for="item in trendingTags"
-                      :key="`tag-${item.tag}`"
-                      :to="{ path: '/articles', query: { tag: normalizeFilterValue(item.tag) } }"
-                      :aria-label="`Filtra articoli per tag ${item.tag}`"
-                      class="inline-flex items-center gap-2 rounded-full border border-gray-200 dark:border-gray-700 bg-white/70 dark:bg-gray-900/60 px-3 py-1.5 text-sm hover:border-primary-400 hover:text-primary transition-colors"
-                    >
-                      <span>{{ item.tag }}</span>
-                      <span class="rounded-full bg-gray-100 dark:bg-gray-800 px-2 py-0.5 text-xs text-gray-700 dark:text-gray-300">
-                        {{ item.count }}
-                      </span>
-                    </NuxtLink>
-                  </div>
                 </div>
               </div>
             </div>
