@@ -1,5 +1,6 @@
 ---
-title: Considerazioni sparse sul Paupergeddon Lucca Summer Edition 2025
+title: "Opinioni sul Paupergeddon Lucca Summer Edition 2025"
+description: "Considerazioni sparse sull'evento"
 author: Pietro Bragioto
 date: 2025-07-10
 published: true
@@ -8,8 +9,6 @@ tags:
 thumbnail: /assets/blog/arts/careful-consideration.jpg
 updatedAt: 2025-07-10
 ---
-
-Siccome mi è stato chiesto svariate volte negli scorsi giorni cosa ne pensassi del Geddon appena trascorso più o meno nel dettaglio, ho deciso di vomitare considerazioni alla rinfusa di seguito, sia riguardo all'evento in generale che alla parte meta / player.
 
 ## Guardando la Top
 

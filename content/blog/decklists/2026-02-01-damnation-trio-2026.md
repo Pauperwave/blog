@@ -3,6 +3,8 @@ title: "Damnation Team Trio 2026"
 description: "Decklists Top 8"
 tags:
   - top8
+locations:
+  - Lucca
 date: 2026-02-01
 updatedAt: 2026-02-08
 author: Pietro Bragioto
