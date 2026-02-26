@@ -4,6 +4,8 @@ import type { NavigationMenuItem } from "@nuxt/ui"
 const navItems: NavigationMenuItem[] = [
   { label: "Autori", icon: "mdi:account-group", to: "/authors" },
 ]
+
+const route = useRoute()
 </script>
 
 <template>
@@ -28,7 +30,9 @@ const navItems: NavigationMenuItem[] = [
         <UNavigationMenu :items="navItems" />
       </template>
     </UHeader>
-    <UMain>
+    <UMain
+      :class="route.path === '/' ? 'bg-linear-to-b from-white to-gray-50 dark:from-gray-950 dark:to-gray-900' : ''"
+    >
       <UContainer>
         <!-- <div class="border border-4 border-fuchsia-600"> -->
         <NuxtPage />
