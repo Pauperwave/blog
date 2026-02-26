@@ -82,7 +82,7 @@ const sections = getHomeSections()
           </div>
         </div>
         
-        <div class="space-y-12 pb-2">
+        <div class="space-y-2 pb-2">
           <ArticleCategorySection
             v-for="section in sections"
             :key="section.category"

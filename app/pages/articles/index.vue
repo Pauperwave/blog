@@ -92,7 +92,7 @@ const {
       />
       <UBlogPosts
         v-else
-        class="gap-4 lg:gap-6 sm:grid-cols-3 lg:grid-cols-4"
+        class="gap-2 sm:gap-4 lg:gap-6 sm:grid-cols-3 lg:grid-cols-4"
       >
         <ArticleBlogCard
           v-for="article in filteredArticles"

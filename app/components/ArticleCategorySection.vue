@@ -21,7 +21,7 @@ withDefaults(defineProps<Props>(), {
 <template>
   <section
     v-if="articles.length"
-    class="space-y-6"
+    class="space-y-2"
   >
     <div class="flex items-center justify-between">
       <h2 class="text-2xl font-bold">{{ title }}</h2>

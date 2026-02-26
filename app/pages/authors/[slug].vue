@@ -203,7 +203,7 @@ useSeoMeta({
       <!-- Recent Articles -->
       <div v-if="recentArticles.length > 0">
         <h2 class="text-2xl font-bold mb-4">Ultimi articoli</h2>
-        <UBlogPosts class="gap-4 lg:gap-6 sm:grid-cols-3 lg:grid-cols-4">
+        <UBlogPosts class="gap-2 sm:gap-4 lg:gap-6 sm:grid-cols-3 lg:grid-cols-4">
           <!-- TODO astrarre la logica del badge "New" in quanto viene usata in diversi punti -->
           <!-- TODO estrarre il componente UBlogPost in quanto il codice è ripetuto -->
           <UBlogPost
