@@ -28,11 +28,6 @@ export default defineNuxtConfig({
       defaults: {
         weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
       },
-      // providers: {
-      //   // Avoid remote metadata fetches in restricted/CI build environments.
-      //   google: false,
-      //   googleicons: false,
-      // },
     },
     site: {
       name: appMeta.name,
@@ -110,10 +105,6 @@ export default defineNuxtConfig({
       }
     },
     icon: {
-        // Avoid remote icon JSON fetches on Vercel serverless builds (timeouts in CI logs).
-        // serverBundle: {
-        //   collections: ['ic', 'lucide', 'simple-icons', 'logos', 'mdi', 'material-symbols']
-        // },
         // Help Nuxt Icon resolve dashed collection names correctly.
         collections: ['ic', 'lucide', 'simple-icons', 'logos', 'mdi', 'material-symbols'],
         aliases: {
