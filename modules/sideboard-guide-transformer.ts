@@ -6,13 +6,14 @@ import type { FileBeforeParseHook } from '@nuxt/content'
 import { createRegExp, digit, whitespace, oneOrMore, char } from 'magic-regexp'
 import { getCardsByNames } from '../server/utils/card-database'
 import type { ParsedCard } from '../shared/types/index.ts'
+import { buildLog } from '../shared/utils/build-log'
 
 export default defineNuxtModule({
   meta: {
     name: 'sideboard-guide-transformer'
   },
   setup(_options, nuxt) {
-    console.log('🚀 [Sideboard Guide Transformer] MODULE LOADED!')
+    buildLog('🚀 [Sideboard Guide Transformer] MODULE LOADED!')
 
     const hookContentBeforeParse = nuxt.hook as unknown as (
       name: 'content:file:beforeParse',
@@ -69,8 +70,8 @@ async function transformSideboardGuideBlocks(content: string, filePath: string):
 
   if (matches.length === 0) return content
 
-  console.log(`\n📝 [Sideboard Guide Transformer] Processing file: ${filePath}`)
-  console.log(`   └─ Found ${matches.length} sideboard guide block(s)`)
+  buildLog(`\n📝 [Sideboard Guide Transformer] Processing file: ${filePath}`)
+  buildLog(`   └─ Found ${matches.length} sideboard guide block(s)`)
 
   // Process matches in reverse order to maintain correct indices
   for (let i = matches.length - 1; i >= 0; i--) {
@@ -79,7 +80,7 @@ async function transformSideboardGuideBlocks(content: string, filePath: string):
     
     const { match, componentName, frontmatter, guideContent, index } = item
     
-    console.log(`\n   🔄 Processing sideboard guide ${matches.length - i}/${matches.length}`)
+    buildLog(`\n   🔄 Processing sideboard guide ${matches.length - i}/${matches.length}`)
     
     const props = parseFrontmatter(frontmatter)
     const { cardsIn, cardsOut, cardsOutAlt } = await parseSideboardGuide(guideContent)
@@ -106,7 +107,7 @@ async function transformSideboardGuideBlocks(content: string, filePath: string):
     content = content.substring(0, index) + result + content.substring(index + match.length)
   }
 
-  console.log(`   ✅ All sideboard guides transformed successfully\n`)
+  buildLog(`   ✅ All sideboard guides transformed successfully\n`)
 
   return content
 }
@@ -239,18 +240,18 @@ function logSectionsAndDatabaseLookup(
   cardNames: Set<string>,
   cardDataMap: Map<string, any>
 ): void {
-  console.log(`   📦 Sections found:`)
-  console.log(`      └─ #in: ${sections.in.length} lines`)
-  console.log(`      └─ #out: ${sections.out.length} lines`)
-  console.log(`      └─ #out-alt: ${sections.outAlt.length} lines`)
+  buildLog(`   📦 Sections found:`)
+  buildLog(`      └─ #in: ${sections.in.length} lines`)
+  buildLog(`      └─ #out: ${sections.out.length} lines`)
+  buildLog(`      └─ #out-alt: ${sections.outAlt.length} lines`)
   
-  console.log(`   🔍 Found ${cardNames.size} unique card names`)
-  console.log(`   💾 Loaded ${cardDataMap.size}/${cardNames.size} cards from database`)
+  buildLog(`   🔍 Found ${cardNames.size} unique card names`)
+  buildLog(`   💾 Loaded ${cardDataMap.size}/${cardNames.size} cards from database`)
   
   const missingCards = Array.from(cardNames).filter(name => !cardDataMap.has(name))
   if (missingCards.length > 0) {
-    console.log(`   ⚠️  Missing from database (${missingCards.length}):`)
-    missingCards.forEach(name => console.log(`      └─ ${name}`))
+    buildLog(`   ⚠️  Missing from database (${missingCards.length}):`)
+    missingCards.forEach(name => buildLog(`      └─ ${name}`))
   }
 }
 
@@ -260,29 +261,29 @@ function logSideboardGuideTransformation(
   cardsOut: ParsedCard[],
   cardsOutAlt: ParsedCard[]
 ): void {
-  console.log(`   📋 Frontmatter props:`, props)
-  console.log(`\n   🎯 Final Parsed Object:`)
+  buildLog(`   📋 Frontmatter props:`, props)
+  buildLog(`\n   🎯 Final Parsed Object:`)
   
-  console.log(`      📥 Cards IN (${cardsIn.length} cards):`)
+  buildLog(`      📥 Cards IN (${cardsIn.length} cards):`)
   cardsIn.forEach(card => {
-    console.log(`         ${card.quantity}x ${card.name}`)
-    console.log(`            └─ Mana Cost: ${card.manaCost || '(none)'}`)
-    console.log(`            └─ Image: ${card.imageUrl ? '✅' : '❌'}`)
+    buildLog(`         ${card.quantity}x ${card.name}`)
+    buildLog(`            └─ Mana Cost: ${card.manaCost || '(none)'}`)
+    buildLog(`            └─ Image: ${card.imageUrl ? '✅' : '❌'}`)
   })
   
-  console.log(`\n      📤 Cards OUT (${cardsOut.length} cards):`)
+  buildLog(`\n      📤 Cards OUT (${cardsOut.length} cards):`)
   cardsOut.forEach(card => {
-    console.log(`         ${card.quantity}x ${card.name}`)
-    console.log(`            └─ Mana Cost: ${card.manaCost || '(none)'}`)
-    console.log(`            └─ Image: ${card.imageUrl ? '✅' : '❌'}`)
+    buildLog(`         ${card.quantity}x ${card.name}`)
+    buildLog(`            └─ Mana Cost: ${card.manaCost || '(none)'}`)
+    buildLog(`            └─ Image: ${card.imageUrl ? '✅' : '❌'}`)
   })
   
   if (cardsOutAlt.length > 0) {
-    console.log(`\n      🔄 Cards OUT (Alternative) (${cardsOutAlt.length} cards):`)
+    buildLog(`\n      🔄 Cards OUT (Alternative) (${cardsOutAlt.length} cards):`)
     cardsOutAlt.forEach(card => {
-      console.log(`         ${card.quantity}x ${card.name}`)
-      console.log(`            └─ Mana Cost: ${card.manaCost || '(none)'}`)
-      console.log(`            └─ Image: ${card.imageUrl ? '✅' : '❌'}`)
+      buildLog(`         ${card.quantity}x ${card.name}`)
+      buildLog(`            └─ Mana Cost: ${card.manaCost || '(none)'}`)
+      buildLog(`            └─ Image: ${card.imageUrl ? '✅' : '❌'}`)
     })
   }
 }

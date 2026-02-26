@@ -5,6 +5,7 @@
  */
 // server/utils/card-database.ts
 import { join } from 'path'
+import { buildLog } from '../../shared/utils/build-log'
 
 export interface CardData {
   name: string
@@ -34,7 +35,7 @@ async function getDatabase(): Promise<DatabaseInstance> {
       if (typeof Bun !== 'undefined') {
         const { Database } = await import('bun:sqlite')
         dbInstance = new Database(dbPath, { readonly: true })
-        console.log('✅ Using bun:sqlite (faster)')
+        buildLog('✅ Using bun:sqlite (faster)')
       } else {
         throw new Error('Not Bun runtime')
       }
@@ -42,7 +43,7 @@ async function getDatabase(): Promise<DatabaseInstance> {
       // Fallback to better-sqlite3 for Node.js (build time)
       const Database = (await import('better-sqlite3')).default
       dbInstance = new Database(dbPath, { readonly: true })
-      console.log('⚠️ Using better-sqlite3 (Node.js compatibily fallback)')
+      buildLog('⚠️ Using better-sqlite3 (Node.js compatibily fallback)')
     }
   }
   return dbInstance

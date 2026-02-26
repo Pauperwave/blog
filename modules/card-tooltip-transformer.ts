@@ -2,13 +2,14 @@
 import { defineNuxtModule } from '@nuxt/kit'
 import type { FileBeforeParseHook } from '@nuxt/content'
 import { createRegExp, exactly, oneOrMore, charNotIn, maybe, whitespace, global } from 'magic-regexp'
+import { buildLog } from '../shared/utils/build-log'
 
 export default defineNuxtModule({
   meta: {
     name: 'card-tooltip-transformer'
   },
   setup(_options, nuxt) {
-    console.log('🚀 [Card Tooltip Transformer] MODULE LOADED!')
+    buildLog('🚀 [Card Tooltip Transformer] MODULE LOADED!')
 
     const hookContentBeforeParse = nuxt.hook as unknown as (
       name: 'content:file:beforeParse',
@@ -98,15 +99,15 @@ function transformCardTooltips(content: string, filePath: string): string {
 function logTransformations(transformations: CardTransformation[], filePath: string): void {
   if (transformations.length === 0) return
 
-  console.log(`\n📝 [Card Tooltip Transformer] Processing file: ${filePath}`)
-  console.log(`   └─ Found ${transformations.length} card tooltip(s)`)
-  console.log(`\n   🃏 Transformed Card Tooltips:`)
+  buildLog(`\n📝 [Card Tooltip Transformer] Processing file: ${filePath}`)
+  buildLog(`   └─ Found ${transformations.length} card tooltip(s)`)
+  buildLog(`\n   🃏 Transformed Card Tooltips:`)
   
   transformations.forEach((t, idx) => {
-    console.log(`      ${idx + 1}. ${t.original}`)
-    console.log(`         └─ Card: "${t.cardName}"${t.set ? ` (Set: ${t.set})` : ''}`)
-    console.log(`         └─ Component: :MagicCardTooltip{name="${t.cardName}"${t.set ? ` set="${t.set}"` : ''}}`)
+    buildLog(`      ${idx + 1}. ${t.original}`)
+    buildLog(`         └─ Card: "${t.cardName}"${t.set ? ` (Set: ${t.set})` : ''}`)
+    buildLog(`         └─ Component: :MagicCardTooltip{name="${t.cardName}"${t.set ? ` set="${t.set}"` : ''}}`)
   })
   
-  console.log(`   ✅ Card tooltips transformed successfully\n`)
+  buildLog(`   ✅ Card tooltips transformed successfully\n`)
 }
