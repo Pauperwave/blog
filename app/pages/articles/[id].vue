@@ -338,19 +338,12 @@ function updateMeta() {
         {{ relatedArticlesString }}
       </p>
       <UBlogPosts id="related-articles">
-        <UBlogPost
+        <ArticleBlogCard
           v-for="article in links"
           :key="article.path"
-          :title="article.title"
-          :image="article.thumbnail"
-          :authors="[{
-            name: relatedAuthorsMap[article.author]?.name || article.author,
-            avatar: { src: relatedAuthorsMap[article.author]?.avatar },
-            description: relatedAuthorsMap[article.author]?.description
-          }]"
+          :article="article"
+          :author-data="relatedAuthorsMap[article.author]"
           :badge="getBadge(article.date)"
-          :to="article.path"
-          variant="subtle"
         />
       </UBlogPosts>
       <USeparator class="mt-4 mb-4" />

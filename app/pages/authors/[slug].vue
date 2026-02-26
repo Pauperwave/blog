@@ -7,6 +7,7 @@ import {
   type CategoryType
 } from '~/constants/content-config'
 import { getRecentArticleBadge as getBadge } from '~/utils/article-badges'
+import { buildArticleTopicTags, buildGlobalNormalizedLocationSet } from '~/utils/article-filters'
 
 const route = useRoute()
 const slug = route.params.slug as string
@@ -77,6 +78,11 @@ const totalArticles = computed(() => authorArticles.value?.length || 0)
 
 // Recent articles (limit to 4)
 const recentArticles = computed(() => authorArticles.value?.slice(0, 4) || [])
+const authorArticlesLocationSet = computed(() =>
+  buildGlobalNormalizedLocationSet(authorArticles.value || [])
+)
+const getArticleTopicTags = (article: AnyArticle) =>
+  buildArticleTopicTags(article, authorArticlesLocationSet.value)
 
 // SEO meta tags
 useSeoMeta({
@@ -205,43 +211,15 @@ useSeoMeta({
         <h2 class="text-2xl font-bold mb-4">Ultimi articoli</h2>
         <UBlogPosts class="gap-2 sm:gap-4 lg:gap-6 sm:grid-cols-3 lg:grid-cols-4">
           <!-- TODO astrarre la logica del badge "New" in quanto viene usata in diversi punti -->
-          <!-- TODO estrarre il componente UBlogPost in quanto il codice è ripetuto -->
-          <UBlogPost
+          <ArticleBlogCard
             v-for="article in recentArticles"
             :key="article.path"
-            :title="article.title"
-            :image="article.thumbnail"
+            :article="article"
             :badge="getBadge(article.date)"
-            :date="article.date"
-            :to="article.path"
-            variant="naked"
-            class="group border border-gray-200 dark:border-gray-800 rounded-xl p-4 hover:border-primary-500 dark:hover:border-primary-400 transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/10 dark:hover:shadow-primary-400/10 hover:-translate-y-1 hover:scale-[1.02] bg-white dark:bg-gray-900/50 backdrop-blur-sm"
-          >
-            <template #date>
-              {{useState(`article-date-${article.path}`, () => formatDateIT(article.date)).value}}
-            </template>
-            <template #description>
-              <p class="mt-1 text-base text-pretty">
-                {{ article.description }}
-              </p>
-              <div class="flex flex-row gap-2 items-center flex-wrap mt-3">
-                <UBadge
-                  color="neutral"
-                  variant="soft"
-                >
-                  {{ CATEGORY_LABELS[article.category as CategoryType] }}
-                </UBadge>
-                <UBadge
-                  v-for="tag in article.tags"
-                  :key="tag"
-                  color="primary"
-                  variant="soft"
-                >
-                  {{ tag }}
-                </UBadge>
-              </div>
-            </template>
-          </UBlogPost>
+            :show-author="false"
+            :category-label="CATEGORY_LABELS[article.category as CategoryType]"
+            :topic-tags="getArticleTopicTags(article)"
+          />
         </UBlogPosts>
       </div>
 

@@ -1,3 +1,4 @@
+<!-- app/components/ArticleBlogCard.vue -->
 <script setup lang="ts">
 import type { BadgeProps } from '@nuxt/ui'
 import type { Author } from '~/composables/useAuthor'
@@ -9,15 +10,20 @@ interface Props {
   authorData?: Author | null
   topicTags?: string[]
   badge?: string | BadgeProps
+  showAuthor?: boolean
+  categoryLabel?: string | null
 }
 
 const props = withDefaults(defineProps<Props>(), {
   authorData: null,
   topicTags: () => [],
-  badge: undefined
+  badge: undefined,
+  showAuthor: true,
+  categoryLabel: null
 })
 
-const showAuthors = computed(() => {
+const shouldShowAuthor = computed(() => {
+  if (!props.showAuthor) return false
   const category = props.article.category
   return category !== 'decklist' && category !== 'report'
 })
@@ -44,6 +50,14 @@ const articleLocation = computed(() => getArticleFilterLocation(props.article))
       </p>
       <div class="flex flex-row gap-2 items-center flex-wrap mt-3">
         <UBadge
+          v-if="props.categoryLabel"
+          :key="`${props.article.path}-category-${props.categoryLabel}`"
+          color="neutral"
+          variant="soft"
+        >
+          {{ props.categoryLabel }}
+        </UBadge>
+        <UBadge
           v-if="articleLocation"
           :key="`${props.article.path}-location-${articleLocation}`"
           color="info"
@@ -62,7 +76,7 @@ const articleLocation = computed(() => getArticleFilterLocation(props.article))
       </div>
     </template>
     <template
-      v-if="showAuthors"
+      v-if="shouldShowAuthor"
       #authors
     >
       <AuthorCard
