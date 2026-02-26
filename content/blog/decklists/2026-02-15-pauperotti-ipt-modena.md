@@ -4,8 +4,7 @@ description: "Decklists Top 8"
 tags:
   - top8
   - IPT
-locations:
-  - Modena
+location: Modena
 date: 2026-02-15
 updatedAt: 2026-02-23
 author: Pietro Bragioto

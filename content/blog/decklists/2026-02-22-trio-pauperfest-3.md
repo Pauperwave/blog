@@ -4,8 +4,7 @@ description: "Decklists Top 8"
 tags:
   - top4
   - IPT
-locations:
-  - Milano
+location: Milano
 date: 2026-02-22
 updatedAt: 2026-02-23
 author: Pietro Bragioto

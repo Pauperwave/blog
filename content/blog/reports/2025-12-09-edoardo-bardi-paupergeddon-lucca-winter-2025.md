@@ -4,8 +4,7 @@ description: ""
 tags:
   - paupergeddon
   - top8
-locations:
-  - Lucca
+location: Lucca
 date: 2025-12-06
 updatedAt: 2025-12-06
 author: Pietro Bragioto

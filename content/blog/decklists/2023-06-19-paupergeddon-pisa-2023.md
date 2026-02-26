@@ -4,8 +4,7 @@ description: "Decklists Top 8"
 tags:
   - top8
   - paupergeddon
-locations:
-  - Pisa
+location: Pisa
 date: 2023-06-19
 updatedAt: 2023-06-19
 author: Pietro Bragioto

@@ -5,8 +5,7 @@ tags:
   - top8
   - top16
   - IPT
-locations:
-  - Milano
+location: Milano
 date: 2026-02-21
 updatedAt: 2026-02-23
 author: Pietro Bragioto

@@ -4,8 +4,7 @@ description: "Decklists Top 8"
 tags:
   - top8
   - league
-locations:
-  - Alto Adige
+location: Alto Adige
 date: 2026-02-22
 updatedAt: 2026-02-24
 author: Pietro Bragioto

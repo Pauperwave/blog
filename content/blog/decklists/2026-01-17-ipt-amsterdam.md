@@ -4,8 +4,7 @@ description: "Decklists Top 8"
 tags:
   - top8
   - IPT
-locations:
-  - Amsterdam
+location: Amsterdam
 date: 2026-01-17
 updatedAt: 2026-02-23
 author: Pietro Bragioto
