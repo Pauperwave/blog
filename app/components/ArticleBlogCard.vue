@@ -15,6 +15,11 @@ const props = withDefaults(defineProps<Props>(), {
   topicTags: () => [],
   badge: undefined
 })
+
+const showAuthors = computed(() => {
+  const category = props.article.category
+  return category !== 'decklist' && category !== 'report'
+})
 </script>
 
 <template>
@@ -53,7 +58,10 @@ const props = withDefaults(defineProps<Props>(), {
         </UBadge>
       </div>
     </template>
-    <template #authors>
+    <template
+      v-if="showAuthors"
+      #authors
+    >
       <AuthorCard
         :author="{
           name: props.authorData?.name || props.article.author,
