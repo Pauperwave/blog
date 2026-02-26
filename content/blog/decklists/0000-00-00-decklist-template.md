@@ -9,7 +9,7 @@ tags:
 location: 
 date: 
 author: Pietro Bragioto
-thumbnail: /assets/blog/events/
+thumbnail: /assets/blog/events/2025-11-30-paupergeddon-lucca-eternal.png
 published: false
 ---
 
