@@ -2,17 +2,14 @@
 title: ""
 description: ""
 tags:
-  - top4
   - top8
-  - top16
-  - top32
   - league
   - ITP
   - paupergeddon
-location: Città
-date: 0000-00-00
+location: 
+date: 
 author: Pietro Bragioto
-thumbnail: /assets/blog/events/2026-02-21-22-Pauperfest-3.jpg
+thumbnail: /assets/blog/events/
 published: false
 ---
 
@@ -26,7 +23,77 @@ published: false
 ---
 name: 
 player: 
-placement: 
+placement: Winner
+headerGradient: 
+---
+
+::
+
+::magic-decklist
+---
+name: 
+player: 
+placement: Finalist
+headerGradient: 
+---
+
+::
+
+::magic-decklist
+---
+name: 
+player: 
+placement: Top 4
+headerGradient: 
+---
+
+::
+
+::magic-decklist
+---
+name: 
+player: 
+placement: Top 4
+headerGradient: 
+---
+
+::
+
+::magic-decklist
+---
+name: 
+player: 
+placement: Top 8
+headerGradient: 
+---
+
+::
+
+::magic-decklist
+---
+name: 
+player: 
+placement: Top 8
+headerGradient: 
+---
+
+::
+
+::magic-decklist
+---
+name: 
+player: 
+placement: Top 8
+headerGradient: 
+---
+
+::
+
+::magic-decklist
+---
+name: 
+player: 
+placement: Top 8
 headerGradient: 
 ---
 
