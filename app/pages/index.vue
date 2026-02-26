@@ -19,7 +19,17 @@ const { data: allArticles } = await useAsyncData('home-articles', async () => {
 
   // Combine all articles, filter out drafts, and sort by date
   const combined: AnyArticle[] = combineArticles(collectionsData)
-    .filter(article => article.published !== false)
+    .filter((article) => {
+      if (!article.published) return false
+      if (article.category !== 'decklist') return true
+
+      const hasLeagueTag = Array.isArray(article.tags)
+        && article.tags.some(tag =>
+          typeof tag === 'string' && tag.trim().toLowerCase() === 'league'
+        )
+
+      return !hasLeagueTag
+    })
 
   return combined.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 })
