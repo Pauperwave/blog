@@ -158,6 +158,44 @@ export default defineNuxtConfig({
         },
         build: {
             sourcemap: false, // Disable sourcemaps in production to eliminate Tailwind warnings
+            rollupOptions: {
+                output: {
+                    manualChunks(id) {
+                        const normalizedId = id.replaceAll("\\", "/")
+
+                        if (!normalizedId.includes("/node_modules/") || normalizedId.endsWith(".css")) {
+                            return
+                        }
+
+                        if (normalizedId.includes("/node_modules/nuxt-studio/")) {
+                            return "vendor-nuxt-studio"
+                        }
+
+                        if (normalizedId.includes("/node_modules/@nuxt/ui/") || normalizedId.includes("/node_modules/@iconify/")) {
+                            return "vendor-nuxt-ui"
+                        }
+
+                        if (normalizedId.includes("/node_modules/@nuxt/content/") || normalizedId.includes("/node_modules/@nuxtjs/mdc/")) {
+                            return "vendor-content"
+                        }
+
+                        if (normalizedId.includes("/node_modules/swiper/") || normalizedId.includes("/node_modules/nuxt-swiper/")) {
+                            return "vendor-swiper"
+                        }
+
+                        if (normalizedId.includes("/node_modules/@vueuse/")) {
+                            return "vendor-vueuse"
+                        }
+
+                        const [, packagePath = "misc"] = normalizedId.split("/node_modules/")
+                        const packageName = packagePath.startsWith("@")
+                          ? packagePath.split("/").slice(0, 2).join("-")
+                          : packagePath.split("/")[0]
+
+                        return `vendor-${packageName.replace("@", "")}`
+                    },
+                },
+            },
         }
     }
 })
