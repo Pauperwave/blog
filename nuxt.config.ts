@@ -93,11 +93,6 @@ export default defineNuxtConfig({
     },
     nitro: {
       preset: 'vercel',
-      wasm: {
-        // @nuxt/content -> shiki imports onig.wasm; unwasm falls back to module mode and logs a warning.
-        // This suppresses that plugin warning while keeping the fallback behavior.
-        silent: true,
-      },
       prerender: {
         // Pre-render the homepage
         routes: ['/'],
