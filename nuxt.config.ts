@@ -1,6 +1,5 @@
 import { definePerson } from "nuxt-schema-org/schema"
 import appMeta from "./app/app.meta"
-import quietNuxtAssetsRootProbePlugin from "./plugins/quietNuxtAssetsRootProbePlugin"
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
