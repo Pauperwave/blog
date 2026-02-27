@@ -156,64 +156,9 @@ export default defineNuxtConfig({
         css: {
             devSourcemap: true, // Keep sourcemaps in development for debugging
         },
-        // build: {
-        //     sourcemap: false, // Disable sourcemaps in production to eliminate Tailwind warnings
-        //     rollupOptions: {
-        //         output: {
-        //             manualChunks(id) {
-        //                 const normalizedId = id.replaceAll("\\", "/")
-
-        //                 if (!normalizedId.includes("/node_modules/") || normalizedId.endsWith(".css")) {
-        //                     return
-        //                 }
-
-        //                 const [, packagePath = ""] = normalizedId.split("/node_modules/")
-        //                 const packageSegments = packagePath.split("/")
-        //                 const packageName = packagePath.startsWith("@")
-        //                   ? packageSegments.slice(0, 2).join("/")
-        //                   : (packageSegments[0] ?? "")
-
-        //                 if (!packageName) {
-        //                   return
-        //                 }
-
-        //                 // Split raw Swiper separately; keep the Nuxt wrapper with framework code.
-        //                 if (packageName === "swiper") {
-        //                   return "vendor-swiper"
-        //                 }
-
-        //                 // Keep icon set JSON apart from framework/runtime packages.
-        //                 if (packageName.startsWith("@iconify-json/")) {
-        //                   return "vendor-icons-data"
-        //                 }
-
-        //                 // Nuxt/Vue/UI packages are tightly coupled; keep them in one chunk
-        //                 // to avoid circular chunk graphs.
-        //                 if (
-        //                   packageName === "nuxt" ||
-        //                   packageName === "nuxt-studio" ||
-        //                   packageName === "nuxt-swiper" ||
-        //                   packageName === "vue" ||
-        //                   packageName === "vue-router" ||
-        //                   packageName === "unhead" ||
-        //                   packageName === "reka-ui" ||
-        //                   packageName === "vaul-vue" ||
-        //                   packageName === "motion-v" ||
-        //                   packageName.startsWith("nuxt-") ||
-        //                   packageName.startsWith("@nuxt/") ||
-        //                   packageName.startsWith("@nuxtjs/") ||
-        //                   packageName.startsWith("@vue/") ||
-        //                   packageName.startsWith("@vueuse/") ||
-        //                   packageName.startsWith("@unhead/") ||
-        //                   packageName.startsWith("@iconify/") ||
-        //                   packageName.startsWith("@floating-ui/") ||
-        //                   packageName.startsWith("@tanstack/")
-        //                 ) {
-        //                   return "vendor-framework"
-        //                 }
-        //             },
-        //         },
-        //     },
-        // }
+        build: {
+            sourcemap: false, // Tailwind's build plugin does not emit sourcemaps
+            chunkSizeWarningLimit: 1600, // Keep warning signal for truly large chunks
+        }
     }
 })

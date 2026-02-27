@@ -33,7 +33,8 @@ async function getDatabase(): Promise<DatabaseInstance> {
     try {
       // Check if we're running in Bun
       if (typeof Bun !== 'undefined') {
-        const { Database } = await import('bun:sqlite')
+        const bunSqliteModuleId = 'bun:sqlite'
+        const { Database } = await import(/* @vite-ignore */ bunSqliteModuleId)
         dbInstance = new Database(dbPath, { readonly: true })
         buildLog('✅ Using bun:sqlite (faster)')
       } else {
@@ -43,7 +44,7 @@ async function getDatabase(): Promise<DatabaseInstance> {
       // Fallback to better-sqlite3 for Node.js (build time)
       const Database = (await import('better-sqlite3')).default
       dbInstance = new Database(dbPath, { readonly: true })
-      buildLog('⚠️ Using better-sqlite3 (Node.js compatibily fallback)')
+      buildLog('⚠️ Using better-sqlite3 (Node.js compatibility fallback)')
     }
   }
   return dbInstance
