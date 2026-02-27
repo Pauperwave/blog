@@ -1,16 +1,34 @@
 <script setup lang="ts">
 import appMeta from "~/app.meta"
 import { PAUPERWAVE_SOCIAL_LINKS } from '~/constants/social-links'
-import { SOCIAL_PLATFORM_META } from '~/constants/social-platform-meta'
 
-const FOOTER_SOCIAL_KEYS = ['facebook', 'instagram', 'youtube', 'telegram', 'github'] as const
-type FooterSocialKey = typeof FOOTER_SOCIAL_KEYS[number]
-
-const footerSocialLinks = FOOTER_SOCIAL_KEYS.map((key: FooterSocialKey) => ({
-  icon: SOCIAL_PLATFORM_META[key].icon,
-  label: SOCIAL_PLATFORM_META[key].label,
-  link: PAUPERWAVE_SOCIAL_LINKS[key]
-}))
+const footerSocialLinks = [
+  {
+    icon: 'i-simple-icons-facebook',
+    label: 'Facebook',
+    link: PAUPERWAVE_SOCIAL_LINKS.facebook
+  },
+  {
+    icon: 'i-simple-icons-instagram',
+    label: 'Instagram',
+    link: PAUPERWAVE_SOCIAL_LINKS.instagram
+  },
+  {
+    icon: 'i-simple-icons-youtube',
+    label: 'YouTube',
+    link: PAUPERWAVE_SOCIAL_LINKS.youtube
+  },
+  {
+    icon: 'i-simple-icons-telegram',
+    label: 'Telegram',
+    link: PAUPERWAVE_SOCIAL_LINKS.telegram
+  },
+  {
+    icon: 'i-simple-icons-github',
+    label: 'GitHub',
+    link: PAUPERWAVE_SOCIAL_LINKS.github
+  }
+]
 </script>
 
 <template>

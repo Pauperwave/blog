@@ -1,29 +1,15 @@
-export interface SocialPlatformMetaDefinition {
+export interface AuthorSocialPlatformMetaDefinition {
   icon: string
   label: string
   hoverClass: string
 }
 
-export const SOCIAL_PLATFORM_META = {
-  facebook: {
-    icon: 'i-lucide-facebook',
-    label: 'Facebook',
-    hoverClass: 'hover:text-blue-600'
-  },
+// Metadata used only for author socials (not for footer/global socials).
+export const AUTHOR_SOCIAL_PLATFORM_META = {
   github: {
     icon: 'i-lucide-github',
     label: 'GitHub',
     hoverClass: 'hover:text-gray-900 dark:hover:text-white'
-  },
-  instagram: {
-    icon: 'i-lucide-instagram',
-    label: 'Instagram',
-    hoverClass: 'hover:text-pink-600'
-  },
-  telegram: {
-    icon: 'i-lucide-send',
-    label: 'Telegram',
-    hoverClass: 'hover:text-sky-500'
   },
   twitch: {
     icon: 'i-lucide-twitch',
@@ -45,4 +31,4 @@ export const SOCIAL_PLATFORM_META = {
     label: 'YouTube',
     hoverClass: 'hover:text-red-600'
   }
-} as const satisfies Record<string, SocialPlatformMetaDefinition>
+} as const satisfies Record<string, AuthorSocialPlatformMetaDefinition>

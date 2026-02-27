@@ -30,7 +30,7 @@ const rootClass = computed(() => {
       <div class="arrow-line" />
       <icon
         class="arrow-head"
-        name="ic:round-keyboard-arrow-right"
+        name="i-lucide-arrow-right"
       />
     </div>
   </div>
