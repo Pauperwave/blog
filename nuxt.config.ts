@@ -158,7 +158,6 @@ export default defineNuxtConfig({
         },
         build: {
             sourcemap: false, // Tailwind's build plugin does not emit sourcemaps
-            chunkSizeWarningLimit: 1600, // Keep warning signal for truly large chunks
         }
     }
 })
