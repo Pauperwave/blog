@@ -157,7 +157,7 @@ export default defineNuxtConfig({
             devSourcemap: true, // Keep sourcemaps in development for debugging
         },
         build: {
-            sourcemap: false, // Tailwind's build plugin does not emit sourcemaps
+            sourcemap: false, // Disable sourcemaps in production to eliminate Tailwind warnings
         }
     }
 })
