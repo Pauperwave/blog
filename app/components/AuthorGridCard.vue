@@ -1,14 +1,9 @@
 <script setup lang="ts">
+import type { AuthorSocials } from '~/constants/author-socials'
+
 interface AuthorCategoryStat {
   category: string
   count: number
-}
-
-interface VisibleSocialLink {
-  key: string
-  icon: string
-  label: string
-  url: string
 }
 
 interface AuthorGridItem {
@@ -20,14 +15,13 @@ interface AuthorGridItem {
   articleCount: number
   latestArticleDate?: string
   categories: AuthorCategoryStat[]
-  socialCount: number
+  socials?: AuthorSocials
 }
 
 interface Props {
   author: AuthorGridItem
   to: string
   categoryLabels: Record<string, string>
-  visibleSocials: VisibleSocialLink[]
 }
 
 const props = defineProps<Props>()
@@ -111,32 +105,14 @@ const props = defineProps<Props>()
         </UBadge>
       </div>
 
-      <div
-        v-if="props.author.socialCount > 0"
-        class="mt-4 flex items-center justify-between gap-3"
-      >
-        <div class="flex items-center gap-2 text-gray-500 dark:text-gray-400">
-          <a
-            v-for="social in props.visibleSocials.slice(0, 4)"
-            :key="`${props.author.name}-grid-${social.key}`"
-            :href="social.url"
-            :aria-label="social.label"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center hover:text-primary transition-colors"
-            @click.stop
-            @keydown.enter.stop
-          >
-            <UIcon
-              :name="social.icon"
-              class="w-4 h-4"
-            />
-          </a>
-        </div>
-        <span class="text-xs text-gray-500 dark:text-gray-400">
-          {{ props.author.socialCount }} link social
-        </span>
-      </div>
+      <AuthorSocialLinks
+        :socials="props.author.socials"
+        variant="icons"
+        :max-items="4"
+        :show-count="true"
+        count-label="link social"
+        class="mt-4 justify-between gap-3"
+      />
     </UCard>
   </NuxtLink>
 </template>

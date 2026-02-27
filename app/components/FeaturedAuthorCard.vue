@@ -1,14 +1,9 @@
 <script setup lang="ts">
+import type { AuthorSocials } from '~/constants/author-socials'
+
 interface AuthorCategoryStat {
   category: string
   count: number
-}
-
-interface VisibleSocialLink {
-  key: string
-  icon: string
-  label: string
-  url: string
 }
 
 interface FeaturedAuthor {
@@ -21,14 +16,13 @@ interface FeaturedAuthor {
   latestArticleTitle?: string
   latestArticlePath?: string
   categories: AuthorCategoryStat[]
-  socialCount: number
+  socials?: AuthorSocials
 }
 
 interface Props {
   author: FeaturedAuthor
   to: string
   categoryLabels: Record<string, string>
-  visibleSocials: VisibleSocialLink[]
 }
 
 const props = defineProps<Props>()
@@ -125,27 +119,12 @@ const props = defineProps<Props>()
             <span v-else>Nessuna pubblicazione recente</span>
           </div>
 
-          <div class="flex items-center gap-2 text-gray-500 dark:text-gray-400">
-            <a
-              v-for="social in props.visibleSocials"
-              :key="`${props.author.name}-${social.key}`"
-              :href="social.url"
-              :aria-label="social.label"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center hover:text-primary transition-colors"
-              @click.stop
-              @keydown.enter.stop
-            >
-              <UIcon
-                :name="social.icon"
-                class="w-4 h-4"
-              />
-            </a>
-            <span class="text-xs">
-              {{ props.author.socialCount }} social
-            </span>
-          </div>
+          <AuthorSocialLinks
+            :socials="props.author.socials"
+            variant="icons"
+            :show-count="true"
+            count-label="social"
+          />
         </div>
       </div>
     </UCard>

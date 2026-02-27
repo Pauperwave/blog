@@ -7,6 +7,7 @@ import {
   queryAllCollections,
   combineArticles
 } from '~/constants/content-config'
+import { AUTHOR_SOCIAL_LINKS, type AuthorSocials } from '~/constants/author-socials'
 
 interface AuthorRecord {
   name: string
@@ -15,13 +16,7 @@ interface AuthorRecord {
   bio?: string
   url?: string
   nickname?: string
-  socials?: {
-    twitter?: string
-    github?: string
-    youtube?: string
-    twitch?: string
-    website?: string
-  }
+  socials?: AuthorSocials
 }
 
 interface AuthorCategoryStat {
@@ -39,22 +34,6 @@ interface AuthorWithStats extends AuthorRecord {
 }
 
 type SortMode = 'articles' | 'recent' | 'name';
-
-type SocialKey = keyof NonNullable<AuthorRecord['socials']>;
-type VisibleSocialLink = {
-  key: SocialKey
-  icon: string
-  label: string
-  url: string
-}
-
-const socialLinks: Array<{ key: SocialKey; icon: string; label: string }> = [
-  { key: 'twitter', icon: 'mdi:twitter', label: 'Twitter' },
-  { key: 'github', icon: 'mdi:github', label: 'GitHub' },
-  { key: 'youtube', icon: 'mdi:youtube', label: 'YouTube' },
-  { key: 'twitch', icon: 'mdi:twitch', label: 'Twitch' },
-  { key: 'website', icon: 'mdi:web', label: 'Website' }
-]
 
 const searchQuery = ref('')
 const showOnlyActive = ref(false)
@@ -98,7 +77,7 @@ const authorsWithStats = computed<AuthorWithStats[]>(() => {
         }))
         .filter(item => item.count > 0)
 
-      const socialCount = socialLinks.filter(link => !!author.socials?.[link.key]).length
+      const socialCount = AUTHOR_SOCIAL_LINKS.filter(link => !!author.socials?.[link.key]).length
 
       return {
         ...author,
@@ -203,13 +182,6 @@ const clearFilters = () => {
 const setSortMode = (mode: SortMode) => {
   sortMode.value = mode
 }
-
-const getVisibleSocialLinks = (author: AuthorWithStats): VisibleSocialLink[] =>
-  socialLinks.reduce<VisibleSocialLink[]>((acc, link) => {
-    const url = author.socials?.[link.key]
-    if (url) acc.push({ ...link, url })
-    return acc
-  }, [])
 
 useSeoMeta({
   title: 'Autori',
@@ -428,7 +400,6 @@ useSeoMeta({
                 :author="author"
                 :to="`/authors/${getAuthorSlug(author.name)}`"
                 :category-labels="CATEGORY_LABELS"
-                :visible-socials="getVisibleSocialLinks(author)"
               />
             </div>
           </section>
@@ -450,7 +421,6 @@ useSeoMeta({
                 :to="`/authors/${getAuthorSlug(author.name)}`"
                 :author="author"
                 :category-labels="CATEGORY_LABELS"
-                :visible-socials="getVisibleSocialLinks(author)"
               />
             </div>
           </section>

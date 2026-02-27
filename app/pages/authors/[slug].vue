@@ -25,29 +25,6 @@ if (!authorData) {
   })
 }
 
-interface Socials {
-  twitter?: string
-  github?: string
-  youtube?: string
-  twitch?: string
-  website?: string
-}
-
-type SocialKey = keyof Socials
-
-const socialLinks: Array<{
-  key: SocialKey
-  icon: string
-  label: string
-  hoverClass: string
-}> = [
-    { key: 'twitter', icon: 'i-mdi-twitter', label: 'Twitter', hoverClass: 'hover:text-blue-400' },
-    { key: 'github', icon: 'i-mdi-github', label: 'GitHub', hoverClass: 'hover:text-gray-900 dark:hover:text-white' },
-    { key: 'youtube', icon: 'i-mdi-youtube', label: 'YouTube', hoverClass: 'hover:text-red-600' },
-    { key: 'twitch', icon: 'i-mdi-twitch', label: 'Twitch', hoverClass: 'hover:text-purple-600' },
-    { key: 'website', icon: 'i-mdi-web', label: 'Website', hoverClass: 'hover:text-primary' }
-  ]
-
 // Query all articles and filter by this author
 const { data: authorArticles } = await useAsyncData(`author-articles-${slug}`, async () => {
   const collectionsData = await queryAllCollections()
@@ -132,30 +109,10 @@ useSeoMeta({
               </p>
 
               <!-- Social Links -->
-              <div
-                v-if="authorData.socials"
-                class="flex items-center gap-4 flex-wrap"
-              >
-                <template
-                  v-for="social in socialLinks"
-                  :key="social.key"
-                >
-                  <ULink
-                    v-if="authorData.socials[social.key]"
-                    :to="authorData.socials[social.key]"
-                    target="_blank"
-                    external
-                    class="flex items-center gap-2 text-sm text-gray-600 transition-colors"
-                    :class="social.hoverClass"
-                  >
-                    <UIcon
-                      :name="social.icon"
-                      class="w-5 h-5"
-                    />
-                    <span>{{ social.label }}</span>
-                  </ULink>
-                </template>
-              </div>
+              <AuthorSocialLinks
+                :socials="authorData.socials"
+                variant="labels"
+              />
 
               <!-- Article Stats -->
               <div class="flex items-center gap-6 flex-wrap">
@@ -210,7 +167,6 @@ useSeoMeta({
       <div v-if="recentArticles.length > 0">
         <h2 class="text-2xl font-bold mb-4">Ultimi articoli</h2>
         <UBlogPosts class="gap-2 sm:gap-4 lg:gap-6 sm:grid-cols-3 lg:grid-cols-4">
-          <!-- TODO astrarre la logica del badge "New" in quanto viene usata in diversi punti -->
           <ArticleBlogCard
             v-for="article in recentArticles"
             :key="article.path"
