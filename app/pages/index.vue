@@ -39,6 +39,29 @@ const articlesByCategory = computed(() => {
   return categories
 })
 
+const hasLeagueTag = (tags: unknown) =>
+  Array.isArray(tags)
+  && tags.some((tag: unknown) =>
+    typeof tag === 'string' && tag.trim().toLowerCase() === 'league'
+  )
+
+const sectionArticlesByCategory = computed(() => {
+  const categories = initializeCategories()
+
+  Object.entries(articlesByCategory.value).forEach(([category, articles]) => {
+    const typedCategory = category as CategoryType
+
+    if (typedCategory === 'decklist') {
+      categories[typedCategory] = articles.filter(article => !hasLeagueTag(article.tags))
+      return
+    }
+
+    categories[typedCategory] = articles
+  })
+
+  return categories
+})
+
 const categoryHighlights = computed(() =>
   CONTENT_TYPE_ORDER
     .map(category => ({
@@ -81,14 +104,14 @@ const sections = getHomeSections()
             </p>
           </div>
         </div>
-        
+
         <div class="space-y-2 pb-2">
           <ArticleCategorySection
             v-for="section in sections"
             :key="section.category"
             :title="section.title"
             :category="section.category"
-            :articles="articlesByCategory[section.category]"
+            :articles="sectionArticlesByCategory[section.category]"
             :authors-map="authorsMap"
           />
         </div>

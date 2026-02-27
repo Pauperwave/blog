@@ -7,13 +7,6 @@ interface HomeArticlesData {
   freshThisWeekCount: number
 }
 
-const hasLeagueTag = (tags: unknown) => {
-  return Array.isArray(tags)
-    && tags.some((tag: unknown) =>
-      typeof tag === 'string' && tag.trim().toLowerCase() === 'league'
-    )
-}
-
 export const useHomeArticles = async () => {
   return await useAsyncData<HomeArticlesData>('home-articles', async () => {
     const collectionsData = await queryAllCollections()
@@ -26,10 +19,6 @@ export const useHomeArticles = async () => {
       .length
 
     const articles = publishedArticles
-      .filter((article) => {
-        if (article.category !== 'decklist') return true
-        return !hasLeagueTag(article.tags)
-      })
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 
     return {
