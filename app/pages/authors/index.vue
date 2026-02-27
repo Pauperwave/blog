@@ -257,31 +257,24 @@ useSeoMeta({
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-3">
-              <UCard class="bg-white/80 dark:bg-gray-900/70 backdrop-blur-sm">
-                <p class="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">Autori</p>
-                <p class="mt-1 text-2xl font-bold">{{ authorsWithStats.length }}</p>
-                <p class="text-sm text-gray-600 dark:text-gray-400">
-                  {{ activeAuthors }} attivi
-                </p>
-              </UCard>
+              <StatInfoCard
+                label="Autori"
+                :value="authorsWithStats.length"
+                :description="`${activeAuthors} attivi`"
+              />
 
-              <UCard class="bg-white/80 dark:bg-gray-900/70 backdrop-blur-sm">
-                <p class="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">Articoli</p>
-                <p class="mt-1 text-2xl font-bold">{{ totalPublishedArticles }}</p>
-                <p class="text-sm text-gray-600 dark:text-gray-400">
-                  Pubblicati
-                </p>
-              </UCard>
+              <StatInfoCard
+                label="Articoli"
+                :value="totalPublishedArticles"
+                description="Pubblicati"
+              />
 
-              <UCard class="bg-white/80 dark:bg-gray-900/70 backdrop-blur-sm">
-                <p class="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">Top autore</p>
-                <p class="mt-1 text-lg font-bold truncate">
-                  {{ topAuthor?.name || 'N/D' }}
-                </p>
-                <p class="text-sm text-gray-600 dark:text-gray-400">
-                  {{ topAuthor ? `${topAuthor.articleCount} articoli pubblicati` : 'Nessun dato disponibile' }}
-                </p>
-              </UCard>
+              <StatInfoCard
+                label="Top autore"
+                :value="topAuthor?.name || 'N/D'"
+                :description="topAuthor ? `${topAuthor.articleCount} articoli pubblicati` : 'Nessun dato disponibile'"
+                value-class="text-lg truncate"
+              />
             </div>
           </div>
         </section>
