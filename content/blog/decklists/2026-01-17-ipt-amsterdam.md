@@ -1,5 +1,5 @@
 ---
-title: "Top 8 - Stroopwafel IPT (Super IPT Amsterdam)"
+title: "Stroopwafel IPT (Super IPT Amsterdam)"
 description: "Decklists Top 8"
 tags:
   - top8
