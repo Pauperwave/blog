@@ -279,74 +279,16 @@ useSeoMeta({
           </div>
         </section>
 
-        <UCard class="mb-6">
-          <div class="flex flex-col gap-4">
-            <div class="flex flex-col lg:flex-row lg:items-center gap-3">
-              <div class="w-full lg:max-w-md">
-                <UInput
-                  v-model="searchQuery"
-                  placeholder="Cerca per nome, nickname o bio..."
-                  class="w-full"
-                />
-              </div>
-
-              <div class="flex items-center gap-2 flex-wrap">
-                <UButton
-                  :variant="showOnlyActive ? 'solid' : 'outline'"
-                  color="primary"
-                  size="sm"
-                  @click="showOnlyActive = !showOnlyActive"
-                >
-                  Solo autori attivi
-                </UButton>
-
-                <UButton
-                  :variant="sortMode === 'articles' ? 'solid' : 'outline'"
-                  color="neutral"
-                  size="sm"
-                  @click="setSortMode('articles')"
-                >
-                  Piu articoli
-                </UButton>
-
-                <UButton
-                  :variant="sortMode === 'recent' ? 'solid' : 'outline'"
-                  color="neutral"
-                  size="sm"
-                  @click="setSortMode('recent')"
-                >
-                  Piu recenti
-                </UButton>
-
-                <UButton
-                  :variant="sortMode === 'name' ? 'solid' : 'outline'"
-                  color="neutral"
-                  size="sm"
-                  @click="setSortMode('name')"
-                >
-                  A-Z
-                </UButton>
-
-                <UButton
-                  v-if="hasActiveFilters"
-                  variant="ghost"
-                  color="neutral"
-                  size="sm"
-                  @click="clearFilters"
-                >
-                  Reset
-                </UButton>
-              </div>
-            </div>
-
-            <div class="flex items-center justify-between gap-2 flex-wrap text-sm text-gray-600 dark:text-gray-400">
-              <span>{{ filteredAuthors.length }} risultati</span>
-              <span v-if="searchQuery.trim()">
-                Ricerca: "{{ searchQuery.trim() }}"
-              </span>
-            </div>
-          </div>
-        </UCard>
+        <AuthorsFiltersToolbar
+          v-model="searchQuery"
+          :show-only-active="showOnlyActive"
+          :sort-mode="sortMode"
+          :has-active-filters="hasActiveFilters"
+          :results-count="filteredAuthors.length"
+          @toggle-active="showOnlyActive = !showOnlyActive"
+          @set-sort="setSortMode"
+          @clear="clearFilters"
+        />
 
         <UEmpty
           v-if="filteredAuthors.length === 0"
