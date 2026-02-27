@@ -3,7 +3,7 @@
 import type { BadgeProps } from '@nuxt/ui'
 import type { Author } from '~/composables/useAuthor'
 import type { AnyArticle } from '~/constants/content-config'
-import { getArticleFilterLocation } from '~/utils/article-filters'
+import { getArticleFilterLocation, hasLeagueTag } from '~/utils/article-filters'
 
 interface Props {
   article: AnyArticle
@@ -29,6 +29,22 @@ const shouldShowAuthor = computed(() => {
 })
 
 const articleLocation = computed(() => getArticleFilterLocation(props.article))
+const isLeagueArticle = computed(() => hasLeagueTag(props.article))
+const displayedTopicTags = computed(() => {
+  const normalizedLocation = articleLocation.value?.trim().toLowerCase() || null
+  const seen = new Set<string>()
+
+  return props.topicTags.filter((tag) => {
+    if (typeof tag !== 'string') return false
+    const normalizedTag = tag.trim().toLowerCase()
+    if (!normalizedTag) return false
+    if (normalizedTag === 'league') return false
+    if (normalizedLocation && normalizedTag === normalizedLocation) return false
+    if (seen.has(normalizedTag)) return false
+    seen.add(normalizedTag)
+    return true
+  })
+})
 </script>
 
 <template>
@@ -39,7 +55,12 @@ const articleLocation = computed(() => getArticleFilterLocation(props.article))
     :date="props.article.date"
     :to="props.article.path"
     variant="naked"
-    class="group border border-gray-200 dark:border-gray-800 rounded-xl p-4 hover:border-primary-500 dark:hover:border-primary-400 transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/10 dark:hover:shadow-primary-400/10 hover:-translate-y-1 hover:scale-[1.02] bg-white dark:bg-gray-900/50 backdrop-blur-sm"
+    :class="[
+      'group border rounded-xl p-4 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:scale-[1.02] backdrop-blur-sm',
+      isLeagueArticle
+        ? 'border-sky-300/80 dark:border-sky-600/70 bg-sky-50/50 dark:bg-sky-500/5 hover:border-sky-500 dark:hover:border-sky-400 hover:shadow-sky-500/10 dark:hover:shadow-sky-400/10'
+        : 'border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 hover:border-primary-500 dark:hover:border-primary-400 hover:shadow-primary-500/10 dark:hover:shadow-primary-400/10'
+    ]"
   >
     <template #date>
       {{ useState(`article-date-${props.article.path}`, () => formatDateIT(props.article.date)).value }}
@@ -58,6 +79,14 @@ const articleLocation = computed(() => getArticleFilterLocation(props.article))
           {{ props.categoryLabel }}
         </UBadge>
         <UBadge
+          v-if="isLeagueArticle"
+          :key="`${props.article.path}-league`"
+          color="info"
+          variant="soft"
+        >
+          League
+        </UBadge>
+        <UBadge
           v-if="articleLocation"
           :key="`${props.article.path}-location-${articleLocation}`"
           color="info"
@@ -66,7 +95,7 @@ const articleLocation = computed(() => getArticleFilterLocation(props.article))
           {{ articleLocation }}
         </UBadge>
         <UBadge
-          v-for="tag in props.topicTags"
+          v-for="tag in displayedTopicTags"
           :key="`${props.article.path}-tag-${tag}`"
           color="primary"
           variant="soft"

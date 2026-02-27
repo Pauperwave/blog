@@ -6,7 +6,7 @@ import {
   type CategoryType,
   CATEGORY_LABELS
 } from '~/constants/content-config'
-import { getRecentArticleBadge as getArticleBadge } from '~/utils/article-badges'
+import { hasLeagueTag } from '~/utils/article-filters'
 
 interface HeroCategoryHighlight {
   category: CategoryType
@@ -31,11 +31,8 @@ const heroSecondaryArticles = computed(() => articles.value.slice(1, 5))
 const featuredThumbnailSrc = computed(() =>
   featuredArticle.value ? getThumbnailSrc(featuredArticle.value.thumbnail) : undefined
 )
-const heroSecondaryCards = computed(() =>
-  heroSecondaryArticles.value.map(article => ({
-    article,
-    badge: getArticleBadge(article.date)
-  }))
+const isFeaturedLeagueArticle = computed(() =>
+  featuredArticle.value ? hasLeagueTag(featuredArticle.value) : false
 )
 
 const getThumbnailSrc = (thumbnail: unknown) => {
@@ -116,7 +113,12 @@ const getThumbnailSrc = (thumbnail: unknown) => {
             v-slot="{ navigate }"
           >
             <UCard
-              class="relative h-full overflow-hidden rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 backdrop-blur-sm cursor-pointer transition-all duration-300 hover:border-primary-500 dark:hover:border-primary-400 hover:shadow-xl hover:shadow-primary-500/10 dark:hover:shadow-primary-400/10 hover:-translate-y-1 active:scale-[0.995]"
+              :class="[
+                'relative h-full overflow-hidden rounded-xl border backdrop-blur-sm cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1 active:scale-[0.995]',
+                isFeaturedLeagueArticle
+                  ? 'border-sky-300/80 dark:border-sky-600/70 bg-sky-50/50 dark:bg-sky-500/5 hover:border-sky-500 dark:hover:border-sky-400 hover:shadow-sky-500/10 dark:hover:shadow-sky-400/10'
+                  : 'border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 hover:border-primary-500 dark:hover:border-primary-400 hover:shadow-primary-500/10 dark:hover:shadow-primary-400/10'
+              ]"
               role="link"
               tabindex="0"
               @click="navigate"
@@ -136,12 +138,21 @@ const getThumbnailSrc = (thumbnail: unknown) => {
                 </div>
 
                 <div class="flex items-center justify-between gap-3 flex-wrap">
-                  <UBadge
-                    color="primary"
-                    variant="soft"
-                  >
-                    In evidenza
-                  </UBadge>
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <UBadge
+                      color="primary"
+                      variant="soft"
+                    >
+                      In evidenza
+                    </UBadge>
+                    <UBadge
+                      v-if="isFeaturedLeagueArticle"
+                      color="info"
+                      variant="soft"
+                    >
+                      League
+                    </UBadge>
+                  </div>
                   <span class="text-xs text-gray-500 dark:text-gray-400">
                     {{ formatDateIT(featuredArticle.date) }}
                   </span>
@@ -209,10 +220,15 @@ const getThumbnailSrc = (thumbnail: unknown) => {
 
             <div class="grid grid-cols-1 gap-2.5 md:gap-3">
               <NuxtLink
-                v-for="{ article, badge } in heroSecondaryCards"
+                v-for="article in heroSecondaryArticles"
                 :key="`hero-secondary-${article._id}`"
                 :to="article.path"
-                class="group rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 p-3 hover:border-primary-400 transition-colors"
+                :class="[
+                  'group rounded-xl border p-3 transition-colors',
+                  hasLeagueTag(article)
+                    ? 'border-sky-300/80 dark:border-sky-600/70 bg-sky-50/50 dark:bg-sky-500/5 hover:border-sky-500 dark:hover:border-sky-400'
+                    : 'border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 hover:border-primary-400'
+                ]"
               >
                 <div class="flex items-start justify-between gap-3">
                   <div class="min-w-0">
@@ -224,11 +240,11 @@ const getThumbnailSrc = (thumbnail: unknown) => {
                         {{ CATEGORY_LABELS[article.category as CategoryType] }}
                       </UBadge>
                       <UBadge
-                        v-if="badge"
-                        :color="badge.color"
+                        v-if="hasLeagueTag(article)"
+                        color="info"
                         variant="soft"
                       >
-                        {{ badge.label }}
+                        League
                       </UBadge>
                     </div>
                     <h3 class="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-primary transition-colors line-clamp-2 leading-snug">
@@ -244,7 +260,7 @@ const getThumbnailSrc = (thumbnail: unknown) => {
                 </div>
               </NuxtLink>
               <p
-                v-if="heroSecondaryCards.length === 0"
+                v-if="heroSecondaryArticles.length === 0"
                 class="text-sm text-gray-600 dark:text-gray-400"
               >
                 Ancora nessun contenuto recente disponibile.

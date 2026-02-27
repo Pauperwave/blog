@@ -7,6 +7,7 @@ import {
   getHomeSections,
   initializeCategories
 } from '~/constants/content-config'
+import { hasLeagueTag } from '~/utils/article-filters'
 
 const { data: homeArticlesData } = await useHomeArticles()
 const allArticles = computed(() => homeArticlesData.value?.articles || [])
@@ -39,12 +40,6 @@ const articlesByCategory = computed(() => {
   return categories
 })
 
-const hasLeagueTag = (tags: unknown) =>
-  Array.isArray(tags)
-  && tags.some((tag: unknown) =>
-    typeof tag === 'string' && tag.trim().toLowerCase() === 'league'
-  )
-
 const sectionArticlesByCategory = computed(() => {
   const categories = initializeCategories()
 
@@ -52,7 +47,7 @@ const sectionArticlesByCategory = computed(() => {
     const typedCategory = category as CategoryType
 
     if (typedCategory === 'decklist') {
-      categories[typedCategory] = articles.filter(article => !hasLeagueTag(article.tags))
+      categories[typedCategory] = articles.filter(article => !hasLeagueTag(article))
       return
     }
 

@@ -12,8 +12,17 @@ export const normalizeArticleFilterValue = (value: string) => value.trim().toLow
 export const getArticleFilterStringArray = (value: unknown): string[] =>
   Array.isArray(value) ? value.filter((item): item is string => typeof item === 'string') : []
 
-export const getArticleFilterString = (value: unknown): string | null =>
-  typeof value === 'string' && value.trim().length > 0 ? value : null
+export const getArticleFilterString = (value: unknown): string | null => {
+  if (typeof value !== 'string') return null
+
+  const trimmedValue = value.trim()
+  if (trimmedValue.length <= 0) return null
+
+  const normalizedValue = normalizeArticleFilterValue(trimmedValue)
+  if (normalizedValue === 'undefined' || normalizedValue === 'null') return null
+
+  return trimmedValue
+}
 
 export const getArticleFilterLocation = (article: ArticleLocationFields): string | null =>
   getArticleFilterString(article?.location)
@@ -42,7 +51,12 @@ export const buildArticleTopicTags = (
 
   return getArticleFilterStringArray(article?.tags).filter((tag) => {
     const normalizedTag = normalizeArticleFilterValue(tag)
-    return normalizedTag !== normalizedLocation && !globalNormalizedLocationSet?.has(normalizedTag)
+    return (
+      normalizedTag !== 'undefined'
+      && normalizedTag !== 'null'
+      && normalizedTag !== normalizedLocation
+      && !globalNormalizedLocationSet?.has(normalizedTag)
+    )
   })
 }
 
@@ -69,3 +83,13 @@ export const getArticleTagFilterQuery = (
 
   return { tag: normalizedTag }
 }
+
+export const hasArticleTag = (article: ArticleFilterFields, tag: string) => {
+  const normalizedTag = normalizeArticleFilterValue(tag)
+
+  return getArticleFilterStringArray(article?.tags).some(
+    articleTag => normalizeArticleFilterValue(articleTag) === normalizedTag
+  )
+}
+
+export const hasLeagueTag = (article: ArticleFilterFields) => hasArticleTag(article, 'league')
