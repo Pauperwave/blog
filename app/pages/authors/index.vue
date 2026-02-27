@@ -204,9 +204,6 @@ const setSortMode = (mode: SortMode) => {
   sortMode.value = mode
 }
 
-const getVisibleSocials = (author: AuthorWithStats) =>
-  socialLinks.filter(link => !!author.socials?.[link.key])
-
 const getVisibleSocialLinks = (author: AuthorWithStats): VisibleSocialLink[] =>
   socialLinks.reduce<VisibleSocialLink[]>((acc, link) => {
     const url = author.socials?.[link.key]
@@ -447,113 +444,14 @@ useSeoMeta({
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <NuxtLink
+              <AuthorGridCard
                 v-for="author in remainingAuthors"
                 :key="author.name"
                 :to="`/authors/${getAuthorSlug(author.name)}`"
-                custom
-                v-slot="{ navigate }"
-              >
-                <UCard
-                  class="h-full border-gray-200 dark:border-gray-800 transition-all duration-300 hover:border-primary-500 dark:hover:border-primary-400 hover:shadow-lg hover:-translate-y-1 cursor-pointer"
-                  role="link"
-                  tabindex="0"
-                  @click="navigate"
-                  @keydown.enter.prevent="navigate"
-                >
-                  <div class="flex items-start gap-4">
-                    <UAvatar
-                      :src="author.avatar"
-                      :alt="author.name"
-                      size="lg"
-                      class="shrink-0"
-                    />
-
-                    <div class="min-w-0 flex-1">
-                      <div class="flex items-start justify-between gap-2">
-                        <div class="min-w-0">
-                          <h3 class="text-lg font-semibold truncate">
-                            {{ author.name }}
-                          </h3>
-                          <p class="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
-                            {{ author.description }}
-                          </p>
-                        </div>
-                        <span
-                          class="mt-1 h-2.5 w-2.5 rounded-full shrink-0"
-                          :class="author.articleCount > 0 ? 'bg-emerald-500' : 'bg-gray-300 dark:bg-gray-700'"
-                        />
-                      </div>
-
-                      <p
-                        v-if="author.nickname"
-                        class="mt-1 text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400"
-                      >
-                        {{ author.nickname }}
-                      </p>
-                    </div>
-                  </div>
-
-                  <p
-                    v-if="author.bio"
-                    class="mt-4 text-sm text-gray-700 dark:text-gray-300 line-clamp-2"
-                  >
-                    {{ author.bio }}
-                  </p>
-
-                  <div class="mt-4 flex items-center gap-2 flex-wrap">
-                    <UBadge
-                      color="primary"
-                      variant="soft"
-                    >
-                      {{ author.articleCount }} {{ author.articleCount === 1 ? 'articolo' : 'articoli' }}
-                    </UBadge>
-
-                    <UBadge
-                      v-if="author.latestArticleDate"
-                      color="neutral"
-                      variant="soft"
-                    >
-                      {{ formatDateIT(author.latestArticleDate) }}
-                    </UBadge>
-
-                    <UBadge
-                      v-if="author.categories[0]"
-                      color="neutral"
-                      variant="soft"
-                    >
-                      {{ CATEGORY_LABELS[author.categories[0].category] }}
-                    </UBadge>
-                  </div>
-
-                  <div
-                    v-if="author.socialCount > 0"
-                    class="mt-4 flex items-center justify-between gap-3"
-                  >
-                    <div class="flex items-center gap-2 text-gray-500 dark:text-gray-400">
-                      <a
-                        v-for="social in getVisibleSocials(author).slice(0, 4)"
-                        :key="`${author.name}-grid-${social.key}`"
-                        :href="author.socials?.[social.key]"
-                        :aria-label="social.label"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="inline-flex items-center hover:text-primary transition-colors"
-                        @click.stop
-                        @keydown.enter.stop
-                      >
-                        <UIcon
-                          :name="social.icon"
-                          class="w-4 h-4"
-                        />
-                      </a>
-                    </div>
-                    <span class="text-xs text-gray-500 dark:text-gray-400">
-                      {{ author.socialCount }} link social
-                    </span>
-                  </div>
-                </UCard>
-              </NuxtLink>
+                :author="author"
+                :category-labels="CATEGORY_LABELS"
+                :visible-socials="getVisibleSocialLinks(author)"
+              />
             </div>
           </section>
         </template>
