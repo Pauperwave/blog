@@ -126,14 +126,8 @@ async function createDatabase(): Promise<Database> {
     CREATE INDEX IF NOT EXISTS idx_name ON cards(name);
   `)
 
-  // Create mana symbols table
-  db.exec(`
-    CREATE TABLE IF NOT EXISTS mana_symbols (
-      symbol TEXT PRIMARY KEY,
-      svg_uri TEXT,
-      indexed_at INTEGER DEFAULT (strftime('%s', 'now'))
-    );
-  `)
+  // Remove legacy table no longer used (we render mana symbols with CSS).
+  db.exec('DROP TABLE IF EXISTS mana_symbols;')
 
   // Create metadata table
   db.exec(`
@@ -222,28 +216,6 @@ async function importPauperCards(db: Database): Promise<void> {
   console.log('✅ Cards imported successfully')
 }
 
-async function downloadManaSymbols(db: Database): Promise<void> {
-  console.log('🎨 Downloading mana symbology...')
-
-  const response = await fetch('https://api.scryfall.com/symbology')
-  const data = await response.json()
-
-  const insert = db.prepare(`
-    INSERT OR REPLACE INTO mana_symbols (symbol, svg_uri)
-    VALUES (?, ?)
-  `)
-
-  const insertMany = db.transaction((symbols: Array<{ symbol: string, svg_uri: string }>) => {
-    for (const item of symbols) {
-      insert.run(item.symbol, item.svg_uri)
-    }
-  })
-
-  insertMany(data.data)
-
-  console.log(`✅ Imported ${data.data.length} mana symbols`)
-}
-
 async function main() {
   try {
     console.log('🚀 Starting bulk data download and database creation...\n')
@@ -260,16 +232,11 @@ async function main() {
     // Step 4: Import Pauper cards
     await importPauperCards(db)
 
-    // Step 5: Download mana symbols
-    await downloadManaSymbols(db)
-
-    // Step 6: Show stats
+    // Step 5: Show stats
     const stats = db.prepare('SELECT COUNT(*) as count FROM cards').get() as { count: number }
-    const symbols = db.prepare('SELECT COUNT(*) as count FROM mana_symbols').get() as { count: number }
 
     console.log('\n📊 Database Statistics:')
     console.log(`   └─ Cards: ${stats.count}`)
-    console.log(`   └─ Mana Symbols: ${symbols.count}`)
     console.log(`   └─ Database size: ${(statSync(DB_PATH).size / 1024 / 1024).toFixed(2)} MB`)
 
     db.close()

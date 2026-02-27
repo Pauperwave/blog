@@ -24,11 +24,10 @@ This is a Nuxt 3 application that downloads Magic: The Gathering card data from 
    - Downloads compressed JSON from Scryfall
    - Saves to: `./server/database/oracle-cards.json` (~168 MB)
 
-3. **Create Database Schema** (line 111-149)
+3. **Create Database Schema** (line 111-141)
    - Creates SQLite database: `./server/database/cards.db`
-   - Creates 3 tables:
+   - Creates 2 tables:
       - `cards`: name (PK), mana_cost, image_url, indexed_at
-      - `mana_symbols`: symbol (PK), svg_uri, indexed_at
       - `metadata`: key (PK), value, updated_at
    - Creates index on `cards.name`
 
@@ -38,10 +37,6 @@ This is a Nuxt 3 application that downloads Magic: The Gathering card data from 
    - Handles double-faced cards (extracts first face mana cost/image)
    - Batch inserts using transaction (~1953 KB final DB)
    - Stores metadata: last_update, total_cards
-
-5. **Download Mana Symbols** (line 207-227)
-   - Fetches from: `https://api.scryfall.com/symbology`
-   - Stores symbol-to-SVG URI mappings
 
 **Trigger Points:**
 - Manual: `bun run download-cards`
@@ -68,14 +63,6 @@ This is a Nuxt 3 application that downloads Magic: The Gathering card data from 
    - Returns `Map<name, CardData>`
    - Used by API endpoint for efficiency
 
-4. **getAllManaSymbols()** (line 107-119)
-   - Cached mana symbol map
-   - Returns `Map<symbol, svgUri>`
-
-5. **getParsedManaCost(manaCost)** (line 124-137)
-   - Parses "{2}{U}{U}" → ["{2}", "{U}", "{U}"]
-   - Enriches with SVG URIs from cache
-
 ---
 
 ## **API Layer**
@@ -91,7 +78,6 @@ This is a Nuxt 3 application that downloads Magic: The Gathering card data from 
       "Lightning Bolt": {
          "name": "Lightning Bolt",
          "manaCost": "{R}",
-         "manaSymbols": [{ "symbol": "{R}", "svgUri": "..." }],
          "imageUrl": "https://..."
       }
    }
@@ -101,8 +87,7 @@ This is a Nuxt 3 application that downloads Magic: The Gathering card data from 
 **Flow:**
 1. Receives comma-separated card names
 2. Calls `getCardsByNames()` for batch lookup
-3. Enriches each card with parsed mana cost + SVG URIs
-4. Returns structured JSON
+3. Returns structured JSON
 
 ---
 
@@ -163,5 +148,5 @@ Scryfall API → download-bulk-data.ts → oracle-cards.json (168 MB)
 - ✅ Components integrated: MagicDecklist, MagicCardDisplay
 - ✅ Efficient batch lookups and caching implemented
 - ✅ Pauper legality filtering applied during import
-- ✅ Mana symbol SVGs downloaded and cached
+- ✅ Mana symbols rendered with CSS (`mana-font`) on the frontend
 - ✅ Interactive UI features for card preview and decklist copying

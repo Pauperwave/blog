@@ -3,7 +3,7 @@
  * GET /api/cards?names=Lightning+Bolt,Counterspell
  */
 
-import { getCardsByNames, getParsedManaCost } from '../utils/card-database'
+import { getCardsByNames } from '../utils/card-database'
 
 export default defineEventHandler(async (event) => {
   const query = getQuery(event)
@@ -26,17 +26,14 @@ export default defineEventHandler(async (event) => {
   // Get cards from database
   const cardsMap = await getCardsByNames(names)
   
-  // Transform to response format with parsed mana costs
+  // Transform to response format
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const response: Record<string, any> = {}
   
   for (const [name, card] of cardsMap.entries()) {
-    const parsedMana = await getParsedManaCost(card.manaCost)
-    
     response[name] = {
       name: card.name,
       manaCost: card.manaCost,
-      manaSymbols: parsedMana.manaSymbols,
       imageUrl: card.imageUrl
     }
   }

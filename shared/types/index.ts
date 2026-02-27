@@ -2,16 +2,10 @@
  * Type definitions for Magic decklist components
  */
 
-export interface ManaSymbol {
-  symbol: string
-  svgUri: string
-}
-
 export interface CardItem {
   quantity: number
   name: string
   manaCost: string
-  manaSymbols: ManaSymbol[]
   imageUrl: string
 }
 

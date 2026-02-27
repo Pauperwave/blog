@@ -13,11 +13,6 @@ export interface CardData {
   imageUrl: string
 }
 
-export interface ParsedManaCost {
-  symbols: string[]
-  manaSymbols: ManaSymbol[]
-}
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type DatabaseInstance = any
 
@@ -48,12 +43,6 @@ async function getDatabase(): Promise<DatabaseInstance> {
     }
   }
   return dbInstance
-}
-
-export function parseManaCost(manaCost: string): string[] {
-  if (!manaCost) return []
-  const matches = manaCost.match(/\{[^}]+\}/g)
-  return matches || []
 }
 
 export async function getCardByName(name: string): Promise<CardData | null> {
@@ -92,47 +81,6 @@ export async function getCardsByNames(names: string[]): Promise<Map<string, Card
   }
 
   return result
-}
-
-export async function getManaSymbol(symbol: string): Promise<string | null> {
-  const db = await getDatabase()
-
-  const row = db.prepare(`
-    SELECT svg_uri FROM mana_symbols WHERE symbol = ? LIMIT 1
-  `).get(symbol)
-
-  return row?.svg_uri || null
-}
-
-let manaSymbolCache: Map<string, string> | null = null
-
-export async function getAllManaSymbols(): Promise<Map<string, string>> {
-  if (manaSymbolCache) return manaSymbolCache
-
-  const db = await getDatabase()
-  const rows = db.prepare('SELECT symbol, svg_uri FROM mana_symbols').all()
-
-  manaSymbolCache = new Map()
-  for (const row of rows) {
-    manaSymbolCache.set(row.symbol, row.svg_uri)
-  }
-
-  return manaSymbolCache
-}
-
-export async function getParsedManaCost(manaCost: string): Promise<ParsedManaCost> {
-  const symbols = parseManaCost(manaCost)
-  const symbolMap = await getAllManaSymbols()
-
-  const manaSymbols: ManaSymbol[] = symbols.map(symbol => ({
-    symbol,
-    svgUri: symbolMap.get(symbol) || ''
-  }))
-
-  return {
-    symbols,
-    manaSymbols
-  }
 }
 
 export function closeDatabase(): void {
