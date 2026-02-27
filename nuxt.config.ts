@@ -146,46 +146,13 @@ export default defineNuxtConfig({
     },
     build: {
       sourcemap: false, // Disable sourcemaps in production to eliminate Tailwind warnings
-      chunkSizeWarningLimit: 1000,
-      rollupOptions: {
-        output: {
-          manualChunks(id) {
-            const normalizedId = id.replace(/\\/g, '/')
-
-            if (!normalizedId.includes('/node_modules/')) {
-              return
-            }
-
-            // Keep Nuxt Studio app internals on Rollup's default splitting strategy.
-            if (normalizedId.includes('/node_modules/nuxt-studio/dist/app/')) {
-              return
-            }
-
-            // Split the heaviest editor/admin dependencies away from the main app chunk.
-            if (normalizedId.includes('/@tiptap/') || normalizedId.includes('/prosemirror/')) {
-              return 'editor'
-            }
-
-            if (normalizedId.includes('/nuxt-studio/') || normalizedId.includes('/@nuxthq/studio/')) {
-              return 'studio-runtime'
-            }
-
-            if (normalizedId.includes('/@nuxt/ui/') || normalizedId.includes('/reka-ui/') || normalizedId.includes('/embla-carousel/')) {
-              return 'ui'
-            }
-
-            if (normalizedId.includes('/@iconify/') || normalizedId.includes('/@nuxt/icon/')) {
-              return 'icons'
-            }
-
-            if (normalizedId.includes('/vue/') || normalizedId.includes('/@vue/') || normalizedId.includes('/vue-router/')) {
-              return 'vue'
-            }
-
-            return 'vendor'
-          },
-        },
-      },
+      chunkSizeWarningLimit: 3000,
+      // rollupOptions: {
+      //   output: {
+      //     manualChunks(id) {
+      //     },
+      //   },
+      // },
     }
   }
 })
