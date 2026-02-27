@@ -1,34 +1,16 @@
 <script setup lang="ts">
 import appMeta from "~/app.meta"
 import { PAUPERWAVE_SOCIAL_LINKS } from '~/constants/social-links'
+import { SOCIAL_PLATFORM_META } from '~/constants/social-platform-meta'
 
-const socialLinks = [
-  {
-    icon: "i-lucide-facebook",
-    link: PAUPERWAVE_SOCIAL_LINKS.facebook,
-    label: "Facebook"
-  },
-  {
-    icon: "i-lucide-instagram",
-    link: PAUPERWAVE_SOCIAL_LINKS.instagram,
-    label: "Instagram"
-  },
-  {
-    icon: "i-lucide-youtube",
-    link: PAUPERWAVE_SOCIAL_LINKS.youtube,
-    label: "YouTube"
-  },
-  {
-    icon: "i-lucide-send",
-    link: PAUPERWAVE_SOCIAL_LINKS.telegram,
-    label: "Telegram"
-  },
-  {
-    icon: "i-lucide-github",
-    link: PAUPERWAVE_SOCIAL_LINKS.github,
-    label: "GitHub"
-  }
-]
+const FOOTER_SOCIAL_KEYS = ['facebook', 'instagram', 'youtube', 'telegram', 'github'] as const
+type FooterSocialKey = typeof FOOTER_SOCIAL_KEYS[number]
+
+const footerSocialLinks = FOOTER_SOCIAL_KEYS.map((key: FooterSocialKey) => ({
+  icon: SOCIAL_PLATFORM_META[key].icon,
+  label: SOCIAL_PLATFORM_META[key].label,
+  link: PAUPERWAVE_SOCIAL_LINKS[key]
+}))
 </script>
 
 <template>
@@ -48,7 +30,7 @@ const socialLinks = [
           <div class="flex gap-2 flex-wrap justify-center md:justify-start">
             <div class="flex gap-2 flex-wrap justify-center md:justify-start">
               <UButton
-                v-for="(social, index) in socialLinks"
+                v-for="(social, index) in footerSocialLinks"
                 :key="index"
                 :icon="social.icon"
                 color="neutral"
