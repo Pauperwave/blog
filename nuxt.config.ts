@@ -35,6 +35,12 @@ export default defineNuxtConfig({
       },
     },
   },
+  mdc: {
+    highlight: {
+      // Avoid WASM loading during serverless bundling (Vercel/Nitro).
+      shikiEngine: 'javascript',
+    },
+  },
   modules: [
     'nuxt-studio',
     "@nuxt/eslint",
@@ -88,6 +94,8 @@ export default defineNuxtConfig({
   icon: {
     // Help Nuxt Icon resolve dashed collection names correctly.
     collections: ['lucide', 'simple-icons'],
+    // Avoid external Iconify fetches during prerender/build.
+    fallbackToApi: false,
     aliases: {
       // Nuxt UI prose code blocks default to vscode-icons for file extensions.
       // We don't ship that collection locally, so map the JS file icon to an installed icon.
@@ -138,6 +146,7 @@ export default defineNuxtConfig({
     },
     build: {
       sourcemap: false, // Disable sourcemaps in production to eliminate Tailwind warnings
+      chunkSizeWarningLimit: 1000,
     }
   }
 })
