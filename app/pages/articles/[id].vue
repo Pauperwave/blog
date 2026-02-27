@@ -265,7 +265,7 @@ function updateMeta() {
               v-for="tag in data?.tags"
               :key="tag"
               :to="getTagFilterLink(tag)"
-              class="rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+              class="rounded-full focus-visible:outline focus-visible:outline-primary"
             >
               <UBadge
                 color="primary"
