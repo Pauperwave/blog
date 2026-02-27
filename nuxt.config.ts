@@ -177,29 +177,47 @@ export default defineNuxtConfig({
                           return
                         }
 
-                        // Nuxt/Vue runtime packages are tightly coupled and can form circular
-                        // graphs if forced into separate manual chunks.
-                        if (
-                          packageName === "nuxt" ||
-                          packageName === "nuxt-studio" ||
-                          packageName === "nuxt-swiper" ||
-                          packageName.startsWith("@nuxt/") ||
-                          packageName.startsWith("@nuxtjs/") ||
-                          packageName.startsWith("@vue/") ||
-                          packageName.startsWith("@vueuse/") ||
-                          packageName.startsWith("@unhead/") ||
-                          packageName.startsWith("@iconify/") ||
-                          packageName === "vue" ||
-                          packageName === "vue-router" ||
-                          packageName === "unhead"
-                        ) {
-                          return "vendor-framework"
-                        }
-
                         // Split raw Swiper separately; keep the Nuxt wrapper with framework code.
                         if (packageName === "swiper") {
                           return "vendor-swiper"
                         }
+
+                        // Keep Vue runtime internals together to avoid circular chunk edges.
+                        if (
+                          packageName === "nuxt" ||
+                          packageName === "vue" ||
+                          packageName === "vue-router" ||
+                          packageName === "unhead" ||
+                          packageName.startsWith("@vue/") ||
+                          packageName.startsWith("@unhead/")
+                        ) {
+                          return "vendor-framework"
+                        }
+
+                        if (
+                          packageName === "nuxt-studio" ||
+                          packageName === "nuxt-swiper" ||
+                          packageName.startsWith("@nuxt/") ||
+                          packageName.startsWith("@nuxtjs/") ||
+                          packageName.startsWith("@vueuse/")
+                        ) {
+                          return "vendor-nuxt"
+                        }
+
+                        if (
+                          packageName.startsWith("@iconify/") ||
+                          packageName.startsWith("@iconify-json/")
+                        ) {
+                          return "vendor-icons"
+                        }
+
+                        const vendorChunkName = packageName
+                          .replace("@", "")
+                          .replace("/", "-")
+                          .replaceAll(".", "-")
+                          .replace(/[^a-zA-Z0-9-]/g, "-")
+
+                        return `vendor-${vendorChunkName}`
                     },
                 },
             },
