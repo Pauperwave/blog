@@ -88,11 +88,11 @@ export default defineNuxtConfig({
   },
   icon: {
     // Help Nuxt Icon resolve dashed collection names correctly.
-    collections: ['ic', 'lucide', 'simple-icons', 'logos', 'mdi', 'material-symbols'],
+    collections: ['ic', 'lucide', 'logos'],
     aliases: {
       // Nuxt UI prose code blocks default to vscode-icons for file extensions.
       // We don't ship that collection locally, so map the JS file icon to an installed icon.
-      'vscode-icons-file-type-js': 'lucide:file-code-2'
+      'vscode-icons-file-type-js': 'i-lucide-file-code-2'
     }
   },
   // image: {

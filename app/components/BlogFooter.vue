@@ -4,27 +4,27 @@ import { PAUPERWAVE_SOCIAL_LINKS } from '~/constants/social-links'
 
 const socialLinks = [
   {
-    icon: "i-simple-icons-facebook",
+    icon: "i-lucide-facebook",
     link: PAUPERWAVE_SOCIAL_LINKS.facebook,
     label: "Facebook"
   },
   {
-    icon: "i-simple-icons-instagram",
+    icon: "i-lucide-instagram",
     link: PAUPERWAVE_SOCIAL_LINKS.instagram,
     label: "Instagram"
   },
   {
-    icon: "i-simple-icons-youtube",
+    icon: "i-lucide-youtube",
     link: PAUPERWAVE_SOCIAL_LINKS.youtube,
     label: "YouTube"
   },
   {
-    icon: "i-simple-icons-telegram",
+    icon: "i-lucide-send",
     link: PAUPERWAVE_SOCIAL_LINKS.telegram,
     label: "Telegram"
   },
   {
-    icon: "i-simple-icons-github",
+    icon: "i-lucide-github",
     link: PAUPERWAVE_SOCIAL_LINKS.github,
     label: "GitHub"
   }

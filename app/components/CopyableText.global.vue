@@ -37,7 +37,7 @@ function onClick(event: MouseEvent) {
       :color="copied ? 'success' : 'neutral'"
       size="sm"
       aria-label="copy content"
-      :icon="copied ? 'material-symbols:check-circle-rounded' : 'material-symbols:content-copy-outline-rounded'"
+      :icon="copied ? 'i-lucide-circle-check' : 'i-lucide-copy'"
       @click="onClick"
     />
     <UDropdownMenu

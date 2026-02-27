@@ -2,7 +2,7 @@
 import type { NavigationMenuItem } from "@nuxt/ui"
 
 const navItems: NavigationMenuItem[] = [
-  { label: "Autori", icon: "mdi:account-group", to: "/authors" },
+  { label: "Autori", icon: "i-lucide-users", to: "/authors" },
 ]
 
 const route = useRoute()

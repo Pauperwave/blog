@@ -18,8 +18,8 @@ const pageHeadline = 'Documenti'
       <UPageAside :ui="{ root: 'lg:col-span-3!' }">
         <UPageAnchors
           :links="[
-            { label: 'Canale YouTube', icon: 'mdi:youtube', to: 'https://www.youtube.com/@alessandromoretti1177', target: '_blank' },
-            { label: 'Tutti gli articoli', icon: 'material-symbols:article-rounded', to: '/articles' },
+            { label: 'Canale YouTube', icon: 'i-lucide-youtube', to: 'https://www.youtube.com/@alessandromoretti1177', target: '_blank' },
+            { label: 'Tutti gli articoli', icon: 'i-lucide-book-open-text', to: '/articles' },
           ]"
         />
         <USeparator

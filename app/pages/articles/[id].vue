@@ -236,8 +236,8 @@ function updateMeta() {
       <UPageAside :ui="{ root: 'lg:col-span-3!' }">
         <UPageAnchors
           :links="[
-            { label: 'Canale YouTube', icon: 'mdi:youtube', to: 'https://www.youtube.com/@alessandromoretti1177', target: '_blank' },
-            { label: 'Tutti gli articoli', icon: 'material-symbols:article-rounded', to: '/articles' },
+            { label: 'Canale YouTube', icon: 'i-lucide-youtube', to: 'https://www.youtube.com/@alessandromoretti1177', target: '_blank' },
+            { label: 'Tutti gli articoli', icon: 'i-lucide-book-open-text', to: '/articles' },
           ]"
         />
         <USeparator
@@ -292,11 +292,11 @@ function updateMeta() {
         <div class="flex flex-row items-center gap-4">
           <p class="flex flex-row items-center gap-1 typ-sublabel">
             <icon
-              name="material-symbols:calendar-today-rounded"
+              name="i-lucide-calendar"
               class="text-primary"
             /> {{ formattedDate }}
           </p>
-          <!-- <p class="flex flex-row items-center gap-1 typ-sublabel"><icon name="material-symbols:alarm-rounded" class="text-primary"></icon> {{ readingTimeText }}</p> -->
+          <!-- <p class="flex flex-row items-center gap-1 typ-sublabel"><icon name="i-lucide-alarm-clock" class="text-primary"></icon> {{ readingTimeText }}</p> -->
         </div>
         <NuxtImg
           v-if="data?.thumbnail"
