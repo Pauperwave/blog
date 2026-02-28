@@ -2,8 +2,8 @@
 const error = useError()
 
 useSeoMeta({
-  title: error.value?.statusCode.toString(),
-  description: error.value?.statusMessage,
+  title: error.value?.status?.toString(),
+  description: error.value?.statusText,
 })
 </script>
 
