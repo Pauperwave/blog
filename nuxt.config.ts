@@ -46,6 +46,7 @@ export default defineNuxtConfig({
     "@nuxt/eslint",
     "@nuxt/image",
     "@nuxt/ui",
+    '@nuxt/icon',
     "@nuxt/content",
     // Must come after @nuxt/ui
     // https://ui.nuxt.com/docs/getting-started/integrations/content
@@ -94,6 +95,9 @@ export default defineNuxtConfig({
   icon: {
     serverBundle: {
       collections: ['lucide', 'simple-icons'],
+    },
+    clientBundle: {
+      scan: true,
     },
     // Avoid external Iconify fetches during prerender/build.
     fallbackToApi: false,
