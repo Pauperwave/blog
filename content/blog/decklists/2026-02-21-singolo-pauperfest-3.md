@@ -7,7 +7,6 @@ tags:
   - IPT
 location: Milano
 date: 2026-02-21
-updatedAt: 2026-02-23
 author: Pietro Bragioto
 thumbnail: /assets/blog/events/2026-02-21-22-Pauperfest-3.jpg
 published: true

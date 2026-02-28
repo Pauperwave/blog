@@ -6,7 +6,6 @@ tags:
   - paupergeddon
 location: Roma
 date: 2024-11-25
-updatedAt: 2024-11-25
 author: Pietro Bragioto
 thumbnail: /assets/blog/events/2024-11-23-paupergeddon-Roma.jpg
 published: true

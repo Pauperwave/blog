@@ -7,7 +7,6 @@ published: true
 tags:
   - meta
 thumbnail: /assets/blog/arts/careful-consideration.jpg
-updatedAt: 2025-07-10
 ---
 
 ## Guardando la Top

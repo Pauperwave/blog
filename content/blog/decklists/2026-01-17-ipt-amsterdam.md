@@ -6,7 +6,6 @@ tags:
   - IPT
 location: Amsterdam
 date: 2026-01-17
-updatedAt: 2026-02-23
 author: Pietro Bragioto
 thumbnail: /assets/blog/events/2026-01-17-stroopwafel-super-ipt-Amsterdam.png
 published: true

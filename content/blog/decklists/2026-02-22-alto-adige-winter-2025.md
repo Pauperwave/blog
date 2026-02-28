@@ -6,7 +6,6 @@ tags:
   - league
 location: Alto Adige
 date: 2026-02-22
-updatedAt: 2026-02-24
 author: Pietro Bragioto
 thumbnail: /assets/blog/logo/alto-adige-sudtirol.png
 published: true

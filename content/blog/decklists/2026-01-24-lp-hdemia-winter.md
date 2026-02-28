@@ -5,7 +5,6 @@ tags:
   - top8
 location: Cento
 date: 2026-01-24
-updatedAt: 2026-01-24
 author: Pietro Bragioto
 thumbnail: /assets/blog/logo/H-Demia.jpg
 published: true

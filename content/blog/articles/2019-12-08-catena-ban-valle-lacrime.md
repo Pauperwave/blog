@@ -4,7 +4,6 @@ description: ""
 tags:
   - meta
 date: 2019-12-08
-updatedAt: 2019-12-08
 author: Pietro Bragioto
 thumbnail: /assets/blog/arts/bok-118-sowing-salt.jpg
 published: true

@@ -6,7 +6,6 @@ tags:
   - top8
 location: Lucca
 date: 2025-12-06
-updatedAt: 2025-12-06
 author: Pietro Bragioto
 thumbnail: /assets/blog/arts/clb-346-basilisk-gate.jpeg
 published: true

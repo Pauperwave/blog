@@ -6,7 +6,6 @@ tags:
   - paupergeddon
 location: Pisa
 date: 2024-06-23
-updatedAt: 2024-06-23
 author: Pietro Bragioto
 thumbnail: /assets/blog/events/2024-06-22-paupergeddon-Pisa.jpg
 published: true

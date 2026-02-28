@@ -6,7 +6,6 @@ tags:
   - paupergeddon
 location: Lecco
 date: 2024-03-25
-updatedAt: 2024-03-25
 author: Pietro Bragioto
 thumbnail: /assets/blog/events/2024-03-24-paupergeddon-Lecco.jpg
 published: true

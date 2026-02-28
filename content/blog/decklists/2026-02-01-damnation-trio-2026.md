@@ -5,7 +5,6 @@ tags:
   - top8
 location: Lucca
 date: 2026-02-01
-updatedAt: 2026-02-08
 author: Pietro Bragioto
 thumbnail: /assets/blog/logo/Damnation.png
 published: true

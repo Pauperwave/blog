@@ -3,7 +3,6 @@ title: "Dimir Terror"
 description: "Guida su come sidare"
 tags: [terror, dimir]
 date: 2023-06-01
-updatedAt: 2023-06-01
 author: "Alessandro Moretti"
 author_avatar: /assets/avatars/moretti.png
 author_description: "Presidente di Pauperwave"

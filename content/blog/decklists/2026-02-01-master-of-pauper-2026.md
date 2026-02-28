@@ -6,7 +6,6 @@ tags:
   - IPT
 location: Torino
 date: 2026-02-01
-updatedAt: 2026-02-08
 author: Pietro Bragioto
 thumbnail: /assets/blog/events/2026-02-01-master-of-pauper-vol-3-ipt-Torino.jpg
 published: true

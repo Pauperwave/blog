@@ -4,7 +4,6 @@ description: "Riflessioni sull'impatto di Pyroblast e Hydroblast nel meta Pauper
 tags:
   - meta analysis
 date: 2026-01-15
-updatedAt: 2026-01-15
 author: Pietro Bragioto
 thumbnail: /assets/blog/arts/cmm-81-counterspell.jpg
 published: true

@@ -4,7 +4,6 @@ description: "Spoilered Pauper cards in Lorwyn Eclipsed"
 tags:
   - set review
 date: 2026-01-17
-updatedAt: 2026-01-17
 author: Pietro Bragioto
 thumbnail: /assets/blog/sets/lorwyn-eclipsed.jpg
 published: true
