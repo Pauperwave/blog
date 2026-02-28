@@ -70,7 +70,7 @@ export default defineNuxtConfig({
     repository: {
       provider: 'github',
       owner: 'Pauperwave', // your GitHub/GitLab username or organization
-      repo: 'https://github.com/Pauperwave/test', // your repository name
+      repo: 'test', // your repository name
       branch: 'main', // the branch to commit to (default: main)
       rootDir: '', // subdirectory for monorepos (default: '')
       private: true, // request access to private repos (default: true)
