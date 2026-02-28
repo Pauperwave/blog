@@ -79,15 +79,15 @@ export default defineNuxtConfig({
       defaultLocale: 'it'
     }
   },
-  nitro: {
-    preset: 'vercel',
-    routeRules: {
-      // Nuxt Studio admin - requires SSR
-      '/admin/**': { ssr: true },
-      // tutto statico, nessun fallback SSR globale
-      '/**': { prerender: true }
-    }
-  },
+  // nitro: {
+  //   preset: 'vercel',
+  //   routeRules: {
+  //     // Nuxt Studio admin - requires SSR
+  //     '/admin/**': { ssr: true },
+  //     // tutto statico, nessun fallback SSR globale
+  //     '/**': { prerender: true }
+  //   }
+  // },
   icon: {
     serverBundle: {
       collections: ['lucide', 'simple-icons'],
