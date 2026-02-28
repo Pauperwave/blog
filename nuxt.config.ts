@@ -88,7 +88,9 @@ export default defineNuxtConfig({
     // Nuxt Studio admin - requires SSR
     '/admin/**': { ssr: true },
     // All content pages prerendered
-    '/articles/**': { prerender: true }
+    '/articles/**': { prerender: true },
+    // Code of Conduct and Statuto
+    '/docs/**': { prerender: true }
   },
   icon: {
     serverBundle: {
