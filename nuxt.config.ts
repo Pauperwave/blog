@@ -64,17 +64,17 @@ export default defineNuxtConfig({
   ],
   studio: {
     // Studio admin route (default: '/_studio')
-    route: '/admin',
+    route: '/editor',
 
     // Git repository configuration (owner and repo are required)
-    repository: {
-      provider: 'github',
-      owner: 'Pauperwave', // your GitHub/GitLab username or organization
-      repo: 'test', // your repository name
-      branch: 'main', // the branch to commit to (default: main)
-      rootDir: '', // subdirectory for monorepos (default: '')
-      private: true, // request access to private repos (default: true)
-    },
+    // repository: {
+    //   provider: 'github',
+    //   owner: 'Pauperwave', // your GitHub/GitLab username or organization
+    //   repo: 'test', // your repository name
+    //   branch: 'main', // the branch to commit to (default: main)
+    //   rootDir: '', // subdirectory for monorepos (default: '')
+    //   private: true, // request access to private repos (default: true)
+    // },
     i18n: {
       defaultLocale: 'it'
     }
@@ -86,7 +86,7 @@ export default defineNuxtConfig({
     // Homepage pre-rendered at build time
     '/': { prerender: true },
     // Nuxt Studio admin - requires SSR
-    '/admin/**': { ssr: true },
+    '/editor/**': { ssr: true },
     // All content pages prerendered
     '/articles/**': { prerender: true },
     // Code of Conduct and Statuto
