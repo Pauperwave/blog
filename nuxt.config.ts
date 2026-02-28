@@ -66,15 +66,14 @@ export default defineNuxtConfig({
     // Studio admin route (default: '/_studio')
     route: '/editor',
 
-    // Git repository configuration (owner and repo are required)
-    // repository: {
-    //   provider: 'github',
-    //   owner: 'Pauperwave', // your GitHub/GitLab username or organization
-    //   repo: 'test', // your repository name
-    //   branch: 'main', // the branch to commit to (default: main)
-    //   rootDir: '', // subdirectory for monorepos (default: '')
-    //   private: true, // request access to private repos (default: true)
-    // },
+    // Git repository configuration
+    repository: {
+      provider: 'github',
+      owner: 'Pauperwave',
+      repo: 'test',
+      branch: 'main',
+      private: true,
+    },
     i18n: {
       defaultLocale: 'it'
     }
