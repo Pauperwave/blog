@@ -81,15 +81,11 @@ export default defineNuxtConfig({
   },
   nitro: {
     preset: 'vercel',
-    prerender: {
-      // Pre-render the homepage
-      routes: ['/'],
-      // Then crawl all the links on the page
-      crawlLinks: true
-    },
     routeRules: {
       // Nuxt Studio admin - requires SSR
       '/admin/**': { ssr: true },
+      // tutto statico, nessun fallback SSR globale
+      '/**': { prerender: true }
     }
   },
   icon: {
