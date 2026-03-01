@@ -78,8 +78,15 @@ export default defineNuxtConfig({
       defaultLocale: 'it'
     }
   },
+  // Also note that your routeRules with '/articles/**': { prerender: true } and the nitro.prerender.crawlLinks are complementary — the route rules mark those patterns as prerenderable, while crawlLinks is what actually discovers the concrete URLs.
   nitro: {
     preset: 'vercel',
+    prerender: {
+      // Pre-render the homepage
+      routes: ['/'],
+      // Then crawl all the links on the page
+      crawlLinks: true
+    },
   },
   routeRules: {
     // Homepage pre-rendered at build time
