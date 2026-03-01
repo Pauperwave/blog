@@ -1,1 +1,0 @@
-The file `com.chrome.devtools.json` is included only to remove the weird warning on the console from the Vue Router.
