@@ -153,6 +153,8 @@ onBeforeUnmount(() => {
   <!-- Mobile Modal -->
   <UModal
     v-model:open="showModal"
+    :title="name"
+    :description="`${name} card image`"
     :ui="{
       content: 'bg-transparent shadow-none ring-0',
       overlay: 'bg-black/80'
