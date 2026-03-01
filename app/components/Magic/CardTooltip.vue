@@ -74,6 +74,7 @@ watch(
   { immediate: true }
 )
 
+// https://ui.nuxt.com/docs/components/tooltip#with-following-cursor
 // Mouse position tracking for virtual reference (desktop)
 const open = ref(false)
 const anchor = ref({ x: 0, y: 0 })
@@ -200,13 +201,11 @@ onBeforeUnmount(() => {
     }"
   >
     <template #content>
-      <div class="flex items-center justify-center p-4">
-        <img
-          :src="imageUrl || undefined"
-          :alt="name"
-          class="max-w-full max-h-[85vh] rounded-xl shadow-2xl"
-        >
-      </div>
+      <img
+        :src="imageUrl || undefined"
+        :alt="name"
+        class="max-w-full max-h-[85vh] rounded-3xl shadow-2xl"
+      >
     </template>
   </UModal>
 </template>
