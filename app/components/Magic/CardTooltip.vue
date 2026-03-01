@@ -45,6 +45,15 @@ async function getDatabaseImage(name: string): Promise<string | null> {
   }
 }
 
+async function resolveImage(name: string, image?: string, set?: string): Promise<string | null> {
+  if (image) return image
+  if (set) return buildScryfallUrl(name, set)
+  if (import.meta.server) return null
+
+  const dbImage = await getDatabaseImage(name)
+  return dbImage || buildScryfallUrl(name)
+}
+
 watch(
   () => [props.name, props.image, props.set] as const,
   async ([name, image, set]) => {
@@ -55,29 +64,12 @@ watch(
       return
     }
 
-    if (image) {
-      imageUrl.value = image
-      imageCache.value[cacheKey] = image
-      return
+    const resolved = await resolveImage(name, image, set)
+    imageUrl.value = resolved
+
+    if (resolved) {
+      imageCache.value[cacheKey] = resolved
     }
-
-    if (set) {
-      const scryfallUrl = buildScryfallUrl(name, set)
-      imageUrl.value = scryfallUrl
-      imageCache.value[cacheKey] = scryfallUrl
-      return
-    }
-
-    if (import.meta.server) {
-      imageUrl.value = null
-      return
-    }
-
-    const dbImage = await getDatabaseImage(name)
-    const finalUrl = dbImage || buildScryfallUrl(name)
-
-    imageUrl.value = finalUrl
-    imageCache.value[cacheKey] = finalUrl
   },
   { immediate: true }
 )
