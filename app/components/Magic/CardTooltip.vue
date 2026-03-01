@@ -2,16 +2,13 @@
 interface Props {
   name: string
   image?: string
-  set?: string  // Optional set code (e.g., "lea", "m21")
+  set?: string
 }
 
 const props = defineProps<Props>()
 const imageCache = useState<Record<string, string>>('card-tooltip-image-cache', () => ({}))
 
-// Display format: Always just "Card Name" (set is used only for image URL)
-const displayText = computed(() => {
-  return props.name
-})
+const displayText = computed(() => props.name)
 
 function buildScryfallUrl(name: string, set?: string): string {
   const baseUrl = 'https://api.scryfall.com/cards/named'
@@ -74,9 +71,7 @@ watch(
   { immediate: true }
 )
 
-// https://ui.nuxt.com/docs/components/tooltip#with-following-cursor
-// Mouse position tracking for virtual reference (desktop)
-const open = ref(false)
+const tooltipOpen = ref(false)
 const anchor = ref({ x: 0, y: 0 })
 
 const reference = computed(() => ({
@@ -92,26 +87,21 @@ const reference = computed(() => ({
     } as DOMRect)
 }))
 
-// Mobile detection and modal state
-const isMobile = ref(false)
+// Mobile detection using native matchMedia API
+const isMobile = useMediaQuery('(max-width: 768px)')
 const showModal = ref(false)
 
-// Check if we're on mobile
-const checkMobile = () => {
-  isMobile.value = window.innerWidth <= 768
-}
-
-// Handle desktop hover
+// Event handlers
 const handlePointerEnter = (ev: PointerEvent) => {
   if (!isMobile.value) {
     anchor.value = { x: ev.clientX, y: ev.clientY }
-    open.value = true
+    tooltipOpen.value = true
   }
 }
 
 const handlePointerLeave = () => {
   if (!isMobile.value) {
-    open.value = false
+    tooltipOpen.value = false
   }
 }
 
@@ -121,35 +111,19 @@ const handlePointerMove = (ev: PointerEvent) => {
   }
 }
 
-// Handle mobile click
 const handleClick = () => {
   if (isMobile.value) {
     showModal.value = true
   }
 }
-
-// Handle window resize
-const handleResize = () => {
-  checkMobile()
-}
-
-onMounted(() => {
-  checkMobile()
-  window.addEventListener('resize', handleResize)
-})
-
-onBeforeUnmount(() => {
-  window.removeEventListener('resize', handleResize)
-})
 </script>
 
 <template>
-  <!-- Desktop Tooltip -->
   <UTooltip
-    v-if="!isMobile"
+    v-model:open="tooltipOpen"
+    :disabled="isMobile"
     :arrow="false"
     :delay-duration="100"
-    :open="open"
     :reference="reference"
     :content="{
       align: 'start',
@@ -162,10 +136,14 @@ onBeforeUnmount(() => {
     }"
   >
     <span 
-      class="font-semibold text-primary cursor-help"
+      class="font-semibold text-primary"
+      :class="isMobile ? 'cursor-pointer underline' : 'cursor-help'"
+      :role="isMobile ? 'button' : undefined"
+      :aria-label="isMobile ? `View ${name} card image` : undefined"
       @pointerenter="handlePointerEnter"
       @pointerleave="handlePointerLeave"
       @pointermove="handlePointerMove"
+      @click="handleClick"
     >
       {{ displayText }}
     </span>
@@ -179,17 +157,6 @@ onBeforeUnmount(() => {
     </template>
   </UTooltip>
 
-  <!-- Mobile: Clickable text -->
-  <span 
-    v-else
-    class="font-semibold text-primary cursor-pointer underline"
-    role="button"
-    :aria-label="`View ${name} card image`"
-    @click="handleClick"
-  >
-    {{ displayText }}
-  </span>
-
   <!-- Mobile Modal -->
   <UModal
     v-model:open="showModal"
@@ -201,11 +168,13 @@ onBeforeUnmount(() => {
     }"
   >
     <template #content>
-      <img
-        :src="imageUrl || undefined"
-        :alt="name"
-        class="max-w-full max-h-[85vh] rounded-3xl shadow-2xl"
-      >
+      <div class="flex items-center justify-center p-4">
+        <img
+          :src="imageUrl || undefined"
+          :alt="name"
+          class="max-w-full max-h-[85vh] rounded-xl shadow-2xl"
+        >
+      </div>
     </template>
   </UModal>
 </template>
