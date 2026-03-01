@@ -45,6 +45,12 @@ const displayedTopicTags = computed(() => {
     return true
   })
 })
+
+const cardVariantClasses = computed(() => 
+  isLeagueArticle.value
+    ? 'border-sky-300/80 dark:border-sky-600/70 bg-sky-50/50 dark:bg-sky-500/5 hover:border-sky-500 dark:hover:border-sky-400 hover:shadow-sky-500/10 dark:hover:shadow-sky-400/10'
+    : 'border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 hover:border-primary-500 dark:hover:border-primary-400 hover:shadow-primary-500/10 dark:hover:shadow-primary-400/10'
+)
 </script>
 
 <template>
@@ -56,10 +62,9 @@ const displayedTopicTags = computed(() => {
     :to="props.article.path"
     variant="naked"
     :class="[
-      'group border rounded-xl p-4 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:scale-[1.02] backdrop-blur-sm',
-      isLeagueArticle
-        ? 'border-sky-300/80 dark:border-sky-600/70 bg-sky-50/50 dark:bg-sky-500/5 hover:border-sky-500 dark:hover:border-sky-400 hover:shadow-sky-500/10 dark:hover:shadow-sky-400/10'
-        : 'border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 hover:border-primary-500 dark:hover:border-primary-400 hover:shadow-primary-500/10 dark:hover:shadow-primary-400/10'
+      'group border rounded-xl p-4 backdrop-blur-sm',
+      'transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:scale-[1.02]',
+      cardVariantClasses
     ]"
   >
     <template #date>
