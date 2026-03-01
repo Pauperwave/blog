@@ -8,8 +8,15 @@ console.log('🧪 Testing Card Database\n')
 
 // Test 1: Get some cards
 console.log('Test 1: Fetching test cards...')
-const testCards = ['Lightning Bolt', 'Counterspell', 'Brainstorm']
+const testCards = [
+  'Lightning Bolt',
+  'Brainstorm',
+  'Counterspell',
+  'Red Elemental Blast',
+  'Blue Elemental Blast'
+]
 const cards = await getCardsByNames(testCards)
+const missingCards: string[] = []
 
 for (const name of testCards) {
   const card = cards.get(name)
@@ -19,7 +26,13 @@ for (const name of testCards) {
     console.log(`   Image: ${card.imageUrl ? 'Yes' : 'No'}`)
   } else {
     console.log(`❌ ${name} not found`)
+    missingCards.push(name)
   }
+}
+
+if (missingCards.length > 0) {
+  console.error(`\n❌ Missing required cards: ${missingCards.join(', ')}`)
+  process.exit(1)
 }
 
 console.log('\n✨ All tests passed!')
