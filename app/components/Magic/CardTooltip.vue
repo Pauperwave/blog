@@ -27,75 +27,60 @@ function buildScryfallUrl(name: string, set?: string): string {
   return `${baseUrl}?${params.toString()}`
 }
 
-const resolvedImage = ref<string | null>(props.image || null)
+const imageUrl = ref<string | null>(props.image || null)
 
-// Prefer injected image -> local DB API -> Scryfall fallback.
+async function getDatabaseImage(name: string): Promise<string | null> {
+  try {
+    const response = await $fetch<{
+      cards?: Record<string, { imageUrl?: string }>
+    }>('/api/cards', { query: { names: name } })
+
+    const directMatch = response.cards?.[name]
+    if (directMatch?.imageUrl) return directMatch.imageUrl
+
+    const firstCard = Object.values(response.cards || {})[0]
+    return firstCard?.imageUrl || null
+  } catch {
+    return null
+  }
+}
+
 watch(
   () => [props.name, props.image, props.set] as const,
   async ([name, image, set]) => {
     const cacheKey = set ? `${name}::${set}` : name
     const cached = imageCache.value[cacheKey]
     if (cached) {
-      resolvedImage.value = cached
+      imageUrl.value = cached
       return
     }
 
     if (image) {
-      resolvedImage.value = image
+      imageUrl.value = image
       imageCache.value[cacheKey] = image
-      console.log(`✅ Using cached image: ${name}`)
       return
     }
 
-    // Keep explicit set behavior deterministic by using Scryfall set lookup.
     if (set) {
       const scryfallUrl = buildScryfallUrl(name, set)
-      resolvedImage.value = scryfallUrl
+      imageUrl.value = scryfallUrl
       imageCache.value[cacheKey] = scryfallUrl
-      console.log(`🌐 Fetching from Scryfall fallback: ${name} (${set})`)
       return
     }
 
-    // Avoid server-side internal API calls for tooltip-only data.
     if (import.meta.server) {
-      resolvedImage.value = null
+      imageUrl.value = null
       return
     }
 
-    try {
-      const response = await $fetch<{
-        cards?: Record<string, { imageUrl?: string }>
-      }>('/api/cards', {
-        query: { names: name }
-      })
+    const dbImage = await getDatabaseImage(name)
+    const finalUrl = dbImage || buildScryfallUrl(name)
 
-      const directMatch = response.cards?.[name]
-      const caseInsensitiveMatch = Object.entries(response.cards || {}).find(
-        ([key]) => key.toLowerCase() === name.toLowerCase()
-      )?.[1]
-      const dbImage = directMatch?.imageUrl || caseInsensitiveMatch?.imageUrl
-
-      if (dbImage) {
-        resolvedImage.value = dbImage
-        imageCache.value[cacheKey] = dbImage
-        console.log(`✅ Using database image: ${name}`)
-        return
-      }
-    } catch {
-      // If local lookup fails, fallback below.
-    }
-
-    const scryfallUrl = buildScryfallUrl(name)
-    resolvedImage.value = scryfallUrl
-    imageCache.value[cacheKey] = scryfallUrl
-    console.log(`🌐 Fetching from Scryfall fallback: ${name}`)
+    imageUrl.value = finalUrl
+    imageCache.value[cacheKey] = finalUrl
   },
   { immediate: true }
 )
-
-const imageUrl = computed(() => {
-  return resolvedImage.value
-})
 
 // Mouse position tracking for virtual reference (desktop)
 const open = ref(false)
