@@ -6,33 +6,95 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+const imageCache = useState<Record<string, string>>('card-tooltip-image-cache', () => ({}))
 
 // Display format: Always just "Card Name" (set is used only for image URL)
 const displayText = computed(() => {
   return props.name
 })
 
-// Build Scryfall API URL with optional set parameter
-const imageUrl = computed(() => {
-  // if the prop is passed use that
-  if (props.image) {
-    console.log(`✅ Using cached image: ${props.name}`)
-    return props.image
-  }
-
-  console.log(`❌ Calling Scryfall API: ${props.name}`)
-  console.log({ name: props.name, image: props.image })
+function buildScryfallUrl(name: string, set?: string): string {
   const baseUrl = 'https://api.scryfall.com/cards/named'
   const params = new URLSearchParams({
-    exact: props.name,
+    exact: name,
     format: 'image'
   })
   
-  if (props.set) {
-    params.append('set', props.set)
+  if (set) {
+    params.append('set', set)
   }
   
   return `${baseUrl}?${params.toString()}`
+}
+
+const resolvedImage = ref<string | null>(props.image || null)
+
+// Prefer injected image -> local DB API -> Scryfall fallback.
+watch(
+  () => [props.name, props.image, props.set] as const,
+  async ([name, image, set]) => {
+    const cacheKey = set ? `${name}::${set}` : name
+    const cached = imageCache.value[cacheKey]
+    if (cached) {
+      resolvedImage.value = cached
+      return
+    }
+
+    if (image) {
+      resolvedImage.value = image
+      imageCache.value[cacheKey] = image
+      console.log(`✅ Using cached image: ${name}`)
+      return
+    }
+
+    // Keep explicit set behavior deterministic by using Scryfall set lookup.
+    if (set) {
+      const scryfallUrl = buildScryfallUrl(name, set)
+      resolvedImage.value = scryfallUrl
+      imageCache.value[cacheKey] = scryfallUrl
+      console.log(`🌐 Fetching from Scryfall fallback: ${name} (${set})`)
+      return
+    }
+
+    // Avoid server-side internal API calls for tooltip-only data.
+    if (import.meta.server) {
+      resolvedImage.value = null
+      return
+    }
+
+    try {
+      const response = await $fetch<{
+        cards?: Record<string, { imageUrl?: string }>
+      }>('/api/cards', {
+        query: { names: name }
+      })
+
+      const directMatch = response.cards?.[name]
+      const caseInsensitiveMatch = Object.entries(response.cards || {}).find(
+        ([key]) => key.toLowerCase() === name.toLowerCase()
+      )?.[1]
+      const dbImage = directMatch?.imageUrl || caseInsensitiveMatch?.imageUrl
+
+      if (dbImage) {
+        resolvedImage.value = dbImage
+        imageCache.value[cacheKey] = dbImage
+        console.log(`✅ Using database image: ${name}`)
+        return
+      }
+    } catch {
+      // If local lookup fails, fallback below.
+    }
+
+    const scryfallUrl = buildScryfallUrl(name)
+    resolvedImage.value = scryfallUrl
+    imageCache.value[cacheKey] = scryfallUrl
+    console.log(`🌐 Fetching from Scryfall fallback: ${name}`)
+  },
+  { immediate: true }
+)
+
+const imageUrl = computed(() => {
+  return resolvedImage.value
 })
 
 // Mouse position tracking for virtual reference (desktop)
@@ -132,7 +194,7 @@ onBeforeUnmount(() => {
     
     <template #content>
       <img 
-        :src="imageUrl" 
+        :src="imageUrl || undefined" 
         :alt="name"
         class="w-70 h-auto rounded-xl"
       >
@@ -163,7 +225,7 @@ onBeforeUnmount(() => {
     <template #content>
       <div class="flex items-center justify-center p-4">
         <img
-          :src="imageUrl"
+          :src="imageUrl || undefined"
           :alt="name"
           class="max-w-full max-h-[85vh] rounded-xl shadow-2xl"
         >
