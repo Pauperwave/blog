@@ -164,10 +164,14 @@ export default defineNuxtConfig({
             // Split only the Nuxt Studio editor stack out of the large client chunk.
             const normalizedId = id.replaceAll("\\", "/")
             if (
-              normalizedId.includes("/node_modules/nuxt-studio/") ||
+              normalizedId.includes("/node_modules/nuxt-studio/")
+            ) {
+              return "nuxt-studio"
+            }
+            if (
               normalizedId.includes("/node_modules/@tiptap/")
             ) {
-              return "studio-editor"
+              return "tiptap"
             }
           },
         },
