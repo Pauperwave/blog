@@ -158,12 +158,20 @@ export default defineNuxtConfig({
     build: {
       sourcemap: false, // Disable sourcemaps in production to eliminate Tailwind warnings
       chunkSizeWarningLimit: 3000,
-      // rollupOptions: {
-      //   output: {
-      //     manualChunks(id) {
-      //     },
-      //   },
-      // },
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            // Split only the Nuxt Studio editor stack out of the large client chunk.
+            const normalizedId = id.replaceAll("\\", "/")
+            if (
+              normalizedId.includes("/node_modules/nuxt-studio/") ||
+              normalizedId.includes("/node_modules/@tiptap/")
+            ) {
+              return "studio-editor"
+            }
+          },
+        },
+      },
     }
   }
 })
