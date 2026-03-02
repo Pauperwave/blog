@@ -161,17 +161,13 @@ export default defineNuxtConfig({
       rollupOptions: {
         output: {
           manualChunks(id) {
-            // Split only the Nuxt Studio editor stack out of the large client chunk.
             const normalizedId = id.replaceAll("\\", "/")
             if (
-              normalizedId.includes("/node_modules/nuxt-studio/")
+              normalizedId.includes("/node_modules/@tiptap/") ||
+              normalizedId.includes("/node_modules/prosemirror-") ||
+              normalizedId.includes("/node_modules/y-prosemirror/")
             ) {
-              return "nuxt-studio"
-            }
-            if (
-              normalizedId.includes("/node_modules/@tiptap/")
-            ) {
-              return "tiptap"
+              return "studio-editor"
             }
           },
         },
