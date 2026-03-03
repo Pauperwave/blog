@@ -1,15 +1,14 @@
 ---
 title: ""
-description: ""
+description: "Decklists Top 8"
 tags:
   - top8
-  - league
   - ITP
-  - paupergeddon
+  - league
 location: 
 date: 
 author: Pietro Bragioto
-thumbnail: /assets/blog/events/2025-11-30-paupergeddon-lucca-eternal.png
+thumbnail: /assets/blog/events/2026-03-01-exploding-pauper.png
 published: false
 ---
 
