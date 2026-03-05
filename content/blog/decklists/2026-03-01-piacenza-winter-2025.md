@@ -5,7 +5,7 @@ tags:
   - top8
   - league
 location: Piacenza
-date: 2026-03-05
+date: 2026-03-01
 author: Pietro Bragioto
 thumbnail: /assets/blog/logo/piacenza.jpg
 published: true

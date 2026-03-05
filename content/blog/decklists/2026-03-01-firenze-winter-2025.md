@@ -5,7 +5,7 @@ tags:
   - top8
   - league
 location: Firenze
-date: 2026-03-05
+date: 2026-03-01
 author: Pietro Bragioto
 thumbnail: /assets/blog/logo/firenze.jpg
 published: true

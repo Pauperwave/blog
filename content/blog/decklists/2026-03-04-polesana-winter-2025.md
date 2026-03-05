@@ -5,7 +5,7 @@ tags:
   - top8
   - league
 location: Adria
-date: 2026-03-05
+date: 2026-03-04
 author: Pietro Bragioto
 thumbnail: /assets/blog/logo/polesana.PNG
 published: true
