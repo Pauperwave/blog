@@ -3,7 +3,7 @@ title: "Exploding Pauper 2026 (IPT Lodi)"
 description: "Decklists Top 8"
 tags:
   - top8
-  - ITP
+  - IPT
 location: Lodi
 date: 2026-03-03
 author: Pietro Bragioto

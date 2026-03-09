@@ -4,7 +4,7 @@ description: ""
 tags:
   - top8
   - league
-  - ITP
+  - IPT
   - paupergeddon
 location: 
 date: 
