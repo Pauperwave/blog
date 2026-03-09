@@ -25,6 +25,7 @@ interface PreparedArticleFilterData {
 
 export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersOptions) => {
   const route = useRoute()
+  const italianCollator = new Intl.Collator('it')
 
   const globalNormalizedLocationSet = computed(() =>
     buildGlobalNormalizedLocationSet(articles.value || [])
@@ -117,7 +118,7 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
   const locationFilterOptions = computed<Array<{ location: string; count: number }>>(() => {
     return (Object.entries(filterCounts.value.locationCounts) as Array<[string, number]>)
       .map(([location, count]) => ({ location, count }))
-      .sort((a, b) => a.location.localeCompare(b.location, 'it'))
+      .sort((a, b) => italianCollator.compare(a.location, b.location))
   })
 
   const getArticleTopicTags = (article: AnyArticle) =>
@@ -136,17 +137,14 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
       })
       .sort((a, b) => {
         if (b.count !== a.count) return b.count - a.count
-        return a.name.localeCompare(b.name, 'it')
+        return italianCollator.compare(a.name, b.name)
       })
   })
 
   const tagFilterOptions = computed<Array<{ tag: string; count: number }>>(() => {
     return (Object.entries(filterCounts.value.tagCounts) as Array<[string, number]>)
       .map(([tag, count]) => ({ tag, count }))
-      .sort((a, b) => {
-        if (b.count !== a.count) return b.count - a.count
-        return a.tag.localeCompare(b.tag, 'it')
-      })
+      .sort((a, b) => italianCollator.compare(a.tag, b.tag))
   })
 
   const authorSlugToName = computed<Record<string, string>>(() =>

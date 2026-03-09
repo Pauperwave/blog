@@ -140,7 +140,7 @@ const activeFilters = computed(() => {
         >
           <UIcon 
             :name="mainPanelOpen ? 'i-lucide-chevron-down' : 'i-lucide-chevron-right'" 
-            class="w-5 h-5 text-primary flex-shrink-0" 
+            class="w-5 h-5 text-primary shrink-0" 
           />
           <div class="flex-1">
             <p class="text-xs uppercase tracking-[0.18em] text-primary font-semibold">
@@ -193,7 +193,7 @@ const activeFilters = computed(() => {
         <div class="space-y-4 pt-4 border-t border-gray-200 dark:border-gray-800">
           <!-- Categoria -->
           <FilterSection
-            label="Categoria"
+            label="Categoria (piu articoli)"
             plural-label="categorie"
             color="neutral"
             :options="categoryOptions"
@@ -204,7 +204,7 @@ const activeFilters = computed(() => {
           
           <!-- Autore -->
           <FilterSection
-            label="Autore"
+            label="Autore (piu articoli)"
             plural-label="autori"
             color="neutral"
             :options="authorOptions"
@@ -216,7 +216,7 @@ const activeFilters = computed(() => {
           
           <!-- Luogo -->
           <FilterSection
-            label="Luogo"
+            label="Luogo (A-Z)"
             plural-label="localita"
             color="info"
             :options="locationOptions"
@@ -227,7 +227,7 @@ const activeFilters = computed(() => {
           
           <!-- Tag -->
           <FilterSection
-            label="Tag"
+            label="Tag (A-Z)"
             plural-label="tag"
             color="primary"
             :options="tagOptions"
