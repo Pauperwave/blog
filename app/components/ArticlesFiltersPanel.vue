@@ -42,31 +42,96 @@ interface Props {
 const props = defineProps<Props>()
 
 const emit = defineEmits<{
-  (e: 'set-category' | 'set-author' | 'set-location' | 'set-tag', value: string | null): void
-  (e: 'clear-all'): void
+  'set-category': [value: string | null]
+  'set-author': [value: string | null]
+  'set-location': [value: string | null]
+  'set-tag': [value: string | null]
+  'clear-all': []
 }>()
-
-const normalizeFilterValue = (value: string) => value.trim().toLowerCase()
-
-const isSelectedLocationValue = (location: string) =>
-  !!props.selectedLocation && normalizeFilterValue(location) === normalizeFilterValue(props.selectedLocation)
-
-const isSelectedTagValue = (tag: string) =>
-  !!props.selectedTag && normalizeFilterValue(tag) === normalizeFilterValue(props.selectedTag)
 
 // Stato per il collapsible principale
 const mainPanelOpen = ref(true)
 
-// Stati per i collapsible interni (inizialmente tutti aperti)
-const categoryOpen = ref(true)
-const authorOpen = ref(false)
-const locationOpen = ref(true)
-const tagOpen = ref(true)
+// Transform options for FilterSection component
+const categoryOptions = computed(() => 
+  props.categoryFilterOptions.map(item => ({
+    value: item.category,
+    label: item.label,
+    count: item.count
+  }))
+)
+
+const authorOptions = computed(() => 
+  props.authorFilterOptions.map(author => ({
+    value: author.slug,
+    label: author.name,
+    count: author.count
+  }))
+)
+
+const locationOptions = computed(() => 
+  props.locationFilterOptions.map(location => ({
+    value: location.location,
+    label: location.location,
+    count: location.count
+  }))
+)
+
+const tagOptions = computed(() => 
+  props.tagFilterOptions.map(tag => ({
+    value: tag.tag,
+    label: tag.tag,
+    count: tag.count
+  }))
+)
+
+// Active filters for badges
+const activeFilters = computed(() => {
+  const filters = []
+  
+  if (props.selectedCategoryLabel) {
+    filters.push({
+      type: 'Categoria',
+      label: props.selectedCategoryLabel,
+      color: 'neutral' as const,
+      clear: () => emit('set-category', null)
+    })
+  }
+  
+  if (props.selectedAuthorLabel) {
+    filters.push({
+      type: 'Autore',
+      label: props.selectedAuthorLabel,
+      color: 'neutral' as const,
+      clear: () => emit('set-author', null)
+    })
+  }
+  
+  if (props.selectedLocationLabel) {
+    filters.push({
+      type: 'Luogo',
+      label: props.selectedLocationLabel,
+      color: 'info' as const,
+      clear: () => emit('set-location', null)
+    })
+  }
+  
+  if (props.selectedTagLabel) {
+    filters.push({
+      type: 'Tag',
+      label: props.selectedTagLabel,
+      color: 'primary' as const,
+      clear: () => emit('set-tag', null)
+    })
+  }
+  
+  return filters
+})
 </script>
 
 <template>
   <section class="rounded-2xl border border-gray-200 dark:border-gray-800 bg-linear-to-b from-white to-gray-50 dark:from-gray-950 dark:to-gray-900 p-4 md:p-6 mb-6">
-    <UCollapsible :default-open="mainPanelOpen">
+    <UCollapsible :default-open="true">
       <!-- Header sempre visibile -->
       <div class="mb-4">
         <div 
@@ -99,41 +164,16 @@ const tagOpen = ref(true)
         <span class="rounded-md bg-warning/15 dark:bg-warning/20 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-warning">
           Filtri attivi
         </span>
+        
         <UBadge
-          v-if="selectedCategoryLabel"
-          color="neutral"
+          v-for="(filter, index) in activeFilters"
+          :key="index"
+          :color="filter.color"
           variant="solid"
           class="cursor-pointer transition-colors hover:bg-error/10 hover:text-error hover:ring hover:ring-inset hover:ring-error/25"
-          @click="emit('set-category', null)"
+          @click="filter.clear()"
         >
-          Categoria: {{ selectedCategoryLabel }}
-        </UBadge>
-        <UBadge
-          v-if="selectedAuthorLabel"
-          color="neutral"
-          variant="solid"
-          class="cursor-pointer transition-colors hover:bg-error/10 hover:text-error hover:ring hover:ring-inset hover:ring-error/25"
-          @click="emit('set-author', null)"
-        >
-          Autore: {{ selectedAuthorLabel }}
-        </UBadge>
-        <UBadge
-          v-if="selectedLocationLabel"
-          color="info"
-          variant="solid"
-          class="cursor-pointer transition-colors hover:bg-error/10 hover:text-error hover:ring hover:ring-inset hover:ring-error/25"
-          @click="emit('set-location', null)"
-        >
-          Luogo: {{ selectedLocationLabel }}
-        </UBadge>
-        <UBadge
-          v-if="selectedTagLabel"
-          color="primary"
-          variant="solid"
-          class="cursor-pointer transition-colors hover:bg-error/10 hover:text-error hover:ring hover:ring-inset hover:ring-error/25"
-          @click="emit('set-tag', null)"
-        >
-          Tag: {{ selectedTagLabel }}
+          {{ filter.type }}: {{ filter.label }}
         </UBadge>
         
         <!-- Bottone Reset filtri -->
@@ -151,183 +191,51 @@ const tagOpen = ref(true)
       <!-- Contenuto collassabile -->
       <template #content>
         <div class="space-y-4 pt-4 border-t border-gray-200 dark:border-gray-800">
-          <!-- Categoria Collapsible -->
-          <UCollapsible :default-open="categoryOpen">
-            <div class="flex items-center justify-between gap-2 flex-wrap">
-              <p 
-                class="text-xs uppercase tracking-[0.16em] text-gray-500 dark:text-gray-400 flex items-center gap-2 cursor-pointer"
-                @click="categoryOpen = !categoryOpen"
-              >
-                <UIcon 
-                  :name="categoryOpen ? 'i-lucide-chevron-down' : 'i-lucide-chevron-right'" 
-                  class="w-4 h-4" 
-                />
-                Categoria
-              </p>
-              <p class="text-xs text-gray-500 dark:text-gray-400">
-                {{ categoryFilterOptions.length }} categorie
-              </p>
-            </div>
-            
-            <template #content>
-              <div class="flex flex-wrap gap-2 pt-2">
-                <UButton
-                  size="xs"
-                  color="neutral"
-                  class="cursor-pointer"
-                  :variant="selectedCategory === null ? 'solid' : 'outline'"
-                  @click="emit('set-category', null)"
-                >
-                  Tutte le categorie
-                </UButton>
-                <UButton
-                  v-for="item in categoryFilterOptions"
-                  :key="item.category"
-                  size="xs"
-                  color="neutral"
-                  class="cursor-pointer"
-                  :variant="selectedCategory === item.category ? 'solid' : 'outline'"
-                  @click="emit('set-category', item.category)"
-                >
-                  {{ item.label }} ({{ item.count }})
-                </UButton>
-              </div>
-            </template>
-          </UCollapsible>
-
-          <!-- Autore Collapsible -->
-          <UCollapsible :default-open="authorOpen">
-            <div class="flex items-center justify-between gap-2 flex-wrap">
-              <p 
-                class="text-xs uppercase tracking-[0.16em] text-gray-500 dark:text-gray-400 flex items-center gap-2 cursor-pointer"
-                @click="authorOpen = !authorOpen"
-              >
-                <UIcon 
-                  :name="authorOpen ? 'i-lucide-chevron-down' : 'i-lucide-chevron-right'" 
-                  class="w-4 h-4" 
-                />
-                Autore
-              </p>
-              <p class="text-xs text-gray-500 dark:text-gray-400">
-                {{ authorFilterOptions.length }} autori
-              </p>
-            </div>
-            
-            <template #content>
-              <div class="flex flex-wrap gap-2 pt-2">
-                <UButton
-                  size="xs"
-                  color="neutral"
-                  class="cursor-pointer"
-                  :variant="selectedAuthor === null ? 'solid' : 'outline'"
-                  @click="emit('set-author', null)"
-                >
-                  Tutti gli autori
-                </UButton>
-                <UButton
-                  v-for="author in authorFilterOptions"
-                  :key="author.slug"
-                  size="xs"
-                  color="neutral"
-                  class="cursor-pointer"
-                  :variant="selectedAuthor === author.slug ? 'solid' : 'outline'"
-                  @click="emit('set-author', author.slug)"
-                >
-                  {{ author.name }} ({{ author.count }})
-                </UButton>
-              </div>
-            </template>
-          </UCollapsible>
-
-          <!-- Luogo Collapsible -->
-          <UCollapsible :default-open="locationOpen">
-            <div class="flex items-center justify-between gap-2 flex-wrap">
-              <p 
-                class="text-xs uppercase tracking-[0.16em] text-gray-500 dark:text-gray-400 flex items-center gap-2 cursor-pointer"
-                @click="locationOpen = !locationOpen"
-              >
-                <UIcon 
-                  :name="locationOpen ? 'i-lucide-chevron-down' : 'i-lucide-chevron-right'" 
-                  class="w-4 h-4" 
-                />
-                Luogo
-              </p>
-              <p class="text-xs text-gray-500 dark:text-gray-400">
-                {{ locationFilterOptions.length }} localita
-              </p>
-            </div>
-            
-            <template #content>
-              <div class="flex flex-wrap gap-2 pt-2">
-                <UButton
-                  size="xs"
-                  color="info"
-                  class="cursor-pointer"
-                  :variant="selectedLocation === null ? 'solid' : 'outline'"
-                  @click="emit('set-location', null)"
-                >
-                  Tutte le localita
-                </UButton>
-                <UButton
-                  v-for="location in locationFilterOptions"
-                  :key="location.location"
-                  size="xs"
-                  color="info"
-                  class="cursor-pointer"
-                  :variant="isSelectedLocationValue(location.location) ? 'solid' : 'outline'"
-                  @click="emit('set-location', location.location)"
-                >
-                  {{ location.location }} ({{ location.count }})
-                </UButton>
-              </div>
-            </template>
-          </UCollapsible>
-
-          <!-- Tag Collapsible -->
-          <UCollapsible :default-open="tagOpen">
-            <div class="flex items-center justify-between gap-2 flex-wrap">
-              <p 
-                class="text-xs uppercase tracking-[0.16em] text-gray-500 dark:text-gray-400 flex items-center gap-2 cursor-pointer"
-                @click="tagOpen = !tagOpen"
-              >
-                <UIcon 
-                  :name="tagOpen ? 'i-lucide-chevron-down' : 'i-lucide-chevron-right'" 
-                  class="w-4 h-4" 
-                />
-                Tag
-              </p>
-              <p class="text-xs text-gray-500 dark:text-gray-400">
-                {{ tagFilterOptions.length }} tag
-              </p>
-            </div>
-            
-            <template #content>
-              <div class="max-h-36 overflow-y-auto pr-1 pt-2">
-                <div class="flex flex-wrap gap-2">
-                  <UButton
-                    size="xs"
-                    color="primary"
-                    class="cursor-pointer"
-                    :variant="selectedTag === null ? 'solid' : 'outline'"
-                    @click="emit('set-tag', null)"
-                  >
-                    Tutti i tag
-                  </UButton>
-                  <UButton
-                    v-for="tag in tagFilterOptions"
-                    :key="tag.tag"
-                    size="xs"
-                    color="primary"
-                    class="cursor-pointer"
-                    :variant="isSelectedTagValue(tag.tag) ? 'solid' : 'outline'"
-                    @click="emit('set-tag', tag.tag)"
-                  >
-                    {{ tag.tag }} ({{ tag.count }})
-                  </UButton>
-                </div>
-              </div>
-            </template>
-          </UCollapsible>
+          <!-- Categoria -->
+          <FilterSection
+            label="Categoria"
+            plural-label="categorie"
+            color="neutral"
+            :options="categoryOptions"
+            :selected-value="selectedCategory"
+            all-label="Tutte le categorie"
+            @select="emit('set-category', $event)"
+          />
+          
+          <!-- Autore -->
+          <FilterSection
+            label="Autore"
+            plural-label="autori"
+            color="neutral"
+            :options="authorOptions"
+            :selected-value="selectedAuthor"
+            all-label="Tutti gli autori"
+            :default-open="false"
+            @select="emit('set-author', $event)"
+          />
+          
+          <!-- Luogo -->
+          <FilterSection
+            label="Luogo"
+            plural-label="localita"
+            color="info"
+            :options="locationOptions"
+            :selected-value="selectedLocation"
+            all-label="Tutte le localita"
+            @select="emit('set-location', $event)"
+          />
+          
+          <!-- Tag -->
+          <FilterSection
+            label="Tag"
+            plural-label="tag"
+            color="primary"
+            :options="tagOptions"
+            :selected-value="selectedTag"
+            all-label="Tutti i tag"
+            :max-height="true"
+            @select="emit('set-tag', $event)"
+          />
         </div>
       </template>
     </UCollapsible>
