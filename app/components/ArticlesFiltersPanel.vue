@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { normalizeArticleFilterValue } from '~/utils/article-filters'
+
 interface CategoryFilterOption {
   category: string
   label: string
@@ -71,7 +73,7 @@ const authorOptions = computed(() =>
 
 const locationOptions = computed(() => 
   props.locationFilterOptions.map(location => ({
-    value: location.location,
+    value: normalizeArticleFilterValue(location.location),
     label: location.location,
     count: location.count
   }))
@@ -79,7 +81,7 @@ const locationOptions = computed(() =>
 
 const tagOptions = computed(() => 
   props.tagFilterOptions.map(tag => ({
-    value: tag.tag,
+    value: normalizeArticleFilterValue(tag.tag),
     label: tag.tag,
     count: tag.count
   }))
@@ -181,7 +183,7 @@ const activeFilters = computed(() => {
           size="sm"
           color="error"
           variant="subtle"
-          class="ml-auto"
+          class="ml-auto cursor-pointer"
           @click="emit('clear-all')"
         >
           Reset filtri
