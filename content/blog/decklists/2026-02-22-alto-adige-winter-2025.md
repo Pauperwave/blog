@@ -2,8 +2,8 @@
 title: "LP Alto Adige and Südtirol Winter 2025"
 description: "Decklists Top 8"
 tags:
-  - top8
-  - league
+  - Top 8
+  - League
 location: Alto Adige
 date: 2026-02-22
 author: Pietro Bragioto

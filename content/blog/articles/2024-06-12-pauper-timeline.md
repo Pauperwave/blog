@@ -2,7 +2,7 @@
 title: "Pauper Timeline (2016-now)"
 description: ""
 tags:
-  - meta
+  - Meta
 date: 2024-06-12
 author: Pietro Bragioto
 thumbnail: /assets/blog/arts/sarawinters-compulsiveresearch.jpg

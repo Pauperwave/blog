@@ -2,8 +2,8 @@
 title: "Pauperfest 3 2026 (SuperIPT Milano)"
 description: "Decklists Top 8 and Top 16"
 tags:
-  - top8
-  - top16
+  - Top 8
+  - Top 16
   - IPT
 location: Milano
 date: 2026-02-21

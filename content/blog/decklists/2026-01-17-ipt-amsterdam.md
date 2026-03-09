@@ -2,7 +2,7 @@
 title: "Stroopwafel IPT (Super IPT Amsterdam)"
 description: "Decklists Top 8"
 tags:
-  - top8
+  - Top 8
   - IPT
 location: Amsterdam
 date: 2026-01-17

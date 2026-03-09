@@ -2,7 +2,7 @@
 title: "Awesome Pauper 2026 (IPT Milano)"
 description: "Decklists Top 8"
 tags:
-  - top8
+  - Top 8
   - IPT
 location: Milano
 date: 2026-02-15

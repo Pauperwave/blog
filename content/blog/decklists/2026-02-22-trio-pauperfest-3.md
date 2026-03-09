@@ -2,7 +2,7 @@
 title: "Team Trio Pauperfest 3 2026"
 description: "Decklists Top 8"
 tags:
-  - top4
+  - Top 4
   - IPT
 location: Milano
 date: 2026-02-22

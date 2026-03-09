@@ -2,7 +2,7 @@
 title: "Pauperotti and Friends 2026 (IPT Modena)"
 description: "Decklists Top 8"
 tags:
-  - top8
+  - Top 8
   - IPT
 location: Modena
 date: 2026-02-15

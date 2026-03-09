@@ -2,7 +2,7 @@
 title: "Master of Pauper Vol. III 2026"
 description: "Decklists Top 8"
 tags:
-  - top8
+  - Top 8
   - IPT
 location: Torino
 date: 2026-02-01

@@ -2,8 +2,8 @@
 title: "LP Sanremo Winter 2025"
 description: "Decklists Top 8"
 tags:
-  - top8
-  - league
+  - Top 8
+  - League
 location: Sanremo
 date: 2026-03-08
 author: Pietro Bragioto

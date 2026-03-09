@@ -23,7 +23,7 @@ The blog uses **Nuxt Content** with 5 distinct collections, all located in `cont
 General blog posts about Magic: The Gathering Pauper format.
 
 **Topics:**
-- Meta analysis
+- Meta Analysis
 - Card evaluations
 - Strategy guides
 - Format news
@@ -80,7 +80,7 @@ Set previews and spoiler analysis for new releases.
 
 **Topics:**
 - New card evaluations
-- Set reviews
+- Set Reviews
 - Pauper impact analysis
 - Downshift announcements
 
@@ -243,7 +243,7 @@ tags:
 ```yaml
 tags:
   - monoblu          # Use english: "mono-blue"
-  - "meta analysis"  # No spaces, use "meta" + "analisi"
+  - "Meta Analysis"  # No spaces, use "meta" + "analisi"
 ```
 
 ---

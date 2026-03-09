@@ -2,8 +2,8 @@
 title: "Limitate in Magic: Eresia o Svolta?"
 description: "Esploriamo il concetto di 'limitate' in Magic: The Gathering e il suo impatto sul gioco."
 tags:
-  - meta analysis
-  - game mechanics
+  - Meta Analysis
+  - Game Mechanics
 date: 2025-10-09
 author: Pietro Bragioto
 thumbnail: /assets/blog/articles/jinxs-monkey-bomb.jpg

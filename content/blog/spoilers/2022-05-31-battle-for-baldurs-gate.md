@@ -2,7 +2,7 @@
 title: "Battle For Baldurs Gate"
 description: "Spoiler article for Battle For Baldurs Gate"
 tags:
-  - set review
+  - Set Review
 date: 2022-05-31
 author: Pietro Bragioto
 thumbnail: /assets/blog/sets/battle-for-baldurs-gate.jpg

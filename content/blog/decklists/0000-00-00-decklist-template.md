@@ -2,10 +2,10 @@
 title: ""
 description: ""
 tags:
-  - top8
-  - league
+  - Top 8
+  - League
   - IPT
-  - paupergeddon
+  - Paupergeddon
 location: 
 date: 
 author: Pietro Bragioto

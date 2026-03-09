@@ -5,7 +5,7 @@ author: Pietro Bragioto
 date: 2025-07-10
 published: true
 tags:
-  - meta
+  - Meta
 thumbnail: /assets/blog/arts/careful-consideration.jpg
 ---
 

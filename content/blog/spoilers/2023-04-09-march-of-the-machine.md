@@ -2,7 +2,7 @@
 title: "March Of The Machine"
 description: "Spoiler article for March Of The Machine"
 tags:
-  - set review
+  - Set Review
 date: 2023-04-09
 author: Pietro Bragioto
 thumbnail: /assets/blog/sets/march-of-the-machine.jpg

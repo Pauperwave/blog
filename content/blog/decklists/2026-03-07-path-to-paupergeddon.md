@@ -2,7 +2,7 @@
 title: "Path to Paupergeddon 2026"
 description: "Decklists Top 8"
 tags:
-  - top8
+  - Top 8
 location: Torino
 date: 2026-03-07
 author: Pietro Bragioto

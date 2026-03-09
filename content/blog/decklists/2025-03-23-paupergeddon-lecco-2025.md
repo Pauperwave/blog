@@ -2,8 +2,8 @@
 title: "Paupergeddon Lucca 2025"
 description: "Decklists Top 8"
 tags:
-  - top8
-  - paupergeddon
+  - Top 8
+  - Paupergeddon
 location: Lecco
 date: 2025-03-23
 author: Pietro Bragioto

@@ -2,7 +2,7 @@
 title: "Regole di Buon Senso per i Report"
 description: ""
 tags:
-  - meta
+  - Meta
 date: 2020-02-18
 author: Pietro Bragioto
 thumbnail: /assets/blog/arts/m20-35-rule-of-law.jpg

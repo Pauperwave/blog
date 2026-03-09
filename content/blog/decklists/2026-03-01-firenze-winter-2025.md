@@ -2,8 +2,8 @@
 title: "LP Firenze Winter 2025"
 description: "Decklists Top 8"
 tags:
-  - top8
-  - league
+  - Top 8
+  - League
 location: Firenze
 date: 2026-03-01
 author: Pietro Bragioto

@@ -2,8 +2,8 @@
 title: "Paupergeddon Roma 2023"
 description: "Decklists Top 8"
 tags:
-  - top8
-  - paupergeddon
+  - Top 8
+  - Paupergeddon
 location: Roma
 date: 2023-11-20
 author: Pietro Bragioto

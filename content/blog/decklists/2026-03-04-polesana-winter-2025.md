@@ -2,8 +2,8 @@
 title: "LP Polesana Winter 2025"
 description: "Decklists Top 8"
 tags:
-  - top8
-  - league
+  - Top 8
+  - League
 location: Adria
 date: 2026-03-04
 author: Pietro Bragioto

@@ -2,8 +2,8 @@
 title: "Paupergeddon Pisa 2024"
 description: "Decklists Top 8"
 tags:
-  - top8
-  - paupergeddon
+  - Top 8
+  - Paupergeddon
 location: Pisa
 date: 2024-06-23
 author: Pietro Bragioto

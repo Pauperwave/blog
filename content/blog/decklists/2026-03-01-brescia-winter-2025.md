@@ -2,8 +2,8 @@
 title: "LP Brescia Winter 2025"
 description: "Decklists Top 8"
 tags:
-  - top8
-  - league
+  - Top 8
+  - League
 location: Brescia
 date: 2026-03-03
 author: Pietro Bragioto

@@ -10,7 +10,7 @@ sitemap:
   videos: []
   images: []
 tags:
-  - meta
+  - Meta
 thumbnail: /assets/blog/arts/vma-70-frantic-search.jpg
 ---
 

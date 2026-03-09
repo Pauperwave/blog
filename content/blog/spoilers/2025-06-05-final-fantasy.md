@@ -2,7 +2,7 @@
 title: "Final Fantasy"
 description: "Spoiler article for Final Fantasy"
 tags:
-  - set review
+  - Set Review
 date: 2025-06-05
 author: Pietro Bragioto
 thumbnail: /assets/blog/sets/final-fantasy.jpeg

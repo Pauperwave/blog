@@ -2,8 +2,8 @@
 title: "Paupergeddon Lecco 2024"
 description: "Decklists Top 8"
 tags:
-  - top8
-  - paupergeddon
+  - Top 8
+  - Paupergeddon
 location: Lecco
 date: 2024-03-25
 author: Pietro Bragioto

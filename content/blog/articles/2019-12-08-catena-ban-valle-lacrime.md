@@ -2,7 +2,7 @@
 title: "La Catena dei Ban e la Valle di Lacrime"
 description: ""
 tags:
-  - meta
+  - Meta
 date: 2019-12-08
 author: Pietro Bragioto
 thumbnail: /assets/blog/arts/bok-118-sowing-salt.jpg

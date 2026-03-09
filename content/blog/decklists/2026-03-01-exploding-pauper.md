@@ -2,7 +2,7 @@
 title: "Exploding Pauper 2026 (IPT Lodi)"
 description: "Decklists Top 8"
 tags:
-  - top8
+  - Top 8
   - IPT
 location: Lodi
 date: 2026-03-03
