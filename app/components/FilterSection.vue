@@ -52,14 +52,14 @@ const isOpen = ref(props.defaultOpen)
       <div 
         :class="[
           'flex flex-wrap gap-2 pt-2',
-          maxHeight && 'max-h-36 overflow-y-auto pr-1'
+          maxHeight && 'md:max-h-36 md:overflow-y-auto md:pr-1'
         ]"
       >
         <UButton
           size="xs"
           :color="color"
           :variant="selectedValue === null ? 'solid' : 'outline'"
-          class="cursor-pointer"
+          class="cursor-pointer max-w-full truncate"
           @click="emit('select', null)"
         >
           {{ allLabel }}
@@ -71,7 +71,7 @@ const isOpen = ref(props.defaultOpen)
           size="xs"
           :color="color"
           :variant="selectedValue === option.value ? 'solid' : 'outline'"
-          class="cursor-pointer"
+          class="cursor-pointer max-w-full truncate"
           @click="emit('select', option.value)"
         >
           {{ option.label }} ({{ option.count }})

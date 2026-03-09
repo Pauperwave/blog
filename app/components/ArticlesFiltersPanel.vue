@@ -132,7 +132,7 @@ const activeFilters = computed(() => {
 </script>
 
 <template>
-  <section class="rounded-2xl border border-gray-200 dark:border-gray-800 bg-linear-to-b from-white to-gray-50 dark:from-gray-950 dark:to-gray-900 p-4 md:p-6 mb-6">
+  <section class="rounded-2xl border border-gray-200 dark:border-gray-800 bg-linear-to-b from-white to-gray-50 dark:from-gray-950 dark:to-gray-900 p-3 md:p-6 mb-4 md:mb-6">
     <UCollapsible :default-open="true">
       <!-- Header sempre visibile -->
       <div class="mb-4">
@@ -161,7 +161,7 @@ const activeFilters = computed(() => {
       <!-- Filtri attivi sempre visibili -->
       <div
         v-if="hasActiveFilters"
-        class="mb-4 flex items-center gap-2 flex-wrap rounded-lg border border-warning/40 dark:border-warning/50 bg-warning/10 dark:bg-warning/15 px-3 py-2 shadow-sm"
+        class="mb-4 flex items-center gap-2 flex-wrap rounded-lg border border-warning/40 dark:border-warning/50 bg-warning/10 dark:bg-warning/15 px-2 py-1.5 md:px-3 md:py-2 shadow-sm"
       >
         <span class="rounded-md bg-warning/15 dark:bg-warning/20 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-warning">
           Filtri attivi
