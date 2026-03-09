@@ -117,10 +117,7 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
   const locationFilterOptions = computed<Array<{ location: string; count: number }>>(() => {
     return (Object.entries(filterCounts.value.locationCounts) as Array<[string, number]>)
       .map(([location, count]) => ({ location, count }))
-      .sort((a, b) => {
-        if (b.count !== a.count) return b.count - a.count
-        return a.location.localeCompare(b.location, 'it')
-      })
+      .sort((a, b) => a.location.localeCompare(b.location, 'it'))
   })
 
   const getArticleTopicTags = (article: AnyArticle) =>
