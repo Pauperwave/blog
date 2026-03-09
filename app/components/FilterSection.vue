@@ -59,6 +59,7 @@ const isOpen = ref(props.defaultOpen)
           size="xs"
           :color="color"
           :variant="selectedValue === null ? 'solid' : 'outline'"
+          class="cursor-pointer"
           @click="emit('select', null)"
         >
           {{ allLabel }}
@@ -70,6 +71,7 @@ const isOpen = ref(props.defaultOpen)
           size="xs"
           :color="color"
           :variant="selectedValue === option.value ? 'solid' : 'outline'"
+          class="cursor-pointer"
           @click="emit('select', option.value)"
         >
           {{ option.label }} ({{ option.count }})
