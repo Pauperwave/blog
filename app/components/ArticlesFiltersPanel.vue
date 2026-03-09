@@ -53,6 +53,12 @@ const isSelectedLocationValue = (location: string) =>
 
 const isSelectedTagValue = (tag: string) =>
   !!props.selectedTag && normalizeFilterValue(tag) === normalizeFilterValue(props.selectedTag)
+
+// Stati per i collapsible (inizialmente tutti aperti)
+const categoryOpen = ref(true)
+const authorOpen = ref(false)
+const locationOpen = ref(true)
+const tagOpen = ref(true)
 </script>
 
 <template>
@@ -82,139 +88,183 @@ const isSelectedTagValue = (tag: string) =>
     </div>
 
     <div class="space-y-4">
-      <div class="space-y-2">
+      <!-- Categoria Collapsible -->
+      <UCollapsible :default-open="categoryOpen">
         <div class="flex items-center justify-between gap-2 flex-wrap">
-          <p class="text-xs uppercase tracking-[0.16em] text-gray-500 dark:text-gray-400">
+          <p 
+            class="text-xs uppercase tracking-[0.16em] text-gray-500 dark:text-gray-400 flex items-center gap-2 cursor-pointer"
+            @click="categoryOpen = !categoryOpen"
+          >
+            <UIcon 
+              :name="categoryOpen ? 'i-lucide-chevron-down' : 'i-lucide-chevron-right'" 
+              class="w-4 h-4" 
+            />
             Categoria
           </p>
           <p class="text-xs text-gray-500 dark:text-gray-400">
             {{ categoryFilterOptions.length }} categorie
           </p>
         </div>
-        <div class="flex flex-wrap gap-2">
-          <UButton
-            size="xs"
-            color="neutral"
-            class="cursor-pointer"
-            :variant="selectedCategory === null ? 'solid' : 'outline'"
-            @click="emit('set-category', null)"
-          >
-            Tutte le categorie
-          </UButton>
-          <UButton
-            v-for="item in categoryFilterOptions"
-            :key="item.category"
-            size="xs"
-            color="neutral"
-            class="cursor-pointer"
-            :variant="selectedCategory === item.category ? 'solid' : 'outline'"
-            @click="emit('set-category', item.category)"
-          >
-            {{ item.label }} ({{ item.count }})
-          </UButton>
-        </div>
-      </div>
+        
+        <template #content>
+          <div class="flex flex-wrap gap-2 pt-2">
+            <UButton
+              size="xs"
+              color="neutral"
+              class="cursor-pointer"
+              :variant="selectedCategory === null ? 'solid' : 'outline'"
+              @click="emit('set-category', null)"
+            >
+              Tutte le categorie
+            </UButton>
+            <UButton
+              v-for="item in categoryFilterOptions"
+              :key="item.category"
+              size="xs"
+              color="neutral"
+              class="cursor-pointer"
+              :variant="selectedCategory === item.category ? 'solid' : 'outline'"
+              @click="emit('set-category', item.category)"
+            >
+              {{ item.label }} ({{ item.count }})
+            </UButton>
+          </div>
+        </template>
+      </UCollapsible>
 
-      <div class="space-y-2">
+      <!-- Autore Collapsible -->
+      <UCollapsible :default-open="authorOpen">
         <div class="flex items-center justify-between gap-2 flex-wrap">
-          <p class="text-xs uppercase tracking-[0.16em] text-gray-500 dark:text-gray-400">
+          <p 
+            class="text-xs uppercase tracking-[0.16em] text-gray-500 dark:text-gray-400 flex items-center gap-2 cursor-pointer"
+            @click="authorOpen = !authorOpen"
+          >
+            <UIcon 
+              :name="authorOpen ? 'i-lucide-chevron-down' : 'i-lucide-chevron-right'" 
+              class="w-4 h-4" 
+            />
             Autore
           </p>
           <p class="text-xs text-gray-500 dark:text-gray-400">
             {{ authorFilterOptions.length }} autori
           </p>
         </div>
-        <div class="flex flex-wrap gap-2">
-          <UButton
-            size="xs"
-            color="neutral"
-            class="cursor-pointer"
-            :variant="selectedAuthor === null ? 'solid' : 'outline'"
-            @click="emit('set-author', null)"
-          >
-            Tutti gli autori
-          </UButton>
-          <UButton
-            v-for="author in authorFilterOptions"
-            :key="author.slug"
-            size="xs"
-            color="neutral"
-            class="cursor-pointer"
-            :variant="selectedAuthor === author.slug ? 'solid' : 'outline'"
-            @click="emit('set-author', author.slug)"
-          >
-            {{ author.name }} ({{ author.count }})
-          </UButton>
-        </div>
-      </div>
+        
+        <template #content>
+          <div class="flex flex-wrap gap-2 pt-2">
+            <UButton
+              size="xs"
+              color="neutral"
+              class="cursor-pointer"
+              :variant="selectedAuthor === null ? 'solid' : 'outline'"
+              @click="emit('set-author', null)"
+            >
+              Tutti gli autori
+            </UButton>
+            <UButton
+              v-for="author in authorFilterOptions"
+              :key="author.slug"
+              size="xs"
+              color="neutral"
+              class="cursor-pointer"
+              :variant="selectedAuthor === author.slug ? 'solid' : 'outline'"
+              @click="emit('set-author', author.slug)"
+            >
+              {{ author.name }} ({{ author.count }})
+            </UButton>
+          </div>
+        </template>
+      </UCollapsible>
 
-      <div class="space-y-2">
+      <!-- Luogo Collapsible -->
+      <UCollapsible :default-open="locationOpen">
         <div class="flex items-center justify-between gap-2 flex-wrap">
-          <p class="text-xs uppercase tracking-[0.16em] text-gray-500 dark:text-gray-400">
+          <p 
+            class="text-xs uppercase tracking-[0.16em] text-gray-500 dark:text-gray-400 flex items-center gap-2 cursor-pointer"
+            @click="locationOpen = !locationOpen"
+          >
+            <UIcon 
+              :name="locationOpen ? 'i-lucide-chevron-down' : 'i-lucide-chevron-right'" 
+              class="w-4 h-4" 
+            />
             Luogo
           </p>
           <p class="text-xs text-gray-500 dark:text-gray-400">
             {{ locationFilterOptions.length }} localita
           </p>
         </div>
-        <div class="flex flex-wrap gap-2">
-          <UButton
-            size="xs"
-            color="info"
-            class="cursor-pointer"
-            :variant="selectedLocation === null ? 'solid' : 'outline'"
-            @click="emit('set-location', null)"
-          >
-            Tutte le localita
-          </UButton>
-          <UButton
-            v-for="location in locationFilterOptions"
-            :key="location.location"
-            size="xs"
-            color="info"
-            class="cursor-pointer"
-            :variant="isSelectedLocationValue(location.location) ? 'solid' : 'outline'"
-            @click="emit('set-location', location.location)"
-          >
-            {{ location.location }} ({{ location.count }})
-          </UButton>
-        </div>
-      </div>
+        
+        <template #content>
+          <div class="flex flex-wrap gap-2 pt-2">
+            <UButton
+              size="xs"
+              color="info"
+              class="cursor-pointer"
+              :variant="selectedLocation === null ? 'solid' : 'outline'"
+              @click="emit('set-location', null)"
+            >
+              Tutte le localita
+            </UButton>
+            <UButton
+              v-for="location in locationFilterOptions"
+              :key="location.location"
+              size="xs"
+              color="info"
+              class="cursor-pointer"
+              :variant="isSelectedLocationValue(location.location) ? 'solid' : 'outline'"
+              @click="emit('set-location', location.location)"
+            >
+              {{ location.location }} ({{ location.count }})
+            </UButton>
+          </div>
+        </template>
+      </UCollapsible>
 
-      <div class="space-y-2">
+      <!-- Tag Collapsible -->
+      <UCollapsible :default-open="tagOpen">
         <div class="flex items-center justify-between gap-2 flex-wrap">
-          <p class="text-xs uppercase tracking-[0.16em] text-gray-500 dark:text-gray-400">
+          <p 
+            class="text-xs uppercase tracking-[0.16em] text-gray-500 dark:text-gray-400 flex items-center gap-2 cursor-pointer"
+            @click="tagOpen = !tagOpen"
+          >
+            <UIcon 
+              :name="tagOpen ? 'i-lucide-chevron-down' : 'i-lucide-chevron-right'" 
+              class="w-4 h-4" 
+            />
             Tag
           </p>
           <p class="text-xs text-gray-500 dark:text-gray-400">
             {{ tagFilterOptions.length }} tag
           </p>
         </div>
-        <div class="max-h-36 overflow-y-auto pr-1">
-          <div class="flex flex-wrap gap-2">
-            <UButton
-              size="xs"
-              color="primary"
-              class="cursor-pointer"
-              :variant="selectedTag === null ? 'solid' : 'outline'"
-              @click="emit('set-tag', null)"
-            >
-              Tutti i tag
-            </UButton>
-            <UButton
-              v-for="tag in tagFilterOptions"
-              :key="tag.tag"
-              size="xs"
-              color="primary"
-              class="cursor-pointer"
-              :variant="isSelectedTagValue(tag.tag) ? 'solid' : 'outline'"
-              @click="emit('set-tag', tag.tag)"
-            >
-              {{ tag.tag }} ({{ tag.count }})
-            </UButton>
+        
+        <template #content>
+          <div class="max-h-36 overflow-y-auto pr-1 pt-2">
+            <div class="flex flex-wrap gap-2">
+              <UButton
+                size="xs"
+                color="primary"
+                class="cursor-pointer"
+                :variant="selectedTag === null ? 'solid' : 'outline'"
+                @click="emit('set-tag', null)"
+              >
+                Tutti i tag
+              </UButton>
+              <UButton
+                v-for="tag in tagFilterOptions"
+                :key="tag.tag"
+                size="xs"
+                color="primary"
+                class="cursor-pointer"
+                :variant="isSelectedTagValue(tag.tag) ? 'solid' : 'outline'"
+                @click="emit('set-tag', tag.tag)"
+              >
+                {{ tag.tag }} ({{ tag.count }})
+              </UButton>
+            </div>
           </div>
-        </div>
-      </div>
+        </template>
+      </UCollapsible>
     </div>
 
     <div
