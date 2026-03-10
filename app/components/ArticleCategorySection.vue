@@ -30,8 +30,9 @@ withDefaults(defineProps<Props>(), {
         variant="link"
         size="sm"
       >
-        {{ viewAllText }}
-        <AnimatedArrow />
+        <AnimatedArrow size="sm">
+          {{ viewAllText }}
+        </AnimatedArrow>
       </UButton>
     </div>
     <UBlogPosts>
