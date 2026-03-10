@@ -73,11 +73,7 @@ const sections = getHomeSections()
 
 <template>
   <UPage>
-    <UPageBody
-      :ui="{
-        base: 'mt-4 pb-0 space-y-0'
-      }"
-    >
+    <UPageBody>
       <HomeHeroSection
         :articles="allArticles"
         :fresh-this-week-count="freshThisWeekCount"
@@ -85,7 +81,7 @@ const sections = getHomeSections()
         :authors-map="authorsMap"
       />
 
-      <section class="mb-4">
+      <section>
         <div class="flex items-end justify-between gap-3 mb-5">
           <div>
             <p class="text-xs uppercase tracking-[0.18em] text-primary font-semibold">
@@ -100,7 +96,7 @@ const sections = getHomeSections()
           </div>
         </div>
 
-        <div class="space-y-2 pb-2">
+        <div class="space-y-8 pb-2">
           <ArticleCategorySection
             v-for="section in sections"
             :key="section.category"
