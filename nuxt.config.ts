@@ -157,21 +157,7 @@ export default defineNuxtConfig({
     },
     build: {
       sourcemap: false, // Disable sourcemaps in production to eliminate Tailwind warnings
-      chunkSizeWarningLimit: 3000,
-      rollupOptions: {
-        output: {
-          manualChunks(id) {
-            const normalizedId = id.replaceAll("\\", "/")
-            if (
-              normalizedId.includes("/node_modules/@tiptap/") ||
-              normalizedId.includes("/node_modules/prosemirror-") ||
-              normalizedId.includes("/node_modules/y-prosemirror/")
-            ) {
-              return "studio-editor"
-            }
-          },
-        },
-      },
+      chunkSizeWarningLimit: 3000
     }
   }
 })
