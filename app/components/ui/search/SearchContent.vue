@@ -23,11 +23,11 @@ const searchTerm = ref('')
 
 const links = [
   { label: 'Docs', icon: 'i-lucide-book-open', to: '/docs' },
-  { label: 'Articles', icon: 'i-lucide-newspaper', to: '/articles' },
-  { label: 'Tutorials', icon: 'i-lucide-graduation-cap', to: '/articles?category=tutorial' },
-  { label: 'Decklists', icon: 'i-lucide-layers', to: '/articles?category=decklist' },
-  { label: 'Reports', icon: 'i-lucide-chart-bar', to: '/articles?category=report' },
-  { label: 'Spoilers', icon: 'i-lucide-sparkles', to: '/articles?category=spoiler' },
+  { label: 'Articoli', icon: 'i-lucide-newspaper', to: '/articles' },
+  { label: 'Tutorial', icon: 'i-lucide-graduation-cap', to: '/articles?category=tutorial' },
+  { label: 'Decklist', icon: 'i-lucide-layers', to: '/articles?category=decklist' },
+  { label: 'Report', icon: 'i-lucide-chart-bar', to: '/articles?category=report' },
+  { label: 'Spoiler', icon: 'i-lucide-sparkles', to: '/articles?category=spoiler' },
 ]
 </script>
 
@@ -40,6 +40,11 @@ const links = [
       :links="links"
       :fuse="{ resultLimit: 42, fuseOptions: { threshold: 0.3 } }"
       shortcut="meta_k"
+      placeholder="Cerca articoli, guide, decklist..."
+      empty-state="Nessun risultato trovato"
+      :groups="[
+        { label: 'Collegamenti rapidi', commands: links },
+      ]"
     />
   </ClientOnly>
 </template>

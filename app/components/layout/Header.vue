@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from "@nuxt/ui"
+import SearchButton from "~/components/ui/search/SearchButton.vue"
 
 const navItems: NavigationMenuItem[] = [
   { label: "Autori", icon: "i-lucide-users", to: "/authors" },
