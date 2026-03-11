@@ -36,7 +36,7 @@ withDefaults(defineProps<Props>(), {
       </UButton>
     </div>
     <UBlogPosts>
-      <ArticleBlogCard
+      <ArticleCard
         v-for="article in articles.slice(0, maxItems)"
         :key="article._id"
         :article="article"

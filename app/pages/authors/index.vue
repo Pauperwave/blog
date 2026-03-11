@@ -279,7 +279,7 @@ useSeoMeta({
           </div>
         </section>
 
-        <AuthorsFiltersToolbar
+        <AuthorFiltersToolbar
           v-model="searchQuery"
           :show-only-active="showOnlyActive"
           :sort-mode="sortMode"
@@ -329,7 +329,7 @@ useSeoMeta({
             </div>
 
             <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
-              <FeaturedAuthorCard
+              <AuthorFeaturedCard
                 v-for="author in featuredAuthors"
                 :key="`featured-${author.name}`"
                 :author="author"

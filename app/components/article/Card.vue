@@ -1,4 +1,4 @@
-<!-- app/components/ArticleBlogCard.vue -->
+<!-- app/components/article/Card.vue -->
 <script setup lang="ts">
 import type { BadgeProps } from '@nuxt/ui'
 import type { Author } from '~/composables/useAuthor'

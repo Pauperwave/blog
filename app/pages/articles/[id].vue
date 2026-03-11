@@ -316,7 +316,7 @@ function updateMeta() {
         class="markdown-content flex-1"
       />
       <template v-if="authorData">
-        <AuthorAbout
+        <AuthorAboutCard
           :src="authorData.avatar"
           :name="authorData.name"
           :description="authorData.description"
@@ -331,14 +331,14 @@ function updateMeta() {
               {{ authorData.bio }}
             </p>
           </template>
-        </AuthorAbout>
+        </AuthorAboutCard>
       </template>
       <USeparator class="mt-4 mb-4" />
       <p class="font-semibold mb-4">
         {{ relatedArticlesString }}
       </p>
       <UBlogPosts id="related-articles">
-        <ArticleBlogCard
+        <ArticleCard
           v-for="article in links"
           :key="article.path"
           :article="article"

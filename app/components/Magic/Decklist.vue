@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import MagicCardTypesIcon from './CardTypesIcon.vue'
+import MagicCardTypesIcon from './card/TypesIcon.vue'
 
 const props = defineProps<{
   name: string

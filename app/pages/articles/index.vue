@@ -60,7 +60,7 @@ const {
 <template>
   <UPage>
     <UPageBody>
-      <ArticlesFiltersPanel
+      <ArticleFiltersPanel
         :results-count="filteredArticles.length"
         :total-count="articles?.length || 0"
         :has-active-filters="hasActiveFilters"
@@ -94,7 +94,7 @@ const {
         v-else
         class="gap-2 sm:gap-4 lg:gap-6 sm:grid-cols-3 lg:grid-cols-4"
       >
-        <ArticleBlogCard
+        <ArticleCard
           v-for="article in filteredArticles"
           :key="article.path"
           :article="article"

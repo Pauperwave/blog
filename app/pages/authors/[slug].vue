@@ -167,7 +167,7 @@ useSeoMeta({
       <div v-if="recentArticles.length > 0">
         <h2 class="text-2xl font-bold mb-4">Ultimi articoli</h2>
         <UBlogPosts class="gap-2 sm:gap-4 lg:gap-6 sm:grid-cols-3 lg:grid-cols-4">
-          <ArticleBlogCard
+          <ArticleCard
             v-for="article in recentArticles"
             :key="article.path"
             :article="article"
