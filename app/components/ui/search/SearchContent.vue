@@ -20,6 +20,7 @@ const { data: files } = useLazyAsyncData(
       queryCollectionSearchSections('spoilers')
     ])
     return [...decklists, ...articles, ...reports, ...tutorials, ...spoilers]
+      .filter(f => f.title?.trim() !== '' && !f.id.includes('template'))
   },
   { server: false }
 )
