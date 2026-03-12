@@ -81,12 +81,12 @@ const getThumbnailSrc = (thumbnail: unknown) => {
               Esplora tutti gli articoli
             </UButton>
             <UButton
-              to="/authors"
+              to="/articles/2020-02-18-regole-report"
               variant="soft"
               color="neutral"
               size="lg"
             >
-              Scopri gli autori
+              Come scrivere un report
             </UButton>
           </div>
 
