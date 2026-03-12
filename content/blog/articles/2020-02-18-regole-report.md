@@ -87,7 +87,7 @@ Out: ([...])
 [...]
 ```
 
-Potete vedere il risultato della pubblicazione di un report che segue queste regole in questo [report di Paupergeddon Lucca Winter 2025](https://test.pauperwave.org/articles/2025-12-09-paupergeddon-lucca-winter-2025).
+Potete vedere il risultato della pubblicazione di un report che segue queste regole in questo [report di Paupergeddon Lucca Winter 2025](/articles/2025-12-09-edoardo-bardi-paupergeddon-lucca-winter-2025).
 
 ## Conclusioni
 
