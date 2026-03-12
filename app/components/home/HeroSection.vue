@@ -69,7 +69,7 @@ const getThumbnailSrc = (thumbnail: unknown) => {
           </h1>
 
           <p class="mt-3 text-base md:text-lg text-gray-700 dark:text-gray-300 max-w-3xl text-pretty">
-            Decklists, report, tutorial e approfondimenti: esplora gli ultimi articoli, segui gli autori più attivi e entra subito nella sezione che ti interessa.
+            Esplora gli ultimi articoli ed entra subito nella sezione che ti interessa.
           </p>
 
           <div class="mt-4 flex flex-wrap gap-2.5">
