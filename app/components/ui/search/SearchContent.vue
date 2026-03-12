@@ -57,6 +57,7 @@ const links = [
   <ClientOnly>
     <LazyUContentSearch
       v-model:search-term="searchTerm"
+      :color-mode="false"
       :files="files ?? []"
       :navigation="navigation ?? []"
       :links="links"
