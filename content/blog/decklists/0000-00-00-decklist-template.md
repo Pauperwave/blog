@@ -1,6 +1,6 @@
 ---
 title: ""
-description: ""
+description: "Decklists Top 8"
 tags:
   - Top 8
   - League
