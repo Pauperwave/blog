@@ -10,9 +10,6 @@ defineProps<{
     :collapsed="collapsed ?? false"
     label="Cerca..."
     placeholder="Cerca nel blog..."
-    size="md"
     color="neutral"
-    variant="outline"
-    class="w-full lg:w-64"
   />
 </template>

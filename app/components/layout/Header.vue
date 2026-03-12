@@ -17,18 +17,20 @@ const navItems: NavigationMenuItem[] = [
       />
     </template>
     <template #right>
+      <SearchButton class="lg:hidden" :collapsed="true" />
       <ColorModeButton />
     </template>
     <!-- Desktop -->
     <template #default>
-      <!-- Expanded on desktop, icon-only on mobile -->
-      <UNavigationMenu :items="navItems" />
+      <!-- <UNavigationMenu :items="navItems" /> -->
       <SearchButton class="hidden lg:flex" :collapsed="false" />
-      <SearchButton class="flex lg:hidden" :collapsed="true" />
     </template>
     <!-- Mobile slideover -->
     <template #body>
-      <UNavigationMenu :items="navItems" />
+      <div class="flex flex-col">
+        <SearchButton variant="ghost" />
+        <UNavigationMenu :items="navItems" />
+      </div>
     </template>
   </UHeader>
 </template>
