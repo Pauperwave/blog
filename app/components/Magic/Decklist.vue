@@ -10,10 +10,13 @@ const props = defineProps<{
   headerGradient?: string
 }>()
 
-const toast = useToast()
+const anchorId = computed(() =>
+  props.player
+    ? `deck-${slugify(props.name)}-${slugify(props.player)}`
+    : `deck-${slugify(props.name)}`
+)
 
-// Template ref for image generation
-const decklistCard = ref<HTMLElement>()
+const toast = useToast()
 
 const SECTIONS = ['Creatures', 'Instants', 'Sorceries', 'Artifacts', 'Enchantments', 'Lands', 'Sideboard'] as const
 
@@ -150,100 +153,102 @@ async function copyDecklist() {
 </script>
 
 <template>
-  <UCard
-    ref="decklistCard"
-    class="decklist-wrapper mx-auto mb-6"
-    :ui="{
-      root: 'overflow-hidden',
-      header: ['relative p-4', headerClass].filter(Boolean).join(' '),
-      footer: 'data-html2canvas-ignore'
-    }"
-  >
-    <!-- Header -->
-    <template #header>
-      <div class="flex flex-col gap-1">
-        <div class="grid grid-cols-[1fr_auto] items-start gap-x-4 gap-y-2">
-          <div class="flex flex-col gap-1">
-            <h2
-              class="text-xl font-semibold leading-tight m-0"
-              :class="textClasses.heading"
+  <div :id="anchorId">
+    <UCard
+      ref="decklistCard"
+      class="decklist-wrapper mx-auto mb-6"
+      :ui="{
+        root: 'overflow-hidden',
+        header: ['relative p-4', headerClass].filter(Boolean).join(' '),
+        footer: 'data-html2canvas-ignore'
+      }"
+    >
+      <!-- Header -->
+      <template #header>
+        <div class="flex flex-col gap-1">
+          <div class="grid grid-cols-[1fr_auto] items-start gap-x-4 gap-y-2">
+            <div class="flex flex-col gap-1">
+              <h2
+                class="text-xl font-semibold leading-tight m-0"
+                :class="textClasses.heading"
+              >
+                {{ name }}
+              </h2>
+              <p
+                v-if="player"
+                class="text-base leading-tight m-0"
+                :class="textClasses.subheading"
+              >
+                {{ player }}
+              </p>
+            </div>
+            <div
+              v-if="placement"
+              class="text-right text-base font-semibold text-gray-900 dark:text-gray-100"
             >
-              {{ name }}
-            </h2>
-            <p
-              v-if="player"
-              class="text-base leading-tight m-0"
-              :class="textClasses.subheading"
-            >
-              {{ player }}
-            </p>
-          </div>
-          <div
-            v-if="placement"
-            class="text-right text-base font-semibold text-gray-900 dark:text-gray-100"
-          >
-            {{ placement }}
+              {{ placement }}
+            </div>
           </div>
         </div>
-      </div>
-    </template>
+      </template>
 
-    <!-- Body - Two-column layout -->
-    <template #default>
-      <div class="decklist-grid">
-        <!-- Main Deck (Left) -->
-        <div class="main-deck">
-          <div v-for="section in mainDeckSections" :key="section" class="section">
-            <h2 class="section-heading">
-              <MagicCardTypesIcon :type="section" size="md" class="section-type-icon" />
-              {{ section }} <span class="card-count">({{ counts[section] }})</span>
-            </h2>
-            <ul class="card-list">
-              <li v-for="(card, index) in cardsBySection[section]" :key="`${section}-${index}`" class="card-item">
-                <span class="card-quantity">{{ card.quantity }}</span>
-                <MagicCardTooltip :name="card.name" :image="card.imageUrl" />
-                <MagicCardManaCost v-if="card.manaCost" :cost="card.manaCost" class="card-mana-cost" />
-              </li>
-            </ul>
+      <!-- Body - Two-column layout -->
+      <template #default>
+        <div class="decklist-grid">
+          <!-- Main Deck (Left) -->
+          <div class="main-deck">
+            <div v-for="section in mainDeckSections" :key="section" class="section">
+              <h2 class="section-heading">
+                <MagicCardTypesIcon :type="section" size="md" class="section-type-icon" />
+                {{ section }} <span class="card-count">({{ counts[section] }})</span>
+              </h2>
+              <ul class="card-list">
+                <li v-for="(card, index) in cardsBySection[section]" :key="`${section}-${index}`" class="card-item">
+                  <span class="card-quantity">{{ card.quantity }}</span>
+                  <MagicCardTooltip :name="card.name" :image="card.imageUrl" />
+                  <MagicCardManaCost v-if="card.manaCost" :cost="card.manaCost" class="card-mana-cost" />
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sideboard (Right) -->
+          <div class="sideboard">
+            <div v-for="section in sideboardSections" :key="section" class="section">
+              <h2 class="section-heading">
+                <MagicCardTypesIcon :type="section" size="md" class="section-type-icon" />
+                {{ section }} <span class="card-count">({{ counts[section] }})</span>
+              </h2>
+              <ul class="card-list">
+                <li v-for="(card, index) in cardsBySection[section]" :key="`${section}-${index}`" class="card-item">
+                  <span class="card-quantity">{{ card.quantity }}</span>
+                  <MagicCardTooltip :name="card.name" :image="card.imageUrl" />
+                  <MagicCardManaCost v-if="card.manaCost" :cost="card.manaCost" class="card-mana-cost" />
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
+      </template>
 
-        <!-- Sideboard (Right) -->
-        <div class="sideboard">
-          <div v-for="section in sideboardSections" :key="section" class="section">
-            <h2 class="section-heading">
-              <MagicCardTypesIcon :type="section" size="md" class="section-type-icon" />
-              {{ section }} <span class="card-count">({{ counts[section] }})</span>
-            </h2>
-            <ul class="card-list">
-              <li v-for="(card, index) in cardsBySection[section]" :key="`${section}-${index}`" class="card-item">
-                <span class="card-quantity">{{ card.quantity }}</span>
-                <MagicCardTooltip :name="card.name" :image="card.imageUrl" />
-                <MagicCardManaCost v-if="card.manaCost" :cost="card.manaCost" class="card-mana-cost" />
-              </li>
-            </ul>
-          </div>
+      <!-- Footer -->
+      <template #footer>
+        <div class="flex gap-2 flex-wrap" data-html2canvas-ignore>
+          <!-- Copy text for MTGO -->
+          <UButton
+            icon="i-lucide-copy"
+            size="sm"
+            variant="subtle"
+            class="cursor-pointer"
+            title="Copia decklist"
+            aria-label="Copia decklist negli appunti"
+            label="Copia per MTGO"
+            @click="copyDecklist"
+          />
         </div>
-      </div>
-    </template>
-
-    <!-- Footer -->
-    <template #footer>
-      <div class="flex gap-2 flex-wrap" data-html2canvas-ignore>
-        <!-- Copy text for MTGO -->
-        <UButton
-          icon="i-lucide-copy"
-          size="sm"
-          variant="subtle"
-          class="cursor-pointer"
-          title="Copia decklist"
-          aria-label="Copia decklist negli appunti"
-          label="Copia per MTGO"
-          @click="copyDecklist"
-        />
-      </div>
-    </template>
-  </UCard>
+      </template>
+    </UCard>
+  </div>
 </template>
 
 <style scoped>

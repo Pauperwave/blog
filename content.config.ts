@@ -80,6 +80,11 @@ export default defineContentConfig({
         type: "page",
         schema: baseContentSchema.extend({
           category: z.literal("decklist").default("decklist"),
+          _decks: z.array(z.object({
+            name: z.string(),
+            player: z.string(),
+            anchorId: z.string()
+          })).default([]),
         }),
       })
     ),

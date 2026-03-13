@@ -7,6 +7,7 @@ import { createRegExp, digit, whitespace, oneOrMore, char } from 'magic-regexp'
 import { getCardsByNames } from '../server/utils/card-database'
 import type { ParsedCard } from '../shared/types/index.ts'
 import { buildLog } from '../shared/utils/build-log'
+import { slugify } from '../shared/utils/strings'
 
 export default defineNuxtModule({
   meta: {
@@ -54,7 +55,7 @@ async function transformDecklistBlocks(content: string, filePath: string): Promi
     decklistContent: string,
     index: number
   }> = []
-  
+
   let match
   while ((match = blockWithFrontmatter.exec(content)) !== null) {
     if (!match[1] || !match[2] || !match[3]) continue
@@ -77,11 +78,11 @@ async function transformDecklistBlocks(content: string, filePath: string): Promi
   for (let i = matches.length - 1; i >= 0; i--) {
     const item = matches[i]
     if (!item) continue
-    
+
     const { match, componentName, frontmatter, decklistContent, index } = item
-    
+
     buildLog(`\n   🔄 Processing decklist ${matches.length - i}/${matches.length}`)
-    
+
     const props = parseFrontmatter(frontmatter)
     const parsedCards = await parseDecklist(decklistContent)
     const sectionCounts = calculateSectionCounts(parsedCards)
@@ -101,9 +102,36 @@ async function transformDecklistBlocks(content: string, filePath: string): Promi
     propStrings.push(`parsedCards="${cardsJson}"`)
     propStrings.push(`sectionCounts="${countsJson}"`)
 
+    const deckId = `deck-${slugify(props.name ?? '')}-${slugify(props.player ?? '')}`
+    propStrings.unshift(`anchor-id="${deckId}"`)
+
     const result = `::${componentName}{${propStrings.join(' ')}}\n::`
-    
+
     content = content.substring(0, index) + result + content.substring(index + match.length)
+  }
+
+  const deckMetas = matches.map(item => {
+    const props = parseFrontmatter(item.frontmatter)
+    return {
+      name: props.name ?? '',
+      player: props.player ?? '',
+      anchorId: `deck-${slugify(props.name ?? '')}-${slugify(props.player ?? '')}`,
+    }
+  })
+
+  content = content.replace(/\r\n/g, '\n')
+  const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/)
+  if (frontmatterMatch) {
+    const existingFrontmatter = frontmatterMatch[1]
+    const decksLines = deckMetas
+      .map(d => [
+        `  - name: "${d.name.replace(/"/g, '\\"')}"`,
+        `    player: "${d.player.replace(/"/g, '\\"')}"`,
+        `    anchorId: "${d.anchorId}"`,
+      ].join('\n'))
+      .join('\n')
+    const newFrontmatter = `---\n${existingFrontmatter}\n_decks:\n${decksLines}\n---`
+    content = content.replace(/^---\n[\s\S]*?\n---/, newFrontmatter)
   }
 
   buildLog(`   ✅ All decklists transformed successfully\n`)
@@ -187,12 +215,12 @@ async function parseDecklist(rawText: string): Promise<Record<string, ParsedCard
   // Check if database exists
   const dbPath = join(process.cwd(), 'server', 'database', 'cards.db')
   const dbExists = existsSync(dbPath)
-  
+
   let cardDataMap: Map<string, any> = new Map()
-  
+
   if (dbExists) {
     cardDataMap = await getCardsByNames(Array.from(cardNames))
-    
+
     // Log database lookup results
     logDatabaseLookup(cardNames, cardDataMap)
   } else {
@@ -214,7 +242,7 @@ async function parseDecklist(rawText: string): Promise<Record<string, ParsedCard
     if (match && match[1] && match[2]) {
       const cardName = match[2]
       const cardData = cardDataMap.get(cardName)
-      
+
       const section = grouped[currentSection]
       if (section) {
         section.push({
@@ -256,7 +284,7 @@ function calculateSectionCounts(cardsBySection: Record<string, ParsedCard[]>): R
 function logDatabaseLookup(cardNames: Set<string>, cardDataMap: Map<string, any>): void {
   buildLog(`   🔍 Found ${cardNames.size} unique card names`)
   buildLog(`   💾 Loaded ${cardDataMap.size}/${cardNames.size} cards from database`)
-  
+
   const missingCards = Array.from(cardNames).filter(name => !cardDataMap.has(name))
   if (missingCards.length > 0) {
     buildLog(`   ⚠️  Missing from database (${missingCards.length}):`)
@@ -272,7 +300,7 @@ function logDecklistTransformation(
   buildLog(`   📋 Frontmatter props:`, props)
   buildLog(`   📊 Section counts:`, sectionCounts)
   buildLog(`   🃏 Total cards by section:`)
-  
+
   for (const [section, cards] of Object.entries(parsedCards)) {
     const totalCount = sectionCounts[section] || 0
     buildLog(`      └─ ${section}: ${cards.length} unique cards (${totalCount} total)`)

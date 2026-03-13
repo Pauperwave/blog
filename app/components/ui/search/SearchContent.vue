@@ -5,13 +5,19 @@ const nuxtApp = useNuxtApp()
 const { data: files } = useLazyAsyncData(
   'search',
   async () => {
-    const [decklists, articles, reports, tutorials, spoilers] = await Promise.all([
+
+    const [decklists, articles, reports, tutorials, spoilers, decklistDocs] = await Promise.all([
       queryCollectionSearchSections('decklists'),
       queryCollectionSearchSections('articles'),
       queryCollectionSearchSections('reports'),
       queryCollectionSearchSections('tutorials'),
       queryCollectionSearchSections('spoilers'),
+      queryCollection('decklists').select('path', '_decks').all(),
     ])
+
+    // 4. NUOVO: costruisce la mappa path -> deck
+    const decksByPath = new Map(decklistDocs.map(doc => [doc.path, doc._decks ?? []]))
+
     return [
       ...decklists.map(f => ({ ...f, _collection: 'decklists' })),
       ...articles.map(f => ({ ...f, _collection: 'articles' })),
@@ -26,6 +32,7 @@ const { data: files } = useLazyAsyncData(
         _collection: f._collection,
         _date: f.id.match(/\d{4}-\d{2}-\d{2}/)?.[0] ?? '',
         _summary: f.content?.trim().replace(/\s+/g, ' ').slice(0, 100) ?? '',
+        _decks: decksByPath.get(f.id) ?? [],
       }))
       .sort((a, b) => b._date.localeCompare(a._date))
   },
@@ -45,7 +52,6 @@ const collections = [
   { key: 'spoilers',  label: 'Spoiler',  icon: 'i-lucide-sparkles' },
 ]
 
-// Pre-raggruppa i file per collezione
 const filesByCollection = computed(() => {
   const map: Record<string, typeof files.value> = {}
   for (const f of files.value ?? []) {
@@ -69,28 +75,52 @@ const LINKS_GROUP = {
 
 const groups = computed(() => [
   LINKS_GROUP,
-  ...collections.map(({ key, label, icon }) => ({
-    id: key,
-    label,
-    items: (filesByCollection.value[key] ?? [])
-      .slice(0, 5)
-      .map(f => ({
-        label: f.title,
-        suffix: f._summary,
-        to: f.id,
-        icon,
-      }))
-  }))
+  {
+    id: 'decklists',
+    label: 'Decklist',
+    items: (filesByCollection.value['decklists'] ?? [])
+      .flatMap(f => [
+        // Prima l'articolo
+        {
+          label: f.title,
+          suffix: f._summary,
+          to: f.id,
+          icon: 'i-lucide-newspaper',
+        },
+        // Poi i singoli mazzi (se presenti)
+        ...f._decks.map(d => ({
+          label: d.name,
+          suffix: [d.player, f.title].filter(Boolean).join(' · '),
+          to: `${f.id}#${d.anchorId}`,
+          icon: 'i-lucide-layers',
+        }))
+      ])
+  },
+
+  // 7. MODIFICATO: le altre collezioni escludono decklists che è già sopra
+  ...collections
+    .filter(c => c.key !== 'decklists')
+    .map(({ key, label, icon }) => ({
+      id: key,
+      label,
+      items: (filesByCollection.value[key] ?? [])
+        .slice(0, 5)
+        .map(f => ({
+          label: f.title,
+          suffix: f._summary,
+          to: f.id,
+          icon,
+        }))
+    }))
 ])
 
 const fuseOptions = {
   resultLimit: 25,
-    fuseOptions: {
+  fuseOptions: {
     threshold: 0.3,
-    keys: ['label', 'suffix']
-  }
+    keys: ['label', 'suffix'],
+  },
 }
-
 </script>
 
 <template>
