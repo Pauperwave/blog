@@ -65,46 +65,46 @@ const LINKS_GROUP = {
   id: 'collegamenti',
   label: 'Collegamenti',
   items: [
-    { label: 'Decklist',  icon: 'i-lucide-layers', to: '/articles?category=decklist' },
-    { label: 'Articoli',  icon: 'i-lucide-newspaper', to: '/articles?category=article' },
-    { label: 'Report',    icon: 'i-lucide-chart-bar', to: '/articles?category=report' },
+    { label: 'Eventi',    icon: 'i-lucide-calendar',      to: '/articles?category=decklist' },
+    { label: 'Articoli',  icon: 'i-lucide-newspaper',      to: '/articles?category=article' },
+    { label: 'Report',    icon: 'i-lucide-chart-bar',       to: '/articles?category=report' },
     { label: 'Tutorial',  icon: 'i-lucide-graduation-cap', to: '/articles?category=tutorial' },
-    { label: 'Spoiler',   icon: 'i-lucide-sparkles', to: '/articles?category=spoiler' },
+    { label: 'Spoiler',   icon: 'i-lucide-sparkles',        to: '/articles?category=spoiler' },
   ]
 }
 
 const groups = computed(() => [
   LINKS_GROUP,
+  // Articoli eventi (ex decklists)
   {
-    id: 'decklists',
+    id: 'eventi',
+    label: 'Eventi',
+    items: (filesByCollection.value['decklists'] ?? [])
+      .map(f => ({
+        label: f.title,
+        suffix: f._summary,
+        to: f.id,
+        icon: 'i-lucide-newspaper',
+      }))
+  },
+  // Singoli mazzi estratti dagli eventi
+  {
+    id: 'decklist',
     label: 'Decklist',
     items: (filesByCollection.value['decklists'] ?? [])
-      .flatMap(f => [
-        // Prima l'articolo
-        {
-          label: f.title,
-          suffix: f._summary,
-          to: f.id,
-          icon: 'i-lucide-newspaper',
-        },
-        // Poi i singoli mazzi (se presenti)
-        ...f._decks.map(d => ({
-          label: d.name,
-          suffix: [d.player, f.title].filter(Boolean).join(' · '),
-          to: `${f.id}#${d.anchorId}`,
-          icon: 'i-lucide-layers',
-        }))
-      ])
+      .flatMap(f => f._decks.map(d => ({
+        label: d.name,
+        suffix: [d.player, f.title].filter(Boolean).join(' · '),
+        to: `${f.id}#${d.anchorId}`,
+        icon: 'i-lucide-layers',
+      })))
   },
-
-  // 7. MODIFICATO: le altre collezioni escludono decklists che è già sopra
   ...collections
     .filter(c => c.key !== 'decklists')
     .map(({ key, label, icon }) => ({
       id: key,
       label,
       items: (filesByCollection.value[key] ?? [])
-        .slice(0, 5)
         .map(f => ({
           label: f.title,
           suffix: f._summary,
@@ -115,7 +115,7 @@ const groups = computed(() => [
 ])
 
 const fuseOptions = {
-  resultLimit: 25,
+  resultLimit: 20,
   fuseOptions: {
     threshold: 0.3,
     keys: ['label', 'suffix'],
