@@ -11,7 +11,7 @@ thumbnail: /assets/blog/arts/clb-346-basilisk-gate.jpeg
 published: true
 ---
 
-# Introduzione
+## Introduzione
 
 Hi everyone, I'm Edoardo Bardi, `Edo_01` on MTGO, from the Lega Pauper Torino.
 This weekend I made the Top 8 at Paupergeddon in Lucca, during the Eternal Weekend.
@@ -31,7 +31,7 @@ Despite this, people like Giovanni Rosso, MVanni on mtgo, Tommaso Loss, ciurlo o
 Thus, Compagnia del Cancello was born.
 After a few reality checks by Tommaso, I was convinced it was the right deck and decided to sleeve it.
 
-# Decklist
+## Decklist
 
 ::magic-decklist
 ---
@@ -86,11 +86,11 @@ During the report, we'll look at the various side decks and how I set up the mat
 Explaining every single choice here would seem misleading and a departure from the purpose of this report.
 However, if more people were interested, I might consider creating a more detailed guide to the deck, perhaps involving other fans of the archetype!
 
-# Tournament
+## Tournament
 
-## Day 1
+### Day 1
 
-### Round 1: Mono R Madness
+#### Round 1: Mono R Madness
 
 ::MagicCardArtCrop
 ---
@@ -101,7 +101,7 @@ crop:
 ---
 ::
 
-#### Game 1
+##### Game 1
 
 I start the tournament with a mulligan to five and decide to keep a hand with a couple of [[The Modern Age]], so I can quickly dig through the deck for generic answers or a [[Squadron Hawk]] that will allow me to recover my mulligan.
 Unfortunately, I discover I'm up against Mono Red: I don't find any of the lifelink pieces and end up losing, despite an attempted air race.
@@ -122,12 +122,12 @@ description:
 1 Guardian of the Guildpact
 ::
 
-#### Game 2
+##### Game 2
 
 In the post-sideboard, with many more one-drop counters, the matchup improves significantly, although I still need to be careful with all his Pyroblasts.
 I manage to neutralize his early draws spells with a few counters, cast a Journey to Nowhere on his Guttersnipe, which would otherwise have quickly put me in trouble, and start to power up the cat.
 
-#### Game 3
+##### Game 3
 
 I open a hand with two Outlaw Medics and a BEB.
 I play the first Medic, which is immediately removed, as expected.
@@ -136,7 +136,7 @@ The next turn I play the second Medic, this time protected by the counter, and f
 - Match: `2-1`
 - Score: `1-0`
 
-### Round 2: Bogles
+#### Round 2: Bogles
 
 ::MagicCardArtCrop
 ---
@@ -147,7 +147,7 @@ crop:
 ---
 ::
 
-#### Game 1
+##### Game 1
 
 My opponent mulligans to six and keeps a hand with just one land and Abundant Growth OTP.
 On turn 2, he plays a creature but misses the land drop, which doesn't arrive until the next turn; by that point, however, I've already developed my game plan enough to control the game.
@@ -164,7 +164,7 @@ description:
 2 Outlaw Medic
 ::
 
-#### Game 2
+##### Game 2
 
 A very similar game to game one: my opponent mulligans again to six with just one land and Abundant Growth.
 On turn 2, the land drop is still missing, while I'm able to develop my game plan without any problems.
@@ -173,7 +173,7 @@ On the last available turn, I play to avoid a possible Flaring Pain and close th
 - Match: `2-0`
 - Score: `2-0`
 
-### Round 3: UB Terror Sneaky
+#### Round 3: UB Terror Sneaky
 
 ::MagicCardArtCrop
 ---
@@ -204,7 +204,7 @@ description:
 1 Outlaw Medic
 ::
 
-#### Game 2
+##### Game 2
 
 Here too, I play Heap Gate on turn three.
 I build the game entirely around its potential, Thorn of the Black Rose, which is the most dangerous card in the matchup.
@@ -213,7 +213,7 @@ The game drags on, but the treasures allow me to accumulate resources and gain t
 - Match: `2-0`
 - Score: `3-0`
 
-### Round 4: Mono U Terror
+#### Round 4: Mono U Terror
 
 ::MagicCardArtCrop
 ---
@@ -224,7 +224,7 @@ crop:
 ---
 ::
 
-#### Game 1
+##### Game 1
 
 I open a hand with three lands, two Thraben Charms, and a few support cards; after some thought, I decide to blindly hold.
 My opponent starts grinding his deck rapidly, and I use my Charms to buy time until I can get a Cat onto the board, which starts hitting for 6 a turn.
@@ -244,7 +244,7 @@ description:
 1 Outlaw Medic
 ::
 
-#### Game 2
+##### Game 2
 
 I'm still not sure if Thraben Charm is really useful in the matchup, but in this game I draw one at the right time, forcing him to use a counter to avoid exiling his two Sleeps.
 At that point, I manage to resolve the Guardian, which slows him down considerably and allows me to close quickly with the two Basilisks.
@@ -252,7 +252,7 @@ At that point, I manage to resolve the Guardian, which slows him down considerab
 - Match: `2-0`
 - Score: `4-0`
 
-### Round 5: Caw Gate
+#### Round 5: Caw Gate
 
 ::MagicCardArtCrop
 ---
@@ -263,7 +263,7 @@ crop:
 ---
 ::
 
-#### Game 1
+##### Game 1
 
 The mirror is always a unique matchup, but a lot of fun to play.
 I manage to get off to a strong start with two Modern Ages on curve, allowing me to dig deep and quickly find several Basilisks.
@@ -282,7 +282,7 @@ description:
 3 Journey to Nowhere
 ::
 
-#### Game 2
+##### Game 2
 
 I mullig to five.
 My opponent probably has a shaky hand; I open with Sea Gate, declaring red immediately.
@@ -292,7 +292,7 @@ His deck begins to stumble, while I manage to resolve my Modern Ages and quickly
 - Match: `2-0`
 - Score: `5-0`
 
-### Round 6: Elves
+#### Round 6: Elves
 
 ::MagicCardArtCrop
 ---
@@ -303,7 +303,7 @@ crop:
 ---
 ::
 
-#### Game 1
+##### Game 1
 
 A matchup that, in effect, almost decides itself, given that the first game isn't particularly favorable and the sideboard doesn't offer a truly effective plan.
 My opponent offers Initiative on the third turn, while I had resolved a Squadron Hawk on turn two, probably hoping to close the game with damage before I could establish a "lock" with the Strands.
@@ -321,7 +321,7 @@ description:
 3 Outlaw Medic
 ::
 
-#### Game 2
+##### Game 2
 
 I have a hand with three lands, two Essence Scatter, a Palace Sentinel, and a Prismatic Strands.
 I decide to keep it.
@@ -355,7 +355,7 @@ I win on the third additional turn thanks to the Guardian's 20 damage.
 - Match: `2-0`
 - Score: `6-0`
 
-### Round 7: Mono R Rally
+#### Round 7: Mono R Rally
 
 ::MagicCardArtCrop
 ---
@@ -366,7 +366,7 @@ crop:
 ---
 ::
 
-#### Game 1
+##### Game 1
 
 During the shuffle, my opponent slips a card: a Gingerbrute.
 I immediately realize it's Mono R Rally.
@@ -388,12 +388,12 @@ description:
 1 Guardian of the Guildpact
 ::
 
-#### Game 2
+##### Game 2
 
 My opponent starts off quite explosively, while I probably have a slightly slow hand, with too many lands tapped.
 I also think I took the wrong path by not defending a medic that, in hindsight, I should have protected; however, without Basilisk, I preferred to give myself more outs to draw it.
 
-#### Game 3
+##### Game 3
 
 I open a good hand with several interactions.
 I manage to defend my pieces with lifelink and win the game without too many problems.
@@ -401,7 +401,7 @@ I manage to defend my pieces with lifelink and win the game without too many pro
 - Match: `2-1`
 - Score: `7-0`
 
-### Round 8: Mono U Fate
+#### Round 8: Mono U Fate
 
 ::MagicCardArtCrop
 ---
@@ -412,7 +412,7 @@ crop:
 ---
 ::
 
-#### Game 1
+##### Game 1
 
 I'm on the play, which is a very positive thing for the matchup.
 My opponent mulligans to five, and already on turn three I start powering up the Sacred Cat and attacking.
@@ -430,13 +430,13 @@ description:
 2 Counterspell
 ::
 
-#### Game 2
+##### Game 2
 
 I open a hand full of tapped lands again.
 My opponent manages to play several Ninjas and his counters, giving the game a more aggressive pace and managing to swing it in his direction.
 Here too, I follow a somewhat dubious line, focusing on removing fliers instead of Ninjas; having never drawn either Medics or Cats, my plan becomes significantly complicated, and therefore I lose the game.
 
-#### Game 3
+##### Game 3
 
 I manage to quickly connect Sacred Cat with Basilisk Gate again and easily close out the game.
 The matchup depends heavily on who goes first.
@@ -444,9 +444,9 @@ The matchup depends heavily on who goes first.
 - Match: `2-1`
 - Score: `8-0`
 
-## Day 2
+### Day 2
 
-### Round 9: UW Familiar
+#### Round 9: UW Familiar
 
 ::MagicCardArtCrop
 ---
@@ -457,7 +457,7 @@ crop:
 ---
 ::
 
-#### Game 1
+##### Game 1
 
 A practically unwinnable game: I have too many useless cards and insufficient racing ability.
 I try to play for the first 6-7 turns, then concede to avoid wasting time.
@@ -478,12 +478,12 @@ description:
 3 Sacred Cat
 ::
 
-#### Game 2
+##### Game 2
 
 In the early turns, I focus on keeping him from untapping with a Familiar, removing him with a Journey on turn three.
 On turn four, I play the Monarch, on turn five, and with the support of two Basilisks, I easily win the game.
 
-#### Game 3
+##### Game 3
 
 Mullig to five; my hand consists of three lands, a Guardian, and an Essence Scatter.
 The plan is clear: play the Guardian again on curve.
@@ -498,7 +498,7 @@ I also have to thank Fabrizio, who played at a very fast pace, allowing us to av
 - Match: `2-1`
 - Score: `9-0`
 
-### Round 10: Mono R Madness
+#### Round 10: Mono R Madness
 
 ::MagicCardArtCrop
 ---
@@ -509,16 +509,16 @@ crop:
 ---
 ::
 
-#### Game 1
+##### Game 1
 
 I can't handle all his pings, and he ends up killing me pretty quickly.
 
-#### Game 2
+##### Game 2
 
 I keep a hand with various interactions and a few Medics.
 I counter his first draws and then manage to connect quickly, gaining health and staying out of his closing range.
 
-#### Game 3
+##### Game 3
 
 I keep a seven hand with three lands (including an island), two Medics, and two BEBs.
 My opponent is stuck with two lands and can't cast his two-mana draw due to my BEB.
@@ -527,7 +527,7 @@ I calmly bring my Medics into play, and after finding the third land drop, he tr
 - Match: `2-1`
 - Score: `10-0`
 
-### Round 11: Mono R Madness
+#### Round 11: Mono R Madness
 
 ::MagicCardArtCrop
 ---
@@ -538,13 +538,13 @@ crop:
 ---
 ::
 
-#### Game 1
+##### Game 1
 
 I have a hand with two Medics, Sacred Cat, three lands (including a Basilisk Gate), and a Counterspell.
 I play the Medic on turn two and the second on turn three, forcing my opponent to use his removal spells right away and wasting precious time.
 This allows me to play a Strand-protected Cat and continue to power it up, constantly staying out of its damage range.
 
-#### Game 2
+##### Game 2
 
 My opponent has a six-land hand with just one land and Looting.
 He skips the turn-two land drop, but finds his second land right afterward, finally starting to play his draws.
@@ -555,7 +555,7 @@ The match was too compromised for him to recover.
 - Match: `2-0`
 - Score: `11-0`
 
-### Round 12: Caw Gates
+#### Round 12: Caw Gates
 
 ::MagicCardArtCrop
 ---
@@ -566,13 +566,13 @@ crop:
 ---
 ::
 
-#### Game 1
+##### Game 1
 
 I'm not playing around with a potential lethal: during my attack with the cat, he has a Prismatic and a CT in my graveyard that removes my Strands.
 He untaps and attacks me for 21.
 It was a game where I was clearly ahead, and I took a completely avoidable risk.
 
-#### Game 2
+##### Game 2
 
 The game drags on for a long time because we both keep connecting with Sacred Cat.
 A somewhat dubious play on his part allows me to take it home, more or less the same way I gave him G1.
@@ -581,7 +581,7 @@ When we finish G2, they had just announced the turns: it ends in a draw.
 - Match: `1-1`
 - Score: `11-0-1`
 
-### Round 13: RG Monsters
+#### Round 13: RG Monsters
 
 ::MagicCardArtCrop
 ---
@@ -592,7 +592,7 @@ crop:
 ---
 ::
 
-#### Game 1
+##### Game 1
 
 I have a somewhat weak hand, with too many tapped lands.
 I try to interact with his mana by using a TC on Utopia Sprawl to take away his red, but he untaps and plays Initiative while I'm without a board.
@@ -609,7 +609,7 @@ description:
 2 Outlaw Medic
 ::
 
-#### Game 2 
+##### Game 2 
 
 Very similar to game one: I try to interact with his mana again, but his Mountain punishes me and he casts Chrysalis on turn three, followed by Initiative on turn four.
 Again, without a board, I have no margin and concede again.
@@ -617,7 +617,7 @@ Again, without a board, I have no margin and concede again.
 - Match: `0-2`
 - Score: `11-1-1`
 
-### Round 14: Mono U Terror
+#### Round 14: Mono U Terror
 
 ::MagicCardArtCrop
 ---
@@ -631,7 +631,7 @@ crop:
 - Match: `11-1-2`
 - Score: `11-1-2`
 
-### Quarterfinal: Mono R Madness
+#### Quarterfinal: Mono R Madness
 
 ::MagicCardArtCrop
 ---
@@ -642,17 +642,17 @@ crop:
 ---
 ::
 
-#### Game 1
+##### Game 1
 
 I manage to win the first game despite the lack of lifelink pieces.
 My opponent doesn't deal much damage, and I manage to close out the game with two Vector Gliders, which apply enough pressure to bring him to zero before he can turn the race around.
 
-#### Game 2
+##### Game 2
 
 I keep a good hand, but here too I choose not to protect a medic that I probably should have defended.
 Without Basilisk, I preferred to take a riskier line to give myself a better chance of drawing.
 
-#### Game 3
+##### Game 3
 
 A very similar game to G2: I find lifelink creatures but not the Basilisk.
 I take too much damage and can't keep up with the pace of the race, thus ending my tournament.
