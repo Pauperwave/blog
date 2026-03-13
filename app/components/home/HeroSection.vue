@@ -86,7 +86,7 @@ const getThumbnailSrc = (thumbnail: unknown) => {
               color="neutral"
               size="lg"
             >
-              Come scrivere un report
+              Scrivere un report
             </UButton>
           </div>
 
