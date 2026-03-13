@@ -15,7 +15,10 @@ const { data: files } = useLazyAsyncData(
       ...reports.map(f => ({ ...f, _collection: 'reports' })),
       ...tutorials.map(f => ({ ...f, _collection: 'tutorials' })),
       ...spoilers.map(f => ({ ...f, _collection: 'spoilers' })),
-    ].filter(f => f.title?.trim() !== '' && !f.id.includes('template') && f.level === 1)
+    ]
+      .filter(f => f.title?.trim() !== '' && !f.id.includes('template') && f.level === 1)
+      .map(f => ({ ...f, _date: f.id.match(/\d{4}-\d{2}-\d{2}/)?.[0] ?? '' }))
+      .sort((a, b) => b._date.localeCompare(a._date))
   },
   { server: false }
 )
@@ -30,6 +33,16 @@ const collections = [
   { key: 'tutorials', label: 'Tutorial', icon: 'i-lucide-graduation-cap' },
   { key: 'spoilers',  label: 'Spoiler',  icon: 'i-lucide-sparkles' },
 ]
+
+// Pre-raggruppa i file per collezione
+const filesByCollection = computed(() => {
+  const map: Record<string, typeof files.value> = {}
+  for (const f of files.value ?? []) {
+    if (!map[f._collection]) map[f._collection] = []
+    map[f._collection]!.push(f)
+  }
+  return map
+})
 
 const groups = computed(() => [
   {
@@ -46,17 +59,11 @@ const groups = computed(() => [
   ...collections.map(({ key, label, icon }) => ({
     id: key,
     label,
-    items: (files.value ?? [])
-      .filter(f => f._collection === key)
-      .sort((a, b) => {
-        const dateA = a.id.match(/\d{4}-\d{2}-\d{2}/)?.[0] ?? ''
-        const dateB = b.id.match(/\d{4}-\d{2}-\d{2}/)?.[0] ?? ''
-        return dateB.localeCompare(dateA)
-      })
+    items: (filesByCollection.value[key] ?? [])
       .slice(0, 5)
       .map(f => ({
         label: f.title,
-        suffix: f.content?.slice(0, 100),
+        suffix: f.content?.trim().replace(/\s+/g, ' ').slice(0, 100),
         to: f.id,
         icon,
       }))
