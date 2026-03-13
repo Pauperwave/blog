@@ -115,7 +115,7 @@ const groups = computed(() => [
 ])
 
 const fuseOptions = {
-  resultLimit: 20,
+  resultLimit: 25,
   fuseOptions: {
     threshold: 0.3,
     keys: ['label', 'suffix'],
