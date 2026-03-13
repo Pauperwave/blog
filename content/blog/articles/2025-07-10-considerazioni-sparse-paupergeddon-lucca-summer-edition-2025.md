@@ -78,9 +78,9 @@ Per quanto mi riguarda preferisco un Pauper giungla pieno di sorprese nel legger
 
 Sembra un paradosso da dirsi: è godibile giocare Pauper in maniera competitiva, a patto che il meta non sia competitivo.
 
-# Organizzazione
+## Organizzazione
 
-## Location
+### Location
 
 Il Polo Fiere di Lucca si è rivelata una location adeguata all' alto numero di partecipanti, non si stava stipati come sardine ai tavoli e ci si poteva muovere liberamente con l'area artisti disposta in modo logisticamente impeccabile.
 
@@ -92,7 +92,7 @@ Mi sono sempre ritenuto una cartina di tornasole per quanto riguarda la temperat
 
 Per questo, per una volta, non mi accodo alle polemiche sul troppo caldo durante l'evento: nel caso aveste pretese di una temperatura da clima in casa durante il Geddon in un Polo Fiere con oltre 1.500 persone al suo interno, l'opzione restare a casa a godersi lo streaming nella più chill delle temperature, resta la più realistica.
 
-## Logistica
+### Logistica
 
 L'altra polemica logistica riguardava la ristorazione all'evento: c'erano un bar all'interno del Polo ed uno esterno, per i critici troppo pochi per far fronte alla mole di gente presente e con code vertiginose per la colazione.
 
@@ -109,7 +109,7 @@ Nonostante possa piangere il cuore rinunciare alla vecchie tradizioni e ai cari 
 
 Nel caso specifico, l'organizzatore titanico in questione è Boose: senza slavare il ragionamento con frasi amichevoli e di facciata sentite e risentite sull'uomo, si può dire che come primo Geddon a Lucca sia stata eseguita un'impresa con un'organizzazione non solo pulita ma ricca, ricca di artisti, premi e chicche; qualcosa che va oltre l'esecuzione scolastica di un compito, qualcosa che fa sentire che "importa dei giocatori e della loro esperienza".
 
-## Grandi polemiche finali
+### Grandi polemiche finali
 
 Vorrei chiudere con una polemica personale, quella sui numeri del Pauper.
 Sento sempre più spesso durante le ultime edizioni porre l'accento e citare ad ogni occasione buona, i numeri in crescita dell'ultimo Geddon e del formato in generale.
