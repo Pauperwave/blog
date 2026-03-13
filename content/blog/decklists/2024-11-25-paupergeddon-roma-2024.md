@@ -22,6 +22,7 @@ published: true
 name: Jund
 player: Alessandro Piraccini
 placement: Winner
+headerGradient: jund
 ---
 Creatures
 1 Troublemaker Ouphe
@@ -68,6 +69,7 @@ Sideboard
 name: Jund Glee
 player: Franco Cicchini
 placement: Finalist
+headerGradient: jund
 ---
 Creatures
 4 Basking Broodscale
@@ -112,6 +114,7 @@ Sideboard
 name: Dredge
 player: Andrea Uccello
 placement: Top 4
+headerGradient: golgari
 ---
 Creatures
 4 Rubblebelt Maverick
@@ -152,6 +155,7 @@ Sideboard
 name: U Faeries
 player: Filip Skornicki
 placement: Top 4
+headerGradient: monoblue
 ---
 Creatures
 4 Faerie Seer
@@ -187,6 +191,7 @@ Sideboard
 name: Jund Glee
 player: Lorenzo Bergamini
 placement: Top 8
+headerGradient: jund
 ---
 Creatures
 2 Krark-Clan Shaman
@@ -236,6 +241,7 @@ Sideboard
 name: Jund
 player: Matteo Cirigliano
 placement: Top 8
+headerGradient: jund
 ---
 Creatures
 3 Krark-Clan Shaman
@@ -285,6 +291,7 @@ Sideboard
 name: U Terror
 player: Giacomo Lancini
 placement: Top 8
+headerGradient: monoblue
 ---
 Creatures
 4 Delver of Secrets 
@@ -326,6 +333,7 @@ Sideboard
 name: BG Glee
 player: Lorenzo Aldegheri
 placement: Top 8
+headerGradient: golgari
 ---
 Creatures
 4 Shambling Ghast

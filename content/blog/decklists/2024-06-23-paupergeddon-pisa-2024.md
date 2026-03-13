@@ -23,6 +23,7 @@ published: true
 name: Rakdos Madness
 player: Filippo Pezza
 placement: Winner
+headerGradient: rakdos
 ---
 Creatures
 4 Voldaren Epicure
@@ -62,6 +63,7 @@ Sideboard
 name: RG Ponza
 player: Giorgio Venditti
 placement: Finalist
+headerGradient: gruul
 ---
 Creatures
 4 Arbor Elf
@@ -101,6 +103,7 @@ Sideboard
 name: Affinity
 player: Franco Cicchini
 placement: Top 4
+headerGradient: jund
 ---
 Creatures
 4 Myr Enforcer
@@ -149,6 +152,7 @@ Sideboard
 name: Goblin Combo
 player: Lorenzo Aldegheri
 placement: Top 4
+headerGradient: rakdos
 ---
 Creatures
 4 Skirk Prospector
@@ -245,6 +249,7 @@ Sideboard
 name: Rakdos Madness
 player: Andrea Imborgia
 placement: Top 8
+headerGradient: rakdos
 ---
 Creatures
 4 Voldaren Epicure
