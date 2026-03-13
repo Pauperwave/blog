@@ -1,4 +1,7 @@
 <script setup lang="ts">
+
+const nuxtApp = useNuxtApp()
+
 const { data: files } = useLazyAsyncData(
   'search',
   async () => {
@@ -17,12 +20,20 @@ const { data: files } = useLazyAsyncData(
       ...spoilers.map(f => ({ ...f, _collection: 'spoilers' })),
     ]
       .filter(f => f.title?.trim() !== '' && !f.id.includes('template') && f.level === 1)
-      .map(f => ({ ...f, _date: f.id.match(/\d{4}-\d{2}-\d{2}/)?.[0] ?? '' }))
+      .map(f => ({
+        id: f.id,
+        title: f.title,
+        _collection: f._collection,
+        _date: f.id.match(/\d{4}-\d{2}-\d{2}/)?.[0] ?? '',
+        _summary: f.content?.trim().replace(/\s+/g, ' ').slice(0, 100) ?? '',
+      }))
       .sort((a, b) => b._date.localeCompare(a._date))
   },
-  { server: false }
+  {
+    server: false,
+    getCachedData: key => nuxtApp.payload.data[key] ?? nuxtApp.static.data[key],
+  }
 )
-
 
 const searchTerm = ref('')
 
@@ -44,18 +55,20 @@ const filesByCollection = computed(() => {
   return map
 })
 
+const LINKS_GROUP = {
+  id: 'collegamenti',
+  label: 'Collegamenti',
+  items: [
+    { label: 'Decklist',  icon: 'i-lucide-layers', to: '/articles?category=decklist' },
+    { label: 'Articoli',  icon: 'i-lucide-newspaper', to: '/articles?category=article' },
+    { label: 'Report',    icon: 'i-lucide-chart-bar', to: '/articles?category=report' },
+    { label: 'Tutorial',  icon: 'i-lucide-graduation-cap', to: '/articles?category=tutorial' },
+    { label: 'Spoiler',   icon: 'i-lucide-sparkles', to: '/articles?category=spoiler' },
+  ]
+}
+
 const groups = computed(() => [
-  {
-    id: 'collegamenti',
-    label: 'Collegamenti',
-    items: [
-      { label: 'Decklist',  icon: 'i-lucide-layers', to: '/articles?category=decklist' },
-      { label: 'Articoli',  icon: 'i-lucide-newspaper', to: '/articles?category=article' },
-      { label: 'Report',    icon: 'i-lucide-chart-bar', to: '/articles?category=report' },
-      { label: 'Tutorial',  icon: 'i-lucide-graduation-cap', to: '/articles?category=tutorial' },
-      { label: 'Spoiler',   icon: 'i-lucide-sparkles', to: '/articles?category=spoiler' },
-    ]
-  },
+  LINKS_GROUP,
   ...collections.map(({ key, label, icon }) => ({
     id: key,
     label,
@@ -63,12 +76,21 @@ const groups = computed(() => [
       .slice(0, 5)
       .map(f => ({
         label: f.title,
-        suffix: f.content?.trim().replace(/\s+/g, ' ').slice(0, 100),
+        suffix: f._summary,
         to: f.id,
         icon,
       }))
   }))
 ])
+
+const fuseOptions = {
+  resultLimit: 25,
+    fuseOptions: {
+    threshold: 0.3,
+    keys: ['label', 'suffix']
+  }
+}
+
 </script>
 
 <template>
@@ -79,13 +101,7 @@ const groups = computed(() => [
       placeholder="Cerca articoli, guide, decklist..."
       :groups="groups"
       :color-mode="false"
-      :fuse="{
-        resultLimit: 25,
-        fuseOptions: {
-          threshold: 0.3,
-          keys: ['label', 'suffix']
-        }
-      }"
+      :fuse="fuseOptions"
     >
       <template #empty>
         Nessun risultato trovato
