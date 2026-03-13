@@ -50,7 +50,6 @@ const formattedDate = useState(`article-date-${route.path}`, () => {
 //     return useState(key, () => formatDateIT(article.date)).value;
 // };
 
-// TODO: Related articles currently show top 3 by tag intersection and publication date
 const MAX_RELATED_ARTICLES = 3
 const relatedArticlesString = "Altri articoli correlati"
 
@@ -221,12 +220,6 @@ function updateMeta() {
     },
   })
 }
-
-// onMounted(() => {
-//   const contentEl = document.getElementById("content");
-//   authorEl.value = contentEl?.querySelector("#author-about");
-//   relatedArticlesEl.value = document.documentElement?.querySelector("#related-articles") as HTMLElement | undefined;
-// });
 </script>
 
 <template>
@@ -360,6 +353,8 @@ function updateMeta() {
 
 /* Apply the variant to all elements in this component */
 * {
+  scroll-margin-top: calc(var(--ui-header-height) + 1rem);
+
   @variant max-lg {
     scroll-margin-top: calc(var(--ui-header-height) + 4rem) !important;
   }
