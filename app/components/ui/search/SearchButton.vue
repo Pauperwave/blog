@@ -11,6 +11,5 @@ defineProps<{
     label="Cerca..."
     placeholder="Cerca nel blog..."
     color="neutral"
-    class="w-xs"
   />
 </template>
