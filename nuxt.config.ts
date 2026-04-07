@@ -72,6 +72,7 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "magic-regexp/nuxt",
     "nuxt-swiper",
+    "@vercel/analytics",
     "./modules/card-tooltip-transformer",
     "./modules/decklist-transformer",
     "./modules/sideboard-guide-transformer"
