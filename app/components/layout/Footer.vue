@@ -114,14 +114,6 @@ const footerSocialLinks = [
           >
             Associati ora
           </NuxtLink>
-          <NuxtLink
-            to="/docs/componenti"
-            color="neutral"
-            variant="link"
-            class="underline"
-          >
-            Componenti di scrittura
-          </NuxtLink>
         </div>
       </div>
     </template>
