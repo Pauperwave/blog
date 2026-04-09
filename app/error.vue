@@ -7,7 +7,6 @@ useSeoMeta({
 })
 </script>
 
-
 <template>
   <UApp>
     <UHeader mode="slideover">
