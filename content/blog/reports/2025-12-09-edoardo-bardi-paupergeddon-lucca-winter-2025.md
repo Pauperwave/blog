@@ -40,6 +40,7 @@ name: Caw Gates
 player: Edoardo Bardi
 description: A deck leveraging the synergy between Caw-Blade and Basilisk Gate to control the board and generate value.
 placement: Top 8 Paupergeddon Lucca Winter 2025
+headerGradient: jeskai
 ---
 Creatures
 4 Sacred Cat
