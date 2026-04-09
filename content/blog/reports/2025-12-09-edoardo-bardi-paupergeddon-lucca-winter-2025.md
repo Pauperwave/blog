@@ -4,6 +4,7 @@ description: ""
 tags:
   - Paupergeddon
   - Top 8
+  - Caw Gates
 location: Lucca
 date: 2025-12-06
 author: Pietro Bragioto
