@@ -381,38 +381,56 @@ card: Repel Calamity
 
 ::magic-decklist
 ---
-name: Elves
-player: Lahiri Cristofori
-placement: Winner
+name: textClasses.heading
+player: textClasses.subheading
+placement: textClasses.placement
+headerGradient: monowhite
 ---
-Creatures
-4 Arbor Elf
-4 Elvish Mystic
-4 Quirion Ranger
-4 Masked Vandal
-4 Priest of Titania
-4 Timberwatch Elf
-4 Avenging Hunter
-3 Sagu Wildling
-4 Generous Ent
-4 Nyxborn Hydra
+::
 
-Sorceries
-4 Land Grant
-4 Winding Way
-4 Lead the Stampede
+::magic-decklist
+---
+name: textClasses.heading
+player: textClasses.subheading
+placement: textClasses.placement
+headerGradient: monoblue
+---
+::
 
-Lands
-1 Gingerbread Cabin
-8 Forest
+::magic-decklist
+---
+name: textClasses.heading
+player: textClasses.subheading
+placement: textClasses.placement
+headerGradient: monoblack
+---
+::
 
-Sideboard
-4 Spinewoods Paladin
-3 Faerie Macabre
-3 Hydroblast
-3 Monstrous Emergence
-1 Island
-1 Tangled Islet
+::magic-decklist
+---
+name: textClasses.heading
+player: textClasses.subheading
+placement: textClasses.placement
+headerGradient: monored
+---
+::
+
+::magic-decklist
+---
+name: textClasses.heading
+player: textClasses.subheading
+placement: textClasses.placement
+headerGradient: monogreen
+---
+::
+
+::magic-decklist
+---
+name: textClasses.heading
+player: textClasses.subheading
+placement: textClasses.placement
+headerGradient: colorless
+---
 ::
 
 TODO aggiungere spazio dopo e/o prima della card
@@ -423,7 +441,7 @@ TODO aggiungere spazio dopo e/o prima della card
 
 ---
 
-:magic-card-tooltip{name="Wildling"}
+:magic-card-tooltip{name="Sagu Wildling"}
 
 ---
 
