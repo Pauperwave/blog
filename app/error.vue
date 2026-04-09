@@ -6,7 +6,7 @@ const props = defineProps<{
 }>()
 
 useSeoMeta({
-  title: `${props.error.status} - ${props.error.statusText}`,
+  title: `${props.error}`,
   description: props.error.statusText,
 })
 </script>
