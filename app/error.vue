@@ -1,9 +1,13 @@
 <script setup lang="ts">
-const error = useError()
+import type { NuxtError } from '#app'
+
+const props = defineProps<{
+  error: NuxtError
+}>()
 
 useSeoMeta({
-  title: `${error.value?.status} - ${error.value?.statusText}`,
-  description: error.value?.statusText,
+  title: `${props.error.status} - ${props.error.statusText}`,
+  description: props.error.statusText,
 })
 </script>
 
@@ -17,7 +21,17 @@ useSeoMeta({
     </UHeader>
     <UMain class="px-4">
       <UContainer>
-        <UError :error>
+        <UError :clear="{
+          size: 'xl',
+          color: 'primary',
+          icon: 'i-lucide-arrow-left',
+          class: 'rounded-full',
+          label: 'Torna al sicuro'
+        }" :error="{
+            ...error,
+            statusMessage: 'Ti senti perso?',
+            message: 'Fblthp ha sempre odiato la folla.'
+          }">
           <img src="~/assets/404/Fblthp-the-Lost-War-of-the-Spark-Art.jpg" alt="Fblthp the Lost"
             class="mx-auto mb-6 rounded-xl" />
         </UError>
