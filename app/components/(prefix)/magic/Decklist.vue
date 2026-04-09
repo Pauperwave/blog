@@ -68,19 +68,36 @@ const headerClass = computed(() => {
   return result
 })
 
-const LIGHT_GRADIENTS = new Set(['monowhite', 'azorius', 'orzhov', 'esper', 'mardu', 'abzan'])
+const LIGHT_GRADIENTS_HEADING = new Set([
+  // monocolor
+  'monowhite', 'monogreen',
+  // bi-color
+  'azorius', 'orzhov',
+  // tri-color
+  'esper', 'mardu', 'abzan'
+])
+
+const LIGHT_GRADIENTS_PLACEMENT = new Set([
+  // monocolor
+  'monowhite', 'monogreen',
+  // bi-color
+  'gruul', 'golgari',  
+  // tri-color
+  'jund', 'naya', 'temur', 'abzan',
+])
 
 const normalizedGradient = computed(() => (props.headerGradient || '').trim().toLowerCase())
 
 const isLightGradient = computed(() => 
-  LIGHT_GRADIENTS.has(normalizedGradient.value)
+  LIGHT_GRADIENTS_HEADING.has(normalizedGradient.value) ||
+  LIGHT_GRADIENTS_PLACEMENT.has(normalizedGradient.value)
 )
 
 const textClasses = computed(() => ({
-  heading: isLightGradient.value ? 'text-gray-900 dark:text-gray-900' : 'text-gray-900 dark:text-gray-100',
-  subheading: isLightGradient.value ? 'text-gray-700 dark:text-gray-700' : 'text-gray-700 dark:text-gray-300'
+  heading: isLightGradient.value ? 'text-gray-900 dark:text-gray-100' : 'text-gray-900 dark:text-gray-100',
+  subheading: isLightGradient.value ? 'text-gray-700 dark:text-gray-700' : 'text-gray-700 dark:text-gray-300',
+  placement: isLightGradient.value ? 'text-gray-900 dark:text-gray-900' : 'text-gray-900 dark:text-gray-100'
 }))
-
 
 // Parse data from transformer
 const cardsBySection = computed(() => {
@@ -184,7 +201,8 @@ async function copyDecklist() {
             </div>
             <div
               v-if="placement"
-              class="text-right text-base font-semibold text-gray-900 dark:text-gray-100"
+              class="text-right text-base font-semibold"
+              :class="textClasses.placement"
             >
               {{ placement }}
             </div>
