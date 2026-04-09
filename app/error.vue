@@ -5,8 +5,9 @@ const props = defineProps<{
   error: NuxtError
 }>()
 
+// title: 404 Not Found
 useSeoMeta({
-  title: `${props.error}`,
+  title: `${props.error.status} ${props.error.statusText}`,
   description: props.error.statusText,
 })
 </script>
@@ -41,7 +42,7 @@ useSeoMeta({
           }"
         >
           <img
-            src="~/assets/404/Fblthp-the-Lost-War-of-the-Spark-Art.jpg"
+            src="/assets/404/Fblthp-the-Lost-War-of-the-Spark-Art.jpg"
             alt="Fblthp the Lost"
             class="mx-auto mb-6 rounded-xl"
           />
