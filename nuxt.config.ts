@@ -101,7 +101,7 @@ export default defineNuxtConfig({
     preset: 'vercel',
     prerender: {
       // Pre-render the homepage
-      routes: ['/'],
+      routes: ['/', '/docs/componenti'],
       // Then crawl all the links on the page
       crawlLinks: true
     },
