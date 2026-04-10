@@ -251,6 +251,12 @@ Ci sono due varianti di questo componente:
 
 Il componente `magic-card-tooltip` viene riutilizzato all'interno del componente `magic-decklist` e del componente `magic-sideboard-guide` come potrai notare più avanti.
 
+### Alcuni casi limite con double faced cards e adventure cards
+
+:magic-card-tooltip{name="Delver of Secrets"}
+:magic-card-tooltip{name="The Modern Age"}
+:magic-card-tooltip{name="Sagu Wildling"}
+
 ## `magic-card-display`
 
 ```md
@@ -377,7 +383,71 @@ card: Repel Calamity
 ---
 ::
 
+## `magic-sideboard-guide`
+
+::warning
+Non disponible in `decklists` e in `spoilers`.
+::
+
+```md
+::magic-sideboard-guide
+---
+description: Descrizione breve delle scelte di side
+matchup: Mono Red Rally
+---
+#in
+3 Cast into the Fire
+#out
+3 Thermo-Alchemist
+#out-alt
+1 Thermo-Alchemist
+2 Great Furnace
+::
+```
+
 ## `magic-decklist`
+
+```md
+::magic-decklist
+---
+name: Elves
+player: Lahiri Cristofori
+placement: Winner
+---
+Creatures
+4 Delver of Secrets
+4 Elvish Mystic
+4 Sagu Wildling
+4 The Modern Age
+4 Masked Vandal
+4 Priest of Titania
+4 Timberwatch Elf
+4 Avenging Hunter
+3 Sagu Wildling
+4 Generous Ent
+
+Sorceries
+4 Land Grant
+4 Winding Way
+4 Lead the Stampede
+
+Lands
+1 Gingerbread Cabin
+8 Forest
+
+Sideboard
+4 Spinewoods Paladin
+3 Faerie Macabre
+3 Hydroblast
+3 Monstrous Emergence
+1 Island
+1 Tangled Islet
+::
+```
+
+### Esempi di Gradienti per Magic Decklist
+
+#### Mono Color
 
 ::magic-decklist
 ---
@@ -433,78 +503,186 @@ headerGradient: colorless
 ---
 ::
 
-TODO aggiungere spazio dopo e/o prima della card
+#### Two-Color Combinations
 
----
-
-:magic-card-tooltip{name="Delver of Secrets"}
-
----
-
-:magic-card-tooltip{name="Sagu Wildling"}
-
----
-
-:magic-card-tooltip{name="The Modern Age"}
-
----
-
-```md
 ::magic-decklist
 ---
-name: Elves
-player: Lahiri Cristofori
-placement: Winner
+name: textClasses.heading
+player: textClasses.subheading
+placement: textClasses.placement
+headerGradient: gruul
 ---
-Creatures
-4 Delver of Secrets
-4 Elvish Mystic
-4 Sagu Wildling
-4 The Modern Age
-4 Masked Vandal
-4 Priest of Titania
-4 Timberwatch Elf
-4 Avenging Hunter
-3 Sagu Wildling
-4 Generous Ent
-
-Sorceries
-4 Land Grant
-4 Winding Way
-4 Lead the Stampede
-
-Lands
-1 Gingerbread Cabin
-8 Forest
-
-Sideboard
-4 Spinewoods Paladin
-3 Faerie Macabre
-3 Hydroblast
-3 Monstrous Emergence
-1 Island
-1 Tangled Islet
-::
-```
-
-## `magic-sideboard-guide`
-
-::warning
-Non disponible in `decklists` e in `spoilers`.
 ::
 
-```md
-::magic-sideboard-guide
+::magic-decklist
 ---
-description: Descrizione breve delle scelte di side
-matchup: Mono Red Rally
+name: textClasses.heading
+player: textClasses.subheading
+placement: textClasses.placement
+headerGradient: azorius
 ---
-#in
-3 Cast into the Fire
-#out
-3 Thermo-Alchemist
-#out-alt
-1 Thermo-Alchemist
-2 Great Furnace
 ::
-```
+
+::magic-decklist
+---
+name: textClasses.heading
+player: textClasses.subheading
+placement: textClasses.placement
+headerGradient: dimir
+---
+::
+
+::magic-decklist
+---
+name: textClasses.heading
+player: textClasses.subheading
+placement: textClasses.placement
+headerGradient: boros
+---
+::
+
+::magic-decklist
+---
+name: textClasses.heading
+player: textClasses.subheading
+placement: textClasses.placement
+headerGradient: golgari
+---
+::
+
+::magic-decklist
+---
+name: textClasses.heading
+player: textClasses.subheading
+placement: textClasses.placement
+headerGradient: izzet
+---
+::
+
+::magic-decklist
+---
+name: textClasses.heading
+player: textClasses.subheading
+placement: textClasses.placement
+headerGradient: orzhov
+---
+::
+
+::magic-decklist
+---
+name: textClasses.heading
+player: textClasses.subheading
+placement: textClasses.placement
+headerGradient: rakdos
+---
+::
+
+::magic-decklist
+---
+name: textClasses.heading
+player: textClasses.subheading
+placement: textClasses.placement
+headerGradient: selesnya
+---
+::
+
+::magic-decklist
+---
+name: textClasses.heading
+player: textClasses.subheading
+placement: textClasses.placement
+headerGradient: simic
+---
+::
+
+#### Three-Color Combinations
+
+::magic-decklist
+---
+name: textClasses.heading
+player: textClasses.subheading
+placement: textClasses.placement
+headerGradient: esper
+---
+::
+
+::magic-decklist
+---
+name: textClasses.heading
+player: textClasses.subheading
+placement: textClasses.placement
+headerGradient: grixis
+---
+::
+
+::magic-decklist
+---
+name: textClasses.heading
+player: textClasses.subheading
+placement: textClasses.placement
+headerGradient: jund
+---
+::
+
+::magic-decklist
+---
+name: textClasses.heading
+player: textClasses.subheading
+placement: textClasses.placement
+headerGradient: naya
+---
+::
+
+::magic-decklist
+---
+name: textClasses.heading
+player: textClasses.subheading
+placement: textClasses.placement
+headerGradient: bant
+---
+::
+
+::magic-decklist
+---
+name: textClasses.heading
+player: textClasses.subheading
+placement: textClasses.placement
+headerGradient: mardu
+---
+::
+
+::magic-decklist
+---
+name: textClasses.heading
+player: textClasses.subheading
+placement: textClasses.placement
+headerGradient: temur
+---
+::
+
+::magic-decklist
+---
+name: textClasses.heading
+player: textClasses.subheading
+placement: textClasses.placement
+headerGradient: sultai
+---
+::
+
+::magic-decklist
+---
+name: textClasses.heading
+player: textClasses.subheading
+placement: textClasses.placement
+headerGradient: jeskai
+---
+::
+
+::magic-decklist
+---
+name: textClasses.heading
+player: textClasses.subheading
+placement: textClasses.placement
+headerGradient: abzan
+---
+::
