@@ -100,9 +100,12 @@ export default defineNuxtConfig({
   experimental: {
     payloadExtraction: false
   },
-  // Also note that your routeRules with '/articles/**': { prerender: true } and the nitro.prerender.crawlLinks are complementary — the route rules mark those patterns as prerenderable, while crawlLinks is what actually discovers the concrete URLs.
+  // Also note that your routeRules with '/articles/**': { prerender: true } and the nitro.prerender.crawlLinks are complementary
+  // the route rules mark those patterns as prerenderable, while crawlLinks is what actually discovers the concrete URLs.
   nitro: {
     preset: 'vercel',
+    // disables sourcemaps for server functions
+    sourceMap: false,
     prerender: {
       // Pre-render the homepage
       routes: ['/', '/docs/componenti'],
