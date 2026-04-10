@@ -27,20 +27,6 @@ export default defineNuxtConfig({
       weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
     },
   },
-  app: {
-    head: {
-      link: [
-        // Preload critical font to reduce render-blocking
-        {
-          rel: 'preload',
-          href: '/_fonts/Geist-Variable.woff2',
-          as: 'font',
-          type: 'font/woff2',
-          crossorigin: 'anonymous'
-        }
-      ]
-    }
-  },
   site: {
     name: appMeta.name,
     url: appMeta.url,
