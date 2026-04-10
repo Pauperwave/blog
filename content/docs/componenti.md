@@ -445,9 +445,13 @@ Sideboard
 ::
 ```
 
-### Esempi di Gradienti per Magic Decklist
+### Esempi di gradienti per `magic-decklist`
 
-#### Mono Color
+#### Mono Color :magic-card-mana-symbol{symbol="w"} / :magic-card-mana-symbol{symbol="u"} / :magic-card-mana-symbol{symbol="b"} / :magic-card-mana-symbol{symbol="r"} / :magic-card-mana-symbol{symbol="g"}
+
+```
+headerGradient: monowhite
+```
 
 ::magic-decklist
 ---
@@ -458,6 +462,10 @@ headerGradient: monowhite
 ---
 ::
 
+```
+headerGradient: monoblue
+```
+
 ::magic-decklist
 ---
 name: textClasses.heading
@@ -466,6 +474,10 @@ placement: textClasses.placement
 headerGradient: monoblue
 ---
 ::
+
+```
+headerGradient: monoblack
+```
 
 ::magic-decklist
 ---
@@ -476,6 +488,10 @@ headerGradient: monoblack
 ---
 ::
 
+```
+headerGradient: monored
+```
+
 ::magic-decklist
 ---
 name: textClasses.heading
@@ -484,6 +500,10 @@ placement: textClasses.placement
 headerGradient: monored
 ---
 ::
+
+```
+headerGradient: monogreen
+```
 
 ::magic-decklist
 ---
@@ -494,6 +514,10 @@ headerGradient: monogreen
 ---
 ::
 
+```
+headerGradient: colorless
+```
+
 ::magic-decklist
 ---
 name: textClasses.heading
@@ -503,7 +527,11 @@ headerGradient: colorless
 ---
 ::
 
-#### Two-Color Combinations
+#### Two-Color Combinations :magic-card-mana-symbol{symbol="rg"} / :magic-card-mana-symbol{symbol="wu"} / :magic-card-mana-symbol{symbol="ub"} / :magic-card-mana-symbol{symbol="rw"} / :magic-card-mana-symbol{symbol="bg"} / :magic-card-mana-symbol{symbol="ur"} / :magic-card-mana-symbol{symbol="wb"} / :magic-card-mana-symbol{symbol="br"} / :magic-card-mana-symbol{symbol="gw"} / :magic-card-mana-symbol{symbol="gu"}
+
+```
+headerGradient: gruul
+```
 
 ::magic-decklist
 ---
@@ -514,6 +542,10 @@ headerGradient: gruul
 ---
 ::
 
+```
+headerGradient: azorius
+```
+
 ::magic-decklist
 ---
 name: textClasses.heading
@@ -522,6 +554,10 @@ placement: textClasses.placement
 headerGradient: azorius
 ---
 ::
+
+```
+headerGradient: dimir
+```
 
 ::magic-decklist
 ---
@@ -532,6 +568,10 @@ headerGradient: dimir
 ---
 ::
 
+```
+headerGradient: boros
+```
+
 ::magic-decklist
 ---
 name: textClasses.heading
@@ -540,6 +580,10 @@ placement: textClasses.placement
 headerGradient: boros
 ---
 ::
+
+```
+headerGradient: golgari
+```
 
 ::magic-decklist
 ---
@@ -550,6 +594,10 @@ headerGradient: golgari
 ---
 ::
 
+```
+headerGradient: izzet
+```
+
 ::magic-decklist
 ---
 name: textClasses.heading
@@ -558,6 +606,10 @@ placement: textClasses.placement
 headerGradient: izzet
 ---
 ::
+
+```
+headerGradient: orzhov
+```
 
 ::magic-decklist
 ---
@@ -568,6 +620,10 @@ headerGradient: orzhov
 ---
 ::
 
+```
+headerGradient: rakdos
+```
+
 ::magic-decklist
 ---
 name: textClasses.heading
@@ -576,6 +632,10 @@ placement: textClasses.placement
 headerGradient: rakdos
 ---
 ::
+
+```
+headerGradient: selesnya
+```
 
 ::magic-decklist
 ---
@@ -586,6 +646,10 @@ headerGradient: selesnya
 ---
 ::
 
+```
+headerGradient: simic
+```
+
 ::magic-decklist
 ---
 name: textClasses.heading
@@ -595,7 +659,11 @@ headerGradient: simic
 ---
 ::
 
-#### Three-Color Combinations
+#### Three-Color Combinations :magic-card-mana-symbol{symbol="wub"} / :magic-card-mana-symbol{symbol="ubr"} / :magic-card-mana-symbol{symbol="brg"} / :magic-card-mana-symbol{symbol="rgw"} / :magic-card-mana-symbol{symbol="gwu"} / :magic-card-mana-symbol{symbol="wbr"} / :magic-card-mana-symbol{symbol="urg"} / :magic-card-mana-symbol{symbol="bgu"} / :magic-card-mana-symbol{symbol="rwu"} / :magic-card-mana-symbol{symbol="wbg"}
+
+```
+headerGradient: esper
+```
 
 ::magic-decklist
 ---
@@ -606,6 +674,10 @@ headerGradient: esper
 ---
 ::
 
+```
+headerGradient: grixis
+```
+
 ::magic-decklist
 ---
 name: textClasses.heading
@@ -614,6 +686,10 @@ placement: textClasses.placement
 headerGradient: grixis
 ---
 ::
+
+```
+headerGradient: jund
+```
 
 ::magic-decklist
 ---
@@ -624,6 +700,10 @@ headerGradient: jund
 ---
 ::
 
+```
+headerGradient: naya
+```
+
 ::magic-decklist
 ---
 name: textClasses.heading
@@ -632,6 +712,10 @@ placement: textClasses.placement
 headerGradient: naya
 ---
 ::
+
+```
+headerGradient: bant
+```
 
 ::magic-decklist
 ---
@@ -642,6 +726,10 @@ headerGradient: bant
 ---
 ::
 
+```
+headerGradient: mardu
+```
+
 ::magic-decklist
 ---
 name: textClasses.heading
@@ -650,6 +738,10 @@ placement: textClasses.placement
 headerGradient: mardu
 ---
 ::
+
+```
+headerGradient: temur
+```
 
 ::magic-decklist
 ---
@@ -660,6 +752,10 @@ headerGradient: temur
 ---
 ::
 
+```
+headerGradient: sultai
+```
+
 ::magic-decklist
 ---
 name: textClasses.heading
@@ -669,6 +765,10 @@ headerGradient: sultai
 ---
 ::
 
+```
+headerGradient: jeskai
+```
+
 ::magic-decklist
 ---
 name: textClasses.heading
@@ -677,6 +777,10 @@ placement: textClasses.placement
 headerGradient: jeskai
 ---
 ::
+
+```
+headerGradient: abzan
+```
 
 ::magic-decklist
 ---
