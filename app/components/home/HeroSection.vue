@@ -247,9 +247,9 @@ const getThumbnailSrc = (thumbnail: unknown) => {
                         League
                       </UBadge>
                     </div>
-                    <h3 class="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-primary transition-colors line-clamp-2 leading-snug">
+                    <h2 class="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-primary transition-colors line-clamp-2 leading-snug">
                       {{ article.title }}
-                    </h3>
+                    </h2>
                     <p class="mt-1 text-xs md:text-sm text-gray-600 dark:text-gray-400 line-clamp-2 leading-snug">
                       {{ article.description }}
                     </p>
