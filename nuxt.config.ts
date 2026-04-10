@@ -127,8 +127,8 @@ export default defineNuxtConfig({
     clientBundle: {
       scan: true,
     },
-    // Allow fetching icons from Iconify API when not found in local bundles
-    fallbackToApi: true,
+    // Avoid external Iconify fetches during prerender/build.
+    fallbackToApi: false,
     aliases: {
       // Nuxt UI prose code blocks default to vscode-icons for file extensions.
       // We don't ship that collection locally, so map the JS file icon to an installed icon.
