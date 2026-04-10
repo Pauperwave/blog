@@ -156,7 +156,7 @@ async function copyDecklist() {
   <div :id="anchorId">
     <UCard
       ref="decklistCard"
-      class="max-w-[900px] mx-auto mb-6"
+      class="max-w-4xl mx-auto mb-6"
       :ui="{
         root: 'overflow-hidden',
         header: ['relative p-4', headerClass].filter(Boolean).join(' '),
@@ -182,7 +182,7 @@ async function copyDecklist() {
               </div>
               <p
                 v-if="player"
-                class="text-base leading-tight m-0"
+                class="text-base font-semibold leading-tight m-0"
                 :class="textClasses.subheading"
               >
                 {{ player }}
@@ -205,19 +205,19 @@ async function copyDecklist() {
           <!-- Main Deck (Left) -->
           <div>
             <div v-for="section in mainDeckSections" :key="section" class="mb-2">
-              <h2 class="mt-[0.6rem] first:mt-0 mb-[0.15rem] text-[1.05rem] font-bold inline-flex items-center gap-[0.35rem]">
+              <h2 class="mt-2.5 first:mt-0 mb-0.5 text-base font-bold inline-flex items-center gap-1.5">
                 <MagicCardTypesIcon :type="section" size="md" class="inline-flex" />
                 {{ section }} <span class="font-medium opacity-80">({{ counts[section] }})</span>
               </h2>
-              <ul class="list-none p-0 mt-[0.15rem] mb-[0.35rem]">
+              <ul class="list-none p-0 mt-0.5 mb-1.5">
                 <li
                   v-for="(card, index) in cardsBySection[section]"
                   :key="`${section}-${index}`"
-                  class="grid grid-cols-[auto_1fr_auto] items-center gap-2 m-0 p-0 leading-[1.4] text-[0.95rem] font-medium"
+                  class="grid grid-cols-[auto_1fr_auto] items-center gap-2 m-0 p-0 leading-snug text-base font-medium"
                 >
                   <span class="font-mono font-semibold">{{ card.quantity }}</span>
                   <MagicCardTooltip :name="card.name" :image="card.imageUrl" />
-                  <MagicCardManaCost v-if="card.manaCost" :cost="card.manaCost" class="min-w-[60px] justify-start" />
+                  <MagicCardManaCost v-if="card.manaCost" :cost="card.manaCost" class="min-w-16 justify-start" />
                 </li>
               </ul>
             </div>
@@ -226,19 +226,19 @@ async function copyDecklist() {
           <!-- Sideboard (Right) -->
           <div v-if="hasSideboard">
             <div class="mb-2">
-              <h2 class="mt-[0.6rem] first:mt-0 mb-[0.15rem] text-[1.05rem] font-bold inline-flex items-center gap-[0.35rem]">
+              <h2 class="mt-2.5 first:mt-0 mb-0.5 text-base font-bold inline-flex items-center gap-1.5">
                 <MagicCardTypesIcon type="Sideboard" size="md" class="inline-flex" />
                 Sideboard <span class="font-medium opacity-80">({{ counts['Sideboard'] }})</span>
               </h2>
-              <ul class="list-none p-0 mt-[0.15rem] mb-[0.35rem]">
+              <ul class="list-none p-0 mt-0.5 mb-1.5">
                 <li
                   v-for="(card, index) in cardsBySection['Sideboard']"
                   :key="`sideboard-${index}`"
-                  class="grid grid-cols-[auto_1fr_auto] items-center gap-2 m-0 p-0 leading-[1.4] text-[0.95rem] font-medium"
+                  class="grid grid-cols-[auto_1fr_auto] items-center gap-2 m-0 p-0 leading-snug text-base font-medium"
                 >
                   <span class="font-mono font-semibold">{{ card.quantity }}</span>
                   <MagicCardTooltip :name="card.name" :image="card.imageUrl" />
-                  <MagicCardManaCost v-if="card.manaCost" :cost="card.manaCost" class="min-w-[60px] justify-start" />
+                  <MagicCardManaCost v-if="card.manaCost" :cost="card.manaCost" class="min-w-16 justify-start" />
                 </li>
               </ul>
             </div>
