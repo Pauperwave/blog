@@ -80,13 +80,13 @@ const footerSocialLinks = [
         <!--  -->
         <!-- Legal Links Section -->
         <div
-          class="flex flex-col text-sm items-center md:items-end justify-center md:justify-start text-center md:text-right"
+          class="flex flex-col text-sm items-center md:items-end justify-center md:justify-start text-center md:text-right gap-1"
         >
           <NuxtLink
             to="/docs/codice-di-condotta"
             color="neutral"
             variant="link"
-            class="underline"
+            class="underline py-1.5 px-2 min-h-[44px] flex items-center"
           >
             Codice di Condotta
           </NuxtLink>
@@ -94,7 +94,7 @@ const footerSocialLinks = [
             to="/docs/statuto"
             color="neutral"
             variant="link"
-            class="underline"
+            class="underline py-1.5 px-2 min-h-[44px] flex items-center"
           >
             Statuto dell'Associazione
           </NuxtLink>
@@ -102,7 +102,7 @@ const footerSocialLinks = [
             to="https://pauperwave.org"
             color="neutral"
             variant="link"
-            class="underline"
+            class="underline py-1.5 px-2 min-h-[44px] flex items-center"
           >
             Chi siamo
           </NuxtLink>
@@ -110,7 +110,7 @@ const footerSocialLinks = [
             to="https://tinyurl.com/adesione-pauperwave"
             color="neutral"
             variant="link"
-            class="underline"
+            class="underline py-1.5 px-2 min-h-[44px] flex items-center"
           >
             Associati ora
           </NuxtLink>
@@ -125,11 +125,11 @@ const footerSocialLinks = [
           <!-- Opzione 3: max-w-2xl (~672px) -->
           <div>
             <p class="text-xs text-center max-w-2xl mx-auto">
-              Pauperwave non costituisce testata giornalistica e non ha carattere periodico essendo aggiornato secondo disponibilità degli autori. Pertanto non può essere considerato in alcun modo un prodotto editoriale ai sensi della <ULink to="https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2001-03-07;62" target="_blank">L. n. 62 del 7/3/2001</ULink>.
+              Pauperwave non costituisce testata giornalistica e non ha carattere periodico essendo aggiornato secondo disponibilità degli autori. Pertanto non può essere considerato in alcun modo un prodotto editoriale ai sensi della <ULink to="https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2001-03-07;62" target="_blank" class="underline">L. n. 62 del 7/3/2001</ULink>.
 
-              Il copyright di tutte le carte presentate su questo sito appartiene alla <ULink to="https://company.wizards.com/" target="_blank">Wizards of the Coast</ULink>.
+              Il copyright di tutte le carte presentate su questo sito appartiene alla <ULink to="https://company.wizards.com/" target="_blank" class="underline">Wizards of the Coast</ULink>.
 
-              Le immagini delle carte sono recuperate da <ULink to="https://scryfall.com" target="_blank">Scryfall</ULink>. Questo sito non è prodotto, affiliato o supportato dalla <ULink to="https://company.wizards.com/" target="_blank">Wizards of the Coast</ULink>.
+              Le immagini delle carte sono recuperate da <ULink to="https://scryfall.com" target="_blank" class="underline">Scryfall</ULink>. Questo sito non è prodotto, affiliato o supportato dalla <ULink to="https://company.wizards.com/" target="_blank" class="underline">Wizards of the Coast</ULink>.
             </p>
           </div>
         </div>
