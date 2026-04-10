@@ -59,11 +59,13 @@ const parsedImages = computed<ImageItem[]>(() => {
             :key="idx"
           >
             <div class="flex justify-center items-center py-4 h-full">
-              <img
+              <NuxtImg
                 :src="image.src"
                 :alt="image.alt"
                 class="rounded-lg shadow-lg max-h-150 w-auto object-contain"
-              >
+                loading="lazy"
+                placeholder
+              />
             </div>
           </SwiperSlide>
         </Swiper>
@@ -77,11 +79,12 @@ const parsedImages = computed<ImageItem[]>(() => {
         >
           <div class="relative rounded-lg min-h-100 bg-gray-100 dark:bg-gray-800">
             <div class="flex justify-center items-center py-4 h-full">
-              <img
+              <NuxtImg
                 :src="parsedImages[0]!.src"
                 :alt="parsedImages[0]!.alt"
                 class="rounded-lg shadow-lg max-h-150 w-auto object-contain"
-              >
+                preload
+              />
             </div>
             <!-- Indicator that carousel is loading -->
             <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
