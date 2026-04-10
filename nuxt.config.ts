@@ -97,8 +97,14 @@ export default defineNuxtConfig({
     }
   },
   // Disable payload extraction to prevent _payload.json 404 errors on Vercel
-  experimental: {
-    payloadExtraction: false
+  vite: {
+    css: {
+      devSourcemap: true, // Keep sourcemaps in development for debugging
+    },
+    build: {
+      sourcemap: false, // Disable sourcemaps in production to eliminate Tailwind warnings
+      chunkSizeWarningLimit: 3000
+    }
   },
   // Also note that your routeRules with '/articles/**': { prerender: true } and the nitro.prerender.crawlLinks are complementary
   // the route rules mark those patterns as prerenderable, while crawlLinks is what actually discovers the concrete URLs.
@@ -122,6 +128,9 @@ export default defineNuxtConfig({
     '/articles/**': { prerender: true },
     // Code of Conduct and Statuto
     '/docs/**': { prerender: true }
+  },
+  experimental: {
+    payloadExtraction: false
   },
   icon: {
     serverBundle: {
@@ -188,14 +197,5 @@ export default defineNuxtConfig({
   //         }
   //     }
   // }
-  // },
-  vite: {
-    css: {
-      devSourcemap: true, // Keep sourcemaps in development for debugging
-    },
-    build: {
-      sourcemap: false, // Disable sourcemaps in production to eliminate Tailwind warnings
-      chunkSizeWarningLimit: 3000
-    }
-  }
+  // }
 })
