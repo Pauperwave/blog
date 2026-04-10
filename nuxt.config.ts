@@ -125,7 +125,20 @@ export default defineNuxtConfig({
       collections: ['lucide', 'simple-icons']
     },
     clientBundle: {
-      scan: true
+      scan: true,
+      icons: [
+        // Nuxt UI prose / MDC components
+        'lucide:hash',
+        'lucide:info',
+        'lucide:lightbulb',
+        'lucide:triangle-alert',
+        'lucide:circle-alert',
+        'lucide:file-code',
+        'lucide:arrow-up-right',
+        // Social icons used dynamically
+        'simple-icons:x',
+        'simple-icons:twitch',
+      ]
     },
     // Avoid external Iconify fetches during prerender/build.
     fallbackToApi: false,
