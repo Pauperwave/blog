@@ -122,14 +122,10 @@ export default defineNuxtConfig({
   },
   icon: {
     serverBundle: {
-      collections: ['lucide', 'simple-icons'],
+      collections: ['lucide', 'simple-icons']
     },
     clientBundle: {
-      scan: true,
-      icons: [
-        'lucide:search',
-        'lucide:menu'
-      ]
+      scan: true
     },
     // Avoid external Iconify fetches during prerender/build.
     fallbackToApi: false,
