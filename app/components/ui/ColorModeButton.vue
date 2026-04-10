@@ -19,6 +19,7 @@ const isDark = computed({
       unchecked-icon="i-lucide-sun"
       color="neutral"
       size="sm"
+      aria-label="Toggle dark mode"
     />
     <template #fallback>
       <div class="size-8" />
