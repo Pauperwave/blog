@@ -103,7 +103,7 @@ Sideboard
 name: Affinity
 player: Franco Cicchini
 placement: Top 4
-headerGradient: jund
+headerGradient: grixis
 ---
 Creatures
 4 Myr Enforcer
@@ -204,6 +204,7 @@ Sideboard
 name: Walls
 player: Gabriele Borghetti
 placement: Top 8
+headerGradient: gruul
 ---
 Creatures
 4 Quirion Ranger
@@ -292,6 +293,7 @@ Sideboard
 name: Mono Red Kuldotha
 player: Lapo Bartoli
 placement: Top 8
+headerGradient: monored
 ---
 Creatures
 4 Goblin Blast-Runner
@@ -330,6 +332,7 @@ Sideboard
 name: Jund Glee
 player: Salvatore Chiavazzo
 placement: Top 8
+headerGradient: jund
 ---
 Creatures
 2 Krark-Clan Shaman

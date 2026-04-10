@@ -23,6 +23,7 @@ published: true
 name: Cawgate
 player: Pietro Carocci
 placement: Winner
+headerGradient: jeskai
 ---
 Creatures
 4 Sacred Cat
@@ -67,6 +68,7 @@ Sideboard
 name: U Terror
 player: Francesco Fiorenzoni
 placement: Finalist
+headerGradient: monoblue
 ---
 Creatures
 4 Delver of Secrets
@@ -102,6 +104,7 @@ Sideboard
 name: Rally
 player: Franek Komsta 
 placement: Top 4
+headerGradient: monored
 ---
 Creatures
 4 Clockwork Percussionist
@@ -142,6 +145,7 @@ Sideboard
 name: Altar Tron
 player: Francesco Foschi
 placement: Top 4
+headerGradient: jund
 ---
 Creatures
 4 Myr Retriever
@@ -188,6 +192,7 @@ Sideboard
 name: U Terror
 player: Riccardo Cestari
 placement: Top 8
+headerGradient: monoblue
 ---
 Creatures
 4 Delver of Secrets
@@ -222,6 +227,7 @@ Sideboard
 name: Monsters
 player: Tommaso Punis
 placement: Top 8
+headerGradient: gruul
 ---
 Creatures
 4 Arbor Elf
@@ -262,6 +268,7 @@ Sideboard
 name: Monsters
 player: Francesco Zibella
 placement: Top 8
+headerGradient: gruul
 ---
 Creatures
 4 Arbor Elf
@@ -300,6 +307,7 @@ Sideboard
 name: Mardu Synth
 player: Jose Vidal Ros
 placement: Top 8
+headerGradient: mardu
 ---
 Creatures
 4 Glint Hawk

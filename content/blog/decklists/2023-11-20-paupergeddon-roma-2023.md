@@ -23,6 +23,7 @@ published: true
 name: Jeskai Glitter
 player: Federico Alvisi
 placement: Winner
+headerGradient: jeskai
 ---
 Creatures
 4 Ornithopter
@@ -66,6 +67,7 @@ Sideboard
 name: Gardens
 player: Tommaso Loss
 placement: Finalist
+headerGradient: golgari
 ---
 Creatures
 3 Crypt Rats
@@ -109,6 +111,7 @@ Sideboard
 name: Gardens
 player: James Truffaz
 placement: Top 4
+headerGradient: golgari
 ---
 Creatures
 3 Crypt Rats
@@ -154,6 +157,7 @@ Sideboard
 name: UB Faeries
 player: Alessio Audizi
 placement: Top 4
+headerGradient: dimir
 ---
 Creatures
 3 Faerie Seer
@@ -200,6 +204,7 @@ Sideboard
 name: Mono Red Kuldotha
 player: Diego Barbagelata
 placement: Top 8
+headerGradient: monored
 ---
 Creatures
 4 Goblin Tomb Raider
@@ -237,6 +242,7 @@ Sideboard
 name: Gardens
 player: Stefano Mannella
 placement: Top 8
+headerGradient: monored
 ---
 Creatures
 4 Goblin Tomb Raider
@@ -274,6 +280,7 @@ Sideboard
 name: Marco Trivella
 player: Familiars
 placement: Top 8
+headerGradient: azorius
 ---
 Creatures
 4 God-Pharaoh's Faithful
@@ -321,6 +328,7 @@ Sideboard
 name: Alessandro Moretti
 player: Familiars
 placement: Top 8
+headerGradient: azorius
 ---
 Creatures
 4 God-Pharaoh's Faithful

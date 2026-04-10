@@ -17,7 +17,7 @@ published: true
 name: Elves
 player: Lahiri Cristofori
 placement: Winner
-headerGradient: Simic
+headerGradient: monogreen
 ---
 Creatures
 4 Arbor Elf
@@ -56,7 +56,7 @@ Sideboard
 name: Cawgate
 player: Michele Barzanti
 placement: Finalist
-headerGradient: Jeskai
+headerGradient: azorius
 ---
 Creatures
 4 Sacred Cat
@@ -220,7 +220,7 @@ Sideboard
 name: Black Fog
 player: Federico Lazzari
 placement: Top 8
-headerGradient: Jund
+headerGradient: jund
 ---
 Creatures
 3 Crypt Rats

@@ -23,6 +23,7 @@ published: true
 name: Affinity
 player: Roberto Francini
 placement: Winner
+headerGradient: grixis
 ---
 Creatures
 2 Krark-Clan Shaman
@@ -73,6 +74,7 @@ Sideboard
 name: Altar Tron
 player: Tommaso Loss
 placement: Finalist
+headerGradient: colorless
 ---
 Creatures
 4 Myr Retriever
@@ -126,6 +128,7 @@ Sideboard
 name: Boros Synth
 player: Emanuele Navarra
 placement: Top 4
+headerGradient: boros
 ---
 Creatures
 4 Glint Hawk
@@ -172,6 +175,7 @@ Sideboard
 name: Affinity
 player: Mislav Dinarina
 placement: Top 4
+headerGradient: grixis
 ---
 Creatures
 2 Krark-Clan Shaman
@@ -225,6 +229,7 @@ Sideboard
 name: Affinity
 player: Filippo Spaggiari
 placement: Top 8
+headerGradient: grixis
 ---
 Creatures
 2 Krark-Clan Shaman
@@ -275,6 +280,7 @@ Sideboard
 name: Boros Synth
 player: Andrea Mengucci
 placement: Top 8
+headerGradient: boros
 ---
 Creatures
 4 Glint Hawk
@@ -320,6 +326,7 @@ Sideboard
 name: Mono U Faeries
 player: Andrea Beatrice
 placement: Top 8
+headerGradient: monoblue
 ---
 Creatures
 3 Brinebarrow Intruder
@@ -356,6 +363,7 @@ Sideboard
 name: Boros Synth
 player: Marco Casotto
 placement: Top 8
+headerGradient: boros
 ---
 Creatures
 4 Glint Hawk

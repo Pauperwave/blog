@@ -23,6 +23,7 @@ published: true
 name: B Pactoll
 player: Lorenzo Montana
 placement: Winner
+headerGradient: golgari
 ---
 Creatures
 4 Shambling Ghast
@@ -66,6 +67,7 @@ Sideboard
 name: Jund
 player: Paolo Donfrancesco
 placement: Finalist
+headerGradient: jund
 ---
 Creatures
 3 Krark-Clan Shaman
@@ -115,6 +117,7 @@ Sideboard
 name: Jund
 player: Ernesto Jacopo Varriale
 placement: Top 4
+headerGradient: jund
 ---
 Creatures
 2 Krark-Clan Shaman
@@ -169,6 +172,7 @@ Sideboard
 name: U Faeries
 player: Mattia Pesenti
 placement: Top 4
+headerGradient: monoblue
 ---
 Creatures
 4 Brinebarrow Intruder
@@ -208,6 +212,7 @@ Sideboard
 name: BG Glee
 player: Adam Bazika
 placement: Top 8
+headerGradient: golgari
 ---
 Creatures
 3 Shambling Ghast
@@ -257,6 +262,7 @@ Sideboard
 name: Jund
 player: Fabio Lamonaca
 placement: Top 8
+headerGradient: jund
 ---
 Creatures
 2 Krark-Clan Shaman
@@ -307,6 +313,7 @@ Sideboard
 name: BGr Glee
 player: Matteo Canfora
 placement: Top 8
+headerGradient: jund
 ---
 Creatures
 3 Shambling Ghast
@@ -354,6 +361,7 @@ Sideboard
 name: Affinity
 player: Mislav Dinarina
 placement: Top 8
+headerGradient: grixis
 ---
 Creatures
 2 Krark-Clan Shaman

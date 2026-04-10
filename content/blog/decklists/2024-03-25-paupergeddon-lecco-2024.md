@@ -23,6 +23,7 @@ published: true
 name: Familiars
 player: Pietro Bragioto
 placement: Winner
+headerGradient: azorius
 ---
 Creatures
 4 God-Pharaoh's Faithful
@@ -72,6 +73,7 @@ Sideboard
 name: Jeskai
 player: Gabriele Tocchi
 placement: Finalist
+headerGradient: jeskai
 ---
 Creatures
 4 Augur of Bolas
@@ -121,6 +123,7 @@ Sideboard
 name: UB Faeries
 player: Fabrizio Campanino
 placement: Top 4
+headerGradient: dimir
 ---
 Creatures
 4 Faerie Seer
@@ -170,6 +173,7 @@ Sideboard
 name: UW Glitter
 player: Raffaele Nobili
 placement: Top 4
+headerGradient: azorius
 ---
 Creatures
 4 Ornithopter
@@ -214,6 +218,7 @@ Sideboard
 name: Boros Glitter
 player: Lapo Bartolini
 placement: Top 8
+headerGradient: boros
 ---
 Creatures
 4 Thraben Inspector
@@ -259,6 +264,7 @@ Sideboard
 name: UW Glitter
 player: Domenico Cardona
 placement: Top 8
+headerGradient: azorius
 ---
 Creatures
 4 Ornithopter
@@ -303,6 +309,7 @@ Sideboard
 name: UB Faeries
 player: Andrea Ciccone
 placement: Top 8
+headerGradient: dimir
 ---
 Creatures
 3 Faerie Seer
@@ -349,6 +356,7 @@ Sideboard
 name: Boros Glitter
 player: Gabriele Carini
 placement: Top 8
+headerGradient: boros
 ---
 Creatures
 4 Thraben Inspector

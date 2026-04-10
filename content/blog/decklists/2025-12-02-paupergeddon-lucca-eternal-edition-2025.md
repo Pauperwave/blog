@@ -21,6 +21,7 @@ published: true
 name: R Madness
 player: Giovanni Postorino
 placement: Winner
+headerGradient: monored
 ---
 Creatures
 4 Voldaren Epicure
@@ -55,6 +56,7 @@ Sideboard
 name: Familiars
 player: Lorenzo Bergamini
 placement: Finalist
+headerGradient: azorius
 ---
 Creatures
 4 God-Pharaoh's Faithful
@@ -99,6 +101,7 @@ Sideboard
 name: Cawgate
 player: Federico Pelliccia
 placement: Top 4
+headerGradient: jeskai
 ---
 Creatures
 4 Sacred Cat
@@ -142,6 +145,7 @@ Sideboard
 name: R Madness
 player: Mikolaj Nowak
 placement: Top 4
+headerGradient: monored
 ---
 Creatures
 4 Voldaren Epicure
@@ -179,6 +183,7 @@ Sideboard
 name: Monsters
 player: Walter Fragnelli
 placement: Top 8
+headerGradient: gruul
 ---
 Creatures
 4 Arbor Elf
@@ -220,6 +225,7 @@ Sideboard
 name: UB Terror
 player: Michal Kowalczyk
 placement: Top 8
+headerGradient: dimir
 ---
 Creatures
 4 Sneaky Snacker
@@ -261,6 +267,7 @@ Sideboard
 name: Cawgate
 player: Edoardo Bardi
 placement: Top 8
+headerGradient: jeskai
 ---
 Creatures
 4 Sacred Cat
@@ -305,6 +312,7 @@ Sideboard
 name: U Terror
 player: Jiri Moravec
 placement: Top 8
+headerGradient: monoblue
 ---
 Creatures
 4 Delver of Secrets 
