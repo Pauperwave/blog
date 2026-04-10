@@ -25,29 +25,40 @@ useSeoMeta({
         />
       </template>
     </UHeader>
-    <UMain class="px-4">
-      <UContainer>
+
+    <UMain>
+      <div class="error-container flex flex-col items-center justify-center text-center gap-6 px-4">
+        <NuxtImg
+          src="/assets/404/Fblthp-the-Lost-War-of-the-Spark-Art.jpg"
+          alt="Fblthp the Lost"
+          class="rounded-xl max-w-4xl w-full"
+        />
         <UError
+          :ui="{ root: 'min-h-0' }"
           :clear="{
             size: 'xl',
             color: 'primary',
             icon: 'i-lucide-arrow-left',
-            class: 'rounded-full',
+            class: 'rounded-full cursor-pointer',
             label: 'Torna al sicuro'
           }"
           :error="{
             ...error,
             statusMessage: 'Ti senti perso?',
-            message: 'Fblthp ha sempre odiato la folla.'
           }"
         >
-          <NuxtImg
-            src="/assets/404/Fblthp-the-Lost-War-of-the-Spark-Art.jpg"
-            alt="Fblthp the Lost"
-            class="mx-auto mb-6 rounded-xl"
-          />
+          <template #message>
+            Anche Fblthp si perde spesso tra i piani.<br>
+            Questo sentiero non conduce ad alcun piano conosciuto.
+          </template>
         </UError>
-      </UContainer>
+      </div>
     </UMain>
   </UApp>
 </template>
+
+<style scoped>
+.error-container {
+  min-height: calc(100vh - var(--ui-header-height));
+}
+</style>
