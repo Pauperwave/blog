@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type { Author } from '~/composables/useAuthor'
+import { defineWebPage } from 'nuxt-schema-org/schema'
+import appMeta from '~/app.meta'
 import {
   CATEGORY_LABELS,
   CONTENT_TYPE_ORDER,
@@ -8,6 +10,16 @@ import {
   initializeCategories
 } from '~/constants/content-config'
 import { hasLeagueTag } from '~/utils/article-filters'
+
+// SEO meta tags for homepage
+useSeoMeta({
+  title: appMeta.name,
+  description: appMeta.description,
+  ogTitle: appMeta.name,
+  ogDescription: appMeta.description,
+  ogImage: '/og-image.png',
+  twitterCard: 'summary_large_image'
+})
 
 const { data: homeArticlesData } = await useHomeArticles()
 const allArticles = computed(() => homeArticlesData.value?.articles || [])
@@ -69,6 +81,15 @@ const categoryHighlights = computed(() =>
 
 // Get sections from centralized config
 const sections = getHomeSections()
+
+useSchemaOrg([
+  defineWebPage({
+    '@type': 'WebPage',
+    name: appMeta.name,
+    description: appMeta.description,
+    url: appMeta.url
+  })
+])
 </script>
 
 <template>

@@ -9,6 +9,7 @@
 
 @theme static {
     --font-sans: "Geist", sans-serif;
+    --font-display: swap;
 }
 
 * {

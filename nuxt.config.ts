@@ -27,6 +27,20 @@ export default defineNuxtConfig({
       weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
     },
   },
+  app: {
+    head: {
+      link: [
+        // Preload critical font to reduce render-blocking
+        {
+          rel: 'preload',
+          href: '/_fonts/Geist-Variable.woff2',
+          as: 'font',
+          type: 'font/woff2',
+          crossorigin: 'anonymous'
+        }
+      ]
+    }
+  },
   site: {
     name: appMeta.name,
     url: appMeta.url,
@@ -120,14 +134,17 @@ export default defineNuxtConfig({
     },
   },
   routeRules: {
-    // Homepage pre-rendered at build time
-    '/': { prerender: true },
+    // Homepage pre-rendered at build time with cache headers
+    '/': { prerender: true, headers: { 'Cache-Control': 'public, max-age=3600, s-maxage=86400' } },
     // Nuxt Studio admin - requires SSR
     '/editor/**': { ssr: true },
-    // All content pages prerendered
-    '/articles/**': { prerender: true },
+    // All content pages prerendered with cache headers
+    '/articles/**': { prerender: true, headers: { 'Cache-Control': 'public, max-age=3600, s-maxage=86400' } },
     // Code of Conduct and Statuto
-    '/docs/**': { prerender: true }
+    '/docs/**': { prerender: true, headers: { 'Cache-Control': 'public, max-age=3600, s-maxage=86400' } },
+    // Static assets with long cache
+    '/_nuxt/**': { headers: { 'Cache-Control': 'public, max-age=31536000, immutable' } },
+    '/assets/**': { headers: { 'Cache-Control': 'public, max-age=31536000, immutable' } }
   },
   // experimental: {
   //   payloadExtraction: false
@@ -160,42 +177,37 @@ export default defineNuxtConfig({
       'vscode-icons-file-type-js': 'lucide:file-code'
     }
   },
-  // image: {
-  //     dir: 'public',
-  // screens: {
-  //     xs: 320,
-  //     sm: 640,
-  //     md: 768,
-  //     lg: 1024,
-  //     xl: 1280,
-  //     xxl: 1536,
-  // },
-  // alias: {
-  //     '/blog': '/assets/blog',
-  //     '/articles': '/assets/blog/articles',
-  //     '/arts': '/assets/blog/arts',
-  //     '/events': '/assets/blog/events',
-  //     '/sets': '/assets/blog/sets',
-  // },
-  // presets: {
-  //     thumbnail: {
-  //         modifiers: {
-  //             format: 'webp',
-  //             width: 1200,
-  //             height: 630,
-  //             fit: 'cover',
-  //             quality: 80
-  //         }
-  //     },
-  //     card: {
-  //         modifiers: {
-  //             format: 'webp',
-  //             width: 600,
-  //             height: 315,
-  //             fit: 'cover',
-  //             quality: 75
-  //         }
-  //     }
-  // }
-  // }
+  image: {
+    // Enable image optimization for better performance
+    quality: 80,
+    format: ['webp', 'jpg', 'png'],
+    screens: {
+      xs: 320,
+      sm: 640,
+      md: 768,
+      lg: 1024,
+      xl: 1280,
+      xxl: 1536,
+    },
+    presets: {
+      thumbnail: {
+        modifiers: {
+          format: 'webp',
+          width: 1200,
+          height: 630,
+          fit: 'cover',
+          quality: 80
+        }
+      },
+      card: {
+        modifiers: {
+          format: 'webp',
+          width: 488,
+          height: 680,
+          fit: 'contain',
+          quality: 85
+        }
+      }
+    }
+  }
 })
