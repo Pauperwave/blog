@@ -41,7 +41,7 @@ useSeoMeta({
             message: 'Fblthp ha sempre odiato la folla.'
           }"
         >
-          <img
+          <NuxtImg
             src="/assets/404/Fblthp-the-Lost-War-of-the-Spark-Art.jpg"
             alt="Fblthp the Lost"
             class="mx-auto mb-6 rounded-xl"
