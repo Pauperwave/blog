@@ -24,7 +24,7 @@ let dbInstance: DatabaseInstance | null = null
 async function getDatabase(): Promise<DatabaseInstance> {
   if (!dbInstance) {
     const dbPath = join(process.cwd(), 'server', 'database', 'cards.db')
-    
+
     try {
       // Check if we're running in Bun
       if (typeof Bun !== 'undefined') {
@@ -72,12 +72,28 @@ export async function getCardsByNames(names: string[]): Promise<Map<string, Card
 
   const rows = db.prepare(query).all(...names)
 
+  // Create a map for exact matches and also a lookup by lowercase name
+  const dbCardsByLowercase = new Map<string, CardData>()
+
   for (const row of rows) {
-    result.set(row.name, {
+    const cardData = {
       name: row.name,
       manaCost: row.mana_cost || '',
       imageUrl: row.image_url
-    })
+    }
+    result.set(row.name, cardData)
+    dbCardsByLowercase.set(row.name.toLowerCase(), cardData)
+  }
+
+  // For names that weren't found exactly, try case-insensitive match
+  for (const name of names) {
+    if (!result.has(name)) {
+      const lowercaseName = name.toLowerCase()
+      const matchedCard = dbCardsByLowercase.get(lowercaseName)
+      if (matchedCard) {
+        result.set(name, matchedCard)
+      }
+    }
   }
 
   return result

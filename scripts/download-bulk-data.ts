@@ -185,6 +185,23 @@ async function importPauperCards(db: Database): Promise<void> {
       imageUrl = ''
     }
 
+    // Handle split cards: combine mana costs from both faces
+    // For split cards, card_faces exists but image_uris is at top level
+    if (card.card_faces && card.card_faces.length > 1 && !card.card_faces[0].image_uris) {
+      const faceCosts = card.card_faces
+        .map(face => face.mana_cost)
+        .filter(cost => cost && cost.trim() !== '')
+
+      if (faceCosts.length > 1) {
+        // Multiple faces with costs - combine with // separator
+        manaCost = faceCosts.join(' // ')
+      } else if (faceCosts.length === 1) {
+        manaCost = faceCosts[0] || ''
+      } else {
+        manaCost = card.mana_cost || ''
+      }
+    }
+
     return {
       name,
       manaCost,

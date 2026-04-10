@@ -158,6 +158,10 @@ const manaClass = (symbol: string) => `ms ms-${getManaClass(symbol)} ms-cost`
         />
       </span>
     </template>
+    <!-- Handle split card separator // -->
+    <template v-else-if="resolvedSequence === '//'">
+      <span class="split-separator">//</span>
+    </template>
     <i v-else :class="manaClass(resolvedSequence)" :title="resolvedSequence" />
   </template>
 </template>
@@ -181,5 +185,14 @@ i.ms {
   display: inline-flex;
   gap: 0.20em;
   vertical-align: middle;
+}
+
+.split-separator {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 0.25em;
+  font-weight: 500;
+  color: var(--mana-color, currentColor);
+  opacity: 0.7;
 }
 </style>
