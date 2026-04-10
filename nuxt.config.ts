@@ -126,6 +126,10 @@ export default defineNuxtConfig({
     },
     clientBundle: {
       scan: true,
+      icons: [
+        'lucide:search',
+        'lucide:menu'
+      ]
     },
     // Avoid external Iconify fetches during prerender/build.
     fallbackToApi: false,
