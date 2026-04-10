@@ -17,7 +17,7 @@ published: true
 | Data | 20 March 2026 |
 | Struttura del torneo | 7 Rounds of Swiss + Single Elimination Top 4 |
 
-##Finals Split: Aquotti-Sposito-Rullo
+## Finals Split: Aquotti-Sposito-Rullo
 
 ::magic-decklist
 ---
@@ -130,7 +130,7 @@ Sideboard
 1 Murmuring Mystic
 ::
 
-##Finals Split: Schiano-Gad-Christensen
+## Finals Split: Schiano-Gad-Christensen
 
 ::magic-decklist
 ---
@@ -269,7 +269,7 @@ Sideboard
 1 Thraben Charm
 ::
 
-##Top 4: Nannipieri-Santo-Beatrice
+## Top 4: Nannipieri-Santo-Beatrice
 
 ::magic-decklist
 ---
@@ -395,7 +395,7 @@ Sideboard
 1 Gingerbread Cabin
 ::
 
-##Top 4: Donfrancesco-Palma-Loss
+## Top 4: Donfrancesco-Palma-Loss
 
 ::magic-decklist
 ---
