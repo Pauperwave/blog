@@ -9,7 +9,7 @@ sitemap:
 
 # Componenti predefiniti
 
-```
+```text
 Link: [Prose Components](/articles/2026-01-17-lorwyn-eclipsed)
 ```
 
@@ -17,7 +17,7 @@ Link: [Prose Components](/articles/2026-01-17-lorwyn-eclipsed)
 
 > Block quote
 
-```js [file.js] {2} meta-info=val
+```js [file.js]
 export default () => {
   console.log('Code block')
 }
@@ -218,7 +218,7 @@ Per una lista completa consultare [Mana & Card Icons](https://mana.andrewgioia.c
 
 ## `magic-card-tooltip`
 
-Componente "in linea", Disponible in `articles` `decklists` `reports` `tutorials`
+Componente "in linea", Disponible in `articles decklists reports tutorials`
 
 ### Quando usarlo
 
@@ -254,7 +254,9 @@ Il componente `magic-card-tooltip` viene riutilizzato all'interno del componente
 ### Alcuni casi limite con double faced cards e adventure cards
 
 :magic-card-tooltip{name="Delver of Secrets"}
+
 :magic-card-tooltip{name="The Modern Age"}
+
 :magic-card-tooltip{name="Sagu Wildling"}
 
 ## `magic-card-display`
@@ -447,346 +449,346 @@ Sideboard
 
 ### Esempi di gradienti per `magic-decklist`
 
-#### Mono Color :magic-card-mana-symbol{symbol="w"} / :magic-card-mana-symbol{symbol="u"} / :magic-card-mana-symbol{symbol="b"} / :magic-card-mana-symbol{symbol="r"} / :magic-card-mana-symbol{symbol="g"}
+#### Mono Color
 
-```
+```text
 headerGradient: monowhite
 ```
 
 ::magic-decklist
 ---
-name: textClasses.heading
-player: textClasses.subheading
-placement: textClasses.placement
 headerGradient: monowhite
+name: heading
+placement: placement
+player: subheading
 ---
 ::
 
-```
+```text
 headerGradient: monoblue
 ```
 
 ::magic-decklist
 ---
-name: textClasses.heading
-player: textClasses.subheading
-placement: textClasses.placement
 headerGradient: monoblue
+name: heading
+placement: placement
+player: subheading
 ---
 ::
 
-```
+```text
 headerGradient: monoblack
 ```
 
 ::magic-decklist
 ---
-name: textClasses.heading
-player: textClasses.subheading
-placement: textClasses.placement
 headerGradient: monoblack
+name: heading
+placement: placement
+player: subheading
 ---
 ::
 
-```
+```text
 headerGradient: monored
 ```
 
 ::magic-decklist
 ---
-name: textClasses.heading
-player: textClasses.subheading
-placement: textClasses.placement
 headerGradient: monored
+name: heading
+placement: placement
+player: subheading
 ---
 ::
 
-```
+```text
 headerGradient: monogreen
 ```
 
 ::magic-decklist
 ---
-name: textClasses.heading
-player: textClasses.subheading
-placement: textClasses.placement
 headerGradient: monogreen
+name: heading
+placement: placement
+player: subheading
 ---
 ::
 
-```
+```text
 headerGradient: colorless
 ```
 
 ::magic-decklist
 ---
-name: textClasses.heading
-player: textClasses.subheading
-placement: textClasses.placement
 headerGradient: colorless
+name: heading
+placement: placement
+player: subheading
 ---
 ::
 
-#### Two-Color Combinations :magic-card-mana-symbol{symbol="rg"} / :magic-card-mana-symbol{symbol="wu"} / :magic-card-mana-symbol{symbol="ub"} / :magic-card-mana-symbol{symbol="rw"} / :magic-card-mana-symbol{symbol="bg"} / :magic-card-mana-symbol{symbol="ur"} / :magic-card-mana-symbol{symbol="wb"} / :magic-card-mana-symbol{symbol="br"} / :magic-card-mana-symbol{symbol="gw"} / :magic-card-mana-symbol{symbol="gu"}
+#### Two-Color Combinations
 
-```
+```text
 headerGradient: gruul
 ```
 
 ::magic-decklist
 ---
-name: textClasses.heading
-player: textClasses.subheading
-placement: textClasses.placement
 headerGradient: gruul
+name: heading
+placement: placement
+player: subheading
 ---
 ::
 
-```
+```text
 headerGradient: azorius
 ```
 
 ::magic-decklist
 ---
-name: textClasses.heading
-player: textClasses.subheading
-placement: textClasses.placement
 headerGradient: azorius
+name: heading
+placement: placement
+player: subheading
 ---
 ::
 
-```
+```text
 headerGradient: dimir
 ```
 
 ::magic-decklist
 ---
-name: textClasses.heading
-player: textClasses.subheading
-placement: textClasses.placement
 headerGradient: dimir
+name: heading
+placement: placement
+player: subheading
 ---
 ::
 
-```
+```text
 headerGradient: boros
 ```
 
 ::magic-decklist
 ---
-name: textClasses.heading
-player: textClasses.subheading
-placement: textClasses.placement
 headerGradient: boros
+name: heading
+placement: placement
+player: subheading
 ---
 ::
 
-```
+```text
 headerGradient: golgari
 ```
 
 ::magic-decklist
 ---
-name: textClasses.heading
-player: textClasses.subheading
-placement: textClasses.placement
 headerGradient: golgari
+name: heading
+placement: placement
+player: subheading
 ---
 ::
 
-```
+```text
 headerGradient: izzet
 ```
 
 ::magic-decklist
 ---
-name: textClasses.heading
-player: textClasses.subheading
-placement: textClasses.placement
 headerGradient: izzet
+name: heading
+placement: placement
+player: subheading
 ---
 ::
 
-```
+```text
 headerGradient: orzhov
 ```
 
 ::magic-decklist
 ---
-name: textClasses.heading
-player: textClasses.subheading
-placement: textClasses.placement
 headerGradient: orzhov
+name: heading
+placement: placement
+player: subheading
 ---
 ::
 
-```
+```text
 headerGradient: rakdos
 ```
 
 ::magic-decklist
 ---
-name: textClasses.heading
-player: textClasses.subheading
-placement: textClasses.placement
 headerGradient: rakdos
+name: heading
+placement: placement
+player: subheading
 ---
 ::
 
-```
+```text
 headerGradient: selesnya
 ```
 
 ::magic-decklist
 ---
-name: textClasses.heading
-player: textClasses.subheading
-placement: textClasses.placement
 headerGradient: selesnya
+name: heading
+placement: placement
+player: subheading
 ---
 ::
 
-```
+```text
 headerGradient: simic
 ```
 
 ::magic-decklist
 ---
-name: textClasses.heading
-player: textClasses.subheading
-placement: textClasses.placement
 headerGradient: simic
+name: heading
+placement: placement
+player: subheading
 ---
 ::
 
-#### Three-Color Combinations :magic-card-mana-symbol{symbol="wub"} / :magic-card-mana-symbol{symbol="ubr"} / :magic-card-mana-symbol{symbol="brg"} / :magic-card-mana-symbol{symbol="rgw"} / :magic-card-mana-symbol{symbol="gwu"} / :magic-card-mana-symbol{symbol="wbr"} / :magic-card-mana-symbol{symbol="urg"} / :magic-card-mana-symbol{symbol="bgu"} / :magic-card-mana-symbol{symbol="rwu"} / :magic-card-mana-symbol{symbol="wbg"}
+#### Three-Color Combinations
 
-```
+```text
 headerGradient: esper
 ```
 
 ::magic-decklist
 ---
-name: textClasses.heading
-player: textClasses.subheading
-placement: textClasses.placement
 headerGradient: esper
+name: heading
+placement: placement
+player: subheading
 ---
 ::
 
-```
+```text
 headerGradient: grixis
 ```
 
 ::magic-decklist
 ---
-name: textClasses.heading
-player: textClasses.subheading
-placement: textClasses.placement
 headerGradient: grixis
+name: heading
+placement: placement
+player: subheading
 ---
 ::
 
-```
+```text
 headerGradient: jund
 ```
 
 ::magic-decklist
 ---
-name: textClasses.heading
-player: textClasses.subheading
-placement: textClasses.placement
 headerGradient: jund
+name: heading
+placement: placement
+player: subheading
 ---
 ::
 
-```
+```text
 headerGradient: naya
 ```
 
 ::magic-decklist
 ---
-name: textClasses.heading
-player: textClasses.subheading
-placement: textClasses.placement
 headerGradient: naya
+name: heading
+placement: placement
+player: subheading
 ---
 ::
 
-```
+```text
 headerGradient: bant
 ```
 
 ::magic-decklist
 ---
-name: textClasses.heading
-player: textClasses.subheading
-placement: textClasses.placement
 headerGradient: bant
+name: heading
+placement: placement
+player: subheading
 ---
 ::
 
-```
+```text
 headerGradient: mardu
 ```
 
 ::magic-decklist
 ---
-name: textClasses.heading
-player: textClasses.subheading
-placement: textClasses.placement
 headerGradient: mardu
+name: heading
+placement: placement
+player: subheading
 ---
 ::
 
-```
+```text
 headerGradient: temur
 ```
 
 ::magic-decklist
 ---
-name: textClasses.heading
-player: textClasses.subheading
-placement: textClasses.placement
 headerGradient: temur
+name: heading
+placement: placement
+player: subheading
 ---
 ::
 
-```
+```text
 headerGradient: sultai
 ```
 
 ::magic-decklist
 ---
-name: textClasses.heading
-player: textClasses.subheading
-placement: textClasses.placement
 headerGradient: sultai
+name: heading
+placement: placement
+player: subheading
 ---
 ::
 
-```
+```text
 headerGradient: jeskai
 ```
 
 ::magic-decklist
 ---
-name: textClasses.heading
-player: textClasses.subheading
-placement: textClasses.placement
 headerGradient: jeskai
+name: heading
+placement: placement
+player: subheading
 ---
 ::
 
-```
+```text
 headerGradient: abzan
 ```
 
 ::magic-decklist
 ---
-name: textClasses.heading
-player: textClasses.subheading
-placement: textClasses.placement
 headerGradient: abzan
+name: heading
+placement: placement
+player: subheading
 ---
 ::
