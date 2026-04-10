@@ -129,9 +129,9 @@ export default defineNuxtConfig({
     // Code of Conduct and Statuto
     '/docs/**': { prerender: true }
   },
-  experimental: {
-    payloadExtraction: false
-  },
+  // experimental: {
+  //   payloadExtraction: false
+  // },
   icon: {
     serverBundle: {
       collections: ['lucide', 'simple-icons']
