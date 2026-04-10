@@ -96,6 +96,10 @@ export default defineNuxtConfig({
       defaultLocale: 'it'
     }
   },
+  // Disable payload extraction to prevent _payload.json 404 errors on Vercel
+  experimental: {
+    payloadExtraction: false
+  },
   // Also note that your routeRules with '/articles/**': { prerender: true } and the nitro.prerender.crawlLinks are complementary — the route rules mark those patterns as prerenderable, while crawlLinks is what actually discovers the concrete URLs.
   nitro: {
     preset: 'vercel',
