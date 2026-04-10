@@ -11,5 +11,6 @@ defineProps<{
     label="Cerca..."
     placeholder="Cerca nel blog..."
     color="neutral"
+    class="w-64 cursor-pointer"
   />
 </template>

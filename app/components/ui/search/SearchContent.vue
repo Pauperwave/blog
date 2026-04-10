@@ -128,7 +128,7 @@ const fuseOptions = {
     <LazyUContentSearch
       v-model:search-term="searchTerm"
       shortcut="meta_k"
-      placeholder="Cerca articoli, guide, decklist..."
+      placeholder="Cerca eventi, decklist, articoli, report, tutorial e spoiler..."
       :groups="groups"
       :color-mode="false"
       :fuse="fuseOptions"
