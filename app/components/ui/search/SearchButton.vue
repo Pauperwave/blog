@@ -9,8 +9,6 @@ defineProps<{
   <UContentSearchButton
     :collapsed="collapsed ?? false"
     label="Cerca..."
-    placeholder="Cerca nel blog..."
-    color="neutral"
-    class="w-xs cursor-pointer"
+    class="lg:w-sm cursor-pointer"
   />
 </template>
