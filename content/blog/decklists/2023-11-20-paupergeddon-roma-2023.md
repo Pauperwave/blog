@@ -277,8 +277,8 @@ Sideboard
 
 ::magic-decklist
 ---
-name: Marco Trivella
-player: Familiars
+name: Familiars
+player: Marco Trivella
 placement: Top 8
 headerGradient: azorius
 ---
@@ -325,8 +325,8 @@ Sideboard
 
 ::magic-decklist
 ---
-name: Alessandro Moretti
-player: Familiars
+name: Familiars
+player: Alessandro Moretti
 placement: Top 8
 headerGradient: azorius
 ---
