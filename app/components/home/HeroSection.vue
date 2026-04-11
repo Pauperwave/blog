@@ -133,7 +133,7 @@ const getThumbnailSrc = (thumbnail: unknown) => {
                   <img
                     :src="featuredThumbnailSrc"
                     :alt="featuredArticle.title"
-                    class="h-48 md:h-52 w-full object-cover"
+                    class="h-48 md:h-72 w-full object-cover"
                   >
                 </div>
 
