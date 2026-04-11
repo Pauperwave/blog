@@ -8,7 +8,7 @@ tags:
 location: Roma
 date: 2026-03-30
 author: Pietro Bragioto
-thumbnail: /assets/blog/arts/ugl-43-goblin-bookie.jpeg
+thumbnail: /assets/blog/arts/ugl-43-goblin-bookie.jpg
 published: true
 ---
 
