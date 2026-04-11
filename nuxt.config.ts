@@ -164,6 +164,9 @@ export default defineNuxtConfig({
     }
   },
   image: {
+    // Use static provider for SSG compatibility
+    // Vercel provider only works with SSR, not static generation
+    provider: 'ipx',
     // Enable image optimization for better performance
     quality: 80,
     format: ['webp', 'jpg', 'png'],
