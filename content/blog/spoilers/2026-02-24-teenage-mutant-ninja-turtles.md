@@ -111,7 +111,7 @@ Per quanto riguarda applicazioni diverse non è nemmeno scontato non vederlo, in
 
 ::overall-rating
 ---
-rating: 6/7
+rating: 6.5
 ---
 ::
 
@@ -142,7 +142,7 @@ Questa ipotesi, potenzialmente, si applica bene anche a un orientamento più sim
 
 ::overall-rating
 ---
-rating: 7+
+rating: 7
 ---
 ::
 

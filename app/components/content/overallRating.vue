@@ -3,12 +3,8 @@ const props = defineProps<{
   rating: number
 }>()
 
-const ratingValue = computed(() => {
-  return props.rating
-})
-
-const fullStars = computed(() => Math.floor(ratingValue.value))
-const hasHalfStar = computed(() => ratingValue.value % 1 >= 0.5)
+const fullStars = computed(() => Math.floor(props.rating))
+const hasHalfStar = computed(() => props.rating % 1 >= 0.5)
 const emptyStars = computed(() => 5 - fullStars.value - (hasHalfStar.value ? 1 : 0))
 </script>
 
