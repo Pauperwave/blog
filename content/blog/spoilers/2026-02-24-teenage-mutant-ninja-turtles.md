@@ -1,6 +1,8 @@
 ---
 title: Teenage Mutant Ninja Turtles
-author: Alessandro Moretti
+author:
+  - Pietro Bragioto
+  - Alessandro Moretti
 category: spoiler
 date: 2026-02-24
 description: Spoilered Pauper cards in Teenage Mutant Ninja Turtles
@@ -111,6 +113,7 @@ Per quanto riguarda applicazioni diverse non è nemmeno scontato non vederlo, in
 ---
 rating: 6/7
 ---
+::
 
 ## 2. Leonardo, Big Brother
 
@@ -141,6 +144,8 @@ Questa ipotesi, potenzialmente, si applica bene anche a un orientamento più sim
 ---
 rating: 7+
 ---
+::
+
 ## 1. Utrom Monitor
 
 ::MagicCardDisplay
