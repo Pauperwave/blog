@@ -8,6 +8,7 @@ import {
   CATEGORY_LABELS
 } from '~/constants/content-config'
 import { hasLeagueTag } from '~/utils/article-filters'
+import MigrationNotice from '~/components/ui/MigrationNotice.vue'
 
 interface HeroCategoryHighlight {
   category: CategoryType
@@ -112,6 +113,7 @@ const getThumbnailSrc = (thumbnail: unknown) => {
                 {{ item.count }}
               </span>
             </NuxtLink>
+            <MigrationNotice class="mt-3" />
           </div>
         </div>
 
