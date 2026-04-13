@@ -28,7 +28,7 @@ useSeoMeta({
 
     <UMain>
       <div class="error-container flex flex-col items-center justify-center text-center gap-6 px-4">
-        <NuxtImg
+        <img
           src="/assets/404/Fblthp-the-Lost-War-of-the-Spark-Art.jpg"
           alt="Fblthp the Lost"
           class="rounded-xl max-w-4xl w-full"
