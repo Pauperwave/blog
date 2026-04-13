@@ -10,6 +10,7 @@ sitemap:
 tags:
   - Paupergeddon
   - Top 16
+decks:
   - Pizza Combo
 thumbnail: /assets/blog/arts/ugl-43-goblin-bookie.jpg
 ---

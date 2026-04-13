@@ -10,6 +10,7 @@ sitemap:
 tags:
   - Paupergeddon
   - Top 16
+decks:
   - White Weenie
 thumbnail: /assets/blog/arts/ugl-43-goblin-bookie.jpg
 ---

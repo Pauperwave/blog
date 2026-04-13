@@ -10,6 +10,7 @@ sitemap:
 tags:
   - Paupergeddon
   - Winner
+decks:
   - Elves
 thumbnail: /assets/blog/arts/ugl-43-goblin-bookie.jpg
 ---

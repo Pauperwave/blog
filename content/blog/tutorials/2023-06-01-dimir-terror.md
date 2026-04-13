@@ -1,9 +1,10 @@
 ---
 title: "Dimir Terror"
 description: "Guida su come sidare"
-tags:
-  - Terror
+tags: []
+decks:
   - Dimir
+  - Terror
 date: 2023-06-01
 author: "Alessandro Moretti"
 author_avatar: /assets/avatars/moretti.png

@@ -1,7 +1,10 @@
 ---
 title: "Mazzo Pingers"
 description: "Introduzione a Pingers"
-tags: [Pingers, Monored]
+tags: []
+decks:
+  - Monored
+  - Pingers
 date: 2025-12-06
 author: Pietro Bragioto
 thumbnail: /assets/blog/arts/inr-174-thermo-alchemist.jpeg

@@ -10,6 +10,7 @@ sitemap:
 tags:
   - Paupergeddon
   - Top 32
+decks:
   - Jund
 thumbnail: /assets/blog/arts/ugl-43-goblin-bookie.jpg
 ---
