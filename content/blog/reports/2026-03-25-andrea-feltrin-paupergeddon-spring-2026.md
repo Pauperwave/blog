@@ -9,7 +9,6 @@ sitemap:
   loc: /articles/2026-03-25-andrea-feltrin-paupergeddon-spring-2026
 tags:
   - Paupergeddon
-  - Winner
 decks:
   - Elves
 thumbnail: /assets/blog/arts/ugl-43-goblin-bookie.jpg
