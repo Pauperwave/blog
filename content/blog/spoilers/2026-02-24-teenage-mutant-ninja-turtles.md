@@ -83,7 +83,7 @@ card: Raphael, Though Turtle
 name: Pietro Bragioto
 rating: 6.5
 ---
-Scartiamo prima di subito eventuali applicazioni in Mono Red dato che Kuldotha Rebirth è in banlist, in Pingers gli slot a 2 sono dedicati per l'appunto ai pinganti a cui spesso non si riescono a trovare 8 slot nelle 75, mentre in Rally non è funzionale un Drop a 2 che non spinga infinitamente sul board.
+Scartiamo prima di subito eventuali applicazioni in Mono Red dato che [[Kuldotha Rebirth]] è in banlist, in Pingers gli slot a 2 sono dedicati per l'appunto ai pinganti a cui spesso non si riescono a trovare 8 slot nelle 75, mentre in Rally non è funzionale un Drop a 2 che non spinga infinitamente sul board.
 Resta da fare qualche considerazione sul versante Dredge dove il gemello minore di Molten Gatekeeper potrebbe essere d'aiuto nel dare consistenza alla tecnologia pingante e renderla effettivamente un solido piano B.
 
 Nel poco conosciuto ai più Mono Red Dredge potrebbe essere un'ottima aggiunta dato che in G1 non si hanno risposte convincenti alle sempre più onnipresenti Nihil Spellbomb, quindi si potrebbe essere sempre più costretti ad andare di beatdown in early per finire il lavoro a suon di trigger con un danno alla volta.
@@ -139,7 +139,7 @@ Sninjare le [[Thraben Inspector]] resta una value play gradita ma dare un follow
 Il monocolor storicamente più scarso del formato sta per ricevere l'ennesimo buff che va a smussarne la lacuna più evidente ossia quella di non avere delle chiusure consistenti di quinto turno nei Mu dove è necessario fare race, un 2x minimo di Leonardo andrà subito testato.
 Per lenire la debolezza di poter giocare solo 4 carte come [[Battle Screech]], probabilmente bisognerà aspettare ancora molte lune.
 
-Questa ipotesi, potenzialmente, si applica bene anche a un orientamento più simile al bannato [[Azorius Glitters]].
+Questa ipotesi, potenzialmente, si applica bene anche a un orientamento più simile al bannato Azorius Glitters.
 ::
 
 ::magic-card-rating
