@@ -120,11 +120,11 @@ export default defineNuxtConfig({
     },
     // Filter routes to only prerender recent articles (< 3 months)
     hooks: {
-      'prerender:routes' (routes: string[]) {
+      'prerender:routes' (ctx: { routes: string[] }) {
         const threeMonthsAgo = new Date()
         threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3)
 
-        return routes.filter((route: string) => {
+        ctx.routes = ctx.routes.filter((route: string) => {
           // Keep all non-article routes
           if (!route.startsWith('/articles/')) return true
 
