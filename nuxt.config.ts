@@ -173,6 +173,9 @@ export default defineNuxtConfig({
         'lucide:circle-alert',
         'lucide:file-code',
         'lucide:arrow-up-right',
+        // UI icons
+        'lucide:search',
+        'lucide:menu',
         // Social icons used dynamically
         'simple-icons:x',
         'simple-icons:twitch',
