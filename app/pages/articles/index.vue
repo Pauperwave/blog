@@ -52,6 +52,7 @@ const {
   authorFilterOptions,
   locationFilterOptions,
   tagFilterOptions,
+  deckFilterOptions,
   hasActiveFilters,
   filteredArticles,
   getArticleTopicTags,
@@ -82,6 +83,7 @@ const {
         :author-filter-options="authorFilterOptions"
         :location-filter-options="locationFilterOptions"
         :tag-filter-options="tagFilterOptions"
+        :deck-filter-options="deckFilterOptions"
         @set-category="setCategoryFilter"
         @set-author="setAuthorFilter"
         @set-location="setLocationFilter"
@@ -104,7 +106,7 @@ const {
           v-for="article in filteredArticles"
           :key="article.path"
           :article="article"
-          :author-data="authorsMap[normalizeAuthors(article.author)[0] || 'Unknown']"
+          :author-data="normalizeAuthors(article.author).map(name => authorsMap[name]).filter((author): author is Author => Boolean(author))"
           :topic-tags="getArticleTopicTags(article)"
           :badge="getBadge(article.date)"
         />

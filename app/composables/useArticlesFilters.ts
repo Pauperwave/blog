@@ -181,6 +181,12 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
     return options.sort((a, b) => italianCollator.compare(a.tag, b.tag))
   })
 
+  const deckFilterOptions = computed<Array<{ tag: string; count: number }>>(() => {
+    return (Object.entries(filterCounts.value.deckCounts) as Array<[string, number]>)
+      .map(([tag, count]) => ({ tag, count }))
+      .sort((a, b) => italianCollator.compare(a.tag, b.tag))
+  })
+
   const authorSlugToName = computed<Record<string, string>>(() =>
     Object.values(authorsMap.value).reduce((acc, author) => {
       const slug = getAuthorSlug(author.name)
@@ -299,11 +305,10 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
     authorFilterOptions,
     locationFilterOptions,
     tagFilterOptions,
+    deckFilterOptions,
     hasActiveFilters,
     filteredArticles,
     getArticleTopicTags,
-    getArticleDeckTags,
-    getArticleCommonTags,
     setCategoryFilter,
     setAuthorFilter,
     setLocationFilter,

@@ -23,6 +23,11 @@ interface TagFilterOption {
   count: number
 }
 
+interface DeckFilterOption {
+  tag: string
+  count: number
+}
+
 interface Props {
   resultsCount: number
   totalCount: number
@@ -39,6 +44,7 @@ interface Props {
   authorFilterOptions: AuthorFilterOption[]
   locationFilterOptions: LocationFilterOption[]
   tagFilterOptions: TagFilterOption[]
+  deckFilterOptions: DeckFilterOption[]
 }
 
 const props = defineProps<Props>()
@@ -84,6 +90,14 @@ const tagOptions = computed(() =>
     value: normalizeArticleFilterValue(tag.tag),
     label: tag.tag,
     count: tag.count
+  }))
+)
+
+const deckOptions = computed(() =>
+  props.deckFilterOptions.map(deck => ({
+    value: normalizeArticleFilterValue(deck.tag),
+    label: deck.tag,
+    count: deck.count
   }))
 )
 
@@ -225,6 +239,19 @@ const activeFilters = computed(() => {
             :selected-value="selectedLocation"
             all-label="Tutte le localita"
             @select="emit('set-location', $event)"
+          />
+
+          <!-- Deck -->
+          <FilterSection
+            v-if="deckOptions.length > 0"
+            label="Deck (A-Z)"
+            plural-label="deck"
+            color="warning"
+            :options="deckOptions"
+            :selected-value="selectedTag"
+            all-label="Tutti i deck"
+            :max-height="true"
+            @select="emit('set-tag', $event)"
           />
 
           <!-- Tags -->

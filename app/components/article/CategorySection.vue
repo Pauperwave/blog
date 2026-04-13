@@ -18,10 +18,9 @@ const props = withDefaults(defineProps<Props>(), {
   viewAllText: 'Vedi tutti'
 })
 
-const getAuthorData = (article: AnyArticle) => {
+const getAuthorData = (article: AnyArticle): Author[] => {
   const authorNames = normalizeAuthors(article.author)
-  const primaryAuthor = authorNames[0] || 'Unknown'
-  return props.authorsMap[primaryAuthor]
+  return authorNames.map(name => props.authorsMap[name]).filter((author): author is Author => Boolean(author))
 }
 </script>
 
