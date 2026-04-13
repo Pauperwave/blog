@@ -1,6 +1,7 @@
 import type { Ref } from 'vue'
 import type { Author } from '~/composables/useAuthor'
 import { getAuthorNameFromSlug, getAuthorSlug } from '~/composables/useAuthorSlug'
+import { normalizeAuthors } from '~/composables/useAuthor'
 import { type AnyArticle, CATEGORY_LABELS } from '~/constants/content-config'
 import {
   buildArticleTopicTags,
@@ -50,7 +51,9 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
     if (!articles.value) return []
 
     return articles.value.map((article) => {
-      const authorName = authorsMap.value[article.author]?.name || article.author
+      const authorNames = normalizeAuthors(article.author)
+      const primaryAuthorName = authorNames[0] || 'Unknown'
+      const authorName = authorsMap.value[primaryAuthorName]?.name || primaryAuthorName
       const authorSlug = getAuthorSlug(authorName)
       const normalizedLocation = getNormalizedArticleLocation(article)
       const topicTags = buildArticleTopicTags(article, globalNormalizedLocationSet.value)
@@ -87,7 +90,11 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
         categoryCounts[article.category] = (categoryCounts[article.category] || 0) + 1
       }
 
-      authorCounts[article.author] = (authorCounts[article.author] || 0) + 1
+      // Count each author separately for multi-author articles
+      const authorNames = normalizeAuthors(article.author)
+      authorNames.forEach((authorName) => {
+        authorCounts[authorName] = (authorCounts[authorName] || 0) + 1
+      })
 
       const location = getArticleFilterLocation(article)
       if (location) {

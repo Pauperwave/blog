@@ -15,6 +15,18 @@ export interface Author {
 }
 
 /**
+ * Helper function to normalize author field to always return an array
+ * @param author - The author field (string or array of strings)
+ * @returns Array of author names
+ */
+export const normalizeAuthors = (author: string | string[]): string[] => {
+  if (Array.isArray(author)) {
+    return author
+  }
+  return [author]
+}
+
+/**
  * Composable to fetch author data from the authors collection
  * @param authorName - The full name of the author (e.g., "Pietro Bragioto")
  * @returns Author data including name, avatar, description, and url
@@ -47,4 +59,19 @@ export const useAuthor = async (authorName: string): Promise<Author> => {
     nickname: author.nickname,
     socials: author.socials
   }
+}
+
+/**
+ * Composable to fetch multiple authors data from the authors collection
+ * @param authorNames - Array of author names (or single name as string)
+ * @returns Array of Author data
+ */
+export const useAuthors = async (authorNames: string | string[]): Promise<Author[]> => {
+  const names = normalizeAuthors(authorNames)
+
+  const authors = await Promise.all(
+    names.map(name => useAuthor(name))
+  )
+
+  return authors
 }

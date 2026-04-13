@@ -4,10 +4,11 @@ import type { BadgeProps } from '@nuxt/ui'
 import type { Author } from '~/composables/useAuthor'
 import type { AnyArticle } from '~/constants/content-config'
 import { getArticleFilterLocation, hasLeagueTag } from '~/utils/article-filters'
+import { normalizeAuthors } from '~/composables/useAuthor'
 
 interface Props {
   article: AnyArticle
-  authorData?: Author | null
+  authorData?: Author | Author[] | null
   topicTags?: string[]
   badge?: string | BadgeProps
   showAuthor?: boolean
@@ -20,6 +21,15 @@ const props = withDefaults(defineProps<Props>(), {
   badge: undefined,
   showAuthor: true,
   categoryLabel: null
+})
+
+const authorsList = computed<Author[]>(() => {
+  if (props.authorData) {
+    return Array.isArray(props.authorData) ? props.authorData : [props.authorData]
+  }
+  // Fallback to article.author names
+  const authorNames = normalizeAuthors(props.article.author)
+  return authorNames.map(name => ({ name, description: '', avatar: '', bio: '', url: '', socials: undefined }))
 })
 
 const shouldShowAuthor = computed(() => {
@@ -46,7 +56,7 @@ const displayedTopicTags = computed(() => {
   })
 })
 
-const cardVariantClasses = computed(() => 
+const cardVariantClasses = computed(() =>
   isLeagueArticle.value
     ? 'border-sky-300/80 dark:border-sky-600/70 bg-sky-50/50 dark:bg-sky-500/5 hover:border-sky-500 dark:hover:border-sky-400 hover:shadow-sky-500/10 dark:hover:shadow-sky-400/10'
     : 'border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 hover:border-primary-500 dark:hover:border-primary-400 hover:shadow-primary-500/10 dark:hover:shadow-primary-400/10'
@@ -113,16 +123,14 @@ const cardVariantClasses = computed(() =>
       v-if="shouldShowAuthor"
       #authors
     >
-      <AuthorCard
-        :author="{
-          name: props.authorData?.name || props.article.author,
-          description: props.authorData?.description,
-          avatar: props.authorData?.avatar,
-          bio: props.authorData?.bio,
-          socials: props.authorData?.socials
-        }"
-        :clickable="false"
-      />
+      <div class="flex flex-wrap gap-2">
+        <AuthorCard
+          v-for="author in authorsList"
+          :key="author.name"
+          :author="author"
+          :clickable="false"
+        />
+      </div>
     </template>
   </UBlogPost>
 </template>

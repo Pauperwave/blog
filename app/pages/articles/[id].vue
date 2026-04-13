@@ -13,6 +13,7 @@ import {
   buildGlobalNormalizedLocationSet,
   getArticleTagFilterQuery
 } from '~/utils/article-filters'
+import { useAuthors, normalizeAuthors } from '~/composables/useAuthor'
 
 import appMeta from "~/app.meta"
 
@@ -35,8 +36,8 @@ const { data } = await useAsyncData(route.path, async () => {
   return null
 })
 
-// Fetch author data from authors collection
-const authorData = data.value?.author ? await useAuthor(data.value.author) : null
+// Fetch author data from authors collection (supports multiple authors)
+const authorsData = data.value?.author ? await useAuthors(data.value.author) : []
 
 // Format date using useState to prevent hydration mismatch
 const formattedDate = useState(`article-date-${route.path}`, () => {
@@ -107,7 +108,12 @@ const getTagFilterLink = (tag: string) => ({
 const relatedAuthorsMap = ref<Record<string, Author>>({})
 
 if (links.value) {
-  const uniqueAuthors = [...new Set(links.value.map(article => article.author))]
+  const uniqueAuthors = new Set<string>()
+  links.value.forEach(article => {
+    const authorNames = normalizeAuthors(article.author)
+    authorNames.forEach((name: string) => uniqueAuthors.add(name))
+  })
+
   for (const authorName of uniqueAuthors) {
     try {
       const authorInfo = await useAuthor(authorName)
@@ -173,7 +179,7 @@ function updateMeta() {
   // if (!data.value.date) missingFields.push('date');
   // if (!data.value.tags || data.value.tags.length === 0) missingFields.push('tags');
   // if (!authorData?.name) missingFields.push('author.name');
-  
+
   // if (missingFields.length > 0) {
   //   console.warn('⚠️ Missing required fields:', missingFields.join(', '));
   // }
@@ -187,9 +193,9 @@ function updateMeta() {
       // datePublished: dayjs(data.value?.date, "YYYY-MM-DD").toDate().toString(),
       keywords: data.value?.tags,
       author: {
-        name: authorData?.name,
-        description: authorData?.description,
-        image: authorData?.avatar,
+        name: authorsData[0]?.name,
+        description: authorsData[0]?.description,
+        image: authorsData[0]?.avatar,
       },
       publisher: definePerson({
         name: appMeta.author.name,
@@ -215,8 +221,8 @@ function updateMeta() {
     thumbnail: data.value?.thumbnail,
     title: data.value?.title,
     author: {
-      name: authorData?.name,
-      image: authorData?.avatar,
+      name: authorsData[0]?.name,
+      image: authorsData[0]?.avatar,
     },
   })
 }
@@ -269,18 +275,21 @@ function updateMeta() {
               </UBadge>
             </NuxtLink>
           </div>
-          <AuthorCard
-            v-if="authorData"
-            :author="{
-              name: authorData.name,
-              description: authorData.description,
-              avatar: authorData.avatar,
-              url: authorData.url,
-              socials: authorData.socials
-            }"
-            :clickable="true"
-            @click="navigateTo(`/authors/${getAuthorSlug(authorData.name)}`)"
-          />
+          <div class="flex flex-wrap gap-2">
+            <AuthorCard
+              v-for="author in authorsData"
+              :key="author.name"
+              :author="{
+                name: author.name,
+                description: author.description,
+                avatar: author.avatar,
+                url: author.url,
+                socials: author.socials
+              }"
+              :clickable="true"
+              @click="navigateTo(`/authors/${getAuthorSlug(author.name)}`)"
+            />
+          </div>
         </div>
         <div class="flex flex-row items-center gap-4">
           <p class="flex flex-row items-center gap-1 typ-sublabel">
@@ -308,23 +317,27 @@ function updateMeta() {
         :value="data"
         class="markdown-content flex-1"
       />
-      <template v-if="authorData">
-        <AuthorAboutCard
-          :src="authorData.avatar"
-          :name="authorData.name"
-          :description="authorData.description"
-          :url="authorData.url"
-          :socials="authorData.socials"
-        >
-          <template
-            v-if="authorData.bio"
-            #body
+      <template v-if="authorsData.length > 0">
+        <div class="flex flex-col gap-4">
+          <AuthorAboutCard
+            v-for="author in authorsData"
+            :key="author.name"
+            :src="author.avatar"
+            :name="author.name"
+            :description="author.description"
+            :url="author.url"
+            :socials="author.socials"
           >
-            <p class="text-sm text-muted mt-2">
-              {{ authorData.bio }}
-            </p>
-          </template>
-        </AuthorAboutCard>
+            <template
+              v-if="author.bio"
+              #body
+            >
+              <p class="text-sm text-muted mt-2">
+                {{ author.bio }}
+              </p>
+            </template>
+          </AuthorAboutCard>
+        </div>
       </template>
       <USeparator class="mt-4 mb-4" />
       <p class="font-semibold mb-4">
