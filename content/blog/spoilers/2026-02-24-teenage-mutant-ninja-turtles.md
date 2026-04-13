@@ -178,7 +178,7 @@ rating: 8
 ---
 Carta estremamente solida nella semplicità che offre.
 
-Le liste in cui inserire una versione estremamente migliorata di [[Somber Hoverguard]] sono tutte pressoché simili: pile artefattose midrange. Nel caso di Leonardo, Big Brother abbiamo parlato di [[Azorius Glitters]] (e magari questa carta apre in effetti a un approccio più Aggro-oriented di Affinity, rispetto all'attuale praticato da Grixis), però è opportuno ricordare che anche il solo prendere la lista stock di Affinity o di Esper fa fare un salto di qualità a queste pile.
+Le liste in cui inserire una versione estremamente migliorata di [[Somber Hoverguard]] sono tutte pressoché simili: pile artefattose midrange. Nel caso di Leonardo, Big Brother abbiamo parlato di Azorius Glitters (e magari questa carta apre in effetti a un approccio più Aggro-oriented di Affinity, rispetto all'attuale praticato da Grixis), però è opportuno ricordare che anche il solo prendere la lista stock di Affinity o di Esper fa fare un salto di qualità a queste pile.
 
 Nel caso di Grixis Affinity è evidente: manca una creatura che abbini un rapporto costo/body buono (oltre a [[Refurbished Familiar]] e [[Myr Enforcer]] ) dato la mancanza di mana-fixing adeguato nella manabase delle liste di Affinity attuali. Badate che i tempi in cui si usciva di casa con 12 ponti e 8 terre di Mirrodin sono lontani, oggi si preferisce un approccio diametralmente opposto, con al massimo 8 dual-lands (così da garantire un early game più "fluido").
 
