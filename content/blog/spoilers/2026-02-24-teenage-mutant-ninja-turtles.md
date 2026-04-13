@@ -31,7 +31,7 @@ card: Ice Cream Kitty
 ---
 ::
 
-::reviewer
+::reviewer-opinion-opinion
 ---
 name: Pietro Bragioto
 rating: 6
@@ -45,7 +45,7 @@ Ma anche spostandoci nel mondo di Altar Tron, non vedo come questa carta possa e
 Questa è la carta riempitiva di questa Top 4 e si è guadagnata il posto per avere un effetto unico per il suo costo di mana nel panorama Pauper. Potrebbe avere il suo spazio come sac outlet che pesca in qualche mazzo combo in futuro o potrei sbagliarmi sul fatto che possa essere già giocabile: per questo la sufficienza risicata.
 ::
 
-::reviewer
+::reviewer-opinion
 ---
 name: Alessandro Moretti
 rating: 6
@@ -77,7 +77,7 @@ card: Raphael, Though Turtle
 ---
 ::
 
-::reviewer
+::reviewer-opinion
 ---
 name: Pietro Bragioto
 rating: 6.5
@@ -94,7 +94,7 @@ Partendo dal fatto che non me ne intendo troppo dell'archetipo e la mia prima pu
 Dopo l'hype iniziale forse questa è la leggendaria di cui ho maggior sfiducia.
 ::
 
-::reviewer
+::reviewer-opinion
 ---
 name: Alessandro Moretti
 rating: 7
@@ -123,7 +123,7 @@ card: Leonardo, Big Brother
 ---
 ::
 
-::reviewer
+::reviewer-opinion
 ---
 name: Pietro Bragioto
 rating: 7.5
@@ -154,7 +154,7 @@ card: Utrom Monitor
 ---
 ::
 
-::reviewer
+::reviewer-opinion
 ---
 name: Pietro Bragioto
 rating: 8
@@ -171,7 +171,7 @@ Il 3/3 resta sotto Crisalide e Bolt, tuttavia sa al mazzo 8 volanti a costo virt
 Da capire al posto di cosa possa entrare nella lista attuale di Affinity, per i più pessimisti potrebbe addirittura non entrare, tuttavia sono fiducioso si testeranno liste belle aggressive di Affinity old style con Tamburi, Rattleclaw e magari qualche impulso rosso al posto dell'engine più potente ma più lento delle dispute.
 ::
 
-::reviewer
+::reviewer-opinion
 ---
 name: Alessandro Moretti
 rating: 8
