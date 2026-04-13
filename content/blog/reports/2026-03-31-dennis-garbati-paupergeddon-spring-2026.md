@@ -13,7 +13,6 @@ tags:
 decks:
   - Terror
 thumbnail: /assets/blog/arts/ugl-43-goblin-bookie.jpg
-published: true
 ---
 
 ::warning

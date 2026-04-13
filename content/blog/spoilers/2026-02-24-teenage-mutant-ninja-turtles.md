@@ -134,7 +134,7 @@ Sento già i vari nostalgici di [[All that Glitters]] vociferare di un possibile
 Partenze con tamburi, totteri e thraben varie capitalizzate e fatte luccicare dall'incarcerato incantesimo erano devastanti, mentre Leonardo rende pericolosi solo i nostri board wide senza tenere conto di tamburi, clue o terre artefattose.
 
 Non penso che questa nuova stampa, benchè forte, possa dare nuova linfa a quell'archetipo e riportarlo in auge, tuttavia è un payoff abbastanza scontato in tutti quei mazzi che fanno dell'andare wide la propria forza e necessitano di ulteriori Payoff in tal senso: il Big Brother affiancherà [[Guardians' Pledge]] in White Weenie scalzando [[Spider-Man, Web-Slinger]] e mandandolo anticipatamente in pensione.
-Sninjare le [[Thraben Inspector]] resta una value play gradita ma dare un follow up devastante a quel [[Battle Screech]] a turno 4 è incredibile: ora bianchino ha un payoff che è anche una creatura e sta pure fuori da [[Cast Down]] !
+Sninjare le [[Thraben Inspector]] resta una value play gradita ma dare un follow up devastante a quel [[Battle Screech]] a turno 4 è incredibile: ora bianchino ha un payoff che è anche una creatura e sta pure fuori da [[Cast Down]]!
 
 Il monocolor storicamente più scarso del formato sta per ricevere l'ennesimo buff che va a smussarne la lacuna più evidente ossia quella di non avere delle chiusure consistenti di quinto turno nei Mu dove è necessario fare race, un 2x minimo di Leonardo andrà subito testato.
 Per lenire la debolezza di poter giocare solo 4 carte come [[Battle Screech]], probabilmente bisognerà aspettare ancora molte lune.
