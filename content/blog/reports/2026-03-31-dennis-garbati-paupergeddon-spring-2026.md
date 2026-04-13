@@ -11,8 +11,9 @@ tags:
   - Paupergeddon
   - Top 32
 decks:
-  - U Terror
+  - Terror
 thumbnail: /assets/blog/arts/ugl-43-goblin-bookie.jpg
+published: true
 ---
 
 ::warning

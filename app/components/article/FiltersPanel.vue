@@ -263,7 +263,6 @@ const activeFilters = computed(() => {
             :options="deckOptions"
             :selected-value="selectedDeck ? normalizeArticleFilterValue(selectedDeck) : null"
             all-label="Tutti i deck"
-            :default-open="false"
             :max-height="true"
             @select="emit('set-deck', $event)"
           />
