@@ -6,5 +6,5 @@ tags:
 date: 2023-07-26
 author: Pietro Bragioto
 thumbnail: /assets/blog/sets/commander-masters.jpg
-published: true
+published: false
 ---

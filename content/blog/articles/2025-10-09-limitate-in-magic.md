@@ -7,7 +7,7 @@ tags:
 date: 2025-10-09
 author: Pietro Bragioto
 thumbnail: /assets/blog/articles/jinxs-monkey-bomb.jpg
-published: true
+published: false
 ---
 
 <!-- with credits -->

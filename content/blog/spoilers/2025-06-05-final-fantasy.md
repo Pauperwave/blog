@@ -6,5 +6,5 @@ tags:
 date: 2025-06-05
 author: Pietro Bragioto
 thumbnail: /assets/blog/sets/final-fantasy.jpeg
-published: true
+published: false
 ---

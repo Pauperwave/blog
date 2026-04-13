@@ -6,5 +6,5 @@ tags:
 date: 2020-09-11
 author: Pietro Bragioto
 thumbnail: /assets/blog/sets/zendikar-rising.jpeg
-published: true
+published: false
 ---

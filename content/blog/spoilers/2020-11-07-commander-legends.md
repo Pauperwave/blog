@@ -6,5 +6,5 @@ tags:
 date: 2020-11-07
 author: Pietro Bragioto
 thumbnail: /assets/blog/sets/commander-legends.jpeg
-published: true
+published: false
 ---

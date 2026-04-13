@@ -6,5 +6,5 @@ tags:
 date: 2022-05-31
 author: Pietro Bragioto
 thumbnail: /assets/blog/sets/battle-for-baldurs-gate.jpg
-published: true
+published: false
 ---

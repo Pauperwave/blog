@@ -6,5 +6,5 @@ tags:
 date: 2022-02-05
 author: Pietro Bragioto
 thumbnail: /assets/blog/sets/kamigawa-neon-dinasty.jpeg
-published: true
+published: false
 ---

@@ -6,5 +6,5 @@ tags:
 date: 2021-11-06
 author: Pietro Bragioto
 thumbnail: /assets/blog/sets/innistrad-crimson-vow.jpeg
-published: true
+published: false
 ---

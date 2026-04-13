@@ -6,5 +6,5 @@ tags:
 date: 2021-09-15
 author: Pietro Bragioto
 thumbnail: /assets/blog/sets/innistrad-midnight-hunt.jpeg
-published: true
+published: false
 ---

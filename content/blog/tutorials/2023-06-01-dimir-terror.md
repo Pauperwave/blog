@@ -9,5 +9,5 @@ author: "Alessandro Moretti"
 author_avatar: /assets/avatars/moretti.png
 author_description: "Presidente di Pauperwave"
 thumbnail: /assets/blog/arts/mmq-61-brainstorm.jpg
-published: true
+published: false
 ---

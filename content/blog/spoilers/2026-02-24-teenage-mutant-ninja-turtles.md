@@ -31,7 +31,7 @@ card: Ice Cream Kitty
 ---
 ::
 
-::reviewer-opinion-opinion
+::reviewer-opinion
 ---
 name: Pietro Bragioto
 rating: 6
