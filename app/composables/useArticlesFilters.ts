@@ -275,17 +275,20 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
     author?: string | null
     location?: string | null
     tag?: string | null
+    deck?: string | null
   }) => {
     const category = next.category === undefined ? selectedCategory.value : next.category
     const author = next.author === undefined ? selectedAuthor.value : next.author
     const location = next.location === undefined ? selectedLocation.value : next.location
     const tag = next.tag === undefined ? selectedTag.value : next.tag
+    const deck = next.deck === undefined ? selectedDeck.value : next.deck
 
     const query: Record<string, string> = {}
     if (category) query.category = category
     if (author) query.author = author
     if (location) query.location = normalizeArticleFilterValue(location)
     if (tag) query.tag = normalizeArticleFilterValue(tag)
+    if (deck) query.deck = normalizeArticleFilterValue(deck)
     void navigateTo({ query }, { replace: true })
   }
 

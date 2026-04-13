@@ -144,6 +144,15 @@ const activeFilters = computed(() => {
     })
   }
 
+  if (props.selectedDeckLabel) {
+    filters.push({
+      type: 'Deck',
+      label: props.selectedDeckLabel,
+      color: 'warning' as const,
+      clear: () => emit('set-deck', null)
+    })
+  }
+
   return filters
 })
 </script>
@@ -240,7 +249,7 @@ const activeFilters = computed(() => {
             all-label="Tutte le localita"
             color="info"
             :options="locationOptions"
-            :selected-value="selectedLocation"
+            :selected-value="selectedLocation ? normalizeArticleFilterValue(selectedLocation) : null"
             :default-open="false"
             @select="emit('set-location', $event)"
           />
@@ -252,7 +261,7 @@ const activeFilters = computed(() => {
             plural-label="deck"
             color="warning"
             :options="deckOptions"
-            :selected-value="selectedDeck"
+            :selected-value="selectedDeck ? normalizeArticleFilterValue(selectedDeck) : null"
             all-label="Tutti i deck"
             :default-open="false"
             :max-height="true"
@@ -266,7 +275,7 @@ const activeFilters = computed(() => {
             plural-label="tag"
             color="primary"
             :options="tagOptions"
-            :selected-value="selectedTag"
+            :selected-value="selectedTag ? normalizeArticleFilterValue(selectedTag) : null"
             all-label="Tutti i tag"
             :max-height="true"
             @select="emit('set-tag', $event)"
