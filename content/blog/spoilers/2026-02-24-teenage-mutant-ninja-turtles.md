@@ -99,9 +99,9 @@ Dopo l'hype iniziale forse questa è la leggendaria di cui ho maggior sfiducia.
 name: Alessandro Moretti
 rating: 7
 ---
-La tartaruga col mana rosso è una ristampa funzionale del golem di Dredge ( [[Molten Gatekeeper]] ).
+La tartaruga col mana rosso è una ristampa funzionale del golem di Dredge ([[Molten Gatekeeper]]).
 
-Io, personalmente, la vedo un'auto-inclusion in Mono Red Dredge – ovviamente assieme a [[Molten Gatekeeper]]. Pure nel caso di Dredge tradizionale non la vedo male e si può tranquillamente pensare di inserirla come sostituzione di qualche flex slot.
+Io, personalmente, la vedo un'auto-inclusion in Mono Red Dredge - ovviamente assieme a [[Molten Gatekeeper]]. Pure nel caso di Dredge tradizionale non la vedo male e si può tranquillamente pensare di inserirla come sostituzione di qualche flex slot.
 Ovviamente tutto questo discorso si basa sul fatto che il macro-archetipo di Dredge ha tutto un gameplan swarm basato su critters e creature con Unearth che permettono di concatenare danno aggiuntivo senza passare alla finisher principale di [[Dread Return]], quindi proponendo un play around per l'hate avversario e al contempo minacciare danni letali in una partita che si allunga di uno, due o più turni.
 
 Raphael in definitiva è una sincrasi tra costo di mana minore/maggiore e possibilità di lanciarlo dalla mano anziché dal cimitero, un miglioramento insomma.
@@ -180,14 +180,14 @@ Carta estremamente solida nella semplicità che offre.
 
 Le liste in cui inserire una versione estremamente migliorata di [[Somber Hoverguard]] sono tutte pressoché simili: pile artefattose midrange. Nel caso di Leonardo, Big Brother abbiamo parlato di Azorius Glitters (e magari questa carta apre in effetti a un approccio più Aggro-oriented di Affinity, rispetto all'attuale praticato da Grixis), però è opportuno ricordare che anche il solo prendere la lista stock di Affinity o di Esper fa fare un salto di qualità a queste pile.
 
-Nel caso di Grixis Affinity è evidente: manca una creatura che abbini un rapporto costo/body buono (oltre a [[Refurbished Familiar]] e [[Myr Enforcer]] ) dato la mancanza di mana-fixing adeguato nella manabase delle liste di Affinity attuali. Badate che i tempi in cui si usciva di casa con 12 ponti e 8 terre di Mirrodin sono lontani, oggi si preferisce un approccio diametralmente opposto, con al massimo 8 dual-lands (così da garantire un early game più "fluido").
+Nel caso di Grixis Affinity è evidente: manca una creatura che abbini un rapporto costo/body buono (oltre a [[Refurbished Familiar]] e [[Myr Enforcer]]) dato la mancanza di mana-fixing adeguato nella manabase delle liste di Affinity attuali. Badate che i tempi in cui si usciva di casa con 12 ponti e 8 terre di Mirrodin sono lontani, oggi si preferisce un approccio diametralmente opposto, con al massimo 8 dual-lands (così da garantire un early game più "fluido").
 
 Nel caso di Esper, Affinity o GlintBlade, il problema principale è il mazzo in sé: scambiare il bianco per il rosso ha un costo opportunità evidente, ovvero, perdere il colore rosso priva il mazzo di [[Krark-Clan Shaman]], che è la principale motivazione per giocare Grixis Affinity.
 
 Si aggiunge a questo che, almeno nella lista Orzhov, [[Refurbished Familiar]] costringe a giocare un numero rilevante di terre artefatto per il solo Famiglio, il che espone notevolmente a [[Dust to Dust]] et similia, ed abbiamo un resoconto del perché Orzhov ed Esper succhiano.
 Non mettendo in dubbio la validità di queste tecno-operazioni, è evidente però la fragilità di una combo di carte specifiche, deboli singolarmente, contro un meta che si basa su singole minacce iper-efficienti (vedasi Elfi, Burn e Tempo).
 
-Aggiungiamo a questo la mancanza di un payoff adeguato: laddove in Grixis [[Galvanic Blast]] e [[Makeshift Munitions]] coprono bene più parti dello spettro della partita (parte Control e parte Aggro), in Esper abbiamo un motore di value in forma di [[Glint Hawk]] (e a volte [[Kor Skyfisher]] ) che si dovrebbe esplicare in un vantaggio incrementale aggiuntivo in combo con [[Refurbished Familiar]] e [[Cryogen Relic]].
+Aggiungiamo a questo la mancanza di un payoff adeguato: laddove in Grixis [[Galvanic Blast]] e [[Makeshift Munitions]] coprono bene più parti dello spettro della partita (parte Control e parte Aggro), in Esper abbiamo un motore di value in forma di [[Glint Hawk]] (e a volte [[Kor Skyfisher]]) che si dovrebbe esplicare in un vantaggio incrementale aggiuntivo in combo con [[Refurbished Familiar]] e [[Cryogen Relic]].
 
 Di conseguenza, vedo evidente come Utrom Monitor migliori Esper e per gli stessi motivi accennati prima per Grixis. La grossa differenza però sta nel fatto che Esper, rispetto a Grixis, ha un numero di minacce maggiori e quindi migliora ulteriormente un piano già forte con un'aggiunta in linea con quanto già propone.
 ::
