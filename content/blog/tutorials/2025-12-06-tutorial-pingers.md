@@ -3,7 +3,6 @@ title: "Mazzo Pingers"
 description: "Introduzione a Pingers"
 tags: []
 decks:
-  - Monored
   - Pingers
 date: 2025-12-06
 author: Pietro Bragioto
