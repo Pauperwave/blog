@@ -211,10 +211,10 @@ const activeFilters = computed(() => {
           <FilterSection
             label="Categoria (piu articoli)"
             plural-label="categorie"
+            all-label="Tutte le categorie"
             color="neutral"
             :options="categoryOptions"
             :selected-value="selectedCategory"
-            all-label="Tutte le categorie"
             @select="emit('set-category', $event)"
           />
 
@@ -222,10 +222,10 @@ const activeFilters = computed(() => {
           <FilterSection
             label="Autore (piu articoli)"
             plural-label="autori"
+            all-label="Tutti gli autori"
             color="neutral"
             :options="authorOptions"
             :selected-value="selectedAuthor"
-            all-label="Tutti gli autori"
             :default-open="false"
             @select="emit('set-author', $event)"
           />
@@ -234,10 +234,11 @@ const activeFilters = computed(() => {
           <FilterSection
             label="Luogo (A-Z)"
             plural-label="localita"
+            all-label="Tutte le localita"
             color="info"
             :options="locationOptions"
             :selected-value="selectedLocation"
-            all-label="Tutte le localita"
+            :default-open="false"
             @select="emit('set-location', $event)"
           />
 
