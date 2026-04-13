@@ -65,6 +65,7 @@ Potrebbe validare una versione Mono Green di Altar Tron: tagliare [[Fanatical Of
 
 ::magic-card-rating
 ---
+cardName: Ice Cream Kitty
 rating: 6
 ---
 ::
@@ -111,6 +112,7 @@ Per quanto riguarda applicazioni diverse non è nemmeno scontato non vederlo, in
 
 ::magic-card-rating
 ---
+cardName: Raphael, Though Turtle
 rating: 6.5
 ---
 ::
@@ -142,6 +144,7 @@ Questa ipotesi, potenzialmente, si applica bene anche a un orientamento più sim
 
 ::magic-card-rating
 ---
+cardName: Leonardo, Big Brother
 rating: 7
 ---
 ::
@@ -194,6 +197,7 @@ Di conseguenza, vedo evidente come Utrom Monitor migliori Esper e per gli stessi
 
 ::magic-card-rating
 ---
+cardName: Utrom Monitor
 rating: 8
 ---
 ::

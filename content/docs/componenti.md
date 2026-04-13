@@ -385,6 +385,121 @@ card: Repel Calamity
 ---
 ::
 
+## `magic-card-rating`
+
+Componente per mostrare il voto di una carta su una scala da 0 a 10.
+
+### Come usarlo
+
+```md
+::magic-card-rating
+---
+cardName: Nome della carta
+rating: 6.5
+---
+::
+```
+
+### Esempi di voti da 0 a 10
+
+::magic-card-rating
+---
+cardName: Pessimo
+rating: 0
+::
+
+::magic-card-rating
+---
+cardName: Molto scarso
+rating: 1
+::
+
+::magic-card-rating
+---
+cardName: Scarso
+rating: 2
+::
+
+::magic-card-rating
+---
+cardName: Sotto la media
+rating: 3
+::
+
+::magic-card-rating
+---
+cardName: Nella media
+rating: 4
+::
+
+::magic-card-rating
+---
+cardName: Discreto
+rating: 5
+::
+
+::magic-card-rating
+---
+cardName: Buono
+rating: 6
+::
+
+::magic-card-rating
+---
+cardName: Molto buono
+rating: 6.5
+::
+
+::magic-card-rating
+---
+cardName: Ottimo
+rating: 7
+::
+
+::magic-card-rating
+---
+cardName: Eccellente
+rating: 7.5
+::
+
+::magic-card-rating
+---
+cardName: Straordinario
+rating: 8
+::
+
+::magic-card-rating
+---
+cardName: Perfetto
+rating: 8.5
+::
+
+::magic-card-rating
+---
+cardName: Leggendario
+rating: 9
+::
+
+::magic-card-rating
+---
+cardName: Dio delle carte
+rating: 9.5
+::
+
+::magic-card-rating
+---
+cardName: Impossibile
+rating: 10
+::
+
+### Colori dinamici
+
+Il colore del badge cambia in base al voto:
+- **0-3.9**: Rosso (error) - Voto insufficiente
+- **4-5.9**: Giallo/Arancio (warning) - Voto mediocre
+- **6-7.9**: Blu (primary) - Voto buono
+- **8-10**: Verde (success) - Voto eccellente
+
 ## `magic-sideboard-guide`
 
 ::warning
