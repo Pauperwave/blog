@@ -1,8 +1,8 @@
 ---
 title: Teenage Mutant Ninja Turtles
 author:
-  - Pietro Bragioto
   - Alessandro Moretti
+  - Pietro Bragioto
 category: spoiler
 date: 2026-02-24
 description: Spoilered Pauper cards in Teenage Mutant Ninja Turtles
@@ -25,7 +25,7 @@ Diamo una rispolveratina ai criteri utilizzati per dare i voti.
 
 ## 4. Ice Cream Kitty
 
-::MagicCardDisplay
+::magic-card-display
 ---
 card: Ice Cream Kitty
 ---
@@ -63,7 +63,7 @@ Se vediamo Ice Cream Kitty come un enabler aggiuntivo, o meglio, un sac outlet p
 Potrebbe validare una versione Mono Green di Altar Tron: tagliare [[Fanatical Offering]], [[Eviscerator's Insight]] e [[Ichor Wellspring]] per [[Malevolent Rumble]] e [[Ancient Stirrings]] diventa un costo solo nel caso non si abbia modo di andare sopra ai 1-for-1, e il gattino è un modo per ottenere vantaggio incrementale che si prende con Malevolent Rumble.
 ::
 
-::overall-rating
+::magic-card-rating
 ---
 rating: 6
 ---
@@ -71,7 +71,7 @@ rating: 6
 
 ## 3. Raphael, Though Turtle
 
-::MagicCardDisplay
+::magic-card-display
 ---
 card: Raphael, Though Turtle
 ---
@@ -117,7 +117,7 @@ rating: 6.5
 
 ## 2. Leonardo, Big Brother
 
-::MagicCardDisplay
+::magic-card-display
 ---
 card: Leonardo, Big Brother
 ---
@@ -148,7 +148,7 @@ rating: 7
 
 ## 1. Utrom Monitor
 
-::MagicCardDisplay
+::magic-card-display
 ---
 card: Utrom Monitor
 ---
