@@ -163,7 +163,7 @@ Un 3/3 volare vanilloso potrebbe non suscitare troppe attese ma il fatto che riv
 Mi riferisco all'Affinity tradizionale Grixis perché non penso che la versione Esper con [[Cryogen Relic]] e piccioni vari sia interessata a un volante vanilla quando ha già 12 volanti e il suo piano principale è fare value, nella versione Esper Ninja potrebbe già avere più senso ma in questo caso stiamo parlando di un rogue deck che deve ancora dimostrare tanto.
 
 Il problema principale dell'Affo odierno sta nel non riuscire a mettere una pressione decente e consistente contro gli altri Control del formato come Jund e Gardens che normalmente tendono a divorarlo salvo grande densità di minacce aka [[Myr Enforcer]] e [[Refurbished Familiar]] nelle prime 15.
-Ultimamente la situazione è leggermente migliorata perché si sta facendo affidamento a una carta come [[Black Mage's Road]] per far passare continuativamente dei danni senza passare per la combat.
+Ultimamente la situazione è leggermente migliorata perché si sta facendo affidamento a una carta come [[Black Mage's Rod]] per far passare continuativamente dei danni senza passare per la combat.
 
 Questo cervello volante può potenzialmente dare ad Affinity un enorme boost restituendogli consistenza nel suo piano aggressivo, cervello tra l'altro artefattoso che va quindi a scontare i sempre presenti [[Myr Enforcer]] e, per i player più mostruosi, anche [[Gearseeker Serpent]].
 Il 3/3 resta sotto Crisalide e Bolt, tuttavia sa al mazzo 8 volanti a costo virtualmente 1 con cui mettere pressione, oltre ad interfacciarsi bene contro le stats 2/1 di [[Sneaky Snacker]] e [[Refurbished Familiar]] avversari.
