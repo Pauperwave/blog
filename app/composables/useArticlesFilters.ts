@@ -165,17 +165,18 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
       })
   })
 
-  const tagFilterOptions = computed<Array<{ tag: string; count: number; isDeck: boolean }>>(() => {
-    const options: Array<{ tag: string; count: number; isDeck: boolean }> = []
+  const tagFilterOptions = computed<Array<{ tag: string; count: number }>>(() => {
+    // Get all deck names to exclude from generic tags
+    const deckNames = new Set<string>()
+    Object.keys(filterCounts.value.deckCounts).forEach(deck => deckNames.add(deck))
 
-    // Add common tags
+    const options: Array<{ tag: string; count: number }> = []
+
+    // Add common tags, excluding deck tags
     Object.entries(filterCounts.value.tagCounts).forEach(([tag, count]) => {
-      options.push({ tag, count: count as number, isDeck: false })
-    })
-
-    // Add deck tags
-    Object.entries(filterCounts.value.deckCounts).forEach(([tag, count]) => {
-      options.push({ tag, count: count as number, isDeck: true })
+      if (!deckNames.has(tag)) {
+        options.push({ tag, count: count as number })
+      }
     })
 
     return options.sort((a, b) => italianCollator.compare(a.tag, b.tag))
