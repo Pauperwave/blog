@@ -56,6 +56,9 @@ const displayedTopicTags = computed(() => {
   })
 })
 
+const deckTags = computed(() => props.article.decks || [])
+const commonTags = computed(() => props.article.tags || [])
+
 const cardVariantClasses = computed(() =>
   isLeagueArticle.value
     ? 'border-sky-300/80 dark:border-sky-600/70 bg-sky-50/50 dark:bg-sky-500/5 hover:border-sky-500 dark:hover:border-sky-400 hover:shadow-sky-500/10 dark:hover:shadow-sky-400/10'
@@ -110,7 +113,30 @@ const cardVariantClasses = computed(() =>
           {{ articleLocation }}
         </UBadge>
         <UBadge
-          v-for="tag in displayedTopicTags"
+          v-if="deckTags.length === 1"
+          :key="`${props.article.path}-deck-single`"
+          color="warning"
+          variant="soft"
+        >
+          Deck: {{ deckTags[0] }}
+        </UBadge>
+        <div
+          v-if="deckTags.length > 1"
+          :key="`${props.article.path}-deck-multiple`"
+          class="flex flex-row gap-2 items-center"
+        >
+          <span class="text-xs text-gray-600 dark:text-gray-400 font-medium">Decks:</span>
+          <UBadge
+            v-for="tag in deckTags"
+            :key="`${props.article.path}-deck-${tag}`"
+            color="warning"
+            variant="soft"
+          >
+            {{ tag }}
+          </UBadge>
+        </div>
+        <UBadge
+          v-for="tag in commonTags"
           :key="`${props.article.path}-tag-${tag}`"
           color="primary"
           variant="soft"

@@ -55,7 +55,7 @@ const emit = defineEmits<{
 const mainPanelOpen = ref(true)
 
 // Transform options for FilterSection component
-const categoryOptions = computed(() => 
+const categoryOptions = computed(() =>
   props.categoryFilterOptions.map(item => ({
     value: item.category,
     label: item.label,
@@ -63,7 +63,7 @@ const categoryOptions = computed(() =>
   }))
 )
 
-const authorOptions = computed(() => 
+const authorOptions = computed(() =>
   props.authorFilterOptions.map(author => ({
     value: author.slug,
     label: author.name,
@@ -71,7 +71,7 @@ const authorOptions = computed(() =>
   }))
 )
 
-const locationOptions = computed(() => 
+const locationOptions = computed(() =>
   props.locationFilterOptions.map(location => ({
     value: normalizeArticleFilterValue(location.location),
     label: location.location,
@@ -79,7 +79,7 @@ const locationOptions = computed(() =>
   }))
 )
 
-const tagOptions = computed(() => 
+const tagOptions = computed(() =>
   props.tagFilterOptions.map(tag => ({
     value: normalizeArticleFilterValue(tag.tag),
     label: tag.tag,
@@ -90,7 +90,7 @@ const tagOptions = computed(() =>
 // Active filters for badges
 const activeFilters = computed(() => {
   const filters = []
-  
+
   if (props.selectedCategoryLabel) {
     filters.push({
       type: 'Categoria',
@@ -99,7 +99,7 @@ const activeFilters = computed(() => {
       clear: () => emit('set-category', null)
     })
   }
-  
+
   if (props.selectedAuthorLabel) {
     filters.push({
       type: 'Autore',
@@ -108,7 +108,7 @@ const activeFilters = computed(() => {
       clear: () => emit('set-author', null)
     })
   }
-  
+
   if (props.selectedLocationLabel) {
     filters.push({
       type: 'Luogo',
@@ -117,7 +117,7 @@ const activeFilters = computed(() => {
       clear: () => emit('set-location', null)
     })
   }
-  
+
   if (props.selectedTagLabel) {
     filters.push({
       type: 'Tag',
@@ -126,7 +126,7 @@ const activeFilters = computed(() => {
       clear: () => emit('set-tag', null)
     })
   }
-  
+
   return filters
 })
 </script>
@@ -136,13 +136,13 @@ const activeFilters = computed(() => {
     <UCollapsible :default-open="true">
       <!-- Header sempre visibile -->
       <div class="mb-4">
-        <div 
+        <div
           class="flex items-center gap-2 cursor-pointer"
           @click="mainPanelOpen = !mainPanelOpen"
         >
-          <UIcon 
-            :name="mainPanelOpen ? 'i-lucide-chevron-down' : 'i-lucide-chevron-right'" 
-            class="w-5 h-5 text-primary shrink-0" 
+          <UIcon
+            :name="mainPanelOpen ? 'i-lucide-chevron-down' : 'i-lucide-chevron-right'"
+            class="w-5 h-5 text-primary shrink-0"
           />
           <div class="flex-1">
             <p class="text-xs uppercase tracking-[0.18em] text-primary font-semibold">
@@ -166,7 +166,7 @@ const activeFilters = computed(() => {
         <span class="rounded-md bg-warning/15 dark:bg-warning/20 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-warning">
           Filtri attivi
         </span>
-        
+
         <UBadge
           v-for="(filter, index) in activeFilters"
           :key="index"
@@ -177,7 +177,7 @@ const activeFilters = computed(() => {
         >
           {{ filter.type }}: {{ filter.label }}
         </UBadge>
-        
+
         <!-- Bottone Reset filtri -->
         <UButton
           size="sm"
@@ -203,7 +203,7 @@ const activeFilters = computed(() => {
             all-label="Tutte le categorie"
             @select="emit('set-category', $event)"
           />
-          
+
           <!-- Autore -->
           <FilterSection
             label="Autore (piu articoli)"
@@ -215,7 +215,7 @@ const activeFilters = computed(() => {
             :default-open="false"
             @select="emit('set-author', $event)"
           />
-          
+
           <!-- Luogo -->
           <FilterSection
             label="Luogo (A-Z)"
@@ -226,9 +226,10 @@ const activeFilters = computed(() => {
             all-label="Tutte le localita"
             @select="emit('set-location', $event)"
           />
-          
-          <!-- Tag -->
+
+          <!-- Tags -->
           <FilterSection
+            v-if="tagOptions.length > 0"
             label="Tag (A-Z)"
             plural-label="tag"
             color="primary"

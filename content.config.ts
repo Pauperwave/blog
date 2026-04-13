@@ -7,6 +7,7 @@ const baseContentSchema = z.object({
   date: z.string(),
   description: z.string(),
   tags: z.optional(z.array(z.string())).default([]),
+  decks: z.optional(z.array(z.string())).default([]),
   location: z.optional(z.string()).default(''),
   author: z.union([z.string(), z.array(z.string())]), // Single author (string) or multiple authors (array)
   thumbnail: z.string(),

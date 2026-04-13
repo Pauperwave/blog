@@ -84,6 +84,7 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
     const authorCounts: Record<string, number> = {}
     const locationCounts: Record<string, number> = {}
     const tagCounts: Record<string, number> = {}
+    const deckCounts: Record<string, number> = {}
 
     preparedArticleFilters.value.forEach(({ article, topicTags }) => {
       if (typeof article.category === 'string') {
@@ -104,13 +105,21 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
       topicTags.forEach((tag) => {
         tagCounts[tag] = (tagCounts[tag] || 0) + 1
       })
+
+      // Count deck tags from the decks field
+      if (article.decks && Array.isArray(article.decks)) {
+        article.decks.forEach((deck) => {
+          deckCounts[deck] = (deckCounts[deck] || 0) + 1
+        })
+      }
     })
 
     return {
       categoryCounts,
       authorCounts,
       locationCounts,
-      tagCounts
+      tagCounts,
+      deckCounts
     }
   })
 
@@ -131,6 +140,14 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
   const getArticleTopicTags = (article: AnyArticle) =>
     preparedArticleFiltersByRef.value.get(article)?.topicTags || buildArticleTopicTags(article, globalNormalizedLocationSet.value)
 
+  const getArticleDeckTags = (article: AnyArticle) => {
+    return article.decks || []
+  }
+
+  const getArticleCommonTags = (article: AnyArticle) => {
+    return article.tags || []
+  }
+
   const authorFilterOptions = computed<Array<{ name: string; slug: string; count: number }>>(() => {
     return (Object.entries(filterCounts.value.authorCounts) as Array<[string, number]>)
       .map(([authorKey, count]) => {
@@ -148,10 +165,20 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
       })
   })
 
-  const tagFilterOptions = computed<Array<{ tag: string; count: number }>>(() => {
-    return (Object.entries(filterCounts.value.tagCounts) as Array<[string, number]>)
-      .map(([tag, count]) => ({ tag, count }))
-      .sort((a, b) => italianCollator.compare(a.tag, b.tag))
+  const tagFilterOptions = computed<Array<{ tag: string; count: number; isDeck: boolean }>>(() => {
+    const options: Array<{ tag: string; count: number; isDeck: boolean }> = []
+
+    // Add common tags
+    Object.entries(filterCounts.value.tagCounts).forEach(([tag, count]) => {
+      options.push({ tag, count: count as number, isDeck: false })
+    })
+
+    // Add deck tags
+    Object.entries(filterCounts.value.deckCounts).forEach(([tag, count]) => {
+      options.push({ tag, count: count as number, isDeck: true })
+    })
+
+    return options.sort((a, b) => italianCollator.compare(a.tag, b.tag))
   })
 
   const authorSlugToName = computed<Record<string, string>>(() =>
@@ -275,6 +302,8 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
     hasActiveFilters,
     filteredArticles,
     getArticleTopicTags,
+    getArticleDeckTags,
+    getArticleCommonTags,
     setCategoryFilter,
     setAuthorFilter,
     setLocationFilter,
