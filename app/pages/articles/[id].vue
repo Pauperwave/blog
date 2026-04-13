@@ -105,22 +105,23 @@ const getTagFilterLink = (tag: string) => ({
 })
 
 // Fetch author data for related articles
-const relatedAuthorsMap = ref<Record<string, Author>>({})
+const relatedAuthorsMap = ref<Record<string, Author[]>>({})
 
 if (links.value) {
-  const uniqueAuthors = new Set<string>()
-  links.value.forEach(article => {
+  for (const article of links.value) {
     const authorNames = normalizeAuthors(article.author)
-    authorNames.forEach((name: string) => uniqueAuthors.add(name))
-  })
+    const authorsData: Author[] = []
 
-  for (const authorName of uniqueAuthors) {
-    try {
-      const authorInfo = await useAuthor(authorName)
-      relatedAuthorsMap.value[authorName] = authorInfo
-    } catch (e) {
-      console.error(`Failed to load author data for ${authorName}:`, e)
+    for (const authorName of authorNames) {
+      try {
+        const authorInfo = await useAuthor(authorName)
+        authorsData.push(authorInfo)
+      } catch (e) {
+        console.error(`Failed to load author data for ${authorName}:`, e)
+      }
     }
+
+    relatedAuthorsMap.value[article.path] = authorsData
   }
 }
 
@@ -348,7 +349,7 @@ function updateMeta() {
           v-for="article in links"
           :key="article.path"
           :article="article"
-          :author-data="relatedAuthorsMap[article.author]"
+          :author-data="relatedAuthorsMap[article.path]"
           :badge="getBadge(article.date)"
         />
       </UBlogPosts>
