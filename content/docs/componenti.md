@@ -402,6 +402,12 @@ rating: 6.5
 
 ### Esempi di voti da 0 a 10
 
+Il colore del badge cambia in base al voto:
+- **0 - 3.5**: Rosso (error) - Voto insufficiente
+- **4 - 5.5**: Giallo/Arancio (warning) - Voto mediocre
+- **6 - 7.5**: Blu (primary) - Voto buono
+- **8 - 10**: Verde (success) - Voto eccellente
+
 ::magic-card-rating
 ---
 cardName: Pessimo
@@ -411,94 +417,44 @@ rating: 0
 ::magic-card-rating
 ---
 cardName: Molto scarso
-rating: 1
+rating: 3.5
 ::
 
 ::magic-card-rating
 ---
 cardName: Scarso
-rating: 2
-::
-
-::magic-card-rating
----
-cardName: Sotto la media
-rating: 3
-::
-
-::magic-card-rating
----
-cardName: Nella media
 rating: 4
 ::
 
 ::magic-card-rating
 ---
-cardName: Discreto
-rating: 5
+cardName: Sotto la media
+rating: 5.5
 ::
 
 ::magic-card-rating
 ---
-cardName: Buono
+cardName: Nella media
 rating: 6
 ::
 
 ::magic-card-rating
 ---
-cardName: Molto buono
-rating: 6.5
-::
-
-::magic-card-rating
----
-cardName: Ottimo
-rating: 7
-::
-
-::magic-card-rating
----
-cardName: Eccellente
+cardName: Discreto
 rating: 7.5
 ::
 
 ::magic-card-rating
 ---
-cardName: Straordinario
+cardName: Buono
 rating: 8
 ::
 
 ::magic-card-rating
 ---
-cardName: Perfetto
-rating: 8.5
-::
-
-::magic-card-rating
----
-cardName: Leggendario
-rating: 9
-::
-
-::magic-card-rating
----
-cardName: Dio delle carte
-rating: 9.5
-::
-
-::magic-card-rating
----
-cardName: Impossibile
+cardName: Molto buono
 rating: 10
 ::
-
-### Colori dinamici
-
-Il colore del badge cambia in base al voto:
-- **0-3.9**: Rosso (error) - Voto insufficiente
-- **4-5.9**: Giallo/Arancio (warning) - Voto mediocre
-- **6-7.9**: Blu (primary) - Voto buono
-- **8-10**: Verde (success) - Voto eccellente
 
 ## `magic-sideboard-guide`
 
