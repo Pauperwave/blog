@@ -8,6 +8,7 @@ import {
   combineArticles
 } from '~/constants/content-config'
 import { AUTHOR_SOCIAL_LINKS, type AuthorSocials } from '~/constants/author-socials'
+import { normalizeAuthors } from '~/composables/useAuthor'
 
 interface AuthorRecord {
   name: string
@@ -59,9 +60,10 @@ const authorsWithStats = computed<AuthorWithStats[]>(() => {
 
   return (authors.value as AuthorRecord[])
     .map((author) => {
-      const authorArticles = publishedArticles.value.filter(
-        article => article.author.toLowerCase() === author.name.toLowerCase()
-      )
+      const authorArticles = publishedArticles.value.filter(article => {
+        const authorNames = normalizeAuthors(article.author)
+        return authorNames.some((name: string) => name.toLowerCase() === author.name.toLowerCase())
+      })
 
       const latestArticle = authorArticles[0]
       const categoryCounts = authorArticles.reduce((acc, article) => {

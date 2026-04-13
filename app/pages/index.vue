@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Author } from '~/composables/useAuthor'
+import { normalizeAuthors } from '~/composables/useAuthor'
 import { defineWebPage } from 'nuxt-schema-org/schema'
 import appMeta from '~/app.meta'
 import {
@@ -29,7 +30,12 @@ const freshThisWeekCount = computed(() => homeArticlesData.value?.freshThisWeekC
 const authorsMap = ref<Record<string, Author>>({})
 
 if (allArticles.value.length) {
-  const uniqueAuthors = [...new Set(allArticles.value.map(article => article.author))]
+  const uniqueAuthors = new Set<string>()
+  allArticles.value.forEach(article => {
+    const authorNames = normalizeAuthors(article.author)
+    authorNames.forEach((name: string) => uniqueAuthors.add(name))
+  })
+
   for (const authorName of uniqueAuthors) {
     try {
       const authorInfo = await useAuthor(authorName)

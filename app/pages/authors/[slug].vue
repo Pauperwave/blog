@@ -8,6 +8,7 @@ import {
 } from '~/constants/content-config'
 import { getRecentArticleBadge as getBadge } from '~/utils/article-badges'
 import { buildArticleTopicTags, buildGlobalNormalizedLocationSet } from '~/utils/article-filters'
+import { normalizeAuthors } from '~/composables/useAuthor'
 
 const route = useRoute()
 const slug = route.params.slug as string
@@ -29,10 +30,11 @@ if (!authorData) {
 const { data: authorArticles } = await useAsyncData(`author-articles-${slug}`, async () => {
   const collectionsData = await queryAllCollections()
   const allArticles: AnyArticle[] = combineArticles(collectionsData)
-    .filter(article =>
-      article.published !== false &&
-      article.author.toLowerCase() === authorName.toLowerCase()
-    )
+    .filter(article => {
+      const authorNames = normalizeAuthors(article.author)
+      return article.published !== false &&
+        authorNames.some((name: string) => name.toLowerCase() === authorName.toLowerCase())
+    })
 
   return allArticles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 })

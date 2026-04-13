@@ -2,6 +2,7 @@
 import type { Author } from '~/composables/useAuthor'
 import type { AnyArticle } from '~/constants/content-config'
 import { getRecentArticleBadge as getArticleBadge } from '~/utils/article-badges'
+import { normalizeAuthors } from '~/composables/useAuthor'
 
 interface Props {
   title: string;
@@ -12,10 +13,16 @@ interface Props {
   viewAllText?: string;
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   maxItems: 3,
   viewAllText: 'Vedi tutti'
 })
+
+const getAuthorData = (article: AnyArticle) => {
+  const authorNames = normalizeAuthors(article.author)
+  const primaryAuthor = authorNames[0] || 'Unknown'
+  return props.authorsMap[primaryAuthor]
+}
 </script>
 
 <template>
@@ -40,7 +47,7 @@ withDefaults(defineProps<Props>(), {
         v-for="article in articles.slice(0, maxItems)"
         :key="article._id"
         :article="article"
-        :author-data="authorsMap[article.author]"
+        :author-data="getAuthorData(article)"
         :topic-tags="article.tags || []"
         :badge="getArticleBadge(article.date)"
       />

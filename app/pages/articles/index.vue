@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Author } from '~/composables/useAuthor'
+import { normalizeAuthors } from '~/composables/useAuthor'
 import {
   type AnyArticle,
   queryAllCollections,
@@ -22,7 +23,12 @@ const { data: articles } = await useAsyncData("articles-index", async () => {
 const authorsMap = ref<Record<string, Author>>({})
 
 if (articles.value) {
-  const uniqueAuthors = [...new Set(articles.value.map(article => article.author))]
+  const uniqueAuthors = new Set<string>()
+  articles.value.forEach(article => {
+    const authorNames = normalizeAuthors(article.author)
+    authorNames.forEach((name: string) => uniqueAuthors.add(name))
+  })
+
   for (const authorName of uniqueAuthors) {
     try {
       const authorInfo = await useAuthor(authorName)
@@ -98,7 +104,7 @@ const {
           v-for="article in filteredArticles"
           :key="article.path"
           :article="article"
-          :author-data="authorsMap[article.author]"
+          :author-data="authorsMap[normalizeAuthors(article.author)[0] || 'Unknown']"
           :topic-tags="getArticleTopicTags(article)"
           :badge="getBadge(article.date)"
         />
