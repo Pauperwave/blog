@@ -44,6 +44,9 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
   const selectedTag = computed<string | null>(() =>
     route.query.tag ? String(route.query.tag) : null
   )
+  const selectedDeck = computed<string | null>(() =>
+    route.query.deck ? String(route.query.deck) : null
+  )
 
   const categoryLabels = CATEGORY_LABELS
 
@@ -228,8 +231,19 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
     return matchedTag?.tag || selectedTag.value
   })
 
+  const selectedDeckLabel = computed<string | null>(() => {
+    if (!selectedDeck.value) return null
+    const normalizedSelectedDeck = normalizeArticleFilterValue(selectedDeck.value)
+
+    const matchedDeck = deckFilterOptions.value.find(
+      item => normalizeArticleFilterValue(item.tag) === normalizedSelectedDeck
+    )
+
+    return matchedDeck?.tag || selectedDeck.value
+  })
+
   const hasActiveFilters = computed(() =>
-    !!selectedCategory.value || !!selectedAuthor.value || !!selectedLocation.value || !!selectedTag.value
+    !!selectedCategory.value || !!selectedAuthor.value || !!selectedLocation.value || !!selectedTag.value || !!selectedDeck.value
   )
 
   const filteredArticles = computed(() => {
@@ -237,6 +251,7 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
     const author = selectedAuthor.value
     const normalizedSelectedLocation = selectedLocation.value ? normalizeArticleFilterValue(selectedLocation.value) : null
     const normalizedSelectedTag = selectedTag.value ? normalizeArticleFilterValue(selectedTag.value) : null
+    const normalizedSelectedDeck = selectedDeck.value ? normalizeArticleFilterValue(selectedDeck.value) : null
 
     const filtered: AnyArticle[] = []
 
@@ -245,8 +260,9 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
       const matchesAuthor = !author || item.authorSlug === author
       const matchesLocation = !normalizedSelectedLocation || item.normalizedLocation === normalizedSelectedLocation
       const matchesTag = !normalizedSelectedTag || item.normalizedTopicTagSet.has(normalizedSelectedTag)
+      const matchesDeck = !normalizedSelectedDeck || (item.article.decks && item.article.decks.some(deck => normalizeArticleFilterValue(deck) === normalizedSelectedDeck))
 
-      if (matchesCategory && matchesAuthor && matchesLocation && matchesTag) {
+      if (matchesCategory && matchesAuthor && matchesLocation && matchesTag && matchesDeck) {
         filtered.push(item.article)
       }
     })
@@ -289,8 +305,12 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
     updateFilters({ tag })
   }
 
+  const setDeckFilter = (deck: string | null) => {
+    updateFilters({ deck })
+  }
+
   const clearAllFilters = () => {
-    updateFilters({ category: null, author: null, location: null, tag: null })
+    updateFilters({ category: null, author: null, location: null, tag: null, deck: null })
   }
 
   return {
@@ -298,10 +318,12 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
     selectedAuthor,
     selectedLocation,
     selectedTag,
+    selectedDeck,
     selectedCategoryLabel,
     selectedAuthorLabel,
     selectedLocationLabel,
     selectedTagLabel,
+    selectedDeckLabel,
     categoryFilterOptions,
     authorFilterOptions,
     locationFilterOptions,
@@ -314,6 +336,7 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
     setAuthorFilter,
     setLocationFilter,
     setTagFilter,
+    setDeckFilter,
     clearAllFilters
   }
 }

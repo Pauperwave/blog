@@ -44,10 +44,12 @@ const {
   selectedAuthor,
   selectedLocation,
   selectedTag,
+  selectedDeck,
   selectedCategoryLabel,
   selectedAuthorLabel,
   selectedLocationLabel,
   selectedTagLabel,
+  selectedDeckLabel,
   categoryFilterOptions,
   authorFilterOptions,
   locationFilterOptions,
@@ -60,6 +62,7 @@ const {
   setAuthorFilter,
   setLocationFilter,
   setTagFilter,
+  setDeckFilter,
   clearAllFilters
 } = useArticlesFilters({ articles, authorsMap })
 </script>
@@ -79,6 +82,8 @@ const {
         :selected-location-label="selectedLocationLabel"
         :selected-tag="selectedTag"
         :selected-tag-label="selectedTagLabel"
+        :selected-deck="selectedDeck"
+        :selected-deck-label="selectedDeckLabel"
         :category-filter-options="categoryFilterOptions"
         :author-filter-options="authorFilterOptions"
         :location-filter-options="locationFilterOptions"
@@ -88,6 +93,7 @@ const {
         @set-author="setAuthorFilter"
         @set-location="setLocationFilter"
         @set-tag="setTagFilter"
+        @set-deck="setDeckFilter"
         @clear-all="clearAllFilters"
       />
 

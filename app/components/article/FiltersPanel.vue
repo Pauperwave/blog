@@ -40,6 +40,8 @@ interface Props {
   selectedLocationLabel: string | null
   selectedTag: string | null
   selectedTagLabel: string | null
+  selectedDeck: string | null
+  selectedDeckLabel: string | null
   categoryFilterOptions: CategoryFilterOption[]
   authorFilterOptions: AuthorFilterOption[]
   locationFilterOptions: LocationFilterOption[]
@@ -54,6 +56,7 @@ const emit = defineEmits<{
   'set-author': [value: string | null]
   'set-location': [value: string | null]
   'set-tag': [value: string | null]
+  'set-deck': [value: string | null]
   'clear-all': []
 }>()
 
@@ -249,10 +252,11 @@ const activeFilters = computed(() => {
             plural-label="deck"
             color="warning"
             :options="deckOptions"
-            :selected-value="selectedTag"
+            :selected-value="selectedDeck"
             all-label="Tutti i deck"
+            :default-open="false"
             :max-height="true"
-            @select="emit('set-tag', $event)"
+            @select="emit('set-deck', $event)"
           />
 
           <!-- Tags -->
