@@ -109,7 +109,7 @@ Raphael in definitiva è una sincrasi tra costo di mana minore/maggiore e possib
 Per quanto riguarda applicazioni diverse non è nemmeno scontato non vederlo, in un numero variabile da 1 a 3 copie, in un piano Sciame in Mono Red Rally. Il ban di [[Kuldotha Rebirth]] è penalizzante, però è oggettivamente una alternativa migliore a [[Kessig Flamebreather]].
 ::
 
-::overall-rating
+::magic-card-rating
 ---
 rating: 6.5
 ---
@@ -140,7 +140,7 @@ Per lenire la debolezza di poter giocare solo 4 carte come [[Battle Screech]], p
 Questa ipotesi, potenzialmente, si applica bene anche a un orientamento più simile al bannato [[Azorius Glitters]].
 ::
 
-::overall-rating
+::magic-card-rating
 ---
 rating: 7
 ---
@@ -192,7 +192,7 @@ Aggiungiamo a questo la mancanza di un payoff adeguato: laddove in Grixis [[Galv
 Di conseguenza, vedo evidente come Utrom Monitor migliori Esper e per gli stessi motivi accennati prima per Grixis. La grossa differenza però sta nel fatto che Esper, rispetto a Grixis, ha un numero di minacce maggiori e quindi migliora ulteriormente un piano già forte con un'aggiunta in linea con quanto già propone.
 ::
 
-::overall-rating
+::magic-card-rating
 ---
 rating: 8
 ---
