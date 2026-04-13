@@ -412,48 +412,56 @@ Il colore del badge cambia in base al voto:
 ---
 cardName: Pessimo
 rating: 0
+---
 ::
 
 ::magic-card-rating
 ---
 cardName: Molto scarso
 rating: 3.5
+---
 ::
 
 ::magic-card-rating
 ---
 cardName: Scarso
 rating: 4
+---
 ::
 
 ::magic-card-rating
 ---
 cardName: Sotto la media
 rating: 5.5
+---
 ::
 
 ::magic-card-rating
 ---
 cardName: Nella media
 rating: 6
+---
 ::
 
 ::magic-card-rating
 ---
 cardName: Discreto
 rating: 7.5
+---
 ::
 
 ::magic-card-rating
 ---
 cardName: Buono
 rating: 8
+---
 ::
 
 ::magic-card-rating
 ---
 cardName: Molto buono
 rating: 10
+---
 ::
 
 ## `magic-sideboard-guide`
