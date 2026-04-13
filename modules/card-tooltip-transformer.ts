@@ -2,14 +2,13 @@
 import { defineNuxtModule } from '@nuxt/kit'
 import type { FileBeforeParseHook } from '@nuxt/content'
 import { createRegExp, exactly, oneOrMore, charNotIn, maybe, whitespace, global } from 'magic-regexp'
-import { buildLog } from '../shared/utils/build-log'
 
 export default defineNuxtModule({
   meta: {
     name: 'card-tooltip-transformer'
   },
   setup(_options, nuxt) {
-    buildLog('🚀 [Card Tooltip Transformer] MODULE LOADED!')
+    console.log('🚀 [Card Tooltip Transformer] MODULE LOADED!')
 
     const hookContentBeforeParse = nuxt.hook as unknown as (
       name: 'content:file:beforeParse',
@@ -20,16 +19,12 @@ export default defineNuxtModule({
     hookContentBeforeParse('content:file:beforeParse', (ctx: FileBeforeParseHook) => {
       const file = ctx.file || ctx
 
-      const allowedFolders = [
-        'articles',
-        'decklists',
-        'reports',
-        // 'spoilers',
-        'tutorials',
-        // 'docs',
+      const forbiddenFolders = [
+        'docs',
       ]
 
-      if (file.extension === '.md' && allowedFolders.some(folder => file.path?.includes(folder))) {
+      if (file.extension === '.md' && !forbiddenFolders.some(folder => file.path?.includes(folder))) {
+        if (!file.body.includes('[[')) return  // early exit, no [[...]] present
         file.body = transformCardTooltips(file.body, file.path)
       }
     })
@@ -64,35 +59,35 @@ const patternSimple = createRegExp(
 
 function transformCardTooltips(content: string, filePath: string): string {
   const transformations: CardTransformation[] = []
-  
+
   // First, replace cards with set codes
   content = content.replace(patternWithSet, (match: string, name: string, set: string) => {
     const cleanName = name.trim()
     const cleanSet = set.trim()
-    
+
     transformations.push({
       original: match,
       cardName: cleanName,
       set: cleanSet
     })
-    
+
     return `:MagicCardTooltip{name="${cleanName}" set="${cleanSet}"}`
   })
-  
+
   // Then, replace simple card names
   content = content.replace(patternSimple, (match: string, name: string) => {
     const cleanName = name.trim()
-    
+
     transformations.push({
       original: match,
       cardName: cleanName
     })
-    
+
     return `:MagicCardTooltip{name="${cleanName}"}`
   })
-  
+
   logTransformations(transformations, filePath)
-  
+
   return content
 }
 
@@ -102,15 +97,15 @@ function logTransformations(
 ): void {
   if (transformations.length === 0) return
 
-  buildLog(`\n📝 [Card Tooltip Transformer] Processing file: ${filePath}`)
-  buildLog(`   └─ Found ${transformations.length} card tooltip(s)`)
-  buildLog(`\n   🃏 Transformed Card Tooltips:`)
-  
+  console.log(`\n📝 [Card Tooltip Transformer] Processing file: ${filePath}`)
+  console.log(`   └─ Found ${transformations.length} card tooltip(s)`)
+  console.log(`\n   🃏 Transformed Card Tooltips:`)
+
   transformations.forEach((t, idx) => {
-    buildLog(`      ${idx + 1}. ${t.original}`)
-    buildLog(`         └─ Card: "${t.cardName}"${t.set ? ` (Set: ${t.set})` : ''}`)
-    buildLog(`         └─ Component: :MagicCardTooltip{name="${t.cardName}"${t.set ? ` set="${t.set}"` : ''}}`)
+    console.log(`      ${idx + 1}. ${t.original}`)
+    console.log(`         └─ Card: "${t.cardName}"${t.set ? ` (Set: ${t.set})` : ''}`)
+    console.log(`         └─ Component: :MagicCardTooltip{name="${t.cardName}"${t.set ? ` set="${t.set}"` : ''}}`)
   })
-  
-  buildLog(`   ✅ Card tooltips transformed successfully\n`)
+
+  console.log(`   ✅ Card tooltips transformed successfully\n`)
 }
