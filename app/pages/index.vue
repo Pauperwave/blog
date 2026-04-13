@@ -14,7 +14,6 @@ import { hasLeagueTag } from '~/utils/article-filters'
 
 // SEO meta tags for homepage
 useSeoMeta({
-  title: appMeta.name,
   description: appMeta.description,
   ogTitle: appMeta.name,
   ogDescription: appMeta.description,
