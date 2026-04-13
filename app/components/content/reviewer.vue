@@ -15,25 +15,29 @@ onMounted(async () => {
 
 <template>
   <div class="my-6">
-    <div class="flex items-center gap-3 mb-3">
-      <UAvatar
-        v-if="authorData?.avatar"
-        :src="authorData?.avatar"
-        :alt="name"
-        size="md"
-        class="shrink-0"
-      />
-      <div class="flex items-center gap-2">
-        <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">
-          {{ name }}
-        </h3>
-        <UBadge color="primary" variant="subtle">
-          Voto: {{ rating }}
-        </UBadge>
+    <UCard>
+      <template #header>
+        <div class="flex items-center gap-3">
+          <UAvatar
+            v-if="authorData?.avatar"
+            :src="authorData?.avatar"
+            :alt="name"
+            size="md"
+            class="shrink-0"
+          />
+          <div class="flex items-center gap-2 flex-1">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">
+              {{ name }}
+            </h3>
+            <UBadge color="primary" variant="soft" size="md">
+              Voto: {{ rating }}
+            </UBadge>
+          </div>
+        </div>
+      </template>
+      <div class="prose prose-gray dark:prose-invert max-w-none border-l-4 border-gray-300 dark:border-gray-600 pl-4 italic text-gray-600 dark:text-gray-400">
+        <slot />
       </div>
-    </div>
-    <div class="prose prose-gray dark:prose-invert max-w-none border-l-4 border-gray-300 dark:border-gray-600 pl-4 bg-gray-50 dark:bg-gray-800/50">
-      <slot />
-    </div>
+    </UCard>
   </div>
 </template>
