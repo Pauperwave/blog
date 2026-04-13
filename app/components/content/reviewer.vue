@@ -32,7 +32,7 @@ onMounted(async () => {
         </UBadge>
       </div>
     </div>
-    <div class="prose prose-gray dark:prose-invert max-w-none border-l-4 border-gray-300 dark:border-gray-600 pl-4 bg-gray-50 dark:bg-gray-800/50 py-4 pr-4 rounded-r">
+    <div class="prose prose-gray dark:prose-invert max-w-none border-l-4 border-gray-300 dark:border-gray-600 pl-4 bg-gray-50 dark:bg-gray-800/50">
       <slot />
     </div>
   </div>
