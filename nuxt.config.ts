@@ -116,39 +116,41 @@ export default defineNuxtConfig({
       // Pre-render the homepage
       routes: ['/', '/docs/componenti'],
       // Then crawl all the links on the page
-      crawlLinks: true,
-      // Filter routes to only prerender recent articles (< 3 months)
-      hooks: {
-        'prerender:routes' (routes: string[]) {
-          const threeMonthsAgo = new Date()
-          threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3)
-
-          return routes.filter((route: string) => {
-            // Keep all non-article routes
-            if (!route.startsWith('/articles/')) return true
-
-            // Extract date from article path: /articles/2026-01-15-title
-            const match = route.match(/\/articles\/(\d{4}-\d{2}-\d{2})/)
-            if (match && match[1]) {
-              const articleDate = new Date(match[1])
-              // Only prerender articles from last 3 months
-              return articleDate >= threeMonthsAgo
-            }
-
-            // Keep routes that don't match date pattern (e.g., /articles)
-            return true
-          })
-        }
-      }
+      crawlLinks: true
     },
+    // Filter routes to only prerender recent articles (< 3 months)
+    hooks: {
+      'prerender:routes' (routes: string[]) {
+        const threeMonthsAgo = new Date()
+        threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3)
+
+        return routes.filter((route: string) => {
+          // Keep all non-article routes
+          if (!route.startsWith('/articles/')) return true
+
+          // Extract date from article path: /articles/2026-01-15-title
+          const match = route.match(/\/articles\/(\d{4}-\d{2}-\d{2})/)
+          if (match && match[1]) {
+            const articleDate = new Date(match[1])
+            // Only prerender articles from last 3 months
+            return articleDate >= threeMonthsAgo
+          }
+
+          // Keep routes that don't match date pattern (e.g., /articles)
+          return true
+        })
+      }
+    }
   },
   routeRules: {
     // Homepage pre-rendered at build time with cache headers
     '/': { prerender: true, headers: { 'Cache-Control': 'public, max-age=3600, s-maxage=86400' } },
+    // Articles index page - always prerendered
+    '/articles': { prerender: true, headers: { 'Cache-Control': 'public, max-age=3600, s-maxage=86400' } },
+    // Individual articles: ISR for on-demand regeneration (old articles will be SSR)
+    '/articles/**': { isr: 3600, headers: { 'Cache-Control': 'public, max-age=3600, s-maxage=86400' } },
     // Nuxt Studio admin - requires SSR
     '/editor/**': { ssr: true },
-    // Articles: ISR for on-demand regeneration (old articles will be SSR)
-    '/articles/**': { isr: 3600, headers: { 'Cache-Control': 'public, max-age=3600, s-maxage=86400' } },
     // Code of Conduct and Statuto
     '/docs/**': { prerender: true, headers: { 'Cache-Control': 'public, max-age=3600, s-maxage=86400' } },
     // Static assets with long cache
