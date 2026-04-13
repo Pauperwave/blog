@@ -9,7 +9,7 @@ export default defineNuxtModule({
     name: 'card-tooltip-transformer'
   },
   setup(_options, nuxt) {
-    console.log('🚀 [Card Tooltip Transformer] MODULE LOADED!')
+    buildLog('🚀 [Card Tooltip Transformer] MODULE LOADED!')
 
     const hookContentBeforeParse = nuxt.hook as unknown as (
       name: 'content:file:beforeParse',
