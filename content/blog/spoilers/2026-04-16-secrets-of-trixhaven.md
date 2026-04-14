@@ -7,7 +7,7 @@ category: spoiler
 date: 2026-04-16
 description: Spoilered Pauper cards in Secrets of Strixhaven
 location: ""
-published: true
+published: false
 sitemap:
   loc: /articles/2026-02-24-secrets-of-trixhaven
 tags:
