@@ -170,7 +170,9 @@ Instants
 1 Cast Down
 4 Counterspell
 2 Unexpected Fangs
-4 Snuff Out Sorceries
+4 Snuff Out
+
+Sorceries
 4 Lórien Revealed
 
 Lands
@@ -342,7 +344,9 @@ headerGradient: golgari
 ---
 Creatures
 3 Cauldron Familiar
-3 Troll of Khazad-dûm Instants
+3 Troll of Khazad-dûm
+
+Instants
 4 Cast Down
 3 Eviscerator's Insight
 4 Fanatical Offering
