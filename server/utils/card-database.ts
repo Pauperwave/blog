@@ -52,26 +52,39 @@ async function getDatabase(): Promise<DatabaseInstance> {
   if (!dbInstance) {
     const dbPath = getDbPath()
 
-    try {
-      // Check if we're running in Bun
-      if (typeof Bun !== 'undefined') {
+    // Determine runtime
+    const isVercelServerless = process.env.VERCEL === '1'
+    const isBunRuntime = typeof Bun !== 'undefined'
+
+    if (isBunRuntime) {
+      try {
         const bunSqliteModuleId = 'bun:sqlite'
         const { Database } = await import(/* @vite-ignore */ bunSqliteModuleId)
         dbInstance = new Database(dbPath, { readonly: true })
-        buildLog('✅ Using bun:sqlite (faster)')
-      } else {
-        throw new Error('Not Bun runtime')
+        buildLog('✅ Using bun:sqlite')
+        return dbInstance
+      } catch (bunError) {
+        const errorMsg = `bun:sqlite failed: ${bunError instanceof Error ? bunError.message : String(bunError)}`
+        buildLog(`⚠️ ${errorMsg}`)
+        // Don't fall through - this is Vercel and bun:sqlite MUST work
+        if (isVercelServerless) {
+          throw new Error(`Cannot initialize database on Vercel serverless: ${errorMsg}`)
+        }
+        // Only fall through on Node.js/build time
       }
-    } catch (error) {
-      // Fallback to better-sqlite3 for Node.js (build time)
+    }
+
+    // Fall back to better-sqlite3 for Node.js (build time only)
+    if (!isBunRuntime) {
       try {
         const Database = (await import('better-sqlite3')).default
         dbInstance = new Database(dbPath, { readonly: true })
-        buildLog('⚠️ Using better-sqlite3 (Node.js compatibility fallback)')
-      } catch (betterSqliteError) {
-        const errorMsg = `Failed to initialize database at ${dbPath}: ${betterSqliteError instanceof Error ? betterSqliteError.message : String(betterSqliteError)}`
+        buildLog('✅ Using better-sqlite3 (Node.js)')
+        return dbInstance
+      } catch (error) {
+        const errorMsg = `better-sqlite3 failed: ${error instanceof Error ? error.message : String(error)}`
         buildLog(`❌ ${errorMsg}`)
-        throw new Error(errorMsg)
+        throw new Error(`Failed to initialize database at ${dbPath}: ${errorMsg}`)
       }
     }
   }
