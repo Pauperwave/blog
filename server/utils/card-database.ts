@@ -1,10 +1,8 @@
-// server\utils\card-database.ts
-/**
- * Card database utility for looking up card data from SQLite
- * Used by components to get card information without API calls
- */
 // server/utils/card-database.ts
 import { join } from 'path'
+import { existsSync } from 'fs'
+import { fileURLToPath } from 'url'
+import { dirname } from 'path'
 import { buildLog } from '../../shared/utils/build-log'
 
 export interface CardData {
@@ -19,11 +17,40 @@ type DatabaseInstance = any
 let dbInstance: DatabaseInstance | null = null
 
 /**
+ * Resolve the database path - handles both development and production (Vercel serverless)
+ */
+function getDbPath(): string {
+  // Try multiple possible paths to handle different environments
+  const possiblePaths = [
+    // Production: relative to .vercel/output/functions or similar
+    join(process.cwd(), 'server', 'database', 'cards.db'),
+    // Vercel serverless: the db might be bundled differently
+    join(dirname(fileURLToPath(import.meta.url)), '..', 'database', 'cards.db'),
+    // Fallback: look relative to repository root
+    join(process.cwd(), 'server', 'database', 'cards.db'),
+  ]
+
+  for (const path of possiblePaths) {
+    if (existsSync(path)) {
+      buildLog(`✅ Found database at: ${path}`)
+      return path
+    }
+  }
+
+  // If no file found, log all attempts for debugging
+  buildLog(`⚠️  Database not found at any expected location. Attempted paths:`)
+  possiblePaths.forEach(p => buildLog(`   - ${p}`))
+  
+  // Return the primary path anyway - let the database connection fail with a clear error
+  return possiblePaths[0]
+}
+
+/**
  * Get database instance - uses bun:sqlite in Bun runtime, better-sqlite3 otherwise
  */
 async function getDatabase(): Promise<DatabaseInstance> {
   if (!dbInstance) {
-    const dbPath = join(process.cwd(), 'server', 'database', 'cards.db')
+    const dbPath = getDbPath()
 
     try {
       // Check if we're running in Bun
@@ -35,11 +62,17 @@ async function getDatabase(): Promise<DatabaseInstance> {
       } else {
         throw new Error('Not Bun runtime')
       }
-    } catch {
+    } catch (error) {
       // Fallback to better-sqlite3 for Node.js (build time)
-      const Database = (await import('better-sqlite3')).default
-      dbInstance = new Database(dbPath, { readonly: true })
-      buildLog('⚠️ Using better-sqlite3 (Node.js compatibility fallback)')
+      try {
+        const Database = (await import('better-sqlite3')).default
+        dbInstance = new Database(dbPath, { readonly: true })
+        buildLog('⚠️ Using better-sqlite3 (Node.js compatibility fallback)')
+      } catch (betterSqliteError) {
+        const errorMsg = `Failed to initialize database at ${dbPath}: ${betterSqliteError instanceof Error ? betterSqliteError.message : String(betterSqliteError)}`
+        buildLog(`❌ ${errorMsg}`)
+        throw new Error(errorMsg)
+      }
     }
   }
   return dbInstance
