@@ -3,7 +3,7 @@
  * GET /api/cards?names=Lightning+Bolt,Counterspell
  */
 
-import { getCardsByNames } from '../utils/card-database'
+import { getCardsByNames, closeDatabase } from '../utils/card-database'
 
 export default defineEventHandler(async (event) => {
   const query = getQuery(event)
@@ -23,20 +23,31 @@ export default defineEventHandler(async (event) => {
     return { cards: {} }
   }
   
-  // Get cards from database
-  const cardsMap = await getCardsByNames(names)
-  
-  // Transform to response format
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  const response: Record<string, any> = {}
-  
-  for (const [name, card] of cardsMap.entries()) {
-    response[name] = {
-      name: card.name,
-      manaCost: card.manaCost,
-      imageUrl: card.imageUrl
+  try {
+    // Get cards from database
+    const cardsMap = await getCardsByNames(names)
+    
+    // Transform to response format
+    /* eslint-disable @typescript-eslint/no-explicit-any */
+    const response: Record<string, any> = {}
+    
+    for (const [name, card] of cardsMap.entries()) {
+      response[name] = {
+        name: card.name,
+        manaCost: card.manaCost,
+        imageUrl: card.imageUrl
+      }
     }
+    
+    return { cards: response }
+  } catch (error) {
+    console.error('Error fetching cards:', error)
+    throw createError({
+      statusCode: 500,
+      message: 'Failed to fetch card data'
+    })
+  } finally {
+    // Close database connection after request (important for serverless)
+    closeDatabase()
   }
-  
-  return { cards: response }
 })

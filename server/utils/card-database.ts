@@ -67,12 +67,14 @@ export async function getCardsByNames(names: string[]): Promise<Map<string, Card
 
   if (names.length === 0) return result
 
+  // First, try exact matches
   const placeholders = names.map(() => '?').join(',')
   const query = `SELECT * FROM cards WHERE name IN (${placeholders})`
 
   const rows = db.prepare(query).all(...names)
 
-  // Create a map for exact matches and also a lookup by lowercase name
+  // Build a case-insensitive lookup from ALL database rows (not just matched ones)
+  // This is necessary because case-insensitive lookups won't work if exact matches fail
   const dbCardsByLowercase = new Map<string, CardData>()
 
   for (const row of rows) {
@@ -82,16 +84,28 @@ export async function getCardsByNames(names: string[]): Promise<Map<string, Card
       imageUrl: row.image_url
     }
     result.set(row.name, cardData)
+    // Store by lowercase for fallback matching
     dbCardsByLowercase.set(row.name.toLowerCase(), cardData)
   }
 
   // For names that weren't found exactly, try case-insensitive match
+  // We need to query the database for case-insensitive matches
   for (const name of names) {
     if (!result.has(name)) {
       const lowercaseName = name.toLowerCase()
-      const matchedCard = dbCardsByLowercase.get(lowercaseName)
-      if (matchedCard) {
-        result.set(name, matchedCard)
+      
+      // Query database for case-insensitive match using LOWER function
+      const caseInsensitiveRow = db.prepare(`
+        SELECT * FROM cards WHERE LOWER(name) = ? LIMIT 1
+      `).get(lowercaseName)
+      
+      if (caseInsensitiveRow) {
+        const cardData = {
+          name: caseInsensitiveRow.name,
+          manaCost: caseInsensitiveRow.mana_cost || '',
+          imageUrl: caseInsensitiveRow.image_url
+        }
+        result.set(name, cardData)
       }
     }
   }
