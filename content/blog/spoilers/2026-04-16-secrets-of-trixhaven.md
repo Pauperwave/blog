@@ -12,7 +12,7 @@ sitemap:
   loc: /articles/2026-02-24-secrets-of-trixhaven
 tags:
   - Set Review
-thumbnail: /assets/blog/sets/secrets-of-trixhaven.jpg
+thumbnail: /assets/blog/sets/secrets-of-trixhaven.webp
 ---
 
 ## Introduzione
