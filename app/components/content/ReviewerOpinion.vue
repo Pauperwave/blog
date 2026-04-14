@@ -6,10 +6,8 @@ const props = defineProps<{
 
 const authorData = ref<{ avatar?: string } | null>(null)
 
-onMounted(async () => {
-  const author = await useAuthor(props.name)
-  authorData.value = { avatar: author.avatar }
-})
+const author = await useAuthor(props.name)
+authorData.value = { avatar: author.avatar }
 </script>
 
 <template>
