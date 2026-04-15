@@ -8,6 +8,10 @@ interface Props {
 const props = defineProps<Props>()
 const imageCache = useState<Record<string, string>>('card-tooltip-image-cache', () => ({}))
 
+// Check if running in serverless environment (Vercel, AWS Lambda, etc.)
+// Only check on server-side, client-side always returns false
+const isServerless = import.meta.client ? false : isServerlessEnvironment()
+
 const displayText = computed(() => props.name)
 
 function buildScryfallUrl(name: string, set?: string): string {
@@ -16,17 +20,23 @@ function buildScryfallUrl(name: string, set?: string): string {
     exact: name,
     format: 'image'
   })
-  
+
   if (set) {
     params.append('set', set)
   }
-  
+
   return `${baseUrl}?${params.toString()}`
 }
 
 const imageUrl = ref<string | null>(props.image || null)
 
 async function getDatabaseImage(name: string): Promise<string | null> {
+  // Skip database call in serverless environment (Vercel, AWS Lambda)
+  // Function preserved for future serverless DB implementation
+  if (isServerless) {
+    return null
+  }
+
   try {
     const response = await $fetch<{
       cards?: Record<string, { imageUrl?: string }>
@@ -135,7 +145,7 @@ const handleClick = () => {
       content: 'bg-transparent border-0 shadow-none p-0'
     }"
   >
-    <span 
+    <span
       class="font-semibold text-primary"
       :class="isMobile ? 'cursor-pointer underline' : 'cursor-help'"
       :role="isMobile ? 'button' : undefined"
@@ -147,10 +157,10 @@ const handleClick = () => {
     >
       {{ displayText }}
     </span>
-    
+
     <template #content>
-      <img 
-        :src="imageUrl || undefined" 
+      <img
+        :src="imageUrl || undefined"
         :alt="name"
         class="w-70 h-auto rounded-xl"
       >

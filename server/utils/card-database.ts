@@ -2,7 +2,6 @@
 import { join, dirname } from 'path'
 import { existsSync } from 'fs'
 import { fileURLToPath } from 'url'
-import { buildLog } from '../../shared/utils/build-log'
 
 export interface CardData {
   name: string
@@ -43,13 +42,6 @@ function getDbPath(): string {
   // Return the primary path anyway - let the database connection fail with a clear error
   return String(possiblePaths[0])
 
-}
-
-/**
- * Check if running in a serverless environment where SQLite is not available
- */
-export function isServerlessEnvironment(): boolean {
-  return process.env.VERCEL === '1' || process.env.AWS_LAMBDA_FUNCTION_VERSION !== undefined
 }
 
 /**

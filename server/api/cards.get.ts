@@ -2,9 +2,6 @@
  * API endpoint to get card data by names
  * GET /api/cards?names=Lightning+Bolt,Counterspell
  */
-
-import { getCardsByNames, closeDatabase, isServerlessEnvironment } from '../utils/card-database'
-
 export default defineEventHandler(async (event) => {
   const query = getQuery(event)
   const namesParam = query.names as string | undefined
