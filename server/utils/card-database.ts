@@ -2,7 +2,7 @@
 import { join, dirname } from 'path'
 import { existsSync } from 'fs'
 import { fileURLToPath } from 'url'
-import { isServerlessEnvironment } from '#shared/utils'
+import { isServerlessEnvironment, buildLog } from '#shared/utils'
 
 export interface CardData {
   name: string
