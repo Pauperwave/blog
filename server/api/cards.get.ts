@@ -3,34 +3,34 @@
  * GET /api/cards?names=Lightning+Bolt,Counterspell
  */
 
-import { getCardsByNames, closeDatabase } from '../utils/card-database'
+import { getCardsByNames, closeDatabase, isServerlessEnvironment } from '../utils/card-database'
 
 export default defineEventHandler(async (event) => {
   const query = getQuery(event)
   const namesParam = query.names as string | undefined
-  
+
   if (!namesParam) {
     throw createError({
       statusCode: 400,
       message: 'Missing "names" parameter'
     })
   }
-  
+
   // Parse comma-separated names
   const names = namesParam.split(',').map(n => n.trim()).filter(Boolean)
-  
+
   if (names.length === 0) {
     return { cards: {} }
   }
-  
+
   try {
     // Get cards from database
     const cardsMap = await getCardsByNames(names)
-    
+
     // Transform to response format
     /* eslint-disable @typescript-eslint/no-explicit-any */
     const response: Record<string, any> = {}
-    
+
     for (const [name, card] of cardsMap.entries()) {
       response[name] = {
         name: card.name,
@@ -38,7 +38,7 @@ export default defineEventHandler(async (event) => {
         imageUrl: card.imageUrl
       }
     }
-    
+
     return { cards: response }
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error)
@@ -47,7 +47,14 @@ export default defineEventHandler(async (event) => {
       names: names.slice(0, 5), // Log first 5 card names for debugging
       requestUrl: getRequestURL(event).href
     })
-    
+
+    // In serverless environments, return empty result instead of error
+    // The Tooltip component will fall back to Scryfall API
+    if (isServerlessEnvironment()) {
+      console.warn('Serverless environment detected - returning empty card data, will use Scryfall fallback')
+      return { cards: {} }
+    }
+
     throw createError({
       statusCode: 500,
       message: 'Failed to fetch card data from database',

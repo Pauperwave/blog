@@ -1,8 +1,7 @@
 // server/utils/card-database.ts
-import { join } from 'path'
+import { join, dirname } from 'path'
 import { existsSync } from 'fs'
 import { fileURLToPath } from 'url'
-import { dirname } from 'path'
 import { buildLog } from '../../shared/utils/build-log'
 
 export interface CardData {
@@ -40,20 +39,34 @@ function getDbPath(): string {
   // If no file found, log all attempts for debugging
   buildLog(`⚠️  Database not found at any expected location. Attempted paths:`)
   possiblePaths.forEach(p => buildLog(`   - ${p}`))
-  
+
   // Return the primary path anyway - let the database connection fail with a clear error
-  return possiblePaths[0]
+  return String(possiblePaths[0])
+
+}
+
+/**
+ * Check if running in a serverless environment where SQLite is not available
+ */
+export function isServerlessEnvironment(): boolean {
+  return process.env.VERCEL === '1' || process.env.AWS_LAMBDA_FUNCTION_VERSION !== undefined
 }
 
 /**
  * Get database instance - uses bun:sqlite in Bun runtime, better-sqlite3 otherwise
+ * Returns null in serverless environments where SQLite is not available
  */
-async function getDatabase(): Promise<DatabaseInstance> {
+async function getDatabase(): Promise<DatabaseInstance | null> {
+  // Skip database initialization in serverless environments
+  if (isServerlessEnvironment()) {
+    buildLog('⚠️  Serverless environment detected - skipping database initialization')
+    return null
+  }
+
   if (!dbInstance) {
     const dbPath = getDbPath()
 
     // Determine runtime
-    const isVercelServerless = process.env.VERCEL === '1'
     const isBunRuntime = typeof Bun !== 'undefined'
 
     if (isBunRuntime) {
@@ -66,11 +79,7 @@ async function getDatabase(): Promise<DatabaseInstance> {
       } catch (bunError) {
         const errorMsg = `bun:sqlite failed: ${bunError instanceof Error ? bunError.message : String(bunError)}`
         buildLog(`⚠️ ${errorMsg}`)
-        // Don't fall through - this is Vercel and bun:sqlite MUST work
-        if (isVercelServerless) {
-          throw new Error(`Cannot initialize database on Vercel serverless: ${errorMsg}`)
-        }
-        // Only fall through on Node.js/build time
+        throw new Error(`Cannot initialize database: ${errorMsg}`)
       }
     }
 
@@ -94,6 +103,10 @@ async function getDatabase(): Promise<DatabaseInstance> {
 export async function getCardByName(name: string): Promise<CardData | null> {
   const db = await getDatabase()
 
+  if (!db) {
+    return null
+  }
+
   const row = db.prepare(`
     SELECT * FROM cards WHERE name = ? LIMIT 1
   `).get(name)
@@ -111,7 +124,7 @@ export async function getCardsByNames(names: string[]): Promise<Map<string, Card
   const db = await getDatabase()
   const result = new Map<string, CardData>()
 
-  if (names.length === 0) return result
+  if (!db || names.length === 0) return result
 
   // First, try exact matches
   const placeholders = names.map(() => '?').join(',')
@@ -139,12 +152,12 @@ export async function getCardsByNames(names: string[]): Promise<Map<string, Card
   for (const name of names) {
     if (!result.has(name)) {
       const lowercaseName = name.toLowerCase()
-      
+
       // Query database for case-insensitive match using LOWER function
       const caseInsensitiveRow = db.prepare(`
         SELECT * FROM cards WHERE LOWER(name) = ? LIMIT 1
       `).get(lowercaseName)
-      
+
       if (caseInsensitiveRow) {
         const cardData = {
           name: caseInsensitiveRow.name,
