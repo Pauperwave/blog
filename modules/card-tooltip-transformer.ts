@@ -3,7 +3,7 @@ import { defineNuxtModule } from '@nuxt/kit'
 import type { FileBeforeParseHook } from '@nuxt/content'
 import { createRegExp, exactly, oneOrMore, charNotIn, maybe, whitespace, global } from 'magic-regexp'
 
-import { buildLog } from '#shared/utils'
+import { buildLog } from '../shared/utils'
 
 export default defineNuxtModule({
   meta: {
