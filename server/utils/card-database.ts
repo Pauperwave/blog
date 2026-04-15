@@ -2,6 +2,7 @@
 import { join, dirname } from 'path'
 import { existsSync } from 'fs'
 import { fileURLToPath } from 'url'
+import { isServerlessEnvironment } from '#shared/utils/env'
 
 export interface CardData {
   name: string
