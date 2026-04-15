@@ -4,9 +4,10 @@ import { join } from 'path'
 import { defineNuxtModule } from '@nuxt/kit'
 import type { FileBeforeParseHook } from '@nuxt/content'
 import { createRegExp, digit, whitespace, oneOrMore, char } from 'magic-regexp'
-import { getCardsByNames } from '../server/utils/card-database'
-import type { ParsedCard } from '../shared/types/index.ts'
-import { buildLog } from '../shared/utils/build-log'
+
+import { getCardsByNames } from '#server/utils/card-database'
+import type { ParsedCard } from '#shared/types/index.ts'
+import { buildLog } from '#shared/utils'
 
 export default defineNuxtModule({
   meta: {
@@ -47,14 +48,14 @@ export default defineNuxtModule({
 async function transformSideboardGuideBlocks(content: string, filePath: string): Promise<string> {
   const blockWithFrontmatter = /::(MagicSideboardGuide|magic-sideboard-guide)\s*\n---\n([\s\S]*?)\n---\n([\s\S]*?)::/gi
 
-  const matches: Array<{ 
-    match: string, 
-    componentName: string, 
-    frontmatter: string, 
-    guideContent: string, 
-    index: number 
+  const matches: Array<{
+    match: string,
+    componentName: string,
+    frontmatter: string,
+    guideContent: string,
+    index: number
   }> = []
-  
+
   let match
   while ((match = blockWithFrontmatter.exec(content)) !== null) {
     if (!match[1] || !match[2] || !match[3]) continue
@@ -77,11 +78,11 @@ async function transformSideboardGuideBlocks(content: string, filePath: string):
   for (let i = matches.length - 1; i >= 0; i--) {
     const item = matches[i]
     if (!item) continue
-    
+
     const { match, componentName, frontmatter, guideContent, index } = item
-    
+
     buildLog(`\n   🔄 Processing sideboard guide ${matches.length - i}/${matches.length}`)
-    
+
     const props = parseFrontmatter(frontmatter)
     const { cardsIn, cardsOut, cardsOutAlt } = await parseSideboardGuide(guideContent)
 
@@ -103,7 +104,7 @@ async function transformSideboardGuideBlocks(content: string, filePath: string):
     propStrings.push(`cardsOutAltParsed="${cardsOutAltJson}"`)
 
     const result = `::${componentName}{${propStrings.join(' ')}}\n::`
-    
+
     content = content.substring(0, index) + result + content.substring(index + match.length)
   }
 
@@ -185,12 +186,12 @@ async function parseSideboardGuide(rawText: string): Promise<{
   // Check if database exists
   const dbPath = join(process.cwd(), 'server', 'database', 'cards.db')
   const dbExists = existsSync(dbPath)
-  
+
   let cardDataMap: Map<string, any> = new Map()
-  
+
   if (dbExists) {
     cardDataMap = await getCardsByNames(Array.from(cardNames))
-    
+
     // Log database lookup and sections
     logSectionsAndDatabaseLookup(sections, cardNames, cardDataMap)
   } else {
@@ -206,7 +207,7 @@ async function parseSideboardGuide(rawText: string): Promise<{
 }
 
 async function parseCardSection(
-  lines: string[], 
+  lines: string[],
   cardDataMap: Map<string, any>,
   section: string
 ): Promise<ParsedCard[]> {
@@ -217,7 +218,7 @@ async function parseCardSection(
     if (match && match[1] && match[2]) {
       const cardName = match[2]
       const cardData = cardDataMap.get(cardName)
-      
+
       cards.push({
         quantity: parseInt(match[1], 10),
         name: cardName,
@@ -244,10 +245,10 @@ function logSectionsAndDatabaseLookup(
   buildLog(`      └─ #in: ${sections.in.length} lines`)
   buildLog(`      └─ #out: ${sections.out.length} lines`)
   buildLog(`      └─ #out-alt: ${sections.outAlt.length} lines`)
-  
+
   buildLog(`   🔍 Found ${cardNames.size} unique card names`)
   buildLog(`   💾 Loaded ${cardDataMap.size}/${cardNames.size} cards from database`)
-  
+
   const missingCards = Array.from(cardNames).filter(name => !cardDataMap.has(name))
   if (missingCards.length > 0) {
     buildLog(`   ⚠️  Missing from database (${missingCards.length}):`)
@@ -263,21 +264,21 @@ function logSideboardGuideTransformation(
 ): void {
   buildLog(`   📋 Frontmatter props:`, props)
   buildLog(`\n   🎯 Final Parsed Object:`)
-  
+
   buildLog(`      📥 Cards IN (${cardsIn.length} cards):`)
   cardsIn.forEach(card => {
     buildLog(`         ${card.quantity}x ${card.name}`)
     buildLog(`            └─ Mana Cost: ${card.manaCost || '(none)'}`)
     buildLog(`            └─ Image: ${card.imageUrl ? '✅' : '❌'}`)
   })
-  
+
   buildLog(`\n      📤 Cards OUT (${cardsOut.length} cards):`)
   cardsOut.forEach(card => {
     buildLog(`         ${card.quantity}x ${card.name}`)
     buildLog(`            └─ Mana Cost: ${card.manaCost || '(none)'}`)
     buildLog(`            └─ Image: ${card.imageUrl ? '✅' : '❌'}`)
   })
-  
+
   if (cardsOutAlt.length > 0) {
     buildLog(`\n      🔄 Cards OUT (Alternative) (${cardsOutAlt.length} cards):`)
     cardsOutAlt.forEach(card => {

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useScryfallCard } from '~/composables/useScryfallCard'
-import { extractImageUrl } from '#shared/utils/scryfall'
+import { extractImageUrl } from '#shared/utils'
 
 const props = defineProps<{
   card: string

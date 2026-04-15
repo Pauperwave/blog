@@ -1,7 +1,7 @@
 import {
   parseCardString,
   buildScryfallCardUrl
-} from '#shared/utils/scryfall'
+} from '#shared/utils'
 import type {
   ScryfallCard,
   ScryfallParsedCard

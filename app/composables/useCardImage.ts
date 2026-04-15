@@ -1,6 +1,5 @@
 import { ref, watch } from 'vue'
-import { resolveCardImageUrl, getDatabaseCardImage } from '#shared/utils/scryfall'
-import { isServerlessEnvironment } from '#shared/utils/env'
+import { resolveCardImageUrl, getDatabaseCardImage, isServerlessEnvironment } from '#shared/utils'
 
 /**
  * Composable for resolving Magic card image URLs with fallback chain
