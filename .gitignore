@@ -3,6 +3,8 @@
 .nuxt
 .vercel
 
+.fallow
+
 # Node dependencies
 node_modules
 
