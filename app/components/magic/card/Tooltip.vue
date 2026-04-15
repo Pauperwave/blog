@@ -1,88 +1,22 @@
 <script setup lang="ts">
-interface Props {
+// Props
+const props = defineProps<{
   name: string
   image?: string
   set?: string
-}
+}>()
 
-const props = defineProps<Props>()
-const imageCache = useState<Record<string, string>>('card-tooltip-image-cache', () => ({}))
-
-// Check if running in serverless environment (Vercel, AWS Lambda, etc.)
-// Only check on server-side, client-side always returns false
-const isServerless = import.meta.client ? false : isServerlessEnvironment()
-
-const displayText = computed(() => props.name)
-
-function buildScryfallUrl(name: string, set?: string): string {
-  const baseUrl = 'https://api.scryfall.com/cards/named'
-  const params = new URLSearchParams({
-    exact: name,
-    format: 'image'
-  })
-
-  if (set) {
-    params.append('set', set)
-  }
-
-  return `${baseUrl}?${params.toString()}`
-}
-
-const imageUrl = ref<string | null>(props.image || null)
-
-async function getDatabaseImage(name: string): Promise<string | null> {
-  // Skip database call in serverless environment (Vercel, AWS Lambda)
-  // Function preserved for future serverless DB implementation
-  if (isServerless) {
-    return null
-  }
-
-  try {
-    const response = await $fetch<{
-      cards?: Record<string, { imageUrl?: string }>
-    }>('/api/cards', { query: { names: name } })
-
-    const directMatch = response.cards?.[name]
-    if (directMatch?.imageUrl) return directMatch.imageUrl
-
-    const firstCard = Object.values(response.cards || {})[0]
-    return firstCard?.imageUrl || null
-  } catch {
-    return null
-  }
-}
-
-async function resolveImage(name: string, image?: string, set?: string): Promise<string | null> {
-  if (image) return image
-  if (set) return buildScryfallUrl(name, set)
-  if (import.meta.server) return null
-
-  const dbImage = await getDatabaseImage(name)
-  return dbImage || buildScryfallUrl(name)
-}
-
-watch(
-  () => [props.name, props.image, props.set] as const,
-  async ([name, image, set]) => {
-    const cacheKey = set ? `${name}::${set}` : name
-    const cached = imageCache.value[cacheKey]
-    if (cached) {
-      imageUrl.value = cached
-      return
-    }
-
-    const resolved = await resolveImage(name, image, set)
-    imageUrl.value = resolved
-
-    if (resolved) {
-      imageCache.value[cacheKey] = resolved
-    }
-  },
-  { immediate: true }
-)
-
+// State
 const tooltipOpen = ref(false)
 const anchor = ref({ x: 0, y: 0 })
+const showModal = ref(false)
+
+// Composables
+const imageUrl = useCardImage(props.name, props.image, props.set)
+const isMobile = useMediaQuery('(max-width: 768px)')
+
+// Computed
+const displayText = computed(() => props.name)
 
 const reference = computed(() => ({
   getBoundingClientRect: () =>
@@ -96,10 +30,6 @@ const reference = computed(() => ({
       ...anchor.value
     } as DOMRect)
 }))
-
-// Mobile detection using native matchMedia API
-const isMobile = useMediaQuery('(max-width: 768px)')
-const showModal = ref(false)
 
 // Event handlers
 const handlePointerEnter = (ev: PointerEvent) => {

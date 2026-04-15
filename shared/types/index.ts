@@ -27,3 +27,34 @@ export interface ParsedCard {
   manaCost: string
   imageUrl: string
 }
+
+/**
+ * Type definitions for Scryfall API
+ */
+export type ScryfallImageType = 'normal' | 'large' | 'small' | 'art_crop'
+
+export interface ScryfallParsedCard {
+  name: string
+  set?: string
+  collector_number?: string
+}
+
+export interface ScryfallCard {
+  name: string
+  image_uris?: {
+    normal?: string
+    large?: string
+    small?: string
+    art_crop?: string
+    png?: string
+  }
+  card_faces?: Array<{
+    image_uris?: {
+      normal?: string
+      large?: string
+      small?: string
+      art_crop?: string
+      png?: string
+    }
+  }>
+}
