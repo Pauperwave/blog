@@ -70,11 +70,11 @@ rating: 6
 ---
 ::
 
-## 3. Raphael, Though Turtle
+## 3. Raphael, Tough Turtle
 
 ::magic-card-display
 ---
-card: Raphael, Though Turtle
+card: Raphael, Tough Turtle
 ---
 ::
 
@@ -112,7 +112,7 @@ Per quanto riguarda applicazioni diverse non è nemmeno scontato non vederlo, in
 
 ::magic-card-rating
 ---
-cardName: Raphael, Though Turtle
+cardName: Raphael, Tough Turtle
 rating: 6.5
 ---
 ::
