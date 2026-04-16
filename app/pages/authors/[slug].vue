@@ -17,14 +17,17 @@ const slug = route.params.slug as string
 const authorName = getAuthorNameFromSlug(slug)
 
 // Fetch author data
-const authorData = await useAuthor(authorName)
+const { data: authorData } = await useAuthor(authorName)
 
-if (!authorData) {
+if (!authorData.value) {
   throw createError({
     statusCode: 404,
     message: `Author "${authorName}" not found`
   })
 }
+
+// TypeScript ora sa che è definito
+const author = computed(() => authorData.value!)
 
 // Query all articles and filter by this author
 const { data: authorArticles } = await useAsyncData(`author-articles-${slug}`, async () => {
@@ -65,19 +68,19 @@ const getArticleTopicTags = (article: AnyArticle) =>
 
 // SEO meta tags
 useSeoMeta({
-  title: `${authorData.name} - Autore`,
-  description: authorData.bio || authorData.description,
-  ogTitle: `${authorData.name} - Autore`,
-  ogDescription: authorData.bio || authorData.description,
-  ogImage: authorData.avatar,
+  title: `${author.value.name} - Autore`,
+  description: author.value.bio || author.value.description,
+  ogTitle: `${author.value.name} - Autore`,
+  ogDescription: author.value.bio || author.value.description,
+  ogImage: author.value.avatar,
 })
 </script>
 
 <template>
   <UPage>
     <UPageHeader
-      :title="authorData.name"
-      :description="authorData.description"
+      :title="author.name"
+      :description="author.description"
     >
       <template #headline>
         <UBadge
@@ -94,8 +97,8 @@ useSeoMeta({
       <UCard class="mb-8">
         <div class="flex flex-col md:flex-row gap-6">
           <UAvatar
-            :src="authorData.avatar"
-            :alt="authorData.name"
+            :src="author.avatar"
+            :alt="author.name"
             size="2xl"
             class="shrink-0"
           />
@@ -104,15 +107,15 @@ useSeoMeta({
             <div class="flex flex-col gap-4">
               <!-- Bio -->
               <p
-                v-if="authorData.bio"
+                v-if="author.bio"
                 class="text-base text-gray-700 dark:text-gray-300"
               >
-                {{ authorData.bio }}
+                {{ author.bio }}
               </p>
 
               <!-- Social Links -->
               <AuthorSocialLinks
-                :socials="authorData.socials"
+                :socials="author.socials"
                 variant="labels"
               />
 
@@ -124,7 +127,7 @@ useSeoMeta({
                     class="w-5 h-5 text-primary"
                   />
                   <UButton
-                    :to="`/articles?author=${getAuthorSlug(authorData.name)}`"
+                    :to="`/articles?author=${getAuthorSlug(author.name)}`"
                     variant="link"
                     color="primary"
                     class="p-0 text-sm font-semibold"
@@ -148,7 +151,7 @@ useSeoMeta({
           <NuxtLink
             v-for="(count, category) in articleCounts"
             :key="category"
-            :to="`/articles?category=${category}&author=${getAuthorSlug(authorData.name)}`"
+            :to="`/articles?category=${category}&author=${getAuthorSlug(author.name)}`"
             class="block"
           >
             <UCard
