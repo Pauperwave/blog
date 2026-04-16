@@ -1,18 +1,20 @@
 <script setup lang="ts">
 import type { Author } from '~/composables/useAuthor'
+import { getAuthorSlug } from '~/composables/useAuthorSlug'
 
-defineProps<{
+const props = defineProps<{
   author: Author
-  clickable?: boolean
 }>()
+
+const handleAuthorClick = () => {
+  navigateTo(`/authors/${getAuthorSlug(props.author.name)}`)
+}
 </script>
 
 <template>
   <div
-    :class="[
-      'relative z-10 pointer-events-auto transition-transform duration-200',
-      clickable ? 'cursor-pointer hover:-translate-y-0.5 focus-within:-translate-y-0.5' : 'cursor-default',
-    ]"
+    class="relative z-10 pointer-events-auto cursor-pointer"
+    @click="handleAuthorClick"
   >
     <div class="flex items-center gap-2">
       <UAvatar
