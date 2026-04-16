@@ -4,7 +4,6 @@ import type { BadgeProps } from '@nuxt/ui'
 import type { Author } from '~/composables/useAuthor'
 import type { AnyArticle } from '~/constants/content-config'
 import { getArticleFilterLocation, hasLeagueTag } from '~/utils/article-filters'
-import { normalizeAuthors } from '~/composables/useAuthor'
 
 interface Props {
   article: AnyArticle
@@ -25,20 +24,8 @@ const {
 } = defineProps<Props>()
 
 const authorsList = computed<Author[]>(() => {
-  if (authorData) {
-    return Array.isArray(authorData) ? authorData : [authorData]
-  }
-  // Fallback to article.author names
-  const authorNames = normalizeAuthors(article.author)
-  return authorNames.map(name => ({
-    name,
-    nickname: '',
-    description: '',
-    avatar: '',
-    bio: '',
-    url: '',
-    socials: undefined
-  }))
+  if (!authorData) return []
+  return Array.isArray(authorData) ? authorData : [authorData]
 })
 
 const shouldShowAuthor = computed(() => {
