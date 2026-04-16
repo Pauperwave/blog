@@ -13,21 +13,14 @@ import {
   buildGlobalNormalizedLocationSet,
   getArticleTagFilterQuery
 } from '~/utils/article-filters'
-import { useAuthors, normalizeAuthors } from '~/composables/useAuthor'
+import { normalizeAuthors } from '~/composables/useAuthor'
 
 import appMeta from "~/app.meta"
 
 const route = useRoute()
-// const authorEl = ref<HTMLElement | null>();
-// const relatedArticlesEl = ref<HTMLElement | null>();
-
-// const readingTimeText = computed(() => (data.value?.meta as any).readingTime?.text);
 const tocTitle = 'In questo articolo'
-// const clipboard = useClipboard();
-// const toast = useToast();
 
 const { data } = await useAsyncData(route.path, async () => {
-  // Try each collection until we find the article
   const collections = getCollectionNames()
   for (const collection of collections) {
     const result = await queryCollection(collection).path(route.path).first()
@@ -36,33 +29,36 @@ const { data } = await useAsyncData(route.path, async () => {
   return null
 })
 
-// Fetch author data from authors collection (supports multiple authors)
-const authorsData = data.value?.author ? await useAuthors(data.value.author) : []
+// Single query for all article authors
+const { data: authorsData } = await useAsyncData<Author[]>(
+  `authors-${route.path}`,
+  async () => {
+    if (!data.value?.author) return []
+    const names = normalizeAuthors(data.value.author)
+    const authors = await queryCollection('authors')
+      .where('name', 'IN', names)
+      .all()
 
-// Format date using useState to prevent hydration mismatch
+    // Restore original frontmatter order
+    return names
+      .map(name => authors.find(a => a.name.toLowerCase() === name.toLowerCase()))
+      .filter(Boolean) as Author[]
+  }
+)
+
 const formattedDate = useState(`article-date-${route.path}`, () => {
   return data.value?.date ? formatDateIT(data.value.date) : 'Data non disponibile'
 })
-
-// Format related article dates using useState
-// const formatRelatedDate = (article: any) => {
-//     const key = `related-date-${article._id || article.path}`;
-//     console.log("[article] Formatting related date for key:", key);
-//     return useState(key, () => formatDateIT(article.date)).value;
-// };
 
 const MAX_RELATED_ARTICLES = 3
 const relatedArticlesString = "Altri articoli correlati"
 
 const { data: relatedArticlesData } = await useAsyncData(`linked-${route.path}`, async () => {
   const collectionsData = await queryAllCollections()
-
-  // Combine all articles and filter
   const allArticles: AnyArticle[] = combineArticles(collectionsData)
   const filterableArticles = allArticles.filter(a => a.published !== false)
   const publishedArticles = allArticles.filter(a => a.published === true)
   const globalNormalizedLocationSet = buildGlobalNormalizedLocationSet(filterableArticles)
-
   const filtered = publishedArticles.filter(a => a.path !== data.value?.path)
 
   const withCommonTags = filtered.map(a => ({
@@ -72,20 +68,14 @@ const { data: relatedArticlesData } = await useAsyncData(`linked-${route.path}`,
 
   let sorted = orderByMultiple(
     withCommonTags,
-    [
-      item => item.commonTags,
-      item => new Date(item.article.date).getTime()
-    ],
+    [item => item.commonTags, item => new Date(item.article.date).getTime()],
     ['desc', 'desc']
   ).map(item => item.article)
 
-  // Fallback: se non ci sono articoli con tag comuni, mostra i più recenti
   if (sorted.length < MAX_RELATED_ARTICLES) {
     sorted = orderBy(filtered, a => new Date(a.date).getTime(), 'desc').slice(0, MAX_RELATED_ARTICLES)
   }
 
-  // showing the top 3 by tag intersection and publication date
-  // console.log(sorted.slice(0, MAX_RELATED_ARTICLES))
   return {
     links: sorted.slice(0, MAX_RELATED_ARTICLES),
     globalNormalizedLocationValues: Array.from(globalNormalizedLocationSet)
@@ -104,39 +94,46 @@ const getTagFilterLink = (tag: string) => ({
   })
 })
 
-// Fetch author data for related articles
-const relatedAuthorsMap = ref<Record<string, Author[]>>({})
+// Single query for all related article authors
+const { data: relatedAuthorsData } = await useAsyncData<Author[]>(
+  `related-authors-${route.path}`,
+  async () => {
+    const allNames = [...new Set(
+      (links.value || []).flatMap(article => normalizeAuthors(article.author))
+    )]
+    if (!allNames.length) return []
+    const authors = await queryCollection('authors')
+      .where('name', 'IN', allNames)
+      .all()
 
-if (links.value) {
-  for (const article of links.value) {
-    const authorNames = normalizeAuthors(article.author)
-    const authorsData: Author[] = []
-
-    for (const authorName of authorNames) {
-      try {
-        const authorInfo = await useAuthor(authorName)
-        authorsData.push(authorInfo)
-      } catch (e) {
-        console.error(`Failed to load author data for ${authorName}:`, e)
-      }
-    }
-
-    relatedAuthorsMap.value[article.path] = authorsData
+    return allNames
+      .map(name => authors.find(a => a.name.toLowerCase() === name.toLowerCase()))
+      .filter(Boolean) as Author[]
   }
-}
+)
+
+const relatedAuthorsMap = computed(() => {
+  const map: Record<string, Author[]> = {}
+  for (const article of links.value || []) {
+    const names = normalizeAuthors(article.author)
+    map[article.path] = names
+      .map(name =>
+        relatedAuthorsData.value?.find(
+          a => a.name.toLowerCase() === name.toLowerCase()
+        )
+      )
+      .filter(Boolean) as Author[]
+  }
+  return map
+})
 
 const { data: surround } = await useAsyncData(`${route.path}-surround`, async () => {
   const collections = getCollectionNames()
-  // console.log('[DEBUG] Collections:', collections);
-  // console.log('[DEBUG] Current path:', route.path);
-
   for (const collection of collections) {
-    // console.log(`[DEBUG] Trying collection: ${collection}`);
     try {
       const result = await queryCollectionItemSurroundings(collection, route.path, {
         fields: ["description"],
       })
-      // console.log(`[DEBUG] Result from ${collection}:`, result);
       if (result) return result
     } catch (e) {
       console.error(`[DEBUG] Error in collection ${collection}:`, e)
@@ -148,55 +145,16 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, async ()
 updateMeta()
 
 function updateMeta() {
-  // Debug: stampa tutti i valori
-  // console.log('=== META DEBUG ===');
-  // console.log('data.value:', data.value);
-  // console.log('authorData:', authorData);
-  // console.log('Fields check:');
-  // console.log('  - title:', data.value?.title || '❌ MISSING');
-  // console.log('  - description:', data.value?.description || '❌ MISSING');
-  // console.log('  - thumbnail:', data.value?.thumbnail || '❌ MISSING');
-  // console.log('  - date:', data.value?.date || '❌ MISSING');
-  // console.log('  - tags:', data.value?.tags || '❌ MISSING');
-  // console.log('  - author.name:', authorData?.name || '❌ MISSING');
-  // console.log('  - author.description:', authorData?.description || '❌ MISSING');
-  // console.log('  - author.avatar:', authorData?.avatar || '❌ MISSING');
-  // console.log('  - publisher.name:', appMeta.author.name || '❌ MISSING');
-  // console.log('  - publisher.description:', appMeta.author.description || '❌ MISSING');
-  // console.log('  - publisher.image:', appMeta.author.image || '❌ MISSING');
-  // console.log('  - publisher.url:', appMeta.author.url || '❌ MISSING');
-  // console.log('==================');
-
-  // if (!data.value) {
-  //   console.error('❌ No data available for meta tags');
-  //   return;
-  // }
-
-  // Lista dei campi mancanti
-  // const missingFields: string[] = [];
-  // if (!data.value.title) missingFields.push('title');
-  // if (!data.value.description) missingFields.push('description');
-  // if (!data.value.thumbnail) missingFields.push('thumbnail');
-  // if (!data.value.date) missingFields.push('date');
-  // if (!data.value.tags || data.value.tags.length === 0) missingFields.push('tags');
-  // if (!authorData?.name) missingFields.push('author.name');
-
-  // if (missingFields.length > 0) {
-  //   console.warn('⚠️ Missing required fields:', missingFields.join(', '));
-  // }
-
   useSchemaOrg([
     defineArticle({
       headline: data.value?.title,
       description: data.value?.description,
       image: data.value?.thumbnail,
-      // TODO abbiamo rimosso la libreria dayjs
-      // datePublished: dayjs(data.value?.date, "YYYY-MM-DD").toDate().toString(),
       keywords: data.value?.tags,
       author: {
-        name: authorsData[0]?.name,
-        description: authorsData[0]?.description,
-        image: authorsData[0]?.avatar,
+        name: authorsData.value?.[0]?.name,
+        description: authorsData.value?.[0]?.description,
+        image: authorsData.value?.[0]?.avatar,
       },
       publisher: definePerson({
         name: appMeta.author.name,
@@ -217,16 +175,16 @@ function updateMeta() {
     twitterImage: data.value?.thumbnail,
   })
 
-  // We use static thumbnails for OG images instead of dynamic generation
   defineOgImageComponent("Article", {
     thumbnail: data.value?.thumbnail,
     title: data.value?.title,
     author: {
-      name: authorsData[0]?.name,
-      image: authorsData[0]?.avatar,
+      name: authorsData.value?.[0]?.name,
+      image: authorsData.value?.[0]?.avatar,
     },
   })
 }
+
 </script>
 
 <template>
@@ -280,13 +238,7 @@ function updateMeta() {
             <AuthorCard
               v-for="author in authorsData"
               :key="author.name"
-              :author="{
-                name: author.name,
-                description: author.description,
-                avatar: author.avatar,
-                url: author.url,
-                socials: author.socials
-              }"
+              :author="author"
               :clickable="true"
               @click="navigateTo(`/authors/${getAuthorSlug(author.name)}`)"
             />
@@ -318,7 +270,7 @@ function updateMeta() {
         :value="data"
         class="markdown-content flex-1"
       />
-      <template v-if="authorsData.length > 0">
+      <template v-if="authorsData && authorsData.length > 0">
         <div class="flex flex-col gap-4">
           <AuthorAboutCard
             v-for="author in authorsData"
