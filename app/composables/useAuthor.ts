@@ -2,9 +2,9 @@ export interface Author {
   name: string
   avatar: string
   description: string
-  bio?: string
+  bio: string
   url: string
-  nickname?: string
+  nickname: string
   socials?: {
     twitter?: string
     github?: string
@@ -40,7 +40,7 @@ export const useAuthor = (authorName: string) => {
   return useAsyncData<Author>(
     `author-${authorName.toLowerCase().replace(/\s+/g, '-')}`,
     async () => {
-      const authors = await queryCollection('authors').all()
+      const authors = await queryCollection('authors').all() as Author[]
 
       if (!authors) {
         throw new Error(`Failed to load authors collection`)
@@ -86,7 +86,7 @@ export const useAuthors = (authorNames: string | string[]) => {
   return useAsyncData<Author[]>(
     key,
     async () => {
-      const allAuthors = await queryCollection('authors').all()
+      const allAuthors = await queryCollection('authors').all() as Author[]
 
       if (!allAuthors) {
         throw new Error(`Failed to load authors collection`)
