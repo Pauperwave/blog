@@ -7,7 +7,7 @@ sitemap:
     - loc: https://avatars.githubusercontent.com/u/225214755?s=200&v=4
 ---
 
-# Componenti predefiniti
+## Componenti predefiniti
 
 ```text
 Link: [Prose Components](/articles/2026-01-17-lorwyn-eclipsed)
@@ -15,7 +15,19 @@ Link: [Prose Components](/articles/2026-01-17-lorwyn-eclipsed)
 
 Link: [Prose Components](/articles/2026-01-17-lorwyn-eclipsed)
 
-> Block quote
+```text
+> This is a quote block
+```
+
+> This is a quote block
+
+````text
+```js [file.js]
+export default () => {
+  console.log('Code block')
+}
+```
+````
 
 ```js [file.js]
 export default () => {
@@ -23,70 +35,159 @@ export default () => {
 }
 ```
 
-`code`
+```text
+# Intestazione di primo livello (non usare)
 
-# H1 Heading
+## Intestazione di secondo livello
 
-## H2 Heading
+### Intestazione di terzo livello
 
-### H3 Heading
+#### Intestazione di quarto livello
+```
 
-#### H4 Heading
+```text
+Divisore sotto.
 
-Divider under.
+---
+```
+
+Divisore sotto.
 
 ---
 
-Divider above.
-
-![A Cool Image](https://avatars.githubusercontent.com/u/225214755?s=200\&v=4)
+Divisore sopra.
 
 Se necessiti di specificare la larghezza di un'immagine, usa html
 
 ```text
-<img src="https://avatars.githubusercontent.com/u/225214755?s=200&v=4" alt="drawing" style="width:200px;"/>
+![drawing](https://avatars.githubusercontent.com/u/225214755?s=200\&v=4){style="width:400px; display: block; margin: 0 auto;"}
 ```
 
-![drawing](https://avatars.githubusercontent.com/u/225214755?s=200\&v=4){style="width:200px;"}
+![drawing](https://avatars.githubusercontent.com/u/225214755?s=200\&v=4){style="width:400px; display: block; margin: 0 auto;"}
+
+```text
+- Una
+- lista
+- non
+- ordinata
+```
 
 - Una
 - lista
 - non
 - ordinata
 
+```text
+1. Una
+2. lista
+3. numerata
+```
+
 1. Una
 2. lista
 3. numerata
 
-**Just a strong paragraph.**
+```text
+Una parola **in grassetto**.
+```
 
-*Just an italic paragraph.*
+Una parola **in grassetto**.
+
+```text
+Una parola *in corsivo*.
+```
+
+Una parola *in corsivo*.
+
+```text
+Scrivo `codice` in linea.
+```
+
+Scrivo `codice` in linea.
+
+```text
+::tip
+Messaggio di nota.
+::
+```
 
 ::tip
 Messaggio di nota.
 ::
 
+```text
 ::caution
-Coffee and tea dehydrate you – WRONG! While caffeine has mild diuretic effects, you're still getting net hydration. Your morning coffee counts, coffee addicts rejoice! ☕
+Messaggio di cautela.
+::
+```
+
+::caution
+Messaggio di cautela.
 ::
 
+```text
 ::note
-You are hereby granted permission to eat foods you enjoy without guilt. The stress from guilt might be worse for you than the occasional cookie. Mind = blown! 🍪
+Messaggio informativo.
 ::
+```
+
+::note
+Messaggio informativo.
+::
+
+```text
+::warning
+Messaggio di allerta.
+::
+```
 
 ::warning
 Messaggio di allerta.
 ::
 
+```text
+::card{title="Titolo della card"}
+Contenuto della card.
+::
+```
+
 ::card{title="The Consistency Paradox"}
 The people who seem most disciplined aren't superhuman – they've just made their habits so small and automatic that they barely require willpower. They're like efficiency ninjas, but with better sleep schedules.
 ::
+
+```text
+| Key | Type      | Description |
+| --- | --------- | ----------- |
+| 1   | Wonderful | Table       |
+| 2   | Wonderful | Data        |
+| 3   | Wonderful | Website     |
+```
 
 | Key | Type      | Description |
 | --- | --------- | ----------- |
 | 1   | Wonderful | Table       |
 | 2   | Wonderful | Data        |
 | 3   | Wonderful | Website     |
+
+```text
+::u-table
+---
+data:
+  - Time Period: Week 1-2
+    What Happens: Feels hard, requires lots of willpower
+    Example: Every workout is a battle
+  - Time Period: Week 3-4
+    What Happens: Starts to feel slightly easier
+    Example: You remember to pack gym clothes
+  - Time Period: Week 5-8
+    What Happens: Becomes part of routine
+    Example: You feel weird on rest days
+  - Time Period: Month 3+
+    What Happens: Automatic behavior
+    Example: Working out feels as natural as brushing teeth
+---
+::
+```
 
 ::u-table
 ---
@@ -106,40 +207,41 @@ data:
 ---
 ::
 
-# Componenti personalizzati
+## Componenti personalizzati
+
+### Simboli di mana singoli
 
 ```js [Simboli di mana]
 :magic-card-mana-symbol{symbol="w"}
+
+:magic-card-mana-symbol{symbol="u"}
+
+:magic-card-mana-symbol{symbol="b"}
+
+:magic-card-mana-symbol{symbol="r"}
+
+:magic-card-mana-symbol{symbol="g"}
+
+:magic-card-mana-symbol{symbol="c"}
 ```
 
-:magic-card-mana-symbol{symbol="w"}
+:magic-card-mana-symbol{symbol="w"} / :magic-card-mana-symbol{symbol="u"} / :magic-card-mana-symbol{symbol="b"} / :magic-card-mana-symbol{symbol="r"} / :magic-card-mana-symbol{symbol="g"} / :magic-card-mana-symbol{symbol="c"}
 
-:magic-card-mana-symbol{symbol="u"}
+### Combinazioni di simboli di mana
 
-:magic-card-mana-symbol{symbol="b"}
+::note
+Nota lo spazio fra i simboli
+::
 
-:magic-card-mana-symbol{symbol="r"}
+```js [Simboli di mana]
+:magic-card-mana-symbol{symbol="wubrgc"}
+```
 
-:magic-card-mana-symbol{symbol="g"}
+:magic-card-mana-symbol{symbol="wubrgc"}
 
-:magic-card-mana-symbol{symbol="c"}
+### Simboli speciali
 
----
-
-:magic-card-mana-symbol{symbol="w"}
-
-:magic-card-mana-symbol{symbol="u"}
-
-:magic-card-mana-symbol{symbol="b"}
-
-:magic-card-mana-symbol{symbol="r"}
-
-:magic-card-mana-symbol{symbol="g"}
-
-:magic-card-mana-symbol{symbol="c"}
-
----
-
+```js [Simboli speciali]
 :magic-card-mana-symbol{symbol="X"}
 
 :magic-card-mana-symbol{symbol="0"}
@@ -163,11 +265,13 @@ data:
 :magic-card-mana-symbol{symbol="9"}
 
 :magic-card-mana-symbol{symbol="10"}
+```
 
----
+:magic-card-mana-symbol{symbol="X"} / :magic-card-mana-symbol{symbol="0"} / :magic-card-mana-symbol{symbol="1"} / :magic-card-mana-symbol{symbol="2"} / :magic-card-mana-symbol{symbol="3"} / :magic-card-mana-symbol{symbol="4"} / :magic-card-mana-symbol{symbol="5"} / :magic-card-mana-symbol{symbol="6"} / :magic-card-mana-symbol{symbol="7"} / :magic-card-mana-symbol{symbol="8"} / :magic-card-mana-symbol{symbol="9"} / :magic-card-mana-symbol{symbol="10"}
 
-:magic-card-mana-symbol{symbol="W/U"}
+### Combinazioni di colori
 
+```js [Combinazioni di colori]
 :magic-card-mana-symbol{symbol="W/B"}
 
 :magic-card-mana-symbol{symbol="U/B"}
@@ -185,9 +289,13 @@ data:
 :magic-card-mana-symbol{symbol="G/W"}
 
 :magic-card-mana-symbol{symbol="G/U"}
+```
 
----
+:magic-card-mana-symbol{symbol="W/U"} / :magic-card-mana-symbol{symbol="W/B"} / :magic-card-mana-symbol{symbol="U/B"} / :magic-card-mana-symbol{symbol="U/R"} / :magic-card-mana-symbol{symbol="B/R"} / :magic-card-mana-symbol{symbol="B/G"} / :magic-card-mana-symbol{symbol="R/G"} / :magic-card-mana-symbol{symbol="R/W"} / :magic-card-mana-symbol{symbol="G/W"} / :magic-card-mana-symbol{symbol="G/U"}
 
+### Tipi di carte
+
+```js [Tipi di carte]
 :magic-card-mana-symbol{symbol="creature"}
 
 :magic-card-mana-symbol{symbol="instant"}
@@ -199,9 +307,13 @@ data:
 :magic-card-mana-symbol{symbol="land"}
 
 :magic-card-mana-symbol{symbol="enchantment"}
+```
 
----
+:magic-card-mana-symbol{symbol="creature"} / :magic-card-mana-symbol{symbol="instant"} / :magic-card-mana-symbol{symbol="sorcery"} / :magic-card-mana-symbol{symbol="artifact"} / :magic-card-mana-symbol{symbol="land"} / :magic-card-mana-symbol{symbol="enchantment"}
 
+### Simboli di mana phyrexiano
+
+```js [Simboli di mana phyrexiano]
 :magic-card-mana-symbol{symbol="P"}
 
 :magic-card-mana-symbol{symbol="W/P"}
@@ -213,12 +325,15 @@ data:
 :magic-card-mana-symbol{symbol="R/P"}
 
 :magic-card-mana-symbol{symbol="G/P"}
+```
 
+:magic-card-mana-symbol{symbol="P"} / :magic-card-mana-symbol{symbol="W/P"} / :magic-card-mana-symbol{symbol="U/P"} / :magic-card-mana-symbol{symbol="B/P"} / :magic-card-mana-symbol{symbol="R/P"} / :magic-card-mana-symbol{symbol="G/P"}
+
+::note
 Per una lista completa consultare [Mana & Card Icons](https://mana.andrewgioia.com/icons.html)
+::
 
-## `magic-card-tooltip`
-
-Componente "in linea", Disponible in `articles decklists reports tutorials`
+## Mostrare l'anteprima di una carta nel testo
 
 ### Quando usarlo
 
@@ -251,15 +366,35 @@ Ci sono due varianti di questo componente:
 
 Il componente `magic-card-tooltip` viene riutilizzato all'interno del componente `magic-decklist` e del componente `magic-sideboard-guide` come potrai notare più avanti.
 
-### Alcuni casi limite con double faced cards e adventure cards
+### Alcuni casi limite
 
-:magic-card-tooltip{name="Delver of Secrets"}
+Alcuni casi limite con double faced cards e adventure cards
 
-:magic-card-tooltip{name="The Modern Age"}
+::note
+Questi casi sono gestiti in modo speciale per garantire che la prima faccia della carta venga visualizzata correttamente.
+::
 
-:magic-card-tooltip{name="Sagu Wildling"}
+:magic-card-tooltip{name="Delver of Secrets"} / :magic-card-tooltip{name="The Modern Age"} / :magic-card-tooltip{name="Sagu Wildling"}
 
-## `magic-card-display`
+::caution
+Al momento non è possibile mostrare la seconda faccia di una carta double faced.
+::
+
+```text
+:magic-card-tooltip{name="Insectile Aberration"}
+```
+
+:magic-card-tooltip{name="Insectile Aberration"}
+
+```text
+:magic-card-tooltip{name="Vector Glider"}
+```
+
+:magic-card-tooltip{name="Vector Glider"}
+
+## Mostrare una carta per intera
+
+Semplice componente per mostrare una carta per intera, utile negli articoli di `spoiler`.
 
 ```md
 ::magic-card-display
@@ -271,7 +406,7 @@ card: Swords to Plowshares
 
 :magic-card-display{card="Swords to Plowshares"}
 
-## `magic-card-art-crop`
+## Mostrare l'art di una carta
 
 Il componente `magic-card-art-crop` in modo predefinito prende il nome della carta e ne restituisce l'art.
 è possibile specificare l'espansione e il numero di collezione della carta, il numero di espansione non è necessario quando l'art è univoca.
@@ -385,7 +520,7 @@ card: Repel Calamity
 ---
 ::
 
-## `magic-card-rating`
+## Esprimere una valutazione
 
 Componente per mostrare il voto di una carta su una scala da 0 a 10.
 
@@ -403,68 +538,63 @@ rating: 6.5
 ### Esempi di voti da 0 a 10
 
 Il colore del badge cambia in base al voto:
+
 - **0 - 3.5**: Rosso (error) - Voto insufficiente
 - **4 - 5.5**: Giallo/Arancio (warning) - Voto mediocre
 - **6 - 7.5**: Blu (primary) - Voto buono
 - **8 - 10**: Verde (success) - Voto eccellente
 
-::magic-card-rating
----
-cardName: Pessimo
-rating: 0
----
+::magic-card-rating{:rating='0' card-name="Pessimo"}
 ::
 
-::magic-card-rating
----
-cardName: Molto scarso
-rating: 3.5
----
+::magic-card-rating{:rating='3.5' card-name="Molto scarso"}
 ::
 
-::magic-card-rating
----
-cardName: Scarso
-rating: 4
----
+::magic-card-rating{:rating='4' card-name="Scarso"}
 ::
 
-::magic-card-rating
----
-cardName: Sotto la media
-rating: 5.5
----
+::magic-card-rating{:rating='5.5' card-name="Sotto la media"}
 ::
 
-::magic-card-rating
----
-cardName: Nella media
-rating: 6
----
+::magic-card-rating{:rating='6' card-name="Nella media"}
 ::
 
-::magic-card-rating
----
-cardName: Discreto
-rating: 7.5
----
+::magic-card-rating{:rating='7.5' card-name="Discreto"}
 ::
 
-::magic-card-rating
----
-cardName: Buono
-rating: 8
----
+::magic-card-rating{:rating='8' card-name="Buono"}
 ::
 
-::magic-card-rating
----
-cardName: Molto buono
-rating: 10
----
+::magic-card-rating{:rating='10' card-name="Molto buono"}
 ::
 
-## `magic-sideboard-guide`
+## Opinione del revisore
+
+Componente per mostrare l'opinione di un revisore su una carta, utilizzato negli articoli di spoiler.
+
+### Come usarlo
+
+```md
+::reviewer-opinion
+---
+name: Nome del revisore
+rating: 7
+---
+Testo dell'opinione del revisore sulla carta.
+::
+```
+
+### Esempio
+
+::reviewer-opinion
+---
+name: Pietro Bragioto
+rating: 7
+---
+Carta interessante che potrebbe trovare spazio in diversi archetipi. La sua versatilità la rende una solida aggiunta al formato, anche se non è una carta definitiva. Il costo di mana è giustificato dall'impatto che può avere sulla partita.
+::
+
+## Guida al sideboard
 
 ::warning
 Non disponible in `decklists` e in `spoilers`.
@@ -486,7 +616,11 @@ matchup: Mono Red Rally
 ::
 ```
 
-## `magic-decklist`
+## Mostrare una decklist
+
+::note
+Componente utile in articoli `decklist`, `report` e `tutorial`.
+::
 
 ```md
 ::magic-decklist
@@ -494,6 +628,7 @@ matchup: Mono Red Rally
 name: Elves
 player: Lahiri Cristofori
 placement: Winner
+headerGradient: monowhite
 ---
 Creatures
 4 Delver of Secrets
@@ -526,9 +661,9 @@ Sideboard
 ::
 ```
 
-### Esempi di gradienti per `magic-decklist`
+### Gradienti per le decklist
 
-#### Mono Color
+#### Gradienti mono-colore
 
 ```text
 headerGradient: monowhite
@@ -608,7 +743,7 @@ player: subheading
 ---
 ::
 
-#### Two-Color Combinations
+#### Gradienti due-colori
 
 ```text
 headerGradient: gruul
@@ -740,7 +875,7 @@ player: subheading
 ---
 ::
 
-#### Three-Color Combinations
+#### Gradienti tre-colori
 
 ```text
 headerGradient: esper
