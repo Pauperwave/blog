@@ -39,7 +39,7 @@ if (allArticles.value.length) {
     try {
       const { data: authorInfo } = await useAuthor(authorName)
       if (authorInfo.value) {
-        authorsMap.value[authorName.toLowerCase()] = authorInfo.value
+        authorsMap.value[authorName] = authorInfo.value
       }
     } catch (e) {
       console.error(`Failed to load author data for ${authorName}:`, e)

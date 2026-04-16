@@ -36,7 +36,7 @@ const { data: authorsMapData } = await useAsyncData<Record<string, Author>>(
       .all()
 
     return Object.fromEntries(
-      authors.map(a => [a.name.toLowerCase(), a as Author])
+      authors.map(a => [a.name, a as Author])
     )
   }
 )
@@ -116,7 +116,7 @@ const {
           v-for="article in filteredArticles"
           :key="article.path"
           :article="article"
-          :author-data="normalizeAuthors(article.author).map(name => authorsMap[name.toLowerCase()]).filter((author): author is Author => Boolean(author))"
+          :author-data="normalizeAuthors(article.author).map(name => authorsMap[name]).filter((author): author is Author => Boolean(author))"
           :topic-tags="getArticleTopicTags(article)"
           :badge="getBadge(article.date)"
         />

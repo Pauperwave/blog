@@ -20,7 +20,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const getAuthorData = (article: AnyArticle): Author[] => {
   const authorNames = normalizeAuthors(article.author)
-  return authorNames.map(name => props.authorsMap[name.toLowerCase()]).filter((author): author is Author => Boolean(author))
+  return authorNames.map(name => props.authorsMap[name]).filter((author): author is Author => Boolean(author))
 }
 </script>
 

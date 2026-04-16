@@ -39,7 +39,7 @@ const isFeaturedLeagueArticle = computed(() =>
 const getAuthorsData = (article: AnyArticle) => {
   const authorNames = normalizeAuthors(article.author)
   return authorNames.map(name => ({
-    data: props.authorsMap[name.toLowerCase()],
+    data: props.authorsMap[name],
     name
   })).filter((item): item is { data: Author; name: string } => Boolean(item.data))
 }
