@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeAll, afterAll } from 'vitest'
+import { describe, it, expect, afterAll } from 'vitest'
 import { getCardsByNames, getCardByName, closeDatabase } from './card-database'
 
 describe('Card Database', () => {
@@ -26,7 +26,7 @@ describe('Card Database', () => {
     it('should find multiple cards by exact names', async () => {
       const names = ['Lightning Bolt', 'Counterspell', 'Grizzly Bears']
       const result = await getCardsByNames(names)
-      
+
       expect(result.size).toBeGreaterThan(0)
       expect(result.get('Lightning Bolt')).toBeTruthy()
     })
@@ -39,7 +39,7 @@ describe('Card Database', () => {
     it('should handle case-insensitive names', async () => {
       const names = ['lightning bolt', 'COUNTERSPELL', 'grizzly bears']
       const result = await getCardsByNames(names)
-      
+
       expect(result.size).toBeGreaterThan(0)
       expect(result.get('lightning bolt')).toBeTruthy()
     })
@@ -47,14 +47,14 @@ describe('Card Database', () => {
     it('should handle mixed case and exact names', async () => {
       const names = ['Lightning Bolt', 'counterspell', 'Grizzly Bears']
       const result = await getCardsByNames(names)
-      
+
       expect(result.size).toBeGreaterThan(0)
     })
 
     it('should handle duplicate names', async () => {
       const names = ['Lightning Bolt', 'Lightning Bolt', 'Counterspell']
       const result = await getCardsByNames(names)
-      
+
       // Should have both keys even though one is duplicate
       expect(result.has('Lightning Bolt')).toBe(true)
       expect(result.has('Counterspell')).toBe(true)
@@ -64,16 +64,16 @@ describe('Card Database', () => {
       // This is the critical test case - could reveal the bug
       const names = ['Lightning Bolt', 'lightning bolt', 'LIGHTNING BOLT']
       const result = await getCardsByNames(names)
-      
+
       expect(result.get('Lightning Bolt')).toBeTruthy()
       expect(result.get('lightning bolt')).toBeTruthy()
       expect(result.get('LIGHTNING BOLT')).toBeTruthy()
-      
+
       // All should resolve to the same card data
       const exactMatch = result.get('Lightning Bolt')
       const lowerMatch = result.get('lightning bolt')
       const upperMatch = result.get('LIGHTNING BOLT')
-      
+
       expect(exactMatch?.imageUrl).toBe(lowerMatch?.imageUrl)
       expect(lowerMatch?.imageUrl).toBe(upperMatch?.imageUrl)
     })
@@ -82,7 +82,7 @@ describe('Card Database', () => {
       // Card names with special characters like apostrophes and dashes
       const names = ["Ashnod's Altar", "Black Mage's Rod", "Eviscerator's Insight"]
       const result = await getCardsByNames(names)
-      
+
       expect(result.size).toBeGreaterThan(0)
     })
 
@@ -93,7 +93,7 @@ describe('Card Database', () => {
         "Black+Mage%27s+Rod".replace(/%27/g, "'").replace(/\+/g, " ")
       ]
       const result = await getCardsByNames(names)
-      
+
       expect(result.size).toBeGreaterThan(0)
     })
 
@@ -107,7 +107,7 @@ describe('Card Database', () => {
     it('should handle mixed valid and invalid names', async () => {
       const names = ['Lightning Bolt', 'Nonexistent Card XYZ', 'Counterspell']
       const result = await getCardsByNames(names)
-      
+
       // Should only return the valid cards
       expect(result.has('Lightning Bolt')).toBe(true)
       expect(result.has('Counterspell')).toBe(true)

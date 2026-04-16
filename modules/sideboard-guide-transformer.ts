@@ -6,8 +6,8 @@ import type { FileBeforeParseHook } from '@nuxt/content'
 import { createRegExp, digit, whitespace, oneOrMore, char } from 'magic-regexp'
 
 import { getCardsByNames } from '#server/utils/card-database'
-import type { ParsedCard } from '#shared/types/index.ts'
-import { buildLog } from '#shared/utils/build-log'
+import type { ParsedCard } from '#shared/types'
+import { buildLog } from '#shared/utils'
 
 export default defineNuxtModule({
   meta: {
