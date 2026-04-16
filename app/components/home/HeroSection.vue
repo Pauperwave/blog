@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { Author } from '~/composables/useAuthor'
-import { getAuthorSlug } from '~/composables/useAuthorSlug'
 import { normalizeAuthors } from '~/composables/useAuthor'
 import {
   type AnyArticle,
@@ -37,13 +36,12 @@ const isFeaturedLeagueArticle = computed(() =>
   featuredArticle.value ? hasLeagueTag(featuredArticle.value) : false
 )
 
-const getPrimaryAuthorData = (article: AnyArticle) => {
+const getAuthorsData = (article: AnyArticle) => {
   const authorNames = normalizeAuthors(article.author)
-  const primaryAuthor = authorNames[0] || 'Unknown'
-  return {
-    data: props.authorsMap[primaryAuthor],
-    name: primaryAuthor
-  }
+  return authorNames.map(name => ({
+    data: props.authorsMap[name.toLowerCase()],
+    name
+  })).filter((item): item is { data: Author; name: string } => Boolean(item.data))
 }
 
 const getThumbnailSrc = (thumbnail: unknown) => {
@@ -186,20 +184,13 @@ const getThumbnailSrc = (thumbnail: unknown) => {
                 </div>
 
                 <div class="flex items-center justify-between gap-3 flex-wrap">
-                  <NuxtLink
-                    v-if="featuredArticle"
-                    :to="`/authors/${getAuthorSlug(getPrimaryAuthorData(featuredArticle).data?.name || getPrimaryAuthorData(featuredArticle).name)}`"
-                    class="inline-flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 hover:text-primary transition-colors"
-                    @click.stop
-                    @keydown.enter.stop
-                  >
-                    <UAvatar
-                      :src="getPrimaryAuthorData(featuredArticle).data?.avatar"
-                      :alt="getPrimaryAuthorData(featuredArticle).data?.name || getPrimaryAuthorData(featuredArticle).name"
-                      size="sm"
+                  <div class="flex flex-wrap gap-2">
+                    <AuthorCard
+                      v-for="authorData in getAuthorsData(featuredArticle)"
+                      :key="authorData.data.name"
+                      :author="authorData.data"
                     />
-                    <span>{{ getPrimaryAuthorData(featuredArticle).data?.name || getPrimaryAuthorData(featuredArticle).name }}</span>
-                  </NuxtLink>
+                  </div>
                   <UButton
                     :to="featuredArticle.path"
                     size="sm"
