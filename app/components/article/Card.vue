@@ -15,36 +15,45 @@ interface Props {
   categoryLabel?: string | null
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  authorData: null,
-  topicTags: () => [],
-  badge: undefined,
-  showAuthor: true,
-  categoryLabel: null
-})
+const {
+  article,
+  authorData = null,
+  topicTags = [],
+  badge = undefined,
+  showAuthor = true,
+  categoryLabel = null
+} = defineProps<Props>()
 
 const authorsList = computed<Author[]>(() => {
-  if (props.authorData) {
-    return Array.isArray(props.authorData) ? props.authorData : [props.authorData]
+  if (authorData) {
+    return Array.isArray(authorData) ? authorData : [authorData]
   }
   // Fallback to article.author names
-  const authorNames = normalizeAuthors(props.article.author)
-  return authorNames.map(name => ({ name, description: '', avatar: '', bio: '', url: '', socials: undefined }))
+  const authorNames = normalizeAuthors(article.author)
+  return authorNames.map(name => ({
+    name,
+    nickname: '',
+    description: '',
+    avatar: '',
+    bio: '',
+    url: '',
+    socials: undefined
+  }))
 })
 
 const shouldShowAuthor = computed(() => {
-  if (!props.showAuthor) return false
-  const category = props.article.category
+  if (!showAuthor) return false
+  const category = article.category
   return category !== 'decklist' && category !== 'report'
 })
 
-const articleLocation = computed(() => getArticleFilterLocation(props.article))
-const isLeagueArticle = computed(() => hasLeagueTag(props.article))
+const articleLocation = computed(() => getArticleFilterLocation(article))
+const isLeagueArticle = computed(() => hasLeagueTag(article))
 const displayedTopicTags = computed(() => {
   const normalizedLocation = articleLocation.value?.trim().toLowerCase() || null
   const seen = new Set<string>()
 
-  return props.topicTags.filter((tag) => {
+  return topicTags.filter((tag) => {
     if (typeof tag !== 'string') return false
     const normalizedTag = tag.trim().toLowerCase()
     if (!normalizedTag) return false
@@ -56,8 +65,7 @@ const displayedTopicTags = computed(() => {
   })
 })
 
-const deckTags = computed(() => props.article.decks || [])
-const commonTags = computed(() => props.article.tags || [])
+const deckTags = computed(() => article.decks || [])
 
 const cardVariantClasses = computed(() =>
   isLeagueArticle.value
@@ -68,11 +76,11 @@ const cardVariantClasses = computed(() =>
 
 <template>
   <UBlogPost
-    :title="props.article.title"
-    :image="props.article.thumbnail"
-    :badge="props.badge"
-    :date="props.article.date"
-    :to="props.article.path"
+    :title="article.title"
+    :image="article.thumbnail"
+    :badge="badge"
+    :date="article.date"
+    :to="article.path"
     variant="naked"
     :class="[
       'group border rounded-xl p-4 backdrop-blur-sm',
@@ -81,24 +89,24 @@ const cardVariantClasses = computed(() =>
     ]"
   >
     <template #date>
-      {{ useState(`article-date-${props.article.path}`, () => formatDateIT(props.article.date)).value }}
+      {{ useState(`article-date-${article.path}`, () => formatDateIT(article.date)).value }}
     </template>
     <template #description>
       <p class="mt-1 text-base text-pretty">
-        {{ props.article.description }}
+        {{ article.description }}
       </p>
       <div class="flex flex-row gap-2 items-center flex-wrap mt-3">
         <UBadge
-          v-if="props.categoryLabel"
-          :key="`${props.article.path}-category-${props.categoryLabel}`"
+          v-if="categoryLabel"
+          :key="`${article.path}-category-${categoryLabel}`"
           color="neutral"
           variant="soft"
         >
-          {{ props.categoryLabel }}
+          {{ categoryLabel }}
         </UBadge>
         <UBadge
           v-if="isLeagueArticle"
-          :key="`${props.article.path}-league`"
+          :key="`${article.path}-league`"
           color="info"
           variant="soft"
         >
@@ -106,7 +114,7 @@ const cardVariantClasses = computed(() =>
         </UBadge>
         <UBadge
           v-if="articleLocation"
-          :key="`${props.article.path}-location-${articleLocation}`"
+          :key="`${article.path}-location-${articleLocation}`"
           color="info"
           variant="soft"
         >
@@ -114,7 +122,7 @@ const cardVariantClasses = computed(() =>
         </UBadge>
         <UBadge
           v-if="deckTags.length === 1"
-          :key="`${props.article.path}-deck-single`"
+          :key="`${article.path}-deck-single`"
           color="warning"
           variant="soft"
         >
@@ -122,13 +130,13 @@ const cardVariantClasses = computed(() =>
         </UBadge>
         <div
           v-if="deckTags.length > 1"
-          :key="`${props.article.path}-deck-multiple`"
+          :key="`${article.path}-deck-multiple`"
           class="flex flex-row gap-2 items-center"
         >
           <span class="text-xs text-gray-600 dark:text-gray-400 font-medium">Decks:</span>
           <UBadge
             v-for="tag in deckTags"
-            :key="`${props.article.path}-deck-${tag}`"
+            :key="`${article.path}-deck-${tag}`"
             color="warning"
             variant="soft"
           >
@@ -136,10 +144,10 @@ const cardVariantClasses = computed(() =>
           </UBadge>
         </div>
         <UBadge
-          v-for="tag in commonTags"
-          :key="`${props.article.path}-tag-${tag}`"
-          color="primary"
-          variant="soft"
+          v-for="tag in displayedTopicTags"
+          :key="`${article.path}-topic-${tag}`"
+          color="neutral"
+          variant="outline"
         >
           {{ tag }}
         </UBadge>
@@ -154,7 +162,6 @@ const cardVariantClasses = computed(() =>
           v-for="author in authorsList"
           :key="author.name"
           :author="author"
-          :clickable="false"
         />
       </div>
     </template>
