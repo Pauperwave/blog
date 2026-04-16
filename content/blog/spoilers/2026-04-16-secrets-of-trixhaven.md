@@ -31,7 +31,6 @@ Ne abbiamo selezionate 9 solo per voi!
 - **Voto 9**: Fa fare il salto di qualità ad un archetipo a Tier 1 / Tier 1.5 ([[Winding Way]], [[Delver of Secrets]], [[Palace Sentinels]]);
 - **Voto 10**: Carta esagerata che vedremo nelle prossime Banlist ([[Frantic Search]], [[Hymn to Tourach]], [[Treasure Cruise]]).
 
-
 ## Gli spoiler
 
 ### Pursue the Past
@@ -83,7 +82,8 @@ card: Shattered Acolyte (SOS)
 name: Alessandro Moretti
 rating: 6
 ---
-Non ho molto da aggiungere a quello che ho già letto in giro: nuova utility per le pile con [[Basilisk Gate]] (in virtù del lifelink). Non eccezionale, ma siamo abituati a vedere bidoni in mazzi come Naya Gates.
+Non ho molto da aggiungere a quello che ho già letto in giro: nuova utility per le pile con [[Basilisk Gate]] (in virtù del lifelink).
+Non eccezionale, ma siamo abituati a vedere bidoni in mazzi come Naya Gates.
 ::
 
 ::reviewer-opinion
@@ -115,7 +115,8 @@ card: Elite Interceptor (SOS)
 name: Alessandro Moretti
 rating: 6
 ---
-Siamo ben lontani dai tempi in cui un 2/2 a costo 3 che cantrippa in EtB fa da soglia per la giocabilità nel formato. [[Llanowar Visionary]] e [[Phyrexian Rager]] sono stati rimpiazzati sia per il vantaggio carte ([[Fanatical Offering]], ecc) che per il body ([[Jhessian Thief]]) e nel Pauper carte che, ai tempi, erano iper-efficienti, come [[Sarulf's Packmate]] e [[Augur of Bolas]], adesso sono sub-efficienti perché lente o non sufficientemente impattanti. 
+Siamo ben lontani dai tempi in cui un 2/2 a costo 3 che cantrippa in EtB fa da soglia per la giocabilità nel formato.
+[[Llanowar Visionary]] e [[Phyrexian Rager]] sono stati rimpiazzati sia per il vantaggio carte ([[Fanatical Offering]], ecc) che per il body ([[Jhessian Thief]]) e nel Pauper carte che, ai tempi, erano iper-efficienti, come [[Sarulf's Packmate]] e [[Augur of Bolas]], adesso sono sub-efficienti perché lente o non sufficientemente impattanti.
 Se da un lato l'utilità di avere un effetto tempo rimpiazzabile con Spider-Man, Web Slinger, Leonardo, Big Brother o [[Kor Skyfisher]] (che tra l'altro permette di connettere con i ninja bianchi e neri), il valore vero che si può generare dal pezzo può essere minore di quanto atteso poiché è, prima di tutto, attaccato ad una creatura e, secondariamente, è una stregoneria a costo 2.
 ::
 
@@ -151,7 +152,8 @@ rating: 6
 ---
 Oggettivamente guardiamola come magia modale: [[Sleight of Hand]] a costo 2, colorless e non neutralizzabile.
 Doppio body volante in late game
-Detta la più basilare osservazione sulla carta ci troviamo, dunque, a paragonarla con carte come [[Lórien Revealed]], [[Generous Ent]] e [[Sagu Wildling]]. Il costo di mana della parte da early game non è al livello delle altre carte già giocate nel formato però, a conti fatti, possiamo vederla come un inserimento molto facile e veloce in mazzi che possono sfruttarla senza particolare fatica, ovvero, Monsters Tron.
+Detta la più basilare osservazione sulla carta ci troviamo, dunque, a paragonarla con carte come [[Lórien Revealed]], [[Generous Ent]] e [[Sagu Wildling]].
+Il costo di mana della parte da early game non è al livello delle altre carte già giocate nel formato però, a conti fatti, possiamo vederla come un inserimento molto facile e veloce in mazzi che possono sfruttarla senza particolare fatica, ovvero, Monsters Tron.
 Oltre alla "versione aggro" di Tron possiamo oggettivamente provarla in qualsiasi archetipo che sfrutta l'aspetto del mana ramp in MtG o che ha una base blu-rossa (il che però complica le cose).
 Non mi sembra irragionevole, prendendo ad esempio ciò che ho letto su varie chat, l'uso di questo cantrip in shell più orientate al control (Izzet Skred e Flicker Tron) però la carta, sotto questo punto di vista, ha la grossa problematica di costare 1 mana in più rispetto a [[Preordain]] e le sue alternative.
 Parlando nello specifico di Flicker Tron, l'aggiunta di un cantrip che si può sfruttare senza l'uso del mana blu è un grosso incentivo che, però, si scontra con la bassa capacità di scavare nel mazzo (rispetto ad [[Impulse]] almeno).
@@ -191,7 +193,8 @@ card: Studious First-Year (SOS)
 name: Alessandro Moretti
 rating: 6
 ---
-Vedendola come aggiunta a costo ridottissimo per Spy Combo o Dredge è una carta che si inserisce nella curva di mana a 1 (quindi, in teoria, migliora early game e turni morti) però, a conti fatti, scambia un costo maggiorato di 1 mana per il mana ramp che, invece, [[Satyr Wayfinder]] e amici non danno. Oggettivamente rampare è forte ed oggettivamente pagare [[Wood Elves]] in due turni separati permette di migliorare il proprio gameplay contro [[Counterspell]] e nei primi due turni (lanciare una magia a costo 3 usando 1 mana al turno 1 e 2 mana al turno due è infattibile prima del turno 3 per una magia a costo 3 e, ovviamente, migliore).
+Vedendola come aggiunta a costo ridottissimo per Spy Combo o Dredge è una carta che si inserisce nella curva di mana a 1 (quindi, in teoria, migliora early game e turni morti) però, a conti fatti, scambia un costo maggiorato di 1 mana per il mana ramp che, invece, [[Satyr Wayfinder]] e amici non danno.
+Oggettivamente rampare è forte ed oggettivamente pagare [[Wood Elves]] in due turni separati permette di migliorare il proprio gameplay contro [[Counterspell]] e nei primi due turni (lanciare una magia a costo 3 usando 1 mana al turno 1 e 2 mana al turno due è infattibile prima del turno 3 per una magia a costo 3 e, ovviamente, migliore).
 Di contro ci troviamo ad avere un Wood Elves che può essere neutralizzato da [[Lava Dart]].
 ::
 
@@ -224,7 +227,9 @@ card: Grapple with Death (SOS)
 name: Alessandro Moretti
 rating: 5
 ---
-Non penso che una carta giocabile per via delle sfighe che si porta appresso. 3 mana per una rimozione per creatura o artefatto significa che inevitabilmente la si deve giocare in un qualche bollone come Gardens o Pestilence. [[Heritage Reclamation]] già viene giocata in Golgari Pestilence, però si va ad abbinare ad una suite di rimozioni migliori e va a compensare il fatto di non uccidere creatura con il fatto che è una compensazione per ciò che manca nelle altre rimozioni, andando a bilanciare con versatilità e, quindi, con un testo materialmente migliore.
+Non penso che una carta giocabile per via delle sfighe che si porta appresso.
+3 mana per una rimozione per creatura o artefatto significa che inevitabilmente la si deve giocare in un qualche bollone come Gardens o Pestilence.
+[[Heritage Reclamation]] già viene giocata in Golgari Pestilence, però si va ad abbinare ad una suite di rimozioni migliori e va a compensare il fatto di non uccidere creatura con il fatto che è una compensazione per ciò che manca nelle altre rimozioni, andando a bilanciare con versatilità e, quindi, con un testo materialmente migliore.
 ::
 
 ::reviewer-opinion
@@ -292,7 +297,8 @@ card: Glorious Decay
 name: Alessandro Moretti
 rating: 7
 ---
-Sidegrade di [[Heritage Reclamation]]. Temiamola a mente per quanto rompere le creature volanti sarà più importante di rompere [[Makeshift Munitions]].
+Sidegrade di [[Heritage Reclamation]].
+Temiamola a mente per quanto rompere le creature volanti sarà più importante di rompere [[Makeshift Munitions]].
 ::
 
 ::reviewer-opinion
@@ -325,13 +331,15 @@ name: Alessandro Moretti
 rating: 7
 ---
 Io sono un grosso fan di Simic Turbofog, archetipo che unisce due degli aspetti più divertenti del cazzeggio di Magic: pescare e fare land drop.
-Una delle carte più forti di UG Fog è sempre stata [[Growth Spiral]] che racchiude questi due aspetti, con l'upside di rampare. Per fare una comparazione con una carta più forte, [[Growth Spiral]] si comporta in un mazzo Simic come [[Cleansing Wildfire]] in un mazzo rosso coi ponti artefatto.
+Una delle carte più forti di UG Fog è sempre stata [[Growth Spiral]] che racchiude questi due aspetti, con l'upside di rampare.
+Per fare una comparazione con una carta più forte, [[Growth Spiral]] si comporta in un mazzo Simic come [[Cleansing Wildfire]] in un mazzo rosso coi ponti artefatto.
 Ora, comprendendo che Simic Fog non è uno degli archetipi più giocati, innovati o rispettati, l'esistenza e la giocabilità di [[Growth Spiral]] non hanno comunque permesso ad [[Eureka Moment]] di veder gioco (almeno, in quantità degna di nota) nonostante sia molto in tema con un'altra carta, ovvero, [[Moment's Peace]].
 Prendendo un momen… un attimo per comprenderne il perché, appare chiaro come ad un certo punto della partita il vantaggio carte e la selezione siano più rilevanti del mana ramp (anche perché si suppone che con il proseguire della partita si avrà un minor bisogno di land drops) e, quindi, [[Eureka Moment]] non ha un impatto sul game significativo quando, invece, carte come [[Behold the Multiverse]] e [[Deduce]] si incastrano meglio nella curva di mana dell'early-to-mid-game e fluidificano il game attraverso il vantaggio della selezione e del mana guadagnato in ottimizzazione e non attraverso il vantaggio mana guadagnato dal mana-ramp.
 Embrace the Paradox può incastrarsi bene come vantaggio carte essendo un un +2 e non un +1 e, nonostante il costo di mana convertito pari a 5 può trattarsi di un upside rispetto alle alternative presenti, sia per il vantaggio carte, che per il vantaggio mana.
 In UG Fog carte come [[Growth Spiral]] spostano parecchio il vantaggio verso il mazzo Simic poiché, banalmente, permettono di accelerare di un turno o due delle giocate che altrimenti sarebbero troppo lente.
 Fog ormai si gioca Golgari, anziché Simic, per due motivi: il guadagno di mana dal giocare carte come [[Fanatical Offering]], [[Ichor Wellspring]] ed [[Eviscerator's Insight]] sopra alle alternative blu e il non dover soffrire [[Pyroblast]] e [[Red Elemental Blast]].
-La versione Simic però ha il vantaggio di essere più veloce e fluida. Oggettivamente si potrebbe pensare di giocare una versione Sultai, dove le uniche magie blu sono (escludendo [[Stream of Thought]]) [[Growth Spiral]] ed Embrace the Paradox, vedremo se questa carta, irrilevante, di una parte del formato irrilevante, potrà essere degna di nota.
+La versione Simic però ha il vantaggio di essere più veloce e fluida.
+Oggettivamente si potrebbe pensare di giocare una versione Sultai, dove le uniche magie blu sono (escludendo [[Stream of Thought]]) [[Growth Spiral]] ed Embrace the Paradox, vedremo se questa carta, irrilevante, di una parte del formato irrilevante, potrà essere degna di nota.
 ::
 
 ::reviewer-opinion
