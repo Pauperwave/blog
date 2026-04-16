@@ -1,16 +1,8 @@
 <script setup lang="ts">
-const props = defineProps<{
-  src: string;
-  name: string;
-  description?: string;
-  url?: string;
-  socials?: {
-    twitter?: string;
-    github?: string;
-    youtube?: string;
-    twitch?: string;
-    website?: string;
-  };
+import type { Author } from '~/composables/useAuthor'
+
+defineProps<{
+  author: Author
 }>()
 </script>
 
@@ -19,36 +11,21 @@ const props = defineProps<{
     id="author-about"
     variant="soft"
   >
-
     <template #header>
       <div class="flex flex-col">
-        <p class="font-bold text-highlighted">Riguardo l'autore</p>
+        <p class="font-bold text-highlighted">
+          Riguardo l'autore
+        </p>
         <slot name="body" />
       </div>
     </template>
-
     <template #footer>
-      <div class="flex items-center gap-2">
+      <div class="flex-1">
         <AuthorCard
-          :author="{
-            name: props.name,
-            avatar: props.src,
-            description: props.description,
-            url: props.url,
-            socials: props.socials
-          }"
-          :clickable="!!props.url"
-          class="flex-1"
+          :author="author"
         />
-        <div class="ml-auto flex items-center gap-2 justify-end">
-          <slot name="actions" />
-        </div>
       </div>
     </template>
-
   </UCard>
 </template>
 
-<style lang="css" scoped>
-@reference "~/assets/css/main.css";
-</style>
