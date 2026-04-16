@@ -20,24 +20,28 @@ const { data: articles } = await useAsyncData("articles-index", async () => {
 })
 
 // Fetch author data for all unique authors
-const authorsMap = ref<Record<string, Author>>({})
+const { data: authorsMapData } = await useAsyncData<Record<string, Author>>(
+  'articles-authors-map',
+  async () => {
+    if (!articles.value) return {}
 
-if (articles.value) {
-  const uniqueAuthors = new Set<string>()
-  articles.value.forEach(article => {
-    const authorNames = normalizeAuthors(article.author)
-    authorNames.forEach((name: string) => uniqueAuthors.add(name))
-  })
+    const uniqueNames = [...new Set(
+      articles.value.flatMap(article => normalizeAuthors(article.author))
+    )]
 
-  for (const authorName of uniqueAuthors) {
-    try {
-      const authorInfo = await useAuthor(authorName)
-      authorsMap.value[authorName] = authorInfo
-    } catch (e) {
-      console.error(`Failed to load author data for ${authorName}:`, e)
-    }
+    if (!uniqueNames.length) return {}
+
+    const authors = await queryCollection('authors')
+      .where('name', 'IN', uniqueNames)
+      .all()
+
+    return Object.fromEntries(
+      authors.map(a => [a.name, a as Author])
+    )
   }
-}
+)
+
+const authorsMap = computed(() => authorsMapData.value ?? {})
 
 const {
   selectedCategory,
