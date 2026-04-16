@@ -4,38 +4,40 @@ const props = defineProps<{
   rating: number
 }>()
 
-const authorData = ref<{ avatar?: string } | null>(null)
-
-const author = await useAuthor(props.name)
-authorData.value = { avatar: author.avatar }
+const { data: author, error } = await useAuthor(props.name)
 </script>
 
 <template>
-  <div class="my-6">
-    <UCard :ui="{ body: 'pl-4', header: 'px-4 py-3' }">
-      <template #header>
-        <div class="flex items-center gap-3">
-          <UAvatar
-            v-if="authorData"
-            :src="authorData.avatar"
-            :alt="name"
-            icon="i-lucide-user"
-            size="md"
-            class="shrink-0"
-          />
-          <div class="flex items-center gap-2 flex-1">
-            <h3 class="text-lg font-semibold text-highlighted">
-              {{ name }}
-            </h3>
-            <UBadge color="primary" variant="soft">
-              Voto: {{ rating }}
-            </UBadge>
-          </div>
-        </div>
-      </template>
-      <div class="prose prose-gray dark:prose-invert max-w-none border-l-4 border-default pl-4 italic text-dimmed">
-        <slot />
+  <div class="my-2">
+    <div class="flex items-center gap-3">
+      <UAvatar
+        :src="author?.avatar"
+        :alt="author?.name ?? name"
+        icon="i-lucide-user"
+        size="xl"
+        class="shrink-0"
+      />
+      <div class="flex items-center gap-2">
+        <h3 class="text-lg font-semibold text-highlighted">
+          {{ author?.name ?? name }}
+        </h3>
+        <UBadge color="warning" variant="soft" size="lg" leading-icon="i-lucide-star">
+          {{ rating }}
+        </UBadge>
       </div>
-    </UCard>
+    </div>
+
+    <UAlert
+      v-if="error"
+      color="error"
+      variant="soft"
+      icon="i-lucide-triangle-alert"
+      :description="error.message"
+      class="mt-3"
+    />
+
+    <blockquote v-else class="border-l-4 border-s-2 border-accented ps-4 mt-3 italic text-muted">
+      <slot />
+    </blockquote>
   </div>
 </template>

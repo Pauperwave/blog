@@ -24,7 +24,7 @@ const badgeColor = computed(() => {
   <UCard>
     <div class="flex flex-col items-center gap-3">
       <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100">
-        Voto complessivo per "{{ cardName }}"
+        Voto complessivo per <MagicCardTooltip :name="cardName" />
       </h2>
 
       <div class="flex flex-wrap justify-center items-center gap-1">
