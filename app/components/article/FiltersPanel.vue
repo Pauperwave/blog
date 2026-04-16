@@ -106,13 +106,18 @@ const deckOptions = computed(() =>
 
 // Active filters for badges
 const activeFilters = computed(() => {
-  const filters = []
+  const filters: Array<{
+    type: string
+    label: string
+    color: 'neutral' | 'info' | 'primary' | 'warning'
+    clear: () => void
+  }> = []
 
   if (props.selectedCategoryLabel) {
     filters.push({
       type: 'Categoria',
       label: props.selectedCategoryLabel,
-      color: 'neutral' as const,
+      color: 'neutral',
       clear: () => emit('set-category', null)
     })
   }
@@ -121,7 +126,7 @@ const activeFilters = computed(() => {
     filters.push({
       type: 'Autore',
       label: props.selectedAuthorLabel,
-      color: 'neutral' as const,
+      color: 'neutral',
       clear: () => emit('set-author', null)
     })
   }
@@ -130,7 +135,7 @@ const activeFilters = computed(() => {
     filters.push({
       type: 'Luogo',
       label: props.selectedLocationLabel,
-      color: 'info' as const,
+      color: 'info',
       clear: () => emit('set-location', null)
     })
   }
@@ -139,7 +144,7 @@ const activeFilters = computed(() => {
     filters.push({
       type: 'Tag',
       label: props.selectedTagLabel,
-      color: 'primary' as const,
+      color: 'primary',
       clear: () => emit('set-tag', null)
     })
   }
@@ -148,7 +153,7 @@ const activeFilters = computed(() => {
     filters.push({
       type: 'Deck',
       label: props.selectedDeckLabel,
-      color: 'warning' as const,
+      color: 'warning',
       clear: () => emit('set-deck', null)
     })
   }

@@ -18,7 +18,7 @@ const props = withDefaults(defineProps<Props>(), {
   viewAllText: 'Vedi tutti'
 })
 
-const getAuthorData = (article: AnyArticle): Author[] => {
+const getArticleAuthorData = (article: AnyArticle): Author[] => {
   const authorNames = normalizeAuthors(article.author)
   return authorNames.map(name => props.authorsMap[name]).filter((author): author is Author => Boolean(author))
 }
@@ -46,7 +46,7 @@ const getAuthorData = (article: AnyArticle): Author[] => {
         v-for="article in articles.slice(0, maxItems)"
         :key="article._id"
         :article="article"
-        :author-data="getAuthorData(article)"
+        :author-data="getArticleAuthorData(article)"
         :topic-tags="article.tags || []"
         :badge="getArticleBadge(article.date)"
       />

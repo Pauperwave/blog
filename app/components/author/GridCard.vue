@@ -10,12 +10,12 @@ interface AuthorGridItem {
   name: string
   avatar: string
   description: string
-  nickname?: string
-  bio?: string
+  nickname: string
+  bio: string
+  socials?: AuthorSocials
   articleCount: number
   latestArticleDate?: string
   categories: AuthorCategoryStat[]
-  socials?: AuthorSocials
 }
 
 interface Props {

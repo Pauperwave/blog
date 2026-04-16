@@ -2,8 +2,15 @@
 <script setup lang="ts">
 const tocTitle = 'In questo articolo'
 
+interface TocLink {
+  id: string
+  text: string
+  depth: number
+  children?: TocLink[]
+}
+
 defineProps<{
-  data: { body: { toc?: { links?: any[] } } } | null | undefined
+  data: { body: { toc?: { links?: TocLink[] } } } | null | undefined
 }>()
 </script>
 

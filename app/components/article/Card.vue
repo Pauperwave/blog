@@ -24,8 +24,7 @@ const {
 } = defineProps<Props>()
 
 const authorsList = computed<Author[]>(() => {
-  if (!authorData) return []
-  return Array.isArray(authorData) ? authorData : [authorData]
+  return authorData ? (Array.isArray(authorData) ? authorData : [authorData]) : []
 })
 
 const shouldShowAuthor = computed(() => {

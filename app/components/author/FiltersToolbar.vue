@@ -49,7 +49,7 @@ const trimmedQuery = computed(() => props.modelValue.trim())
             size="sm"
             @click="emit('set-sort', 'articles')"
           >
-            Piu articoli
+            Più articoli
           </UButton>
 
           <UButton
@@ -58,7 +58,7 @@ const trimmedQuery = computed(() => props.modelValue.trim())
             size="sm"
             @click="emit('set-sort', 'recent')"
           >
-            Piu recenti
+            Più recenti
           </UButton>
 
           <UButton

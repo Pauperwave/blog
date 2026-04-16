@@ -81,7 +81,6 @@ const renderedSocials = computed(() => {
           class="w-4 h-4"
         />
       </a>
-
       <span
         v-if="showCount"
         class="text-xs"
