@@ -88,8 +88,8 @@ export const useAuthors = (authorNames: string | string[]) => {
     async () => {
       const allAuthors = await queryCollection('authors').all() as Author[]
 
-      if (!allAuthors) {
-        throw new Error(`Failed to load authors collection`)
+      if (!allAuthors.length) {
+        throw new Error(`Authors collection is empty`)
       }
 
       const results: Author[] = []
@@ -113,7 +113,7 @@ export const useAuthors = (authorNames: string | string[]) => {
           url: author.url,
           nickname: author.nickname,
           socials: author.socials
-        })
+        } satisfies Author)
       }
 
       return results
