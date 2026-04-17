@@ -33,7 +33,7 @@ export function useCardImage(name: string, image?: string, set?: string, options
 
   watch(
     () => [name, image, set] as const,
-    async ([cardName, providedImage, cardSet]) => {
+    ([cardName, providedImage, cardSet]) => {
       const cacheKeyForCard = cardSet ? `${cardName}::${cardSet}` : cardName
       const cached = imageCache.value[cacheKeyForCard]
       if (cached) {
@@ -41,10 +41,9 @@ export function useCardImage(name: string, image?: string, set?: string, options
         return
       }
 
-      const resolved = await resolveCardImageUrl(cardName, {
+      const resolved = resolveCardImageUrl(cardName, {
         image: providedImage,
-        set: cardSet,
-        isServerSide: import.meta.server
+        set: cardSet
       })
       imageUrl.value = resolved
 
