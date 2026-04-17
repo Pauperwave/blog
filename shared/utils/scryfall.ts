@@ -124,29 +124,3 @@ export async function resolveCardImageUrl(
   return dbImage || buildScryfallImageUrl(name)
 }
 
-/**
- * Fetch card image URL from local database API
- * Requires Nuxt runtime context for $fetch
- * @param name - Card name
- * @param isServerless - Whether running in serverless environment (skip database if true)
- */
-export async function getDatabaseCardImage(name: string, isServerless = false): Promise<string | null> {
-  // Skip database call in serverless environment (Vercel, AWS Lambda)
-  if (isServerless) {
-    return null
-  }
-
-  try {
-    const response = await $fetch<{
-      cards?: Record<string, { imageUrl?: string }>
-    }>('/api/cards', { query: { names: name } })
-
-    const directMatch = response.cards?.[name]
-    if (directMatch?.imageUrl) return directMatch.imageUrl
-
-    const firstCard = Object.values(response.cards || {})[0]
-    return firstCard?.imageUrl || null
-  } catch {
-    return null
-  }
-}

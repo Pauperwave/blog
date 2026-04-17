@@ -1,5 +1,5 @@
 import { ref, watch } from 'vue'
-import { resolveCardImageUrl, getDatabaseCardImage, isServerlessEnvironment } from '#shared/utils'
+import { resolveCardImageUrl } from '#shared/utils'
 
 /**
  * Composable for resolving Magic card image URLs with fallback chain
@@ -7,11 +7,9 @@ import { resolveCardImageUrl, getDatabaseCardImage, isServerlessEnvironment } fr
  * Handles image resolution with multiple fallback strategies:
  * 1. Provided image URL (if available)
  * 2. Scryfall API with set code (if set provided)
- * 3. Local database lookup (if not serverless)
- * 4. Scryfall API without set (fallback)
+ * 3. Scryfall API without set (fallback)
  *
- * Includes caching to avoid redundant network requests and automatically
- * skips database calls in serverless environments (Vercel, AWS Lambda).
+ * Includes caching to avoid redundant network requests.
  *
  * @param name - Card name
  * @param image - Optional provided image URL (highest priority)
@@ -33,13 +31,6 @@ export function useCardImage(name: string, image?: string, set?: string, options
   const cacheKey = options?.cacheKey || 'card-tooltip-image-cache'
   const imageCache = useState<Record<string, string>>(cacheKey, () => ({}))
 
-  // Check if running in serverless environment (Vercel, AWS Lambda, etc.)
-  // Only check on server-side, client-side always returns false
-  const isServerless = import.meta.client ? false : isServerlessEnvironment()
-
-  // Memoized database lookup callback
-  const databaseLookup = (cardNameToLookup: string) => getDatabaseCardImage(cardNameToLookup, isServerless)
-
   watch(
     () => [name, image, set] as const,
     async ([cardName, providedImage, cardSet]) => {
@@ -53,7 +44,6 @@ export function useCardImage(name: string, image?: string, set?: string, options
       const resolved = await resolveCardImageUrl(cardName, {
         image: providedImage,
         set: cardSet,
-        databaseLookup,
         isServerSide: import.meta.server
       })
       imageUrl.value = resolved
