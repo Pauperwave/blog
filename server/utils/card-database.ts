@@ -2,7 +2,7 @@
 import { join, dirname } from 'path'
 import { existsSync } from 'fs'
 import { fileURLToPath } from 'url'
-import { isServerlessEnvironment, buildLog } from '#shared/utils'
+import { isServerlessEnvironment, console.log } from '#shared/utils'
 
 export interface CardData {
   name: string
@@ -31,14 +31,14 @@ function getDbPath(): string {
 
   for (const path of possiblePaths) {
     if (existsSync(path)) {
-      buildLog(`✅ Found database at: ${path}`)
+      console.log(`✅ Found database at: ${path}`)
       return path
     }
   }
 
   // If no file found, log all attempts for debugging
-  buildLog(`⚠️  Database not found at any expected location. Attempted paths:`)
-  possiblePaths.forEach(p => buildLog(`   - ${p}`))
+  console.log(`⚠️  Database not found at any expected location. Attempted paths:`)
+  possiblePaths.forEach(p => console.log(`   - ${p}`))
 
   // Return the primary path anyway - let the database connection fail with a clear error
   return String(possiblePaths[0])
@@ -52,7 +52,7 @@ function getDbPath(): string {
 async function getDatabase(): Promise<DatabaseInstance | null> {
   // Skip database initialization in serverless environments
   if (isServerlessEnvironment()) {
-    buildLog('⚠️  Serverless environment detected - skipping database initialization')
+    console.log('⚠️  Serverless environment detected - skipping database initialization')
     return null
   }
 
@@ -67,11 +67,11 @@ async function getDatabase(): Promise<DatabaseInstance | null> {
         const bunSqliteModuleId = 'bun:sqlite'
         const { Database } = await import(/* @vite-ignore */ bunSqliteModuleId)
         dbInstance = new Database(dbPath, { readonly: true })
-        buildLog('✅ Using bun:sqlite')
+        console.log('✅ Using bun:sqlite')
         return dbInstance
       } catch (bunError) {
         const errorMsg = `bun:sqlite failed: ${bunError instanceof Error ? bunError.message : String(bunError)}`
-        buildLog(`⚠️ ${errorMsg}`)
+        console.log(`⚠️ ${errorMsg}`)
         throw new Error(`Cannot initialize database: ${errorMsg}`)
       }
     }
@@ -81,11 +81,11 @@ async function getDatabase(): Promise<DatabaseInstance | null> {
       try {
         const Database = (await import('better-sqlite3')).default
         dbInstance = new Database(dbPath, { readonly: true })
-        buildLog('✅ Using better-sqlite3 (Node.js)')
+        console.log('✅ Using better-sqlite3 (Node.js)')
         return dbInstance
       } catch (error) {
         const errorMsg = `better-sqlite3 failed: ${error instanceof Error ? error.message : String(error)}`
-        buildLog(`❌ ${errorMsg}`)
+        console.log(`❌ ${errorMsg}`)
         throw new Error(`Failed to initialize database at ${dbPath}: ${errorMsg}`)
       }
     }
@@ -113,11 +113,31 @@ export async function getCardByName(name: string): Promise<CardData | null> {
   }
 }
 
+const SCRYFALL_API_BASE = 'https://api.scryfall.com'
+
+/**
+ * Build Scryfall image URL for a card
+ */
+function buildScryfallImageUrl(name: string): string {
+  return `${SCRYFALL_API_BASE}/cards/named?exact=${encodeURIComponent(name)}&format=image`
+}
+
 export async function getCardsByNames(names: string[]): Promise<Map<string, CardData>> {
   const db = await getDatabase()
   const result = new Map<string, CardData>()
 
-  if (!db || names.length === 0) return result
+  if (!db || names.length === 0) {
+    // If no database, fall back to Scryfall for all cards
+    console.log('⚠️  Database not available, using Scryfall fallback for all cards')
+    for (const name of names) {
+      result.set(name, {
+        name,
+        manaCost: '',
+        imageUrl: buildScryfallImageUrl(name)
+      })
+    }
+    return result
+  }
 
   // First, try exact matches
   const placeholders = names.map(() => '?').join(',')
@@ -141,7 +161,7 @@ export async function getCardsByNames(names: string[]): Promise<Map<string, Card
   }
 
   // For names that weren't found exactly, try case-insensitive match
-  // We need to query the database for case-insensitive matches
+  // We need to query the database for case-insensitive matches using LOWER function
   for (const name of names) {
     if (!result.has(name)) {
       const lowercaseName = name.toLowerCase()
@@ -158,6 +178,14 @@ export async function getCardsByNames(names: string[]): Promise<Map<string, Card
           imageUrl: caseInsensitiveRow.image_url
         }
         result.set(name, cardData)
+      } else {
+        // Fallback to Scryfall API
+        console.log(`🌐 Card "${name}" not in database, using Scryfall fallback`)
+        result.set(name, {
+          name,
+          manaCost: '',
+          imageUrl: buildScryfallImageUrl(name)
+        })
       }
     }
   }
