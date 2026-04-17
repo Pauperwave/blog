@@ -27,10 +27,12 @@ export const useArticleData = async (path: string) => {
     for (const collection of getCollectionNames()) {
       try {
         const result = await queryCollectionItemSurroundings(collection, path, {
-          fields: ['description'],
+          fields: ['description', 'published'],
         })
         // queryCollectionItemSurroundings ritorna [prev, next] anche con null items
-        if (result && (result[0] || result[1])) return result
+        // Filter out unpublished articles
+        const filtered = result?.filter(item => item?.published !== false)
+        if (filtered && (filtered[0] || filtered[1])) return filtered
       } catch (e) {
         console.error(`[DEBUG] Error in collection ${collection}:`, e)
       }
