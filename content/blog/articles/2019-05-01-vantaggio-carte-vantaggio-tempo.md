@@ -80,19 +80,30 @@ Partiamo con Mana Denial (rimuovere del mana, qualitativamente e/o quantitativam
 
 ### Mana Denial
 
-ff
+primo ostacolo, togliere una terra costa 3 mana ed uno slot appositamente usato per le spell. Mancando soluzioni come [[Wasteland]] o [[Blood Moon]] dobbiamo usare gli spacca-terre in maniera massiva (Ponza.deck) o come risposte post side.
+Il secondo problema del Mana Denial in Pauper è che il formato tende ad essere più resistente ai mazzi Ponza rispetto ad un formato come il Modern: tipicamente la manabase del Pauper tende a portare ad un flood più consistente a causa della mancanza delle fetchland rare (come [[Misty Rainforest]]) e non essendoci dei top di curva veloci a chiudere la partita quanto [[Inferno Titan]] o [[Stormbreath Dragon]].
+Penso che il Tempo generato dal land denial sia molto più chiaramente osservabile in Legacy grazie a carte come [[Wasteland]]: costo minimo, efficienza elevata.
+
+Hand Disruption: usare mana e carte per togliere delle carte in mano all'avversario generalmente non è una mossa utile per guadagnare Tempo; lo è quando ci troviamo contro strategie fragili che soffrono particolarmente i [[Duress]] effect e/o quando abbiamo una race sufficientemente veloce (Suicide Black dell'Esteso è un esempio).
+Per fare un esempio, non abbiamo carte d'alto impatto come come [[Hymn to Tourach]], [[Thoughtseize]] e [[Death's Shadow]] (shadow ovviamente è la "race sufficientemente veloce 🙂 ).
 
 ### Card Advantage
 
-ff
+come detto a inizio articolo, il concetto di Vantaggio Carte non è sempre in linea con il concetto di Tempo. [[Divination]] ne è esempio lampante: uso una carta che non fa nulla adesso, ma fornisce due possibili nuove scelte e informazioni successivamente (se ovviamente non abbiamo più magie giocabili/mana nel turno in cui peschiamo le carte addizionali).
+Il CA riflette i valori del Vantaggio Tempo soprattutto con le spell modali (cioè quelle magie che possono usare 1 o più effetti diversi, es. [[Kolaghan's Command]]) ed i permanenti (perlopiù creature) che si ciclano (es. [[Augur of Bolas]]). Il principio è sempre quello: 2 azioni in 1. Una mass removal è, con molta fantasia, una spell modale il cui textbox dice "Distruggi X Creature". Se noi in una mossa ed in un turno eliminiamo anche solo 3-4 creature che sono entrate in gioco nell'arco di tempo di 2-3 turni (turni in cui abbiamo compiuto altre azioni), abbiamo de facto generato un vantaggio Carte ed un vantaggio Tempo.
 
 ### Mana Ramp
 
-ff
+è un concetto piuttosto chiaro. Un maggiore quantitativo di mana significa che possiamo giocare prima delle carte che normalmente non potremmo o ci permette di giocare un maggior numero di magie in un solo turno. Mi viene a mente [[Priest of Titania]] al turno 2, seguita da un [[Lead the Stampede]] / [[Distant Melody]] al turno 3.
 
 ### Free spells
 
-ff
+distinguiamo, per le spell "gratis", due tipi di carta:
+
+1. carte che hanno un costo alternativo che non implica l'uso del mana ([[Mutagenic Growth]], [[Snuff Out]], ecc.);
+2. carte che "restituiscono" il mana ([[Cloud of Faeries]], [[Snap]], ecc.).
+
+Vantaggio Tempo è, semplificato, la possibilità di giocare di più dell'avversario. Magie "gratuite" sono potenzialmente un vantaggio limitato solo al numero di bersagli e alla quantità che possiamo averne in mano. Ne parleremo nel dettaglio in un paragrafo di questo articolo.
 
 ### Riassumendo
 
@@ -153,7 +164,7 @@ In seguito, ho ancora la possibilità di rigiocare [[Augur of Bolas]], che andr�
 
 Se l'avversario propone rimozione su [[Ninja of the Deep Hours]] ed esso muore, potremmo pensare di non aver creato un vantaggio, ma in realtà abbiamo fatto comunque un "-1" in mano all'avversario, proprio grazie all'abilità innescata della creatura che abbiamo ripreso.
 
-Grossolanamente, un [[Ninja of the Deep Hours]] che va a segno una volta riprendendo [[Augur of Bolas]] è uguale ad una [[Divination]] a costo 4 che comprende due [[Grizzly Bear]].
+Grossolanamente, un [[Ninja of the Deep Hours]] che va a segno una volta riprendendo [[Augur of Bolas]] è uguale ad una [[Divination]] a costo 4 che comprende due [[Grizzly Bears]].
 
 ##### Daze e Gush
 
