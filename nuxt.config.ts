@@ -153,7 +153,8 @@ export default defineNuxtConfig({
     '/articles/**': { prerender: true, headers: { 'Cache-Control': 'public, max-age=86400, s-maxage=604800' } },
     // Exclude template files from prerendering
     '/articles/0000-00-00-decklist-template': { prerender: false },
-    '/articles/0000-00-00-report-template': { prerender: false },
+    '/reports/0000-00-00-report-template': { prerender: false },
+    '/spoilers/0000-00-00-spoiler-template': { prerender: false },
     // Nuxt Studio admin - requires SSR
     '/editor/**': { ssr: true },
     // Code of Conduct and Statuto
