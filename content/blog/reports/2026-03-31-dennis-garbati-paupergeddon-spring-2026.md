@@ -94,20 +94,9 @@ Rusults Summary (10-4):
 - 13. Grull Ponza - WW (OTD)
 - 14. Pizza Combo - LL
 
-## Day 1
+### Day 1
 
-### Turno 1: Elves - Bea Borsa from Milan
-
-::MagicCardArtCrop
----
-card: Priest of Titania (MH3)
-crop:
-  height: xl
-  position: top
----
-::
-
-### Turno 2: Elves - Ratkowski from Poland
+#### Round 1: Elves - Bea Borsa from Milan
 
 ::MagicCardArtCrop
 ---
@@ -118,7 +107,18 @@ crop:
 ---
 ::
 
-### Turno 3: 5-Land Spy - asWerty223 from Poland
+#### Round 2: Elves - Ratkowski from Poland
+
+::MagicCardArtCrop
+---
+card: Priest of Titania (MH3)
+crop:
+  height: xl
+  position: top
+---
+::
+
+#### Round 3: 5-Land Spy - asWerty223 from Poland
 
 ::MagicCardArtCrop
 ---
@@ -129,7 +129,7 @@ crop:
 ---
 ::
 
-### Turno 4: Jund Wildfire - Triso
+#### Round 4: Jund Wildfire - Triso
 
 ::MagicCardArtCrop
 ---
@@ -140,7 +140,7 @@ crop:
 ---
 ::
 
-### Turno 5: CawGate - Keira Randall from Lega Pauper London (Top64)
+#### Round 5: CawGate - Keira Randall from Lega Pauper London (Top64)
 
 ::MagicCardArtCrop
 ---
@@ -151,7 +151,7 @@ crop:
 ---
 ::
 
-### Turno 6: Grixis Affinity - Lou Anton Hauser (top8)
+#### Round 6: Grixis Affinity - Lou Anton Hauser (top8)
 
 ::MagicCardArtCrop
 ---
@@ -162,7 +162,7 @@ crop:
 ---
 ::
 
-### Turno 7: Elves - Rebondo
+#### Round 7: Elves - Rebondo
 
 ::MagicCardArtCrop
 ---
@@ -173,7 +173,7 @@ crop:
 ---
 ::
 
-### Turno 8: Mono Red Madness - Roberto Vincenzo Evola
+#### Round 8: Mono Red Madness - Roberto Vincenzo Evola
 
 ::MagicCardArtCrop
 ---
@@ -184,11 +184,11 @@ crop:
 ---
 ::
 
-## Day 2
+### Day 2
 
 After a pizza and a Spritz with the team, we are ready for battle with five members in the race.
 
-### Turno 9: Elves - Dario Blandford (Top16)
+#### Round 9: Elves - Dario Blandford (Top16)
 
 ::MagicCardArtCrop
 ---
@@ -199,17 +199,17 @@ crop:
 ---
 ::
 
-#### Game 1
+##### Game 1
 
 Dario is an incredible player; in this game he has the nuts and I never entered the game.
 
-#### Game 2 and 3
+##### Game 2 and 3
 
 I'm sure these two were among the best matches of the tournament. Both games I won thanks to a mix of pressure with Delver and a good number of counterspells, especially in Game 2, which went long—I saw all four copies. In Game 3, I had a good plan: he begins with Llanowar, so I Gut Shot it and remain open with Force Spike instead of playing Delver.
 
 This sequencing rewards me because I Spike Titania, then play Delver with Brainstorm open on turn 2, cleaning the top, etc.
 
-### Turno 10: Mono R Madness - Nicola Santo (My Teammate)
+#### Round 10: Mono R Madness - Nicola Santo (My Teammate)
 
 ::MagicCardArtCrop
 ---
@@ -220,7 +220,7 @@ crop:
 ---
 ::
 
-### Turno 11: Grixis Affinity - Leonardo Priami (Top32)
+#### Round 11: Grixis Affinity - Leonardo Priami (Top32)
 
 ::MagicCardArtCrop
 ---
@@ -231,7 +231,7 @@ crop:
 ---
 ::
 
-### Turno 12: Jund Wildfire - LucG27
+#### Round 12: Jund Wildfire - LucG27
 
 ::MagicCardArtCrop
 ---
@@ -242,7 +242,7 @@ crop:
 ---
 ::
 
-### Turno 13: Grull Ponza - Kroissant
+#### Round 13: Grull Ponza - Kroissant
 
 ::MagicCardArtCrop
 ---
@@ -253,7 +253,7 @@ crop:
 ---
 ::
 
-### Turno 14: Temur Pizza - Riccardo Cestari (Top16 Teammate)
+#### Round 14: Temur Pizza - Riccardo Cestari (Top16 Teammate)
 
 ::MagicCardArtCrop
 ---
