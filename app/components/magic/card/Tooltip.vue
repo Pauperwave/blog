@@ -12,11 +12,21 @@ const anchor = ref({ x: 0, y: 0 })
 const showModal = ref(false)
 
 // Composables
-const imageUrl = useCardImage(props.name, props.image, props.set)
 const isMobile = useMediaQuery('(max-width: 768px)')
 
 // Computed
 const displayText = computed(() => props.name)
+
+// Prefer image prop if provided (build-time resolved), otherwise fetch at runtime
+const imageUrl = computed(() => {
+  if (props.image) {
+    return props.image
+  }
+  // Only use runtime fetching if image prop is not provided
+  // This should rarely happen after the transformer fix
+  const fallbackUrl = useCardImage(props.name, undefined, props.set)
+  return fallbackUrl.value
+})
 
 const reference = computed(() => ({
   getBoundingClientRect: () =>
