@@ -21,7 +21,7 @@ La ricerca [`(game:paper) set:sos rarity:c prefer:best order:set -type:basic`](h
 
 > Ma quante di queste carte sono effettivamente giocabili nei mazzi Pauper competitivi?
 
-Ne abbiamo selezionate 9 solo per voi!
+Ne abbiamo selezionate 8 solo per voi!
 
 ### Criteri di valutazione
 
@@ -91,7 +91,7 @@ name: Pietro Bragioto
 rating: 6
 ---
 Inizialmente ero gasato per la carta e già pensavo a split incredibili in White Weennie in chiave anti stallo contro i bonzi volanti di Affo, Crisalidi e Terrori, poi leggendo e riflettendoci meglio penso che questo scenario non sia troppo realistico.
-Il fatto di poter fare l'abilità solo sorcery e perdere l'eventuale pescata in caso di removal o wrattina oppure semplicemente perché vogliamo sninjare Leonardo in early, mi sembra uno scoglio troppo grande per pensare a rimpiazzare la solidità degli ispettori, al massimo si affiancherà in una o due copie anche se non vedo cut facili all'infuori di qualche lista che gioca carte esotiche come il mono verde di [[Steadfast Unicorn]].
+Il fatto di poter fare l'abilità solo sorcery e perdere l'eventuale pescata in caso di removal o wrattina oppure semplicemente perché vogliamo sninjare Leonardo in early, mi sembra uno scoglio troppo grande per pensare a rimpiazzare la solidità degli ispettori, al massimo si affiancherà in una o due copie anche se non vedo cut facili all'infuori di qualche lista che gioca carte esotiche come il mono per di [[Steadfast Unicorn]].
 "Al massimo" probabilmente è abbastanza per una sufficienza con un + di incoraggiamento, ma nulla di più.
 ::
 
