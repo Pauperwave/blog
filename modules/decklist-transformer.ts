@@ -26,6 +26,11 @@ export default defineNuxtModule({
     hookContentBeforeParse('content:file:beforeParse', async (ctx: FileBeforeParseHook) => {
       const file = ctx.file || ctx
 
+      // Skip template files
+      if (file.path?.includes('template')) {
+        return
+      }
+
       const allowedFolders = [
         'articles',
         'decklists',

@@ -2,7 +2,6 @@
 import { join, dirname } from 'path'
 import { existsSync } from 'fs'
 import { fileURLToPath } from 'url'
-import { isServerlessEnvironment, buildLog } from '#shared/utils'
 
 export interface CardData {
   name: string
@@ -47,15 +46,8 @@ function getDbPath(): string {
 
 /**
  * Get database instance - uses better-sqlite3
- * Returns null in serverless environments where SQLite is not available
  */
 async function getDatabase(): Promise<DatabaseInstance | null> {
-  // Skip database initialization in serverless environments
-  if (isServerlessEnvironment()) {
-    console.log('⚠️  Serverless environment detected - skipping database initialization')
-    return null
-  }
-
   if (!dbInstance) {
     const dbPath = getDbPath()
 
@@ -77,7 +69,7 @@ export async function getCardByName(name: string): Promise<CardData | null> {
   const db = await getDatabase()
 
   if (!db) {
-    return null
+    throw new Error('Database not available')
   }
 
   const row = db.prepare(`
@@ -106,18 +98,7 @@ export async function getCardsByNames(names: string[]): Promise<Map<string, Card
   const db = await getDatabase()
   const result = new Map<string, CardData>()
 
-  if (!db || names.length === 0) {
-    // If no database, fall back to Scryfall for all cards
-    console.log('⚠️  Database not available, using Scryfall fallback for all cards')
-    for (const name of names) {
-      result.set(name, {
-        name,
-        manaCost: '',
-        imageUrl: buildScryfallImageUrl(name)
-      })
-    }
-    return result
-  }
+  if (names.length === 0) return result
 
   // First, try exact matches
   const placeholders = names.map(() => '?').join(',')
