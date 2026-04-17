@@ -46,7 +46,7 @@ function getDbPath(): string {
 }
 
 /**
- * Get database instance - uses bun:sqlite in Bun runtime, better-sqlite3 otherwise
+ * Get database instance - uses better-sqlite3
  * Returns null in serverless environments where SQLite is not available
  */
 async function getDatabase(): Promise<DatabaseInstance | null> {
@@ -59,35 +59,15 @@ async function getDatabase(): Promise<DatabaseInstance | null> {
   if (!dbInstance) {
     const dbPath = getDbPath()
 
-    // Determine runtime
-    const isBunRuntime = typeof Bun !== 'undefined'
-
-    if (isBunRuntime) {
-      try {
-        const bunSqliteModuleId = 'bun:sqlite'
-        const { Database } = await import(/* @vite-ignore */ bunSqliteModuleId)
-        dbInstance = new Database(dbPath, { readonly: true })
-        console.log('✅ Using bun:sqlite')
-        return dbInstance
-      } catch (bunError) {
-        const errorMsg = `bun:sqlite failed: ${bunError instanceof Error ? bunError.message : String(bunError)}`
-        console.log(`⚠️ ${errorMsg}`)
-        throw new Error(`Cannot initialize database: ${errorMsg}`)
-      }
-    }
-
-    // Fall back to better-sqlite3 for Node.js (build time only)
-    if (!isBunRuntime) {
-      try {
-        const Database = (await import('better-sqlite3')).default
-        dbInstance = new Database(dbPath, { readonly: true })
-        console.log('✅ Using better-sqlite3 (Node.js)')
-        return dbInstance
-      } catch (error) {
-        const errorMsg = `better-sqlite3 failed: ${error instanceof Error ? error.message : String(error)}`
-        console.log(`❌ ${errorMsg}`)
-        throw new Error(`Failed to initialize database at ${dbPath}: ${errorMsg}`)
-      }
+    try {
+      const Database = (await import('better-sqlite3')).default
+      dbInstance = new Database(dbPath, { readonly: true })
+      console.log('✅ Using better-sqlite3')
+      return dbInstance
+    } catch (error) {
+      const errorMsg = `better-sqlite3 failed: ${error instanceof Error ? error.message : String(error)}`
+      console.log(`❌ ${errorMsg}`)
+      throw new Error(`Failed to initialize database at ${dbPath}: ${errorMsg}`)
     }
   }
   return dbInstance

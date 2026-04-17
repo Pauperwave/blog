@@ -24,17 +24,9 @@ export default defineNuxtModule({
 
     if (existsSync(dbPath)) {
       try {
-        // Try bun:sqlite first (Bun runtime)
-        if (typeof Bun !== 'undefined') {
-          const { Database } = await import('bun:sqlite')
-          db = new Database(dbPath, { readonly: true })
-          console.log(`✅ [Card Tooltip Transformer] Database loaded (bun:sqlite): ${dbPath}`)
-        } else {
-          // Fall back to better-sqlite3 (Node.js runtime)
-          const Database = (await import('better-sqlite3')).default
-          db = new Database(dbPath, { readonly: true })
-          console.log(`✅ [Card Tooltip Transformer] Database loaded (better-sqlite3): ${dbPath}`)
-        }
+        const Database = (await import('better-sqlite3')).default
+        db = new Database(dbPath, { readonly: true })
+        console.log(`✅ [Card Tooltip Transformer] Database loaded (better-sqlite3): ${dbPath}`)
       } catch (error) {
         console.log(`⚠️  [Card Tooltip Transformer] Failed to load database: ${error}`)
       }
