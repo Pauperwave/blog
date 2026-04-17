@@ -1,5 +1,5 @@
 ---
-title: Report Top 16 Paupergeddon Spring 2026 Matteo Morosini with Rally
+title: Report Top 16 Paupergeddon Spring 2026 - Matteo Morosini with Rally
 author: Pietro Bragioto
 category: report
 date: 2026-03-26

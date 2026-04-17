@@ -1,5 +1,5 @@
 ---
-title: Report Top 32 Paupergeddon Spring 2026 Manuel Cobai with Jund
+title: Report Top 32 Paupergeddon Spring 2026 - Manuel Cobai with Jund
 author: Pietro Bragioto
 category: report
 date: 2026-03-25

@@ -1,5 +1,5 @@
 ---
-title: Report Top 16 Paupergeddon Spring 2026 Edoardo Pastore con White Weenie
+title: Report Top 16 Paupergeddon Spring 2026 - Edoardo Pastore con White Weenie
 author: Pietro Bragioto
 category: report
 date: 2026-03-25

@@ -1,5 +1,5 @@
 ---
-title: Report Top 16 Paupergeddon Spring 2026 Riccardo Cestari with Pizza Combo
+title: Report Top 16 Paupergeddon Spring 2026 - Riccardo Cestari with Pizza Combo
 author: Pietro Bragioto
 category: report
 date: 2026-03-30

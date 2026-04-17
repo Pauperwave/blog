@@ -1,5 +1,5 @@
 ---
-title: "Report Top 8 Paupergeddon Lucca Winter 2025 Edoardo Bardi with Caw Gates"
+title: Report Top 8 Paupergeddon Lucca Winter 2025 - Edoardo Bardi with Caw Gates
 description: ""
 tags:
   - Paupergeddon
