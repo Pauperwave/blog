@@ -8,14 +8,14 @@ import { createRegExp, digit, whitespace, oneOrMore, char } from 'magic-regexp'
 
 import { getCardsByNames } from '#server/utils/card-database'
 import type { ParsedCard } from '#shared/types'
-import { buildLog, slugify } from '#shared/utils'
+import { slugify } from '#shared/utils'
 
 export default defineNuxtModule({
   meta: {
     name: 'decklist-transformer'
   },
   setup(_options, nuxt) {
-    buildLog('🚀 [Decklist Transformer] MODULE LOADED!')
+    console.log('🚀 [Decklist Transformer] MODULE LOADED!')
 
     const hookContentBeforeParse = nuxt.hook as unknown as (
       name: 'content:file:beforeParse',
@@ -72,8 +72,8 @@ async function transformDecklistBlocks(content: string, filePath: string): Promi
 
   if (matches.length === 0) return content
 
-  buildLog(`\n📝 [Decklist Transformer] Processing file: ${filePath}`)
-  buildLog(`   └─ Found ${matches.length} decklist block(s)`)
+  console.log(`\n📝 [Decklist Transformer] Processing file: ${filePath}`)
+  console.log(`   └─ Found ${matches.length} decklist block(s)`)
 
   // Process matches in reverse order to maintain correct indices
   for (let i = matches.length - 1; i >= 0; i--) {
@@ -82,7 +82,7 @@ async function transformDecklistBlocks(content: string, filePath: string): Promi
 
     const { match, componentName, frontmatter, decklistContent, index } = item
 
-    buildLog(`\n   🔄 Processing decklist ${matches.length - i}/${matches.length}`)
+    console.log(`\n   🔄 Processing decklist ${matches.length - i}/${matches.length}`)
 
     const props = parseFrontmatter(frontmatter)
     const parsedCards = await parseDecklist(decklistContent)
@@ -135,7 +135,7 @@ async function transformDecklistBlocks(content: string, filePath: string): Promi
     content = content.replace(/^---\n[\s\S]*?\n---/, newFrontmatter)
   }
 
-  buildLog(`   ✅ All decklists transformed successfully\n`)
+  console.log(`   ✅ All decklists transformed successfully\n`)
 
   return content
 }
@@ -283,13 +283,13 @@ function calculateSectionCounts(cardsBySection: Record<string, ParsedCard[]>): R
 // ============================================================================
 
 function logDatabaseLookup(cardNames: Set<string>, cardDataMap: Map<string, any>): void {
-  buildLog(`   🔍 Found ${cardNames.size} unique card names`)
-  buildLog(`   💾 Loaded ${cardDataMap.size}/${cardNames.size} cards from database`)
+  console.log(`   🔍 Found ${cardNames.size} unique card names`)
+  console.log(`   💾 Loaded ${cardDataMap.size}/${cardNames.size} cards from database`)
 
   const missingCards = Array.from(cardNames).filter(name => !cardDataMap.has(name))
   if (missingCards.length > 0) {
-    buildLog(`   ⚠️  Missing from database (${missingCards.length}):`)
-    missingCards.forEach(name => buildLog(`      └─ ${name}`))
+    console.log(`   ⚠️  Missing from database (${missingCards.length}):`)
+    missingCards.forEach(name => console.log(`      └─ ${name}`))
   }
 }
 
@@ -298,12 +298,12 @@ function logDecklistTransformation(
   parsedCards: Record<string, ParsedCard[]>,
   sectionCounts: Record<string, number>
 ): void {
-  buildLog(`   📋 Frontmatter props:`, props)
-  buildLog(`   📊 Section counts:`, sectionCounts)
-  buildLog(`   🃏 Total cards by section:`)
+  console.log(`   📋 Frontmatter props:`, props)
+  console.log(`   📊 Section counts:`, sectionCounts)
+  console.log(`   🃏 Total cards by section:`)
 
   for (const [section, cards] of Object.entries(parsedCards)) {
     const totalCount = sectionCounts[section] || 0
-    buildLog(`      └─ ${section}: ${cards.length} unique cards (${totalCount} total)`)
+    console.log(`      └─ ${section}: ${cards.length} unique cards (${totalCount} total)`)
   }
 }
