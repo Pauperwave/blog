@@ -2,7 +2,6 @@
 import { defineNuxtModule } from '@nuxt/kit'
 import type { FileBeforeParseHook } from '@nuxt/content'
 import { createRegExp, exactly, oneOrMore, charNotIn, maybe, whitespace, global } from 'magic-regexp'
-import { Database } from 'bun:sqlite'
 import { join, dirname } from 'path'
 import { existsSync } from 'fs'
 import { fileURLToPath } from 'url'
@@ -13,17 +12,27 @@ export default defineNuxtModule({
   meta: {
     name: 'card-tooltip-transformer'
   },
-  setup(_options, nuxt) {
+  async setup(_options, nuxt) {
     buildLog('🚀 [Card Tooltip Transformer] MODULE LOADED!')
 
     // Initialize database connection at build time
     const dbPath = join(dirname(fileURLToPath(import.meta.url)), '..', 'server', 'database', 'cards.db')
-    let db: Database | null = null
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Dynamic import requires any type
+    let db: any = null
 
     if (existsSync(dbPath)) {
       try {
-        db = new Database(dbPath, { readonly: true })
-        buildLog(`✅ [Card Tooltip Transformer] Database loaded: ${dbPath}`)
+        // Try bun:sqlite first (Bun runtime)
+        if (typeof Bun !== 'undefined') {
+          const { Database } = await import('bun:sqlite')
+          db = new Database(dbPath, { readonly: true })
+          buildLog(`✅ [Card Tooltip Transformer] Database loaded (bun:sqlite): ${dbPath}`)
+        } else {
+          // Fall back to better-sqlite3 (Node.js runtime)
+          const Database = (await import('better-sqlite3')).default
+          db = new Database(dbPath, { readonly: true })
+          buildLog(`✅ [Card Tooltip Transformer] Database loaded (better-sqlite3): ${dbPath}`)
+        }
       } catch (error) {
         buildLog(`⚠️  [Card Tooltip Transformer] Failed to load database: ${error}`)
       }
@@ -87,7 +96,8 @@ const patternSimple = createRegExp(
   [global]
 )
 
-function getCardImageUrl(db: Database | null, cardName: string): string | null {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Dynamic import requires any type
+function getCardImageUrl(db: any, cardName: string): string | null {
   if (!db) return null
 
   try {
@@ -102,7 +112,8 @@ function getCardImageUrl(db: Database | null, cardName: string): string | null {
   }
 }
 
-function transformCardTooltips(content: string, filePath: string, db: Database | null): string {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Dynamic import requires any type
+function transformCardTooltips(content: string, filePath: string, db: any): string {
   const transformations: CardTransformation[] = []
 
   // First, replace cards with set codes
