@@ -86,16 +86,18 @@ Partiamo con Mana Denial (rimuovere del mana, qualitativamente e/o quantitativam
 
 ### Mana Denial
 
-primo ostacolo, togliere una terra costa 3 mana ed uno slot appositamente usato per le spell. Mancando soluzioni come [[Wasteland]] o [[Blood Moon]] dobbiamo usare gli spacca-terre in maniera massiva (Ponza.deck) o come risposte post side.
+Primo ostacolo, togliere una terra costa 3 mana ed uno slot appositamente usato per le spell. Mancando soluzioni come [[Wasteland]] o [[Blood Moon]] dobbiamo usare gli spacca-terre in maniera massiva (Ponza.deck) o come risposte post side.
 Il secondo problema del Mana Denial in Pauper è che il formato tende ad essere più resistente ai mazzi Ponza rispetto ad un formato come il Modern: tipicamente la manabase del Pauper tende a portare ad un flood più consistente a causa della mancanza delle fetchland rare (come [[Misty Rainforest]]) e non essendoci dei top di curva veloci a chiudere la partita quanto [[Inferno Titan]] o [[Stormbreath Dragon]].
 Penso che il Tempo generato dal land denial sia molto più chiaramente osservabile in Legacy grazie a carte come [[Wasteland]]: costo minimo, efficienza elevata.
 
-Hand Disruption: usare mana e carte per togliere delle carte in mano all'avversario generalmente non è una mossa utile per guadagnare Tempo; lo è quando ci troviamo contro strategie fragili che soffrono particolarmente i [[Duress]] effect e/o quando abbiamo una race sufficientemente veloce (Suicide Black dell'Esteso è un esempio).
+### Hand Disruption
+
+Usare mana e carte per togliere delle carte in mano all'avversario generalmente non è una mossa utile per guadagnare Tempo; lo è quando ci troviamo contro strategie fragili che soffrono particolarmente i [[Duress]] effect e/o quando abbiamo una race sufficientemente veloce (Suicide Black dell'Esteso è un esempio).
 Per fare un esempio, non abbiamo carte d'alto impatto come come [[Hymn to Tourach]], [[Thoughtseize]] e [[Death's Shadow]] (shadow ovviamente è la "race sufficientemente veloce 🙂 ).
 
 ### Card Advantage
 
-come detto a inizio articolo, il concetto di Vantaggio Carte non è sempre in linea con il concetto di Tempo. [[Divination]] ne è esempio lampante: uso una carta che non fa nulla adesso, ma fornisce due possibili nuove scelte e informazioni successivamente (se ovviamente non abbiamo più magie giocabili/mana nel turno in cui peschiamo le carte addizionali).
+Come detto a inizio articolo, il concetto di Vantaggio Carte non è sempre in linea con il concetto di Tempo. [[Divination]] ne è esempio lampante: uso una carta che non fa nulla adesso, ma fornisce due possibili nuove scelte e informazioni successivamente (se ovviamente non abbiamo più magie giocabili/mana nel turno in cui peschiamo le carte addizionali).
 Il CA riflette i valori del Vantaggio Tempo soprattutto con le spell modali (cioè quelle magie che possono usare 1 o più effetti diversi, es. [[Kolaghan's Command]]) ed i permanenti (perlopiù creature) che si ciclano (es. [[Augur of Bolas]]). Il principio è sempre quello: 2 azioni in 1. Una mass removal è, con molta fantasia, una spell modale il cui textbox dice "Distruggi X Creature". Se noi in una mossa ed in un turno eliminiamo anche solo 3-4 creature che sono entrate in gioco nell'arco di tempo di 2-3 turni (turni in cui abbiamo compiuto altre azioni), abbiamo de facto generato un vantaggio Carte ed un vantaggio Tempo.
 
 ### Mana Ramp
@@ -104,10 +106,10 @@ Il CA riflette i valori del Vantaggio Tempo soprattutto con le spell modali (cio
 
 ### Free spells
 
-distinguiamo, per le spell "gratis", due tipi di carta:
+Distinguiamo, per le spell "gratis", due tipi di carta:
 
-1. carte che hanno un costo alternativo che non implica l'uso del mana ([[Mutagenic Growth]], [[Snuff Out]], ecc.);
-2. carte che "restituiscono" il mana ([[Cloud of Faeries]], [[Snap]], ecc.).
+1. Carte che hanno un costo alternativo che non implica l'uso del mana ([[Mutagenic Growth]], [[Snuff Out]], ecc.);
+2. Carte che "restituiscono" il mana ([[Cloud of Faeries]], [[Snap]], ecc.).
 
 Vantaggio Tempo è, semplificato, la possibilità di giocare di più dell'avversario. Magie "gratuite" sono potenzialmente un vantaggio limitato solo al numero di bersagli e alla quantità che possiamo averne in mano. Ne parleremo nel dettaglio in un paragrafo di questo articolo.
 
