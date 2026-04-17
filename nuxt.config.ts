@@ -149,8 +149,8 @@ export default defineNuxtConfig({
     '/': { prerender: true, headers: { 'Cache-Control': 'public, max-age=3600, s-maxage=86400' } },
     // Articles index page - always prerendered
     '/articles': { prerender: true, headers: { 'Cache-Control': 'public, max-age=3600, s-maxage=86400' } },
-    // Individual articles: ISR for on-demand regeneration (old articles will be SSR)
-    '/articles/**': { isr: 3600, headers: { 'Cache-Control': 'public, max-age=3600, s-maxage=86400' } },
+    // Individual articles: prerendered with long cache (rarely change after publication)
+    '/articles/**': { prerender: true, headers: { 'Cache-Control': 'public, max-age=86400, s-maxage=604800' } },
     // Nuxt Studio admin - requires SSR
     '/editor/**': { ssr: true },
     // Code of Conduct and Statuto
