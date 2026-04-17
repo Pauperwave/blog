@@ -77,22 +77,22 @@ Sideboard
 
 ## Tournament
 
-Rusults Summary (10-4):
+Riepilogo dei risultati (10-4):
 
-- 1. Elves - LWW (OTD)
-- 2. Elves - WW (OTP)
-- 3. 5-Land Spy - WLW (OTD)
-- 4. Jund Wildfire - LWW (OTD)
-- 5. CawGate - WLW
-- 6. Affinity - LWL (OTD)
-- 7. Elves - WW (OTD)
-- 8. Mono R Madness - WW (OTP)
-- 9. Elves - LWW (OTD)
-- 10. Mono R Madness - LL (OTP)
-- 11. Affinity - LL (OTD)
-- 12. Jund Wildfire - WW
-- 13. Grull Ponza - WW (OTD)
-- 14. Pizza Combo - LL
+1. Elves - LWW (OTD)
+2. Elves - WW (OTP)
+3. 5-Land Spy - WLW (OTD)
+4. Jund Wildfire - LWW (OTD)
+5. CawGate - WLW
+6. Affinity - LWL (OTD)
+7. Elves - WW (OTD)
+8. Mono R Madness - WW (OTP)
+9. Elves - LWW (OTD)
+10. Mono R Madness - LL (OTP)
+11. Affinity - LL (OTD)
+12. Jund Wildfire - WW
+13. Grull Ponza - WW (OTD)
+14. Pizza Combo - LL
 
 ### Day 1
 
