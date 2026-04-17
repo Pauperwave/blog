@@ -65,6 +65,14 @@ Sorceries
 
 Lands
 16 Island
+
+Sideboard
+4 Hydroblast
+2 Blue Elemental Blast
+3 Gut Shot
+3 Steel Sabotage
+2 Annul
+1 Envelop
 ::
 
 ## Tournament
