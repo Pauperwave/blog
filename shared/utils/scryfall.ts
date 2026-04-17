@@ -5,6 +5,50 @@ import type {
 } from '#shared/types'
 
 const SCRYFALL_API_BASE = 'https://api.scryfall.com'
+const SCRYFALL_CACHE_KEY = 'scryfall-card-cache'
+
+/**
+ * Get or initialize Scryfall card cache
+ * Uses Nuxt useState for server/client shared state
+ */
+function getScryfallCache(): Record<string, ScryfallCard> {
+  // Try to get from Nuxt state (works server and client)
+  try {
+    return useState<Record<string, ScryfallCard>>(SCRYFALL_CACHE_KEY, () => {
+      // On client, try to restore from localStorage
+      if (import.meta.client) {
+        try {
+          const stored = localStorage.getItem(SCRYFALL_CACHE_KEY)
+          if (stored) {
+            return JSON.parse(stored)
+          }
+        } catch {
+          // localStorage might be disabled or full
+        }
+      }
+      return {}
+    }).value
+  } catch {
+    return {}
+  }
+}
+
+/**
+ * Save card to cache (client-side localStorage persistence)
+ */
+function saveToCache(key: string, card: ScryfallCard) {
+  const cache = getScryfallCache()
+  cache[key] = card
+
+  // Persist to localStorage on client
+  if (import.meta.client) {
+    try {
+      localStorage.setItem(SCRYFALL_CACHE_KEY, JSON.stringify(cache))
+    } catch {
+      // localStorage might be disabled or full
+    }
+  }
+}
 
 /**
  * Extract image URL from Scryfall card data
@@ -97,13 +141,42 @@ export function buildScryfallImageUrl(name: string, set?: string): string {
 }
 
 /**
+ * Fetch card data from Scryfall API with caching
+ * @param name - Card name
+ * @param set - Optional set code
+ */
+async function fetchScryfallCard(name: string, set?: string): Promise<ScryfallCard | null> {
+  const cacheKey = set ? `${name}::${set}` : name
+  const cache = getScryfallCache()
+
+  // Check cache first
+  if (cache[cacheKey]) {
+    return cache[cacheKey]
+  }
+
+  // Build API URL
+  const url = set
+    ? `${SCRYFALL_API_BASE}/cards/named?exact=${encodeURIComponent(name)}&set=${set}`
+    : `${SCRYFALL_API_BASE}/cards/named?exact=${encodeURIComponent(name)}`
+
+  try {
+    const response = await $fetch<ScryfallCard>(url)
+    saveToCache(cacheKey, response)
+    return response
+  } catch {
+    return null
+  }
+}
+
+/**
  * Resolve card image URL with fallback chain
- * Priority: provided image → Scryfall with set → database lookup → Scryfall without set
+ * Priority: provided image → Scryfall with set → Scryfall without set
+ * Uses caching to avoid repeated API calls
  * @param name - Card name
  * @param image - Optional provided image URL
  * @param set - Optional set code
- * @param databaseLookup - Optional async function to lookup image from database
- * @param isServerSide - Whether running on server-side (skip database if true)
+ * @param databaseLookup - Optional async function to lookup image from database (unused but kept for compatibility)
+ * @param isServerSide - Whether running on server-side (skip Scryfall fetch if true)
  */
 export async function resolveCardImageUrl(
   name: string,
@@ -114,13 +187,23 @@ export async function resolveCardImageUrl(
     isServerSide?: boolean
   } = {}
 ): Promise<string | null> {
-  const { image, set, databaseLookup, isServerSide } = options
+  const { image, set, isServerSide } = options
 
   if (image) return image
-  if (set) return buildScryfallImageUrl(name, set)
-  if (isServerSide) return null
 
-  const dbImage = databaseLookup ? await databaseLookup(name) : null
-  return dbImage || buildScryfallImageUrl(name)
+  // On server-side, return direct image URL without fetching
+  if (isServerSide) {
+    return buildScryfallImageUrl(name, set)
+  }
+
+  // Fetch card data from Scryfall (with caching)
+  const card = await fetchScryfallCard(name, set)
+  if (card) {
+    const imageUrl = extractImageUrl(card)
+    if (imageUrl) return imageUrl
+  }
+
+  // Fallback to direct image URL
+  return buildScryfallImageUrl(name, set)
 }
 
