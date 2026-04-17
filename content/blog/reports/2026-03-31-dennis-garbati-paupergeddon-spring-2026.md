@@ -79,20 +79,20 @@ Sideboard
 
 Rusults Summary (10-4):
 
-1T. Elves - LWW (OTD)
-2T. Elves - WW (OTP)
-3T. 5-Land Spy - WLW (OTD)
-4T. Jund Wildfire - LWW (OTD)
-5T. CawGate - WLW
-6T. Affinity - LWL (OTD)
-7T. Elves - WW (OTD)
-8T. Mono R Madness - WW (OTP)
-9T. Elves - LWW (OTD)
-10T. Mono R Madness - LL (OTP)
-11T. Affinity - LL (OTD)
-12T. Jund Wildfire - WW
-13T. Grull Ponza - WW (OTD)
-14T. Pizza Combo - LL
+- 1. Elves - LWW (OTD)
+- 2. Elves - WW (OTP)
+- 3. 5-Land Spy - WLW (OTD)
+- 4. Jund Wildfire - LWW (OTD)
+- 5. CawGate - WLW
+- 6. Affinity - LWL (OTD)
+- 7. Elves - WW (OTD)
+- 8. Mono R Madness - WW (OTP)
+- 9. Elves - LWW (OTD)
+- 10. Mono R Madness - LL (OTP)
+- 11. Affinity - LL (OTD)
+- 12. Jund Wildfire - WW
+- 13. Grull Ponza - WW (OTD)
+- 14. Pizza Combo - LL
 
 ## Day 1
 
