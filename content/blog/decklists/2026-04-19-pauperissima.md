@@ -1,5 +1,5 @@
 ---
-title: "Top 16 Pauperissima: Fear and Pauper 2026"
+title: "Pauperissima: Fear and Pauper 2026"
 description: "Decklists Top 16"
 tags:
   - Top 16
