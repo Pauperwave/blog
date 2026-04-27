@@ -2,7 +2,7 @@
 title: "Top 16 Pauperissima: Fear and Pauper 2026"
 description: "Decklists Top 16"
 tags:
-  - Top 816
+  - Top 16
   - IPT
 location: Milano
 date: 2026-04-19
