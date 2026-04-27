@@ -84,7 +84,7 @@ Instants
 
 Sorceries
 4 Faithless Looting
-4 Follow the Lumarets
+4 Pursue the Past
 4 Malevolent Rumble
 
 Artifacts
@@ -130,7 +130,7 @@ Instants
 
 Sorceries
 4 Faithless Looting
-4 Follow the Lumarets
+4 Pursue the Past
 4 Malevolent Rumble
 
 Artifacts
@@ -221,7 +221,7 @@ Instants
 
 Sorceries
 4 Faithless Looting
-4 Follow the Lumarets
+4 Pursue the Past
 4 Malevolent Rumble
 
 Artifacts
