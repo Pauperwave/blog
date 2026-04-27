@@ -21,7 +21,7 @@ published: true
 ---
 name: Spy
 player: Alessandro Morino
-placement: Top8
+placement: Top 8
 headerGradient: golgari
 ---
 Creatures
