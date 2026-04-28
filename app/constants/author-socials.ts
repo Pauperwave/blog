@@ -2,11 +2,11 @@ import { AUTHOR_SOCIAL_PLATFORM_META } from './author-social-platform-meta'
 
 export interface AuthorSocials {
   twitter?: string
+  reddit?: string
   github?: string
   youtube?: string
   twitch?: string
   website?: string
-  reddit?: string
 }
 
 export type AuthorSocialKey = keyof AuthorSocials
