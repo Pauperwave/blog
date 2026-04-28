@@ -163,9 +163,9 @@ export default defineNuxtConfig({
     '/_nuxt/**': { headers: { 'Cache-Control': 'public, max-age=31536000, immutable' } },
     '/assets/**': { headers: { 'Cache-Control': 'public, max-age=31536000, immutable' } }
   },
-  // experimental: {
-  //   payloadExtraction: false
-  // },
+  experimental: {
+    payloadExtraction: process.env.NODE_ENV === 'production'
+  },
   icon: {
     serverBundle: {
       collections: ['lucide', 'simple-icons']
