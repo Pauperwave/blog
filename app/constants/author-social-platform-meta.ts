@@ -6,6 +6,16 @@ export interface AuthorSocialPlatformMetaDefinition {
 
 // Metadata used only for author socials (not for footer/global socials).
 export const AUTHOR_SOCIAL_PLATFORM_META = {
+  twitter: {
+    icon: 'i-simple-icons-x',
+    label: 'Twitter',
+    hoverClass: 'hover:text-blue-400'
+  },
+  reddit: {
+    icon: 'i-simple-icons-reddit',
+    label: 'Reddit',
+    hoverClass: 'hover:text-orange-600'
+  },
   github: {
     icon: 'i-simple-icons-github',
     label: 'GitHub',
@@ -16,19 +26,14 @@ export const AUTHOR_SOCIAL_PLATFORM_META = {
     label: 'Twitch',
     hoverClass: 'hover:text-purple-600'
   },
-  twitter: {
-    icon: 'i-simple-icons-x',
-    label: 'Twitter',
-    hoverClass: 'hover:text-blue-400'
+  youtube: {
+    icon: 'i-simple-icons-youtube',
+    label: 'YouTube',
+    hoverClass: 'hover:text-red-600'
   },
   website: {
     icon: 'i-lucide-globe',
     label: 'Website',
     hoverClass: 'hover:text-primary'
-  },
-  youtube: {
-    icon: 'i-simple-icons-youtube',
-    label: 'YouTube',
-    hoverClass: 'hover:text-red-600'
   }
 } as const satisfies Record<string, AuthorSocialPlatformMetaDefinition>
