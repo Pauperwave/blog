@@ -129,7 +129,7 @@ Sideboard
 ::magic-decklist
 ---
 name: Gardens
-player: Antonio Barresi
+player: Giovanni Motta
 placement: Top 4
 headerGradient: golgari
 ---
