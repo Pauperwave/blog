@@ -9,8 +9,8 @@ const sitemapSchema: any = (options: any) => defineSitemapSchema({ z, ...options
  * Shared sitemap filter: excludes any content entry where `published` is explicitly false.
  * Defaults to published=true if the field is missing (e.g. in older content files).
  */
-const publishedFilter = ({ entry }: { entry: { published?: boolean } }) =>
-  entry.published !== false
+const publishedFilter = (entry: { published?: boolean }) =>
+  entry?.published !== false
 
 /**
  * Base schema shared across all blog content types (articles, tutorials, decklists, reports, spoilers).
