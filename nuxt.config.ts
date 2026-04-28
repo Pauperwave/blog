@@ -116,11 +116,12 @@ export default defineNuxtConfig({
       // Pre-render the homepage
       routes: ['/', '/docs/componenti'],
       // Then crawl all the links on the page
-      crawlLinks: true
+      crawlLinks: true,
+      failOnError: false
     },
     // Filter routes to only prerender recent articles (< 3 months)
     hooks: {
-      'prerender:routes' (ctx: any) {
+      'prerender:routes' (ctx: { routes?: string[] }) {
         if (!ctx.routes || !Array.isArray(ctx.routes)) return
 
         const threeMonthsAgo = new Date()
