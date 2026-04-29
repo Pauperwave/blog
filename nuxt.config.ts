@@ -38,9 +38,9 @@ export default defineNuxtConfig({
   schemaOrg: {
     identity: definePerson(appMeta.author),
   },
-  // ogImage: {
-  //     enabled: false, // Using static thumbnails instead of dynamic OG image generation
-  // },
+  ogImage: {
+    zeroRuntime: true
+  },
   content: {
     build: {
       markdown: {
