@@ -36,7 +36,7 @@ export const useArticleMeta = (
     twitterImage: data.value?.thumbnail,
   })
 
-  defineOgImageComponent('Article', {
+  defineOgImage('Article.takumi', {
     thumbnail: data.value?.thumbnail,
     title: data.value?.title,
     author: {
