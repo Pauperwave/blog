@@ -1,6 +1,6 @@
 ---
 title: Codice di Condotta
-description: Codice di condotta della comunità Pauperwave per un ambiente rispettoso e inclusivo.
+description: Codice di condotta per un ambiente rispettoso e inclusivo
 ---
 
 # Codice di Condotta
