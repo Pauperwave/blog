@@ -32,7 +32,7 @@ useSeoMeta({
           src="/assets/404/Fblthp-the-Lost-War-of-the-Spark-Art.jpg"
           alt="Fblthp the Lost"
           class="rounded-xl max-w-4xl w-full"
-        />
+        >
         <UError
           :ui="{ root: 'min-h-0' }"
           :clear="{
