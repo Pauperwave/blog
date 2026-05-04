@@ -179,23 +179,16 @@ Creatures
 2 Sandstorm Eidolon
 
 Instants
-2 Electrickery
 3 Lightning Bolt
 2 Loran's Escape
-2 Loran's Escape
-4 Red Elemental Blast
 1 Abandon Attachments
-1 Flaring Pain
 1 Fling
 4 Inside Out
-2 Thraben Charm
-2 Prismatic Strands
 2 Prismatic Strands
 
 Sorceries
 3 Faithless Looting
 4 Pursue the Past
-2 Shenanigans
 3 Thrilling Discovery
 
 Lands
@@ -204,6 +197,15 @@ Lands
 3 Escape Tunnel
 5 Mountain
 5 Plains
+
+Sideboard
+4 Red Elemental Blast
+2 Electrickery
+2 Loran's Escape
+2 Prismatic Strands
+2 Shenanigans
+2 Thraben Charm
+1 Flaring Pain
 ::
 
 ::magic-decklist
