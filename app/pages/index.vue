@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 import type { Author } from '~/composables/useAuthor'
 import { normalizeAuthors } from '~/composables/useAuthor'
 import { defineWebPage } from 'nuxt-schema-org/schema'
@@ -17,8 +18,13 @@ useSeoMeta({
   description: appMeta.description,
   ogTitle: appMeta.name,
   ogDescription: appMeta.description,
-  ogImage: '/og-image.png',
   twitterCard: 'summary_large_image'
+})
+
+// OG Image for homepage
+defineOgImage('Page.takumi', {
+  title: appMeta.name,
+  description: appMeta.description,
 })
 
 const { data: homeArticlesData } = await useHomeArticles()

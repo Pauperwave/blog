@@ -55,6 +55,12 @@ const publishedArticles = computed(() =>
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 )
 
+// OG Image for authors list page (must be called at top level)
+defineOgImage('Page.takumi', {
+  title: 'Autori',
+  subtitle: 'Tutti gli autori del blog',
+})
+
 const authorsWithStats = computed<AuthorWithStats[]>(() => {
   if (!authors.value) return []
 

@@ -43,6 +43,12 @@ const { data: authorsMapData } = await useAsyncData<Record<string, Author>>(
 
 const authorsMap = computed(() => authorsMapData.value ?? {})
 
+// OG Image for articles list page
+defineOgImage('Page.takumi', {
+  title: 'Tutti gli Articoli',
+  subtitle: `${articles.value?.length || 0} articoli disponibili`,
+})
+
 const {
   selectedCategory,
   selectedAuthor,
