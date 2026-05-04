@@ -5,7 +5,7 @@ author:
   - Pietro Bragioto
 category: spoiler
 date: 2026-02-24
-description: Spoilered Pauper cards in Teenage Mutant Ninja Turtles
+description: Spoilered Pauper cards
 location: ""
 published: true
 sitemap:
