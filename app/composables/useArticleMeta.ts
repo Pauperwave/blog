@@ -36,12 +36,16 @@ export const useArticleMeta = (
     twitterImage: data.value?.thumbnail,
   })
 
-  defineOgImageComponent('Article', {
+  const firstAuthor = authorsData.value?.[0]
+  console.log('[DEBUG] useArticleMeta authorsData:', authorsData.value)
+  console.log('[DEBUG] useArticleMeta firstAuthor:', firstAuthor)
+  console.log('[DEBUG] useArticleMeta firstAuthor?.name:', firstAuthor?.name)
+  console.log('[DEBUG] useArticleMeta firstAuthor?.avatar:', firstAuthor?.avatar)
+  defineOgImage('Article.takumi', {
     thumbnail: data.value?.thumbnail,
     title: data.value?.title,
-    author: {
-      name: authorsData.value?.[0]?.name,
-      image: authorsData.value?.[0]?.avatar,
-    },
+    author: firstAuthor?.name && firstAuthor?.avatar
+      ? { name: firstAuthor.name, image: firstAuthor.avatar }
+      : undefined,
   })
 }

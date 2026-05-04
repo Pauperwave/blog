@@ -16,12 +16,17 @@ export const useArticleData = async (path: string) => {
   const articleAsync = useAsyncData(path, fetchArticle)
   const authorsAsync = useAsyncData<Author[]>(`authors-${path}`, async () => {
     const article = await fetchArticle()
+    console.log('[DEBUG] Article author field:', article?.author)
     if (!article?.author) return []
     const names = normalizeAuthors(article.author)
+    console.log('[DEBUG] Normalized author names:', names)
     const authors = await queryCollection('authors').where('name', 'IN', names).all()
-    return names
+    console.log('[DEBUG] Query returned authors:', authors.map(a => ({ name: a.name, avatar: a.avatar })))
+    const mapped = names
       .map(name => authors.find(a => a.name.toLowerCase() === name.toLowerCase()))
       .filter(Boolean) as Author[]
+    console.log('[DEBUG] Mapped authors:', mapped.map(a => ({ name: a.name, avatar: a.avatar })))
+    return mapped
   })
   const surroundAsync = useAsyncData(`${path}-surround`, async () => {
     for (const collection of getCollectionNames()) {

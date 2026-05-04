@@ -73,7 +73,7 @@ Leggendo qualche articolo ed ascoltando diverse opinioni, lo possiamo definire c
 
 L'esempio più banale che possiamo fare: l'avversario può giocare X magie, io posso giocare X+1 magie, io ho un vantaggio tempo sul mio avversario.
 
-Ad inizio partita chi inizia con più carte in mano ha più CA dell'avversario, [[diversamente]] la risorsa Tempo è pari a 0.
+Ad inizio partita chi inizia con più carte in mano ha più CA dell'avversario, diversamente la risorsa Tempo è pari a 0.
 Per creare vantaggio tempo possiamo sfruttare diverse strategie e/o soluzioni:
 
 - **Mana Denial**

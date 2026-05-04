@@ -38,9 +38,9 @@ export default defineNuxtConfig({
   schemaOrg: {
     identity: definePerson(appMeta.author),
   },
-  // ogImage: {
-  //     enabled: false, // Using static thumbnails instead of dynamic OG image generation
-  // },
+  ogImage: {
+    zeroRuntime: true
+  },
   content: {
     build: {
       markdown: {
@@ -116,11 +116,12 @@ export default defineNuxtConfig({
       // Pre-render the homepage
       routes: ['/', '/docs/componenti'],
       // Then crawl all the links on the page
-      crawlLinks: true
+      crawlLinks: true,
+      failOnError: false
     },
     // Filter routes to only prerender recent articles (< 3 months)
     hooks: {
-      'prerender:routes' (ctx: any) {
+      'prerender:routes' (ctx: { routes?: string[] }) {
         if (!ctx.routes || !Array.isArray(ctx.routes)) return
 
         const threeMonthsAgo = new Date()
@@ -163,9 +164,9 @@ export default defineNuxtConfig({
     '/_nuxt/**': { headers: { 'Cache-Control': 'public, max-age=31536000, immutable' } },
     '/assets/**': { headers: { 'Cache-Control': 'public, max-age=31536000, immutable' } }
   },
-  // experimental: {
-  //   payloadExtraction: false
-  // },
+  experimental: {
+    payloadExtraction: process.env.NODE_ENV === 'production'
+  },
   icon: {
     serverBundle: {
       collections: ['lucide', 'simple-icons']

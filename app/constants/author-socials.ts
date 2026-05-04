@@ -2,6 +2,7 @@ import { AUTHOR_SOCIAL_PLATFORM_META } from './author-social-platform-meta'
 
 export interface AuthorSocials {
   twitter?: string
+  reddit?: string
   github?: string
   youtube?: string
   twitch?: string
@@ -17,7 +18,7 @@ export interface AuthorSocialLinkDefinition {
   hoverClass: string
 }
 
-const AUTHOR_SOCIAL_KEYS: AuthorSocialKey[] = ['twitter', 'github', 'youtube', 'twitch', 'website']
+const AUTHOR_SOCIAL_KEYS: AuthorSocialKey[] = ['twitter', 'github', 'youtube', 'twitch', 'website', 'reddit']
 
 export const AUTHOR_SOCIAL_LINKS: AuthorSocialLinkDefinition[] = AUTHOR_SOCIAL_KEYS.map(key => ({
   key,
