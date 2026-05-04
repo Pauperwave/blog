@@ -1,6 +1,6 @@
 ---
-title: "Pauperissima: Fear and Pauper 2026"
-description: "Decklists Top 16"
+title: "Pauperissima"
+description: "Fear and Pauper 2026"
 tags:
   - Top 16
   - IPT
