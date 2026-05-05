@@ -1,5 +1,6 @@
 ---
 title: Statuto dell'associazione
+description: Principi, finalità e regole che ne disciplinano organizzazione e attività.
 sitemap:
   loc: /statuto
   videos: []

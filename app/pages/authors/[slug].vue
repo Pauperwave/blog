@@ -69,10 +69,18 @@ const getArticleTopicTags = (article: AnyArticle) =>
 // SEO meta tags
 useSeoMeta({
   title: `${author.value.name} - Autore`,
-  description: author.value.bio || author.value.description,
-  ogTitle: `${author.value.name} - Autore`,
-  ogDescription: author.value.bio || author.value.description,
-  ogImage: author.value.avatar,
+  description: author.value.description,
+})
+
+console.log("[DEBUG] Author [slug]", author.value)
+
+// OG Image for author profile page
+defineOgImage('Author.takumi', {
+  name: author.value.name,
+  avatar: author.value.avatar,
+  description: author.value.description,
+  bio: author.value.bio,
+  articleCount: totalArticles.value,
 })
 </script>
 

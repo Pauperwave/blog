@@ -10,6 +10,12 @@ const { data } = await useAsyncData(`doc-${route.params.slug}`, () =>
 
 const tocTitle = 'In questo articolo'
 const pageHeadline = 'Documenti'
+
+// OG Image for docs page
+defineOgImage('Page.takumi', {
+  title: data.value?.title || 'Documento',
+  description: data.value?.description,
+})
 </script>
 
 <template>

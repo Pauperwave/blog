@@ -29,23 +29,6 @@ export const useArticleMeta = (
   useSeoMeta({
     title: data.value?.title,
     description: data.value?.description,
-    ogImage: data.value?.thumbnail,
-    ogImageWidth: 1200,
-    ogImageHeight: 630,
-    twitterCard: 'summary_large_image',
-    twitterImage: data.value?.thumbnail,
-  })
-
-  const firstAuthor = authorsData.value?.[0]
-  console.log('[DEBUG] useArticleMeta authorsData:', authorsData.value)
-  console.log('[DEBUG] useArticleMeta firstAuthor:', firstAuthor)
-  console.log('[DEBUG] useArticleMeta firstAuthor?.name:', firstAuthor?.name)
-  console.log('[DEBUG] useArticleMeta firstAuthor?.avatar:', firstAuthor?.avatar)
-  defineOgImage('Article.takumi', {
-    thumbnail: data.value?.thumbnail,
-    title: data.value?.title,
-    author: firstAuthor?.name && firstAuthor?.avatar
-      ? { name: firstAuthor.name, image: firstAuthor.avatar }
-      : undefined,
+    twitterCard: 'summary_large_image'
   })
 }

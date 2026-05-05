@@ -1,6 +1,6 @@
 ---
 title: "Lorwyn Eclipsed"
-description: "Spoilered Pauper cards in Lorwyn Eclipsed"
+description: "Spoilered Pauper cards"
 tags:
   - Set Review
 date: 2026-01-17

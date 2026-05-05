@@ -1,10 +1,10 @@
 export default {
   id: "pauperwave_blog",
   name: "Pauperwave Blog",
-  description: "A blog about Magic The Gathering Pauper format.",
+  description: "Un blog dedicato al formato Pauper di Magic: The Gathering",
   author: {
     name: "Pauperwave",
-    url: "https://pauperwave.org",
+    url: "blog.pauperwave.org",
     image: "https://avatars.githubusercontent.com/u/225214755?s=200&v=4",
     email: "pauperwave@gmail.com",
     description: "Associazione italiana senza scopo di lucro che promuove il formato Pauper e il gioco come strumento educativo e sociale."

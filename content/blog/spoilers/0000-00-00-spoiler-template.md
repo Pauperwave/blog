@@ -5,7 +5,7 @@ author:
   - Pietro Bragioto
 category: spoiler
 date: 2026-01-01
-description: Spoilered Pauper cards in "Nome del Set"
+description: Spoilered Pauper cards
 location: ""
 published: false
 sitemap:

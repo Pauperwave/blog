@@ -10,6 +10,24 @@ const formattedDate = useState(`article-date-${route.path}`, () => {
 })
 
 useArticleMeta(data, authorsData)
+
+// Move defineOgImage here directly for DevTools OG image preview support
+const firstAuthor = authorsData.value?.[0]
+defineOgImage('Article.takumi', {
+  thumbnail: data.value?.thumbnail,
+  title: data.value?.title,
+  subtitle: data.value?.description,
+  tags: data.value?.tags,
+  date: formattedDate,
+  author: firstAuthor?.name && firstAuthor?.avatar
+    ? {
+      name: firstAuthor.name,
+      image: firstAuthor.avatar,
+      description: firstAuthor.description,
+      bio: firstAuthor.bio
+    }
+    : undefined,
+})
 </script>
 
 <template>

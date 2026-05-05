@@ -39,7 +39,8 @@ export default defineNuxtConfig({
     identity: definePerson(appMeta.author),
   },
   ogImage: {
-    zeroRuntime: true
+    zeroRuntime: true,
+    buildCache: true
   },
   content: {
     build: {

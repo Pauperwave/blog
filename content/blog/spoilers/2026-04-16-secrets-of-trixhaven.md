@@ -5,7 +5,7 @@ author:
   - Pietro Bragioto
 category: spoiler
 date: 2026-04-16
-description: Spoilered Pauper cards in Secrets of Strixhaven
+description: Spoilered Pauper cards
 location: ""
 published: true
 sitemap:
