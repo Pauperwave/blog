@@ -60,18 +60,18 @@ export default defineNuxtConfig({
     },
   },
   modules: [
-    'nuxt-studio',
+    "nuxt-studio",
     "@nuxt/eslint",
     "@nuxt/image",
     "@nuxt/ui",
-    '@nuxt/icon',
-    "@nuxt/content",
-    // Must come after @nuxt/ui
+    "@nuxt/icon",
+    "@nuxt/content", // Must come after @nuxt/ui
     // https://ui.nuxt.com/docs/getting-started/integrations/content
     "@nuxtjs/mdc",
     "@nuxtjs/seo",
     "@vueuse/nuxt",
     "magic-regexp/nuxt",
+    "nuxt-echarts",
     "nuxt-swiper",
     "@vercel/analytics",
     "./modules/card-tooltip-transformer",
