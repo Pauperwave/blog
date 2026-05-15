@@ -27,13 +27,13 @@ Reactive decks struggle to answer [[Sneaky Snacker]] with commonly played intera
 When you ask yourself why a certain reactive deck isn't played anymore, the first thing you should consider is how that deck would beat a T2 [[Sneaky Snacker]].
 If you can't find a convincing answer, you now know why you don't see the deck around.
 
-So, Snacker demands running some specific solutions, which is one of the main reasons for the big uptick in [[Nihil Spellbombs]] during the last year.
+So, Snacker demands running some specific solutions, which is one of the main reasons for the big uptick in [[Nihil Spellbomb]] during the last year.
 But
 
-  (a) not every reactive deck is black;
-  (b) even 4 [[Nihil Spellbombs]] is not enough.
+  1. not every reactive deck is black;
+  2. even 4 [[Nihil Spellbomb]] is not enough.
 
-Why did I say (b)? Because if a reanimated Snacker kills your deck, you need very high chances of preventing it.
+Why did I say (2)? Because if a reanimated Snacker kills your deck, you need very high chances of preventing it.
 You can't leave it to chance.
 Seeing a [[Sneaky Snacker]] on the opposite side should be a rare occurrence if you built your deck correctly.
 
