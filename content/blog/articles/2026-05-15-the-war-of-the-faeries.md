@@ -76,7 +76,7 @@ Jund Wildfire didn't use to run Faerie Macabre, but I added it a few weeks ago, 
 Since then, my teammate, seasonofmists, and I have had a lot of success with the same 75.
 
 Since the next B&R announcement is approaching, I want to clarify that the goal of this article is not to "normalize" [[Sneaky Snacker]] by suggesting that the format can comfortably handle it thanks to [[Faerie Macabre]].
-Whenever Pauper reaches a point where "[[Force of Will]] effects" become necessary, it raises legitimate concerns about the health of the format.
+Whenever Pauper reaches a point where _ [[Force of Will]] effects_ become necessary, it raises legitimate concerns about the health of the format.
 My aim, however, was to provide useful deckbuilding insight rather than engage in unproductive ban discourse.
 I'll leave readers to draw their own conclusions on that front.
 
