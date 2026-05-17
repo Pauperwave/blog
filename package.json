@@ -28,6 +28,7 @@
     "@nuxt/icon": "2.2.1",
     "@nuxt/image": "^2.0.0",
     "@nuxt/ui": "^4.7.1",
+    "@nuxtjs/device": "4.0.0",
     "@nuxtjs/mdc": "^0.21.1",
     "@nuxtjs/seo": "^5.1.3",
     "@vercel/analytics": "^2.0.1",

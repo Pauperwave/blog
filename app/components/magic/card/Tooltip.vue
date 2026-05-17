@@ -1,60 +1,45 @@
 <script setup lang="ts">
-// Props
-const props = defineProps<{
+defineProps<{
   name: string
   image?: string
-  set?: string
 }>()
 
-// State
 const tooltipOpen = ref(false)
 const anchor = ref({ x: 0, y: 0 })
 const showModal = ref(false)
 
 // Composables
-const isMobile = useMediaQuery('(max-width: 768px)')
-
-// Computed
-const displayText = computed(() => props.name)
-const imageUrl = computed(() => props.image || null)
+const { isMobile } = useDevice()
 
 const reference = computed(() => ({
-  getBoundingClientRect: () =>
-    ({
-      width: 0,
-      height: 0,
-      left: anchor.value.x,
-      right: anchor.value.x,
-      top: anchor.value.y,
-      bottom: anchor.value.y,
-      ...anchor.value
-    } as DOMRect)
+  getBoundingClientRect: () => ({
+    width: 0,
+    height: 0,
+    left: anchor.value.x,
+    right: anchor.value.x,
+    top: anchor.value.y,
+    bottom: anchor.value.y,
+    ...anchor.value
+  } as DOMRect)
 }))
 
-// Event handlers
 const handlePointerEnter = (ev: PointerEvent) => {
-  if (!isMobile.value) {
+  if (!isMobile) {
     anchor.value = { x: ev.clientX, y: ev.clientY }
     tooltipOpen.value = true
   }
 }
 
 const handlePointerLeave = () => {
-  if (!isMobile.value) {
-    tooltipOpen.value = false
-  }
+  if (!isMobile) tooltipOpen.value = false
 }
 
 const handlePointerMove = (ev: PointerEvent) => {
-  if (!isMobile.value) {
-    anchor.value = { x: ev.clientX, y: ev.clientY }
-  }
+  if (!isMobile) anchor.value = { x: ev.clientX, y: ev.clientY }
 }
 
 const handleClick = () => {
-  if (isMobile.value) {
-    showModal.value = true
-  }
+  if (isMobile) showModal.value = true
 }
 </script>
 
@@ -85,12 +70,12 @@ const handleClick = () => {
       @pointermove="handlePointerMove"
       @click="handleClick"
     >
-      {{ displayText }}
+      {{ name }}
     </span>
 
     <template #content>
       <img
-        :src="imageUrl || undefined"
+        :src="image"
         :alt="name"
         class="w-70 h-auto rounded-xl"
       >
@@ -110,7 +95,7 @@ const handleClick = () => {
     <template #content>
       <div class="flex items-center justify-center p-4">
         <img
-          :src="imageUrl || undefined"
+          :src="image"
           :alt="name"
           class="max-w-full max-h-[85vh] rounded-xl shadow-2xl"
         >
