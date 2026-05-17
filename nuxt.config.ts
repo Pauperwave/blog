@@ -83,7 +83,7 @@ export default defineNuxtConfig({
     "./modules/sideboard-guide-transformer",
   ],
   echarts: {
-    renderer: ['canvas', 'svg'],
+    renderer: ['svg'],
     charts: [
       'BarChart',
       'LineChart',
