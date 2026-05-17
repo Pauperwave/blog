@@ -7,6 +7,10 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   components: [
     {
+      path: '~/components/charts',
+      pathPrefix: false,
+    },
+    {
       path: '~/components/content',
       pathPrefix: false,
     },
@@ -64,11 +68,11 @@ export default defineNuxtConfig({
     "@nuxt/eslint",
     "@nuxt/image",
     "@nuxt/ui",
-    "@nuxt/icon",
-    "@nuxt/content", // Must come after @nuxt/ui
-    // https://ui.nuxt.com/docs/getting-started/integrations/content
+    "@nuxt/icon", // Must come after @nuxt/ui
+    "@nuxt/content", // https://ui.nuxt.com/docs/getting-started/integrations/content
     "@nuxtjs/mdc",
     "@nuxtjs/seo",
+    "@nuxtjs/device",
     "@vueuse/nuxt",
     "magic-regexp/nuxt",
     "nuxt-echarts",
@@ -76,8 +80,28 @@ export default defineNuxtConfig({
     "@vercel/analytics",
     "./modules/card-tooltip-transformer",
     "./modules/decklist-transformer",
-    "./modules/sideboard-guide-transformer"
+    "./modules/sideboard-guide-transformer",
   ],
+  echarts: {
+    renderer: ['canvas', 'svg'],
+    charts: [
+      'BarChart',
+      'LineChart',
+      'PieChart'
+    ],
+    components: [
+      'DatasetComponent',
+      'GridComponent',
+      'TooltipComponent',
+      'ToolboxComponent',
+      'LegendComponent',
+      'TitleComponent',
+    ],
+    features: [
+      'LabelLayout',
+      'UniversalTransition'
+    ]
+  },
   css: [
     "~/assets/css/main.css",
   ],
@@ -89,7 +113,7 @@ export default defineNuxtConfig({
     repository: {
       provider: 'github',
       owner: 'Pauperwave',
-      repo: 'test',
+      repo: 'blog',
       branch: 'main',
       private: true,
     },

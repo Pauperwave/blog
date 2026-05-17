@@ -379,3 +379,23 @@ Sideboard
 3 Smash to Smithereens
 2 Relic of Progenitus
 ::
+
+::pie-chart
+---
+title: Meta Breakdown
+description: Distribution of deck types in the tournament
+data:
+  - { value: 11, name: Jund Wildfire }
+  - { value: 11, name: Monored Madness }
+  - { value: 8, name: Spy Combo }
+  - { value: 7, name: Grixis Affinity }
+  - { value: 6, name: Monoblu Terror }
+  - { value: 6, name: UB Terror }
+  - { value: 5, name: UW Familiars }
+  - { value: 4, name: Naya Gates }
+  - { value: 4, name: Glintblade }
+  - { value: 3, name: Boros Tribe }
+  - { value: 3, name: RDW }
+  - { value: 32, name: Others }
+---
+::
