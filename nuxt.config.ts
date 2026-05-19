@@ -214,6 +214,9 @@ export default defineNuxtConfig({
         // Social icons used dynamically
         'simple-icons:x',
         'simple-icons:twitch',
+        'simple-icons:reddit',
+        'simple-icons:youtube',
+        'simple-icons:github',
       ]
     },
     // Avoid external Iconify fetches during prerender/build.
