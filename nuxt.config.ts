@@ -182,6 +182,7 @@ export default defineNuxtConfig({
     '/reports/0000-00-00-report-template': { prerender: false },
     '/spoilers/0000-00-00-spoiler-template': { prerender: false },
     // Nuxt Studio admin - requires SSR
+    '/editor': { ssr: true },
     '/editor/**': { ssr: true },
     // Code of Conduct and Statuto
     '/docs/**': { prerender: true, headers: { 'Cache-Control': 'public, max-age=3600, s-maxage=86400' } },
