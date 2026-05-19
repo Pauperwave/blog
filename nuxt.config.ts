@@ -128,7 +128,15 @@ export default defineNuxtConfig({
     },
     build: {
       sourcemap: false, // Disable sourcemaps in production to eliminate Tailwind warnings
-      chunkSizeWarningLimit: 3000
+      chunkSizeWarningLimit: 3000,
+      rollupOptions: {
+        onwarn(warning, warn) {
+          if (warning.code === 'INVALID_ANNOTATION' && warning.message.includes('#__PURE__')) {
+            return
+          }
+          warn(warning)
+        }
+      }
     }
   },
   // Also note that your routeRules with '/articles/**': { prerender: true } and the nitro.prerender.crawlLinks are complementary
