@@ -14,8 +14,15 @@ const navItems: NavigationMenuItem[] = [
     </template>
     <template #right>
       <SearchButton class="lg:hidden" :collapsed="true" />
-      <UButton icon="i-lucide-pencil" label="Editor" to="/editor" variant="ghost" color="neutral"
-        class="hidden md:flex" />
+      <UButton
+        icon="i-lucide-pencil"
+        label="Editor"
+        to="/editor"
+        variant="outline"
+        size="sm"
+        color="neutral"
+        class="hidden md:flex"
+      />
       <ColorModeButton />
     </template>
     <!-- Desktop -->
