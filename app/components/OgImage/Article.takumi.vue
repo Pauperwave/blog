@@ -78,7 +78,8 @@ defineProps<{
         <img
           :src="author.image"
           :alt="author.name"
-          class="size-10 rounded-full object-cover shrink-0 ring-2 ring-emerald-400/50 ring-offset-2 ring-offset-slate-950"
+          class="size-10 rounded-full object-cover shrink-0"
+          style="border: 2px solid rgba(52, 211, 153, 0.5); box-shadow: 0 0 0 2px #020617;"
         >
         <div class="flex flex-col gap-0.5">
           <p class="font-semibold text-xl text-white leading-tight">{{ author.name }}</p>

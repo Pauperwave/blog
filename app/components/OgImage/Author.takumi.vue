@@ -16,7 +16,7 @@ defineProps<{
     <div class="absolute -top-32 -left-32 w-96 h-96 bg-emerald-500/10 rounded-full" style="filter: blur(64px)" />
     <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-primary-500/10 rounded-full" style="filter: blur(64px)" />
 
-    <div class="relative z-10 w-full h-full flex flex-col justify-between p-14">
+    <div class="relative w-full h-full flex flex-col justify-between p-14" style="z-index: 10">
       <!-- Header -->
       <div class="flex items-center gap-3">
         <div class="w-1 h-8 bg-emerald-400 rounded-full" />

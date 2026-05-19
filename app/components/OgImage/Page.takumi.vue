@@ -35,7 +35,8 @@ defineProps<{
             :src="appMeta.author.image"
             width="48"
             height="48"
-            class="rounded-full border-2 border-emerald-400/50"
+            class="rounded-full"
+            style="border: 2px solid rgba(52, 211, 153, 0.5)"
             alt=""
           >
           <div>
