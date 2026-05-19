@@ -134,6 +134,9 @@ export default defineNuxtConfig({
           if (warning.code === 'INVALID_ANNOTATION' && warning.message.includes('#__PURE__')) {
             return
           }
+          if (warning.message?.includes('Sourcemap is likely to be incorrect')) {
+            return
+          }
           warn(warning)
         }
       }
