@@ -19,8 +19,8 @@ published: true
 
 ::magic-decklist
 ---
-name: "Walls"
-player: "Mattia Ferraris"
+name: Walls
+player: Mattia Ferraris
 placement: Winner
 headerGradient: simic
 ---
@@ -67,10 +67,10 @@ Sideboard
 
 ::magic-decklist
 ---
-name: 
-player: 
+name: Nome mazzo
+player: Nome giocatore
 placement: Finalist
-headerGradient: 
+headerGradient: monogreen
 ---
 Creatures
 4 Myr Retriever
@@ -108,64 +108,4 @@ Sideboard
 2 Ancient Grudge
 2 Nihil Spellbomb
 1 Blood Fountain
-::
-
-::magic-decklist
----
-name: 
-player: 
-placement: Top 4
-headerGradient: 
----
-
-::
-
-::magic-decklist
----
-name: 
-player: 
-placement: Top 4
-headerGradient: 
----
-
-::
-
-::magic-decklist
----
-name: 
-player: 
-placement: Top 8
-headerGradient: 
----
-
-::
-
-::magic-decklist
----
-name: 
-player: 
-placement: Top 8
-headerGradient: 
----
-
-::
-
-::magic-decklist
----
-name: 
-player: 
-placement: Top 8
-headerGradient: 
----
-
-::
-
-::magic-decklist
----
-name: 
-player: 
-placement: Top 8
-headerGradient: 
----
-
 ::
