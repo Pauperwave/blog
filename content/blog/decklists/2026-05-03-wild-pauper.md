@@ -7,7 +7,7 @@ tags:
 location: Roma
 date: 2026-05-03
 author: Pietro Bragioto
-thumbnail: /assets/blog/events/Wild-Pauper.jpg
+thumbnail: /assets/blog/events/2026-05-03-wild-pauper.jpg
 published: true
 ---
 
