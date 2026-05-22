@@ -1,6 +1,6 @@
 ---
-title: "Novara Pauper Clash"
-description: "Decklists Top 8"
+title: "Novara Pauper Clash
+description: "Decklists Top 8
 tags:
   - Top 8
 location: Novara
@@ -18,8 +18,8 @@ published: true
 
 ::magic-decklist
 ---
-name: "Spy"
-player: "Mattia Ferraris"
+name: Spy
+player: Mattia Ferraris
 placement: Winner
 headerGradient: simic
 ---
@@ -66,8 +66,8 @@ Sideboard
 
 ::magic-decklist
 ---
-name: "Altar Tron"
-player: "Riccardo Malgara"
+name: Altar Tron
+player: Riccardo Malgara
 placement: Finalist
 headerGradient: golgari
 ---
@@ -111,8 +111,8 @@ Sideboard
 
 ::magic-decklist
 ---
-name: "Monsters Tron"
-player: "Andrea Feo"
+name: Monsters Tron
+player: Andrea Feo
 placement: Top 4
 headerGradient: gruul
 ---
@@ -161,8 +161,8 @@ Sideboard
 
 ::magic-decklist
 ---
-name: "White Weenie"
-player: "Nikolin Lasku"
+name: White Weenie
+player: Nikolin Lasku
 placement: Top 4
 headerGradient: monowhite
 ---
@@ -202,8 +202,8 @@ Sideboard
 
 ::magic-decklist
 ---
-name: "R Madness"
-player: "Domenico Perndoka"
+name: R Madness
+player: Domenico Perndoka
 placement: Top 8
 headerGradient: monored
 ---
@@ -239,8 +239,8 @@ Sideboard
 
 ::magic-decklist
 ---
-name: "Naya Gates"
-player: "Nicol Colombo"
+name: Naya Gates
+player: Nicol Colombo
 placement: Top 8
 headerGradient: naya
 ---
@@ -285,8 +285,8 @@ Sideboard
 
 ::magic-decklist
 ---
-name: "Dimir Affinity"
-player: "Samuele Diso"
+name: Dimir Affinity
+player: Samuele Diso
 placement: Top 8
 headerGradient: dimir
 ---
@@ -336,8 +336,8 @@ Sideboard
 
 ::magic-decklist
 ---
-name: "BW Refurbished"
-player: "Alessandro Marazzini"
+name: BW Refurbished
+player: Alessandro Marazzini
 placement: Top 8
 headerGradient: orzhov
 ---
