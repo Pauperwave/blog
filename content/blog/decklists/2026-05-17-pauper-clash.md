@@ -19,7 +19,7 @@ published: true
 
 ::magic-decklist
 ---
-name: "Walls"
+name: "Spy"
 player: "Mattia Ferraris"
 placement: Winner
 headerGradient: simic
@@ -67,10 +67,10 @@ Sideboard
 
 ::magic-decklist
 ---
-name: 
-player: 
+name: "Altar Tron"
+player: "Riccardo Malgara"
 placement: Finalist
-headerGradient: 
+headerGradient: golgari
 ---
 Creatures
 4 Myr Retriever
@@ -112,60 +112,276 @@ Sideboard
 
 ::magic-decklist
 ---
-name: 
-player: 
+name: "Monsters Tron"
+player: "Andrea Feo"
 placement: Top 4
-headerGradient: 
+headerGradient: gruul
 ---
+Creatures
+3 Generous Ent
+4 Boulderbranch Golem
+4 Bramble Wurm
+4 Maelstrom Colossus
 
+Instants
+2 Crop Rotation
+3 Breath Weapon
+2 Unfathomable Truths
+
+Sorceries
+4 Ancient Stirrings
+
+Artifacts
+4 Candy Trail
+4 Expedition Map
+2 Relic of Progenitus
+2 Prophetic Prism
+4 Pinnacle Kill-Ship
+
+Lands
+1 Crystal Grotto
+1 Hidden Grotto
+1 Wooded Ridgeline
+1 Bojuka Bog
+2 Forest
+4 Urza's Mine
+4 Urza's Power Plant
+4 Urza's Tower
+
+Sideboard
+3 Gut Shot
+2 Heritage Reclamation
+2 Monstrous Emergence
+2 Pulse of Murasa
+2 Weather the Storm
+1 Fiery Cannonade
+1 Moment's Peace
+1 Relic of Progenitus
+1 Shattering Pulse
 ::
 
 ::magic-decklist
 ---
-name: 
-player: 
+name: "White Weenie"
+player: "Nikolin Lasku"
 placement: Top 4
-headerGradient: 
+headerGradient: monowhite
 ---
+Creatures
+3 Lunarch Veteran // Luminous Phantom
+3 Novice Inspector
+4 Thraben Inspector
+4 Kor Skyfisher
+4 Raffine's Informant
+4 Leonardo, Big Brother
+1 Goliath Paladin
 
+Instants
+4 Thraben Charm
+2 Guardians' Pledge
+4 Prismatic Strands
+
+Sorceries
+4 Battle Screech
+
+Enchantment
+3 Journey to Nowhere
+
+Lands
+4 Orzhov Basilica
+16 Plains
+
+Sideboard
+4 Dust to Dust
+3 Arms of Hadar
+3 Martyr of Sands
+2 Destroy Evil
+1 Goliath Paladin
+1 Nihil Spellbomb
+1 Palace Sentinels
 ::
 
 ::magic-decklist
 ---
-name: 
-player: 
+name: "R Madness"
+player: "Domenico Perndoka"
 placement: Top 8
-headerGradient: 
+headerGradient: monored
 ---
+Creatures
+4 Voldaren Epicure
+4 Kessig Flamebreather
+4 Sneaky Snacker
+3 Guttersnipe
 
+Instants
+4 Lava Dart
+4 Lightning Bolt
+4 Fiery Temper
+3 Fireblast
+
+Sorceries
+4 Faithless Looting
+4 Grab the Prize
+4 Highway Robbery
+
+Lands
+18 Mountain
+
+Sideboard
+4 Pyroblast
+3 Smash to Smithereens
+2 Cast into the Fire
+2 Relic of Progenitus
+2 Searing Blaze
+1 End the Festivities
+1 Faerie Macabre
 ::
 
 ::magic-decklist
 ---
-name: 
-player: 
+name: "Naya Gates"
+player: "Nicol Colombo"
 placement: Top 8
-headerGradient: 
+headerGradient: naya
 ---
+Creatures
+3 Lunarch Veteran // Luminous Phantom
+4 Sacred Cat
+3 Outlaw Medic
+4 Sneaky Snacker
 
+Instants
+2 Thraben Charm
+4 Prismatic Strands
+
+Sorceries
+4 Faithless Looting
+4 Malevolent Rumble
+4 Pursue the Past
+
+Artifacts
+3 Melded Moxite
+
+Enchantment
+4 Journey to Nowhere
+
+Lands
+4 Basilisk Gate
+4 Citadel Gate
+4 Cliffgate
+2 Manor Gate
+4 Plains
+3 Mountain
+
+Sideboard
+3 Ancient Grudge
+2 Electrickery
+2 End the Festivities
+2 Guardian of the Guildpact
+2 Pulse of Murasa
+2 Red Elemental Blast
+2 Thraben Charm
 ::
 
 ::magic-decklist
 ---
-name: 
-player: 
+name: "Dimir Affinity"
+player: "Samuele Diso"
 placement: Top 8
-headerGradient: 
+headerGradient: dimir
 ---
+Creatures
+2 Ornithopter
+2 Glaze Fiend
+2 Kenku Artificer
+4 Refurbished Familiar
+2 Utrom Monitor
+2 Gearseeker Serpent
+2 Myr Enforcer
 
+Instants
+2 Cast Down
+2 Fanatical Offering
+3 Reckoner's Bargain
+3 Metallic Rebuke
+
+Sorceries
+4 Thoughtcast
+
+Artifacts
+3 Blood Fountain
+2 Chromatic Star
+2 Nihil Spellbomb
+2 Springleaf Drum
+2 Cryogen Relic
+2 Tithing Blade // Consuming Sepulcher
+
+Lands
+4 Mistvault Bridge
+4 Seat of the Synod
+4 Vault of Whispers
+3 Swamp
+2 Island
+
+Sideboard
+4 Blue Elemental Blast
+2 Arms of Hadar
+2 Cast Down
+2 Dispel
+2 Duress
+1 Annul
+1 Metallic Rebuke
+1 Pain 101
 ::
 
 ::magic-decklist
 ---
-name: 
-player: 
+name: "BW Refurbished"
+player: "Alessandro Marazzini"
 placement: Top 8
-headerGradient: 
+headerGradient: orzhov
 ---
+Creatures
+4 Glint Hawk
+1 Novice Inspector
+4 Thraben Inspector
+4 Kor Skyfisher
+3 Oroku Saki, Shredder Rising
+1 Mukotai Ambusher
+4 Refurbished Familiar
 
+Instants
+4 Cast Down
+2 Thraben Charm
+
+Artifacts
+2 Blood Fountain
+2 Grim Bauble
+1 Nihil Spellbomb
+4 Lembas
+3 Tithing Blade // Consuming Sepulcher
+
+Enchantment
+1 Omen of the Dead
+
+Lands
+3 Goldmire Bridge
+3 Ancient Den
+3 Vault of Whispers
+1 Bojuka Bog
+4 Contaminated Landscape
+3 Snow-Covered Plains
+3 Snow-Covered Swamp
+
+Sideboard
+3 Duress
+3 Dust to Dust
+2 Mukotai Ambusher
+2 Navigator's Compass
+1 Ashes to Ashes
+1 Faerie Macabre
+1 Grim Bauble
+1 Shrivel
+1 Thraben Charm
 ::
