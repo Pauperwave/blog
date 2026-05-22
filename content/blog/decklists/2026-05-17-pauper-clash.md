@@ -1,6 +1,6 @@
 ---
-title: "Novara Pauper Clash
-description: "Decklists Top 8
+title: "Novara Pauper Clash"
+description: "Decklists Top 8"
 tags:
   - Top 8
 location: Novara
