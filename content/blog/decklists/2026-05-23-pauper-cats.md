@@ -149,7 +149,7 @@ Creatures
 3 Mesmeric Fiend
 4 Overgrown Battlement
 4 Wall of Roots
-2 Balustrade Spy
+4 Balustrade Spy
 4 Sagu Wildling // Roost Seek
 4 Generous Ent
 2 Troll of Khazad-dûm
@@ -159,7 +159,7 @@ Sorceries
 4 Land Grant
 4 Winding Way
 4 Lead the Stampede
-4 Dread Return
+2 Dread Return
 
 Artifacts
 1 Lotus Petal
