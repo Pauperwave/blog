@@ -139,8 +139,8 @@ Sideboard
 4 Blue Elemental Blast
 4 Hydroblast
 4 Dispel
-2 Stream of Thought
-1 Nihil Spellbomb
+2 Nihil Spellbomb
+1 Stream of Thought
 ::
 
 ## Finalist: Caimani felici
