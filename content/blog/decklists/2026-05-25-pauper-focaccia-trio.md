@@ -1,6 +1,6 @@
 ---
 title: "Pauper Focaccia Trio"
-description: "Decklists Top 8"
+description: "Decklists Top 4"
 tags:
   - Top 8
   - IPT
