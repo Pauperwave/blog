@@ -5,7 +5,7 @@ tags:
   - Top 8
   - IPT
 location: Genova
-date: 2026-05-25
+date: 2026-05-24
 author: Pietro Bragioto
 thumbnail: /assets/blog/events/2026-05-25-trio-pauper-focaccia.jpeg
 published: true
@@ -14,7 +14,7 @@ published: true
 | Informazione | Dettagli |
 |---|---|
 | Teams | 25 |
-| Data | 25 Maggio 2026 |
+| Data | 24 Maggio 2026 |
 | Struttura del torneo | 5 Rounds of Swiss + Single Elimination Top 4 |
 
 ## Winner: Il vecchio, il signore e il loro badante
