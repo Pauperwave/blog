@@ -1,11 +1,9 @@
 ---
-title: ""
+title: "LP Brescia Summer 2026"
 description: "Decklists Top 8"
 tags:
   - Top 8
   - League
-  - IPT
-  - Paupergeddon
 location: Brescia
 date: 2026-06-13
 author: Alessandro Moretti
