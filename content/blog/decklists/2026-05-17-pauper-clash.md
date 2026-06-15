@@ -3,7 +3,6 @@ title: "Novara Pauper Clash"
 description: "Decklists Top 8"
 tags:
   - Top 8
-  - League
 location: Novara
 date: 2026-05-17
 author: Alessandro Moretti
@@ -19,8 +18,8 @@ published: true
 
 ::magic-decklist
 ---
-name: "Spy"
-player: "Mattia Ferraris"
+name: Spy
+player: Mattia Ferraris
 placement: Winner
 headerGradient: simic
 ---
@@ -36,7 +35,7 @@ Creatures
 4 Balustrade Spy
 4 Sagu Wildling // Roost Seek
 4 Generous Ent
-1 Troll of Khazad-dûm
+1 Troll of Khazad-dÃ»m
 2 Lotleth Giant
 2 Nyxborn Hydra
 
@@ -67,8 +66,8 @@ Sideboard
 
 ::magic-decklist
 ---
-name: "Altar Tron"
-player: "Riccardo Malgara"
+name: Altar Tron
+player: Riccardo Malgara
 placement: Finalist
 headerGradient: golgari
 ---
@@ -112,8 +111,8 @@ Sideboard
 
 ::magic-decklist
 ---
-name: "Monsters Tron"
-player: "Andrea Feo"
+name: Monsters Tron
+player: Andrea Feo
 placement: Top 4
 headerGradient: gruul
 ---
@@ -162,8 +161,8 @@ Sideboard
 
 ::magic-decklist
 ---
-name: "White Weenie"
-player: "Nikolin Lasku"
+name: White Weenie
+player: Nikolin Lasku
 placement: Top 4
 headerGradient: monowhite
 ---
@@ -203,8 +202,8 @@ Sideboard
 
 ::magic-decklist
 ---
-name: "R Madness"
-player: "Domenico Perndoka"
+name: R Madness
+player: Domenico Perndoka
 placement: Top 8
 headerGradient: monored
 ---
@@ -240,8 +239,8 @@ Sideboard
 
 ::magic-decklist
 ---
-name: "Naya Gates"
-player: "Nicol Colombo"
+name: Naya Gates
+player: Nicol Colombo
 placement: Top 8
 headerGradient: naya
 ---
@@ -286,8 +285,8 @@ Sideboard
 
 ::magic-decklist
 ---
-name: "Dimir Affinity"
-player: "Samuele Diso"
+name: Dimir Affinity
+player: Samuele Diso
 placement: Top 8
 headerGradient: dimir
 ---
@@ -337,8 +336,8 @@ Sideboard
 
 ::magic-decklist
 ---
-name: "BW Refurbished"
-player: "Alessandro Marazzini"
+name: BW Refurbished
+player: Alessandro Marazzini
 placement: Top 8
 headerGradient: orzhov
 ---

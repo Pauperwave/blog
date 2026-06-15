@@ -1,11 +1,12 @@
+// shared\utils\strings.ts
 export function slugify(text: string): string {
   return text
-    .toString()
     .toLowerCase()
     .trim()
-    .replace(/\s+/g, '-')
+    .replace(/[_\s]+/g, '-')
     .replace(/[^\w-]+/g, '')
-    .replace(/--+/g, '-')
+    .replace(/-{2,}/g, '-')
+    .replace(/^-+|-+$/g, '')
 }
 
 /**
