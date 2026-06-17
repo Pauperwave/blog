@@ -49,7 +49,7 @@ Artifacts
 4 Ichor Wellspring
 2 Lembas
 
-Enchantment
+Enchantments
 1 Makeshift Munitions
 
 Lands
@@ -328,7 +328,7 @@ Instants
 Sorceries
 2 Malevolent Rumble
 
-Enchantment
+Enchantments
 4 Utopia Sprawl
 4 Abundant Growth
 4 Ethereal Armor

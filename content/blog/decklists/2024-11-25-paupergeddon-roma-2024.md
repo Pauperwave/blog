@@ -44,7 +44,7 @@ Artifacts
 4 Ichor Wellspring
 2 Lembas
 
-Enchantment
+Enchantments
 4 Sadistic Glee
 1 Makeshift Munitions
 
@@ -90,7 +90,7 @@ Artifacts
 2 Chromatic Star
 4 Ichor Wellspring
 
-Enchantment
+Enchantments
 4 Sadistic Glee
 2 Makeshift Munitions
 
@@ -216,7 +216,7 @@ Artifacts
 1 Chromatic Star
 3 Ichor Wellspring
 
-Enchantment
+Enchantments
 4 Sadistic Glee
 1 Makeshift Munitions
 
@@ -314,7 +314,7 @@ Sorceries
 1 Sleep of the Dead
 4 Lórien Revealed
 
-Enchantment
+Enchantments
 1 Dragon Wings
 
 Lands
@@ -353,7 +353,7 @@ Sorceries
 Artifacts
 4 Ichor Wellspring
 
-Enchantment
+Enchantments
 4 Sadistic Glee
 
 Lands

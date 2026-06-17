@@ -210,7 +210,7 @@ Artifacts
 4 Nihil Spellbomb
 4 Cryogen Relic
 
-Enchantment
+Enchantments
 1 Makeshift Munitions
 
 Lands

@@ -46,7 +46,7 @@ Artifacts
 4 Chromatic Star
 4 Ichor Wellspring
 
-Enchantment
+Enchantments
 1 Makeshift Munitions
 
 Lands
@@ -99,7 +99,7 @@ Artifacts
 2 Ashnod's Altar
 3 Golem Foundry
 
-Enchantment
+Enchantments
 1 Makeshift Munitions
 
 Lands
@@ -148,7 +148,7 @@ Artifacts
 1 Ichor Wellspring
 4 Lembas
 
-Enchantment
+Enchantments
 2 Journey to Nowhere
 1 Makeshift Munitions
 
@@ -200,7 +200,7 @@ Artifacts
 2 Nihil Spellbomb
 4 Ichor Wellspring
 
-Enchantment
+Enchantments
 1 Makeshift Munitions
 
 Lands
@@ -253,7 +253,7 @@ Artifacts
 1 Nihil Spellbomb
 4 Ichor Wellspring
 
-Enchantment
+Enchantments
 1 Makeshift Munitions
 
 Lands
@@ -299,7 +299,7 @@ Artifacts
 4 Barbed Batterfist
 4 Ichor Wellspring
 
-Enchantment
+Enchantments
 2 Makeshift Munitions
 
 Lands
@@ -383,7 +383,7 @@ Artifacts
 2 Ichor Wellspring
 3 Lembas
 
-Enchantment
+Enchantments
 1 Makeshift Munitions
 
 Lands

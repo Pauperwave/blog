@@ -293,7 +293,7 @@ Artifacts
 4 Ichor Wellspring
 2 Lembas
 
-Enchantment
+Enchantments
 1 Makeshift Munitions
 
 Lands

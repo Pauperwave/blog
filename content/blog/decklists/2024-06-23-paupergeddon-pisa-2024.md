@@ -81,7 +81,7 @@ Sorceries
 Artifacts
 1 Colossal Dreadmask
 
-Enchantment
+Enchantments
 4 Utopia Sprawl
 4 Wild Growth
 
@@ -125,7 +125,7 @@ Artifacts
 3 Nihil Spellbomb
 4 Ichor Wellspring
 
-Enchantment
+Enchantments
 2 Makeshift Munitions
 
 Lands
@@ -175,7 +175,7 @@ Artifacts
 2 Chromatic Star
 4 Ichor Wellspring
 
-Enchantment
+Enchantments
 1 Makeshift Munitions
 
 Lands
@@ -356,7 +356,7 @@ Artifacts
 2 Chromatic Star
 3 Ichor Wellspring
 
-Enchantment
+Enchantments
 4 Sadistic Glee
 1 Makeshift Munitions
 

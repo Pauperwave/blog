@@ -194,7 +194,7 @@ Sorceries
 Artifacts
 4 Springleaf Drum
 
-Enchantment
+Enchantments
 4 All That Glitters
 
 Lands
@@ -237,7 +237,7 @@ Artifacts
 3 Wedding Invitation
 1 Barbed Batterfist
 
-Enchantment
+Enchantments
 4 All That Glitters
 1 Makeshift Munitions
 
@@ -284,7 +284,7 @@ Sorceries
 Artifacts
 3 Springleaf Drum
 
-Enchantment
+Enchantments
 4 All That Glitters
 
 Lands
@@ -375,7 +375,7 @@ Artifacts
 3 Wedding Invitation
 1 Barbed Batterfist
 
-Enchantment
+Enchantments
 4 All That Glitters
 1 Makeshift Munitions
 
