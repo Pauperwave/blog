@@ -109,9 +109,7 @@ placement: Top 4
 headerGradient: golgari
 ---
 Creatures
-3 Troublemaker Ouphe
 2 Crypt Rats
-2 Avenging Hunter
 1 Sagu Wildling // Roost Seek
 4 Troll of Khazad-dûm
 
@@ -121,17 +119,13 @@ Instants
 3 Eviscerator's Insight
 4 Fanatical Offering
 2 Reckoner's Bargain
-3 Weather the Storm
 
 Sorceries
-3 Duress
 2 Drown in Sorrow
-3 Rancid Earth
 
 Artifacts
 2 Campfire
 3 Nihil Spellbomb
-1 Nihil Spellbomb
 4 Ichor Wellspring
 3 Lembas
 4 Tithing Blade // Consuming Sepulcher
@@ -142,6 +136,14 @@ Lands
 2 Bojuka Bog
 9 Swamp
 2 Desert
+
+Sideboard
+3 Duress
+3 Rancid Earth
+3 Troublemaker Ouphe
+3 Weather the Storm
+2 Avenging Hunter
+1 Nihil Spellbomb
 ::
 
 ::magic-decklist
