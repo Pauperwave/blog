@@ -318,51 +318,36 @@ Sideboard
 
 ::magic-decklist
 ---
-name: Jund
-player: Marco Ferraro
+name: Elves
+player: Claudio Ferrara
 placement: Top 8
-headerGradient: jund
+headerGradient: monogreen
 ---
 Creatures
-3 Krark-Clan Shaman
-4 Gixian Infiltrator
-4 Refurbished Familiar
-4 Writhing Chrysalis
-
-Instants
-4 Fanatical Offering
-1 Eviscerator's Insight
-4 Cast Down
-2 Toxin Analysis
-1 Pulse of Murasa
+4 Arbor Elf
+4 Elvish Mystic
+4 Quirion Ranger
+4 Masked Vandal
+4 Priest of Titania
+4 Timberwatch Elf
+4 Avenging Hunter
+3 Sagu Wildling // Roost Seek
+4 Generous Ent
+4 Nyxborn Hydra
 
 Sorceries
-4 Cleansing Wildfire
-
-Artifacts
-2 Nihil Spellbomb
-2 Lembas
-4 Ichor Wellspring
-
-Enchantments
-1 Makeshift Munitions
+4 Winding Way
+4 Lead the Stampede
 
 Lands
-4 Drossforge Bridge
-4 Slagwoods Bridge
-2 Vault of Whispers
-4 Twisted Landscape
-3 Swamp
-2 Forest
-1 Mountain
+1 Gingerbread Cabin
+12 Forest
 
 Sideboard
-3 Duress
-2 Faerie Macabre
-2 Ancient Grudge
-1 Troublemaker Ouphe
-1 Go for the Throat
-1 Terminate
-2 Breath Weapon
-3 Weather the Storm
+4 Monstrous Emergence
+4 Spinewoods Paladin
+3 Faerie Macabre
+2 Primordial Pachyderm
+1 Undergrowth Leopard
+1 Vitu-Ghazi Inspector
 ::
