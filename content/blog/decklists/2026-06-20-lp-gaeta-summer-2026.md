@@ -1,5 +1,5 @@
 ---
-title: "LP Gaeta Summer 2026"
+title: "LP Golfo di Gaeta Summer 2026"
 description: "Decklists Top 8"
 tags:
   - Top 8
