@@ -15,7 +15,7 @@ published: true
 |---|---|
 | Giocatori | 8 |
 | Data | 20 June 2026 |
-| Struttura del torneo | Single Elimination Top 8 |
+| Struttura del torneo | Double Elimination Top 8 |
 
 ::magic-decklist
 ---
