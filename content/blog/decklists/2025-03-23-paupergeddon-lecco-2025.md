@@ -91,7 +91,7 @@ Artifacts
 4 Ichor Wellspring
 2 Lembas
 
-Enchantment
+Enchantments
 1 Makeshift Munitions
 
 Lands
@@ -142,7 +142,7 @@ Artifacts
 3 Ichor Wellspring
 2 Lembas
 
-Enchantment
+Enchantments
 1 Makeshift Munitions
 
 Lands
@@ -192,7 +192,7 @@ Instants
 Sorceries
 4 Of One Mind
 
-Enchantment
+Enchantments
 1 Bind the Monster
 
 Lands
@@ -236,7 +236,7 @@ Artifacts
 1 Sylvok Lifestaff
 4 Ichor Wellspring
 
-Enchantment
+Enchantments
 4 Sadistic Glee
 
 Lands
@@ -287,7 +287,7 @@ Artifacts
 4 Ichor Wellspring
 2 Lembas
 
-Enchantment
+Enchantments
 1 Makeshift Munitions
 
 Lands
@@ -334,7 +334,7 @@ Artifacts
 4 Ichor Wellspring
 1 Lembas
 
-Enchantment
+Enchantments
 4 Sadistic Glee
 2 Makeshift Munitions
 
@@ -385,7 +385,7 @@ Artifacts
 2 Hunter's Blowgun
 4 Ichor Wellspring
 
-Enchantment
+Enchantments
 1 Makeshift Munitions
 
 Lands

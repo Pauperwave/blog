@@ -42,7 +42,7 @@ Sorceries
 1 Deep Analysis
 4 Lórien Revealed
 
-Enchantment
+Enchantments
 4 The Modern Age // Vector Glider
 4 Journey to Nowhere
 
@@ -246,7 +246,7 @@ Instants
 Sorceries
 4 Malevolent Rumble
 
-Enchantment
+Enchantments
 4 Utopia Sprawl
 4 Wild Growth
 
@@ -285,7 +285,7 @@ Sorceries
 1 Lead the Stampede
 2 You Meet in a Tavern
 
-Enchantment
+Enchantments
 4 Utopia Sprawl
 4 Wild Growth
 

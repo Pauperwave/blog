@@ -119,7 +119,7 @@ Instants
 Sorceries
 4 Lórien Revealed
 
-Enchantment
+Enchantments
 4 The Modern Age // Vector Glider
 4 Journey to Nowhere
 
@@ -202,7 +202,7 @@ Instants
 Sorceries
 4 Malevolent Rumble
 
-Enchantment
+Enchantments
 4 Utopia Sprawl
 3 Wild Growth
 
@@ -284,7 +284,7 @@ Instants
 Sorceries
 4 Lórien Revealed
 
-Enchantment
+Enchantments
 4 Journey to Nowhere
 4 The Modern Age // Vector Glider
 

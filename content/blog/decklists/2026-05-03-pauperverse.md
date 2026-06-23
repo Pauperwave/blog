@@ -43,7 +43,7 @@ Artifacts
 4 Ichor Wellspring
 3 Lembas
 
-Enchantment
+Enchantments
 1 Makeshift Munitions
 
 Lands
@@ -93,7 +93,7 @@ Artifacts
 2 Cryogen Relic
 2 Ichor Wellspring
 
-Enchantment
+Enchantments
 1 Makeshift Munitions
 
 Lands
@@ -142,7 +142,7 @@ Artifacts
 4 Ichor Wellspring
 3 Lembas
 
-Enchantment
+Enchantments
 1 Makeshift Munitions
 
 Lands
@@ -233,7 +233,7 @@ Sorceries
 Artifacts
 3 Melded Moxite
 
-Enchantment
+Enchantments
 4 Journey to Nowhere
 
 Lands

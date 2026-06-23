@@ -75,7 +75,7 @@ Instants
 Sorceries
 4 Lórien Revealed
 
-Enchantment
+Enchantments
 4 Journey to Nowhere
 
 Lands
@@ -122,7 +122,7 @@ Sorceries
 4 Thermokarst
 4 Mwonvuli Acid-Moss
 
-Enchantment
+Enchantments
 4 Utopia Sprawl
 3 Wild Growth
 

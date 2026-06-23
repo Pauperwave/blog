@@ -41,7 +41,7 @@ Instants
 Sorceries
 4 Lórien Revealed
 
-Enchantment
+Enchantments
 4 Journey to Nowhere
 
 Lands
@@ -300,7 +300,7 @@ Instants
 Sorceries
 2 You Meet in a Tavern
 
-Enchantment
+Enchantments
 4 Utopia Sprawl
 3 Wild Growth
 
@@ -530,7 +530,7 @@ Instants
 Sorceries
 4 Lórien Revealed
 
-Enchantment
+Enchantments
 4 Journey to Nowhere
 
 Lands

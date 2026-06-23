@@ -44,7 +44,7 @@ Artifacts
 4 Experimental Synthesizer
 4 Springleaf Drum
 
-Enchantment
+Enchantments
 4 All That Glitters 
 
 Lands

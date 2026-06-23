@@ -58,7 +58,7 @@ Instants
 Sorceries
 4 Lórien Revealed
 
-Enchantment
+Enchantments
 4 Journey to Nowhere
 4 The Modern Age // Vector Glider
 
