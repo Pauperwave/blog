@@ -14,13 +14,13 @@ published: true
 |---|---|
 | Giocatori | 98 |
 | Data | 21 June 2026 |
-| Struttura del torneo |  |
+| Struttura del torneo | 7 Rounds of Swiss + Single Elimination Top 8 |
 
 ::magic-decklist
 ---
 name: Naya Gates
 player: Diego Lacedonia
-placement: Winner
+placement: Top 4 Split
 headerGradient: naya
 ---
 Creatures
@@ -64,7 +64,7 @@ Sideboard
 ---
 name: Gardens
 player: Gabriele Della Longa
-placement: Finalist
+placement: Top 4 Split
 headerGradient: golgari
 ---
 Creatures
@@ -113,7 +113,7 @@ Sideboard
 ---
 name: Seeker Combo
 player: Gabriele Zaffiro
-placement: Top 4
+placement: Top 4 Split
 headerGradient: temur
 ---
 Creatures
@@ -163,7 +163,7 @@ Sideboard
 ---
 name: Pingers
 player: Demetrio Morselli
-placement: Top 4
+placement: Top 4 Split
 headerGradient: monored
 ---
 Creatures
