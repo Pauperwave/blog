@@ -297,7 +297,7 @@ Creatures
 
 Instants
 2 Thraben Charm
-2 Prismatic Strands
+3 Prismatic Strands
 
 Sorceries
 1 Faithless Looting
