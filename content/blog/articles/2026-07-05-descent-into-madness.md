@@ -3,7 +3,7 @@ title: "Cronaca di uno sprazzo effimero"
 description: "Commento al Ban di Seeker"
 tags:
   - Meta
-date: 2026-06-30
+date: 2026-07-05
 author: Pietro Bragioto
 thumbnail: /assets/blog/arts/descent into madness.jpeg
 published: true
