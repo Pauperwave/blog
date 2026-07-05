@@ -1,10 +1,10 @@
 ---
-title: "Cronaca di uno sprazzo effimero"
+title: "A Descent into Madness"
 description: "Commento al Ban di Seeker"
 tags:
   - Meta
 date: 2026-07-05
-author: Pietro Bragioto
+author: Paolo Donfrancesco
 thumbnail: /assets/blog/arts/descent into madness.jpeg
 published: true
 ---
