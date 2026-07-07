@@ -11,6 +11,7 @@ const { data: author, error } = await useAuthor(props.name)
   <div class="my-2">
     <div class="flex items-center gap-3">
       <UAvatar
+        :as="{ img: 'img' }"
         :src="author?.avatar"
         :alt="author?.name ?? name"
         icon="i-lucide-user"

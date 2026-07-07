@@ -105,6 +105,7 @@ defineOgImage('Author.takumi', {
       <UCard class="mb-8">
         <div class="flex flex-col md:flex-row gap-6">
           <UAvatar
+            :as="{ img: 'img' }"
             :src="author.avatar"
             :alt="author.name"
             size="2xl"

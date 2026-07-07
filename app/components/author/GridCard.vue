@@ -42,6 +42,7 @@ const props = defineProps<Props>()
     >
       <div class="flex items-start gap-4">
         <UAvatar
+          :as="{ img: 'img' }"
           :src="props.author.avatar"
           :alt="props.author.name"
           size="lg"

@@ -18,6 +18,7 @@ const handleAuthorClick = () => {
   >
     <div class="flex items-center gap-2">
       <UAvatar
+        :as="{ img: 'img' }"
         :src="author.avatar"
         :alt="author.name"
         size="md"
