@@ -20,6 +20,8 @@ const props = defineProps<{
   sectionCounts?: string
   /** Mana combination for header gradient styling */
   headerGradient?: ManaCombination
+  /** Show only the header, hide body and footer (default: false) */
+  headerOnly?: boolean
 }>()
 
 const anchorId = computed(() =>
@@ -86,7 +88,7 @@ async function copyDecklist() {
         header: ['relative p-4', headerClass].filter(Boolean).join(' ')
       }"
     >
-      <!-- Header -->
+      <!-- Header: sempre visibile -->
       <template #header>
         <div class="flex flex-col gap-1">
           <div class="grid grid-cols-[1fr_auto] items-start gap-x-4 gap-y-2">
@@ -123,7 +125,7 @@ async function copyDecklist() {
       </template>
 
       <!-- Body - Two-column layout -->
-      <template #default>
+      <template v-if="!props.headerOnly" #default>
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8">
           <!-- Main Deck (Left) -->
           <div>
@@ -148,7 +150,7 @@ async function copyDecklist() {
       </template>
 
       <!-- Footer -->
-      <template #footer>
+      <template v-if="!props.headerOnly" #footer>
         <div class="flex gap-2 flex-wrap">
           <UButton
             icon="i-lucide-copy"
