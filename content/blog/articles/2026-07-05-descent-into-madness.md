@@ -81,7 +81,7 @@ We also have graveyard-based combo decks such as Cycling Storm, and mixed combo 
 Suppose one of these decks received enough support to become tier 1.
 Would the Pauper Format Panel allow it to remain legal? Maybe.
 They haven't explicitly taken a stance against these archetypes.
-Then again, I'd place them somewhere between [[Seeker of Skybreak]]/[[Basking Broodscale]] and [[High Tide]]/[[Chatterstorm]] on the spectrum of fairness.
+Then again, I'd place them somewhere between [[Seeker of Skybreak]] or [[Basking Broodscale]] and [[High Tide]] or [[Chatterstorm]] on the spectrum of fairness.
 If [[Seeker of Skybreak]] and [[Basking Broodscale]] are already considered unacceptable on principle, it's hard to imagine Cycling Storm or Gruul Storm surviving for long as tier 1 decks.
 
 You might recall that I'm not against philosophically motivated bans, as I wanted a [[High Tide]] ban on that basis.
