@@ -12,7 +12,7 @@ const imageUrl = computed(() => extractImageUrl(cardData.value, 'normal'))
 </script>
 
 <template>
-  <div class="my-8">
+  <div>
     <UAlert
       v-if="error"
       color="error"
