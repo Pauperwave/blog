@@ -31,11 +31,17 @@ After a lot of discussion over the past two weeks, we have decided that cheap an
 ::
 
 This statement is just unrealistic. They say they aren’t against combo per se, but how can a combo deck ever be tier 1 while complying with their standards?
+
 Creature combo decks requiring multiple pieces, such as Goblin Combo and Walls Combo, have succeeded in the past. The format, however, has become much more powerful. Today, a creature combo deck that needs three or more cards is unlikely to become a serious tier 1 contender. If two-card combos are ruled out on principle, relevant creature combo decks effectively disappear from Pauper.
+
 This is particularly alarming because in a creature-centric format like Pauper, creature-based combo decks are the most honest and interactive combo decks that I can imagine. If even those are banned for philosophical reasons, I can’t imagine other kinds of combo decks surviving in tier 1.
+
 On the other hand, the PFP let a spell-based combo deck like High Tide survive for 8 months, giving it a lot more leeway than Seeker of Skybreak, despite being a significantly less interactable combo deck. So I might be missing something about their hierarchy of values. But they did eventually ban High Tide, so I doubt we’re going to see spell-based combo decks in the future.
+
 That still doesn't cover every possibility.  We also have graveyard-based combo decks such as Cycling Storm, and mixed combo decks such as Gruul Storm, which uses both creatures and spells. Suppose one of these decks received enough support to become tier 1. Would the PFP allow it to remain legal? Maybe. They haven't explicitly taken a stance against these archetypes. Then again, I'd place them somewhere between Seeker/Broodscale and High Tide/Chatterstorm on the spectrum of fairness. If Seeker and Broodscale are already considered unacceptable on principle, it's hard to imagine Cycling Storm or Gruul Storm surviving for long as tier 1 decks.
+
 You might recall that I’m not against philosophically motivated bans, as I wanted a High Tide ban on that basis. But spell-based combo decks are the only kind of combo deck that I wouldn’t allow in Pauper, due to a lack of relevant interaction in the format. In my opinion, other kinds of combo decks should receive the same scrutiny as any Pauper deck, i.e. only get banned if they are too strong. I’m not against combo in general. The PFP claims to be in the same boat, but its actions speak differently.
+
 A healthy Magic ecosystem needs combo decks. Moreover, Pauper is many players' first introduction to competitive Magic and is a great place to learn Magic fundamentals. For me, that education included learning how to play both with and against combo decks. I hope future players get the same opportunity.
 
 ::article-quote
@@ -51,7 +57,9 @@ In a format like Pauper, which can stay consistent for long stretches of time, h
 ::
 
 This is another important point. The last time a new tier 1 deck emerged was in April 2025, with Mono Red Madness, more than one year ago. And the last time that a new card gave rise to a new tier 1 deck was with MH3, more than two years ago.
+
 A stable format certainly has its upsides, but some change is required to keep players engaged. The discontinuation of Masters sets, draftable Commander sets, and Modern Horizons has left Pauper players with few opportunities to receive new cards that can compete with the established staples for the foreseeable future.
+
 In this situation, the rare additions to the format are particularly cherished, and banning a new combo without even giving it a chance to show whether and how powerful it is leaves many players utterly demoralized and disenfranchised.
 
 ::article-quote
@@ -63,15 +71,20 @@ I talked about the Snacker situation in [my last article](https://blog.pauperwav
 # Descending into Madness
 
 The most troubling part of how the PFP handled Hawkeye’s Bow is how they fueled widespread panic on the internet. The card wasn’t even out yet, and the PFP was asking on social media whether it should be banned. Nobody I know was particularly worried during spoiler season. To me, it felt like the PFP was waving the ban hammer in search of a problem.
+
 This situation generated the biggest mobilization of internet commenters I’ve ever seen in the context of Pauper. Every social media platform was flooded with comments demanding a ban or talking as if the ban was a foregone conclusion. I could tell that most of those people weren’t familiar with Pauper, as I kept reading outlandish takes that revealed a lack of basic format knowledge.
+
 Now, not being knowledgeable in Pauper isn’t a sin. It’s always great to see new people discovering the format. I just wonder what is to be gained from asking the internet how to manage the format, when it’s well established that internet commenters often overestimate their knowledge of any topic.
+
 Maybe the fact that the panel members are all public figures is an incentive for them to seek external validation. Anonymity would better serve those who manage a format.
 
 
 # The Maturity of Pauper
 
 The PFP took over when Pauper was still a very niche format. In recent years, Pauper has grown a lot and is now the first or second most popular 60-card format in several regions of the world, regularly bringing around a thousand people together for Paupergeddon.
+
 We should give the PFP their flowers for being part of this period of massive growth for the format. Nonetheless, I’d be happy to see Pauper take a step further and go back to being managed by Wizards of the Coast, like every real 60-card format.
+
 This would grant anonymity to the decision-makers, but it would also save them from a strange conundrum that current PFP members find themselves in. Because PFP members are active players, people naturally expect them to participate in major tournaments to stay connected with the format. At the same time, the increasing stakes of those events would create a perception of a conflict of interest. WotC employees wouldn't face the same tension.
 
 The Seeker ban exposed structural problems in the way Pauper is managed: incoherent and unrealistic principles, public pressure influencing decision-making, and panel members placed in an inherently awkward position. As the format continues to grow, a better framework should be found.
