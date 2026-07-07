@@ -70,13 +70,13 @@ Quante blaste hai giocato in side?
 Tutte e 8 di entrambe i colori, non si sa mai
 ::
 
-D'altra parte vediamo sempre più spesso liste di Mono Blue Terror che giocano a 6 Hydro, mentre i player di Mono Red si stanno lentamente svegliando dal loro letargo e stanno scoprendo l'ebrezza di poter listare 8 [[Pyroblast]] in side: da due anni ripeto che qualsiasi Mono Red, eccezzion fatta per Rally, è da giocare con 8 [[Pyroblast]], [Pingers](2025-12-06-tutorial-pingers) ha fatto un bel salto in avanti con quest approccio e in Madness la vera follia è tagliarle.
+D'altra parte vediamo sempre più spesso liste di Mono Blue Terror che giocano a 6 Hydro, mentre i player di Mono Red si stanno lentamente svegliando dal loro letargo e stanno scoprendo l'ebrezza di poter listare 8 [[Pyroblast]] in side: da due anni ripeto che qualsiasi Mono Red, eccezzion fatta per Rally, è da giocare con 8 [[Pyroblast]], [Pingers](2025-12-06-pingers) ha fatto un bel salto in avanti con quest approccio e in Madness la vera follia è tagliarle.
 
 Siamo passati dalle blaste che aiutavano i mazzi reattivi ai giorni d'oggi dove queste proteggono i mazzi proattivi con la maggiore efficenza possibile aiutandoli a rimanere in cima alla catena: non serve per forza avere una side avriegata per un meta variegato quando tu sei il mazzo aggressivo per eccellenza, una carta che fa sì che il bastone di oppo non si infili nelle tue ruote è ok, se quella carta nel frattempo mette i bastoni nelle ruote di oppo quella carta diventa incredibile.
 
 Mono Red Madness è l'esempio perfetto: la sua più grande debolezza sono i counter sui peschini e 8 [[Pyroblast]] al posto di qualche botto sono il miglior modo di fronteggiare gli U-Based dato che fare peschino [[Pyroblast]] di terzo è spesso chiave di volta della partita, counterarare una [[Hydroblast]] su Cecchino o Kessig è sfizioso, distruggere un terror o chiudere la ripartenza ad oppo dopo uno scambio di risorse counterando Lorien è la ciliegina.
 
-Nel mentre Terror aumenta a sua volta le [[Hydroblast]] per fronteggiare le 8 [[Pyroblast]] dei mazzi mono rossi, per poter andare a contrastare il peschino protetto di madness o la presenza in board di [Pingers](2025-12-06-tutorial-pingers) che si sta dimostrando uan vera spina nel fianco se ingrana.
+Nel mentre Terror aumenta a sua volta le [[Hydroblast]] per fronteggiare le 8 [[Pyroblast]] dei mazzi mono rossi, per poter andare a contrastare il peschino protetto di madness o la presenza in board di [Pingers](2025-12-06-pingers) che si sta dimostrando uan vera spina nel fianco se ingrana.
 
 ::MagicCardArtCrop
 ---
@@ -91,7 +91,7 @@ crop:
 
 Siamo arrivati ad un punto dove l'_hot take_ è maturato e la possibilità di giocare 8 [[Pyroblast]] e 8 [[Hydroblast]] difende l'oppressore anzichè combatterlo promuovendo uno stile di gioco sempre più drittoe aggressivo andando sempre più spesso a rompere la _color pie_ trasformando i post side sempre più spesso in una poco interessante guerra di blaste.
 
-Noto a più riprese come ultimamente lo spazio di side a disposizione di [Pingers](2025-12-06-tutorial-pingers), ma soprattutto di Mono U Terror sia cannibalizzato dal dover giocare forzatamente dalle 6 blaste in sù precludendomi la possibilità di carte più spicy ed incastri di gran lunga più interessanti e stimolanti.
+Noto a più riprese come ultimamente lo spazio di side a disposizione di [Pingers](2025-12-06-pingers), ma soprattutto di Mono U Terror sia cannibalizzato dal dover giocare forzatamente dalle 6 blaste in sù precludendomi la possibilità di carte più spicy ed incastri di gran lunga più interessanti e stimolanti.
 
 Con la speranza che la situazione degeneri ulteriormente e che ci si renda conto della povertà di gameplay a cui inevitabilmente porta la presenza di 8 blaste, spero che al PFP venga l'illuminazione divina e si torni a limitarle al 4x.
 Concludo da dove ho inziato, ossia da quella puntata del [Bojuka Pod](https://open.spotify.com/show/17FI6eC5rdW2Hz7fKmWRqF), parafrasando la risposta scherzosa, ma nemmeno troppo, del vincitore dell'ultimo Paupergeddon Giovanni Postorino alla classica domanda sulla side:

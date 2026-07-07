@@ -42,7 +42,7 @@ Step-by-step how-to guides for learning Pauper.
 - Gameplay tutorials
 - Sideboarding guides
 
-**Example:** `2025-12-06-tutorial-pingers.md`
+**Example:** `2025-12-06-pingers.md`
 
 ---
 
