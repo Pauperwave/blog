@@ -1,5 +1,28 @@
+import { readdirSync, readFileSync } from "node:fs"
+import { fileURLToPath } from "node:url"
 import { definePerson } from "nuxt-schema-org/schema"
 import appMeta from "./app/app.meta"
+
+/**
+ * Reads content/authors/*.yml directly (avoids depending on Nuxt Content's
+ * runtime query API, which isn't available in this build-time Nitro hook)
+ * and returns the slug for each author, so their pages can be added to the
+ * prerender crawl explicitly. Author cards link via programmatic navigation
+ * (no real <a href>), so Nitro's crawlLinks crawler can never discover
+ * /authors/[slug] routes on its own.
+ */
+const getAuthorSlugsAtBuildTime = (): string[] => {
+  const authorsDir = fileURLToPath(new URL("./content/authors", import.meta.url))
+  return readdirSync(authorsDir)
+    .filter(file => file.endsWith(".yml"))
+    .map(file => {
+      const contents = readFileSync(`${authorsDir}/${file}`, "utf-8")
+      const match = contents.match(/^name:\s*(.+)$/m)
+      return match?.[1]?.trim()
+    })
+    .filter((name): name is string => Boolean(name))
+    .map(name => name.toLowerCase().replace(/\s+/g, "-"))
+}
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -155,29 +178,28 @@ export default defineNuxtConfig({
       crawlLinks: true,
       failOnError: false
     },
-    // Filter routes to only prerender recent articles (< 3 months)
+    // Filter routes to only prerender recent articles (< 3 months), and add
+    // author routes explicitly since the crawler can't discover them (see
+    // getAuthorSlugsAtBuildTime above).
     hooks: {
-      'prerender:routes' (ctx: { routes?: string[] }) {
-        if (!ctx.routes || !Array.isArray(ctx.routes)) return
-
+      'prerender:routes' (routes: Set<string>) {
         const threeMonthsAgo = new Date()
         threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3)
 
-        ctx.routes = ctx.routes.filter((route: string) => {
-          // Keep all non-article routes
-          if (!route.startsWith('/articles/')) return true
+        for (const route of routes) {
+          if (!route.startsWith('/articles/')) continue
 
           // Extract date from article path: /articles/2026-01-15-title
           const match = route.match(/\/articles\/(\d{4}-\d{2}-\d{2})/)
-          if (match && match[1]) {
-            const articleDate = new Date(match[1])
-            // Only prerender articles from last 3 months
-            return articleDate >= threeMonthsAgo
+          if (match && match[1] && new Date(match[1]) < threeMonthsAgo) {
+            routes.delete(route)
           }
+        }
 
-          // Keep routes that don't match date pattern (e.g., /articles)
-          return true
-        })
+        routes.add('/authors')
+        for (const slug of getAuthorSlugsAtBuildTime()) {
+          routes.add(`/authors/${slug}`)
+        }
       }
     }
   },
@@ -197,6 +219,10 @@ export default defineNuxtConfig({
     '/editor/**': { ssr: true },
     // Code of Conduct and Statuto
     '/docs/**': { prerender: true, headers: { 'Cache-Control': 'public, max-age=3600, s-maxage=86400' } },
+    // Author profile pages: prerendered explicitly (see the prerender:routes hook above),
+    // since author cards link via programmatic navigation with no crawlable <a href>.
+    '/authors': { prerender: true, headers: { 'Cache-Control': 'public, max-age=3600, s-maxage=86400' } },
+    '/authors/**': { prerender: true, headers: { 'Cache-Control': 'public, max-age=3600, s-maxage=86400' } },
     // Static assets with long cache
     '/_nuxt/**': { headers: { 'Cache-Control': 'public, max-age=31536000, immutable' } },
     '/assets/**': { headers: { 'Cache-Control': 'public, max-age=31536000, immutable' } }
