@@ -1,6 +1,7 @@
 ---
 title: Componenti disponibili in scrittura
 description: Descrizione dettagliata dei componenti disponibili durante la scrittura di un articolo
+published: true
 sitemap:
   loc: /componenti
   images:
@@ -586,11 +587,7 @@ Testo dell'opinione del revisore sulla carta.
 
 ### Esempio
 
-::reviewer-opinion
----
-name: Pietro Bragioto
-rating: 7
----
+::reviewer-opinion{:rating='7' name="Pietro Bragioto"}
 Carta interessante che potrebbe trovare spazio in diversi archetipi. La sua versatilità la rende una solida aggiunta al formato, anche se non è una carta definitiva. Il costo di mana è giustificato dall'impatto che può avere sulla partita.
 ::
 
@@ -671,8 +668,8 @@ headerGradient: monowhite
 
 ::magic-decklist
 ---
+headerOnly: true
 headerGradient: monowhite
-headerOnly: true
 name: heading
 placement: placement
 player: subheading
@@ -685,8 +682,8 @@ headerGradient: monoblue
 
 ::magic-decklist
 ---
+headerOnly: true
 headerGradient: monoblue
-headerOnly: true
 name: heading
 placement: placement
 player: subheading
@@ -699,8 +696,8 @@ headerGradient: monoblack
 
 ::magic-decklist
 ---
+headerOnly: true
 headerGradient: monoblack
-headerOnly: true
 name: heading
 placement: placement
 player: subheading
@@ -713,8 +710,8 @@ headerGradient: monored
 
 ::magic-decklist
 ---
+headerOnly: true
 headerGradient: monored
-headerOnly: true
 name: heading
 placement: placement
 player: subheading
@@ -727,8 +724,8 @@ headerGradient: monogreen
 
 ::magic-decklist
 ---
-headerGradient: monogreen
 headerOnly: true
+headerGradient: monogreen
 name: heading
 placement: placement
 player: subheading
@@ -741,8 +738,8 @@ headerGradient: colorless
 
 ::magic-decklist
 ---
-headerGradient: colorless
 headerOnly: true
+headerGradient: colorless
 name: heading
 placement: placement
 player: subheading
@@ -757,8 +754,8 @@ headerGradient: gruul
 
 ::magic-decklist
 ---
+headerOnly: true
 headerGradient: gruul
-headerOnly: true
 name: heading
 placement: placement
 player: subheading
@@ -771,8 +768,8 @@ headerGradient: azorius
 
 ::magic-decklist
 ---
+headerOnly: true
 headerGradient: azorius
-headerOnly: true
 name: heading
 placement: placement
 player: subheading
@@ -785,8 +782,8 @@ headerGradient: dimir
 
 ::magic-decklist
 ---
+headerOnly: true
 headerGradient: dimir
-headerOnly: true
 name: heading
 placement: placement
 player: subheading
@@ -799,8 +796,8 @@ headerGradient: boros
 
 ::magic-decklist
 ---
+headerOnly: true
 headerGradient: boros
-headerOnly: true
 name: heading
 placement: placement
 player: subheading
@@ -813,8 +810,8 @@ headerGradient: golgari
 
 ::magic-decklist
 ---
+headerOnly: true
 headerGradient: golgari
-headerOnly: true
 name: heading
 placement: placement
 player: subheading
@@ -827,8 +824,8 @@ headerGradient: izzet
 
 ::magic-decklist
 ---
+headerOnly: true
 headerGradient: izzet
-headerOnly: true
 name: heading
 placement: placement
 player: subheading
@@ -841,8 +838,8 @@ headerGradient: orzhov
 
 ::magic-decklist
 ---
+headerOnly: true
 headerGradient: orzhov
-headerOnly: true
 name: heading
 placement: placement
 player: subheading
@@ -855,8 +852,8 @@ headerGradient: rakdos
 
 ::magic-decklist
 ---
+headerOnly: true
 headerGradient: rakdos
-headerOnly: true
 name: heading
 placement: placement
 player: subheading
@@ -869,8 +866,8 @@ headerGradient: selesnya
 
 ::magic-decklist
 ---
-headerGradient: selesnya
 headerOnly: true
+headerGradient: selesnya
 name: heading
 placement: placement
 player: subheading
@@ -883,8 +880,8 @@ headerGradient: simic
 
 ::magic-decklist
 ---
-headerGradient: simic
 headerOnly: true
+headerGradient: simic
 name: heading
 placement: placement
 player: subheading
@@ -899,8 +896,8 @@ headerGradient: esper
 
 ::magic-decklist
 ---
+headerOnly: true
 headerGradient: esper
-headerOnly: true
 name: heading
 placement: placement
 player: subheading
@@ -913,8 +910,8 @@ headerGradient: grixis
 
 ::magic-decklist
 ---
+headerOnly: true
 headerGradient: grixis
-headerOnly: true
 name: heading
 placement: placement
 player: subheading
@@ -927,8 +924,8 @@ headerGradient: jund
 
 ::magic-decklist
 ---
+headerOnly: true
 headerGradient: jund
-headerOnly: true
 name: heading
 placement: placement
 player: subheading
@@ -941,8 +938,8 @@ headerGradient: naya
 
 ::magic-decklist
 ---
+headerOnly: true
 headerGradient: naya
-headerOnly: true
 name: heading
 placement: placement
 player: subheading
@@ -955,8 +952,8 @@ headerGradient: bant
 
 ::magic-decklist
 ---
+headerOnly: true
 headerGradient: bant
-headerOnly: true
 name: heading
 placement: placement
 player: subheading
@@ -969,8 +966,8 @@ headerGradient: mardu
 
 ::magic-decklist
 ---
+headerOnly: true
 headerGradient: mardu
-headerOnly: true
 name: heading
 placement: placement
 player: subheading
@@ -983,8 +980,8 @@ headerGradient: temur
 
 ::magic-decklist
 ---
+headerOnly: true
 headerGradient: temur
-headerOnly: true
 name: heading
 placement: placement
 player: subheading
@@ -997,8 +994,8 @@ headerGradient: sultai
 
 ::magic-decklist
 ---
+headerOnly: true
 headerGradient: sultai
-headerOnly: true
 name: heading
 placement: placement
 player: subheading
@@ -1011,8 +1008,8 @@ headerGradient: jeskai
 
 ::magic-decklist
 ---
-headerGradient: jeskai
 headerOnly: true
+headerGradient: jeskai
 name: heading
 placement: placement
 player: subheading
@@ -1025,8 +1022,8 @@ headerGradient: abzan
 
 ::magic-decklist
 ---
-headerGradient: abzan
 headerOnly: true
+headerGradient: abzan
 name: heading
 placement: placement
 player: subheading
