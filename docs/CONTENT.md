@@ -6,6 +6,7 @@ Guide for managing content in the MTG Pauper blog.
 
 - [Content Collections](#content-collections)
 - [Frontmatter Reference](#frontmatter-reference)
+- [Text Style Rules](#text-style-rules)
 - [MDC Syntax](#mdc-syntax)
 - [Adding New Content](#adding-new-content)
 - [Card References](#card-references)
@@ -335,6 +336,15 @@ published: true   # Published and visible
 - Set `published: true` while writing (there is no necessity to commit unfinished articles)
 - Change to `published: true` when ready to publish
 - Not published articles are filtered in production builds
+
+---
+
+## Text Style Rules
+
+Simple find-and-replace rules to apply to article body text before publishing:
+
+- Replace every en-dash `–` with a regular hyphen `-`.
+- Replace every curly apostrophe `'` with a straight apostrophe `'`.
 
 ---
 
@@ -947,6 +957,7 @@ Before publishing, verify:
 - [ ] Content is properly structured with headings
 - [ ] No broken links
 - [ ] Spell-checked (Italian content)
+- [ ] En-dashes (`–`) and curly apostrophes (`'`) replaced with `-` and `'` (see [Text Style Rules](#text-style-rules))
 - [ ] Preview looks good in dev server
 
 ---
