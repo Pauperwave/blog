@@ -1206,9 +1206,9 @@ xAxisName: CMC medio
 yAxisName: Win Rate %
 series:
   - name: Aggro
-    data: [[1.8, 52], [2.1, 55], [1.5, 58]]
+    data: [{ x: 1.8, y: 52 }, { x: 2.1, y: 55 }, { x: 1.5, y: 58 }]
   - name: Control
-    data: [[3.2, 51], [3.8, 49], [3.5, 53]]
+    data: [{ x: 3.2, y: 51 }, { x: 3.8, y: 49 }, { x: 3.5, y: 53 }]
 ---
 ::
 ```
@@ -1220,9 +1220,9 @@ xAxisName: CMC medio
 yAxisName: Win Rate %
 series:
   - name: Aggro
-    data: [[1.8, 52], [2.1, 55], [1.5, 58]]
+    data: [{ x: 1.8, y: 52 }, { x: 2.1, y: 55 }, { x: 1.5, y: 58 }]
   - name: Control
-    data: [[3.2, 51], [3.8, 49], [3.5, 53]]
+    data: [{ x: 3.2, y: 51 }, { x: 3.8, y: 49 }, { x: 3.5, y: 53 }]
 ---
 ::
 

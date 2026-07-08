@@ -1,6 +1,9 @@
 <!-- app/components/charts/ScatterChart.vue -->
 <script lang="ts" setup>
-type ScatterPoint = [number, number]
+type ScatterPoint = {
+  x: number
+  y: number
+}
 
 type ScatterSeriesItem = {
   name: string
@@ -75,7 +78,7 @@ const chartOption = computed(() => ({
       color: theme.colors.value.palette[i % theme.colors.value.palette.length],
       opacity: 0.85,
     },
-    data: s.data,
+    data: s.data.map(p => [p.x, p.y]),
   })),
 }))
 </script>
