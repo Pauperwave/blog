@@ -41,11 +41,28 @@ const chartOption = computed(() => ({
     data: props.data ?? [],
     name: props.title,
     center: ['50%', '45%'],
+    radius: ['45%', '70%'],
+    padAngle: 2,
+    itemStyle: {
+      borderRadius: 8,
+    },
+    emphasis: {
+      scale: true,
+      scaleSize: 6,
+      itemStyle: {
+        shadowBlur: 16,
+        shadowColor: 'rgba(0, 0, 0, 0.25)',
+      },
+    },
     label: {
       fontSize: 12,
       fontFamily: '"Geist", sans-serif',
-      color: theme.colors.value.text,
-      formatter: '{b} {d}%',
+      color: theme.colors.value.textSecondary,
+      formatter: '{d}%',
+    },
+    labelLine: {
+      length: 8,
+      length2: 8,
     },
   }],
 }))
