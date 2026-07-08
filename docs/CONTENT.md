@@ -10,6 +10,7 @@ Guide for managing content in the MTG Pauper blog.
 - [MDC Syntax](#mdc-syntax)
 - [Adding New Content](#adding-new-content)
 - [Card References](#card-references)
+- [Charts](#charts)
 - [Images](#images)
 - [SEO Best Practices](#seo-best-practices)
 
@@ -581,6 +582,112 @@ export default defineEventHandler(async (event) => {
   return cards
 })
 ```
+
+---
+
+## Charts
+
+Four chart components (ECharts via `nuxt-echarts`/`vue-echarts`) are available as MDC shortcodes. All are dark-mode aware and responsive automatically — no extra props needed for that. Source: `app/components/charts/`.
+
+### `::bar-chart`
+
+One bar per data item. Use `horizontal: true` when you have more than ~5 categories or long labels — it avoids rotated/overlapping axis text.
+
+```markdown
+::bar-chart
+---
+title: Meta Breakdown - Copie Giocate
+description: Numero di copie della carta per archetipo, torneo Paupergeddon
+seriesName: Copie
+horizontal: true
+data:
+  - { name: Jund Wildfire, value: 11 }
+  - { name: Monored Madness, value: 11 }
+  - { name: Spy Combo, value: 8 }
+---
+::
+```
+
+| Prop | Type | Notes |
+|---|---|---|
+| `title`, `description` | string | optional |
+| `data` | `{ name, value }[]` | one bar per item |
+| `seriesName` | string | tooltip/legend label, defaults to `title` |
+| `horizontal` | boolean | categories on the y-axis instead of rotated x-axis labels |
+| `yAxisName`, `height` | string | optional |
+
+### `::line-chart`
+
+One or more named series over shared `categories`. Set `stacked: true` for the classic stacked-area "meta share over time" look; leave it `false` for a plain multi-line comparison.
+
+```markdown
+::line-chart
+---
+title: Andamento Meta nel Tempo
+categories: [Gen, Feb, Mar, Apr, Mag, Giu]
+stacked: true
+yAxisName: "% Meta Share"
+series:
+  - { name: Jund Wildfire, data: [12, 14, 13, 15, 16, 18] }
+  - { name: Monoblu Terror, data: [8, 9, 10, 9, 8, 7] }
+---
+::
+```
+
+| Prop | Type | Notes |
+|---|---|---|
+| `title`, `description` | string | optional |
+| `categories` | string[] | x-axis labels |
+| `series` | `{ name, data: number[] }[]` | one line per entry |
+| `stacked` | boolean | default `false` |
+| `area` | boolean | area fill; defaults to match `stacked` |
+| `smooth` | boolean | default `false` |
+| `yAxisName`, `height` | string | optional |
+
+### `::confidence-band-chart`
+
+A value line with a shaded upper/lower bound band around it (win-rate projections, statistical ranges).
+
+```markdown
+::confidence-band-chart
+---
+title: Win Rate Previsto - Mono Blue Control
+seriesName: Win Rate
+bandLabel: "Intervallo di Confidenza (95%)"
+yAxisName: "Win Rate %"
+data:
+  - { x: "Round 1", value: 55, lower: 48, upper: 62 }
+  - { x: "Round 2", value: 57, lower: 51, upper: 63 }
+---
+::
+```
+
+| Prop | Type | Notes |
+|---|---|---|
+| `title`, `description` | string | optional |
+| `data` | `{ x, value, lower, upper }[]` | one point per x position |
+| `seriesName` | string | value-line label, defaults to `title` |
+| `bandLabel` | string | band legend label, default "Confidence Band" |
+| `smooth`, `yAxisName`, `height` | — | optional |
+
+### `::pie-chart`
+
+```markdown
+::pie-chart
+---
+title: Meta Breakdown
+data:
+  - { value: 11, name: Jund Wildfire }
+  - { value: 8, name: Spy Combo }
+---
+::
+```
+
+| Prop | Type | Notes |
+|---|---|---|
+| `title`, `description` | string | optional |
+| `data` | `{ value, name }[]` | one slice per item |
+| `height` | string | default `500px` |
 
 ---
 
