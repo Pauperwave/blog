@@ -35,6 +35,7 @@ const chartOption = computed(() => {
   return {
     title: {
       text: props.title ?? '',
+      top: 0,
       textStyle: theme.baseTextStyle.value,
     },
     tooltip: {
@@ -50,7 +51,7 @@ const chartOption = computed(() => {
     },
     legend: {
       type: 'scroll',
-      top: props.title ? 28 : 0,
+      top: props.title ? 36 : 0,
       data: [valueLabel.value, band.value],
       textStyle: theme.baseTextStyle.value,
     },

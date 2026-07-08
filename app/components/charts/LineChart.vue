@@ -25,6 +25,7 @@ const showsArea = computed(() => props.area ?? props.stacked ?? false)
 const chartOption = computed(() => ({
   title: {
     text: props.title ?? '',
+    top: 0,
     textStyle: theme.baseTextStyle.value,
   },
   tooltip: {
@@ -35,7 +36,7 @@ const chartOption = computed(() => ({
   },
   legend: {
     type: 'scroll',
-    top: props.title ? 28 : 0,
+    top: props.title ? 36 : 0,
     data: (props.series ?? []).map(s => s.name),
     textStyle: theme.baseTextStyle.value,
   },
