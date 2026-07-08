@@ -111,7 +111,7 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
 
       // Count deck tags from the decks field
       if (article.decks && Array.isArray(article.decks)) {
-        article.decks.forEach((deck) => {
+        article.decks.forEach((deck: string) => {
           deckCounts[deck] = (deckCounts[deck] || 0) + 1
         })
       }
@@ -260,7 +260,7 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
       const matchesAuthor = !author || item.authorSlug === author
       const matchesLocation = !normalizedSelectedLocation || item.normalizedLocation === normalizedSelectedLocation
       const matchesTag = !normalizedSelectedTag || item.normalizedTopicTagSet.has(normalizedSelectedTag)
-      const matchesDeck = !normalizedSelectedDeck || (item.article.decks && item.article.decks.some(deck => normalizeArticleFilterValue(deck) === normalizedSelectedDeck))
+      const matchesDeck = !normalizedSelectedDeck || (item.article.decks && item.article.decks.some((deck: string) => normalizeArticleFilterValue(deck) === normalizedSelectedDeck))
 
       if (matchesCategory && matchesAuthor && matchesLocation && matchesTag && matchesDeck) {
         filtered.push(item.article)
