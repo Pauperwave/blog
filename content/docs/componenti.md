@@ -1193,3 +1193,71 @@ data:
   - { value: 7, name: Grixis Affinity }
 ---
 ::
+
+### Grafico a dispersione (scatter)
+
+Utile per mostrare correlazioni tra due valori (es. costo di mana medio e win rate). La legenda compare solo con più di una serie.
+
+```md
+::scatter-chart
+---
+title: CMC medio vs Win Rate
+xAxisName: CMC medio
+yAxisName: Win Rate %
+series:
+  - name: Aggro
+    data: [[1.8, 52], [2.1, 55], [1.5, 58]]
+  - name: Control
+    data: [[3.2, 51], [3.8, 49], [3.5, 53]]
+---
+::
+```
+
+::scatter-chart
+---
+title: CMC medio vs Win Rate
+xAxisName: CMC medio
+yAxisName: Win Rate %
+series:
+  - name: Aggro
+    data: [[1.8, 52], [2.1, 55], [1.5, 58]]
+  - name: Control
+    data: [[3.2, 51], [3.8, 49], [3.5, 53]]
+---
+::
+
+### Grafico radar
+
+Utile per confrontare uno o più mazzi su più assi contemporaneamente (es. profilo di un archetipo). L'ordine dei `values` di ogni serie deve corrispondere all'ordine degli `indicators`.
+
+```md
+::radar-chart
+---
+title: Profilo Archetipo
+indicators:
+  - { name: Aggro, max: 10 }
+  - { name: Control, max: 10 }
+  - { name: Consistenza, max: 10 }
+  - { name: Potenza, max: 10 }
+  - { name: Budget, max: 10 }
+series:
+  - { name: Mono Red Madness, values: [9, 2, 6, 7, 8] }
+  - { name: Mono Blue Control, values: [2, 9, 7, 8, 5] }
+---
+::
+```
+
+::radar-chart
+---
+title: Profilo Archetipo
+indicators:
+  - { name: Aggro, max: 10 }
+  - { name: Control, max: 10 }
+  - { name: Consistenza, max: 10 }
+  - { name: Potenza, max: 10 }
+  - { name: Budget, max: 10 }
+series:
+  - { name: Mono Red Madness, values: [9, 2, 6, 7, 8] }
+  - { name: Mono Blue Control, values: [2, 9, 7, 8, 5] }
+---
+::
