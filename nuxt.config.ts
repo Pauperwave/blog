@@ -110,7 +110,9 @@ export default defineNuxtConfig({
     charts: [
       'BarChart',
       'LineChart',
-      'PieChart'
+      'PieChart',
+      'ScatterChart',
+      'RadarChart'
     ],
     components: [
       'DatasetComponent',
@@ -119,6 +121,7 @@ export default defineNuxtConfig({
       'ToolboxComponent',
       'LegendComponent',
       'TitleComponent',
+      'RadarComponent',
     ],
     features: [
       'LabelLayout',
