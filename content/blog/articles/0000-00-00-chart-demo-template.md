@@ -1,9 +1,9 @@
 ---
-title: Chart Demo Draft
+title: ""
 author: Alessandro Moretti
 category: article
-date: 2026-07-08
-description: Draft page for manually verifying the new chart components (bar, line, confidence-band, pie).
+date:
+description: Reference page for manually testing all chart components (bar, line, confidence-band, pie, scatter, radar) in light/dark mode and on narrow viewports.
 location: ""
 published: false
 tags:
@@ -11,7 +11,7 @@ tags:
 thumbnail: /arts/cmm-81-counterspell.jpg
 ---
 
-Temporary draft to verify the 4 chart components render correctly in light/dark mode and on narrow viewports. Delete this file after verification.
+Template/reference page for the chart components — not meant to be published. Keep in sync with the shortcode examples in `docs/CONTENT.md` and `content/docs/componenti.md` when adding or changing a chart component.
 
 ## Bar chart — vertical
 
@@ -105,5 +105,37 @@ data:
   - { value: 11, name: Monored Madness }
   - { value: 8, name: Spy Combo }
   - { value: 7, name: Grixis Affinity }
+---
+::
+
+## Scatter chart
+
+::scatter-chart
+---
+title: CMC medio vs Win Rate
+xAxisName: CMC medio
+yAxisName: Win Rate %
+series:
+  - name: Aggro
+    data: [{ x: 1.8, y: 52 }, { x: 2.1, y: 55 }, { x: 1.5, y: 58 }]
+  - name: Control
+    data: [{ x: 3.2, y: 51 }, { x: 3.8, y: 49 }, { x: 3.5, y: 53 }]
+---
+::
+
+## Radar chart
+
+::radar-chart
+---
+title: Profilo Archetipo
+indicators:
+  - { name: Aggro, max: 10 }
+  - { name: Control, max: 10 }
+  - { name: Consistenza, max: 10 }
+  - { name: Potenza, max: 10 }
+  - { name: Budget, max: 10 }
+series:
+  - { name: Mono Red Madness, values: [9, 2, 6, 7, 8] }
+  - { name: Mono Blue Control, values: [2, 9, 7, 8, 5] }
 ---
 ::
