@@ -10,7 +10,7 @@ interface FeaturedAuthor {
   name: string
   avatar: string
   description: string
-  bio?: string
+  bio: string
   articleCount: number
   latestArticleDate?: string
   latestArticleTitle?: string

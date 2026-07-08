@@ -14,9 +14,9 @@ interface AuthorRecord {
   name: string
   avatar: string
   description: string
-  bio?: string
+  bio: string
   url?: string
-  nickname?: string
+  nickname: string
   socials?: AuthorSocials
 }
 
