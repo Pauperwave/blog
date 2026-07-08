@@ -3,7 +3,7 @@ title: Componenti disponibili in scrittura
 description: Descrizione dettagliata dei componenti disponibili durante la scrittura di un articolo
 published: true
 sitemap:
-  loc: /componenti
+  loc: /docs/componenti
   images:
     - loc: https://avatars.githubusercontent.com/u/225214755?s=200&v=4
 ---
@@ -1027,5 +1027,135 @@ headerGradient: abzan
 name: heading
 placement: placement
 player: subheading
+---
+::
+
+## Grafici
+
+Quattro componenti grafico (ECharts) utili per articoli di meta-analisi, report e tutorial. Si adattano automaticamente alla dark mode e allo schermo.
+
+### Grafico a barre
+
+Utile per confronti tra categorie (es. numero di copie giocate per archetipo). Usa `horizontal: true` quando i nomi delle categorie sono lunghi o numerosi.
+
+```md
+::bar-chart
+---
+title: Meta Breakdown - Copie Giocate
+seriesName: Copie
+horizontal: true
+data:
+  - { name: Jund Wildfire, value: 11 }
+  - { name: Monored Madness, value: 11 }
+  - { name: Spy Combo, value: 8 }
+  - { name: Grixis Affinity, value: 7 }
+---
+::
+```
+
+::bar-chart
+---
+title: Meta Breakdown - Copie Giocate
+seriesName: Copie
+horizontal: true
+data:
+  - { name: Jund Wildfire, value: 11 }
+  - { name: Monored Madness, value: 11 }
+  - { name: Spy Combo, value: 8 }
+  - { name: Grixis Affinity, value: 7 }
+---
+::
+
+### Grafico a linee
+
+Una o più serie nominate sull'asse temporale condiviso `categories`. Con `stacked: true` ottieni il classico grafico ad area impilata, utile per mostrare l'andamento della meta share nel tempo.
+
+```md
+::line-chart
+---
+title: Andamento Meta nel Tempo
+categories: [Gen, Feb, Mar, Apr, Mag, Giu]
+stacked: true
+yAxisName: "% Meta Share"
+series:
+  - { name: Jund Wildfire, data: [12, 14, 13, 15, 16, 18] }
+  - { name: Monoblu Terror, data: [8, 9, 10, 9, 8, 7] }
+  - { name: RDW, data: [5, 6, 6, 7, 6, 5] }
+---
+::
+```
+
+::line-chart
+---
+title: Andamento Meta nel Tempo
+categories: [Gen, Feb, Mar, Apr, Mag, Giu]
+stacked: true
+yAxisName: "% Meta Share"
+series:
+  - { name: Jund Wildfire, data: [12, 14, 13, 15, 16, 18] }
+  - { name: Monoblu Terror, data: [8, 9, 10, 9, 8, 7] }
+  - { name: RDW, data: [5, 6, 6, 7, 6, 5] }
+---
+::
+
+### Grafico con banda di confidenza
+
+Una linea di valore con una fascia superiore/inferiore intorno, utile per stime e proiezioni (es. win rate previsto).
+
+```md
+::confidence-band-chart
+---
+title: Win Rate Previsto - Mono Blue Control
+seriesName: Win Rate
+bandLabel: "Intervallo di Confidenza (95%)"
+yAxisName: "Win Rate %"
+data:
+  - { x: "Round 1", value: 55, lower: 48, upper: 62 }
+  - { x: "Round 2", value: 57, lower: 51, upper: 63 }
+  - { x: "Round 3", value: 54, lower: 46, upper: 61 }
+  - { x: "Round 4", value: 58, lower: 52, upper: 65 }
+---
+::
+```
+
+::confidence-band-chart
+---
+title: Win Rate Previsto - Mono Blue Control
+seriesName: Win Rate
+bandLabel: "Intervallo di Confidenza (95%)"
+yAxisName: "Win Rate %"
+data:
+  - { x: "Round 1", value: 55, lower: 48, upper: 62 }
+  - { x: "Round 2", value: 57, lower: 51, upper: 63 }
+  - { x: "Round 3", value: 54, lower: 46, upper: 61 }
+  - { x: "Round 4", value: 58, lower: 52, upper: 65 }
+---
+::
+
+### Grafico a torta
+
+Utile per mostrare la distribuzione degli archetipi in un torneo.
+
+```md
+::pie-chart
+---
+title: Meta Breakdown
+data:
+  - { value: 11, name: Jund Wildfire }
+  - { value: 11, name: Monored Madness }
+  - { value: 8, name: Spy Combo }
+  - { value: 7, name: Grixis Affinity }
+---
+::
+```
+
+::pie-chart
+---
+title: Meta Breakdown
+data:
+  - { value: 11, name: Jund Wildfire }
+  - { value: 11, name: Monored Madness }
+  - { value: 8, name: Spy Combo }
+  - { value: 7, name: Grixis Affinity }
 ---
 ::
