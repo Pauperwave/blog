@@ -52,7 +52,7 @@ I will address both possible meanings:
     The Challenge results from Friday through Sunday already seemed to support this conclusion.
     Unfortunately, those events fell outside the time window considered by the Pauper Format Panel.
     
-- The format's sideboards were warped to fight Naya [[Seeker of Skybreak]].
+- The format's sideboards were warped to fight Naya Seeker of Skybreak.
     - If this is the intended meaning, then the statement isn't consistent with the available decklists.
     Most lists didn't change after [[Hawkeye's Bow]]'s release.
 
@@ -72,7 +72,7 @@ If two-card combos are ruled out on principle, relevant creature combo decks eff
 This is particularly alarming because in a creature-centric format like Pauper, creature-based combo decks are the most honest and interactive combo decks that I can imagine.
 If even those are banned for philosophical reasons, I can't imagine other kinds of combo decks surviving in tier 1.
 
-On the other hand, the Pauper Format Panel let a spell-based combo deck like [[High Tide]] survive for 8 months, giving it a lot more leeway than [[Seeker of Skybreak]], despite being a significantly less interactable combo deck.
+On the other hand, the Pauper Format Panel let a spell-based combo deck like High Tide survive for 8 months, giving it a lot more leeway than [[Seeker of Skybreak]], despite being a significantly less interactable combo deck.
 So I might be missing something about their hierarchy of values.
 But they did eventually ban [[High Tide]], so I doubt we're going to see spell-based combo decks in the future.
 
