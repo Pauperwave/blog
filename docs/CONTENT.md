@@ -98,15 +98,13 @@ Every content file must include frontmatter metadata at the top.
 
 ```yaml
 ---
-title: string              # Article title (SEO important)
-description: string        # Short summary (150-160 chars recommended)
-date: YYYY-MM-DD          # Publication date (ISO format)
-tags: string[]            # List of tags for categorization
-author: string            # Author's name
-author_avatar: string     # Path to author image
-author_description: string # Author bio (one sentence)
-thumbnail: string         # Hero image path
-published: true           # false = hidden (default), true = public
+title: string              # Article title (SEO important) — required
+description: string        # Short summary (150-160 chars recommended) — required
+date: YYYY-MM-DD           # Publication date (ISO format) — required
+author: string | string[]  # Name(s) matching content/authors/*.yml — required
+thumbnail: string           # Hero image path, use an alias (see Images) — required
+tags: string[]              # Optional, defaults to []
+published: boolean          # Optional, defaults to false (hidden)
 ---
 ```
 
@@ -124,9 +122,7 @@ tags:
   - blu
   - rosso
 author: "Alessandro Moretti"
-author_avatar: "/assets/authors/alessandro.jpg"
-author_description: "Giocatore competitivo di Pauper e content creator"
-thumbnail: "/assets/articles/pyroblast-hydroblast.jpg"
+thumbnail: /arts/pyroblast-hydroblast.jpg
 published: true
 ---
 ```
@@ -248,23 +244,57 @@ tags:
   - "Meta Analysis"  # No spaces, use "meta" + "analisi"
 ```
 
+#### Tag già in uso
+
+L'elenco "Common Tags" sopra è indicativo (archetipi, colori, argomenti). In pratica, però, i tag realmente usati nei contenuti pubblicati sono principalmente **categorie di torneo/formato**, non archetipi — e seguono uno stile diverso (Title Case, spazi ammessi) da quello raccomandato più sopra. Prima di crearne uno nuovo, controlla se uno di questi copre già il caso:
+
+| Tag | Occorrenze | Uso |
+|---|---|---|
+| `Top 8` | 77 | Piazzamento in un torneo (top 8) |
+| `League` | 35 | Risultato/report di una league su Magic Online |
+| `IPT` | 28 | Torneo della serie IPT (es. "IPT Amsterdam") |
+| `Set Review` | 22 | Analisi di un nuovo set/espansione |
+| `Paupergeddon` | 18 | Evento Paupergeddon (torneo dal vivo) |
+| `Meta` | 13 | Analisi del metagame |
+| `Top 16` | 6 | Piazzamento in un torneo (top 16) |
+| `Top 32` | 2 | Piazzamento in un torneo (top 32) |
+| `Top 4` | 1 | Piazzamento in un torneo (top 4) |
+| `PTE` | 1 | Torneo della serie PTE |
+| `Game Mechanics` | 1 | Contenuto su regole/meccaniche di gioco |
+
+> Nota: questo elenco riflette lo stato di `content/blog/` al momento della stesura (file placeholder/template esclusi) — se aggiungi molti tag nuovi, vale la pena rigenerarlo invece di fidarsi ciecamente.
+
 ---
 
-#### `author` & `author_avatar` & `author_description`
+#### `author`
 
-Currently single author, but structured for future multi-author support.
+A string (single author) or array of strings (co-authors) — both are supported today, not a future feature. The value must match the `name` field of an entry in the separate `authors` collection (`content/authors/*.yml`), not inline avatar/bio fields.
 
 ```yaml
 author: "Alessandro Moretti"
-author_avatar: "/assets/authors/alessandro.jpg"
-author_description: "Giocatore competitivo di Pauper dal 2019"
+# or, for co-authored articles:
+author: ["Alessandro Moretti", "Pietro Bragioto"]
+```
+
+Avatar, bio, description and social links live in the matching `content/authors/*.yml` file instead of the article's own frontmatter:
+
+```yaml
+# content/authors/moretti-alessandro.yml
+name: Alessandro Moretti
+nickname: AdeptoTerra
+description: Presidente Pauperwave
+bio: Bio più lunga mostrata nella pagina autore...
+avatar: /assets/avatars/alessandro-moretti.png
+url: /authors/alessandro-moretti
+socials:
+  twitter: https://x.com/A_AdeptoTerra
 ```
 
 **Avatar requirements:**
 - Format: JPG or PNG
 - Size: 200x200px minimum
 - Aspect ratio: 1:1 (square)
-- Location: `public/assets/authors/`
+- Location: `public/assets/avatars/`
 
 ---
 
@@ -475,18 +505,18 @@ Copy template from [Frontmatter Reference](#frontmatter-reference) and fill in a
 
 #### 5. Add Images
 
-Place images in `public/assets/articles/`:
+Place images in `public/assets/blog/articles/` (see [Images](#images) for the full alias reference):
 
 ```bash
-public/assets/articles/
+public/assets/blog/articles/
 ├── mono-blue-control-hero.jpg      # Thumbnail
 ├── mono-blue-control-diagram.jpg   # In-article image
 └── ...
 ```
 
-Reference in content:
+Reference in content using the `/articles/*` alias, not the full path:
 ```markdown
-![Mono Blue Control diagram](/assets/articles/mono-blue-control-diagram.jpg)
+![Mono Blue Control diagram](/articles/mono-blue-control-diagram.jpg)
 ```
 
 #### 6. Preview
@@ -688,6 +718,61 @@ data:
 | `title`, `description` | string | optional |
 | `data` | `{ value, name }[]` | one slice per item |
 | `height` | string | default `500px` |
+
+### `::scatter-chart`
+
+One or more named point series. Legend only shows with 2+ series.
+
+```markdown
+::scatter-chart
+---
+title: CMC medio vs Win Rate
+xAxisName: CMC medio
+yAxisName: Win Rate %
+series:
+  - name: Aggro
+    data: [[1.8, 52], [2.1, 55], [1.5, 58]]
+  - name: Control
+    data: [[3.2, 51], [3.8, 49], [3.5, 53]]
+---
+::
+```
+
+| Prop | Type | Notes |
+|---|---|---|
+| `title`, `description` | string | optional |
+| `series` | `{ name, data: [number, number][] }[]` | one point series per group; each point is `[x, y]` |
+| `xAxisName`, `yAxisName` | string | axis labels |
+| `symbolSize` | number | point size, default `12` |
+| `height` | string | optional |
+
+### `::radar-chart`
+
+Compares one or more entities across shared axes (`indicators`). Legend only shows with 2+ series.
+
+```markdown
+::radar-chart
+---
+title: Profilo Archetipo
+indicators:
+  - { name: Aggro, max: 10 }
+  - { name: Control, max: 10 }
+  - { name: Consistenza, max: 10 }
+  - { name: Potenza, max: 10 }
+  - { name: Budget, max: 10 }
+series:
+  - { name: Mono Red Madness, values: [9, 2, 6, 7, 8] }
+  - { name: Mono Blue Control, values: [2, 9, 7, 8, 5] }
+---
+::
+```
+
+| Prop | Type | Notes |
+|---|---|---|
+| `title`, `description` | string | optional |
+| `indicators` | `{ name, max }[]` | the radar axes, shared by all series |
+| `series` | `{ name, values: number[] }[]` | one polygon per entity; `values` order must match `indicators` |
+| `height` | string | optional |
 
 ---
 
@@ -1069,7 +1154,7 @@ Before publishing, verify:
 
 ---
 
-<!-- ## Examples
+## Examples
 
 ### Complete Article Example
 
@@ -1078,21 +1163,49 @@ Before publishing, verify:
 title: "Mono Blue Control: La Guida Definitiva al Mazzo Tier 1"
 description: "Impara a giocare Mono Blue Control nel meta Pauper attuale: decklist, sideboard, matchup e strategie avanzate per dominare il formato."
 date: 2026-01-17
+category: article
 tags: [mono-blue, control, strategy]
 author: "Alessandro Moretti"
-author_avatar: "/assets/authors/alessandro.jpg"
-author_description: "Giocatore competitivo di Pauper dal 2019"
-thumbnail: "/assets/articles/mono-blue-control-hero.jpg"
+thumbnail: /arts/cmm-81-counterspell.jpg
 published: true
 ---
 
 # Introduzione
 
-Mono Blue Control è uno dei mazzi più iconici del formato Pauper...
+Mono Blue Control è uno dei mazzi più iconici del formato Pauper, capace di controllare la partita grazie a controspell come [[Counterspell]] e carte di card advantage come [[Deep Analysis]].
 
 ## La Decklist
 
-``` -->
+::magic-decklist
+---
+name: Mono Blue Control
+player: Alessandro Moretti
+placement: 1° posto
+headerGradient: monoblue
+---
+Creatures
+4 Cryptic Serpent
+
+Instants
+4 Counterspell
+4 Spell Pierce
+
+Sorceries
+4 Preordain
+
+Lands
+16 Island
+
+Sideboard
+4 Dispel
+::
+
+## Conclusione
+
+Un mazzo solido e versatile, adatto sia ai principianti che ai giocatori esperti del formato.
+```
+
+Nota: `author` deve corrispondere esattamente al `name` di un file in `content/authors/*.yml`. `category`, `decks` e `location` sono opzionali e non richiedono di essere specificati se non rilevanti.
 
 ---
 
