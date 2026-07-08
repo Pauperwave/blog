@@ -1,11 +1,8 @@
 <script setup lang="ts">
 const route = useRoute()
 
-// Costruisci il path del documento basandoti sullo slug dell'URL
-const documentPath = computed(() => `docs/${route.params.slug}.md`)
-
 const { data } = await useAsyncData(`doc-${route.params.slug}`, () =>
-  queryCollection('docs').where('id', '=', documentPath.value).first()
+  queryCollection('docs').path(route.path).first()
 )
 
 const tocTitle = 'In questo articolo'
