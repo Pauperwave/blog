@@ -5,6 +5,10 @@
 
 .fallow
 
+# Locally installed Claude Code skills
+.claude/
+skills-lock.json
+
 # Node dependencies
 node_modules
 
