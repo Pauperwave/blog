@@ -1,6 +1,8 @@
 ---
 title: Codice di Condotta
 description: Codice di condotta per un ambiente rispettoso e inclusivo
+sitemap:
+  loc: /docs/codice-di-condotta
 ---
 
 # Codice di Condotta
