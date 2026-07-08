@@ -35,13 +35,14 @@ export default defineContentConfig({
     /**
      * Documentation pages.
      * Source: content/docs/**\/*.md
-     * URL prefix: / (e.g. docs/getting-started.md → /getting-started)
+     * URL prefix: /docs (e.g. docs/getting-started.md → /docs/getting-started)
+     * Must match the route used by app/pages/docs/[slug].vue.
      */
     docs: defineCollection({
       type: "page",
       source: {
         include: "docs/**/*.md",
-        prefix: "/"
+        prefix: "/docs"
       },
       schema: z.object({
         title: z.string(),
