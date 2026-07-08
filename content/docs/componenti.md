@@ -1038,6 +1038,40 @@ Quattro componenti grafico (ECharts) utili per articoli di meta-analisi, report 
 
 Utile per confronti tra categorie (es. numero di copie giocate per archetipo). Usa `horizontal: true` quando i nomi delle categorie sono lunghi o numerosi.
 
+#### Grafico a barre verticale
+
+Comportamento predefinito (senza `horizontal`).
+
+```md
+::bar-chart
+---
+title: Meta Breakdown - Copie Giocate
+seriesName: Copie
+data:
+  - { name: Jund Wildfire, value: 11 }
+  - { name: Monored Madness, value: 11 }
+  - { name: Spy Combo, value: 8 }
+  - { name: Grixis Affinity, value: 7 }
+---
+::
+```
+
+::bar-chart
+---
+title: Meta Breakdown - Copie Giocate
+seriesName: Copie
+data:
+  - { name: Jund Wildfire, value: 11 }
+  - { name: Monored Madness, value: 11 }
+  - { name: Spy Combo, value: 8 }
+  - { name: Grixis Affinity, value: 7 }
+---
+::
+
+#### Grafico a barre orizzontale
+
+Con `horizontal: true`, utile quando i nomi delle categorie sono lunghi o numerosi.
+
 ```md
 ::bar-chart
 ---
