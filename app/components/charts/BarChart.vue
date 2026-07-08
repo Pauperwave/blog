@@ -69,11 +69,13 @@ const chartOption = computed(() => ({
   series: [{
     type: 'bar',
     name: props.seriesName ?? props.title,
-    data: values.value,
-    itemStyle: {
-      color: theme.colors.value.palette[0],
-      borderRadius: props.horizontal ? [0, 4, 4, 0] : [4, 4, 0, 0],
-    },
+    data: values.value.map((value, i) => ({
+      value,
+      itemStyle: {
+        color: theme.colors.value.palette[i % theme.colors.value.palette.length],
+        borderRadius: props.horizontal ? [0, 4, 4, 0] : [4, 4, 0, 0],
+      },
+    })),
     label: { show: false },
   }],
 }))
