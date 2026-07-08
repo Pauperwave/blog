@@ -591,6 +591,82 @@ Testo dell'opinione del revisore sulla carta.
 Carta interessante che potrebbe trovare spazio in diversi archetipi. La sua versatilità la rende una solida aggiunta al formato, anche se non è una carta definitiva. Il costo di mana è giustificato dall'impatto che può avere sulla partita.
 ::
 
+## Card Autore
+
+Piccola card cliccabile con avatar, nome e descrizione dell'autore — usata ad esempio nelle byline degli articoli. Tutti gli autori attualmente registrati:
+
+```md
+::author-card
+---
+author:
+  name: Alessandro Moretti
+  avatar: /assets/avatars/alessandro-moretti.png
+  description: Presidente Pauperwave
+  nickname: AdeptoTerra
+  url: /authors/alessandro-moretti
+---
+::
+```
+
+::author-card
+---
+author:
+  name: Alessandro Moretti
+  avatar: /assets/avatars/alessandro-moretti.png
+  description: Presidente Pauperwave
+  nickname: AdeptoTerra
+  url: /authors/alessandro-moretti
+---
+::
+
+::author-card
+---
+author:
+  name: Pietro Bragioto
+  avatar: /assets/avatars/pietro-bragioto.jpg
+  description: Scribacchino di liste
+  nickname: crila-peoty
+  url: /authors/pietro-bragioto
+---
+::
+
+::author-card
+---
+author:
+  name: Nicola Cordeschi
+  avatar: /assets/avatars/nicola-cordeschi.jpg
+  description: Fondatore Lega Pauper TAA
+  nickname: ilFritto
+  url: /authors/nicola-cordeschi
+---
+::
+
+::author-card
+---
+author:
+  name: Paolo Donfrancesco
+  avatar: /assets/avatars/paolo-donfrancesco.jpg
+  description: Walker735
+  nickname: Walker735
+  url: /authors/paolo-donfrancesco
+---
+::
+
+::author-card
+---
+author:
+  name: Hypergeomancer
+  avatar: /assets/avatars/hypergeomancer.png
+  description: ""
+  nickname: hypergeomancer
+  url: /authors/hypergeomancer
+---
+::
+
+::caution
+La card di Hypergeomancer mostra una `description` vuota — manca nel file `content/authors/hypergeomancer.yml`, andrebbe aggiunta.
+::
+
 ## Guida al sideboard
 
 ::warning
