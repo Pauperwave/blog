@@ -8,7 +8,6 @@ import {
 } from '~/constants/content-config'
 import { getRecentArticleBadge as getBadge } from '~/utils/article-badges'
 
-// Query all collections and combine them
 const { data: articles } = await useAsyncData("articles-index", async () => {
   const collectionsData = await queryAllCollections()
 
@@ -19,7 +18,6 @@ const { data: articles } = await useAsyncData("articles-index", async () => {
   return allArticles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 })
 
-// Fetch author data for all unique authors
 const { data: authorsMapData } = await useAsyncData<Record<string, Author>>(
   'articles-authors-map',
   async () => {

@@ -16,7 +16,6 @@ const slug = route.params.slug as string
 // Convert slug back to author name (e.g., "pietro-bragioto" -> "Pietro Bragioto")
 const authorName = getAuthorNameFromSlug(slug)
 
-// Fetch author data
 const { data: authorData } = await useAuthor(authorName)
 
 if (!authorData.value) {
@@ -42,8 +41,7 @@ const { data: authorArticles } = await useAsyncData(`author-articles-${slug}`, a
   return allArticles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 })
 
-// Count articles by category
-const articleCounts = computed(() => {
+const articleCountByCategory = computed(() => {
   if (!authorArticles.value) return {}
 
   const counts: Record<string, number> = {}
@@ -55,10 +53,8 @@ const articleCounts = computed(() => {
   return counts
 })
 
-// Total articles count
 const totalArticles = computed(() => authorArticles.value?.length || 0)
 
-// Recent articles (limit to 4)
 const recentArticles = computed(() => authorArticles.value?.slice(0, 4) || [])
 const authorArticlesLocationSet = computed(() =>
   buildGlobalNormalizedLocationSet(authorArticles.value || [])
@@ -66,15 +62,13 @@ const authorArticlesLocationSet = computed(() =>
 const getArticleTopicTags = (article: AnyArticle) =>
   buildArticleTopicTags(article, authorArticlesLocationSet.value)
 
-// SEO meta tags
 useSeoMeta({
   title: `${author.value.name} - Autore`,
   description: author.value.description,
 })
 
-console.log("[DEBUG] Author [slug]", author.value)
+if (import.meta.dev) console.log("[DEBUG] Author [slug]", author.value)
 
-// OG Image for author profile page
 defineOgImage('Author.takumi', {
   name: author.value.name,
   avatar: author.value.avatar,
@@ -86,15 +80,9 @@ defineOgImage('Author.takumi', {
 
 <template>
   <UPage>
-    <UPageHeader
-      :title="author.name"
-      :description="author.description"
-    >
+    <UPageHeader :title="author.name" :description="author.description">
       <template #headline>
-        <UBadge
-          variant="soft"
-          color="primary"
-        >
+        <UBadge variant="soft" color="primary">
           Autore
         </UBadge>
       </template>
@@ -104,43 +92,24 @@ defineOgImage('Author.takumi', {
       <!-- Author Info Section -->
       <UCard class="mb-8">
         <div class="flex flex-col md:flex-row gap-6">
-          <UAvatar
-            :as="{ img: 'img' }"
-            :src="author.avatar"
-            :alt="author.name"
-            size="2xl"
-            class="shrink-0"
-          />
+          <UAvatar :as="{ img: 'img' }" :src="author.avatar" :alt="author.name" size="2xl" class="shrink-0" />
 
           <div class="flex-1">
             <div class="flex flex-col gap-4">
               <!-- Bio -->
-              <p
-                v-if="author.bio"
-                class="text-base text-gray-700 dark:text-gray-300"
-              >
+              <p v-if="author.bio" class="text-base text-gray-700 dark:text-gray-300">
                 {{ author.bio }}
               </p>
 
               <!-- Social Links -->
-              <AuthorSocialLinks
-                :socials="author.socials"
-                variant="labels"
-              />
+              <AuthorSocialLinks :socials="author.socials" variant="labels" />
 
               <!-- Article Stats -->
               <div class="flex items-center gap-6 flex-wrap">
                 <div class="flex items-center gap-2">
-                  <Icon
-                    name="i-lucide-book-open-text"
-                    class="w-5 h-5 text-primary"
-                  />
-                  <UButton
-                    :to="`/articles?author=${getAuthorSlug(author.name)}`"
-                    variant="link"
-                    color="primary"
-                    class="p-0 text-sm font-semibold"
-                  >
+                  <Icon name="i-lucide-book-open-text" class="w-5 h-5 text-primary" />
+                  <UButton :to="`/articles?author=${getAuthorSlug(author.name)}`" variant="link" color="primary"
+                    class="p-0 text-sm font-semibold">
                     {{ totalArticles }} articoli totali
                   </UButton>
                 </div>
@@ -151,21 +120,13 @@ defineOgImage('Author.takumi', {
       </UCard>
 
       <!-- Article Counts by Category -->
-      <div
-        v-if="Object.keys(articleCounts).length > 0"
-        class="mb-8"
-      >
+      <div v-if="Object.keys(articleCountByCategory).length > 0" class="mb-8">
         <h2 class="text-2xl font-bold mb-4">Articoli per categoria</h2>
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-          <NuxtLink
-            v-for="(count, category) in articleCounts"
-            :key="category"
-            :to="`/articles?category=${category}&author=${getAuthorSlug(author.name)}`"
-            class="block"
-          >
+          <NuxtLink v-for="(count, category) in articleCountByCategory" :key="category"
+            :to="`/articles?category=${category}&author=${getAuthorSlug(author.name)}`" class="block">
             <UCard
-              class="text-center cursor-pointer hover:border-primary-500 dark:hover:border-primary-400 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
-            >
+              class="text-center cursor-pointer hover:border-primary-500 dark:hover:border-primary-400 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
               <div class="flex flex-col gap-2">
                 <p class="text-3xl font-bold text-primary">{{ count }}</p>
                 <p class="text-sm text-gray-600 dark:text-gray-400">
@@ -181,26 +142,16 @@ defineOgImage('Author.takumi', {
       <div v-if="recentArticles.length > 0">
         <h2 class="text-2xl font-bold mb-4">Ultimi articoli</h2>
         <UBlogPosts class="gap-2 sm:gap-4 lg:gap-6 sm:grid-cols-3 lg:grid-cols-4">
-          <ArticleCard
-            v-for="article in recentArticles"
-            :key="article.path"
-            :article="article"
-            :badge="getBadge(article.date)"
-            :show-author="false"
+          <ArticleCard v-for="article in recentArticles" :key="article.path" :article="article"
+            :badge="getBadge(article.date)" :show-author="false"
             :category-label="CATEGORY_LABELS[article.category as CategoryType]"
-            :topic-tags="getArticleTopicTags(article)"
-          />
+            :topic-tags="getArticleTopicTags(article)" />
         </UBlogPosts>
       </div>
 
       <!-- Empty State -->
-      <UEmpty
-        v-else
-        title="Nessun articolo"
-        description="Questo autore non ha ancora pubblicato articoli."
-        variant="naked"
-        :actions="[{ label: 'Torna alla home', to: '/' }]"
-      />
+      <UEmpty v-else title="Nessun articolo" description="Questo autore non ha ancora pubblicato articoli."
+        variant="naked" :actions="[{ label: 'Torna alla home', to: '/' }]" />
     </UPageBody>
   </UPage>
 </template>

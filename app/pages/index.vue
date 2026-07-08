@@ -31,7 +31,6 @@ const { data: homeArticlesData } = await useHomeArticles()
 const allArticles = computed(() => homeArticlesData.value?.articles || [])
 const freshThisWeekCount = computed(() => homeArticlesData.value?.freshThisWeekCount ?? 0)
 
-// Fetch author data for all unique authors
 const authorsMap = ref<Record<string, Author>>({})
 
 if (allArticles.value.length) {
@@ -92,7 +91,6 @@ const categoryHighlights = computed(() =>
     .filter(item => item.count > 0)
 )
 
-// Get sections from centralized config
 const sections = getHomeSections()
 
 useSchemaOrg([

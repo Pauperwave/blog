@@ -44,7 +44,6 @@ const counts = computed(() =>
   safeParse<Record<string, number>>(props.sectionCounts, {}, 'sectionCounts')
 )
 
-// Separate main deck and sideboard
 const mainDeckSections = computed(() =>
   SECTIONS.filter(s => s !== 'Sideboard' && (cardsBySection.value[s] ?? []).length > 0)
 )
