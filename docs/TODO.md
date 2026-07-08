@@ -1,5 +1,18 @@
 # TODO
 
+## Monetizzazione: pubblicità non invasiva o donazioni
+
+Obiettivo: coprire i costi di hosting/mantenimento, target indicativo ~20€/mese. Due strade, non necessariamente alternative:
+
+- **Pubblicità non invasiva** — valutare provider ad-friendly (es. EthicalAds, Carbon Ads) che non richiedono banner pesanti/popup e si adattano al tema del sito; evitare qualunque cosa impatti Core Web Vitals o l'esperienza di lettura.
+- **Richiesta donazioni** — link a Ko-fi/Buy Me a Coffee/GitHub Sponsors o simili, probabilmente in footer o in una pagina dedicata.
+
+Da decidere: quale delle due (o entrambe), dove posizionarle nel layout, e se serve una pagina `/supporta` o basta un widget nel footer.
+
+## Show the back face of double-faced cards
+
+`magic-card-tooltip` (and by extension `[[Card Name]]` inline references) currently can't show the second face of a double-faced card — only the front face is ever displayed. Already flagged inline in `content/docs/componenti.md` ("Alcuni casi limite"), tracked here so it doesn't only live as a caution note.
+
 ## Set up Nuxt Studio authentication
 
 `/editor` currently fails with:
