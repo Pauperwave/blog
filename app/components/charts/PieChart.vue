@@ -1,4 +1,4 @@
-<!-- app/components/content/PieChart.vue -->
+<!-- app/components/charts/PieChart.vue -->
 <script lang="ts" setup>
 type ChartDataItem = {
   value: number
@@ -12,31 +12,29 @@ const props = defineProps<{
   height?: string
 }>()
 
-const colorMode = useColorMode()
+const theme = useChartTheme()
 
 const chartOption = computed(() => ({
   title: {
     text: props.title ?? '',
-    textStyle: {
-      color: colorMode.value === 'dark' ? '#e5e7eb' : '#111827',
-    },
+    textStyle: theme.baseTextStyle.value,
   },
   tooltip: {
     trigger: 'item',
-    formatter: '{b} {d}%'
+    formatter: '{b} {d}%',
+    backgroundColor: theme.colors.value.tooltipBackground,
+    borderColor: theme.colors.value.tooltipBorder,
+    textStyle: { color: theme.colors.value.text },
   },
-  textStyle: {
-    color: colorMode.value === 'dark' ? '#e5e7eb' : '#111827',
-  },
+  textStyle: theme.baseTextStyle.value,
   backgroundColor: 'transparent',
+  color: theme.colors.value.palette,
   legend: {
     top: '25%',
     orient: 'vertical',
     left: 'left',
     data: (props.data ?? []).map(d => d.name),
-    textStyle: {
-      color: colorMode.value === 'dark' ? '#e5e7eb' : '#111827',
-    },
+    textStyle: theme.baseTextStyle.value,
   },
   series: [{
     type: 'pie',
@@ -45,8 +43,8 @@ const chartOption = computed(() => ({
     center: ['50%', '45%'],
     label: {
       fontSize: 12,
-      fontFamily: 'Inter, sans-serif',
-      color: colorMode.value === 'dark' ? '#e5e7eb' : '#111827',
+      fontFamily: '"Geist", sans-serif',
+      color: theme.colors.value.text,
       formatter: '{b} {d}%',
     },
   }],
