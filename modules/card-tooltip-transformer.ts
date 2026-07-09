@@ -6,7 +6,7 @@ import { join, dirname } from 'path'
 import { existsSync } from 'fs'
 import { fileURLToPath } from 'url'
 
-// import { buildLog } from '#shared/utils/build-log'
+import { buildLog } from '#shared/utils'
 
 const SCRYFALL_API_BASE = 'https://api.scryfall.com'
 
@@ -15,7 +15,7 @@ export default defineNuxtModule({
     name: 'card-tooltip-transformer'
   },
   async setup(_options, nuxt) {
-    console.log('🚀 [Card Tooltip Transformer] MODULE LOADED!')
+    buildLog('🚀 [Card Tooltip Transformer] MODULE LOADED!')
 
     // Initialize database connection at build time
     const dbPath = join(dirname(fileURLToPath(import.meta.url)), '..', 'server', 'database', 'cards.db')
@@ -26,12 +26,12 @@ export default defineNuxtModule({
       try {
         const Database = (await import('better-sqlite3')).default
         db = new Database(dbPath, { readonly: true })
-        console.log(`✅ [Card Tooltip Transformer] Database loaded (better-sqlite3): ${dbPath}`)
+        buildLog(`✅ [Card Tooltip Transformer] Database loaded (better-sqlite3): ${dbPath}`)
       } catch (error) {
-        console.log(`⚠️  [Card Tooltip Transformer] Failed to load database: ${error}`)
+        buildLog(`⚠️  [Card Tooltip Transformer] Failed to load database: ${error}`)
       }
     } else {
-      console.log(`⚠️  [Card Tooltip Transformer] Database not found at: ${dbPath}`)
+      buildLog(`⚠️  [Card Tooltip Transformer] Database not found at: ${dbPath}`)
     }
 
     const hookContentBeforeParse = nuxt.hook as unknown as (
@@ -57,7 +57,7 @@ export default defineNuxtModule({
     nuxt.hook('build:done', () => {
       if (db) {
         db.close()
-        console.log('🔒 [Card Tooltip Transformer] Database connection closed')
+        buildLog('🔒 [Card Tooltip Transformer] Database connection closed')
       }
     })
   }
@@ -101,17 +101,17 @@ async function getCardImageUrl(db: any, cardName: string): Promise<string | null
 
       if (row?.image_url) return row.image_url
     } catch (error) {
-      console.log(`⚠️  [Card Tooltip Transformer] Failed to query database for "${cardName}": ${error}`)
+      buildLog(`⚠️  [Card Tooltip Transformer] Failed to query database for "${cardName}": ${error}`)
     }
   }
 
   // Fallback to Scryfall API
   try {
     const url = `${SCRYFALL_API_BASE}/cards/named?exact=${encodeURIComponent(cardName)}&format=image`
-    console.log(`🌐 [Card Tooltip Transformer] Fetching from Scryfall: ${cardName}`)
+    buildLog(`🌐 [Card Tooltip Transformer] Fetching from Scryfall: ${cardName}`)
     return url
   } catch (error) {
-    console.log(`⚠️  [Card Tooltip Transformer] Failed to fetch from Scryfall for "${cardName}": ${error}`)
+    buildLog(`⚠️  [Card Tooltip Transformer] Failed to fetch from Scryfall for "${cardName}": ${error}`)
     return null
   }
 }
@@ -194,16 +194,16 @@ function logTransformations(
 ): void {
   if (transformations.length === 0) return
 
-  console.log(`\n📝 [Card Tooltip Transformer] Processing file: ${filePath}`)
-  console.log(`   └─ Found ${transformations.length} card tooltip(s)`)
-  console.log(`\n   🃏 Transformed Card Tooltips:`)
+  buildLog(`\n📝 [Card Tooltip Transformer] Processing file: ${filePath}`)
+  buildLog(`   └─ Found ${transformations.length} card tooltip(s)`)
+  buildLog(`\n   🃏 Transformed Card Tooltips:`)
 
   transformations.forEach((t, idx) => {
-    console.log(`      ${idx + 1}. ${t.original}`)
-    console.log(`         └─ Card: "${t.cardName}"${t.set ? ` (Set: ${t.set})` : ''}`)
-    console.log(`         └─ Image URL: ${t.imageUrl || 'Not found in database'}`)
-    console.log(`         └─ Component: :MagicCardTooltip{name="${t.cardName}"${t.set ? ` set="${t.set}"` : ''}${t.imageUrl ? ` image="${t.imageUrl}"` : ''}}`)
+    buildLog(`      ${idx + 1}. ${t.original}`)
+    buildLog(`         └─ Card: "${t.cardName}"${t.set ? ` (Set: ${t.set})` : ''}`)
+    buildLog(`         └─ Image URL: ${t.imageUrl || 'Not found in database'}`)
+    buildLog(`         └─ Component: :MagicCardTooltip{name="${t.cardName}"${t.set ? ` set="${t.set}"` : ''}${t.imageUrl ? ` image="${t.imageUrl}"` : ''}}`)
   })
 
-  console.log(`   ✅ Card tooltips transformed successfully\n`)
+  buildLog(`   ✅ Card tooltips transformed successfully\n`)
 }
