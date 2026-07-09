@@ -275,6 +275,14 @@ export default defineNuxtConfig({
     // Enable image optimization for better performance
     quality: 80,
     format: ['webp', 'jpg', 'png'],
+    // Short aliases documented in docs/CONTENT.md for frontmatter/content image paths
+    alias: {
+      '/arts': '/assets/blog/arts',
+      '/sets': '/assets/blog/sets',
+      '/events': '/assets/blog/events',
+      '/articles': '/assets/blog/articles',
+      '/blog': '/assets/blog',
+    },
     screens: {
       xs: 320,
       sm: 640,
