@@ -407,6 +407,42 @@ card: Swords to Plowshares
 
 :magic-card-display{card="Swords to Plowshares"}
 
+## Galleria di carte
+
+Striscia orizzontale scorrevole di carte intere, utile per illustrare un gruppo di carte discusse insieme nel testo.
+
+```md
+::magic-card-gallery
+---
+cards:
+  - Swords to Plowshares
+  - Counterspell
+caption: "Le carte al centro della discussione"
+---
+::
+```
+
+::magic-card-gallery
+---
+cards:
+  - Swords to Plowshares
+  - Counterspell
+caption: "Le carte al centro della discussione"
+---
+::
+
+## Icona del tipo di carta
+
+Piccola icona inline (mana-font) per un tipo di carta, utile in prosa o tabelle senza dover caricare l'immagine intera.
+
+```md
+:magic-card-types-icon{type="creature" size="md"}
+```
+
+:magic-card-types-icon{type="creature" size="md"} Creatura &nbsp;
+:magic-card-types-icon{type="instant" size="md"} Istantaneo &nbsp;
+:magic-card-types-icon{type="land" size="md"} Terra
+
 ## Mostrare l'art di una carta
 
 Il componente `magic-card-art-crop` in modo predefinito prende il nome della carta e ne restituisce l'art.
@@ -1103,6 +1139,52 @@ headerGradient: abzan
 name: heading
 placement: placement
 player: subheading
+---
+::
+
+## Immagini
+
+### Immagine con didascalia
+
+```md
+::image-caption
+---
+src: /arts/cmm-81-counterspell.jpg
+alt: "Counterspell"
+caption: "Una didascalia esplicativa sotto l'immagine"
+---
+::
+```
+
+::image-caption
+---
+src: /arts/cmm-81-counterspell.jpg
+alt: "Counterspell"
+caption: "Una didascalia esplicativa sotto l'immagine"
+---
+::
+
+### Carosello di immagini
+
+Utile per foto di mazzi o più angolazioni di una carta fisica.
+
+```md
+::image-carousel
+---
+images:
+  - /arts/cmm-81-counterspell.jpg
+  - src: /sets/lord-of-the-rings.jpg
+    alt: "Lord of the Rings"
+---
+::
+```
+
+::image-carousel
+---
+images:
+  - /arts/cmm-81-counterspell.jpg
+  - src: /sets/lord-of-the-rings.jpg
+    alt: "Lord of the Rings"
 ---
 ::
 

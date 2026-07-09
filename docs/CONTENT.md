@@ -551,6 +551,39 @@ Il mazzo gioca 4 copie di [[Counterspell]] e 2 [[Exclude]] per il controllo.
 Use double square brackets `[[Card Name]]` to reference cards.
 This will render the card image when the user hovers over the card name or touches it on mobile.
 
+### Card Gallery
+
+Use `::magic-card-gallery` to show a horizontally-scrolling strip of full card images, e.g. to illustrate a group of cards discussed together in the text.
+
+```markdown
+::magic-card-gallery
+---
+cards:
+  - Hawkeye's Bow
+  - Seeker of Skybreak
+caption: "Le due carte al centro della discussione"
+---
+::
+```
+
+| Prop | Type | Required | Description |
+|------|------|----------|--------------|
+| `cards` | `string[]` | Yes | Card names, resolved the same way as `[[Card Name]]` |
+| `caption` | `string` | No | Text shown below the gallery |
+
+### Card Type Icons
+
+Use `::magic-card-types-icon` to render a small inline mana-font icon for a card type (artifact, creature, enchantment, instant, land, sorcery) — useful in prose or tables without pulling in a full card image.
+
+```markdown
+:magic-card-types-icon{type="creature" size="md"}
+```
+
+| Prop | Type | Required | Description |
+|------|------|----------|--------------|
+| `type` | `string` | Yes | One of: `artifacts`, `creatures`, `enchantments`, `instants`, `lands`, `sorceries` |
+| `size` | `'sm' \| 'md' \| 'lg'` | No | Icon size, default `md` |
+
 ### Decklists
 
 Use `MagicDecklist` component for formatted decklists.
@@ -928,6 +961,46 @@ loading: lazy
 - ✅ Optimized for Core Web Vitals
 - ✅ On-demand image processing
 - ✅ Automatic caching
+
+#### Image with Caption
+
+Use `::image-caption` for a single image with an optional caption underneath, e.g. a step in a tutorial.
+
+```markdown
+::image-caption
+---
+src: /assets/blog/articles/white-border/rubber.jpg
+alt: "Gomma Faber Castell"
+caption: "Lo strumento usato per questo passaggio"
+---
+::
+```
+
+| Prop | Type | Required | Description |
+|------|------|----------|--------------|
+| `src` | `string` | Yes | Image path |
+| `alt` | `string` | No | Alt text, default `''` |
+| `caption` | `string` | No | Caption shown below the image |
+
+#### Image Carousel
+
+Use `::image-carousel` for a swiper carousel of multiple images (e.g. deck photos, multiple angles of a physical card).
+
+```markdown
+::image-carousel
+---
+images:
+  - /assets/blog/articles/white-border/deck-0.jpg
+  - /assets/blog/articles/white-border/deck-1.jpg
+  - src: /assets/blog/articles/white-border/deck-2.jpg
+    alt: "Vista dall'alto del mazzo"
+---
+::
+```
+
+| Prop | Type | Required | Description |
+|------|------|----------|--------------|
+| `images` | `(string \| { src: string; alt?: string })[]` | Yes | Plain paths or objects with per-image alt text |
 
 ---
 
