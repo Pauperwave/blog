@@ -8,6 +8,9 @@ import {
 } from '~/constants/content-config'
 import { hasLeagueTag } from '~/utils/article-filters'
 import MigrationNotice from '~/components/ui/MigrationNotice.vue'
+// Explicit import needed: auto-imports used only in <template> aren't resolved by
+// `nuxt typecheck` (vue-tsc -b project references) — https://github.com/nuxt/cli/issues/1224
+import { formatDateIT } from '#imports'
 
 interface HeroCategoryHighlight {
   category: CategoryType

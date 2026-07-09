@@ -9,6 +9,9 @@ import {
 import { getRecentArticleBadge as getBadge } from '~/utils/article-badges'
 import { buildArticleTopicTags, buildGlobalNormalizedLocationSet } from '~/utils/article-filters'
 import { normalizeAuthors } from '~/composables/useAuthor'
+// Explicit import needed: auto-imports used only in <template> aren't resolved by
+// `nuxt typecheck` (vue-tsc -b project references) — https://github.com/nuxt/cli/issues/1224
+import { getAuthorSlug } from '#imports'
 
 const route = useRoute()
 const slug = route.params.slug as string
@@ -92,7 +95,13 @@ defineOgImage('Author.takumi', {
       <!-- Author Info Section -->
       <UCard class="mb-8">
         <div class="flex flex-col md:flex-row gap-6">
-          <UAvatar :as="{ img: 'img' }" :src="author.avatar" :alt="author.name" size="2xl" class="shrink-0" />
+          <UAvatar
+            :as="{ img: 'img' }"
+            :src="author.avatar"
+            :alt="author.name"
+            size="2xl"
+            class="shrink-0"
+          />
 
           <div class="flex-1">
             <div class="flex flex-col gap-4">
@@ -108,8 +117,12 @@ defineOgImage('Author.takumi', {
               <div class="flex items-center gap-6 flex-wrap">
                 <div class="flex items-center gap-2">
                   <Icon name="i-lucide-book-open-text" class="w-5 h-5 text-primary" />
-                  <UButton :to="`/articles?author=${getAuthorSlug(author.name)}`" variant="link" color="primary"
-                    class="p-0 text-sm font-semibold">
+                  <UButton
+                    :to="`/articles?author=${getAuthorSlug(author.name)}`"
+                    variant="link"
+                    color="primary"
+                    class="p-0 text-sm font-semibold"
+                  >
                     {{ totalArticles }} articoli totali
                   </UButton>
                 </div>
@@ -123,10 +136,15 @@ defineOgImage('Author.takumi', {
       <div v-if="Object.keys(articleCountByCategory).length > 0" class="mb-8">
         <h2 class="text-2xl font-bold mb-4">Articoli per categoria</h2>
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-          <NuxtLink v-for="(count, category) in articleCountByCategory" :key="category"
-            :to="`/articles?category=${category}&author=${getAuthorSlug(author.name)}`" class="block">
+          <NuxtLink
+            v-for="(count, category) in articleCountByCategory"
+            :key="category"
+            :to="`/articles?category=${category}&author=${getAuthorSlug(author.name)}`"
+            class="block"
+          >
             <UCard
-              class="text-center cursor-pointer hover:border-primary-500 dark:hover:border-primary-400 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+              class="text-center cursor-pointer hover:border-primary-500 dark:hover:border-primary-400 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+            >
               <div class="flex flex-col gap-2">
                 <p class="text-3xl font-bold text-primary">{{ count }}</p>
                 <p class="text-sm text-gray-600 dark:text-gray-400">
@@ -142,16 +160,26 @@ defineOgImage('Author.takumi', {
       <div v-if="recentArticles.length > 0">
         <h2 class="text-2xl font-bold mb-4">Ultimi articoli</h2>
         <UBlogPosts class="gap-2 sm:gap-4 lg:gap-6 sm:grid-cols-3 lg:grid-cols-4">
-          <ArticleCard v-for="article in recentArticles" :key="article.path" :article="article"
-            :badge="getBadge(article.date)" :show-author="false"
+          <ArticleCard
+            v-for="article in recentArticles"
+            :key="article.path"
+            :article="article"
+            :badge="getBadge(article.date)"
+            :show-author="false"
             :category-label="CATEGORY_LABELS[article.category as CategoryType]"
-            :topic-tags="getArticleTopicTags(article)" />
+            :topic-tags="getArticleTopicTags(article)"
+          />
         </UBlogPosts>
       </div>
 
       <!-- Empty State -->
-      <UEmpty v-else title="Nessun articolo" description="Questo autore non ha ancora pubblicato articoli."
-        variant="naked" :actions="[{ label: 'Torna alla home', to: '/' }]" />
+      <UEmpty
+        v-else
+        title="Nessun articolo"
+        description="Questo autore non ha ancora pubblicato articoli."
+        variant="naked"
+        :actions="[{ label: 'Torna alla home', to: '/' }]"
+      />
     </UPageBody>
   </UPage>
 </template>

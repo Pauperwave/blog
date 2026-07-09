@@ -9,6 +9,9 @@ import {
 } from '~/constants/content-config'
 import { AUTHOR_SOCIAL_LINKS, type AuthorSocials } from '~/constants/author-socials'
 import { normalizeAuthors } from '~/composables/useAuthor'
+// Explicit import needed: auto-imports used only in <template> aren't resolved by
+// `nuxt typecheck` (vue-tsc -b project references) — https://github.com/nuxt/cli/issues/1224
+import { formatDateIT, getAuthorSlug } from '#imports'
 
 interface AuthorRecord {
   name: string

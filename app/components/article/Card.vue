@@ -4,6 +4,9 @@ import type { BadgeProps } from '@nuxt/ui'
 import type { Author } from '~/composables/useAuthor'
 import type { AnyArticle } from '~/constants/content-config'
 import { getArticleFilterLocation, hasLeagueTag } from '~/utils/article-filters'
+// Explicit import needed: auto-imports used only in <template> aren't resolved by
+// `nuxt typecheck` (vue-tsc -b project references) — https://github.com/nuxt/cli/issues/1224
+import { useState, formatDateIT } from '#imports'
 
 interface Props {
   article: AnyArticle

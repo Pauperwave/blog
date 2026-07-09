@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import type { AuthorSocials } from '~/constants/author-socials'
+// Explicit import needed: auto-imports used only in <template> aren't resolved by
+// `nuxt typecheck` (vue-tsc -b project references) — https://github.com/nuxt/cli/issues/1224
+import { formatDateIT } from '#imports'
 
 interface AuthorCategoryStat {
   category: string
