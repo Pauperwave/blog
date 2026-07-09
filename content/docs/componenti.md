@@ -431,6 +431,36 @@ caption: "Le carte al centro della discussione"
 ---
 ::
 
+## Ventaglio di carte
+
+Carte disposte a ventaglio, come una mano di carte — utile per mostrare più opzioni/varianti insieme con un effetto più scenico della galleria.
+
+```md
+::magic-card-fan
+---
+cards:
+  - Swords to Plowshares
+  - Counterspell
+  - Lightning Bolt
+  - Brainstorm
+  - Lava Spike
+caption: "Cinque carte a ventaglio"
+---
+::
+```
+
+::magic-card-fan
+---
+cards:
+  - Swords to Plowshares
+  - Counterspell
+  - Lightning Bolt
+  - Brainstorm
+  - Lava Spike
+caption: "Cinque carte a ventaglio"
+---
+::
+
 ## Icona del tipo di carta
 
 Piccola icona inline (mana-font) per un tipo di carta, utile in prosa o tabelle senza dover caricare l'immagine intera.
@@ -697,10 +727,6 @@ author:
   nickname: hypergeomancer
   url: /authors/hypergeomancer
 ---
-::
-
-::caution
-La card di Hypergeomancer mostra una `description` vuota — manca nel file `content/authors/hypergeomancer.yml`, andrebbe aggiunta.
 ::
 
 ## Guida al sideboard

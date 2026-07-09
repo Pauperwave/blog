@@ -568,8 +568,29 @@ caption: "Le due carte al centro della discussione"
 
 | Prop | Type | Required | Description |
 |------|------|----------|--------------|
-| `cards` | `string[]` | Yes | Card names, resolved the same way as `[[Card Name]]` |
+| `cards` | `string[]` | Yes | Card names, resolved client-side at runtime via the Scryfall API (`useScryfallCard`, cached in `useState`) — same mechanism as `magic-card-display`/`magic-card-art-crop`, *not* the build-time DB lookup used by `[[Card Name]]` |
 | `caption` | `string` | No | Text shown below the gallery |
+
+### Card Fan
+
+Use `::magic-card-fan` to show cards overlapping in a fanned-out hand-of-cards arrangement (rotated, hover to lift) — same card resolution as `magic-card-gallery`, better suited to comparing several similar options at a glance.
+
+```markdown
+::magic-card-fan
+---
+cards:
+  - Swords to Plowshares
+  - Counterspell
+  - Lightning Bolt
+caption: "Le opzioni a confronto"
+---
+::
+```
+
+| Prop | Type | Required | Description |
+|------|------|----------|--------------|
+| `cards` | `string[]` | Yes | Card names, resolved the same way as `magic-card-gallery` |
+| `caption` | `string` | No | Text shown below the fan |
 
 ### Card Type Icons
 
