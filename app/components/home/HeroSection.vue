@@ -143,11 +143,12 @@ const getThumbnailSrc = (thumbnail: unknown) => {
                   v-if="featuredThumbnailSrc"
                   class="overflow-hidden rounded-xl border border-gray-200/70 dark:border-gray-800/70"
                 >
-                  <img
+                  <NuxtImg
                     :src="featuredThumbnailSrc"
                     :alt="featuredArticle.title"
+                    loading="lazy"
                     class="h-48 md:h-72 w-full object-cover"
-                  >
+                  />
                 </div>
 
                 <div class="flex items-center justify-between gap-3 flex-wrap">
