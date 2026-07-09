@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { Swiper, SwiperSlide } from 'swiper/vue'
-import { Navigation, Pagination, Autoplay } from 'swiper/modules'
-
 interface ImageItem {
   src: string
   alt?: string
@@ -34,6 +31,16 @@ const parsedImages = computed<ImageItem[]>(() => {
     }
   })
 })
+
+const containerRef = ref(null)
+useSwiper(containerRef, {
+  slidesPerView: 1,
+  spaceBetween: 20,
+  navigation: true,
+  pagination: { clickable: true },
+  loop: true,
+  autoplay: { delay: 3000, disableOnInteraction: false }
+})
 </script>
 
 <template>
@@ -44,29 +51,25 @@ const parsedImages = computed<ImageItem[]>(() => {
         v-if="parsedImages.length > 0"
         class="swiper-carousel-wrapper"
       >
-        <Swiper
-          :modules="[Navigation, Pagination, Autoplay]"
-          :slides-per-view="1"
-          :space-between="20"
-          :navigation="true"
-          :pagination="{ clickable: true }"
-          :loop="true"
-          :autoplay="{ delay: 3000, disableOnInteraction: false }"
+        <swiper-container
+          ref="containerRef"
           class="rounded-lg min-h-100"
+          :init="false"
         >
-          <SwiperSlide
+          <swiper-slide
             v-for="(image, idx) in parsedImages"
             :key="idx"
           >
             <div class="flex justify-center items-center py-4 h-full">
-              <img
+              <NuxtImg
                 :src="image.src"
                 :alt="image.alt"
+                loading="lazy"
                 class="rounded-lg shadow-lg max-h-150 w-auto object-contain"
-              >
+              />
             </div>
-          </SwiperSlide>
-        </Swiper>
+          </swiper-slide>
+        </swiper-container>
       </div>
 
       <!-- SSR Fallback: Show first image as placeholder -->
@@ -77,11 +80,12 @@ const parsedImages = computed<ImageItem[]>(() => {
         >
           <div class="relative rounded-lg min-h-100 bg-gray-100 dark:bg-gray-800">
             <div class="flex justify-center items-center py-4 h-full">
-              <img
+              <NuxtImg
                 :src="parsedImages[0]!.src"
                 :alt="parsedImages[0]!.alt"
+                loading="lazy"
                 class="rounded-lg shadow-lg max-h-150 w-auto object-contain"
-              >
+              />
             </div>
             <!-- Indicator that carousel is loading -->
             <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-2">

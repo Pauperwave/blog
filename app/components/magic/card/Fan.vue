@@ -1,203 +1,75 @@
 <script setup lang="ts">
-/** Parsed slot text structure */
-interface ParsedCard {
-  name: string
-  set?: string
-  collector_number?: string
+import { useScryfallCard } from '~/composables/useScryfallCard'
+import { extractImageUrl } from '#shared/utils'
+
+const props = defineProps<{
+  cards: string[]
+  caption?: string
+}>()
+
+const cardsWithData = props.cards.map(card => ({
+  name: card,
+  ...useScryfallCard(card)
+}))
+
+function fanRotation(index: number, total: number): number {
+  if (total <= 1) return 0
+  const maxAngle = Math.min(6 * (total - 1), 24)
+  const step = (maxAngle * 2) / (total - 1)
+  return -maxAngle + step * index
 }
-
-/** Scryfall minimal card type */
-interface ScryfallCard {
-  id: string
-  name: string
-  image_uris?: {
-    small?: string
-    normal?: string
-    large?: string
-  }
-}
-
-const cardData = ref<ScryfallCard[] | null>(null)
-const loading = ref(false)
-const error = ref<string | null>(null)
-
-const slotText = ref<HTMLElement | null>(null)
-const rawText = ref('')
-
-const containerRef = ref(null)
-const swiper = useSwiper(containerRef)
-
-const onSwiper = (swiper) => {
-  console.log(swiper)
-}
-const onSlideChange = () => {
-  console.log('slide change')
-}
-
-/** Parse slot text into name + optional set + collector */
-function parseSlotText(raw: string): ParsedCard[] {
-  return raw
-    .split('\n')
-    .map(line => line.trim())
-    .filter(Boolean)
-    .map<ParsedCard>((line) => {
-      const full = line.match(/^(.+?)\s+\(([A-Za-z0-9]+)\)\s+(\d+)$/)
-      if (full) {
-        return {
-          name: full[1]!,
-          set: full[2]!.toLowerCase(),
-          collector_number: full[3]
-        } satisfies ParsedCard
-      }
-
-      const set = line.match(/^(.+?)\s+\(([A-Za-z0-9]+)\)$/)
-      if (set) {
-        return {
-          name: set[1]!,
-          set: set[2]!.toLowerCase()
-        } satisfies ParsedCard
-      }
-
-      return { name: line } satisfies ParsedCard
-    })
-}
-
-/** Fetch a single card from Scryfall */
-async function fetchCard(card: ParsedCard): Promise<ScryfallCard | null> {
-  try {
-    let url = ''
-    if (card.set && card.collector_number) {
-      url = `https://api.scryfall.com/cards/${card.set}/${card.collector_number}`
-    } else if (card.set) {
-      url = `https://api.scryfall.com/cards/named?exact=${encodeURIComponent(card.name)}&set=${card.set}`
-    } else {
-      url = `https://api.scryfall.com/cards/named?fuzzy=${encodeURIComponent(card.name)}`
-    }
-
-    const res = await fetch(url)
-    if (!res.ok) throw new Error(`Carta non trovata: ${card.name}`)
-    return await res.json()
-  } catch (err) {
-    console.warn(`Errore fetch per ${card.name}`, err)
-    return null
-  }
-}
-
-/** Watch slot content using MutationObserver */
-onMounted(() => {
-  if (!slotText.value) return
-
-  const update = () => {
-    rawText.value = slotText.value?.textContent?.trim() || ''
-  }
-
-  update()
-
-  // Access Swiper instance
-  // Read more about Swiper instance: https://swiperjs.com/swiper-api#methods--properties
-  console.log(swiper.instance)
-
-  // const observer = new MutationObserver(update)
-  // observer.observe(slotText.value, { childList: true, subtree: true, characterData: true })
-})
-
-/** Fetch Scryfall data whenever rawText changes */
-watch(rawText, async (raw) => {
-  const cards = parseSlotText(raw)
-  if (!cards.length) {
-    cardData.value = []
-    return
-  }
-
-  loading.value = true
-  error.value = null
-  cardData.value = null
-
-  try {
-    const results = await Promise.all(cards.map(fetchCard))
-    cardData.value = results.filter((c): c is ScryfallCard => Boolean(c))
-  } catch (e) {
-    error.value = (e as Error).message
-  } finally {
-    loading.value = false
-  }
-})
 </script>
 
 <template>
-  <div>
-    <!-- Slot che contiene i nomi delle carte -->
-    <div
-      ref="slotText"
-      class="hidden"
-    >
-      <slot mdc-unwrap="p" />
-    </div>
-
-    <!-- Stati di caricamento / errore -->
-    <div
-      v-if="loading"
-      class="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2"
-    >
+  <figure class="my-8">
+    <div class="flex justify-center items-end flex-wrap pt-10 pb-6 px-4">
       <div
-        v-for="n in 6"
-        :key="n"
-        class="h-48 bg-gray-300 animate-pulse rounded-lg"
-      />
-    </div>
-    <div
-      v-if="error"
-      class="text-red-500 mt-4"
-    >
-      {{ error }}
-    </div>
-
-    <!-- Carte renderizzate -->
-    <div
-      v-if="cardData?.length"
-      class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 mt-4"
-    >
-      <div
-        v-for="card in cardData"
-        :key="card.id"
-        class="flex flex-col items-center"
+        v-for="(item, idx) in cardsWithData"
+        :key="item.name"
+        class="fan-card shrink-0"
+        :style="{
+          transform: `rotate(${fanRotation(idx, cardsWithData.length)}deg)`,
+          zIndex: idx,
+          marginLeft: idx === 0 ? '0' : '-3.5rem'
+        }"
       >
+        <UAlert
+          v-if="item.error.value"
+          color="error"
+          variant="soft"
+          title="Card not found"
+          :description="`Could not find card: ${item.name}`"
+          icon="i-lucide-alert-circle"
+        />
         <img
-          v-if="card.image_uris?.normal"
-          :src="card.image_uris.normal"
-          :alt="card.name"
-          class="rounded-lg shadow-md hover:scale-105 transition-transform"
+          v-else-if="extractImageUrl(item.cardData.value, 'normal') && !item.loading.value"
+          :src="extractImageUrl(item.cardData.value, 'normal')!"
+          :alt="item.cardData.value?.name"
+          class="w-36 md:w-44 rounded-lg shadow-lg"
         >
+        <USkeleton
+          v-else
+          class="h-50 w-36 md:w-44 rounded-lg"
+        />
       </div>
     </div>
-    <div
-      v-else-if="!loading"
-      class="text-2xl font-sans font-bold text-indigo-500"
+    <figcaption
+      v-if="caption"
+      class="text-sm text-muted text-center py-2"
     >
-      Nessuna carta caricata
-    </div>
-
-    <ClientOnly>
-      <swiper-container ref="containerRef">
-        <swiper
-          :slides-per-view="3"
-          :space-between="50"
-          @swiper="onSwiper"
-          @slide-change="onSlideChange"
-        >
-          <swiper-slide
-            v-for="(card, idx) in cardData"
-            :key="idx"
-          >
-            <img
-              v-if="card.image_uris?.normal"
-              :src="card.image_uris.normal"
-              :alt="card.name"
-              class="rounded-lg shadow-md hover:scale-105 transition-transform"
-            >
-          </swiper-slide>
-        </swiper>
-      </swiper-container>
-    </ClientOnly>
-  </div>
+      {{ caption }}
+    </figcaption>
+  </figure>
 </template>
+
+<style scoped>
+.fan-card {
+  transform-origin: bottom center;
+  transition: transform 0.25s ease;
+}
+
+.fan-card:hover {
+  transform: translateY(-24px) scale(1.08) !important;
+  z-index: 999 !important;
+}
+</style>
