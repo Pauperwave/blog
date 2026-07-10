@@ -91,9 +91,11 @@ const patternSimple = createRegExp(
 )
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Dynamic import requires any type
-async function getCardImageUrl(db: any, cardName: string): Promise<string | null> {
-  // Try database first
-  if (db) {
+async function getCardImageUrl(db: any, cardName: string, set?: string): Promise<string | null> {
+  // The local DB is built from Scryfall's "oracle_cards" bulk file, which only ever
+  // stores one representative printing per card (no set column) — it can't answer a
+  // set-specific request, so skip it and go straight to Scryfall when a set is given.
+  if (!set && db) {
     try {
       const row = db.prepare(`
         SELECT image_url FROM cards WHERE name = ? LIMIT 1
@@ -107,8 +109,9 @@ async function getCardImageUrl(db: any, cardName: string): Promise<string | null
 
   // Fallback to Scryfall API
   try {
-    const url = `${SCRYFALL_API_BASE}/cards/named?exact=${encodeURIComponent(cardName)}&format=image`
-    buildLog(`🌐 [Card Tooltip Transformer] Fetching from Scryfall: ${cardName}`)
+    const setParam = set ? `&set=${encodeURIComponent(set)}` : ''
+    const url = `${SCRYFALL_API_BASE}/cards/named?exact=${encodeURIComponent(cardName)}${setParam}&format=image`
+    buildLog(`🌐 [Card Tooltip Transformer] Fetching from Scryfall: ${cardName}${set ? ` (${set})` : ''}`)
     return url
   } catch (error) {
     buildLog(`⚠️  [Card Tooltip Transformer] Failed to fetch from Scryfall for "${cardName}": ${error}`)
@@ -129,7 +132,7 @@ async function transformCardTooltips(content: string, filePath: string, db: any)
 
     const cleanName = match[1].trim()
     const cleanSet = match[2].trim()
-    const imageUrl = await getCardImageUrl(db, cleanName)
+    const imageUrl = await getCardImageUrl(db, cleanName, cleanSet)
 
     transformations.push({
       original: match[0],
