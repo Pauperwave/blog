@@ -591,6 +591,10 @@ caption: "Le opzioni a confronto"
 |------|------|----------|--------------|
 | `cards` | `string[]` | Yes | Card names, resolved the same way as `magic-card-gallery` |
 | `caption` | `string` | No | Text shown below the fan |
+| `arch` | `number` | No | Total rotation spread in degrees (default: `20.5`, matching the WotC blog's fan component). The step between adjacent cards is `arch / count`, so the spread converges toward `arch` as more cards are added rather than growing past it. Only applies to `layout: fan`. |
+| `layout` | `'fan' \| 'hand'` | No | `fan` (default) rotates cards around a shared pivot. `hand` skips rotation entirely — cards spread horizontally in fixed 60%-of-own-width steps and rise into a shallow arc (center card frontmost), like holding a hand of cards. ⚠️ The `hand` values were only partially captured live from magic.wizards.com (2 of 5 slot positions) and extrapolated for the rest — treat it as a reasonable approximation, not a byte-exact reproduction like `fan` is. |
+
+Below `md` (768px), the fan falls back to a plain horizontal scroll strip — rotated overlapping cards don't work on narrow viewports.
 
 ### Card Type Icons
 
