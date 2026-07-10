@@ -433,7 +433,7 @@ caption: "Le carte al centro della discussione"
 
 ## Ventaglio di carte
 
-Carte disposte a ventaglio, come una mano di carte — utile per mostrare più opzioni/varianti insieme con un effetto più scenico della galleria.
+Carte disposte a ventaglio, come una mano di carte — utile per mostrare più opzioni/varianti insieme con un effetto più scenico della galleria. Su schermi stretti (mobile) passa automaticamente a una striscia scorrevole.
 
 ```md
 ::magic-card-fan
@@ -445,6 +445,7 @@ cards:
   - Brainstorm
   - Lava Spike
 caption: "Cinque carte a ventaglio"
+arch: 20.5 # opzionale, apertura totale del ventaglio in gradi
 ---
 ::
 ```
@@ -458,6 +459,38 @@ cards:
   - Brainstorm
   - Lava Spike
 caption: "Cinque carte a ventaglio"
+---
+::
+
+### Variante "a mano"
+
+Impostando `layout: hand` le carte non ruotano più: si dispongono in un leggero arco verticale (la carta centrale è la più "vicina", quelle ai lati risalgono leggermente), come tenerle in mano.
+
+```md
+::magic-card-fan
+---
+cards:
+  - Lightning Bolt
+  - Mulldrifter
+  - Prophetic Prism
+  - Chain Lightning
+  - Ghostly Flicker
+caption: "Cinque carte a mano"
+layout: hand
+---
+::
+```
+
+::magic-card-fan
+---
+cards:
+  - Lightning Bolt
+  - Mulldrifter
+  - Prophetic Prism
+  - Chain Lightning
+  - Ghostly Flicker
+caption: "Cinque carte a mano"
+layout: hand
 ---
 ::
 
