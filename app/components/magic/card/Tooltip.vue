@@ -1,8 +1,12 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   name: string
   image?: string
+  /** Scryfall set code — when given, `image` is resolved to that specific printing. */
+  set?: string
 }>()
+
+const cardLabel = computed(() => props.set ? `${props.name} (${props.set})` : props.name)
 
 const tooltipOpen = ref(false)
 const anchor = ref({ x: 0, y: 0 })
@@ -64,7 +68,7 @@ const handleClick = () => {
       class="font-semibold text-primary"
       :class="isMobile ? 'cursor-pointer underline' : 'cursor-help'"
       :role="isMobile ? 'button' : undefined"
-      :aria-label="isMobile ? `View ${name} card image` : undefined"
+      :aria-label="isMobile ? `View ${cardLabel} card image` : undefined"
       @pointerenter="handlePointerEnter"
       @pointerleave="handlePointerLeave"
       @pointermove="handlePointerMove"
@@ -76,7 +80,7 @@ const handleClick = () => {
     <template #content>
       <img
         :src="image"
-        :alt="name"
+        :alt="cardLabel"
         class="w-70 h-auto rounded-xl"
       >
     </template>
@@ -85,8 +89,8 @@ const handleClick = () => {
   <!-- Mobile Modal -->
   <UModal
     v-model:open="showModal"
-    :title="name"
-    :description="`${name} card image`"
+    :title="cardLabel"
+    :description="`${cardLabel} card image`"
     :ui="{
       content: 'bg-transparent shadow-none ring-0',
       overlay: 'bg-black/80'
@@ -96,7 +100,7 @@ const handleClick = () => {
       <div class="flex items-center justify-center p-4">
         <img
           :src="image"
-          :alt="name"
+          :alt="cardLabel"
           class="max-w-full max-h-[85vh] rounded-xl shadow-2xl"
         >
       </div>
