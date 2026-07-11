@@ -72,7 +72,20 @@ export default defineNuxtConfig({
   },
   ogImage: {
     zeroRuntime: true,
-    buildCache: true
+    buildCache: true,
+    security: {
+      // Default 15s is shorter than the takumi prerender worker's own internal 30s
+      // timeout (nuxt-og-image's node-dev binding spawns a real Node worker_threads
+      // Worker to isolate crashes during prerendering — postToWorker() hardcodes a
+      // 30s ceiling). The first render pays a one-time cold-start cost spinning up
+      // that worker + loading @takumi-rs/core inside it; every render after reuses
+      // the same warm worker and is fast. Confirmed empirically: 15s (default) and
+      // 20000ms both failed, 29000ms succeeds twice cleanly — so the real cold-start
+      // time is somewhere in the 20-29s range. Kept at 29000 (close to the hard 30s
+      // ceiling) rather than narrowing further, since finding the exact minimum isn't
+      // worth more ~110s build cycles — see docs/2026-07-11-build-performance-investigation.md.
+      renderTimeout: 29000
+    }
   },
   content: {
     build: {
@@ -203,7 +216,11 @@ export default defineNuxtConfig({
       // function to fall back to. Excluding _ipx from prerender means those image URLs 404 in
       // production. Unlike the /articles? case, each _ipx URL is a uniquely-computed image
       // variant with no equivalent already-generated fallback file.
-      ignore: ['/articles?']
+      ignore: ['/articles?'],
+      // Nitro's own default is 1 (fully sequential) — testing whether an explicit bump
+      // helps, since observed prerender wall time already looked more parallel than
+      // that default would suggest (something may already be overriding it).
+      concurrency: 4
     },
     // Filter routes to only prerender recent articles (< 3 months), and add
     // author routes explicitly since the crawler can't discover them (see
