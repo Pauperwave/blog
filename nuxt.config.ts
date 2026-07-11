@@ -185,23 +185,25 @@ export default defineNuxtConfig({
       // Then crawl all the links on the page
       crawlLinks: true,
       failOnError: false,
-      // crawlLinks follows every <img src="/_ipx/..."> rendered by NuxtImg and was
-      // statically transforming each one at build time — 94 image routes measured at
-      // ~567s of combined processing, by far the dominant build-time cost. On Vercel,
-      // ipx already runs on-demand as a serverless function at request time (cached
-      // after first hit), so pre-baking them here is redundant, not a correctness need.
       // NOTE: nitropack's string-pattern matcher here is a plain `path.startsWith(pattern)`,
       // not a glob — no `**`/`*` wildcards, just a literal prefix.
       //
       // /articles?... : the filter query params (category/author/location/tag/deck) on the
-      // articles listing are a client-side-only filter — 30 distinct crawled combinations
-      // measured, each triggering a full page render AND its own OG image render, even
+      // articles listing are a client-side-only filter — the SAME static articles/index.html
+      // serves every query-string variant (Vercel routes by path, not query string; the tag
+      // filter is applied client-side post-hydration via route.query), so excluding these from
+      // the crawl removes zero real content. It only stops 30 distinct crawled combinations
+      // from each separately triggering a full page render AND its own OG image render, even
       // though defineOgImage() on that page never references the filter, so every one of
-      // those 30 OG images is pixel-identical duplicate work (~299s of combined processing
-      // across all /_og/ routes on that page, the single biggest prerender cost found).
-      // Filtered views still work fine live via on-demand SSR; only the bare /articles page
-      // needs to be static.
-      ignore: ['/_ipx/', '/articles?']
+      // those 30 OG images was pixel-identical duplicate work.
+      //
+      // Do NOT add '/_ipx/' here (tried it, had to revert): this project's Vercel deployment
+      // is 100% static (`nitro.preset: 'vercel'` + `nuxt generate` → .vercel/output/static
+      // only, confirmed no functions/ directory at all) — there is no on-demand ipx serverless
+      // function to fall back to. Excluding _ipx from prerender means those image URLs 404 in
+      // production. Unlike the /articles? case, each _ipx URL is a uniquely-computed image
+      // variant with no equivalent already-generated fallback file.
+      ignore: ['/articles?']
     },
     // Filter routes to only prerender recent articles (< 3 months), and add
     // author routes explicitly since the crawler can't discover them (see
