@@ -25,6 +25,12 @@ Da decidere: quale delle due (o entrambe), dove posizionarle nel layout, e se se
 [error] [nuxt-studio] In order to authenticate users, you need to set up a GITHUB OAuth application.
 ```
 
+The same missing credentials also show up as a build-time warning on Vercel production builds, not just locally:
+
+```
+[warn] [Nuxt Studio] In order to use Studio in production mode, you need to setup authentication:
+```
+
 Nuxt Studio needs OAuth credentials to authenticate editors — this is a Studio requirement, unrelated to Nuxt UI.
 
 **Steps** (GitHub, since that's the configured repository provider):
