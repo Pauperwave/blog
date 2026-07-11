@@ -13,6 +13,10 @@ Da decidere: quale delle due (o entrambe), dove posizionarle nel layout, e se se
 
 `magic-card-tooltip` (and by extension `[[Card Name]]` inline references) currently can't show the second face of a double-faced card — only the front face is ever displayed. Already flagged inline in `content/docs/componenti.md` ("Alcuni casi limite"), tracked here so it doesn't only live as a caution note.
 
+## Verify `hand` layout against a live magic.wizards.com session
+
+`magic-cards`' `layout: hand` is only partially reverse-engineered — 2 of 5 card slot positions were captured live (from "Design Files: Urza's Destiny, Part 3", the one article found using `config="hand"`), the rest is extrapolated. Unverified: the other 3 slot positions, and whether hovering a hand card repositions siblings the way `fan` does. See `docs/2026-07-10-magic-cards-component-research.md` for what's confirmed vs. assumed.
+
 ## Template pages leak into sitemap.xml
 
 The four `0000-00-00-*-template` pages are all `published: false` and have `prerender: false` route rules, but `prerender: false` only controls static generation — it doesn't exclude a route from `@nuxtjs/sitemap`'s content-source discovery, which doesn't currently filter by `published`. So they still show up in `sitemap.xml`:

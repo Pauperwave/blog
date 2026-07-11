@@ -393,50 +393,32 @@ Al momento non è possibile mostrare la seconda faccia di una carta double faced
 
 :magic-card-tooltip{name="Vector Glider"}
 
-## Mostrare una carta per intera
+## Mostrare una o più carte
 
-Semplice componente per mostrare una carta per intera, utile negli articoli di `spoiler`.
+`magic-cards` è l'unico componente da usare per mostrare carte intere negli articoli — sia per una carta sola (utile in `spoiler`) sia per più carte insieme, con ventaglio ruotato (`fan`, default) o variante "a mano" (`hand`, senza rotazione). Su schermi stretti (mobile) passa automaticamente a una striscia scorrevole: non è una modalità scelta dall'autore, è il comportamento responsive automatico, come nel componente originale di WotC.
+
+Per una singola carta basta un array con un solo elemento:
 
 ```md
-::magic-card-display
+::magic-cards
 ---
-card: Swords to Plowshares
+cards:
+  - Swords to Plowshares
 ---
 ::
 ```
 
-:magic-card-display{card="Swords to Plowshares"}
-
-## Galleria di carte
-
-Striscia orizzontale scorrevole di carte intere, utile per illustrare un gruppo di carte discusse insieme nel testo.
-
-```md
-::magic-card-gallery
+::magic-cards
 ---
 cards:
   - Swords to Plowshares
-  - Counterspell
-caption: "Le carte al centro della discussione"
----
-::
-```
-
-::magic-card-gallery
----
-cards:
-  - Swords to Plowshares
-  - Counterspell
-caption: "Le carte al centro della discussione"
 ---
 ::
 
-## Ventaglio di carte
-
-Carte disposte a ventaglio, come una mano di carte — utile per mostrare più opzioni/varianti insieme con un effetto più scenico della galleria. Su schermi stretti (mobile) passa automaticamente a una striscia scorrevole.
+Per più carte insieme: il ventaglio ruotato.
 
 ```md
-::magic-card-fan
+::magic-cards
 ---
 cards:
   - Swords to Plowshares
@@ -445,12 +427,12 @@ cards:
   - Brainstorm
   - Lava Spike
 caption: "Cinque carte a ventaglio"
-arch: 20.5 # opzionale, apertura totale del ventaglio in gradi
+arch: 20.5 # opzionale, apertura totale del ventaglio in gradi (solo layout: fan)
 ---
 ::
 ```
 
-::magic-card-fan
+::magic-cards
 ---
 cards:
   - Swords to Plowshares
@@ -467,7 +449,7 @@ caption: "Cinque carte a ventaglio"
 Impostando `layout: hand` le carte non ruotano più: si dispongono in un leggero arco verticale (la carta centrale è la più "vicina", quelle ai lati risalgono leggermente), come tenerle in mano.
 
 ```md
-::magic-card-fan
+::magic-cards
 ---
 cards:
   - Lightning Bolt
@@ -481,7 +463,7 @@ layout: hand
 ::
 ```
 
-::magic-card-fan
+::magic-cards
 ---
 cards:
   - Lightning Bolt

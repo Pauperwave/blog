@@ -56,7 +56,9 @@ Nitro preset is `vercel`. `routeRules` in `nuxt.config.ts` prerenders `/`, `/art
 
 ### Component auto-import prefixing drives MDC shortcode naming
 
-In `nuxt.config.ts`, `~/components/{charts,content,layout,ui}` are registered with `pathPrefix: false` (flat names, e.g. `app/components/layout/Header.vue` → `<Header>`), while the rest of `app/components` keeps Nuxt's default folder-prefixed convention. That's why MDC shortcodes map the way they do: `::article-quote` → `app/components/article/Quote.vue`, `::magic-decklist` → `app/components/magic/Decklist.vue`, `::magic-card-gallery` → `app/components/magic/card/Gallery.vue`, and the `[[Card]]` transformer's `:MagicCardTooltip` → `app/components/magic/card/Tooltip.vue`.
+In `nuxt.config.ts`, `~/components/{charts,content,layout,ui}` are registered with `pathPrefix: false` (flat names, e.g. `app/components/layout/Header.vue` → `<Header>`), while the rest of `app/components` keeps Nuxt's default folder-prefixed convention. That's why MDC shortcodes map the way they do: `::article-quote` → `app/components/article/Quote.vue`, `::magic-decklist` → `app/components/magic/Decklist.vue`, `::magic-cards` → `app/components/magic/Cards.vue`, and the `[[Card]]` transformer's `:MagicCardTooltip` → `app/components/magic/card/Tooltip.vue`.
+
+`magic-cards` mirrors WotC's own `<magic-cards>`/`<magic-card>` relationship: it only owns fan/hand positioning, composing `MagicCard` (`::magic-card`, `app/components/magic/Card.vue`) per card rather than duplicating card resolution/rendering. `magic-card` is an internal building block, not something content authors call directly — articles always use `::magic-cards` (even for one card, via a single-element `cards` array).
 
 ### Image path aliases (`@nuxt/image`)
 

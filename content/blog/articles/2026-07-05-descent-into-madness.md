@@ -21,7 +21,7 @@ It was the fastest-ever action in the format's history, pre-bans excluded, and i
 In this article, I won't focus much on establishing whether the [[Seeker of Skybreak]] combo was too strong or not, because that's not what the Pauper Format Panel's statement is about.
 I will highlight the flaws in the philosophy that led the Pauper Format Panel to the ban, and I will draw some general conclusions from how the whole story unfolded.
 
-::magic-card-gallery
+::magic-cards
 ---
 cards:
   - Hawkeye's Bow

@@ -448,12 +448,12 @@ Questo mazzo ha vinto il torneo!
 You can use Vue components directly in Markdown:
 
 ```markdown
-<!-- Card component (if implemented) -->
-:magic-card-display{name="Counterspell"}
-
-::MagicCardDisplay
+<!-- Card display, see "Cards (fan / hand)" below — magic-card-display no longer exists,
+magic-cards is the only shortcode for showing card images now -->
+::magic-cards
 ---
-card: Counterspell (sld)
+cards:
+  - Counterspell
 ---
 ::
 
@@ -551,32 +551,12 @@ Il mazzo gioca 4 copie di [[Counterspell]] e 2 [[Exclude]] per il controllo.
 Use double square brackets `[[Card Name]]` to reference cards.
 This will render the card image when the user hovers over the card name or touches it on mobile.
 
-### Card Gallery
+### Cards (fan / hand)
 
-Use `::magic-card-gallery` to show a horizontally-scrolling strip of full card images, e.g. to illustrate a group of cards discussed together in the text.
-
-```markdown
-::magic-card-gallery
----
-cards:
-  - Hawkeye's Bow
-  - Seeker of Skybreak
-caption: "Le due carte al centro della discussione"
----
-::
-```
-
-| Prop | Type | Required | Description |
-|------|------|----------|--------------|
-| `cards` | `string[]` | Yes | Card names, resolved client-side at runtime via the Scryfall API (`useScryfallCard`, cached in `useState`) — same mechanism as `magic-card-display`/`magic-card-art-crop`, *not* the build-time DB lookup used by `[[Card Name]]` |
-| `caption` | `string` | No | Text shown below the gallery |
-
-### Card Fan
-
-Use `::magic-card-fan` to show cards overlapping in a fanned-out hand-of-cards arrangement (rotated, hover to lift) — same card resolution as `magic-card-gallery`, better suited to comparing several similar options at a glance.
+Use `::magic-cards` to show one or more cards — a rotated fan arrangement (default) or an upright "hand" arrangement, both with hover-to-lift. It's the *only* shortcode content authors use for card images now; for a single card, just pass a one-element `cards` array. Mirrors the naming of WotC's own component: their `<magic-cards>` wraps N `<magic-card>` elements, and ours does the same — `Cards.vue` only owns positioning, it composes `MagicCard` (`app/components/magic/Card.vue`, `::magic-card`) for each card's actual resolution/rendering rather than duplicating it. `magic-card` itself is an internal building block, not meant to be used directly in content.
 
 ```markdown
-::magic-card-fan
+::magic-cards
 ---
 cards:
   - Swords to Plowshares
@@ -589,12 +569,14 @@ caption: "Le opzioni a confronto"
 
 | Prop | Type | Required | Description |
 |------|------|----------|--------------|
-| `cards` | `string[]` | Yes | Card names, resolved the same way as `magic-card-gallery` |
-| `caption` | `string` | No | Text shown below the fan |
+| `cards` | `string[]` | Yes | Card names, resolved client-side at runtime via the Scryfall API (`useScryfallCard`, cached in `useState`) — same mechanism as `magic-card-art-crop`, *not* the build-time DB lookup used by `[[Card Name]]` |
+| `caption` | `string` | No | Text shown below the cards |
 | `arch` | `number` | No | Total rotation spread in degrees (default: `20.5`, matching the WotC blog's fan component). The step between adjacent cards is `arch / count`, so the spread converges toward `arch` as more cards are added rather than growing past it. Only applies to `layout: fan`. |
 | `layout` | `'fan' \| 'hand'` | No | `fan` (default) rotates cards around a shared pivot. `hand` skips rotation entirely — cards spread horizontally in fixed 60%-of-own-width steps and rise into a shallow arc (center card frontmost), like holding a hand of cards. ⚠️ The `hand` values were only partially captured live from magic.wizards.com (2 of 5 slot positions) and extrapolated for the rest — treat it as a reasonable approximation, not a byte-exact reproduction like `fan` is. |
 
-Below `md` (768px), the fan falls back to a plain horizontal scroll strip — rotated overlapping cards don't work on narrow viewports.
+Below `md` (768px), *both* layouts fall back to a plain horizontal scroll strip (rotated/spread cards don't work on narrow viewports) — this isn't a selectable mode, it's the same automatic responsive swap WotC's own component does below its `mobile-breakpoint` attribute. There is no separate "gallery" shortcode/mode anymore — that case is just `magic-cards` viewed on a narrow screen.
+
+See `docs/2026-07-10-magic-cards-component-research.md` for the full reverse-engineering notes (rotation/position formulas, hover math, what's verified vs. extrapolated) and a matched-articles list from crawling WotC's own archive.
 
 ### Card Type Icons
 

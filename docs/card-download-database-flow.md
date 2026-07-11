@@ -53,7 +53,7 @@ Il componente riceve dati **già risolti** (mana cost, immagine) direttamente ne
 
 - **`app/components/magic/Decklist.vue`** — renderizza main deck / sideboard con simboli di mana e preview immagine su hover (desktop) / modal (mobile), copia decklist in formato MTGO.
 - **`app/components/magic/card/Tooltip.vue`** — tooltip hover/tap per i riferimenti `[[Card]]` inline.
-- **`app/components/magic/card/Display.vue`** — visualizzazione di una singola carta; questo fa fetch diretto dalla Scryfall API (non dal DB locale), supporta sintassi set/collector number.
+- **`app/components/magic/Card.vue`** — visualizzazione di una singola carta (usata internamente da `Cards.vue`, non richiamata direttamente nei contenuti); questo fa fetch diretto dalla Scryfall API (non dal DB locale), supporta sintassi set/collector number.
 
 ---
 

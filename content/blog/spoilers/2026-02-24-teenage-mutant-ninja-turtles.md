@@ -25,9 +25,10 @@ Diamo una rispolveratina ai criteri utilizzati per dare i voti.
 
 ## 4. Ice Cream Kitty
 
-::magic-card-display
+::magic-cards
 ---
-card: Ice Cream Kitty
+cards:
+  - Ice Cream Kitty
 ---
 ::
 
@@ -72,9 +73,10 @@ rating: 6
 
 ## 3. Raphael, Tough Turtle
 
-::magic-card-display
+::magic-cards
 ---
-card: Raphael, Tough Turtle
+cards:
+  - Raphael, Tough Turtle
 ---
 ::
 
@@ -119,9 +121,10 @@ rating: 6.5
 
 ## 2. Leonardo, Big Brother
 
-::magic-card-display
+::magic-cards
 ---
-card: Leonardo, Big Brother
+cards:
+  - Leonardo, Big Brother
 ---
 ::
 
@@ -151,9 +154,10 @@ rating: 7
 
 ## 1. Utrom Monitor
 
-::magic-card-display
+::magic-cards
 ---
-card: Utrom Monitor
+cards:
+  - Utrom Monitor
 ---
 ::
 

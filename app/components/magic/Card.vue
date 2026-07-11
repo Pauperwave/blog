@@ -2,11 +2,18 @@
 import { useScryfallCard } from '~/composables/useScryfallCard'
 import { extractImageUrl } from '#shared/utils'
 
-const props = defineProps<{
+interface Props {
   card: string
-}>()
+  /** Tailwind width classes for the card image and its loading skeleton. */
+  imgClass?: string
+}
 
-const { cardData, loading, error } = useScryfallCard(props.card)
+const {
+  card,
+  imgClass = 'max-w-sm mx-auto'
+} = defineProps<Props>()
+
+const { cardData, loading, error } = useScryfallCard(card)
 
 const imageUrl = computed(() => extractImageUrl(cardData.value, 'normal'))
 </script>
@@ -25,11 +32,13 @@ const imageUrl = computed(() => extractImageUrl(cardData.value, 'normal'))
       v-else-if="imageUrl && !loading"
       :src="imageUrl"
       :alt="cardData?.name"
-      class="rounded-lg shadow-lg max-w-sm mx-auto"
+      :class="[imgClass, 'rounded-lg shadow-lg']"
+      style="aspect-ratio: 265 / 370"
     >
     <USkeleton
       v-else
-      class="h-96 w-full max-w-sm mx-auto rounded-lg"
+      :class="[imgClass, 'rounded-lg']"
+      style="aspect-ratio: 265 / 370"
     />
   </div>
 </template>

@@ -1,8 +1,15 @@
 # `magic-cards` component research — 2026-07-10
 
 Notes on reverse-engineering WotC's `<magic-cards>` web component (used throughout
-magic.wizards.com/en/news/making-magic) and replicating it as `app/components/magic/card/Fan.vue`
-(MDC shortcode `::magic-card-fan`).
+magic.wizards.com/en/news/making-magic) and replicating it as `app/components/magic/Cards.vue`
+(MDC shortcode `::magic-cards`).
+
+*Naming history: this started as `app/components/magic/card/Fan.vue` /
+`::magic-card-fan`, alongside a separate `magic-card-gallery` shortcode for the plain
+scrolling-strip case. It was later renamed/merged into `Cards.vue` / `::magic-cards` to
+mirror WotC's real naming and composition — see the "Later refactor" note at the bottom.
+The formulas and verification notes below are unaffected by that rename, only the file
+path and shortcode name changed.*
 
 ## Background
 
@@ -10,7 +17,7 @@ The blog wanted a "hand of cards" display component matching the one used on the
 Magic site (e.g. the "My Words: White" article). WotC's version is a custom element,
 `<magic-cards config="...">`, wrapping `<magic-card face="...">` children. It has at least
 two layout configs: `fan` (rotated, overlapping arc) and `hand` (upright, spread with a
-vertical arc). `Fan.vue` implements both via a `layout` prop.
+vertical arc). `Cards.vue` implements both via a `layout` prop.
 
 ## `fan` layout — fully reverse-engineered, high confidence
 
@@ -44,7 +51,7 @@ observed, not guessed.
 - Transition: `transform 0.4s ease, filter 0.4s ease` on both properties.
 
 **Mobile fallback:** below `md` (768px), rotated overlapping cards don't work well, so
-`Fan.vue` falls back to a plain horizontal scroll strip (no rotation) — this is our own
+`Cards.vue` falls back to a plain horizontal scroll strip (no rotation) — this is our own
 design choice, not a replication of WotC's mobile behavior (they use a `swiper-container`
 web component instead, which we didn't adopt to avoid pulling in more dependencies for a
 device-detection fallback).
@@ -82,7 +89,7 @@ Destiny, Part 3" — see the crawl results below). From this we extrapolated:
 - **Hover:** the one captured hover state (index 0: `translateY(25%)` → `translateY(15%)`)
   is a **-10 percentage point** lift. Implemented as: any hovered hand card's Y offset is
   reduced by 10pp. Whether hovering a hand card also affects its *siblings* (the way `fan`
-  pushes obstructing cards aside) was never observed — `Fan.vue` currently does **not**
+  pushes obstructing cards aside) was never observed — `Cards.vue` currently does **not**
   reposition hand siblings on hover, only applies the same grayscale/blur/brightness
   filter used by `fan` (an assumption that the filter mechanism is shared across configs,
   not verified specifically for `hand`).
@@ -123,10 +130,10 @@ per-article checkpoint (to survive the process hangs Windows/Git Bash's `while r
 loops seemed prone to over a long run) finished the remaining articles quickly and safely
 without re-triggering the block.
 
-## Current `Fan.vue` API
+## Current `Cards.vue` API
 
 ```yaml
-::magic-card-fan
+::magic-cards
 ---
 cards: [Card Name, ...]       # required
 caption: "..."                 # optional
@@ -136,5 +143,34 @@ layout: fan                    # optional, 'fan' (default) | 'hand'
 ::
 ```
 
-See `docs/CONTENT.md` ("Card Fan" section) and `content/docs/componenti.md`
+See `docs/CONTENT.md` ("Cards (fan / hand)" section) and `content/docs/componenti.md`
 ("Ventaglio di carte" / "Variante 'a mano'") for the full prop tables and live examples.
+
+## Later refactor: composition + gallery merge (same day)
+
+Shortly after this research, the component was renamed `Fan.vue` → `Cards.vue`
+(`::magic-card-fan` → `::magic-cards`) and restructured to actually compose
+`MagicCardDisplay` (`::magic-card-display`) for each card, mirroring WotC's real
+`<magic-cards>`/`<magic-card>` relationship — `Cards.vue` now only owns fan/hand
+positioning, not card resolution/rendering, which was previously duplicated inline.
+
+At the same time, the separate `magic-card-gallery` shortcode (a plain horizontal
+scroll strip) was removed entirely: it's not a real WotC config value, just the
+automatic mobile-breakpoint behavior of `fan`/`hand` (matching how WotC's own
+`mobile-breakpoint`/`force-swiper-on-mobile` attributes work) — so `magic-cards` now
+provides it automatically rather than as a separate author-facing mode. The 2 real
+content usages of `magic-card-gallery` and 1 of `magic-card-fan` were migrated to
+`magic-cards`; `Gallery.vue` and the old `Fan.vue` were deleted.
+
+## Second refactor: magic-card-display → magic-card, single-card usage folded in (same day)
+
+To fully mirror WotC's real `<magic-cards>`/`<magic-card>` naming, `Display.vue` was
+moved from `app/components/magic/card/Display.vue` to `app/components/magic/Card.vue`
+(shortcode `::magic-card-display` → `::magic-card`), and `Cards.vue` was updated to
+compose `MagicCard` instead of the old `MagicCardDisplay` name.
+
+`magic-card` is now purely an internal building block — content authors never call it
+directly. `::magic-cards` became the *only* shortcode for showing card images at all,
+including a single card (`cards: [Single Name]`). The 12 real content usages of
+`magic-card-display` (4 in `2026-02-24-teenage-mutant-ninja-turtles.md`, 8 in
+`2026-04-16-secrets-of-trixhaven.md`) were migrated accordingly.

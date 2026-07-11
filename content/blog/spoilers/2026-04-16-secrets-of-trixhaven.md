@@ -35,9 +35,10 @@ Ne abbiamo selezionate 8 solo per voi!
 
 ### 8. Studious First-Year
 
-::magic-card-display
+::magic-cards
 ---
-card: Studious First-Year (SOS)
+cards:
+  - Studious First-Year (SOS)
 ---
 ::
 
@@ -69,9 +70,10 @@ rating: 5.75
 
 ### 7. Elite Interceptor
 
-::magic-card-display
+::magic-cards
 ---
-card: Elite Interceptor (SOS)
+cards:
+  - Elite Interceptor (SOS)
 ---
 ::
 
@@ -104,9 +106,10 @@ rating: 6
 
 ### 6. Embrace the Paradox
 
-::magic-card-display
+::magic-cards
 ---
-card: Embrace the Paradox
+cards:
+  - Embrace the Paradox
 ---
 ::
 
@@ -146,9 +149,10 @@ rating: 6.25
 
 ### 5. Shattered Acolyte
 
-::magic-card-display
+::magic-cards
 ---
-card: Shattered Acolyte (SOS)
+cards:
+  - Shattered Acolyte (SOS)
 ---
 ::
 
@@ -179,9 +183,10 @@ rating: 6.25
 
 ### 4. Visionary's Dance
 
-::magic-card-display
+::magic-cards
 ---
-card: Visionary's Dance (SOS)
+cards:
+  - Visionary's Dance (SOS)
 ---
 ::
 
@@ -222,9 +227,10 @@ rating: 6.25
 
 ### 3. Glorious Decay
 
-::magic-card-display
+::magic-cards
 ---
-card: Glorious Decay
+cards:
+  - Glorious Decay
 ---
 ::
 
@@ -255,9 +261,10 @@ rating: 7
 
 ### 2. Pursue the Past
 
-::magic-card-display
+::magic-cards
 ---
-card: Pursue the Past (SOS)
+cards:
+  - Pursue the Past (SOS)
 ---
 ::
 
@@ -291,9 +298,10 @@ rating: 7
 
 ### 1. Follow the Lumarets
 
-::magic-card-display
+::magic-cards
 ---
-card: Follow the Lumarets (SOS)
+cards:
+  - Follow the Lumarets (SOS)
 ---
 ::
 
