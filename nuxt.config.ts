@@ -184,7 +184,24 @@ export default defineNuxtConfig({
       routes: ['/', '/docs/componenti'],
       // Then crawl all the links on the page
       crawlLinks: true,
-      failOnError: false
+      failOnError: false,
+      // crawlLinks follows every <img src="/_ipx/..."> rendered by NuxtImg and was
+      // statically transforming each one at build time — 94 image routes measured at
+      // ~567s of combined processing, by far the dominant build-time cost. On Vercel,
+      // ipx already runs on-demand as a serverless function at request time (cached
+      // after first hit), so pre-baking them here is redundant, not a correctness need.
+      // NOTE: nitropack's string-pattern matcher here is a plain `path.startsWith(pattern)`,
+      // not a glob — no `**`/`*` wildcards, just a literal prefix.
+      //
+      // /articles?... : the filter query params (category/author/location/tag/deck) on the
+      // articles listing are a client-side-only filter — 30 distinct crawled combinations
+      // measured, each triggering a full page render AND its own OG image render, even
+      // though defineOgImage() on that page never references the filter, so every one of
+      // those 30 OG images is pixel-identical duplicate work (~299s of combined processing
+      // across all /_og/ routes on that page, the single biggest prerender cost found).
+      // Filtered views still work fine live via on-demand SSR; only the bare /articles page
+      // needs to be static.
+      ignore: ['/_ipx/', '/articles?']
     },
     // Filter routes to only prerender recent articles (< 3 months), and add
     // author routes explicitly since the crawler can't discover them (see
