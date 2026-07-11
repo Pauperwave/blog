@@ -2,7 +2,7 @@
 .data
 .nuxt
 .vercel
-
+dist
 .fallow
 
 # Locally installed Claude Code skills
