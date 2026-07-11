@@ -17,17 +17,6 @@ Da decidere: quale delle due (o entrambe), dove posizionarle nel layout, e se se
 
 `magic-cards`' `layout: hand` is only partially reverse-engineered — 2 of 5 card slot positions were captured live (from "Design Files: Urza's Destiny, Part 3", the one article found using `config="hand"`), the rest is extrapolated. Unverified: the other 3 slot positions, and whether hovering a hand card repositions siblings the way `fan` does. See `docs/2026-07-10-magic-cards-component-research.md` for what's confirmed vs. assumed.
 
-## Template pages leak into sitemap.xml
-
-The four `0000-00-00-*-template` pages are all `published: false` and have `prerender: false` route rules, but `prerender: false` only controls static generation — it doesn't exclude a route from `@nuxtjs/sitemap`'s content-source discovery, which doesn't currently filter by `published`. So they still show up in `sitemap.xml`:
-
-- `/articles/0000-00-00-decklist-template` (actually lives under `content/blog/decklists/`, routed via `/articles/`)
-- `/articles/0000-00-00-chart-demo-template`
-- `/reports/0000-00-00-report-template`
-- `/spoilers/0000-00-00-spoiler-template`
-
-Fix is likely a `sitemap.exclude` entry for these 4 paths in `nuxt.config.ts`, or making the sitemap module's content query respect `published: false` generally (would also cover any future draft content, not just these 4).
-
 ## Set up Nuxt Studio authentication
 
 `/editor` currently fails with:

@@ -61,6 +61,11 @@ export default defineNuxtConfig({
   },
   sitemap: {
     zeroRuntime: true,
+    // Excludes every template/placeholder page in one rule, matched by their shared
+    // `0000-00-00-` filename convention — scales to future template files automatically,
+    // no per-path entry needed here (unlike the routeRules prerender:false exclusions
+    // below, which @nuxtjs/sitemap doesn't derive sitemap exclusion from on their own).
+    exclude: [/0000-00-00/],
   },
   schemaOrg: {
     identity: definePerson(appMeta.author),
@@ -213,8 +218,13 @@ export default defineNuxtConfig({
     '/articles': { prerender: true, headers: { 'Cache-Control': 'public, max-age=3600, s-maxage=86400' } },
     // Individual articles: prerendered with long cache (rarely change after publication)
     '/articles/**': { prerender: true, headers: { 'Cache-Control': 'public, max-age=86400, s-maxage=604800' } },
-    // Exclude template files from prerendering
+    // Exclude template files from prerendering. Empirically confirmed redundant for the
+    // crawl-based generate flow today (published:false content is never linked anywhere,
+    // so crawlLinks never reaches these routes regardless) — kept anyway as cheap, explicit
+    // protection against that assumption breaking (e.g. an accidental link to one of these).
+    // Sitemap exclusion is handled centrally via sitemap.exclude below instead of per-path.
     '/articles/0000-00-00-decklist-template': { prerender: false },
+    '/articles/0000-00-00-trio-template': { prerender: false },
     '/articles/0000-00-00-chart-demo-template': { prerender: false },
     '/reports/0000-00-00-report-template': { prerender: false },
     '/spoilers/0000-00-00-spoiler-template': { prerender: false },
