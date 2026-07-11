@@ -102,7 +102,7 @@ crawled: 238 listing pages, 1,136 unique articles, every one fetched and checked
 literal `<magic-cards` tag in its raw HTML.
 
 **Result: 43 articles use it.** Full results (title, URL, instance count, config
-value(s)) are in [`magic-cards-fan-hand-matches-2026-07-10.tsv`](./magic-cards-fan-hand-matches-2026-07-10.tsv)
+value(s)) are in [`2026-07-10-magic-cards-fan-hand-matches.tsv`](./2026-07-10-magic-cards-fan-hand-matches.tsv)
 in this same folder.
 
 Two outliers worth knowing about if this work continues:
