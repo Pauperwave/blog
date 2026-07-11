@@ -8,19 +8,21 @@ function createTestDatabase(): Database {
     CREATE TABLE cards (
       name TEXT PRIMARY KEY,
       mana_cost TEXT,
-      image_url TEXT
+      image_url TEXT,
+      back_image_url TEXT
     );
   `)
   createTable.run()
 
   // Insert test cards
   const stmt = db.prepare(`
-    INSERT INTO cards (name, mana_cost, image_url) VALUES (?, ?, ?)
+    INSERT INTO cards (name, mana_cost, image_url, back_image_url) VALUES (?, ?, ?, ?)
   `)
 
-  stmt.run('Lightning Bolt', '{R}', 'https://cards.scryfall.io/normal/en/lea/1.jpg')
-  stmt.run('Counterspell', '{U}{U}', 'https://cards.scryfall.io/normal/en/lea/2.jpg')
-  stmt.run('Grizzly Bears', '{1}{G}', 'https://cards.scryfall.io/normal/en/lea/3.jpg')
+  stmt.run('Lightning Bolt', '{R}', 'https://cards.scryfall.io/normal/en/lea/1.jpg', null)
+  stmt.run('Counterspell', '{U}{U}', 'https://cards.scryfall.io/normal/en/lea/2.jpg', null)
+  stmt.run('Grizzly Bears', '{1}{G}', 'https://cards.scryfall.io/normal/en/lea/3.jpg', null)
+  stmt.run('Delver of Secrets', '{U}', 'https://cards.scryfall.io/normal/front/1/delver.jpg', 'https://cards.scryfall.io/normal/back/1/delver.jpg')
 
   return db
 }
@@ -64,6 +66,27 @@ describe('Card Tooltip Transformer', () => {
       const imageUrl = row?.image_url || null
 
       expect(imageUrl).toBeNull()
+
+      db.close()
+    })
+
+    it('should resolve a back face image for double-faced cards', () => {
+      const db = createTestDatabase()
+
+      const row = db.prepare('SELECT image_url, back_image_url FROM cards WHERE name = ? LIMIT 1').get('Delver of Secrets') as { image_url: string, back_image_url: string | null } | undefined
+
+      expect(row?.image_url).toBe('https://cards.scryfall.io/normal/front/1/delver.jpg')
+      expect(row?.back_image_url).toBe('https://cards.scryfall.io/normal/back/1/delver.jpg')
+
+      db.close()
+    })
+
+    it('should have a null back face image for single-faced cards', () => {
+      const db = createTestDatabase()
+
+      const row = db.prepare('SELECT back_image_url FROM cards WHERE name = ? LIMIT 1').get('Lightning Bolt') as { back_image_url: string | null } | undefined
+
+      expect(row?.back_image_url).toBeNull()
 
       db.close()
     })
@@ -116,6 +139,28 @@ describe('Card Tooltip Transformer', () => {
         : `:MagicCardTooltip{name="${cardName}" set="${set}"}`
 
       expect(component).toBe(':MagicCardTooltip{name="Lightning Bolt" set="UMA" image="https://cards.scryfall.io/normal/en/lea/1.jpg"}')
+    })
+
+    it('should include a backImage attribute for double-faced cards', () => {
+      const cardName = 'Delver of Secrets'
+      const imageUrl = 'https://cards.scryfall.io/normal/front/1/delver.jpg'
+      const backImageUrl = 'https://cards.scryfall.io/normal/back/1/delver.jpg'
+
+      const backImageAttr = backImageUrl ? ` backImage="${backImageUrl}"` : ''
+      const component = `:MagicCardTooltip{name="${cardName}" image="${imageUrl}"${backImageAttr}}`
+
+      expect(component).toBe(':MagicCardTooltip{name="Delver of Secrets" image="https://cards.scryfall.io/normal/front/1/delver.jpg" backImage="https://cards.scryfall.io/normal/back/1/delver.jpg"}')
+    })
+
+    it('should omit the backImage attribute for single-faced cards', () => {
+      const cardName = 'Lightning Bolt'
+      const imageUrl = 'https://cards.scryfall.io/normal/en/lea/1.jpg'
+      const backImageUrl: string | null = null
+
+      const backImageAttr = backImageUrl ? ` backImage="${backImageUrl}"` : ''
+      const component = `:MagicCardTooltip{name="${cardName}" image="${imageUrl}"${backImageAttr}}`
+
+      expect(component).toBe(':MagicCardTooltip{name="Lightning Bolt" image="https://cards.scryfall.io/normal/en/lea/1.jpg"}')
     })
   })
 })

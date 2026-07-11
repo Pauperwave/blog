@@ -3,6 +3,7 @@ interface ParsedCard {
   quantity: string
   name: string
   imageUrl?: string
+  backImageUrl?: string
   manaCost: string
 }
 
@@ -105,7 +106,7 @@ const totalOut = computed(() => {
             >
               <span class="card-quantity">{{ card.quantity }}</span>
               <span class="card-name-wrapper">
-                <MagicCardTooltip :name="card.name" :image="card.imageUrl" />
+                <MagicCardTooltip :name="card.name" :image="card.imageUrl" :back-image="card.backImageUrl" />
               </span>
               <MagicCardManaCost v-if="card.manaCost" :cost="card.manaCost" class="card-mana-cost" />
             </li>
@@ -133,7 +134,7 @@ const totalOut = computed(() => {
             >
               <span class="card-quantity">{{ card.quantity }}</span>
               <span class="card-name-wrapper">
-                <MagicCardTooltip :name="card.name" :image="card.imageUrl" />
+                <MagicCardTooltip :name="card.name" :image="card.imageUrl" :back-image="card.backImageUrl" />
               </span>
               <MagicCardManaCost v-if="card.manaCost" :cost="card.manaCost" class="card-mana-cost" />
             </li>
@@ -153,7 +154,7 @@ const totalOut = computed(() => {
               >
                 <span class="card-quantity">{{ card.quantity }}</span>
                 <span class="card-name-wrapper">
-                  <MagicCardTooltip :name="card.name" :image="card.imageUrl" />
+                  <MagicCardTooltip :name="card.name" :image="card.imageUrl" :back-image="card.backImageUrl" />
                 </span>
                 <MagicCardManaCost v-if="card.manaCost" :cost="card.manaCost" class="card-mana-cost" />
               </li>

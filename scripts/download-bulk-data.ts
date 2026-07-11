@@ -42,6 +42,7 @@ interface ScryfallCard {
     border_crop: string
   }
   card_faces?: Array<{
+    name?: string
     mana_cost?: string
     image_uris?: {
       small: string
@@ -65,6 +66,7 @@ interface Card {
   name: string
   manaCost: string
   imageUrl: string
+  backImageUrl: string
 }
 
 async function fetchBulkDataInfo(): Promise<BulkDataInfo> {
@@ -126,6 +128,12 @@ async function createDatabase(): Promise<Database> {
     CREATE INDEX IF NOT EXISTS idx_name ON cards(name);
   `)
 
+  // Migrate existing databases created before back-face support was added
+  const existingColumns = db.query('PRAGMA table_info(cards)').all() as Array<{ name: string }>
+  if (!existingColumns.some(col => col.name === 'back_image_url')) {
+    db.exec('ALTER TABLE cards ADD COLUMN back_image_url TEXT;')
+  }
+
   // Remove legacy table no longer used (we render mana symbols with CSS).
   db.exec('DROP TABLE IF EXISTS mana_symbols;')
 
@@ -156,17 +164,27 @@ async function importPauperCards(db: Database): Promise<void> {
 
   console.log(`✅ Found ${pauperCards.length} Pauper-legal + Banned cards out of ${allCards.length} total`)
 
+  // Full resync from a fresh bulk snapshot each run — clear out cards from previous
+  // runs that no longer appear (renamed/reprinted under a different name upstream,
+  // rotated out of the filter, etc.), otherwise stale rows accumulate indefinitely.
+  db.exec('DELETE FROM cards;')
+
   // Prepare insert statement
   const insert = db.prepare(`
-    INSERT OR REPLACE INTO cards (name, mana_cost, image_url)
-    VALUES (?, ?, ?)
+    INSERT OR REPLACE INTO cards (name, mana_cost, image_url, back_image_url)
+    VALUES (?, ?, ?, ?)
   `)
 
-  // Transform and insert cards
-  const cardsToInsert: Card[] = pauperCards.map(card => {
-    const name = card.name
+  // Transform and insert cards. Double-faced cards are looked up two different ways
+  // elsewhere in the codebase: inline `[[Card Name]]` references use the front face
+  // alone (e.g. "Delver of Secrets"), while decklists paste the full compound name as
+  // exported by MTGO/Scryfall (e.g. "Delver of Secrets // Insectile Aberration"). Both
+  // need to resolve, so these cards are inserted under both names.
+  const cardsToInsert: Card[] = pauperCards.flatMap(card => {
     let manaCost = ''
     let imageUrl = ''
+    let backImageUrl = ''
+    let frontFaceName: string | undefined
 
     // Priority 1: Top-level image_uris (normal, adventure, split, flip, etc.)
     if (card.image_uris) {
@@ -178,6 +196,17 @@ async function importPauperCards(db: Database): Promise<void> {
       manaCost = card.card_faces[0].mana_cost || card.mana_cost || ''
       imageUrl = card.card_faces[0].image_uris.normal ||
         card.card_faces[0].image_uris.large || ''
+
+      if (card.card_faces[0].name && card.card_faces[0].name !== card.name) {
+        frontFaceName = card.card_faces[0].name
+      }
+
+      // Second face's own image (transform/modal_dfc cards flip to a distinct back face;
+      // reversible_card's "back" is just an alternate art of the same front, still useful)
+      const backFace = card.card_faces[1]
+      if (backFace?.image_uris) {
+        backImageUrl = backFace.image_uris.normal || backFace.image_uris.large || ''
+      }
     }
     // Fallback: no images found
     else {
@@ -202,11 +231,11 @@ async function importPauperCards(db: Database): Promise<void> {
       }
     }
 
-    return {
-      name,
-      manaCost,
-      imageUrl
+    const rows: Card[] = [{ name: card.name, manaCost, imageUrl, backImageUrl }]
+    if (frontFaceName) {
+      rows.push({ name: frontFaceName, manaCost, imageUrl, backImageUrl })
     }
+    return rows
   })
 
   console.log('💾 Inserting cards into database...')
@@ -214,7 +243,7 @@ async function importPauperCards(db: Database): Promise<void> {
   // Use transaction for batch insert
   const insertMany = db.transaction((cards: Card[]) => {
     for (const card of cards) {
-      insert.run(card.name, card.manaCost, card.imageUrl)
+      insert.run(card.name, card.manaCost, card.imageUrl, card.backImageUrl || null)
     }
   })
 

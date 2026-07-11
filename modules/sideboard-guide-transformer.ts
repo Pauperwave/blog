@@ -224,7 +224,8 @@ async function parseCardSection(
         name: cardName,
         section: section || '',
         manaCost: cardData?.manaCost || '',
-        imageUrl: cardData?.imageUrl || ''
+        imageUrl: cardData?.imageUrl || '',
+        backImageUrl: cardData?.backImageUrl || undefined
       })
     }
   }

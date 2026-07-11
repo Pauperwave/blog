@@ -1,12 +1,20 @@
 <script setup lang="ts">
-const props = defineProps<{
+interface Props {
   name: string
   image?: string
+  /** Second face's image, for transform/modal double-faced cards. Mobile only — a button below the preview toggles it. */
+  backImage?: string
   /** Scryfall set code — when given, `image` is resolved to that specific printing. */
   set?: string
-}>()
+}
 
-const cardLabel = computed(() => props.set ? `${props.name} (${props.set})` : props.name)
+const { name, image = '', backImage = '', set = '' } = defineProps<Props>()
+
+const cardLabel = computed(() => set ? `${name} (${set})` : name)
+
+const showBack = ref(false)
+const modalImage = computed(() => (showBack.value && backImage) ? backImage : image)
+const modalLabel = computed(() => showBack.value && backImage ? `${cardLabel.value} (back face)` : cardLabel.value)
 
 const tooltipOpen = ref(false)
 const anchor = ref({ x: 0, y: 0 })
@@ -45,6 +53,14 @@ const handlePointerMove = (ev: PointerEvent) => {
 const handleClick = () => {
   if (isMobile) showModal.value = true
 }
+
+const toggleFace = () => {
+  if (backImage) showBack.value = !showBack.value
+}
+
+watch(showModal, (open) => {
+  if (!open) showBack.value = false
+})
 </script>
 
 <template>
@@ -97,12 +113,21 @@ const handleClick = () => {
     }"
   >
     <template #content>
-      <div class="flex items-center justify-center p-4">
+      <div class="flex flex-col items-center gap-3 p-4">
         <img
-          :src="image"
-          :alt="cardLabel"
-          class="max-w-full max-h-[85vh] rounded-xl shadow-2xl"
+          :src="modalImage"
+          :alt="modalLabel"
+          class="max-w-full max-h-[75vh] rounded-xl shadow-2xl"
         >
+        <UButton
+          v-if="backImage"
+          icon="i-lucide-repeat"
+          :label="showBack ? 'Show front face' : 'Show back face'"
+          size="lg"
+          color="neutral"
+          variant="solid"
+          @click="toggleFace"
+        />
       </div>
     </template>
   </UModal>

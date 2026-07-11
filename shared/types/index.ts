@@ -7,6 +7,7 @@ export interface CardItem {
   name: string
   manaCost: string
   imageUrl: string
+  backImageUrl?: string
 }
 
 export interface DeckSection {
@@ -26,6 +27,7 @@ export interface ParsedCard {
   section: string
   manaCost: string
   imageUrl: string
+  backImageUrl?: string
 }
 
 /**

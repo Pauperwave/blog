@@ -358,12 +358,12 @@ Ci sono due varianti di questo componente:
   ```md \[Versione minimale]
   [[Swords to Plowshares]]
   ```
-  Risultato: :magic-card-tooltip{name="Swords to Plowshares"}
+  Risultato: :magic-card-tooltip{image="https://cards.scryfall.io/normal/front/b/4/b4e9c870-23c0-413a-ae39-265f09da16d1.jpg?1782682546" name="Swords to Plowshares"}
 - con la specifica del nome (`name`) e dell'espansione (`set`): spiegazione;
   ```md \[Versione minimale]
   [[Swords to Plowshares | spg]]
   ```
-  Risultato: :magic-card-tooltip{name="Swords to Plowshares" set="spg"}
+  Risultato: :magic-card-tooltip{image="https://cards.scryfall.io/normal/front/8/0/80590c26-285e-4b7b-9ee5-62956dba4ad7.jpg?1782689989" name="Swords to Plowshares" set="spg"}
 
 Il componente `magic-card-tooltip` viene riutilizzato all'interno del componente `magic-decklist` e del componente `magic-sideboard-guide` come potrai notare più avanti.
 
@@ -375,23 +375,23 @@ Alcuni casi limite con double faced cards e adventure cards
 Questi casi sono gestiti in modo speciale per garantire che la prima faccia della carta venga visualizzata correttamente.
 ::
 
-:magic-card-tooltip{name="Delver of Secrets"} / :magic-card-tooltip{name="The Modern Age"} / :magic-card-tooltip{name="Sagu Wildling"}
+[[Delver of Secrets]] / [[The Modern Age]] / [[Sagu Wildling]]
 
 ::caution
-Al momento non è possibile mostrare la seconda faccia di una carta double faced.
+Su desktop (hover) al momento non è possibile mostrare la seconda faccia di una carta double faced — viene sempre mostrata la prima. Da mobile invece, aprendo la modale a schermo intero, è disponibile un pulsante per mostrare il retro della carta.
 ::
 
 ```text
-:magic-card-tooltip{name="Insectile Aberration"}
+[[Insectile Aberration]]
 ```
 
-:magic-card-tooltip{name="Insectile Aberration"}
+[[Insectile Aberration]]
 
 ```text
-:magic-card-tooltip{name="Vector Glider"}
+[[Vector Glider]]
 ```
 
-:magic-card-tooltip{name="Vector Glider"}
+[[Vector Glider]]
 
 ## Mostrare una o più carte
 
@@ -440,7 +440,7 @@ cards:
   - Lightning Bolt
   - Brainstorm
   - Lava Spike
-caption: "Cinque carte a ventaglio"
+caption: Cinque carte a ventaglio
 ---
 ::
 
@@ -471,7 +471,7 @@ cards:
   - Prophetic Prism
   - Chain Lightning
   - Ghostly Flicker
-caption: "Cinque carte a mano"
+caption: Cinque carte a mano
 layout: hand
 ---
 ::
@@ -484,9 +484,9 @@ Piccola icona inline (mana-font) per un tipo di carta, utile in prosa o tabelle 
 :magic-card-types-icon{type="creature" size="md"}
 ```
 
-:magic-card-types-icon{type="creature" size="md"} Creatura &nbsp;
-:magic-card-types-icon{type="instant" size="md"} Istantaneo &nbsp;
-:magic-card-types-icon{type="land" size="md"} Terra
+:magic-card-types-icon{size="md" type="creature"} Creatura  
+:magic-card-types-icon{size="md" type="instant"} Istantaneo  
+:magic-card-types-icon{size="md" type="land"} Terra
 
 ## Mostrare l'art di una carta
 
@@ -1197,13 +1197,7 @@ caption: "Una didascalia esplicativa sotto l'immagine"
 ::
 ```
 
-::image-caption
----
-src: /arts/cmm-81-counterspell.jpg
-alt: "Counterspell"
-caption: "Una didascalia esplicativa sotto l'immagine"
----
-::
+:image-caption{alt="Counterspell" caption="Una didascalia esplicativa sotto l'immagine" src="/arts/cmm-81-counterspell.jpg"}
 
 ### Carosello di immagini
 
@@ -1225,7 +1219,7 @@ images:
 images:
   - /arts/cmm-81-counterspell.jpg
   - src: /sets/lord-of-the-rings.jpg
-    alt: "Lord of the Rings"
+    alt: Lord of the Rings
 ---
 ::
 
@@ -1257,13 +1251,17 @@ data:
 
 ::bar-chart
 ---
-title: Meta Breakdown - Copie Giocate
-seriesName: Copie
 data:
-  - { name: Jund Wildfire, value: 11 }
-  - { name: Monored Madness, value: 11 }
-  - { name: Spy Combo, value: 8 }
-  - { name: Grixis Affinity, value: 7 }
+  - name: Jund Wildfire
+    value: 11
+  - name: Monored Madness
+    value: 11
+  - name: Spy Combo
+    value: 8
+  - name: Grixis Affinity
+    value: 7
+seriesName: Copie
+title: Meta Breakdown - Copie Giocate
 ---
 ::
 
@@ -1288,14 +1286,18 @@ data:
 
 ::bar-chart
 ---
-title: Meta Breakdown - Copie Giocate
-seriesName: Copie
-horizontal: true
 data:
-  - { name: Jund Wildfire, value: 11 }
-  - { name: Monored Madness, value: 11 }
-  - { name: Spy Combo, value: 8 }
-  - { name: Grixis Affinity, value: 7 }
+  - name: Jund Wildfire
+    value: 11
+  - name: Monored Madness
+    value: 11
+  - name: Spy Combo
+    value: 8
+  - name: Grixis Affinity
+    value: 7
+horizontal: true
+seriesName: Copie
+title: Meta Breakdown - Copie Giocate
 ---
 ::
 
@@ -1320,14 +1322,41 @@ series:
 
 ::line-chart
 ---
-title: Andamento Meta nel Tempo
-categories: [Gen, Feb, Mar, Apr, Mag, Giu]
-stacked: true
-yAxisName: "% Meta Share"
+categories:
+  - Gen
+  - Feb
+  - Mar
+  - Apr
+  - Mag
+  - Giu
 series:
-  - { name: Jund Wildfire, data: [12, 14, 13, 15, 16, 18] }
-  - { name: Monoblu Terror, data: [8, 9, 10, 9, 8, 7] }
-  - { name: RDW, data: [5, 6, 6, 7, 6, 5] }
+  - name: Jund Wildfire
+    data:
+      - 12
+      - 14
+      - 13
+      - 15
+      - 16
+      - 18
+  - name: Monoblu Terror
+    data:
+      - 8
+      - 9
+      - 10
+      - 9
+      - 8
+      - 7
+  - name: RDW
+    data:
+      - 5
+      - 6
+      - 6
+      - 7
+      - 6
+      - 5
+stacked: true
+title: Andamento Meta nel Tempo
+yAxisName: "% Meta Share"
 ---
 ::
 
@@ -1353,15 +1382,27 @@ data:
 
 ::confidence-band-chart
 ---
-title: Win Rate Previsto - Mono Blue Control
-seriesName: Win Rate
-bandLabel: "Intervallo di Confidenza (95%)"
-yAxisName: "Win Rate %"
 data:
-  - { x: "Round 1", value: 55, lower: 48, upper: 62 }
-  - { x: "Round 2", value: 57, lower: 51, upper: 63 }
-  - { x: "Round 3", value: 54, lower: 46, upper: 61 }
-  - { x: "Round 4", value: 58, lower: 52, upper: 65 }
+  - x: Round 1
+    value: 55
+    lower: 48
+    upper: 62
+  - x: Round 2
+    value: 57
+    lower: 51
+    upper: 63
+  - x: Round 3
+    value: 54
+    lower: 46
+    upper: 61
+  - x: Round 4
+    value: 58
+    lower: 52
+    upper: 65
+bandLabel: Intervallo di Confidenza (95%)
+seriesName: Win Rate
+title: Win Rate Previsto - Mono Blue Control
+yAxisName: Win Rate %
 ---
 ::
 
@@ -1384,12 +1425,16 @@ data:
 
 ::pie-chart
 ---
-title: Meta Breakdown
 data:
-  - { value: 11, name: Jund Wildfire }
-  - { value: 11, name: Monored Madness }
-  - { value: 8, name: Spy Combo }
-  - { value: 7, name: Grixis Affinity }
+  - value: 11
+    name: Jund Wildfire
+  - value: 11
+    name: Monored Madness
+  - value: 8
+    name: Spy Combo
+  - value: 7
+    name: Grixis Affinity
+title: Meta Breakdown
 ---
 ::
 
@@ -1414,14 +1459,26 @@ series:
 
 ::scatter-chart
 ---
+series:
+  - name: Aggro
+    data:
+      - x: 1.8
+        y: 52
+      - x: 2.1
+        y: 55
+      - x: 1.5
+        y: 58
+  - name: Control
+    data:
+      - x: 3.2
+        y: 51
+      - x: 3.8
+        y: 49
+      - x: 3.5
+        y: 53
 title: CMC medio vs Win Rate
 xAxisName: CMC medio
 yAxisName: Win Rate %
-series:
-  - name: Aggro
-    data: [{ x: 1.8, y: 52 }, { x: 2.1, y: 55 }, { x: 1.5, y: 58 }]
-  - name: Control
-    data: [{ x: 3.2, y: 51 }, { x: 3.8, y: 49 }, { x: 3.5, y: 53 }]
 ---
 ::
 
@@ -1448,15 +1505,32 @@ series:
 
 ::radar-chart
 ---
-title: Profilo Archetipo
 indicators:
-  - { name: Aggro, max: 10 }
-  - { name: Control, max: 10 }
-  - { name: Consistenza, max: 10 }
-  - { name: Potenza, max: 10 }
-  - { name: Budget, max: 10 }
+  - name: Aggro
+    max: 10
+  - name: Control
+    max: 10
+  - name: Consistenza
+    max: 10
+  - name: Potenza
+    max: 10
+  - name: Budget
+    max: 10
 series:
-  - { name: Mono Red Madness, values: [9, 2, 6, 7, 8] }
-  - { name: Mono Blue Control, values: [2, 9, 7, 8, 5] }
+  - name: Mono Red Madness
+    values:
+      - 9
+      - 2
+      - 6
+      - 7
+      - 8
+  - name: Mono Blue Control
+    values:
+      - 2
+      - 9
+      - 7
+      - 8
+      - 5
+title: Profilo Archetipo
 ---
 ::

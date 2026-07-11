@@ -20,6 +20,18 @@ describe('Card Database', () => {
       const card = await getCardByName('Nonexistent Card XYZ')
       expect(card).toBeNull()
     })
+
+    it('should resolve a back face image for a transform card, keyed by its front face name', async () => {
+      const card = await getCardByName('Delver of Secrets')
+      expect(card).not.toBeNull()
+      expect(card?.imageUrl).toBeTruthy()
+      expect(card?.backImageUrl).toBeTruthy()
+    })
+
+    it('should leave backImageUrl undefined for single-faced cards', async () => {
+      const card = await getCardByName('Lightning Bolt')
+      expect(card?.backImageUrl).toBeUndefined()
+    })
   })
 
   describe('getCardsByNames', () => {
@@ -112,6 +124,13 @@ describe('Card Database', () => {
       expect(result.has('Lightning Bolt')).toBe(true)
       expect(result.has('Counterspell')).toBe(true)
       expect(result.has('Nonexistent Card XYZ')).toBe(false)
+    })
+
+    it('should include backImageUrl for transform cards', async () => {
+      const result = await getCardsByNames(['Delver of Secrets', 'Lightning Bolt'])
+
+      expect(result.get('Delver of Secrets')?.backImageUrl).toBeTruthy()
+      expect(result.get('Lightning Bolt')?.backImageUrl).toBeUndefined()
     })
   })
 })

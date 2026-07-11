@@ -3,7 +3,7 @@ import MagicCardTypesIcon from './card/TypesIcon.vue'
 
 defineProps<{
   section: string
-  cards: Array<{ quantity: number; name: string; imageUrl?: string; manaCost?: string }>
+  cards: Array<{ quantity: number; name: string; imageUrl?: string; backImageUrl?: string; manaCost?: string }>
   count: number
 }>()
 </script>
@@ -21,7 +21,7 @@ defineProps<{
         class="grid grid-cols-[auto_1fr_auto] items-center gap-2 m-0 p-0 leading-snug text-base font-medium"
       >
         <span class="font-mono font-semibold">{{ card.quantity }}</span>
-        <MagicCardTooltip :name="card.name" :image="card.imageUrl" />
+        <MagicCardTooltip :name="card.name" :image="card.imageUrl" :back-image="card.backImageUrl" />
         <MagicCardManaCost v-if="card.manaCost" :cost="card.manaCost" class="min-w-16 justify-start" />
       </li>
     </ul>

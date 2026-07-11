@@ -30,6 +30,17 @@ export function extractImageUrl(
 }
 
 /**
+ * Extract the second face's image URL from Scryfall card data, for
+ * transform/modal double-faced cards. Returns null for single-faced cards.
+ */
+export function extractBackImageUrl(
+  card: ScryfallCard | null,
+  imageType: ScryfallImageType = 'normal'
+): string | null {
+  return card?.card_faces?.[1]?.image_uris?.[imageType] ?? null
+}
+
+/**
  * Parse card string into name + optional set + collector number
  * Formats supported:
  * - "Name (SET) 123" → name + set + collector_number

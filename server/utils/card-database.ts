@@ -7,6 +7,8 @@ export interface CardData {
   name: string
   manaCost: string
   imageUrl: string
+  /** Second face's image, for transform/modal double-faced cards. */
+  backImageUrl?: string
 }
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -81,7 +83,8 @@ export async function getCardByName(name: string): Promise<CardData | null> {
   return {
     name: row.name,
     manaCost: row.mana_cost || '',
-    imageUrl: row.image_url
+    imageUrl: row.image_url,
+    backImageUrl: row.back_image_url || undefined
   }
 }
 
@@ -114,7 +117,8 @@ export async function getCardsByNames(names: string[]): Promise<Map<string, Card
     const cardData = {
       name: row.name,
       manaCost: row.mana_cost || '',
-      imageUrl: row.image_url
+      imageUrl: row.image_url,
+      backImageUrl: row.back_image_url || undefined
     }
     result.set(row.name, cardData)
     // Store by lowercase for fallback matching
@@ -136,7 +140,8 @@ export async function getCardsByNames(names: string[]): Promise<Map<string, Card
         const cardData = {
           name: caseInsensitiveRow.name,
           manaCost: caseInsensitiveRow.mana_cost || '',
-          imageUrl: caseInsensitiveRow.image_url
+          imageUrl: caseInsensitiveRow.image_url,
+          backImageUrl: caseInsensitiveRow.back_image_url || undefined
         }
         result.set(name, cardData)
       } else {

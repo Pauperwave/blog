@@ -14,8 +14,8 @@ Nuxt 4. I dati delle carte vengono scaricati da Scryfall e salvati in un databas
 
 1. **Fetch Bulk Data Info** — chiama `https://api.scryfall.com/bulk-data`, trova il bulk data type `oracle_cards`.
 2. **Download Bulk Data** — crea `server/database/` se necessario, scarica il JSON compresso in `server/database/oracle-cards.json` (~168 MB, gitignored).
-3. **Create Database Schema** — crea `server/database/cards.db` (SQLite, gitignored) con tabelle `cards` (name PK, mana_cost, image_url, indexed_at) e `metadata` (key PK, value, updated_at), più indice su `cards.name`.
-4. **Import Pauper Cards** — legge `oracle-cards.json`, filtra `legalities.pauper === 'legal'`, gestisce le carte double-faced (prima faccia), inserisce in batch via transazione (~2 MB il DB finale).
+3. **Create Database Schema** — crea `server/database/cards.db` (SQLite, **committato in git** nonostante il nome suggerisca il contrario — solo `oracle-cards.json` è gitignored) con tabelle `cards` (name PK, mana_cost, image_url, back_image_url, indexed_at) e `metadata` (key PK, value, updated_at), più indice su `cards.name`.
+4. **Import Pauper Cards** — legge `oracle-cards.json`, filtra `legalities.pauper === 'legal' || 'banned'`, svuota la tabella (`DELETE FROM cards`) e reimporta da zero ad ogni run. Le carte double-faced (transform/modal DFC) vengono inserite **due volte**: una riga con il nome completo Scryfall (`"Fronte // Retro"`, usato dalle decklist incollate da MTGO) e una riga alias con il solo nome della prima faccia (usato da `[[Card Name]]`) — entrambe con `back_image_url` valorizzato per la seconda faccia.
 
 **Trigger:**
 - Manuale: `bun run download-cards`
@@ -76,7 +76,7 @@ Scryfall API → download-bulk-data.ts → oracle-cards.json (168 MB, gitignored
 
 ## Current State
 
-- Database e JSON intermedio non sono committati (gitignored), vanno rigenerati in locale con `bun run download-cards`.
+- `cards.db` **è committato in git** (vedi `.gitignore`: la riga che lo escluderebbe è commentata); solo `oracle-cards.json` è gitignored. Va comunque rigenerato in locale con `bun run download-cards` dopo un aggiornamento delle legalità Pauper o dei dati Scryfall, e il risultato va committato.
 - Nessun endpoint `/api/cards` — tutta la risoluzione carte avviene a build time.
 - Filtro legalità Pauper applicato in fase di import.
 - Simboli di mana renderizzati via CSS (`mana-font`) lato frontend.

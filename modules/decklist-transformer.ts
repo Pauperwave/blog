@@ -256,7 +256,8 @@ async function parseDecklist(rawText: string): Promise<Record<string, ParsedCard
           name: cardName,
           section: currentSection,
           manaCost: cardData?.manaCost || '',
-          imageUrl: cardData?.imageUrl || ''
+          imageUrl: cardData?.imageUrl || '',
+          backImageUrl: cardData?.backImageUrl || undefined
         })
       }
     }
