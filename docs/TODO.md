@@ -13,6 +13,10 @@ Da decidere: quale delle due (o entrambe), dove posizionarle nel layout, e se se
 
 `magic-cards`' `layout: hand` is only partially reverse-engineered — 2 of 5 card slot positions were captured live (from "Design Files: Urza's Destiny, Part 3", the one article found using `config="hand"`), the rest is extrapolated. Unverified: the other 3 slot positions, and whether hovering a hand card repositions siblings the way `fan` does. See `docs/2026-07-10-magic-cards-component-research.md` for what's confirmed vs. assumed.
 
+## Pie chart legend overlaps the chart on mobile
+
+`app/components/charts/PieChart.vue` — in the mobile viewport, the legend (positioned on the left) sits on top of the pie chart itself instead of stacking below/around it. Needs a responsive layout fix (e.g. move the legend below the chart, or stack vertically, under a mobile breakpoint).
+
 ## Set up Nuxt Studio authentication
 
 `/editor` currently fails with:
