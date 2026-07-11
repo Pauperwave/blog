@@ -13,8 +13,11 @@ const { name, image = '', backImage = '', set = '' } = defineProps<Props>()
 const cardLabel = computed(() => set ? `${name} (${set})` : name)
 
 const showBack = ref(false)
-const modalImage = computed(() => (showBack.value && backImage) ? backImage : image)
-const modalLabel = computed(() => showBack.value && backImage ? `${cardLabel.value} (back face)` : cardLabel.value)
+// Matches Scryfall's own card page exactly (measured live): flipping to the
+// back face takes 750ms, flipping back to the front takes 200ms — two
+// different transition durations depending on the target state, not a
+// single symmetric one.
+const flipDuration = computed(() => showBack.value ? '750ms' : '200ms')
 
 const tooltipOpen = ref(false)
 const anchor = ref({ x: 0, y: 0 })
@@ -114,15 +117,38 @@ watch(showModal, (open) => {
   >
     <template #content>
       <div class="flex flex-col items-center gap-3 p-4">
-        <img
-          :src="modalImage"
-          :alt="modalLabel"
-          class="max-w-full max-h-[75vh] rounded-xl shadow-2xl"
-        >
+        <!-- 3D flip, same technique as Scryfall's own card page: both faces
+             stacked with backface-visibility hidden, back pre-rotated 180deg,
+             and the wrapper rotates on toggle. -->
+        <div class="relative max-w-full max-h-[75vh]" style="perspective: 1200px;">
+          <div
+            class="relative"
+            :style="{
+              transformStyle: 'preserve-3d',
+              transform: showBack ? 'rotateY(180deg)' : 'rotateY(0deg)',
+              transition: `transform ${flipDuration}`
+            }"
+          >
+            <img
+              :src="image"
+              :alt="cardLabel"
+              class="block max-w-full max-h-[75vh] rounded-xl shadow-2xl"
+              style="backface-visibility: hidden;"
+            >
+            <img
+              v-if="backImage"
+              :src="backImage"
+              :alt="`${cardLabel} (back face)`"
+              class="absolute inset-0 w-full h-full rounded-xl shadow-2xl object-cover"
+              style="backface-visibility: hidden; transform: rotateY(180deg);"
+            >
+          </div>
+        </div>
         <UButton
           v-if="backImage"
           icon="i-lucide-repeat"
-          :label="showBack ? 'Show front face' : 'Show back face'"
+          label="Transform"
+          aria-label="Transform card"
           size="lg"
           color="neutral"
           variant="solid"
