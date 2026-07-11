@@ -64,6 +64,10 @@ In `nuxt.config.ts`, `~/components/{charts,content,layout,ui}` are registered wi
 
 `/arts/*`, `/sets/*`, `/events/*`, `/articles/*`, `/blog/*` resolve to `public/assets/blog/...`. Use the alias (not the full `/assets/blog/...` path) in frontmatter `thumbnail` and in content body images.
 
+### Chart components share `useDevice()` for mobile detection, not `useMediaQuery`
+
+All six chart components (`BarChart`, `ConfidenceBandChart`, `LineChart`, `PieChart`, `RadarChart`, `ScatterChart` in `app/components/charts/`) get their mobile flag the same way: `const { isMobile } = useDevice()` (`@nuxtjs/device`, UA-based, plain boolean — not a ref, so no `.value`). This mirrors `MagicCardTooltip`'s own `useDevice()` usage. Don't reach for `@vueuse/core`'s `useMediaQuery`/`useBreakpoints` for chart responsiveness even though `@vueuse/nuxt` is installed — it would introduce a second, viewport-width-based mobile source alongside the UA-based one every other chart uses, and the two can disagree (e.g. a desktop browser window resized narrow). Follow the existing `isMobile` pattern already in the sibling chart files instead.
+
 ### `#server` / `#shared` imports
 
 `server/utils/*` and `shared/{types,utils}/*` are imported via the `#server/...` and `#shared/...` aliases (see the transformer modules) rather than relative paths — this lets the build-time content-transformer modules, which run outside the normal Nitro/Vue app graph, reuse the same DB and type code as runtime server routes.

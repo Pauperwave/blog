@@ -13,6 +13,11 @@ const props = defineProps<{
 }>()
 
 const theme = useChartTheme()
+// Same isMobile source every other chart component uses (BarChart,
+// ConfidenceBandChart, LineChart, RadarChart, ScatterChart). On mobile a
+// left-side vertical legend has no room and sits on top of the pie —
+// stack it under the pie instead.
+const { isMobile } = useDevice()
 
 const chartOption = computed(() => ({
   title: {
@@ -29,19 +34,27 @@ const chartOption = computed(() => ({
   textStyle: theme.baseTextStyle.value,
   backgroundColor: 'transparent',
   color: theme.colors.value.palette,
-  legend: {
-    top: '25%',
-    orient: 'vertical',
-    left: 'left',
-    data: (props.data ?? []).map(d => d.name),
-    textStyle: theme.baseTextStyle.value,
-  },
+  legend: isMobile
+    ? {
+        orient: 'horizontal',
+        top: 'bottom',
+        left: 'center',
+        data: (props.data ?? []).map(d => d.name),
+        textStyle: theme.baseTextStyle.value,
+      }
+    : {
+        top: '25%',
+        orient: 'vertical',
+        left: 'left',
+        data: (props.data ?? []).map(d => d.name),
+        textStyle: theme.baseTextStyle.value,
+      },
   series: [{
     type: 'pie',
     data: props.data ?? [],
     name: props.title,
-    center: ['50%', '45%'],
-    radius: ['45%', '70%'],
+    center: isMobile ? ['50%', '42%'] : ['50%', '45%'],
+    radius: isMobile ? ['35%', '58%'] : ['45%', '70%'],
     padAngle: 2,
     itemStyle: {
       borderRadius: 8,
