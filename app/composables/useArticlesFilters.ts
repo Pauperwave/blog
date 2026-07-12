@@ -143,14 +143,6 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
   const getArticleTopicTags = (article: AnyArticle) =>
     preparedArticleFiltersByRef.value.get(article)?.topicTags || buildArticleTopicTags(article, globalNormalizedLocationSet.value)
 
-  const getArticleDeckTags = (article: AnyArticle) => {
-    return article.decks || []
-  }
-
-  const getArticleCommonTags = (article: AnyArticle) => {
-    return article.tags || []
-  }
-
   const authorFilterOptions = computed<Array<{ name: string; slug: string; count: number }>>(() => {
     return (Object.entries(filterCounts.value.authorCounts) as Array<[string, number]>)
       .map(([authorKey, count]) => {

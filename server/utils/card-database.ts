@@ -61,7 +61,7 @@ async function getDatabase(): Promise<DatabaseInstance | null> {
     } catch (error) {
       const errorMsg = `better-sqlite3 failed: ${error instanceof Error ? error.message : String(error)}`
       console.log(`❌ ${errorMsg}`)
-      throw new Error(`Failed to initialize database at ${dbPath}: ${errorMsg}`)
+      throw new Error(`Failed to initialize database at ${dbPath}: ${errorMsg}`, { cause: error })
     }
   }
   return dbInstance

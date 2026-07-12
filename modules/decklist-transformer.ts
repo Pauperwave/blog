@@ -198,19 +198,15 @@ async function parseDecklist(rawText: string): Promise<Record<string, ParsedCard
     'Sideboard': [],
   }
 
-  let currentSection: keyof typeof grouped = 'Creatures'
   const lines = rawText.split('\n')
 
-  // First pass: collect all unique card names
+  // First pass: collect all unique card names (section is irrelevant here)
   const cardNames: Set<string> = new Set()
   for (const line of lines) {
     const trimmed = line.trim()
     if (!trimmed) continue
 
-    if (SECTION_HEADERS[trimmed]) {
-      currentSection = SECTION_HEADERS[trimmed] as keyof typeof grouped
-      continue
-    }
+    if (SECTION_HEADERS[trimmed]) continue
 
     const match = trimmed.match(CARD_PATTERN)
     if (match && match[1] && match[2]) {
@@ -234,7 +230,7 @@ async function parseDecklist(rawText: string): Promise<Record<string, ParsedCard
   }
 
   // Second pass: build the grouped structure with mana costs
-  currentSection = 'Creatures'
+  let currentSection: keyof typeof grouped = 'Creatures'
   for (const line of lines) {
     const trimmed = line.trim()
     if (!trimmed) continue

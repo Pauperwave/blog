@@ -181,8 +181,8 @@ async function importPauperCards(db: Database): Promise<void> {
   // exported by MTGO/Scryfall (e.g. "Delver of Secrets // Insectile Aberration"). Both
   // need to resolve, so these cards are inserted under both names.
   const cardsToInsert: Card[] = pauperCards.flatMap(card => {
-    let manaCost = ''
-    let imageUrl = ''
+    let manaCost: string
+    let imageUrl: string
     let backImageUrl = ''
     let frontFaceName: string | undefined
 

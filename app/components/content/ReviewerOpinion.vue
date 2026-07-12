@@ -22,7 +22,12 @@ const { data: author, error } = await useAuthor(props.name)
         <h3 class="text-lg font-semibold text-highlighted">
           {{ author?.name ?? name }}
         </h3>
-        <UBadge color="warning" variant="soft" size="lg" leading-icon="i-lucide-star">
+        <UBadge
+          color="warning"
+          variant="soft"
+          size="lg"
+          leading-icon="i-lucide-star"
+        >
           {{ rating }}
         </UBadge>
       </div>
