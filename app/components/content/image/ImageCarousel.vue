@@ -64,7 +64,6 @@ useSwiper(containerRef, {
               <NuxtImg
                 :src="image.src"
                 :alt="image.alt"
-                loading="lazy"
                 class="rounded-lg shadow-lg max-h-150 w-auto object-contain"
               />
             </div>
