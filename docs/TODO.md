@@ -17,6 +17,12 @@ Da decidere: quale delle due (o entrambe), dove posizionarle nel layout, e se se
 
 `app/components/charts/PieChart.vue` — in the mobile viewport, the legend (positioned on the left) sits on top of the pie chart itself instead of stacking below/around it. Needs a responsive layout fix (e.g. move the legend below the chart, or stack vertically, under a mobile breakpoint).
 
+## Pulsante "torna in cima" su mobile
+
+Aggiungere un tasto flottante in basso a destra, visibile solo su mobile, per tornare rapidamente in cima alla pagina (utile su articoli lunghi).
+
+Verificato: **non esiste già** — né altrove in questo sito (`app/`), né come componente pronto in Nuxt UI (nessun `back-to-top`/`scroll-to-top` nei componenti installati). Andrebbe costruito da zero: `@vueuse/core`'s `useWindowScroll` (già installato, vedi `nuxt.config.ts` → `@vueuse/nuxt`) per tracciare la posizione di scroll ed eventualmente mostrare/nascondere il pulsante, più un `UButton` stilizzato come floating action button, gestito con lo stesso `useDevice()`'s `isMobile` usato altrove nel progetto (vedi nota in `CLAUDE.md` sui grafici) per limitarlo a mobile.
+
 ## Set up Nuxt Studio authentication
 
 `/editor` currently fails with:
