@@ -179,8 +179,16 @@ async function getCardImages(db: any, cardName: string, set?: string): Promise<C
     })
     if (response.ok) {
       const card = await response.json() as ScryfallCard
-      const image = extractImageUrl(card) || `${SCRYFALL_API_BASE}/cards/named?exact=${encodeURIComponent(cardName)}${setParam}&format=image`
-      return { image, backImage: extractBackImageUrl(card) }
+      const front = extractImageUrl(card) || `${SCRYFALL_API_BASE}/cards/named?exact=${encodeURIComponent(cardName)}${setParam}&format=image`
+      const back = extractBackImageUrl(card)
+
+      // If the reference names the card's *back* face directly (e.g.
+      // [[Insectile Aberration]] for Delver of Secrets), show that face
+      // first — the flip control then reveals the front face instead.
+      const backFaceName = card.card_faces?.[1]?.name
+      const requestedIsBackFace = !!back && !!backFaceName && backFaceName.toLowerCase() === cardName.toLowerCase()
+
+      return requestedIsBackFace ? { image: back, backImage: front } : { image: front, backImage: back }
     }
 
     buildLog(`⚠️  [Card Tooltip Transformer] Scryfall lookup failed for "${cardName}" (${response.status})`)

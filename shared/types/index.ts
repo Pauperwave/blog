@@ -51,6 +51,7 @@ export interface ScryfallCard {
     png?: string
   }
   card_faces?: Array<{
+    name?: string
     image_uris?: {
       normal?: string
       large?: string
