@@ -738,7 +738,7 @@ author:
 author:
   name: Hypergeomancer
   avatar: /assets/avatars/hypergeomancer.png
-  description: ""
+  description: Matematico
   nickname: hypergeomancer
   url: /authors/hypergeomancer
 ---
