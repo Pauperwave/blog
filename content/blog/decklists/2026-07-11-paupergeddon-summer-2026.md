@@ -17,7 +17,9 @@ published: true
 | Data | 11-12 July 2026 |
 | Struttura del torneo | 14 Rounds of Swiss + Single Elimination Top 8 |
 
-N.B. per ulteriori statistiche sull'evento trovate tutto sul [sito ufficiale del Paupergedon](https://paupergeddon.com/)
+::note
+{{ per ulteriori statistiche sull'evento trovate tutto sul [sito ufficiale del Paupergedon](https://paupergeddon.com/) }}
+::
 
 ::magic-decklist
 ---
