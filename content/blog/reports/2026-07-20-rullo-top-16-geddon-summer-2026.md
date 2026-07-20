@@ -114,7 +114,8 @@ Piuttosto che raccontare nel dettaglio tutte le partite disputate, preferisco co
 ::magic-sideboard-guide
 ---
 matchup: Affinity
-description:
+description: Postside, da parte sua, entrano dai 4 agli 8 counter tra Blue Blast ed Envelop. Non giocando hate per artefatto dobbiamo gestire il matchup combattendo sulle creature e sui suoi counter.
+Inizialmente non ero troppo convinto delle Searing Blaze in questo matchup ma durante il torneo ho avuto modo di ricredermi; poter togliere Utrom Monitor o Refurbished Familiar oppure completare un trade con Myr Enfoncer, facendo allo stesso tempo 3 danni all’avversario mi ha salvato in alcuni spot.
 ---
 #in
 4 Pyroblast
@@ -123,11 +124,6 @@ description:
 4 Fireblast
 2 Lightning Bolt
 ::
-
-Postside, da parte sua, entrano dai 4 agli 8 counter tra Blue Blast ed Envelop. Non giocando hate per artefatto dobbiamo gestire il matchup combattendo sulle creature e sui suoi counter.
-Inizialmente non ero troppo convinto delle Searing Blaze in questo matchup ma durante il torneo ho avuto modo di ricredermi; poter togliere Utrom Monitor o Refurbished Familiar oppure completare un trade con Myr Enfoncer, facendo allo stesso tempo 3 danni all’avversario mi ha salvato in alcuni spot.
-
-
 
 ::magic-sideboard-guide
 ---
