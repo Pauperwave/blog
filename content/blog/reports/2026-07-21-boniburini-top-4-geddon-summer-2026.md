@@ -106,7 +106,7 @@ Without further ado, let’s put the skies on and begin the slalom.
 ---
 card: Myr Enforcer
 crop:
-  height: large
+  height: xl
   position: top
 ---
 ::
@@ -140,7 +140,7 @@ Score 1-0
 ---
 card: Guttersnipe
 crop:
-  height: large
+  height: xl
   position: top
 ---
 ::
@@ -178,7 +178,7 @@ Score 2-0
 ---
 card: Ephemerate
 crop:
-  height: large
+  height: xl
   position: top
 ---
 ::
@@ -222,7 +222,7 @@ Score 3-0
 ---
 card: Lava Dart
 crop:
-  height: large
+  height: xl
   position: top
 ---
 ::
@@ -245,7 +245,7 @@ Score 4-0
 ---
 card: Mysidian Elder
 crop:
-  height: large
+  height: xl
   position: top
 ---
 ::
@@ -296,7 +296,7 @@ Score 5-0
 ---
 card: Archaeomancer
 crop:
-  height: large
+  height: xl
   position: top
 ---
 ::
@@ -329,7 +329,7 @@ Score 6-0
 ---
 card: Khalni Garden
 crop:
-  height: large
+  height: xl
   position: top
 ---
 ::
@@ -366,7 +366,7 @@ Score 7-0
 ---
 card: Cleansing Wildfire
 crop:
-  height: large
+  height: xl
   position: top
 ---
 ::
@@ -409,7 +409,7 @@ Changing perspective on to another deck helped me not to overthink.
 ---
 card: Timberwatch Elf
 crop:
-  height: large
+  height: xl
   position: top
 ---
 ::
@@ -448,7 +448,7 @@ Score 8-1
 ---
 card: Outlaw Medic
 crop:
-  height: large
+  height: xl
   position: top
 ---
 ::
@@ -486,7 +486,7 @@ Score 9-1
 ---
 card: Melded Moxite
 crop:
-  height: large
+  height: xl
   position: top
 ---
 ::
@@ -520,7 +520,7 @@ Score 10-1
 ---
 card: Battle Screech
 crop:
-  height: large
+  height: xl
   position: top
 ---
 ::
@@ -564,7 +564,7 @@ Score 10-2
 ---
 card: Tolarian Terror
 crop:
-  height: large
+  height: xl
   position: top
 ---
 ::
@@ -607,7 +607,7 @@ Score 11-2
 ---
 card: Balustrade Spy
 crop:
-  height: large
+  height: xl
   position: top
 ---
 ::
@@ -675,7 +675,7 @@ Ua, ui, ue, la fortuna viene a me. Ui, ue, ua la fortuna viene qua. Ua, ue, ui l
 ---
 card: Songs of the Damned
 crop:
-  height: large
+  height: xl
   position: top
 ---
 ::
@@ -715,7 +715,7 @@ Score 13-2
 ---
 card: Krark-Clan Shaman
 crop:
-  height: large
+  height: xl
   position: top
 ---
 ::
