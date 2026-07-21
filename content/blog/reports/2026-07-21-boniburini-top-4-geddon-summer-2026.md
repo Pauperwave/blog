@@ -710,3 +710,11 @@ Last but not least I have to say thank you to Lillo Aldegheri aka Seasonofmist, 
 I was joking, the biggest thanks goes to Team Bidoni and fellow LPRE players who supported me all the weekend, and before during testing, so thanks to Fiakka (who could not attend the event), Gabri, Gando, Lollo, Pietro, Tazzo and to all Lega Pauper Reggio Emilia.
 
 See ya all at PauperFog!
+
+::image-caption
+---
+src: /assets/blog/articles/Boniburini-sheet.jpeg
+alt: ""
+caption: ""
+---
+::
