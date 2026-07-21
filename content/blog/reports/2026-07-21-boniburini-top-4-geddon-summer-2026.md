@@ -32,6 +32,45 @@ Also, and that was the most important part of my decision making during the deck
 è uno gnomo armato di ascia! (cit.)
 ::
 
+::magic-decklist
+---
+name: Rally
+player: Dario Boniburini
+placement: Top 4
+headerGradient: monored
+---
+Creatures
+4 Clockwork Percussionist
+4 Goblin Bushwhacker
+4 Goblin Tomb Raider
+4 Voldaren Epicure
+4 Burning-Tree Emissary
+
+Instants
+4 Galvanic Blast
+4 Lightning Bolt
+
+Sorceries
+2 Chain Lightning
+4 Rally at the Hornburg
+3 Reckless Impulse
+1 Wrenn's Resolve
+
+Artifacts
+4 Inventor's Axe
+
+Lands
+4 Great Furnace
+14 Mountain
+
+Sideboard
+4 Cast into the Fire
+4 Pyroblast
+3 Relic of Progenitus
+3 Tectonic Hazard
+1 Flaring Pain
+::
+
 ::image-caption
 ---
 src: /assets/blog/articles/rally-deck.jpeg
