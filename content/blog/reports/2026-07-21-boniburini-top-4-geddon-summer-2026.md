@@ -63,6 +63,15 @@ Without further ado, let’s put the skies on and begin the slalom.
 
 #### Round 1 - Grixis Affinity - Augusto Bonilauri from LP Milano
 
+::MagicCardArtCrop
+---
+card: Myr Enforcer
+crop:
+  height: xl
+  position: top
+---
+::
+
 Game1: I won the die roll, first success of the tournament. I started fast with turn 1 mountain clockwork and turn 2 Tomb Raider followed by another Tomb Raider. Before he could do anything relevant he was dead.
 
 ::magic-sideboard-guide
@@ -87,6 +96,15 @@ Match 2-0
 Score 1-0
 
 #### Round 2 - Mono R Madness (with Kessig Flamebreather) - Alessandro Cecconi
+
+::MagicCardArtCrop
+---
+card: Guttersnipe
+crop:
+  height: xl
+  position: top
+---
+::
 
 Game1: Second match, second die roll won and the matchup was really good; lucky.
 I keep a one lander with Great Furnace, Tomb Raider and Burning-Tree Emissary. So I started with Furnace and Tomb Raider. I drew my second land on turn 2 and played BTE into another 1 drop.
@@ -116,6 +134,15 @@ Match 2-0
 Score 2-0
 
 #### Round 3 - Jeskai Ephemerate - Yuvyuv03
+
+::MagicCardArtCrop
+---
+card: Ephemerate
+crop:
+  height: xl
+  position: top
+---
+::
 
 Game 1: Guess what? Another die roll won into another T1 Furnace Tomb Raider and began attacking his life points. 
 In a couple of turns I put him on 8 but with a Union of the Third Path he climbed back to 13.
@@ -152,6 +179,15 @@ Score 3-0
 
 #### Round 4 - Lorenzo a.k.a. duskreven - Mono Red Madness
 
+::MagicCardArtCrop
+---
+card: Lava Dart
+crop:
+  height: xl
+  position: top
+---
+::
+
 Game 1: I won the die roll, he mulligan to 5. I kept a really strong hand and by his turn 3 he conceded. 
 I think he played the moxite version of madness but I’m not really sure.
 
@@ -165,6 +201,15 @@ Match 2-0
 Score 4-0
 
 #### Round 5 - Illontra - Pinger Tron
+
+::MagicCardArtCrop
+---
+card: Mysidian Elder
+crop:
+  height: xl
+  position: top
+---
+::
 
 Game 1: Another one, another die roll won. At this point I realized the holy card of San Watcher, protector of the Mulligan, was working quite well, my luck was flawless. I started using it as a meme at the beginning of the tournament and by now it became a relevant part of my pregame routine.
 This game wasn’t particularly close. I only saw 2 tron land, 1 Candy trail and 2 maps so I thought it was some kind of monster tron, which is a bad matchup but kinda winnable if I close the game sufficiently fast.
@@ -208,6 +253,15 @@ Score 5-0
 
 #### Round 6 - Martin Rabiller form Savoia - Jeskai Ephemerate
 
+::MagicCardArtCrop
+---
+card: Archaeomancer
+crop:
+  height: xl
+  position: top
+---
+::
+
 Game1: I was kinda nervous entering this game, the first to secure day 2. Last year I threw away 2 matches so this time I was determined to not let it happen again. Then, I lost the first die roll of the day.
 I kept a one lander hand that made turn one Epicure into turn two Tomb Raider. 
 He killed the Tomb Raider with Skred but I sneak into play an Inventor’s Axe that same turn.
@@ -231,6 +285,15 @@ Match 2-0
 Score 6-0
 
 #### Round 7 - Paolo Rollo - Golgari Gardens
+
+::MagicCardArtCrop
+---
+card: Khalni Garden
+crop:
+  height: xl
+  position: top
+---
+::
 
 Game 1: I lost the second die roll in a row so I appealed to San Watcher and he delivered. At this point we were at table 1, but the pressure was relieved so I played kinda carefree.
 I kept on 7 with Furnace Tomb Raider turn 1, thank you San Watcher.
@@ -259,6 +322,15 @@ Match 2-1
 Score 7-0
 
 #### Round 8 - Alessandro Perrone from LP Lecce- Jund Wildfire
+
+::MagicCardArtCrop
+---
+card: Cleansing Wildfire
+crop:
+  height: xl
+  position: top
+---
+::
 
 Game 1: At this moment of the tournament I felt confident, I was at table one so I felt unbeatable.
 In this turn I ate a slice of humble pie and this kept me to the ground.
@@ -294,6 +366,15 @@ Changing perspective on to another deck helped me not to overthink.
 
 #### Round 9 - Marco94 from LP Pisa - Elves
 
+::MagicCardArtCrop
+---
+card: Timberwatch Elf
+crop:
+  height: xl
+  position: top
+---
+::
+
 Game 1: I kept a quite burn heavy hand on 7 cards on the play while he mulligan to 6.
 I started attacking and removing his creatures, I wanted to keep his side of the board as empty as I could.
 That worked quite well and I was able to win game one.
@@ -324,6 +405,15 @@ Score 8-1
 
 #### Round 10 - Alessandro Mazzi - Naya Gates
 
+::MagicCardArtCrop
+---
+card: Outlaw Medic
+crop:
+  height: xl
+  position: top
+---
+::
+
 Game 1: I kept on 6 he mull to 5. I realized now this was the first mulligan of the tournament.
 I was on the draw but tapland into tapland into tapland from my opponent was too slow to stop my race.
 He never saw a Basilisk gate nor Prismatic Strands so I was able to take game one with the power of the axes.
@@ -353,6 +443,15 @@ Score 9-1
 
 #### Round 11 - Pietro Bragioto - Mono Red Madness (Moxite version)
 
+::MagicCardArtCrop
+---
+card: Melded Moxite
+crop:
+  height: xl
+  position: top
+---
+::
+
 Game 1: I knew Pietro was playing madness because he played against a friend of mine on day 1 but he is a much better player than me so I had to stay focused and play at my best to win the match.
 I lost the die roll but I started Furnace Tomb Raider making him sigh at my play.
 Both of us knew that was a favorable matchup for my deck. This first game was really fast, I had lethal on turn five but he killed me on his turn five with Guttersnipe, Fireblast and Lava Dart from the graveyard in response to a removal, all of this with Grab the Price on the stack. 
@@ -377,6 +476,15 @@ Match 2-1
 Score 10-1
 
 #### Round 12 - Giovanni Favetta - White Weenie
+
+::MagicCardArtCrop
+---
+card: Battle Screech
+crop:
+  height: xl
+  position: top
+---
+::
 
 Game 1: At this point this was a win&in for the top 8. He was 12-0 and until then he’d lost only three games in the tournament.
 I don’t have to say this is a terrible matchup for Rally, his creatures are cheap and can survive blocking ours, but I still felt really confident.
@@ -413,6 +521,15 @@ Score 10-2
 
 #### Round 13 - Ilsantone - Mono U Terror
 
+::MagicCardArtCrop
+---
+card: Tolarian Terror
+crop:
+  height: xl
+  position: top
+---
+::
+
 Game 1: Basically I was back to the wall. Another loss and I can say goodbye to my chances to reach top 8. So I was kinda nervous going into this match.
 I won the die roll and started with Furnace Tomb Raider. 
 When he started Island pass I made a sigh of relief, almost every blue matchup is favorable or even. 
@@ -446,6 +563,15 @@ Match 2-0
 Score 11-2
 
 #### Round 14 - Nicola Cordeschi aka Il Fritto - Spy Combo
+
+::MagicCardArtCrop
+---
+card: Balustrade Spy
+crop:
+  height: xl
+  position: top
+---
+::
 
 Game 1: Before the game we did some math, and no one of us was safe: if we intentionally draw almost certainly one of us was out of the top 8. So we had to play.
 I won the die roll and started with a really aggressive Furnace into Tomb Raider on turn one.
@@ -506,6 +632,15 @@ Ua, ui, ue, la fortuna viene a me. Ui, ue, ua la fortuna viene qua. Ua, ue, ui l
 
 #### Top 8 - Francesco Redaelli - Cycling Storm
 
+::MagicCardArtCrop
+---
+card: Songs of the Damned
+crop:
+  height: xl
+  position: top
+---
+::
+
 This was the first match I played in streaming since last year but I wasn’t too nervous.
 This run was fantastic and I didn’t want to stop here.
 My teammates helped me with a propitiatory rite for luck by Fantozzi, so I was very chill at the moment.
@@ -536,6 +671,15 @@ Match 2-0
 Score 13-2
 
 #### Top 4 - Jan Plachy - Jund Wildfire
+
+::MagicCardArtCrop
+---
+card: Krark-Clan Shaman
+crop:
+  height: xl
+  position: top
+---
+::
 
 Game 1: I saw his decklist and instantly knew I was in trouble. He played 2 Toxins and Pulse maindeck so for me it was a matter of speed. If he sees some of these cards I probably lose because he can go out of reach.
 I tried to close the game fast, I put him to 5 even after his first Krark-Clan Shaman, but he played Pulse to come back to 11, took shaman back from the graveyard and wrath the board.
