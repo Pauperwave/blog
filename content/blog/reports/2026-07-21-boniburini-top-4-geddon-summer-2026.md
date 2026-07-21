@@ -100,7 +100,7 @@ Without further ado, let’s put the skies on and begin the slalom.
 
 ## Day 1
 
-### Round 1 - Grixis Affinity - Augusto Bonilauri from LP Milano
+## Round 1 - Grixis Affinity - Augusto Bonilauri from LP Milano
 
 ::MagicCardArtCrop
 ---
@@ -134,7 +134,7 @@ Axed.
 Match 2-0
 Score 1-0
 
-### Round 2 - Mono R Madness (with Kessig Flamebreather) - Alessandro Cecconi
+## Round 2 - Mono R Madness (with Kessig Flamebreather) - Alessandro Cecconi
 
 ::MagicCardArtCrop
 ---
@@ -172,7 +172,7 @@ Axed.
 Match 2-0
 Score 2-0
 
-### Round 3 - Jeskai Ephemerate - Yuvyuv03
+## Round 3 - Jeskai Ephemerate - Yuvyuv03
 
 ::MagicCardArtCrop
 ---
@@ -216,7 +216,7 @@ Axed.
 Match 2-1
 Score 3-0
 
-### Round 4 - Lorenzo a.k.a. duskreven - Mono Red Madness
+## Round 4 - Lorenzo a.k.a. duskreven - Mono Red Madness
 
 ::MagicCardArtCrop
 ---
@@ -239,7 +239,7 @@ Axed.
 Match 2-0
 Score 4-0
 
-### Round 5 - Illontra - Pinger Tron
+## Round 5 - Illontra - Pinger Tron
 
 ::MagicCardArtCrop
 ---
@@ -290,7 +290,7 @@ Axed.
 Match 2-0
 Score 5-0
 
-### Round 6 - Martin Rabiller form Savoia - Jeskai Ephemerate
+## Round 6 - Martin Rabiller form Savoia - Jeskai Ephemerate
 
 ::MagicCardArtCrop
 ---
@@ -323,7 +323,7 @@ At this point I secured day 2 which was my goal for the tournament. I felt reall
 Match 2-0
 Score 6-0
 
-### Round 7 - Paolo Rollo - Golgari Gardens
+## Round 7 - Paolo Rollo - Golgari Gardens
 
 ::MagicCardArtCrop
 ---
@@ -360,7 +360,7 @@ Axed.
 Match 2-1
 Score 7-0
 
-### Round 8 - Alessandro Perrone from LP Lecce- Jund Wildfire
+## Round 8 - Alessandro Perrone from LP Lecce- Jund Wildfire
 
 ::MagicCardArtCrop
 ---
@@ -403,7 +403,7 @@ Changing perspective on to another deck helped me not to overthink.
 
 ## Day 2
 
-### Round 9 - Marco94 from LP Pisa - Elves
+## Round 9 - Marco94 from LP Pisa - Elves
 
 ::MagicCardArtCrop
 ---
@@ -442,7 +442,7 @@ Axed.
 Match 2-0
 Score 8-1
 
-### Round 10 - Alessandro Mazzi - Naya Gates
+## Round 10 - Alessandro Mazzi - Naya Gates
 
 ::MagicCardArtCrop
 ---
@@ -480,7 +480,7 @@ Axed.
 Match 2-0
 Score 9-1
 
-### Round 11 - Pietro Bragioto - Mono Red Madness (Moxite version)
+## Round 11 - Pietro Bragioto - Mono Red Madness (Moxite version)
 
 ::MagicCardArtCrop
 ---
@@ -514,7 +514,7 @@ Axed.
 Match 2-1
 Score 10-1
 
-### Round 12 - Giovanni Favetta - White Weenie
+## Round 12 - Giovanni Favetta - White Weenie
 
 ::MagicCardArtCrop
 ---
@@ -558,7 +558,7 @@ Maybe I could have played better but he always had the right response, like Ramo
 Match 1-2
 Score 10-2
 
-### Round 13 - Ilsantone - Mono U Terror
+## Round 13 - Ilsantone - Mono U Terror
 
 ::MagicCardArtCrop
 ---
@@ -601,7 +601,7 @@ Axed.
 Match 2-0
 Score 11-2
 
-### Round 14 - Nicola Cordeschi aka Il Fritto - Spy Combo
+## Round 14 - Nicola Cordeschi aka Il Fritto - Spy Combo
 
 ::MagicCardArtCrop
 ---
@@ -669,7 +669,7 @@ Score 12-2
 Ua, ui, ue, la fortuna viene a me. Ui, ue, ua la fortuna viene qua. Ua, ue, ui la fortuna non va lì
 ::
 
-### Top 8 - Francesco Redaelli - Cycling Storm
+## Top 8 - Francesco Redaelli - Cycling Storm
 
 ::MagicCardArtCrop
 ---
@@ -709,7 +709,7 @@ Francesco is a great Cycling Storm player. I was really scared when he tried to 
 Match 2-0
 Score 13-2
 
-### Top 4 - Jan Plachy - Jund Wildfire
+## Top 4 - Jan Plachy - Jund Wildfire
 
 ::MagicCardArtCrop
 ---
