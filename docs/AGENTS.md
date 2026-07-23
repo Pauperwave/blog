@@ -82,8 +82,8 @@ server/
 ## Documentation
 
 For detailed information, see:
-- **[DEVELOPMENT.md](../DEVELOPMENT.md)** - Technical details, utilities, patterns
-- **[CONTENT.md](../CONTENT.md)** - Content management, frontmatter, collections
+- **[DEVELOPMENT.md](./DEVELOPMENT.md)** - Technical details, utilities, patterns
+- **[CONTENT.md](./CONTENT.md)** - Content management, frontmatter, collections
 
 ## AI Agent Guidelines
 

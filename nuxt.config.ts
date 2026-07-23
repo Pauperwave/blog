@@ -83,7 +83,7 @@ export default defineNuxtConfig({
       // 20000ms both failed, 29000ms succeeds twice cleanly — so the real cold-start
       // time is somewhere in the 20-29s range. Kept at 29000 (close to the hard 30s
       // ceiling) rather than narrowing further, since finding the exact minimum isn't
-      // worth more ~110s build cycles — see docs/2026-07-11-build-performance-investigation.md.
+      // worth more ~110s build cycles — see docs/audits/2026-07-11-build-performance-investigation.md.
       renderTimeout: 29000
     }
   },

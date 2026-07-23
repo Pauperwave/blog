@@ -576,7 +576,7 @@ caption: "Le opzioni a confronto"
 
 Below `md` (768px), *both* layouts fall back to a plain horizontal scroll strip (rotated/spread cards don't work on narrow viewports) — this isn't a selectable mode, it's the same automatic responsive swap WotC's own component does below its `mobile-breakpoint` attribute. There is no separate "gallery" shortcode/mode anymore — that case is just `magic-cards` viewed on a narrow screen.
 
-See `docs/2026-07-10-magic-cards-component-research.md` for the full reverse-engineering notes (rotation/position formulas, hover math, what's verified vs. extrapolated) and a matched-articles list from crawling WotC's own archive.
+See `docs/architecture/2026-07-10-magic-cards-component-research.md` for the full reverse-engineering notes (rotation/position formulas, hover math, what's verified vs. extrapolated) and a matched-articles list from crawling WotC's own archive.
 
 ### Card Type Icons
 
