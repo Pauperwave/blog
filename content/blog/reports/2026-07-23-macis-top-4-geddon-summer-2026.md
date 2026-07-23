@@ -175,7 +175,7 @@ Match 0-2, Score 2-1
 
 ::MagicCardArtCrop
 ---
-card: Mistical Teachings
+card: Mystical Teachings
 crop:
   height: xl
   position: top
@@ -429,7 +429,7 @@ Match 0-0-3, Score 11-1-1
 
 ::MagicCardArtCrop
 ---
-card: Rally at the Hornbourg
+card: Rally at the Hornburg
 crop:
   height: xl
   position: top
