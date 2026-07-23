@@ -17,14 +17,14 @@ thumbnail: /assets/blog/arts/mh3-126-inventor-s-axe.jpg
 Furnace into Tomb Raider on turn 1, the deck does this
 ::
 
-Hi guys! I’m Dario from Lega Pauper Reggio Emilia and Team Bidoni. I’m the hand behind our playmat and token arts. I finished top 4 at Paupergeddon Summer 2026 with Mono Red Rally (with Axes).
+Hi guys! I'm Dario from Lega Pauper Reggio Emilia and Team Bidoni. I'm the hand behind our playmat and token arts. I finished top 4 at Paupergeddon Summer 2026 with Mono Red Rally (with Axes).
 
 So where to start?! I chose this deck after seeing Lillo Aldegheri aka seasonofmists doing great in Bologna. 
 Easy playpattern, fast games, linear strategy, all things that my smooth brain can handle for a long tournament like Paupergeddon. I missed Paupergeddon Spring and Eternal Weekend so I was very rusty going to such a big event so I valued the shortage of games and linear strategy the most.
 I needed a deck that could let me rest, drink, eat, and chat in between games so it was an easy choice, kinda.
-So the list I submitted, as I said, was the exact 60 as Aldegheri’s in our League’s top8, I just tweaked the sideboard for my taste. 
+So the list I submitted, as I said, was the exact 60 as Aldegheri's in our League's top8, I just tweaked the sideboard for my taste. 
 Joking with my teammate I said if I go to turn even a single time that will be a moral and personal defeat, but in the longest game of the swiss round I think I finished with 15 minutes still on the clock, so mission completed.
-Also, and that was the most important part of my decision making during the deck choice, I didn’t have much time to test or to prepare so I went with the most basic and streamlined deck I could think of.
+Also, and that was the most important part of my decision making during the deck choice, I didn't have much time to test or to prepare so I went with the most basic and streamlined deck I could think of.
 
 ## Decklist
 
@@ -79,22 +79,22 @@ caption: ""
 ---
 ::
 
-So, I’ve made one unusual choice in the decklist. I preferred 4 Inventor’s Axe over 3 Experimental Synthesizers and 1 End the festivities maindeck because I valued aggression over grindyness in the long run. If the game goes long you are already in a bad spot.
+So, I've made one unusual choice in the decklist. I preferred 4 Inventor's Axe over 3 Experimental Synthesizers and 1 End the festivities maindeck because I valued aggression over grindyness in the long run. If the game goes long you are already in a bad spot.
 The deck perfectly encapsulates the philosophy “Live fast, die young”, you have to maximise damage in every combat step in the early game so when the opponent is low on life you can close the game
 with some burn spells.
 The deck is not built to sustain a grindy game, is built for speed and the axes are very good at killing your opponent fast.
 
-On Thursday evening I almost changed the list going back to the synthesizer’s one but in the end I really didn’t miss synth.
-The split Wrenn’s Resolve/Reckless Impulse is only because I own only 3 Reckless and 1 Wrenn, as we said in Italy “è quello che passa il convento”.
-I, also, considered playing Gingerbrute over Chain Lightning but I did not have time to test it so I preferred to stay with a quite consolidated list. I think brute can really help the axe’s strategy but it's more an all in gameplan, one breath weapon and you could fall short of closing games without 10 burn spells.
+On Thursday evening I almost changed the list going back to the synthesizer's one but in the end I really didn't miss synth.
+The split Wrenn's Resolve/Reckless Impulse is only because I own only 3 Reckless and 1 Wrenn, as we said in Italy “è quello che passa il convento”.
+I, also, considered playing Gingerbrute over Chain Lightning but I did not have time to test it so I preferred to stay with a quite consolidated list. I think brute can really help the axe's strategy but it's more an all in gameplan, one breath weapon and you could fall short of closing games without 10 burn spells.
 
 In the sideboard Flaring Pain is there because I was scared of the hype for Naya cazzate, Prismatic Strands is a pain in the ass for this deck, actually more than Mono Red Madness because you rely heavily on one combat step to close the game.
 For the Artifacts matchup I played 4 Cast into the Fire to exile the opponent's lands, Affinity and Jund are quite clunky if you keep them out of one color and usually keep 2 lander hands. 
-I preferred Cast over Smash to smithereens because they are more flexible and I can side-in also in creature heavy matchup like elves or mirror match. I expected quite a lot of Affinity and Jund so maybe I should’ve played more artifact hate but at the cost of graveyard hate. Last summer I chose not to play graveyard hate and I lost 2 win&in for day2 against Spy combo and Rakdos Madness (damned undying faeries); so I wanted at least 3 Relic of Progenitus that I can use also against Terror strategy.
+I preferred Cast over Smash to smithereens because they are more flexible and I can side-in also in creature heavy matchup like elves or mirror match. I expected quite a lot of Affinity and Jund so maybe I should've played more artifact hate but at the cost of graveyard hate. Last summer I chose not to play graveyard hate and I lost 2 win&in for day2 against Spy combo and Rakdos Madness (damned undying faeries); so I wanted at least 3 Relic of Progenitus that I can use also against Terror strategy.
 For the last 3 cards I played 3 Tectonic Hazard, the End the Festivities for poor people, These are great to remove blockers in the early game and against go-wide strategy.
 
-I don’t remember the games quite well but I’ll try my best. 
-Without further ado, let’s put the skies on and begin the slalom.
+I don't remember the games quite well but I'll try my best. 
+Without further ado, let's put the skies on and begin the slalom.
 
 ## Tournament
 
@@ -125,9 +125,9 @@ description:
 2 Rally at the Hornbourg
 ::
 
-Game 2: I started really aggressive with Great Furnace Tomb Raider (you’ll read this phrase many more times during this report, I’ll put the stats at the end), followed by another 5 damage on turn 2. He cleaned up the board with Krark-Clan Shaman so I had to restart building board presence. 
+Game 2: I started really aggressive with Great Furnace Tomb Raider (you'll read this phrase many more times during this report, I'll put the stats at the end), followed by another 5 damage on turn 2. He cleaned up the board with Krark-Clan Shaman so I had to restart building board presence. 
 We passed a couple of interlocutory turns where I had only a 1/1 attacking while he played a Utrom Monitor and started attacking back, forcing a race. He had 4 lands and only a black source so when I drew Cast into the Fire I decided to attack the manabase. 
-He responded by playing Reckoner’s Bargain, sacrificing the Utrom to gain some life. The next turn I restarted by flooding the board with creatures and closing the game in a couple of turns.
+He responded by playing Reckoner's Bargain, sacrificing the Utrom to gain some life. The next turn I restarted by flooding the board with creatures and closing the game in a couple of turns.
 
 Axed.
 
@@ -199,7 +199,7 @@ description:
 3 Reckless Impulse
 2 Chain Lightning
 1 Lightning Bolt
-1 Wrenn’s Resolve
+1 Wrenn's Resolve
 ::
 
 Game 2: I started kinda slow so he had time to stabilize with some Skred and Hydroblast then he started attacking back with a Mulldrifter. 
@@ -207,7 +207,7 @@ In the end a Breath Weapon followed by a Murmuring Mystic sealed the deal but I 
 
 Game 3: I opened another one lander with T1 Furnace Tomb Raider, 3 Pyroblasts so I kept 7. 
 I started attacking very early, pressuring his life points, he tried to stabilize removing my creatures but I drew like a dragon so there was almost no game.
-I had a window to try to win a turn early but I didn’t even try to bolt him into his open blue mana. 
+I had a window to try to win a turn early but I didn't even try to bolt him into his open blue mana. 
 He was also kinda short on land so when he tapped out to play a mystic so I closed the match. 
 In this spot I almost had a brain fart, I drew a Tomb Raider which was lethal but somehow I nearly messed up, after I thought for almost 30 seconds I found the obvious line: remove the blocker with Pyroblast, attack and bolt him to death.
 
@@ -228,7 +228,7 @@ crop:
 ::
 
 Game 1: I won the die roll, he mulligan to 5. I kept a really strong hand and by his turn 3 he conceded. 
-I think he played the moxite version of madness but I’m not really sure.
+I think he played the moxite version of madness but I'm not really sure.
 
 Game 2: He started but he could not establish a board presence because I had a burn heavy hand. 
 I attacked for 3 damage for a couple of turns until he went to 0. 
@@ -251,7 +251,7 @@ crop:
 ::
 
 Game 1: Another one, another die roll won. At this point I realized the holy card of San Watcher, protector of the Mulligan, was working quite well, my luck was flawless. I started using it as a meme at the beginning of the tournament and by now it became a relevant part of my pregame routine.
-This game wasn’t particularly close. I only saw 2 tron land, 1 Candy trail and 2 maps so I thought it was some kind of monster tron, which is a bad matchup but kinda winnable if I close the game sufficiently fast.
+This game wasn't particularly close. I only saw 2 tron land, 1 Candy trail and 2 maps so I thought it was some kind of monster tron, which is a bad matchup but kinda winnable if I close the game sufficiently fast.
 
 ::magic-sideboard-guide
 ---
@@ -266,7 +266,7 @@ description:
 
 Game 2: I kept a hand with 2 lands and no 1 drop, I played turn 2 BTE plus Rally and started applying pressure. 
 I immediately noticed my sideboard was kinda wrong when he started playing Island into Conduit Pylons. 
-He stabilized with Breath Weapon then played Moment’s Peace protected with Blue Elemental Blast. 
+He stabilized with Breath Weapon then played Moment's Peace protected with Blue Elemental Blast. 
 I conceded an already lost game, he was at a healthy life total and I had 0 board presence and 0 cards in hand.
 
 ::magic-sideboard-guide
@@ -303,7 +303,7 @@ crop:
 
 Game1: I was kinda nervous entering this game, the first to secure day 2. Last year I threw away 2 matches so this time I was determined to not let it happen again. Then, I lost the first die roll of the day.
 I kept a one lander hand that made turn one Epicure into turn two Tomb Raider. 
-He killed the Tomb Raider with Skred but I sneak into play an Inventor’s Axe that same turn.
+He killed the Tomb Raider with Skred but I sneak into play an Inventor's Axe that same turn.
 The vampire went unchecked until he tapped out so I decided to press on the accelerator.
 In 2 turns I put him to 0 with a double Galvanic Blast and went to Game 2.
 
@@ -431,7 +431,7 @@ description:
 1 Rally ad the Hornburg
 1 Goblin Bushwhacker
 3 Reckless Impulse
-1 Wrenn’s Resolve
+1 Wrenn's Resolve
 ::
 
 Game 2: I kept a hand with early aggression and 2 Tectonic Hazard. 
@@ -467,13 +467,13 @@ description:
 3 Tectonic Hazard
 #out
 3 Reckless Impulse
-1 Wrenn’s Resolve
+1 Wrenn's Resolve
 ::
 
 Game 2: Going into game 2 I felt confident nonetheless this was one of the scariest matchup for my deck.
 Again I made a slow turn 1 into 3 damage turn 2 into 5+ damage a turn for the rest of the game.
 I applied so much pressure that one turn he had to cast 2 Prismatic Strands, one on red and one on white, just to stay alive.
-For the sideboard plan I thought of trimming some playset for the go-wide strategy to fit some Relic of Progenitus, I still don’t know if this is correct but I fear to slow down too much.
+For the sideboard plan I thought of trimming some playset for the go-wide strategy to fit some Relic of Progenitus, I still don't know if this is correct but I fear to slow down too much.
 
 Axed.
 
@@ -496,8 +496,8 @@ I lost the die roll but I started Furnace Tomb Raider making him sigh at my play
 Both of us knew that was a favorable matchup for my deck. This first game was really fast, I had lethal on turn five but he killed me on his turn five with Guttersnipe, Fireblast and Lava Dart from the graveyard in response to a removal, all of this with Grab the Price on the stack. 
 
 After this game we had a deckcheck so we chatted a little bit.
-Pietro was a great guy and I’m not saying it because he is the guy who publish thereport, *wink wink. Jokes aside he was really chill and we talked about the upcoming events, like PauperFog on 26 of July in Reggio Emilia. 
-After this blatant self promotion let’s go to the sideboard.
+Pietro was a great guy and I'm not saying it because he is the guy who publish thereport, *wink wink. Jokes aside he was really chill and we talked about the upcoming events, like PauperFog on 26 of July in Reggio Emilia. 
+After this blatant self promotion let's go to the sideboard.
 
 Game 2: After speaking to my Madness opponents on Day 1 I changed how I sideboarded against Madness. 
 So, if the sneakers leave there less need of graveyard hate and less board wipe but I sided in anyway because Chains are really bad.
@@ -505,7 +505,7 @@ I had a hell of a hand, with BTE plus Rally on turn two, if I remember correctly
 Again he still put me to 11 so it was kinda close, I had to stay focused.
 
 Game 3: I kept one lander but was very promising with almost only 1 mana cards, thinking about if I drew a land I was as safe as houses.
-I don’t have to say that I drew my second land on turn 2 and Rally on turn three flooding the board with creatures.
+I don't have to say that I drew my second land on turn 2 and Rally on turn three flooding the board with creatures.
 I was able to close the game helped by Pietro missing a land drop. 
 A friend of mine told me after the game that he had Searing Blaze but no land to enable landfall to deal with my Burning-threes .
 
@@ -525,13 +525,13 @@ crop:
 ---
 ::
 
-Game 1: At this point this was a win&in for the top 8. He was 12-0 and until then he’d lost only three games in the tournament.
-I don’t have to say this is a terrible matchup for Rally, his creatures are cheap and can survive blocking ours, but I still felt really confident.
+Game 1: At this point this was a win&in for the top 8. He was 12-0 and until then he'd lost only three games in the tournament.
+I don't have to say this is a terrible matchup for Rally, his creatures are cheap and can survive blocking ours, but I still felt really confident.
 This game was insane, he was on the play but never drew any Prismatic Strands. 
-Instead I drew like a dragon. I don’t remember the game too well, I was too focused. We had almost ten people watching us, so maybe someone else remembers the exact plays.
+Instead I drew like a dragon. I don't remember the game too well, I was too focused. We had almost ten people watching us, so maybe someone else remembers the exact plays.
 I only remember I kept a hand with Furnace, Tomb Raider and 2 Bushwacker. 
 During the game I flooded the board removing his 3 toughness creatures.
-I closed the game playing Bushwhacker 4 turns in a row topdecking the other two that I hadn’t in hand. Crazy game.
+I closed the game playing Bushwhacker 4 turns in a row topdecking the other two that I hadn't in hand. Crazy game.
 
 ::magic-sideboard-guide
 ---
@@ -594,7 +594,7 @@ I drew 3 Relics in this game so he had to pay 7 mana for his first Terror.
 I was patient after the first Terror, keeping burn spells in hand and waited for the right spot to close the game. 
 When I was at five I decided to pull the trigger. He had few mana open and only 2 cards. 
 I was lucky he had only one Dispel and an Envelop, so I was able to win by casting 3 burn spells.
-I’m still one game from top 8.
+I'm still one game from top 8.
 
 Axed.
 
@@ -614,9 +614,9 @@ crop:
 
 Game 1: Before the game we did some math, and no one of us was safe: if we intentionally draw almost certainly one of us was out of the top 8. So we had to play.
 I won the die roll and started with a really aggressive Furnace into Tomb Raider on turn one.
-He mulligan to 6 or 5 I don’t remember but the turning point was when he milled his only Swamp with a Winding Way. 
+He mulligan to 6 or 5 I don't remember but the turning point was when he milled his only Swamp with a Winding Way. 
 From that moment I tried to keep him out of his black mana while keeping pressure on the board. 
-I’m one game away from the top 8 but Spy is a bad matchup.
+I'm one game away from the top 8 but Spy is a bad matchup.
 
 ::magic-sideboard-guide
 ---
@@ -632,7 +632,7 @@ description:
 ::
 
 
-Game 2: I kept a functional hand and started executing my gameplan but he managed to fill the board and gain life with Nylea’s Disciple.
+Game 2: I kept a functional hand and started executing my gameplan but he managed to fill the board and gain life with Nylea's Disciple.
 That gained him quite some time but my board state was concerning to him so he decided to pull the trigger and tried to combo with one land in the deck.
 That worked, he milled 2 Dread Return and 2 Giants with 8 creatures on the board, so I conceded.
 
@@ -658,7 +658,7 @@ I started fast with a Burning-Tree into Relic of Progenitus on turn 3.
 My draws were fire, I found the right card at the right moment like an Axe out of cracking a Relic.
 I managed his board with my burn spells while a Bushwhacker sealed the deal. 
 Top 8 achieved.
-Nicola was a really great guy and it was a pleasure playing with him. I’m no surprise he’s a legend of the Italian pauper community. Due to this win I was second place in swiss round so I was on the play at least for the next two games, lucky.
+Nicola was a really great guy and it was a pleasure playing with him. I'm no surprise he's a legend of the Italian pauper community. Due to this win I was second place in swiss round so I was on the play at least for the next two games, lucky.
 
 Axed.
 
@@ -680,8 +680,8 @@ crop:
 ---
 ::
 
-This was the first match I played in streaming since last year but I wasn’t too nervous.
-This run was fantastic and I didn’t want to stop here.
+This was the first match I played in streaming since last year but I wasn't too nervous.
+This run was fantastic and I didn't want to stop here.
 My teammates helped me with a propitiatory rite for luck by Fantozzi, so I was very chill at the moment.
 
 Game 1: I started keeping seven while he went to 6. Good start already. 
@@ -697,7 +697,7 @@ description:
 3 Relic of Progenitus
 #out
 2 Chain Lightning
-1 Wrenn’s Resolve
+1 Wrenn's Resolve
 ::
 
 Game 2: I kept on 6 with Furnace, Tomb Raider, double BTE, Relic and one between Bolt and Axe.
@@ -724,8 +724,8 @@ Game 1: I saw his decklist and instantly knew I was in trouble. He played 2 Toxi
 I tried to close the game fast, I put him to 5 even after his first Krark-Clan Shaman, but he played Pulse to come back to 11, took shaman back from the graveyard and wrath the board.
 This game ended on this play, nothing that happened after really mattered.
 
-Game 2: I kept a really good hand with T1 creature, turn 2 BET plus Cast into the Fire who exiled his Drossforge Bridge. Unfortunately this was not enough to win the game, he drew the land he needed then only answers to my board while I wasn’t able to close the game.
-It’s kinda muddy in my head now but my only out was he attacked with most of his creatures giving me the chance to play BTE plus Tomb Raider plus Bushwhacker.
+Game 2: I kept a really good hand with T1 creature, turn 2 BET plus Cast into the Fire who exiled his Drossforge Bridge. Unfortunately this was not enough to win the game, he drew the land he needed then only answers to my board while I wasn't able to close the game.
+It's kinda muddy in my head now but my only out was he attacked with most of his creatures giving me the chance to play BTE plus Tomb Raider plus Bushwhacker.
 But he was really careful in his combat steps so I never really had a window to try anything.
 Unlucky.
 Match 0-2
@@ -738,14 +738,14 @@ He drew and played better than me so it was a deserved win.
 
 ## Conclusion
 
-After all, I’m very happy with this result. My goal was to make day 2 and I went all down to the semifinal. It was a great run, or as someone would say, a great rally.
+After all, I'm very happy with this result. My goal was to make day 2 and I went all down to the semifinal. It was a great run, or as someone would say, a great rally.
 I was lucky during all tournaments I took very few mullingan and started the game with Great Furnace Goblin Tomb Raider 13 times out of 38 games I played, so quite a bit more than 14%.
-I think Inventor’s Axe is a good card in this deck. I won at least 3 games thanks to Inventor’s Axe, the most important was game 3 of the win&in for the top8.
+I think Inventor's Axe is a good card in this deck. I won at least 3 games thanks to Inventor's Axe, the most important was game 3 of the win&in for the top8.
 
 I want to thank all of my opponents, everyone was super kind and chill. Special thanks to il Fritto, a legend, who I played the win&in for the top8, sorry for the last topdeck but I drew like that all weekend.
 Joking with my friends they said I was blessed by gods of magic.
 
-Last but not least I have to say thank you to Lillo Aldegheri aka Seasonofmist, I ran this list after I saw him playing it at Bologna’s Pauper Ragù and in our League Top8.
+Last but not least I have to say thank you to Lillo Aldegheri aka Seasonofmist, I ran this list after I saw him playing it at Bologna's Pauper Ragù and in our League Top8.
 I was joking, the biggest thanks goes to Team Bidoni and fellow LPRE players who supported me all the weekend, and before during testing, so thanks to Fiakka (who could not attend the event), Gabri, Gando, Lollo, Pietro, Tazzo and to all Lega Pauper Reggio Emilia.
 
 See ya all at PauperFog!

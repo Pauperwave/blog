@@ -57,7 +57,7 @@ Sideboard
 1 Crimson Fleet Commodore
 ::
 
-La prima cosa che salta all’occhio guardando la lista è la presenza di 4 copie di Melded Moxite al posto di Kessig Flamebreather, i crediti di questa scelta vanno totalmente al mio amico e mentore Pietro Bragioto, il primo ad implementare questa soluzione nelle sue liste.
+La prima cosa che salta all'occhio guardando la lista è la presenza di 4 copie di Melded Moxite al posto di Kessig Flamebreather, i crediti di questa scelta vanno totalmente al mio amico e mentore Pietro Bragioto, il primo ad implementare questa soluzione nelle sue liste.
 
 ::article-quote
 Perchè Moxite sopra Kessig?
@@ -65,14 +65,14 @@ Perchè Moxite sopra Kessig?
 
 Il motivo di questa scelta è duplice:
 
-1. Avere 4 copie di “scarto pesco due” in piu’ nel mazzo permette banalmente di rianimare Snacker piu’ consistentemente;
-2. L’idea di fondo è spostare il mazzo verso la sua versione piu’ orientata al piano combo, cercando di accumulare risorse fino al turno in cui Guttersnipe diventa letale. È proprio seguendo questa filosofia che abbiamo deciso di massimizzare le copie di Guttersnipe e Fireblast, aumentando la probabilità di costruire un turno esplosivo capace di chiudere la partita all'istante.
+1. Avere 4 copie di “scarto pesco due” in piu' nel mazzo permette banalmente di rianimare Snacker piu' consistentemente;
+2. L'idea di fondo è spostare il mazzo verso la sua versione piu' orientata al piano combo, cercando di accumulare risorse fino al turno in cui Guttersnipe diventa letale. È proprio seguendo questa filosofia che abbiamo deciso di massimizzare le copie di Guttersnipe e Fireblast, aumentando la probabilità di costruire un turno esplosivo capace di chiudere la partita all'istante.
 
-Inoltre il token Robot che si puo’ generare puo’ essere sia un buon bloccante contro i mazzi Terror sia un attaccante per accorciare la race nei matchup più “grindosi”.
+Inoltre il token Robot che si puo' generare puo' essere sia un buon bloccante contro i mazzi Terror sia un attaccante per accorciare la race nei matchup più “grindosi”.
 
 ## La Sideboard
 
-Partendo dal presupposto che non ci si puo’ settare contro ogni matchup, in particolare in un torneo da 14 turni come il Paupergeddon, la scelta quasi piu’ ovvia è stata avere nell’arsenale post side quante piu’ risposte per uno dei peggiori matchup del mazzo: Mono U terror. L'elevato numero di Pyroblast e Red Elemental Blast, oltre a migliorare sensibilmente quel matchup, si è rivelato estremamente utile anche contro tutti i mazzi Flicker based, aumentando il valore complessivo della sideboard.
+Partendo dal presupposto che non ci si puo' settare contro ogni matchup, in particolare in un torneo da 14 turni come il Paupergeddon, la scelta quasi piu' ovvia è stata avere nell'arsenale post side quante piu' risposte per uno dei peggiori matchup del mazzo: Mono U terror. L'elevato numero di Pyroblast e Red Elemental Blast, oltre a migliorare sensibilmente quel matchup, si è rivelato estremamente utile anche contro tutti i mazzi Flicker based, aumentando il valore complessivo della sideboard.
 
 Per quanto riguarda Searing Blaze, ho sempre avuto parecchie riserve sulla carta nelle varie versioni di Mono Red che si sono succedute negli anni. Proprio in Redness, però, la carta riesce finalmente a esprimere tutto il suo potenziale. La lista iniziale prevedeva addirittura quattro copie, ma la sera prima del Main Event abbiamo deciso di sostituire la quarta con una copia di Crimson Fleet Commodore. Dal momento che avevamo deciso di rinunciare a carte come End the Festivities, Searing Blaze diventava la nostra risposta principale a Mono Red Rally, oltre a rappresentare un vantaggio enorme nel mirror di Redness.
 
@@ -86,7 +86,7 @@ Perchè nessun “hate” per artefatto?
 ::
 
 Ho sempre ritenuto carte come Cast into fire, Suplex e Smash to smithereens carte da side imprescindibili per la strategia Mono Red. 
-Però se queste risultano fondamentali in mazzi come Mono Red Rally che si possono permettere di fare T1 creatura, T2 slando, T3 doppia creatura o slando piu’ creatura; in Redness questa strategia perde un po’ di efficacia dal momento che gli unici drop a 1 mana che giochiamo sono solo i Voldaren Epicure. 
+Però se queste risultano fondamentali in mazzi come Mono Red Rally che si possono permettere di fare T1 creatura, T2 slando, T3 doppia creatura o slando piu' creatura; in Redness questa strategia perde un po' di efficacia dal momento che gli unici drop a 1 mana che giochiamo sono solo i Voldaren Epicure. 
 C'era poi un secondo aspetto che ci ha convinti a rinunciare a questo tipo di effetti: volevamo evitare di appesantire ulteriormente la curva con altri drop a due mana, mantenendo il mazzo il più possibile esplosivo, lineare e focalizzato sul proprio game plan.
 
 ## Il Torneo
@@ -125,7 +125,7 @@ description:
 ::
 
 Postside, da parte sua, entrano dai 4 agli 8 counter tra Blue Blast ed Envelop. Non giocando hate per artefatto dobbiamo gestire il matchup combattendo sulle creature e sui suoi counter.
-Inizialmente non ero troppo convinto delle Searing Blaze in questo matchup ma durante il torneo ho avuto modo di ricredermi; poter togliere Utrom Monitor o Refurbished Familiar oppure completare un trade con Myr Enfoncer, facendo allo stesso tempo 3 danni all’avversario mi ha salvato in alcuni spot.
+Inizialmente non ero troppo convinto delle Searing Blaze in questo matchup ma durante il torneo ho avuto modo di ricredermi; poter togliere Utrom Monitor o Refurbished Familiar oppure completare un trade con Myr Enfoncer, facendo allo stesso tempo 3 danni all'avversario mi ha salvato in alcuni spot.
 
 
 
@@ -142,7 +142,7 @@ description:
 3 Guttersnipe
 ::
 
-Il mio avversario di R3 giocava la versione con lo spash nero solo per Snuff out e Cast Down, quindi con molte piu’ fate e con Brinebarrow Intruder. Il matchup è abbastanza favorevole con il corretto utilizzo dei Lava Dart e delle risorse in generale. In questo matchup Melded Moxite risulta fondamentale per la creazione del token che tiene a bada i suoi ninja e imposta la race. Contro questo mazzo è importante non fare mai la prima mossa ma accumulare piu’ risorse possibili in mano.
+Il mio avversario di R3 giocava la versione con lo spash nero solo per Snuff out e Cast Down, quindi con molte piu' fate e con Brinebarrow Intruder. Il matchup è abbastanza favorevole con il corretto utilizzo dei Lava Dart e delle risorse in generale. In questo matchup Melded Moxite risulta fondamentale per la creazione del token che tiene a bada i suoi ninja e imposta la race. Contro questo mazzo è importante non fare mai la prima mossa ma accumulare piu' risorse possibili in mano.
 
 
 
@@ -162,7 +162,7 @@ description:
 ::
 
 Contro le versioni più controllose di UB il problema principale è sempre stato quello di non riuscire a chiudere prima che l'avversario accumulasse troppe risorse. La configurazione con Moxite e la massimizzazione di Guttersnipe cambia però questa dinamica.
-Le Relic servono esclusivamente per esiliare le Snacker dell’avversario dal momento che questa versione non gioca i Tolarian Terror. Le carte migliori del matchup sono Voldaren Epicure e Highway Robbery; i primi perchè rubano tanti danni inziali e permettono di giocare intorno a Gurmag + Fangs utilizzano Lava Dart sulla nostra creatura dopo il blocco, le seconde perchè grazie all’abilità Plot permettono di risolvere almeno un effetto “scarto pesco due” in un turno.
+Le Relic servono esclusivamente per esiliare le Snacker dell'avversario dal momento che questa versione non gioca i Tolarian Terror. Le carte migliori del matchup sono Voldaren Epicure e Highway Robbery; i primi perchè rubano tanti danni inziali e permettono di giocare intorno a Gurmag + Fangs utilizzano Lava Dart sulla nostra creatura dopo il blocco, le seconde perchè grazie all'abilità Plot permettono di risolvere almeno un effetto “scarto pesco due” in un turno.
 
 
 
@@ -261,7 +261,7 @@ description:
 3 Guttersnipe
 ::
 
-Inutile girarci attorno, il matchup è estramamente negativo. Abbiamo qualche speranza se l’avversario non fa Burning-Tree Emissary + Rally at the Hornburg. Post-side togliamo i Guttersnipe e cerchiamo di combattere quanto possibile il suo board grazie alle Searing Blaze.
+Inutile girarci attorno, il matchup è estramamente negativo. Abbiamo qualche speranza se l'avversario non fa Burning-Tree Emissary + Rally at the Hornburg. Post-side togliamo i Guttersnipe e cerchiamo di combattere quanto possibile il suo board grazie alle Searing Blaze.
 
 
 
@@ -300,7 +300,7 @@ Nel nostro caso abbiamo deciso di investire molto su Mono U Terror, un matchup c
 Il risultato del torneo ha dimostrato che questa scelta aveva senso, permettendoci di affrontare una delle sfide più difficili con un piano concreto.
 
 Ringrazio tutte le persone che hanno contribuito ai test e alla costruzione della lista, in particolare Pietro Bragioto per essere stato il primo a credere nella soluzione con Melded Moxite, e tutti gli amici della Lega Pauper Padova e della “Via del Fuoco” con cui ho condiviso discussioni, prove e modifiche durante la preparazione.
-L'11° posto al Paupergeddon è un risultato di cui sono molto soddisfatto, ma con il rammarico che sarebbe potuto essere qualcosa di piu’.
+L'11° posto al Paupergeddon è un risultato di cui sono molto soddisfatto, ma con il rammarico che sarebbe potuto essere qualcosa di piu'.
 
 Al prossimo Paupergeddon!
 
