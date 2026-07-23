@@ -1,6 +1,6 @@
 // Pure positioning/filter math for the magic-cards fan/hand layouts, extracted from
 // app/components/magic/Cards.vue so it's independently unit-testable. See
-// docs/2026-07-10-magic-cards-component-research.md for how these formulas were
+// docs/architecture/2026-07-10-magic-cards-component-research.md for how these formulas were
 // reverse-engineered from magic.wizards.com.
 
 const SPREAD = 0.15

@@ -1,4 +1,6 @@
-# TODO
+# Todos
+
+Loose observations and open questions — not yet committed, ranked work. For that, see `docs/BACKLOG.md`.
 
 ## Monetizzazione: pubblicità non invasiva o donazioni
 
@@ -7,45 +9,8 @@ Obiettivo: coprire i costi di hosting/mantenimento, target indicativo ~20€/mes
 - **Pubblicità non invasiva** — valutare provider ad-friendly (es. EthicalAds, Carbon Ads) che non richiedono banner pesanti/popup e si adattano al tema del sito; evitare qualunque cosa impatti Core Web Vitals o l'esperienza di lettura.
 - **Richiesta donazioni** — link a Ko-fi/Buy Me a Coffee/GitHub Sponsors o simili, probabilmente in footer o in una pagina dedicata.
 
-Da decidere: quale delle due (o entrambe), dove posizionarle nel layout, e se serve una pagina `/supporta` o basta un widget nel footer.
+Da decidere: quale delle due (o entrambe), dove posizionarle nel layout, e se serve una pagina `/supporta` o basta un widget nel footer. Non ancora promosso a `BACKLOG.md` — manca una decisione su quale strada seguire prima che sia un item implementabile.
 
 ## Verify `hand` layout against a live magic.wizards.com session
 
-`magic-cards`' `layout: hand` is only partially reverse-engineered — 2 of 5 card slot positions were captured live (from "Design Files: Urza's Destiny, Part 3", the one article found using `config="hand"`), the rest is extrapolated. Unverified: the other 3 slot positions, and whether hovering a hand card repositions siblings the way `fan` does. See `docs/2026-07-10-magic-cards-component-research.md` for what's confirmed vs. assumed.
-
-## Pie chart legend overlaps the chart on mobile
-
-`app/components/charts/PieChart.vue` — in the mobile viewport, the legend (positioned on the left) sits on top of the pie chart itself instead of stacking below/around it. Needs a responsive layout fix (e.g. move the legend below the chart, or stack vertically, under a mobile breakpoint).
-
-## Pulsante "torna in cima" su mobile
-
-Aggiungere un tasto flottante in basso a destra, visibile solo su mobile, per tornare rapidamente in cima alla pagina (utile su articoli lunghi).
-
-Verificato: **non esiste già** — né altrove in questo sito (`app/`), né come componente pronto in Nuxt UI (nessun `back-to-top`/`scroll-to-top` nei componenti installati). Andrebbe costruito da zero: `@vueuse/core`'s `useWindowScroll` (già installato, vedi `nuxt.config.ts` → `@vueuse/nuxt`) per tracciare la posizione di scroll ed eventualmente mostrare/nascondere il pulsante, più un `UButton` stilizzato come floating action button, gestito con lo stesso `useDevice()`'s `isMobile` usato altrove nel progetto (vedi nota in `CLAUDE.md` sui grafici) per limitarlo a mobile.
-
-## Set up Nuxt Studio authentication
-
-`/editor` currently fails with:
-
-```
-[error] [nuxt-studio] In order to authenticate users, you need to set up a GITHUB OAuth application.
-```
-
-The same missing credentials also show up as a build-time warning on Vercel production builds, not just locally:
-
-```
-[warn] [Nuxt Studio] In order to use Studio in production mode, you need to setup authentication:
-```
-
-Nuxt Studio needs OAuth credentials to authenticate editors — this is a Studio requirement, unrelated to Nuxt UI.
-
-**Steps** (GitHub, since that's the configured repository provider):
-
-1. GitHub → Settings → Developer settings → OAuth Apps → New OAuth App
-2. Set the callback URL to `https://blog.pauperwave.org/editor` (production) — a separate app is needed for local dev with a `http://localhost:3000/editor` callback
-3. Copy the generated Client ID and Client Secret
-4. Set as environment variables:
-   - Production: add `STUDIO_GITHUB_CLIENT_ID` / `STUDIO_GITHUB_CLIENT_SECRET` to Vercel
-   - Local dev: add the same two to `.env`
-
-Alternative: Google OAuth is also supported (`STUDIO_GOOGLE_CLIENT_ID` / `STUDIO_GOOGLE_CLIENT_SECRET`), combined with `STUDIO_GITHUB_TOKEN` to allow Studio to push changes to the repo. See the [Nuxt Studio docs](https://nuxt.studio/) for details — out of scope for this project's own docs.
+`magic-cards`' `layout: hand` is only partially reverse-engineered — 2 of 5 card slot positions were captured live (from "Design Files: Urza's Destiny, Part 3", the one article found using `config="hand"`), the rest is extrapolated. Unverified: the other 3 slot positions, and whether hovering a hand card repositions siblings the way `fan` does. See `docs/architecture/2026-07-10-magic-cards-component-research.md` for what's confirmed vs. assumed.

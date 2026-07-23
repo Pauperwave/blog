@@ -74,11 +74,14 @@ All six chart components (`BarChart`, `ConfidenceBandChart`, `LineChart`, `PieCh
 
 ## Further documentation
 
-These already exist and are the primary reference for their areas — read them before re-deriving things from scratch:
+`docs/README.md` is the maintained index of everything else. Start there for anything beyond this file. These already exist and are the primary reference for their areas — read them before re-deriving things from scratch:
 
 - `docs/DEVELOPMENT.md` — code style conventions, utility functions, testing patterns, `useAsyncData` content-fetching patterns.
 - `docs/CONTENT.md` — full frontmatter reference, MDC syntax, decklist/card-reference syntax, image guidelines, publishing checklist.
-- `docs/ai/AGENTS.md` — condensed quick-reference version of the above two.
+- `docs/AGENTS.md` — condensed quick-reference version of the above two.
+- `docs/architecture/` — subsystem reference docs (card download/DB flow, `magic-cards` component internals, author system status).
+- `docs/audits/` — one-off investigation/postmortem reports (e.g. build performance).
+- `docs/TODO.md`, `docs/BACKLOG.md`, `docs/PROGRESS.md` have distinct roles — see `docs/README.md`: `TODO.md` is scratch/not-yet-committed, `BACKLOG.md` is ranked/committed work, `PROGRESS.md` is curated backward-looking history (ADRs).
 
 Known drift in those docs, don't trust blindly:
 - `docs/DEVELOPMENT.md` references a `server/api/cards.get.ts` endpoint; `server/api/` is currently empty. Card lookups happen at build time inside the content-transformer modules, not via a runtime API route.
