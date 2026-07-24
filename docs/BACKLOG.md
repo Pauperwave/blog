@@ -9,42 +9,29 @@ Committed, actionable work items, ranked by priority with a rough effort estimat
 
 | # | Item | Priority | Effort |
 |---|------|----------|--------|
-| 1 | [Set up Nuxt Studio authentication](#1-set-up-nuxt-studio-authentication) | P1 | S |
+| 1 | [Set up Nuxt Studio authentication](#1-set-up-nuxt-studio-authentication) | Done (auth) / P3 (usability) | S |
 | 2 | [Sistemare generazione og-images](#2-sistemare-generazione-og-images) | P2 | S |
 | 3 | [Pie chart legend overlaps the chart on mobile](#3-pie-chart-legend-overlaps-the-chart-on-mobile) | P2 | S |
 | 4 | [Pulsante "torna in cima" su mobile](#4-pulsante-torna-in-cima-su-mobile) | P2 | M |
-| 5 | [Integrare editor Tiptap per la modifica articoli](#5-integrare-editor-tiptap-per-la-modifica-articoli) | P3 | L |
+| 5 | [Editor custom (markdown/MDC) per la modifica articoli](#5-editor-custom-markdownmdc-per-la-modifica-articoli) | P2 | L |
 
 ---
 
 ## 1. Set up Nuxt Studio authentication
 
-`/editor` currently fails with:
+**Auth part: done (2026-07-24).** See `docs/PROGRESS.md` ADR-003 for the full story (wrong callback URL, wrong env var names vs. the module's actual code, missing moderators allowlist — all fixed and verified against `node_modules/nuxt-studio` source, not just the — partially inaccurate — official docs).
 
-```
-[error] [nuxt-studio] In order to authenticate users, you need to set up a GITHUB OAuth application.
-```
+**Still open, downgraded to P3:** Studio itself turned out to be a poor fit for this project's content pipeline (see #5 below and ADR-003) — the "GitHub content differs from your website, refresh" banner is permanent and structural for any decklist/report/tutorial content that goes through the custom transformer modules, and saving through Studio on that content risks writing the *expanded* (Scryfall-resolved) form back to git instead of the plain-text source the transformers expect. Until that's resolved (or Studio is scoped to plain-article-only editing), treat `/editor` as **not safe to publish through** for decklist/sideboard-guide/card-reference content. Lowered from P1 to P3 because the urgent part (open unauthenticated access on a live site) is fixed; what's left is a usability/architecture-fit question, not a security hole.
 
-The same missing credentials also show up as a build-time warning on Vercel production builds, not just locally:
-
-```
-[warn] [Nuxt Studio] In order to use Studio in production mode, you need to setup authentication:
-```
-
-Nuxt Studio needs OAuth credentials to authenticate editors — this is a Studio requirement, unrelated to Nuxt UI.
-
-**Steps** (GitHub, since that's the configured repository provider):
+**Original steps (kept for reference — GitHub, the configured repository provider):**
 
 1. GitHub → Settings → Developer settings → OAuth Apps → New OAuth App
-2. Set the callback URL to `https://blog.pauperwave.org/editor` (production) — a separate app is needed for local dev with a `http://localhost:3000/editor` callback
-3. Copy the generated Client ID and Client Secret
-4. Set as environment variables:
-   - Production: add `STUDIO_GITHUB_CLIENT_ID` / `STUDIO_GITHUB_CLIENT_SECRET` to Vercel
-   - Local dev: add the same two to `.env`
+2. Callback URL is the module's fixed auth route, not `/editor` (`studio.route`): `https://blog.pauperwave.org/__nuxt_studio/auth/github`. Verified against `node_modules/nuxt-studio/dist/module/runtime/server/routes/auth/github.get.js` — the official docs (`nuxt.studio/raw/auth-providers.md`) don't mention this distinction and are wrong about the env var names (see next point).
+3. Copy the generated Client ID and Client Secret.
+4. Env vars — use the **flat names read directly via `process.env`** in the installed module code (`STUDIO_GITHUB_CLIENT_ID`, `STUDIO_GITHUB_CLIENT_SECRET`), **not** the `NUXT_STUDIO_AUTH_GITHUB_CLIENT_ID`/`_SECRET` names the official docs show — grepped the entire installed package (`nuxt-studio@1.7.0`, also the latest published version, so not a version-drift issue) and found zero occurrences of any `NUXT_STUDIO_*` variable. Set on both Vercel (production) and `.env`/`.env.local` (local dev).
+5. **`STUDIO_GITHUB_MODERATORS`** (comma-separated allowed GitHub primary emails) is not optional in practice — without it, *any* GitHub account that completes the OAuth flow gets a valid `/editor` session (the moderators check in `github.get.js` is skipped entirely when the env var is unset). Set this before considering the auth setup complete on a live site.
 
-Alternative: Google OAuth is also supported (`STUDIO_GOOGLE_CLIENT_ID` / `STUDIO_GOOGLE_CLIENT_SECRET`), combined with `STUDIO_GITHUB_TOKEN` to allow Studio to push changes to the repo. See the [Nuxt Studio docs](https://nuxt.studio/) for details — out of scope for this project's own docs.
-
-**P1** because `/editor` is fully broken without it, not just degraded.
+Alternative: Google OAuth is also supported (`STUDIO_GOOGLE_CLIENT_ID` / `STUDIO_GOOGLE_CLIENT_SECRET`, requires `STUDIO_GOOGLE_MODERATORS`), combined with `STUDIO_GITHUB_TOKEN` to allow Studio to push changes to the repo. Simpler alternative for a single-maintainer setup: skip OAuth entirely and set `STUDIO_GITHUB_TOKEN` (a GitHub PAT) — the module's `validateAuthConfig` short-circuits and requires no OAuth client credentials at all when this token is present, at the cost of no per-user login screen.
 
 ---
 
@@ -76,12 +63,18 @@ Verificato: **non esiste già** — né altrove in questo sito (`app/`), né com
 
 ---
 
-## 5. Integrare editor Tiptap per la modifica articoli
+## 5. Editor custom (markdown/MDC) per la modifica articoli
 
-Obiettivo: editing in-place degli articoli (markdown/MDC) direttamente dal sito, usando Tiptap invece di (o in aggiunta a) Nuxt Studio. Da definire prima di implementare:
+**Non più ridondante rispetto a Studio — promosso a P2.** Nuxt Studio (auth risolta, vedi #1) si è rivelato strutturalmente incompatibile con questo blog per i contenuti che passano dai transformer custom (`modules/decklist-transformer.ts`, `modules/sideboard-guide-transformer.ts`, `modules/card-tooltip-transformer.ts`): Studio confronta il sorgente git con il contenuto renderizzato/arricchito e li trova sempre diversi (banner "content differs" permanente), e potrebbe scrivere su git la versione espansa (con tutto il JSON Scryfall) invece del testo semplice che i transformer si aspettano in input. Dettagli in `docs/PROGRESS.md` ADR-003.
 
-- Se sostituisce l'editor `/editor` di Studio o è un flusso separato.
-- Come si integra con il content pipeline (i tre transformer in `modules/` che riscrivono il markdown prima del parsing di Nuxt Content).
-- Come si integra con l'autenticazione (item #1 di questo backlog copre solo Studio).
+**Progetto di riferimento individuato:** [`nuxt-ui-templates/editor`](https://github.com/nuxt-ui-templates/editor) ([demo](https://editor-template.nuxt.dev/)) — editor WYSIWYG standalone stile Notion, stack: Nuxt UI (componente Editor) + il modulo community `nuxt-tiptap-editor` (**non** l'integrazione TipTap proprietaria di Studio — moduli diversi, verificato) + Y.js (collaborazione realtime, opzionale) + Vercel AI SDK (completions, opzionale). Salva in markdown, con media via NuxtHub Blob. **Non passa dalla pipeline Nuxt Content/collections di questo progetto** — è un punto di partenza architetturale da adattare, non un'integrazione pronta all'uso.
 
-**P3/L** — scope non ancora definito, dipende anche dall'esito di #1 (se Studio risulta sufficiente una volta autenticato, potrebbe ridimensionare la priorità di questo item).
+**Vincolo chiave per l'adattamento (a differenza di Studio):** l'editor deve lavorare sul markdown **grezzo, pre-transform** — lo stesso testo semplice che un autore scriverebbe a mano oggi in un file `.md` — e scrivere su git quella stessa forma, mai l'output arricchito dei transformer. Questo probabilmente esclude di poter riusare il componente Editor "as-is" per i blocchi `::magic-decklist`/`::magic-sideboard-guide`/`[[Card]]`, che nella UI dovrebbero restare editabili come sintassi/testo (o con un'anteprima separata), non come componenti MDC pienamente renderizzati e poi ri-serializzati.
+
+**Da definire prima di implementare:**
+- Se sostituisce del tutto `/editor` di Studio o coesiste (es. Studio per contenuti "puri", editor custom per decklist/report/tutorial).
+- Come l'editor evita di toccare/espandere i blocchi `::magic-decklist` ecc. — trattarli come testo opaco/token, non come contenuto WYSIWYG pieno.
+- Persistenza: scrittura diretta su file locali (dev) vs. commit su GitHub in produzione (stesso problema di Studio: serve un token/OAuth con permessi di scrittura sul repo).
+- Autenticazione: riusare `STUDIO_GITHUB_MODERATORS`-style allowlist o costruirne una propria.
+
+**P2/L** — scope grande ma ora prioritario, perché Studio non copre il caso d'uso principale (decklist/report).
