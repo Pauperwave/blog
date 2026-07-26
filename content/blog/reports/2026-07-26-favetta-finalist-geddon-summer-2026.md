@@ -7,7 +7,7 @@ tags:
 decks:
   - White Weenie
 location: Lucca
-published: false
+published: true
 date: 2026-07-26
 author: Alessandro Moretti
 thumbnail: /assets/blog/arts/tmt-14-leonardo-big-brother.jpg
