@@ -55,13 +55,13 @@ Sideboard
 
 Scelgo di portare WW a questo Geddon perché è il mazzo che so giocare meglio, è un mazzo lineare che permette di finire rapidamente le partite e quindi di “decomprimere” un pochino fra un turno e l’altro. Inoltre, a mio avviso, è un mazzo ben posizionato nel meta e che non tutti sono preparati ad affrontare al meglio.
 La lista è abbastanza stock, le uniche carte che ho deciso attivamente di giocare e che vorrei giustificare sono:
-    • Ramosian Rally: mi aspettavo molte wratte stile Arms of Hadar e Breath Weapon. Per questo avere una mono copia di una carta che ti salva praticamente tutto il board e a cui l’avversario non può giocare attorno mi è sembrato forte. In aggiunta ci chiudi le partite;
-    • Elite Interceptor: è l’ultima carta che ho aggiunto alla lista: un altro buon parante contro Rally, utile contro le Crisalidi e gli Utrom per far passare danni e con 10 Thraben ho molto più spesso una giocata “forte” a turno 1 e mi è parso di mulligare meno.
-Scelte di side
+- Ramosian Rally: mi aspettavo molte wratte stile Arms of Hadar e Breath Weapon. Per questo avere una mono copia di una carta che ti salva praticamente tutto il board e a cui l’avversario non può giocare attorno mi è sembrato forte. In aggiunta ci chiudi le partite;
+- Elite Interceptor: è l’ultima carta che ho aggiunto alla lista: un altro buon parante contro Rally, utile contro le Crisalidi e gli Utrom per far passare danni e con 10 Thraben ho molto più spesso una giocata “forte” a turno 1 e mi è parso di mulligare meno.
+
 Ho deciso di giocare una side con molti 4x/3x in modo da migliorare pochi matchup ma che considero critici ovvero:
-    • Affinity: 4x Dust to Dust e Journey mi aiutano a migliorare molto la winrate di g2 e g3. Un tempo era un matchup scontato a favore di WW. Adesso gli Utrom rendono molto più combattuto g1.
-    • Elfi: mazzo che ha vinto lo scorso Geddon, è un matchup che considero sfavorevole ma che si può vincere incastrando bene le giocate. Ho deciso di mettere 1 Holy light e 3 Stendardiere per bloccare Timberwatch, Quirion, Hydra. Le Stendardiere si spendono bene anche contro i mazzi cancelli.
-    • Madness: meno facile di quanto si possa pensare, sido 7 carte di cui 4 Martiri per cercare di stare un pochino alto di vita e non morire in un unico turno da Guttersnipe. Volere migliorare il matchup con Madness ha influenzato anche le scelte di main (vedi 4x Strands e 4x Lunarca).
+- Affinity: 4x Dust to Dust e Journey mi aiutano a migliorare molto la winrate di g2 e g3. Un tempo era un matchup scontato a favore di WW. Adesso gli Utrom rendono molto più combattuto g1.
+- Elfi: mazzo che ha vinto lo scorso Geddon, è un matchup che considero sfavorevole ma che si può vincere incastrando bene le giocate. Ho deciso di mettere 1 Holy light e 3 Stendardiere per bloccare Timberwatch, Quirion, Hydra. Le Stendardiere si spendono bene anche contro i mazzi cancelli.
+- Madness: meno facile di quanto si possa pensare, sido 7 carte di cui 4 Martiri per cercare di stare un pochino alto di vita e non morire in un unico turno da Guttersnipe. Volere migliorare il matchup con Madness ha influenzato anche le scelte di main (vedi 4x Strands e 4x Lunarca).
 
 ## Tournament
 
