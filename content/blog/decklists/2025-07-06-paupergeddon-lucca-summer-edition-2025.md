@@ -276,7 +276,7 @@ Creatures
 4 Jewel Thief
 4 Writhing Chrysalis
 4 Avenging Hunter
-3 Sagu Wildling
+3 Sagu Wildling // Roost Seek
 4 Boarding Party
 2 Annoyed Altisaur
 

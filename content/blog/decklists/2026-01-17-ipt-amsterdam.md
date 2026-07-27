@@ -299,7 +299,7 @@ Lands
 13 Forest
 
 Sideboard
-4 Sagu Wildling
+4 Lotleth Giant // Roost Seek
 4 Vitu-Ghazi Inspector
 3 Faerie Macabre
 2 Viridian Longbow

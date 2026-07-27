@@ -787,13 +787,13 @@ headerGradient: monowhite
 Creatures
 4 Delver of Secrets
 4 Elvish Mystic
-4 Sagu Wildling
+4 Sagu Wildling // Roost Seek
 4 The Modern Age
 4 Masked Vandal
 4 Priest of Titania
 4 Timberwatch Elf
 4 Avenging Hunter
-3 Sagu Wildling
+3 Sagu Wildling // Roost Seek
 4 Generous Ent
 
 Sorceries

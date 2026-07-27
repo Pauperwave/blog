@@ -251,7 +251,7 @@ description:
 ---
 #out
 4 Lunarch Veteran
-1 Spiderman, Web-Slinger
+1 Spider-Man, Web-Slinger
 1 Prismatic Strands
 #in
 4 Dust to Dust
@@ -320,7 +320,7 @@ description:
 ---
 #out
 1 Novice Inspector
-1 Spiderman, Web-Slinger
+1 Spider-Man, Web-Slinger
 1 Prismatic Strands
 4 Lunarch Veteran
 #in
@@ -409,7 +409,7 @@ description:
 ---
 #out
 1 Novice Inspector
-1 Spiderman, Web-Slinger
+1 Spider-Man, Web-Slinger
 4 Lunarch Veteran
 #in
 3 Dust to Dust
@@ -443,7 +443,7 @@ description:
 ---
 #out
 1 Novice Inspector
-1 Spiderman, Web-Slinger
+1 Spider-Man, Web-Slinger
 4 Lunarch Veteran
 #in
 3 Dust to Dust

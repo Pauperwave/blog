@@ -35,7 +35,7 @@ Creatures
 4 Balustrade Spy
 4 Sagu Wildling // Roost Seek
 4 Generous Ent
-1 Troll of Khazad-dÃ»m
+1 Troll of Khazad-dûm
 2 Lotleth Giant
 2 Nyxborn Hydra
 

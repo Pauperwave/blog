@@ -428,7 +428,7 @@ description:
 4 Cast into the Fire
 #out
 1 Burning-Tree Emissary
-1 Rally ad the Hornburg
+1 Rally at the Hornburg
 1 Goblin Bushwhacker
 3 Reckless Impulse
 1 Wrenn's Resolve

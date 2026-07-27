@@ -278,15 +278,15 @@ headerGradient: golgari
 Creatures
 4 Balustrade Spy
 2 Elves of Deep Shadow
-3 Gatecreep Vine
+3 Gatecreeper Vine
 4 Generous Ent
-2 Lothlet Giant
+2 Lotleth Giant
 4 Masked Vandal
 2 Mesmeric Fiend
 2 Nyxborn Hydra
 4 Overgrown Battlement
 2 Quirion Ranger
-4 Sagu Wildling
+4 Sagu Wildling // Roost Seek
 4 Saruli Caretaker
 1 Troll of Khazad-dûm
 3 Wall of Roots

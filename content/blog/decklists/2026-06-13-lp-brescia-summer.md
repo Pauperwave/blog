@@ -106,7 +106,7 @@ placement: Top 4
 headerGradient: monowhite
 ---
 Creatures
-1 Ardenvale Tactician
+1 Ardenvale Tactician // Dizzying Swoop
 1 Eagles of the North
 4 Kor Skyfisher
 3 Leonardo, Big Brother
@@ -196,7 +196,7 @@ Creatures
 2 Mesmeric Fiend
 2 Nyxborn Hydra
 4 Overgrown Battlement
-4 Sagu Wildling
+4 Sagu Wildling // Roost Seek
 4 Saruli Caretaker
 2 Troll of Khazad-dûm
 3 Wall of Roots
@@ -309,11 +309,11 @@ Creatures
 4 Avenging Hunter
 3 Eldrazi Repurposer
 3 Jewel Thief
-3 Leyline Weaver
+3 Spider Manifestation
 4 Nyxborn Hydra
 3 Primordial Pachyderm
 4 Writhing Chrysalis
-3 Zan, Tunnelweb Explorer
+3 Spider-Man, Brooklyn Visionary
 
 Instants
 4 Cast Down

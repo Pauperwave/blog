@@ -281,7 +281,7 @@ Creatures
 4 Masked Vandal
 2 Mesmeric Fiend
 4 Balustrade Spy
-4 Sagu Wildling
+4 Sagu Wildling // Roost Seek
 4 Generous Ent
 1 Troll of Khazad-dûm
 2 Lotleth Giant
