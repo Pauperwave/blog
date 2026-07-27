@@ -287,7 +287,7 @@ Sideboard
 3 Hydroblast
 4 Pyroblast
 2 Ancient Grudge
-1 Mysidian Elder
+1 Mysidian Elderr
 1 Stonehorn Dignitary
 1 Weather the Storm
 ::

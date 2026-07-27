@@ -138,7 +138,7 @@ Sideboard
 1 End the Festivities
 4 Pyroblast
 2 Red Elemental Blast
-2 Relic of Profenitus
+2 Relic of Progenitus
 2 Searing Blaze
 2 Smash to Smithereens
 ::
@@ -174,7 +174,7 @@ Sideboard
 2 Cast into the Fire
 4 Pyroblast
 2 Red Elemental Blast
-3 Relic of Profenitus
+3 Relic of Progenitus
 4 Suplex
 ::
 

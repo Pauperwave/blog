@@ -191,7 +191,7 @@ placement: Top 8
 headerGradient: temur
 ---
 Creatures
-2 Mysidian Elder
+2 Mysidian Elderr
 1 Murmuring Mystic
 3 Mnemonic Wall
 
