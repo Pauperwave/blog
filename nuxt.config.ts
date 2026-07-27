@@ -95,6 +95,12 @@ export default defineNuxtConfig({
           depth: 3,
           searchDepth: 2,
         },
+        remarkPlugins: {
+          "remark-math": {},
+        },
+        rehypePlugins: {
+          "rehype-katex": {},
+        },
       },
     },
   },
@@ -148,6 +154,7 @@ export default defineNuxtConfig({
   },
   css: [
     "~/assets/css/main.css",
+    "katex/dist/katex.min.css",
   ],
   studio: {
     // Studio admin route (default: '/_studio')
