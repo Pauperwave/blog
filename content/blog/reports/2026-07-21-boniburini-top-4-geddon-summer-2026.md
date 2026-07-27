@@ -628,7 +628,7 @@ description:
 #out
 1 Reckless Impulse
 1 Rally at the Hornburg
-1 Reckless Bushwhacker
+1 Goblin Bushwhacker
 ::
 
 
@@ -647,7 +647,7 @@ description:
 #out
 4 Reckless Impulse
 1 Rally at the Hornburg
-1 Reckless Bushwhacker
+1 Goblin Bushwhacker
 ::
 
 Side in: 
