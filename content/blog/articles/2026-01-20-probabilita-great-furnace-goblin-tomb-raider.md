@@ -84,10 +84,22 @@ In altre parole: più mulligan facciamo, più opportunità abbiamo di imbatterci
 
 Questo processo può essere rappresentato visivamente come un **albero di decisione**, dove ogni ramo corrisponde a un tentativo:
 
-::image-caption
+::mermaid
 ---
-src: /blog/graphs/mulligan-tree.jpg
-alt: "Albero di decisione dei mulligan"
+code: |
+  flowchart LR
+      A["Pesca<br/>7 carte"] -->|14.54%| B["Trovata<br/>a 7 carte"]
+      A -->|85.46%| C["Combo<br/>assente"]
+      C -->|14.54%| D["Trovata<br/>a 6 carte"]
+      C -->|85.46%| E["Combo<br/>assente"]
+      E -->|14.54%| F["Trovata<br/>a 5 carte"]
+      E -->|85.46%| G["Combo<br/>assente"]
+
+      classDef found fill:#d4edda,stroke:#28a745,stroke-width:2px,font-weight:bold,color:#155724;
+      classDef absent fill:#f8d7da,stroke:#dc3545,stroke-width:2px,color:#721c24;
+
+      class B,D,F found
+      class C,E,G absent
 ---
 ::
 
