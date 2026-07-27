@@ -19,10 +19,10 @@ cards:
   - Great Furnace
   - Goblin Tomb Raider
   - Voldaren Epicure
-  - Reckless Impulse
   - Galvanic Blast
   - Lightning Bolt
-caption: "La combo emblematica di Mono-Red Rally: [[Great Furnace]] + [[Goblin Tomb Raider]]."
+  - Reckless Impulse
+caption: "La combo emblematica di Mono-Red Rally."
 arch: 20.5 # opzionale, apertura totale del ventaglio in gradi (solo layout: fan)
 ---
 ::
