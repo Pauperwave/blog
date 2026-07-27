@@ -17,11 +17,11 @@ Ciao Gente! Sono Giovanni Favetta, assiduo frequentatore dei Paupergeddon e vice
 
 ::magic-decklist
 ---
-name: White Weenie
+name: White Weennie
 player: Giovanni Favetta
 placement: Finalist
 headerGradient: monowhite
---- 
+---
 Creatures
 2 Elite Interceptor // Rejoinder
 4 Lunarch Veteran // Luminous Phantom
