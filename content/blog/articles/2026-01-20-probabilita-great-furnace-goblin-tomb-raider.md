@@ -1,5 +1,5 @@
 ---
-title: "Quanto spesso apriamo con *Great Furnace* e *Goblin Tomb Raider*?"
+title: "Quanto spesso apriamo con Great Furnace e Goblin Tomb Raider?"
 description: "La combo emblematica di Mono-Red Rally è davvero così comune? Un'analisi matematica delle probabilità di apertura, con teoria e simulazioni a confronto."
 tags:
   - Meta
@@ -10,14 +10,20 @@ thumbnail: /assets/blog/arts/lci-151-goblin-tomb-raider.jpg
 published: true
 ---
 
-# Quanto spesso apriamo con *Great Furnace* e *Goblin Tomb Raider*?
+# Quanto spesso apriamo con Great Furnace e Goblin Tomb Raider?
 
 ::magic-cards
 ---
 cards:
+  - Mountain
   - Great Furnace
   - Goblin Tomb Raider
-layout: hand
+  - Voldaren Epicure
+  - Reckless Impulse
+  - Galvanic Blast
+  - Lightning Bolt
+caption: "La combo emblematica di Mono-Red Rally: [[Great Furnace]] + [[Goblin Tomb Raider]]."
+arch: 20.5 # opzionale, apertura totale del ventaglio in gradi (solo layout: fan)
 ---
 ::
 
@@ -80,7 +86,7 @@ Questo processo può essere rappresentato visivamente come un **albero di decisi
 
 ::image-caption
 ---
-src: /blog/graphs/mulligan%20tree.jpg
+src: /blog/graphs/mulligan-tree.jpg
 alt: "Albero di decisione dei mulligan"
 ---
 ::
@@ -105,7 +111,7 @@ Il punto chiave non è che il giocatore debba mulligare aggressivamente *solo* p
 
 Per l'avversario, questo significa che anche quando Mono-Red mulliga - magari per ragioni completamente diverse - la minaccia della combo resta concreta e statisticamente più probabile di quanto sembrasse dalla prima mano.
 
-## Verifica pratica: le simulazioni Monte Carlo
+## Validazione Monte Carlo
 
 A questo punto è naturale chiedersi se questi numeri teorici descrivano davvero ciò che accade in pratica.
 
@@ -164,6 +170,14 @@ In Pauper, come spesso in Magic, non vince chi gioca la carta più forte. Vince 
 
 ---
 
-**Video correlato:** [youtu.be/uLo23nq_4bQ](https://youtu.be/uLo23nq_4bQ)
+::video-preview
+---
+url: https://youtu.be/uLo23nq_4bQ
+---
+::
 
-**Paper correlato:** [https://zenodo.org/records/18721570](https://zenodo.org/records/18721570)
+::paper-preview
+---
+url: https://zenodo.org/records/18721570
+---
+::
