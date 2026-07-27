@@ -26,7 +26,14 @@ const baseContentSchema = z.object({
   // Supports single author (string) or multiple authors (array of strings)
   author: z.union([z.string(), z.array(z.string())]),
   thumbnail: z.string(),
-  published: z.boolean().default(false)
+  published: z.boolean().default(false),
+  // Populated automatically by the remark-reading-time plugin, not set in frontmatter.
+  readingTime: z.optional(z.object({
+    text: z.string(),
+    minutes: z.number(),
+    time: z.number(),
+    words: z.number()
+  }))
 })
 
 export default defineContentConfig({
