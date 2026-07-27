@@ -3,7 +3,14 @@
 import type { Author } from '~/composables/useAuthor'
 
 defineProps<{
-  data: { title?: string; description?: string; tags?: string[]; thumbnail?: string; date?: string } | null | undefined
+  data: {
+    title?: string
+    description?: string
+    tags?: string[]
+    thumbnail?: string
+    date?: string
+    readingTime?: { minutes: number }
+  } | null | undefined
   authors: Author[]
   formattedDate: string
   getTagFilterLink: (tag: string) => { path: string; query: Record<string, string> }
@@ -48,6 +55,15 @@ defineProps<{
             name="i-lucide-calendar"
             class="text-primary"
           /> {{ formattedDate }}
+        </p>
+        <p
+          v-if="data?.readingTime"
+          class="flex flex-row items-center gap-1 typ-sublabel"
+        >
+          <icon
+            name="i-lucide-clock"
+            class="text-primary"
+          /> {{ Math.ceil(data.readingTime.minutes) }} min di lettura
         </p>
       </div>
       <NuxtImg

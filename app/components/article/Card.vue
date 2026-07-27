@@ -79,6 +79,9 @@ const cardVariantClasses = computed(() =>
   >
     <template #date>
       {{ useState(`article-date-${article.path}`, () => formatDateIT(article.date)).value }}
+      <template v-if="article.readingTime">
+        · {{ Math.ceil(article.readingTime.minutes) }} min di lettura
+      </template>
     </template>
     <template #description>
       <p class="mt-1 text-base text-pretty">

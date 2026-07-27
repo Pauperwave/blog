@@ -27,7 +27,7 @@ Creatures
 4 Priest of Titania
 4 Timberwatch Elf
 4 Avenging Hunter
-3 Sagu Wildling
+3 Sagu Wildling // Roost Seek
 4 Generous Ent
 4 Nyxborn Hydra
 

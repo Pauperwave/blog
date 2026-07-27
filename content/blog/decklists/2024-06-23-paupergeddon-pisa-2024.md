@@ -240,7 +240,7 @@ Sideboard
 1 Reaping the Graves
 1 Galvanic Alchemist
 1 Secret Door
-1 Guardian Naga
+1 Guardian Naga // Banishing Coils
 1 Coalition Honor Guard
 1 Shield-Wall Sentinel
 ::

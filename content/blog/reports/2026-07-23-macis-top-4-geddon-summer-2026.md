@@ -20,7 +20,7 @@ Why a brew, and why Pingers Tron? Well, I've always liked being an outlier, doin
 
 Back in May, I was playing on MTGO when I was lucky enough to get paired against Davide Abis (Abisd94 on MTGO). To be honest, I never really liked playing against him because he was always beating me with weird, obscure decks. This time was no different. Still, after the match I decided to message him about his brew because I've always been interested in Tron archetypes, and I love flickering things. Long story short, we spent the next two months discussing the deck almost every day, and eventually we arrived at the 75 cards that I registered for Paupergeddon.
 
-What I love about Pingers Tron is that it offers multiple angles of attack. The deck is packed with threats: it can stabilize the board or close out games with Bramble Wurm, probably the best creature in Pauper, it can slowly ping the opponent to death with Mysidian Elder and Black Mage's Rod, or it can simply burn the opponent out of nowhere with Kaervek's Torch.
+What I love about Pingers Tron is that it offers multiple angles of attack. The deck is packed with threats: it can stabilize the board or close out games with Bramble Wurm, probably the best creature in Pauper, it can slowly ping the opponent to death with Mysidian Elderr and Black Mage's Rod, or it can simply burn the opponent out of nowhere with Kaervek's Torch.
 
 ::magic-decklist
 ---
@@ -30,7 +30,7 @@ placement: Top 4
 headerGradient: grixis
 ---
 Creatures
-4 Mysidian Elder
+4 Mysidian Elderr
 4 Bramble Wurm
 
 Instants
@@ -95,8 +95,8 @@ description:
 4 Hydroblas
 3 Cast Down
 #out
-4 Mysidian Elder
-2 Black Mage’s Rod
+4 Mysidian Elderr
+2 Black Mage's Rod
 1 Ghostly Flikcer
 ::
 
@@ -125,7 +125,7 @@ description:
 ---
 #in
 3 Cast Down
-4 Moment’s Peace
+4 Moment's Peace
 #out
 4 Bramble Wurm
 3 Nihil Spellbomb
@@ -156,12 +156,12 @@ matchup: Elves
 description:
 ---
 #in
-4 Moment’s Peace
+4 Moment's Peace
 3 Breath Weapon
 3 Cast Down
 #out
 4 Bramble Wurm
-2 Black Mage’s Rod
+2 Black Mage's Rod
 3 Nihil Spellbomb
 1 Cryogenic Relic
 ::
@@ -183,7 +183,7 @@ crop:
 ---
 ::
 
-It was time to strike back, what’s the best way? Well get paired against a slow Tron deck which struggle to close Tron.
+It was time to strike back, what's the best way? Well get paired against a slow Tron deck which struggle to close Tron.
 Game 1: I kept an hot hand and he quite a slow one. I slammed a Bramble Wurm and a Pinger on the Table by Turn 4 and it was good game by Turn 6.
 
 ::magic-sideboard-guide
@@ -214,9 +214,9 @@ crop:
 ::
 
 Another Match, another game, another Tron.
-Game 1: The first game was easy, Flicker Tron doesn’t have that many counterspells G1, so I just needed to bait a couple out and than exile them with Nihil Spellbomb. I placed some pingers and ended up closing easily the game.
+Game 1: The first game was easy, Flicker Tron doesn't have that many counterspells G1, so I just needed to bait a couple out and than exile them with Nihil Spellbomb. I placed some pingers and ended up closing easily the game.
 
-Game 2: This was probably the toughest game of all tournament. I had to, as I like to say, “control the control”. He sided a lot of interactions and I had to play the slow route. At some point after I had accumulated enough resources I exploded and started drawing half my deck, realizing after a bit that probably I would deck out quickly if i didn’t manage to stick a pinger onto the table. So I started slowing down and avoiding big turns to lower the storm count for the Weather the Storm of my opponent. I kept making land drops for my Torch that was burning in my hand. I was ready to play slowly for couple more turns and shuffling my lembas and pinging here and there, but than he went for it with a big rolling thunder, luckily not as big to kill me but quite scary one. He played Memonic Wall, took back Rolling Thunder and he passed the Turn. I knew I had to go for it. He was at 20 , I attack with Mysidian Elder, he didn’t block with an Eldrazi Spawn, 19 life points. I tap 25, Torch for 24 damage plus one damage of a wizard Token. He asks: “Storm count” I reply: “One” and I start smiling because 18+6 = game, set, match. He started smiling too and he ended shaking my hand. 
+Game 2: This was probably the toughest game of all tournament. I had to, as I like to say, “control the control”. He sided a lot of interactions and I had to play the slow route. At some point after I had accumulated enough resources I exploded and started drawing half my deck, realizing after a bit that probably I would deck out quickly if i didn't manage to stick a pinger onto the table. So I started slowing down and avoiding big turns to lower the storm count for the Weather the Storm of my opponent. I kept making land drops for my Torch that was burning in my hand. I was ready to play slowly for couple more turns and shuffling my lembas and pinging here and there, but than he went for it with a big rolling thunder, luckily not as big to kill me but quite scary one. He played Memonic Wall, took back Rolling Thunder and he passed the Turn. I knew I had to go for it. He was at 20 , I attack with Mysidian Elderr, he didn't block with an Eldrazi Spawn, 19 life points. I tap 25, Torch for 24 damage plus one damage of a wizard Token. He asks: “Storm count” I reply: “One” and I start smiling because 18+6 = game, set, match. He started smiling too and he ended shaking my hand. 
 
 Match 2-0, Score 4-1
 
@@ -232,7 +232,7 @@ crop:
 ::
 
 Finally a non-Tron deck and also a quite favorite match up.
-Game 1: Game 1 was so long and back and forth for a while. I managed to stabilize with some lembas loop and with a couple of Bramble Wurm. He was desperate and had to sack 12 lands in a couple of turns because my Bramble Wurm were too annoying and he ended up with a Makeshift munition, a land and an Utrom Monitor. I Flickered two Black Mage’s Rod on the table, untapped and killed him with the lembas loop and other spells I had in hand. At the end of this game we had 5 minutes on the clock so I knew I just needed to not lose.
+Game 1: Game 1 was so long and back and forth for a while. I managed to stabilize with some lembas loop and with a couple of Bramble Wurm. He was desperate and had to sack 12 lands in a couple of turns because my Bramble Wurm were too annoying and he ended up with a Makeshift munition, a land and an Utrom Monitor. I Flickered two Black Mage's Rod on the table, untapped and killed him with the lembas loop and other spells I had in hand. At the end of this game we had 5 minutes on the clock so I knew I just needed to not lose.
 
 ::magic-sideboard-guide
 ---
@@ -240,14 +240,14 @@ matchup: Affinity
 description:
 ---
 #in
-4 Moment’s Peace
+4 Moment's Peace
 4 Hydroblast
 #out
-1 Kaervek’s Torch
+1 Kaervek's Torch
 3 Nihil Spellbomb
 1 Ghostly Flicker
 1 Cryogenic Relic
-2 Mysidian Elder
+2 Mysidian Elderr
 ::
 
 I wanted to secure the result so I went into a cacume defense mode.
@@ -273,7 +273,7 @@ Game 1: I mulled to 4 and basically conceded the game without playing
 
 Game 2: I had fire in my hand. Tron, color, double Wurm on the table + Flicker as a back up by turn 5. I was at 35 and opponent decided that it was enough.
 
-Game 3: He started slow with a grab the prize discarding a lava dart. I also struggled but still managed to resolve a couple of his pingers with Hydroblast and Cast Down. Than on turn 6, he untapped, attacked, with a Voldaren Epicure and a Kessig Flamebreather and cracked a Blood Token discarding a land, played a looting discarding two more lands and my confidence sky rocketed. I untapped, close Tron, played Bramble Wurm, Flicker it, and killed Kessig. I was at day 2. I couldn’t believe it. 
+Game 3: He started slow with a grab the prize discarding a lava dart. I also struggled but still managed to resolve a couple of his pingers with Hydroblast and Cast Down. Than on turn 6, he untapped, attacked, with a Voldaren Epicure and a Kessig Flamebreather and cracked a Blood Token discarding a land, played a looting discarding two more lands and my confidence sky rocketed. I untapped, close Tron, played Bramble Wurm, Flicker it, and killed Kessig. I was at day 2. I couldn't believe it. 
 
 Match 2-1, Score 6-1
 
@@ -288,12 +288,12 @@ crop:
 ---
 ::
 
-I felt like a was dreaming but I had no time to rest so I had to stay focused, because now the goal was bigger and I didn’t want to let it slip. I had just one rule: focus on one game at time.
+I felt like a was dreaming but I had no time to rest so I had to stay focused, because now the goal was bigger and I didn't want to let it slip. I had just one rule: focus on one game at time.
 
 Game 1: He had a slow start, with just a Refurbished Familiar and an Utrom Monitor. I placed a Bramble Wurm and stabilized from there. After that it was a snowball until the victory.
-The game with affinity usually go like this if they don’t start like madman’s .
+The game with affinity usually go like this if they don't start like madman's .
 
-Game 2: He had the naz start, I was terrified but still alive on turn 5. I had one out: find Tron and a Moment Peace, I flicker a Cryogen Relic and a Lembas. I found what I need. I stabilized for two turns, with Moment’s Peace, than I sticked a Bramble Wurm on the table and I went on to win the game after some lembas cycles to get out of reach of his Galvanic Blast.
+Game 2: He had the naz start, I was terrified but still alive on turn 5. I had one out: find Tron and a Moment Peace, I flicker a Cryogen Relic and a Lembas. I found what I need. I stabilized for two turns, with Moment's Peace, than I sticked a Bramble Wurm on the table and I went on to win the game after some lembas cycles to get out of reach of his Galvanic Blast.
 
 Another Match in the books.
 
@@ -311,9 +311,9 @@ crop:
 ::
 
 I was picked in the back up featured match area. Pressure and gloves were on but the focus was there. 
-Game 1: The opponent was clearly surprised by the deck and lost because didn’t really know what to expect, at least this is what I saw. 
+Game 1: The opponent was clearly surprised by the deck and lost because didn't really know what to expect, at least this is what I saw. 
 
-Game 2: This game was weird because he sideboard in what seemed to me all his counters. I got stuck for a couple of turns because of his counters which seemed endless. Luckily he just had them and no pressure on the board. I managed to stabilize after some turns of land pass. I took over the game because he didn’t have enough resources to beat my Bramble Wurms. Is it the first time that happens ?
+Game 2: This game was weird because he sideboard in what seemed to me all his counters. I got stuck for a couple of turns because of his counters which seemed endless. Luckily he just had them and no pressure on the board. I managed to stabilize after some turns of land pass. I took over the game because he didn't have enough resources to beat my Bramble Wurms. Is it the first time that happens ?
 
 ## Round 10 - Spy Walls 
 
@@ -401,12 +401,12 @@ description:
 #out
 2 Ghostly Flicker
 1 Cryogen Relic
-1 Mysidian Elder
+1 Mysidian Elderr
 ::
 
 Game 2: He started with quite a nice hand and I kept a reactive hand, without Tron but with land drops and interactions. He played a Terror on turn three and was met by a cast down some turns later. He played another terror, another cast down, and finally after some baiting I managed to close Tron and close the game easily from there.
 
-I knew I was dreaming but I didn’t want to stop.
+I knew I was dreaming but I didn't want to stop.
 
 Match 2-0, Score 11-1
 
@@ -462,14 +462,14 @@ description:
 ---
 #in
 4 Hydroblast
-4 Moment’s Peace
+4 Moment's Peace
 3 Breath Weapon
 #out
 3 Nihil Spellbomb
-1 Kaervek’s Torch
+1 Kaervek's Torch
 3 Cryogen Relic
-2 Mysidian Elde
-2 Black Mage’s Rod
+2 Mysidian Elder
+2 Black Mage's Rod
 ::
 
 Game 2: With open deck lists I saw my opponent was running raze in the sideboard and I was terrified. I kept a reasonable hand against him, with some lands, color, couple of fog and Hydroblast. I started buying some turns even though he had an hell of a start and managed to to put me down to three. At the top deck I managed to close Tron and had to calculate a forced line to save my self couple more turns because it was clear my opponent had a bolt in hand and I was a three life points . After some thought I luckily found it and managed to survive couple more turns until I found a gigantic Bramble Wurm and close the game off from there.
@@ -488,7 +488,7 @@ crop:
 ::
 
 I was confident coming up in this match up, usually he his slower than me and with a couple of Bramble Wurms I can stabilize the board and then finish him off with the Pingers. Well as always nothing goes as planned.
-Game 1: we both mulligan to five cards. I keep a reasonable hand against him and I was confident, because usually mono white suffers the mulligan more than me, well I couldn’t be more wrong. He started with Raffine’s informant discarding Lunarch Veteran, then a Battle Screech came on turn four and a top deck of Guardian Pledge finished me immediately. Nice and quick but it’s never over until it’s over. Especially after sideboard where I can bring Moment’s Peace and Breath Weapon to clear the board. 
+Game 1: we both mulligan to five cards. I keep a reasonable hand against him and I was confident, because usually mono white suffers the mulligan more than me, well I couldn't be more wrong. He started with Raffine's informant discarding Lunarch Veteran, then a Battle Screech came on turn four and a top deck of Guardian Pledge finished me immediately. Nice and quick but it's never over until it's over. Especially after sideboard where I can bring Moment's Peace and Breath Weapon to clear the board. 
 
 ::magic-sideboard-guide
 ---
@@ -496,15 +496,15 @@ matchup: Mono White
 description:
 ---
 #in
-4 Moment’s Peace
+4 Moment's Peace
 2 Breath Weapon
 #out
-2 Black Mage’s Rod
+2 Black Mage's Rod
 3 Nihil spellbomb
-1 Kaervek’s Torch
+1 Kaervek's Torch
 ::
 
-Game 2: I mulligan to five cards with a pretty bad hand and he kept at six with a quite strong start with Leonardo the Big Brother. I started with candy trail looking for the second land drop and I saw two. The second Urza’s Mine and an island. Here I probably made the biggest error in my tournament. I was tired and I wanted Tron so I automatically kept the Urza land, even though I hade the same one the board. The idea was that in later turns I would have loved to have more mana rather than more color. Wrong. I drew a lot of Ghostly Flicker during the game that could’ve finished him off but with the lack of colored mana I was not able to cast them. After that I managed to stabilize the game with a couple of Bramble Wurms but the deck started to not follow me and gave me just lands and Moment’s Peace, which is fine but you need to do something else in order to win a Magic game, not just seat on your Moment’s Peace, especially if your opponent is at one life point. Well he was able to kill me with a Thraben charm casted exiling my last Moment’s Peace.
+Game 2: I mulligan to five cards with a pretty bad hand and he kept at six with a quite strong start with Leonardo the Big Brother. I started with candy trail looking for the second land drop and I saw two. The second Urza's Mine and an island. Here I probably made the biggest error in my tournament. I was tired and I wanted Tron so I automatically kept the Urza land, even though I hade the same one the board. The idea was that in later turns I would have loved to have more mana rather than more color. Wrong. I drew a lot of Ghostly Flicker during the game that could've finished him off but with the lack of colored mana I was not able to cast them. After that I managed to stabilize the game with a couple of Bramble Wurms but the deck started to not follow me and gave me just lands and Moment's Peace, which is fine but you need to do something else in order to win a Magic game, not just seat on your Moment's Peace, especially if your opponent is at one life point. Well he was able to kill me with a Thraben charm casted exiling my last Moment's Peace.
 My opponent played the match perfectly and deserved to reach the final, while I had to pack my cards and accept the defeat but realizing shortly after what I had just achieved over the course of the last two days.
 
 Match 0-2, Score 12-2-2
@@ -514,7 +514,7 @@ Match 0-2, Score 12-2-2
 My choice paid off. After months of testing, I was able to prove the power of the deck, which I believe has the potential to become a tiered deck. Pingers Tron is not the best deck in the format, but it is probably the one that best fits my playstyle. As I mentioned before, the deck is inspired by Jund Wildfire, but also by the idea of bringing together some of the strongest cards from different archetypes, such as Bramble Wurm, Ghostly Flicker, Black Mage's Rod, and Eviscerator's Insight.
 The deck felt incredibly fun and well-rounded, but there is still a lot of work to do to make it even better. That said, I think this is a very good starting point.
 
-The most important deckbuilding decision that Davide and I made was playing more copies of Mysidian Elder than Black Mage's Rod. Artifact hate is very common in the current metagame, and Mysidian Elder also has much better synergy with Ghostly Flicker.
+The most important deckbuilding decision that Davide and I made was playing more copies of Mysidian Elderr than Black Mage's Rod. Artifact hate is very common in the current metagame, and Mysidian Elderr also has much better synergy with Ghostly Flicker.
 
 Another key decision was moving Bramble Wurm and Nihil Spellbomb from the sideboard to the main deck. This freed up valuable sideboard slots and allowed us to improve several difficult matchups.
 

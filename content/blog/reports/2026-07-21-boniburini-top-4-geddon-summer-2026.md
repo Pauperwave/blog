@@ -122,7 +122,7 @@ description:
 4 Cast into the Fire
 #out
 2 Chain Lightning
-2 Rally at the Hornbourg
+2 Rally at the Hornburg
 ::
 
 Game 2: I started really aggressive with Great Furnace Tomb Raider (you'll read this phrase many more times during this report, I'll put the stats at the end), followed by another 5 damage on turn 2. He cleaned up the board with Krark-Clan Shaman so I had to restart building board presence. 
@@ -243,7 +243,7 @@ Score 4-0
 
 ::MagicCardArtCrop
 ---
-card: Mysidian Elder
+card: Mysidian Elderr
 crop:
   height: xl
   position: top
@@ -428,7 +428,7 @@ description:
 4 Cast into the Fire
 #out
 1 Burning-Tree Emissary
-1 Rally ad the Hornburg
+1 Rally at the Hornburg
 1 Goblin Bushwhacker
 3 Reckless Impulse
 1 Wrenn's Resolve
@@ -542,7 +542,7 @@ description:
 1 Flaring Pain
 3 Tectonic Hazard
 #out
-2 Rally at the Hornbourg
+2 Rally at the Hornburg
 2 Reckless Impulse
 ::
 
@@ -627,7 +627,7 @@ description:
 3 Relic of Progenitus
 #out
 1 Reckless Impulse
-1 Rally at the Hornbourg
+1 Rally at the Hornburg
 1 Reckless Bushwhacker
 ::
 
@@ -646,7 +646,7 @@ description:
 3 Tectonic Hazard
 #out
 4 Reckless Impulse
-1 Rally at the Hornbourg
+1 Rally at the Hornburg
 1 Reckless Bushwhacker
 ::
 

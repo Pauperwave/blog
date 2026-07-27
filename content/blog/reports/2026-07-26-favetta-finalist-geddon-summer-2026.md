@@ -53,10 +53,10 @@ Sideboard
 1 Holy Light
 ::
 
-Scelgo di portare WW a questo Geddon perché è il mazzo che so giocare meglio, è un mazzo lineare che permette di finire rapidamente le partite e quindi di “decomprimere” un pochino fra un turno e l’altro. Inoltre, a mio avviso, è un mazzo ben posizionato nel meta e che non tutti sono preparati ad affrontare al meglio.
+Scelgo di portare WW a questo Geddon perché è il mazzo che so giocare meglio, è un mazzo lineare che permette di finire rapidamente le partite e quindi di “decomprimere” un pochino fra un turno e l'altro. Inoltre, a mio avviso, è un mazzo ben posizionato nel meta e che non tutti sono preparati ad affrontare al meglio.
 La lista è abbastanza stock, le uniche carte che ho deciso attivamente di giocare e che vorrei giustificare sono:
-- Ramosian Rally: mi aspettavo molte wratte stile Arms of Hadar e Breath Weapon. Per questo avere una mono copia di una carta che ti salva praticamente tutto il board e a cui l’avversario non può giocare attorno mi è sembrato forte. In aggiunta ci chiudi le partite;
-- Elite Interceptor: è l’ultima carta che ho aggiunto alla lista: un altro buon parante contro Rally, utile contro le Crisalidi e gli Utrom per far passare danni e con 10 Thraben ho molto più spesso una giocata “forte” a turno 1 e mi è parso di mulligare meno.
+- Ramosian Rally: mi aspettavo molte wratte stile Arms of Hadar e Breath Weapon. Per questo avere una mono copia di una carta che ti salva praticamente tutto il board e a cui l'avversario non può giocare attorno mi è sembrato forte. In aggiunta ci chiudi le partite;
+- Elite Interceptor: è l'ultima carta che ho aggiunto alla lista: un altro buon parante contro Rally, utile contro le Crisalidi e gli Utrom per far passare danni e con 10 Thraben ho molto più spesso una giocata “forte” a turno 1 e mi è parso di mulligare meno.
 
 Ho deciso di giocare una side con molti 4x/3x in modo da migliorare pochi matchup ma che considero critici ovvero:
 - Affinity: 4x Dust to Dust e Journey mi aiutano a migliorare molto la winrate di g2 e g3. Un tempo era un matchup scontato a favore di WW. Adesso gli Utrom rendono molto più combattuto g1.
@@ -241,8 +241,8 @@ crop:
 ---
 ::
 
-Affinity è un matchup sulla carta favorevole ma che è peggiorato negli ultimi tempi a causa di Utrom monitor. Il piano g1 è mettere un numero sufficiente di volanti che non stanno sotto Krark, rimuovere gli Utrom e chiudere velocemente la partita. Charm+Strands ci aiuta con Munizioni, l’unica carta che può impensierire i nostri uccellini.
-G1: sono tiltato, gioco in streaming, parto con la side del turno prima dentro al mazzo, mi scordo un trigger di pescata dopo aver risolto la spell di Elite interceptor. Anche durante una combat, credo che un Utrom dovesse morire durante i blocchi ma ero troppo cotto per capirlo e in mezzo c’era stata pure una judge call per chiarire una questione legata a come erano impilate alcune spell. Perdo G1.
+Affinity è un matchup sulla carta favorevole ma che è peggiorato negli ultimi tempi a causa di Utrom monitor. Il piano g1 è mettere un numero sufficiente di volanti che non stanno sotto Krark, rimuovere gli Utrom e chiudere velocemente la partita. Charm+Strands ci aiuta con Munizioni, l'unica carta che può impensierire i nostri uccellini.
+G1: sono tiltato, gioco in streaming, parto con la side del turno prima dentro al mazzo, mi scordo un trigger di pescata dopo aver risolto la spell di Elite interceptor. Anche durante una combat, credo che un Utrom dovesse morire durante i blocchi ma ero troppo cotto per capirlo e in mezzo c'era stata pure una judge call per chiarire una questione legata a come erano impilate alcune spell. Perdo G1.
 
 ::magic-sideboard-guide
 ---
@@ -251,7 +251,7 @@ description:
 ---
 #out
 4 Lunarch Veteran
-1 Spiderman, Web-Slinger
+1 Spider-Man, Web-Slinger
 1 Prismatic Strands
 #in
 4 Dust to Dust
@@ -320,7 +320,7 @@ description:
 ---
 #out
 1 Novice Inspector
-1 Spiderman, Web-Slinger
+1 Spider-Man, Web-Slinger
 1 Prismatic Strands
 4 Lunarch Veteran
 #in
@@ -400,7 +400,7 @@ crop:
 ---
 ::
 
-G1: Andrea mulliga a 4 ma assembla trono e cala due mucche. Con un Elite riesco a tapparne una e menare per un po’ di danni. Il turno dopo sono letale con Ramosian Rally.
+G1: Andrea mulliga a 4 ma assembla trono e cala due mucche. Con un Elite riesco a tapparne una e menare per un po' di danni. Il turno dopo sono letale con Ramosian Rally.
 
 ::magic-sideboard-guide
 ---
@@ -409,7 +409,7 @@ description:
 ---
 #out
 1 Novice Inspector
-1 Spiderman, Web-Slinger
+1 Spider-Man, Web-Slinger
 4 Lunarch Veteran
 #in
 3 Dust to Dust
@@ -425,7 +425,7 @@ Score: 13-0-2
 
 ::MagicCardArtCrop
 ---
-card: Mysidian Elder
+card: Mysidian Elderr
 crop:
   height: xl
   position: top
@@ -443,7 +443,7 @@ description:
 ---
 #out
 1 Novice Inspector
-1 Spiderman, Web-Slinger
+1 Spider-Man, Web-Slinger
 4 Lunarch Veteran
 #in
 3 Dust to Dust
@@ -475,5 +475,5 @@ Score: 14-1-2
 
 Ringraziamenti finali
 È quasi scontato dire che questo risultato è anche merito della bellissima community che abbiamo creato a Genova! 
-Tengo a ringraziare specialmente: Nicolò Grasso e Fabio Comitangelo, miei compagni di team trio e di testing; Matteo Cirigliano sempre pronto ad aiutarci con la sua sconfinata esperienza; La setta di White Weenies, che primi fra tutti hanno creduto che fosse un mazzo: Lando e Luca Ravera; i tifosi che durante la finale hanno fatto mulligare i miei oppo: Kai de Gast, Sorre, Luca Michenzi (the real Italian Mule), Silvietta, Diego, Alisa, Nico Baretto, Andre Gazzo e Fabri Embresi e gli amici che mi hanno seguito da casa: Mattia (che droppa sull’1-0 il Paupergeddon per motivi di lavoro quindi unico undefeated a un Geddon della storia) Paolino, Berre, Sky, Bessio, Marco Paro, Glauco, Joel e Paso, gli ultras Premodern: Nicholas. Pala e Luca Rosselli. La mia compagna Lulli (Aka Magicalulli) che sopporta con pazienza la mia passione per questo gioco.
-Tengo anche a fare le mie congratulazioni ai caster, specialmente Zio Francone e Skura, che hanno commentato l’evento in maniera magistrale e hanno avuto solo belle parole per me.
+Tengo a ringraziare specialmente: Nicolò Grasso e Fabio Comitangelo, miei compagni di team trio e di testing; Matteo Cirigliano sempre pronto ad aiutarci con la sua sconfinata esperienza; La setta di White Weenies, che primi fra tutti hanno creduto che fosse un mazzo: Lando e Luca Ravera; i tifosi che durante la finale hanno fatto mulligare i miei oppo: Kai de Gast, Sorre, Luca Michenzi (the real Italian Mule), Silvietta, Diego, Alisa, Nico Baretto, Andre Gazzo e Fabri Embresi e gli amici che mi hanno seguito da casa: Mattia (che droppa sull'1-0 il Paupergeddon per motivi di lavoro quindi unico undefeated a un Geddon della storia) Paolino, Berre, Sky, Bessio, Marco Paro, Glauco, Joel e Paso, gli ultras Premodern: Nicholas. Pala e Luca Rosselli. La mia compagna Lulli (Aka Magicalulli) che sopporta con pazienza la mia passione per questo gioco.
+Tengo anche a fare le mie congratulazioni ai caster, specialmente Zio Francone e Skura, che hanno commentato l'evento in maniera magistrale e hanno avuto solo belle parole per me.

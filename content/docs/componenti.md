@@ -677,9 +677,7 @@ Carta interessante che potrebbe trovare spazio in diversi archetipi. La sua vers
 Piccola card cliccabile con avatar, nome e descrizione dell'autore — usata ad esempio nelle byline degli articoli. Tutti gli autori attualmente registrati:
 
 ::note
-Nella byline degli articoli questa card viene impostata **automaticamente**: basta scrivere il nome completo dell'autore nel frontmatter (`author: "Nome Cognome"`) — non serve invocare `::author-card` a mano nel corpo del testo. Il nome deve corrispondere esattamente (case-insensitive) al campo `name` di un file in `content/authors/**.yml`.
-
-La card completa con la **bio** (mostrata ad esempio nella sezione "Riguardo l'autore" in fondo agli articoli) è un componente diverso da quello mostrato qui sotto, e al momento non è dimostrata in questa pagina.
+Nella byline degli articoli questa card viene impostata **automaticamente**: basta scrivere il nome completo dell'autore nel frontmatter (`author: "Nome Cognome"`) — non serve invocare `::author-card` a mano nel corpo del testo. Il nome deve corrispondere esattamente (case-insensitive) al campo `name` di un file in `content/authors/**.yml`. La card completa con la **bio** (mostrata ad esempio nella sezione "Riguardo l'autore" in fondo agli articoli) è un componente diverso da quello mostrato qui sotto, e al momento non è dimostrata in questa pagina.
 ::
 
 ```md
@@ -789,13 +787,13 @@ headerGradient: monowhite
 Creatures
 4 Delver of Secrets
 4 Elvish Mystic
-4 Sagu Wildling
+4 Sagu Wildling // Roost Seek
 4 The Modern Age
 4 Masked Vandal
 4 Priest of Titania
 4 Timberwatch Elf
 4 Avenging Hunter
-3 Sagu Wildling
+3 Sagu Wildling // Roost Seek
 4 Generous Ent
 
 Sorceries

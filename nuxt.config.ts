@@ -97,6 +97,7 @@ export default defineNuxtConfig({
         },
         remarkPlugins: {
           "remark-math": {},
+          "remark-reading-time": {},
         },
         rehypePlugins: {
           "rehype-katex": {},
