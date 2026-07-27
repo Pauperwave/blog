@@ -305,7 +305,7 @@ Chiudo Day1 senza sconfitte, solo due game persi e 4 litri di acqua bevuti.
 card: Cleansing Wildfire
 crop:
   height: xl
-  position: top
+  position: center
 ---
 ::
 
@@ -340,7 +340,7 @@ Score: 9-0
 card: Cleansing Wildfire
 crop:
   height: xl
-  position: top
+  position: center
 ---
 ::
 
@@ -396,7 +396,7 @@ Chiudo la svizzera posizionandomi primo.
 card: Pinnacle Kill-Ship
 crop:
   height: xl
-  position: top
+  position: center
 ---
 ::
 
@@ -461,7 +461,7 @@ Score 14-0-2
 card: Cleansing Wildfire
 crop:
   height: xl
-  position: top
+  position: center
 ---
 ::
 
