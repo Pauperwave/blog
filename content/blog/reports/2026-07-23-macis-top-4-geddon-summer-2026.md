@@ -20,7 +20,7 @@ Why a brew, and why Pingers Tron? Well, I've always liked being an outlier, doin
 
 Back in May, I was playing on MTGO when I was lucky enough to get paired against Davide Abis (Abisd94 on MTGO). To be honest, I never really liked playing against him because he was always beating me with weird, obscure decks. This time was no different. Still, after the match I decided to message him about his brew because I've always been interested in Tron archetypes, and I love flickering things. Long story short, we spent the next two months discussing the deck almost every day, and eventually we arrived at the 75 cards that I registered for Paupergeddon.
 
-What I love about Pingers Tron is that it offers multiple angles of attack. The deck is packed with threats: it can stabilize the board or close out games with Bramble Wurm, probably the best creature in Pauper, it can slowly ping the opponent to death with Mysidian Elderr and Black Mage's Rod, or it can simply burn the opponent out of nowhere with Kaervek's Torch.
+What I love about Pingers Tron is that it offers multiple angles of attack. The deck is packed with threats: it can stabilize the board or close out games with Bramble Wurm, probably the best creature in Pauper, it can slowly ping the opponent to death with Mysidian Elder and Black Mage's Rod, or it can simply burn the opponent out of nowhere with Kaervek's Torch.
 
 ::magic-decklist
 ---
@@ -30,7 +30,7 @@ placement: Top 4
 headerGradient: grixis
 ---
 Creatures
-4 Mysidian Elderr
+4 Mysidian Elder
 4 Bramble Wurm
 
 Instants
@@ -92,12 +92,12 @@ matchup: R Madness
 description:
 ---
 #in
-4 Hydroblas
+4 Hydroblast
 3 Cast Down
 #out
-4 Mysidian Elderr
+4 Mysidian Elder
 2 Black Mage's Rod
-1 Ghostly Flikcer
+1 Ghostly Flicker
 ::
 
 Game 2: This game was a bit different, I played nihil spellbomb turn 1 and I avoided any sneaky Snacker on the table. Then i slowly assembled Tron with some cast down killing his Kessig Flamebreather and an Hydro on guttersnipe. He managed to put me to 10 life with his Epicures but when I finally close Tron the game was over. Bramble on the table and time to fight back.
@@ -163,7 +163,7 @@ description:
 4 Bramble Wurm
 2 Black Mage's Rod
 3 Nihil Spellbomb
-1 Cryogenic Relic
+1 Cryogen Relic
 ::
 
 After sideboard the match up is playable, but opponent was not playable that day.
@@ -216,7 +216,7 @@ crop:
 Another Match, another game, another Tron.
 Game 1: The first game was easy, Flicker Tron doesn't have that many counterspells G1, so I just needed to bait a couple out and than exile them with Nihil Spellbomb. I placed some pingers and ended up closing easily the game.
 
-Game 2: This was probably the toughest game of all tournament. I had to, as I like to say, “control the control”. He sided a lot of interactions and I had to play the slow route. At some point after I had accumulated enough resources I exploded and started drawing half my deck, realizing after a bit that probably I would deck out quickly if i didn't manage to stick a pinger onto the table. So I started slowing down and avoiding big turns to lower the storm count for the Weather the Storm of my opponent. I kept making land drops for my Torch that was burning in my hand. I was ready to play slowly for couple more turns and shuffling my lembas and pinging here and there, but than he went for it with a big rolling thunder, luckily not as big to kill me but quite scary one. He played Memonic Wall, took back Rolling Thunder and he passed the Turn. I knew I had to go for it. He was at 20 , I attack with Mysidian Elderr, he didn't block with an Eldrazi Spawn, 19 life points. I tap 25, Torch for 24 damage plus one damage of a wizard Token. He asks: “Storm count” I reply: “One” and I start smiling because 18+6 = game, set, match. He started smiling too and he ended shaking my hand. 
+Game 2: This was probably the toughest game of all tournament. I had to, as I like to say, “control the control”. He sided a lot of interactions and I had to play the slow route. At some point after I had accumulated enough resources I exploded and started drawing half my deck, realizing after a bit that probably I would deck out quickly if i didn't manage to stick a pinger onto the table. So I started slowing down and avoiding big turns to lower the storm count for the Weather the Storm of my opponent. I kept making land drops for my Torch that was burning in my hand. I was ready to play slowly for couple more turns and shuffling my lembas and pinging here and there, but than he went for it with a big rolling thunder, luckily not as big to kill me but quite scary one. He played Memonic Wall, took back Rolling Thunder and he passed the Turn. I knew I had to go for it. He was at 20 , I attack with Mysidian Elder, he didn't block with an Eldrazi Spawn, 19 life points. I tap 25, Torch for 24 damage plus one damage of a wizard Token. He asks: “Storm count” I reply: “One” and I start smiling because 18+6 = game, set, match. He started smiling too and he ended shaking my hand. 
 
 Match 2-0, Score 4-1
 
@@ -246,8 +246,8 @@ description:
 1 Kaervek's Torch
 3 Nihil Spellbomb
 1 Ghostly Flicker
-1 Cryogenic Relic
-2 Mysidian Elderr
+1 Cryogen Relic
+2 Mysidian Elder
 ::
 
 I wanted to secure the result so I went into a cacume defense mode.
@@ -401,7 +401,7 @@ description:
 #out
 2 Ghostly Flicker
 1 Cryogen Relic
-1 Mysidian Elderr
+1 Mysidian Elder
 ::
 
 Game 2: He started with quite a nice hand and I kept a reactive hand, without Tron but with land drops and interactions. He played a Terror on turn three and was met by a cast down some turns later. He played another terror, another cast down, and finally after some baiting I managed to close Tron and close the game easily from there.
@@ -488,7 +488,7 @@ crop:
 ::
 
 I was confident coming up in this match up, usually he his slower than me and with a couple of Bramble Wurms I can stabilize the board and then finish him off with the Pingers. Well as always nothing goes as planned.
-Game 1: we both mulligan to five cards. I keep a reasonable hand against him and I was confident, because usually mono white suffers the mulligan more than me, well I couldn't be more wrong. He started with Raffine's informant discarding Lunarch Veteran, then a Battle Screech came on turn four and a top deck of Guardian Pledge finished me immediately. Nice and quick but it's never over until it's over. Especially after sideboard where I can bring Moment's Peace and Breath Weapon to clear the board. 
+Game 1: we both mulligan to five cards. I keep a reasonable hand against him and I was confident, because usually mono white suffers the mulligan more than me, well I couldn't be more wrong. He started with Raffine's informant discarding Lunarch Veteran, then a Battle Screech came on turn four and a top deck of Guardians' Pledge finished me immediately. Nice and quick but it's never over until it's over. Especially after sideboard where I can bring Moment's Peace and Breath Weapon to clear the board. 
 
 ::magic-sideboard-guide
 ---
@@ -514,7 +514,7 @@ Match 0-2, Score 12-2-2
 My choice paid off. After months of testing, I was able to prove the power of the deck, which I believe has the potential to become a tiered deck. Pingers Tron is not the best deck in the format, but it is probably the one that best fits my playstyle. As I mentioned before, the deck is inspired by Jund Wildfire, but also by the idea of bringing together some of the strongest cards from different archetypes, such as Bramble Wurm, Ghostly Flicker, Black Mage's Rod, and Eviscerator's Insight.
 The deck felt incredibly fun and well-rounded, but there is still a lot of work to do to make it even better. That said, I think this is a very good starting point.
 
-The most important deckbuilding decision that Davide and I made was playing more copies of Mysidian Elderr than Black Mage's Rod. Artifact hate is very common in the current metagame, and Mysidian Elderr also has much better synergy with Ghostly Flicker.
+The most important deckbuilding decision that Davide and I made was playing more copies of Mysidian Elder than Black Mage's Rod. Artifact hate is very common in the current metagame, and Mysidian Elder also has much better synergy with Ghostly Flicker.
 
 Another key decision was moving Bramble Wurm and Nihil Spellbomb from the sideboard to the main deck. This freed up valuable sideboard slots and allowed us to improve several difficult matchups.
 
