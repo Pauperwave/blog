@@ -375,6 +375,15 @@ Alcuni casi limite con double faced cards e adventure cards
 Questi casi sono gestiti in modo speciale per garantire che la prima faccia della carta venga visualizzata correttamente.
 ::
 
+::tip
+Per le carte a due facce (transform, modal DFC, adventure, split, ...) il nome da usare **dipende da dove scrivi**:
+
+- Nel testo in prosa (`[[Card Name]]`) usa solo il nome della prima faccia, così come stampato sulla carta: `[[Sagu Wildling]]`.
+- Nelle decklist (`::magic-decklist`, `::magic-sideboard-guide`) usa il nome completo con `//`, così come lo esporta MTGO/Scryfall: `4 Sagu Wildling // Roost Seek`.
+
+Entrambe le forme risolvono correttamente: `cards.db` viene generato con una riga per ciascuna delle due varianti (vedi `docs/architecture/card-download-database-flow.md`).
+::
+
 [[Delver of Secrets]] / [[The Modern Age]] / [[Sagu Wildling]]
 
 ::caution
