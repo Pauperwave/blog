@@ -1,5 +1,6 @@
 ---
 title: Report Top 4 Paupergeddon Summer 2026 - Pinger Tron by Manuel Macis
+description: ""
 author: Pietro Bragioto
 category: report
 date: 2026-07-23

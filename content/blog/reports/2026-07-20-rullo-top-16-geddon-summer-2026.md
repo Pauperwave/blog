@@ -1,5 +1,6 @@
 ---
 title: Report Top 16 Paupergeddon Summer 2026 - Red Madness by Matteo Rullo
+description: ""
 author: Pietro Bragioto
 category: report
 date: 2026-07-20
