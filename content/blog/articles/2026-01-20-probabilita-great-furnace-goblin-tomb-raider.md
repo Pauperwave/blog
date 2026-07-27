@@ -1,6 +1,6 @@
 ---
 title: "Quanto spesso apriamo con Great Furnace e Goblin Tomb Raider?"
-description: "La combo emblematica di Mono-Red Rally è davvero così comune? Un'analisi matematica delle probabilità di apertura, con teoria e simulazioni a confronto."
+description: "Un'analisi matematica delle probabilità di apertura, con teoria e simulazioni a confronto."
 tags:
   - Meta
   - Data Analysis
