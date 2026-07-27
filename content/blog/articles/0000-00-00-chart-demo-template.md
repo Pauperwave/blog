@@ -3,7 +3,7 @@ title: ""
 author: Alessandro Moretti
 category: article
 date:
-description: Reference page for manually testing all chart components (bar, line, confidence-band, pie, scatter, radar) in light/dark mode and on narrow viewports.
+description: Reference page for manually testing all chart components (bar, line, confidence-band, pie, scatter, radar, mermaid) in light/dark mode and on narrow viewports.
 location: ""
 published: false
 tags:
@@ -137,5 +137,17 @@ indicators:
 series:
   - { name: Mono Red Madness, values: [9, 2, 6, 7, 8] }
   - { name: Mono Blue Control, values: [2, 9, 7, 8, 5] }
+---
+::
+
+## Mermaid diagram
+
+::mermaid
+---
+code: |
+  flowchart TD
+    A[Mainboard] --> B{Sideboard}
+    B -->|Round 1| C[Swap]
+    B -->|Round 2| D[Keep]
 ---
 ::

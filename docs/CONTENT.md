@@ -657,7 +657,7 @@ export default defineEventHandler(async (event) => {
 
 ## Charts
 
-Four chart components (ECharts via `nuxt-echarts`/`vue-echarts`) are available as MDC shortcodes. All are dark-mode aware and responsive automatically — no extra props needed for that. Source: `app/components/charts/`.
+Seven chart components (six via ECharts using `nuxt-echarts`/`vue-echarts`, plus a Mermaid diagram renderer) are available as MDC shortcodes. All are dark-mode aware and responsive automatically — no extra props needed for that. Source: `app/components/charts/`.
 
 ### `::bar-chart`
 
@@ -813,6 +813,27 @@ series:
 | `indicators` | `{ name, max }[]` | the radar axes, shared by all series |
 | `series` | `{ name, values: number[] }[]` | one polygon per entity; `values` order must match `indicators` |
 | `height` | string | optional |
+
+### `::mermaid`
+
+Renders a [Mermaid](https://mermaid.js.org/) diagram (flowcharts, sequence diagrams, etc.) client-side. Dark-mode aware like the other charts, but rendered after hydration (not present in prerendered HTML) since Mermaid requires the DOM — the `mermaid` package is only downloaded when a page actually has a diagram on it. Source: `app/components/charts/Mermaid.vue`.
+
+```markdown
+::mermaid
+---
+code: |
+  flowchart TD
+    A[Mainboard] --> B{Sideboard}
+    B -->|Round 1| C[Swap]
+    B -->|Round 2| D[Keep]
+---
+::
+```
+
+| Prop | Type | Notes |
+|---|---|---|
+| `code` | string | raw Mermaid diagram definition (use YAML block scalar `\|` for multi-line) |
+| `height` | string | minimum height while rendering/loading, default `100px` |
 
 ---
 

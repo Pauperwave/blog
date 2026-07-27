@@ -40,6 +40,7 @@
     "katex": "^0.18.1",
     "magic-regexp": "^0.11.0",
     "mana-font": "^1.18.0",
+    "mermaid": "^11.16.0",
     "nuxt": "^4.4.8",
     "nuxt-echarts": "1.0.1",
     "nuxt-studio": "1.7.0",
