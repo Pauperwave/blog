@@ -107,7 +107,7 @@ Sideboard
 4 Red Elemental Blast
 2 Ancient Grudge
 1 Envelop
-1 Mysidian Elderr
+1 Mysidian Elder
 1 Stonehorn Dignitary
 1 Weather the Storm
 ::

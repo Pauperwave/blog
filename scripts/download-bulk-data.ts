@@ -197,10 +197,6 @@ async function importPauperCards(db: Database): Promise<void> {
       imageUrl = card.card_faces[0].image_uris.normal ||
         card.card_faces[0].image_uris.large || ''
 
-      if (card.card_faces[0].name && card.card_faces[0].name !== card.name) {
-        frontFaceName = card.card_faces[0].name
-      }
-
       // Second face's own image (transform/modal_dfc cards flip to a distinct back face;
       // reversible_card's "back" is just an alternate art of the same front, still useful)
       const backFace = card.card_faces[1]
@@ -214,8 +210,9 @@ async function importPauperCards(db: Database): Promise<void> {
       imageUrl = ''
     }
 
-    // Handle split cards: combine mana costs from both faces
-    // For split cards, card_faces exists but image_uris is at top level
+    // Handle split-style layouts (split, adventure, "prepare", etc.): card_faces holds
+    // two named halves but the image lives at the top level, not per-face — combine
+    // mana costs from both faces since neither branch above does it for this shape.
     if (card.card_faces && card.card_faces.length > 1 && !card.card_faces[0].image_uris) {
       const faceCosts = card.card_faces
         .map(face => face.mana_cost)
@@ -229,6 +226,15 @@ async function importPauperCards(db: Database): Promise<void> {
       } else {
         manaCost = card.mana_cost || ''
       }
+    }
+
+    // Dual-key insert for any card with named faces (transform, modal_dfc, split,
+    // adventure, "prepare", ...): inline `[[Card Name]]` references use the front
+    // face alone, decklists paste the full compound name — see the comment above
+    // `cardsToInsert`. Computed once here, independent of which branch above
+    // resolved image_url/mana_cost, so both layout shapes stay in sync.
+    if (card.card_faces && card.card_faces[0]?.name && card.card_faces[0].name !== card.name) {
+      frontFaceName = card.card_faces[0].name
     }
 
     const rows: Card[] = [{ name: card.name, manaCost, imageUrl, backImageUrl }]

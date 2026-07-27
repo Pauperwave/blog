@@ -158,7 +158,7 @@ description:
 4 Martyr of Sands
 #out
 3 Battle Screech
-2 Guardian Pledge
+2 Guardians' Pledge
 2 Elite Interceptor
 ::
 
@@ -425,7 +425,7 @@ Score: 13-0-2
 
 ::MagicCardArtCrop
 ---
-card: Mysidian Elderr
+card: Mysidian Elder
 crop:
   height: xl
   position: top

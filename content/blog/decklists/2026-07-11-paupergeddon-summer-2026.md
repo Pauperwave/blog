@@ -154,7 +154,7 @@ placement: Top 4
 headerGradient: grixis
 ---
 Creatures
-4 Mysidian Elderr
+4 Mysidian Elder
 4 Bramble Wurm
 
 Instants

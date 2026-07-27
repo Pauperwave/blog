@@ -243,7 +243,7 @@ Score 4-0
 
 ::MagicCardArtCrop
 ---
-card: Mysidian Elderr
+card: Mysidian Elder
 crop:
   height: xl
   position: top

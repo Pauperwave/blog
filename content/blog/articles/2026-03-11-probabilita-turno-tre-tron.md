@@ -217,6 +217,14 @@ La matematica quantifica quello che i giocatori esperti sanno per istinto, e con
 
 ---
 
-**Video correlato:** [youtu.be/B_UUarIJt2E](https://youtu.be/B_UUarIJt2E)
+::video-preview
+---
+url: https://youtu.be/B_UUarIJt2E
+---
+::
 
-**Paper correlato:** [zenodo.org/records/18802326](https://zenodo.org/records/18802326)
+::paper-preview
+---
+url: https://zenodo.org/records/18802326
+---
+::
