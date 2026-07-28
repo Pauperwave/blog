@@ -75,7 +75,6 @@ if (import.meta.dev) console.log("[DEBUG] Author [slug]", author.value)
 defineOgImage('Author.takumi', {
   name: author.value.name,
   avatar: author.value.avatar,
-  description: author.value.description,
   bio: author.value.bio,
   articleCount: totalArticles.value,
 })

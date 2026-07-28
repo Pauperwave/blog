@@ -4,7 +4,6 @@ import appMeta from "~/app.meta"
 defineProps<{
   name?: string
   avatar?: string
-  description?: string
   bio?: string
   articleCount?: number
 }>()
