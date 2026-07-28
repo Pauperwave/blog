@@ -4,19 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands
 
-Package manager/runtime: **Bun**.
-
-```bash
-bun install                # install deps
-bun run dev                # dev server (localhost:3000, falls back to 3001)
-bun run dev:clean          # wipe .nuxt/.data caches, then dev
-bun run build               # production build (nitro preset: vercel)
-bun run generate             # static generation
-bun run preview               # preview a build
-bun run typecheck             # nuxt typecheck
-bun run lint / bun run lint:fix
-bun run download-cards        # (re)build server/database/cards.db from Scryfall bulk data
-```
+Package manager/runtime: **Bun**. Standard scripts are in `package.json` (`dev`, `build`, `generate`, `preview`, `typecheck`, `lint`/`lint:fix`, `download-cards`, ...).
 
 Testing is **Vitest**, run through package.json scripts:
 
