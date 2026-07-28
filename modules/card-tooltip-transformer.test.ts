@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest'
-import { Database } from 'bun:sqlite'
+import Database from 'better-sqlite3'
 
 // Use in-memory database for testing to avoid file locking issues
-function createTestDatabase(): Database {
+function createTestDatabase(): Database.Database {
   const db = new Database(':memory:')
   const createTable = db.prepare(`
     CREATE TABLE cards (
@@ -94,7 +94,7 @@ describe('Card Tooltip Transformer', () => {
 
   describe('transformCardTooltips without database', () => {
     it('should return null when database is null', () => {
-      const db: Database | null = null
+      const db: Database.Database | null = null
 
       let imageUrl: string | null = null
 

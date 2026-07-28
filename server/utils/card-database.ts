@@ -88,15 +88,6 @@ export async function getCardByName(name: string): Promise<CardData | null> {
   }
 }
 
-const SCRYFALL_API_BASE = 'https://api.scryfall.com'
-
-/**
- * Build Scryfall image URL for a card
- */
-function buildScryfallImageUrl(name: string): string {
-  return `${SCRYFALL_API_BASE}/cards/named?exact=${encodeURIComponent(name)}&format=image`
-}
-
 export async function getCardsByNames(names: string[]): Promise<Map<string, CardData>> {
   const db = await getDatabase()
   const result = new Map<string, CardData>()
@@ -144,15 +135,11 @@ export async function getCardsByNames(names: string[]): Promise<Map<string, Card
           backImageUrl: caseInsensitiveRow.back_image_url || undefined
         }
         result.set(name, cardData)
-      } else {
-        // Fallback to Scryfall API
-        console.log(`🌐 Card "${name}" not in database, using Scryfall fallback`)
-        result.set(name, {
-          name,
-          manaCost: '',
-          imageUrl: buildScryfallImageUrl(name)
-        })
       }
+      // Names not found in the database are left out of the result map —
+      // callers (decklist/sideboard transformers) already treat a missing
+      // entry as "no image" and log it, rather than silently assuming a
+      // Scryfall URL exists for an unverified name.
     }
   }
 
