@@ -135,11 +135,13 @@ export async function getCardsByNames(names: string[]): Promise<Map<string, Card
           backImageUrl: caseInsensitiveRow.back_image_url || undefined
         }
         result.set(name, cardData)
+      } else {
+        // Left out of the result map (not inserted with a guessed Scryfall
+        // URL) — callers already treat a missing entry as "no image". Logged
+        // unconditionally, unlike buildLog(), so a bad card name is visible
+        // in every build, not just verbose ones.
+        console.warn(`⚠️  Card "${name}" not found in database`)
       }
-      // Names not found in the database are left out of the result map —
-      // callers (decklist/sideboard transformers) already treat a missing
-      // entry as "no image" and log it, rather than silently assuming a
-      // Scryfall URL exists for an unverified name.
     }
   }
 
