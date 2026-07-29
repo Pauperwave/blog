@@ -5,7 +5,7 @@ tags:
   - Meta
 date: 2026-07-29
 author: Pietro Bragioto
-thumbnail: /assets/blog/articles/Walker.jpg
+thumbnail: /assets/blog/art/arb-55-godtracker-of-jund.jpg
 published: true
 ---
 
@@ -13,8 +13,7 @@ With the recent win of the Pauper Showcase Qualifier event, Walker735 aka Paolo 
 This is the third time foor an italian in the Pauper format after 
 
 
-## Let's start with Jund, I want you to weight the factors of your deck choice: best deck, pet deck and expertise.
-## Do you choose Jund only because you think it is the best deck in Pauper right now or because of the comfort pick factor?
+## Let's start with Jund, I want you to weight the factors of your deck choice: best deck, pet deck and expertise. Do you choose Jund only because you think it is the best deck in Pauper right now or because of the comfort pick factor?
 
 Both. On one hand, with only four days to prepare for the event, Jund was the only deck I could confidently play at these stakes. I have about 1.5k matches with Jund, while with most other Pauper decks my experience ranges between 10 and 200 matches. So, if I have a pet deck, it's definitely Jund. You could even call it my "baby", since I had the biggest role in the deck's development from the start.
 
@@ -38,8 +37,7 @@ I have fond memories of when I played my first Showcase Qualifier by renting for
 The only critique I have for the current showcase system is that I don't like Last Chance events. Nobody likes single-elimination tournaments, and for good reason. But I do understand that it's a way for Daybreak to make players burn play points, and that has an overall positive effect on the game's economy.
 
 
-## How are you going to live the MOCS and the PT preparation?
-## Tryharding all the formats, place your bet in a specific portion letìs say Modern or chill your way?
+## How are you going to live the MOCS and the PT preparation? Tryharding all the formats, place your bet in a specific portion letìs say Modern or chill your way?
 
 While it's true that I've barely played other formats, having checked all my boxes in Pauper makes me willing to find new goals, and the invites to the MOCS and the Pro Tour will challenge me in new ways.
 I'm sure that those tournaments will be great experiences even if I don't win a single match, but I don't want to go there just as a tourist. I want to get there well-prepared. It will be hard and it will be very different from what I'm used to, but I'm willing to try and put in the work.
