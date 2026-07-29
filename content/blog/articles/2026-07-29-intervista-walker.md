@@ -10,7 +10,6 @@ published: true
 ---
 
 With the recent win of the Pauper Showcase Qualifier event, Walker735 aka Paolo Donfrancesco qualified for the Pro Tour, the MOCS and the Regional.
-This is the third time foor an italian in the Pauper format after 
 
 
 ## Let's start with Jund, I want you to weight the factors of your deck choice: best deck, pet deck and expertise. Do you choose Jund only because you think it is the best deck in Pauper right now or because of the comfort pick factor?
