@@ -16,7 +16,8 @@
   "duplicates": {
     "ignore": [
       "app/components/charts/**",
-      "modules/**"
+      "modules/**",
+      "app/components/magic/SideboardGuide.vue"
     ]
   }
 }
