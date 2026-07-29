@@ -1,0 +1,23 @@
+{
+  "$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
+  "ignoreDependencies": [
+    "@takumi-rs/core",
+    "@takumi-rs/wasm",
+    "echarts",
+    "vue-echarts",
+    "rehype-katex",
+    "remark-math",
+    "remark-reading-time",
+    "@vueuse/core"
+  ],
+  "rules": {
+    "test-only-dependency": "off"
+  },
+  "duplicates": {
+    "ignore": [
+      "app/components/charts/**",
+      "modules/**",
+      "app/components/magic/SideboardGuide.vue"
+    ]
+  }
+}

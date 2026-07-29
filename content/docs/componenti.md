@@ -1238,7 +1238,7 @@ images:
 
 ## Grafici
 
-Quattro componenti grafico (ECharts) utili per articoli di meta-analisi, report e tutorial. Si adattano automaticamente alla dark mode e allo schermo.
+Sette componenti grafico (sei via ECharts, più un renderer di diagrammi Mermaid) utili per articoli di meta-analisi, report e tutorial. Si adattano automaticamente alla dark mode e allo schermo.
 
 ### Grafico a barre
 
@@ -1545,5 +1545,31 @@ series:
       - 8
       - 5
 title: Profilo Archetipo
+---
+::
+
+### Diagramma Mermaid
+
+Renderizza un diagramma [Mermaid](https://mermaid.js.org/) (flowchart, sequence diagram, ecc.) lato client. Utile per illustrare flussi decisionali (es. guide al sideboard, alberi di scelta durante una partita). A differenza degli altri grafici, il diagramma viene renderizzato solo dopo l'hydration della pagina, non è presente nell'HTML prerenderizzato.
+
+```md
+::mermaid
+---
+code: |
+  flowchart TD
+    A[Mainboard] --> B{Sideboard}
+    B -->|Round 1| C[Swap]
+    B -->|Round 2| D[Keep]
+---
+::
+```
+
+::mermaid
+---
+code: |
+  flowchart TD
+    A[Mainboard] --> B{Sideboard}
+    B -->|Round 1| C[Swap]
+    B -->|Round 2| D[Keep]
 ---
 ::

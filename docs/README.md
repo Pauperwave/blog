@@ -83,4 +83,4 @@ docs/
 
 - Dated docs (`YYYY-MM-DD-topic.md`) are point-in-time research/investigation notes — the date marks when they were written, not an expiry.
 - `architecture/` = lasting reference for how something works; `audits/` = one-off investigation/postmortem reports; root level = entry points and process docs.
-- Run `bun run lint` after any file modification.
+- Run `pnpm run lint` after any file modification.

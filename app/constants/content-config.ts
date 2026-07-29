@@ -61,7 +61,7 @@ export type CollectionName = 'decklists' | 'articles' | 'reports' | 'spoilers' |
  * Collection names as they appear in queryCollection() calls.
  * Maps category types to their actual collection names in content.config.ts
  */
-export const COLLECTION_NAMES: Record<CategoryType, CollectionName> = {
+const COLLECTION_NAMES: Record<CategoryType, CollectionName> = {
   decklist: 'decklists',
   article: 'articles',
   report: 'reports',
@@ -101,7 +101,7 @@ export const CATEGORY_LABELS: Record<CategoryType, string> = {
  * Section titles for the home page.
  * Maps each category to its display title on the home page.
  */
-export const HOME_SECTION_TITLES: Record<CategoryType, string> = {
+const HOME_SECTION_TITLES: Record<CategoryType, string> = {
   decklist: 'Top Decklists',
   article: 'Ultimi articoli',
   report: 'Resoconti dei tornei',

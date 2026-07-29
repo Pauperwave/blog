@@ -16,35 +16,19 @@ const props = defineProps<{
 }>()
 
 // Parse pre-fetched card data from props
-const cardsIn = computed(() => {
-  if (!props.cardsInParsed) return []
+const parseCards = (json: string | undefined, propName: string): ParsedCard[] => {
+  if (!json) return []
   try {
-    return JSON.parse(props.cardsInParsed) as ParsedCard[]
+    return JSON.parse(json) as ParsedCard[]
   } catch (e) {
-    console.error('Failed to parse cardsInParsed:', e)
+    console.error(`Failed to parse ${propName}:`, e)
     return []
   }
-})
+}
 
-const cardsOut = computed(() => {
-  if (!props.cardsOutParsed) return []
-  try {
-    return JSON.parse(props.cardsOutParsed) as ParsedCard[]
-  } catch (e) {
-    console.error('Failed to parse cardsOutParsed:', e)
-    return []
-  }
-})
-
-const cardsOutAlt = computed(() => {
-  if (!props.cardsOutAltParsed) return []
-  try {
-    return JSON.parse(props.cardsOutAltParsed) as ParsedCard[]
-  } catch (e) {
-    console.error('Failed to parse cardsOutAltParsed:', e)
-    return []
-  }
-})
+const cardsIn = computed(() => parseCards(props.cardsInParsed, 'cardsInParsed'))
+const cardsOut = computed(() => parseCards(props.cardsOutParsed, 'cardsOutParsed'))
+const cardsOutAlt = computed(() => parseCards(props.cardsOutAltParsed, 'cardsOutAltParsed'))
 
 const hasAlternative = computed(() => cardsOutAlt.value.length > 0)
 

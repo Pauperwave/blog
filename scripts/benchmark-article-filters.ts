@@ -1,3 +1,4 @@
+import { glob, readFile } from 'node:fs/promises'
 import { join, relative, sep } from 'node:path'
 import { parse as parseYaml } from 'yaml'
 
@@ -76,6 +77,29 @@ const DEFAULTS = {
 const normalizeFilterValue = (value: string) => value.trim().toLowerCase()
 const getAuthorSlug = (authorName: string) => authorName.toLowerCase().replace(/\s+/g, '-')
 
+// Shared by both the legacy and optimized filter-options builders below: both need
+// the same counts -> sorted-options shape, they just differ in how the counts
+// themselves are computed (from scratch each time vs. read from prepared state),
+// which is the actual thing this benchmark measures.
+const buildCountOptions = (counts: Record<string, number>) =>
+  Object.entries(counts)
+    .map(([value, count]) => ({ value, count }))
+    .sort((a, b) => (b.count !== a.count ? b.count - a.count : a.value.localeCompare(b.value, 'it')))
+
+const buildLocationFilterOptions = (locationCounts: Record<string, number>) =>
+  buildCountOptions(locationCounts).map(({ value, count }) => ({ location: value, count }))
+
+const buildTagFilterOptions = (tagCounts: Record<string, number>) =>
+  buildCountOptions(tagCounts).map(({ value, count }) => ({ tag: value, count }))
+
+const buildAuthorFilterOptions = (authorCounts: Record<string, number>, authorsMap: Record<string, BenchmarkAuthor>) =>
+  Object.entries(authorCounts)
+    .map(([authorKey, count]) => {
+      const authorName = authorsMap[authorKey]?.name || authorKey
+      return { name: authorName, slug: getAuthorSlug(authorName), count }
+    })
+    .sort((a, b) => (b.count !== a.count ? b.count - a.count : a.name.localeCompare(b.name, 'it')))
+
 const getStringArray = (value: unknown): string[] =>
   Array.isArray(value) ? value.filter((item): item is string => typeof item === 'string') : []
 
@@ -141,12 +165,8 @@ const parseArgs = () => {
 const walkMarkdownFiles = async (dir: string): Promise<string[]> => {
   const files: string[] = []
 
-  for (const pattern of ['**/*.md', '**/*.mdc']) {
-    const glob = new Bun.Glob(pattern)
-
-    for await (const relativePath of glob.scan({ cwd: dir })) {
-      files.push(join(dir, relativePath))
-    }
+  for await (const relativePath of glob('**/*.{md,mdc}', { cwd: dir })) {
+    files.push(join(dir, relativePath))
   }
 
   return files
@@ -184,7 +204,7 @@ const loadPublishedArticlesFromContent = async (config: ReturnType<typeof parseA
     const files = await walkMarkdownFiles(collectionDir)
 
     for (const filePath of files) {
-      const source = await Bun.file(filePath).text()
+      const source = await readFile(filePath, 'utf-8')
       const frontmatter = extractFrontmatter(source)
       if (!frontmatter) continue
 
@@ -344,25 +364,14 @@ const buildLegacyFilterOptions = (articles: BenchmarkArticle[], authorsMap: Reco
     return acc
   }, {} as Record<string, number>)
 
-  const locationFilterOptions = Object.entries(locationCounts)
-    .map(([location, count]) => ({ location, count }))
-    .sort((a, b) => (b.count !== a.count ? b.count - a.count : a.location.localeCompare(b.location, 'it')))
+  const locationFilterOptions = buildLocationFilterOptions(locationCounts)
 
   const authorCounts = articles.reduce((acc, article) => {
     acc[article.author] = (acc[article.author] || 0) + 1
     return acc
   }, {} as Record<string, number>)
 
-  const authorFilterOptions = Object.entries(authorCounts)
-    .map(([authorKey, count]) => {
-      const authorName = authorsMap[authorKey]?.name || authorKey
-      return {
-        name: authorName,
-        slug: getAuthorSlug(authorName),
-        count
-      }
-    })
-    .sort((a, b) => (b.count !== a.count ? b.count - a.count : a.name.localeCompare(b.name, 'it')))
+  const authorFilterOptions = buildAuthorFilterOptions(authorCounts, authorsMap)
 
   const tagCounts = articles.reduce((acc, article) => {
     getArticleTopicTagsLegacy(article).forEach((tag) => {
@@ -371,9 +380,7 @@ const buildLegacyFilterOptions = (articles: BenchmarkArticle[], authorsMap: Reco
     return acc
   }, {} as Record<string, number>)
 
-  const tagFilterOptions = Object.entries(tagCounts)
-    .map(([tag, count]) => ({ tag, count }))
-    .sort((a, b) => (b.count !== a.count ? b.count - a.count : a.tag.localeCompare(b.tag, 'it')))
+  const tagFilterOptions = buildTagFilterOptions(tagCounts)
 
   return { categoryFilterOptions, locationFilterOptions, authorFilterOptions, tagFilterOptions }
 }
@@ -455,24 +462,9 @@ const buildOptimizedFilterOptions = (state: OptimizedPreparedState, authorsMap: 
     count: state.counts.categoryCounts[category] || 0
   }))
 
-  const locationFilterOptions = Object.entries(state.counts.locationCounts)
-    .map(([location, count]) => ({ location, count }))
-    .sort((a, b) => (b.count !== a.count ? b.count - a.count : a.location.localeCompare(b.location, 'it')))
-
-  const authorFilterOptions = Object.entries(state.counts.authorCounts)
-    .map(([authorKey, count]) => {
-      const authorName = authorsMap[authorKey]?.name || authorKey
-      return {
-        name: authorName,
-        slug: getAuthorSlug(authorName),
-        count
-      }
-    })
-    .sort((a, b) => (b.count !== a.count ? b.count - a.count : a.name.localeCompare(b.name, 'it')))
-
-  const tagFilterOptions = Object.entries(state.counts.tagCounts)
-    .map(([tag, count]) => ({ tag, count }))
-    .sort((a, b) => (b.count !== a.count ? b.count - a.count : a.tag.localeCompare(b.tag, 'it')))
+  const locationFilterOptions = buildLocationFilterOptions(state.counts.locationCounts)
+  const authorFilterOptions = buildAuthorFilterOptions(state.counts.authorCounts, authorsMap)
+  const tagFilterOptions = buildTagFilterOptions(state.counts.tagCounts)
 
   return { categoryFilterOptions, locationFilterOptions, authorFilterOptions, tagFilterOptions }
 }

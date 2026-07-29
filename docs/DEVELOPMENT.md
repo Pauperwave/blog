@@ -20,7 +20,8 @@ Technical reference for developers and AI agents working on this project.
 
 ### Core Technologies
 
-- **Bun** - JavaScript runtime (faster than Node.js) and package manager (faster than npm/yarn/pnpm but less common)
+- **pnpm** - Package manager
+- **Node** - JavaScript runtime (pinned via `volta`); standalone scripts run directly via `node` using its native TypeScript type-stripping, no transpiler needed
 - **TypeScript** - Strict mode enabled for type safety
 - **Nuxt 4** - Vue meta-framework with SSG (Static Site Generation)
 - **Vue 3** - Progressive JavaScript framework (Composition API)
@@ -31,8 +32,7 @@ Technical reference for developers and AI agents working on this project.
 
 ### Why These Choices?
 
-- **Bun over Node.js:** ~3x faster install times, built-in TypeScript support
-- **Bun over pnpm/yarn:** Single tool for runtime + package management, faster installs
+- **pnpm over npm/yarn:** faster installs, strict/non-flat node_modules by default
 - **TypeScript strict mode:** Catch more errors at compile time
 - **Vue 3 Composition API:** Better logic reuse, improved TypeScript support
 - **Tailwind CSS:** Utility-first CSS for rapid styling, small bundle size
@@ -243,7 +243,7 @@ formatDateWithMonthIT('2025-01-17')  // '17 gen 2025'
 
 ```bash
 # Download card data (runs automatically on build)
-bun run download-cards
+pnpm run download-cards
 ```
 
 #### Usage
@@ -270,8 +270,6 @@ CREATE TABLE cards (
 )
 ```
 
-**Note:** Using `bun:sqlite` causes a warning during build. This is expected behavior (treated as external dependency).
-
 ---
 
 ## Testing
@@ -285,13 +283,13 @@ CREATE TABLE cards (
 
 ```bash
 # Watch mode (re-runs on file changes)
-bun test
+pnpm test
 
 # Single run (for CI/CD)
-bun test:run
+pnpm test:run
 
 # UI mode (browser interface)
-bun test:ui
+pnpm test:ui
 ```
 
 ### Test Structure
@@ -499,9 +497,6 @@ const { data: links } = await useAsyncData(`linked-${route.path}`, async () => {
 
 ### Warnings (Expected Behavior)
 
-- **"bun:sqlite" treated as external dependency**  
-  This is correct - SQLite is server-side only and shouldn't be bundled for client.
-
 - **Port 3000 already in use**  
   Dev server automatically falls back to port 3001. This is expected.
 
@@ -513,31 +508,31 @@ const { data: links } = await useAsyncData(`linked-${route.path}`, async () => {
 
 ```bash
 # Clear cache and reinstall
-rm -rf node_modules bun.lockb
-bun install
-bun test:run
+rm -rf node_modules pnpm-lock.yaml
+pnpm install
+pnpm test:run
 ```
 
 ### Content not updating
 
 ```bash
 # Clear Nuxt cache
-bun run clean
-bun dev
+pnpm run clean
+pnpm dev
 ```
 
 ### Card database missing
 
 ```bash
 # Re-download card data
-bun run download-cards
+pnpm run download-cards
 ```
 
 ### Type errors in IDE
 
 ```bash
 # Regenerate Nuxt types
-bun run postinstall
+pnpm run postinstall
 ```
 
 ---

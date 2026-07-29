@@ -8,5 +8,3 @@ export const PAUPERWAVE_SOCIAL_LINKS = {
   telegram: 'https://t.me/pauperwave_official',
   github: 'https://github.com/pauperwave',
 } as const
-
-export type SocialPlatform = keyof typeof PAUPERWAVE_SOCIAL_LINKS

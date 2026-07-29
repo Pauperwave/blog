@@ -1,0 +1,14 @@
+allowBuilds:
+  better-sqlite3: true
+  esbuild: true
+  sharp: true
+  unrs-resolver: true
+  vue-demi: true
+
+overrides:
+  # nuxt-schema-org 6.2.1+ (pulled via @nuxtjs/seo) introduced a function-based
+  # `defaults` in webPageResolver that crashes under unhead v2's walkResolver
+  # (calls any function it encounters with zero arguments). Pinned to last
+  # known working version — see commit 58d3ae9.
+  nuxt-schema-org: 6.0.4
+  "@unhead/vue": 3.2.3

@@ -88,15 +88,6 @@ export async function getCardByName(name: string): Promise<CardData | null> {
   }
 }
 
-const SCRYFALL_API_BASE = 'https://api.scryfall.com'
-
-/**
- * Build Scryfall image URL for a card
- */
-function buildScryfallImageUrl(name: string): string {
-  return `${SCRYFALL_API_BASE}/cards/named?exact=${encodeURIComponent(name)}&format=image`
-}
-
 export async function getCardsByNames(names: string[]): Promise<Map<string, CardData>> {
   const db = await getDatabase()
   const result = new Map<string, CardData>()
@@ -145,13 +136,11 @@ export async function getCardsByNames(names: string[]): Promise<Map<string, Card
         }
         result.set(name, cardData)
       } else {
-        // Fallback to Scryfall API
-        console.log(`🌐 Card "${name}" not in database, using Scryfall fallback`)
-        result.set(name, {
-          name,
-          manaCost: '',
-          imageUrl: buildScryfallImageUrl(name)
-        })
+        // Left out of the result map (not inserted with a guessed Scryfall
+        // URL) — callers already treat a missing entry as "no image". Logged
+        // unconditionally, unlike buildLog(), so a bad card name is visible
+        // in every build, not just verbose ones.
+        console.warn(`⚠️  Card "${name}" not found in database`)
       }
     }
   }

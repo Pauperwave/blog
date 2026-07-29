@@ -2,24 +2,35 @@
  * Downloads Scryfall bulk data and creates a local SQLite database
  * of Pauper-legal cards for fast lookups.
  *
- * Run with: bun run scripts/download-bulk-data.ts
+ * Run with: node scripts/download-bulk-data.ts
  */
 
 import { createWriteStream, existsSync, mkdirSync, statSync } from 'fs'
 import { pipeline } from 'stream/promises'
-import { Database } from 'bun:sqlite'
+import { createGunzip } from 'zlib'
+import Database from 'better-sqlite3'
 import { readFile } from 'fs/promises'
 
 const BULK_DATA_API = 'https://api.scryfall.com/bulk-data'
 const DB_PATH = './server/database/cards.db'
-const TEMP_FILE = './server/database/oracle-cards.json'
+// Scryfall only offers a gzip-compressed JSONL download now (one card object
+// per line, no enclosing array) — no plain-JSON option. downloadBulkData()
+// decompresses on the fly, so this file is already plain JSONL on disk.
+const TEMP_FILE = './server/database/oracle-cards.jsonl'
+
+// Scryfall rejects requests without an identifying User-Agent (returns 400) —
+// Node's built-in fetch doesn't set one by default, unlike curl/browsers.
+const SCRYFALL_HEADERS = {
+  'User-Agent': 'PauperwaveBlog/1.0 (+https://blog.pauperwave.org)',
+  'Accept': 'application/json',
+}
 
 interface BulkDataInfo {
   object: string
   type: string
-  download_uri: string
+  jsonl_download_uri: string
   updated_at: string
-  size: number
+  compressed_size: number
 }
 
 interface ScryfallCard {
@@ -71,7 +82,7 @@ interface Card {
 
 async function fetchBulkDataInfo(): Promise<BulkDataInfo> {
   console.log('📡 Fetching bulk data information...')
-  const response = await fetch(BULK_DATA_API)
+  const response = await fetch(BULK_DATA_API, { headers: SCRYFALL_HEADERS })
   const data = await response.json()
 
   // Find the Oracle Cards bulk data
@@ -81,7 +92,7 @@ async function fetchBulkDataInfo(): Promise<BulkDataInfo> {
     throw new Error('Oracle Cards bulk data not found')
   }
 
-  console.log(`✅ Found bulk data (${(oracleCards.size / 1024 / 1024).toFixed(2)} MB)`)
+  console.log(`✅ Found bulk data (${(oracleCards.compressed_size / 1024 / 1024).toFixed(2)} MB compressed)`)
   console.log(`📅 Last updated: ${oracleCards.updated_at}`)
 
   return oracleCards
@@ -95,16 +106,18 @@ async function downloadBulkData(downloadUri: string): Promise<void> {
     mkdirSync('./server/database', { recursive: true })
   }
 
-  const response = await fetch(downloadUri)
+  const response = await fetch(downloadUri, { headers: { 'User-Agent': SCRYFALL_HEADERS['User-Agent'] } })
   if (!response.ok || !response.body) {
     throw new Error(`Failed to download: ${response.statusText}`)
   }
 
-  // Download and decompress
+  // Scryfall serves the file as opaque gzip (no Content-Encoding header, so
+  // fetch won't auto-decompress it) — gunzip on the fly into a plain JSONL file.
   const fileStream = createWriteStream(TEMP_FILE)
   await pipeline(
     /* eslint-disable @typescript-eslint/no-explicit-any */
     response.body as any,
+    createGunzip(),
     fileStream
   )
 
@@ -114,7 +127,7 @@ async function downloadBulkData(downloadUri: string): Promise<void> {
 async function createDatabase(): Promise<Database> {
   console.log('🗄️  Creating SQLite database...')
 
-  const db = new Database(DB_PATH, { create: true })
+  const db = new Database(DB_PATH)
 
   // Create cards table
   db.exec(`
@@ -129,7 +142,7 @@ async function createDatabase(): Promise<Database> {
   `)
 
   // Migrate existing databases created before back-face support was added
-  const existingColumns = db.query('PRAGMA table_info(cards)').all() as Array<{ name: string }>
+  const existingColumns = db.prepare('PRAGMA table_info(cards)').all() as Array<{ name: string }>
   if (!existingColumns.some(col => col.name === 'back_image_url')) {
     db.exec('ALTER TABLE cards ADD COLUMN back_image_url TEXT;')
   }
@@ -155,7 +168,12 @@ async function importPauperCards(db: Database): Promise<void> {
   console.log('📖 Reading and filtering cards...')
 
   const fileContent = await readFile(TEMP_FILE, 'utf-8')
-  const allCards: ScryfallCard[] = JSON.parse(fileContent)
+  // JSONL: one card object per line, no enclosing array — filter out the
+  // trailing blank line left by the file's final newline.
+  const allCards: ScryfallCard[] = fileContent
+    .split('\n')
+    .filter(line => line.trim() !== '')
+    .map(line => JSON.parse(line))
 
   // Filter Pauper-legal and Banned cards
   const pauperCards = allCards.filter(card =>
@@ -276,7 +294,7 @@ async function main() {
     const bulkInfo = await fetchBulkDataInfo()
 
     // Step 2: Download bulk data
-    await downloadBulkData(bulkInfo.download_uri)
+    await downloadBulkData(bulkInfo.jsonl_download_uri)
 
     // Step 3: Create database
     const db = await createDatabase()
@@ -294,7 +312,7 @@ async function main() {
     db.close()
 
     console.log('\n✨ Done! Database ready at:', DB_PATH)
-    console.log('\n💡 You can now run your build with: bun run generate')
+    console.log('\n💡 You can now run your build with: pnpm run generate')
 
   } catch (error) {
     console.error('❌ Error:', error)

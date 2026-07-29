@@ -1,4 +1,4 @@
-export interface AuthorSocialPlatformMetaDefinition {
+interface AuthorSocialPlatformMetaDefinition {
   icon: string
   label: string
   hoverClass: string
