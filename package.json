@@ -2,14 +2,15 @@
   "name": "pauperwave_blog",
   "private": true,
   "type": "module",
+  "packageManager": "pnpm@11.15.1",
   "scripts": {
-    "download-cards": "bun run scripts/download-bulk-data.ts",
+    "download-cards": "node scripts/download-bulk-data.ts",
     "build": "nuxt build",
-    "update-cards": "bun run download-cards",
+    "update-cards": "pnpm run download-cards",
     "dev": "nuxt dev",
     "dev:clean": "rm -rf .nuxt .data && nuxt dev",
     "clean": "nuxt cleanup",
-    "clean:all": "nuxt cleanup && rm -rf .data node_modules bun.lock package-lock.json",
+    "clean:all": "nuxt cleanup && rm -rf .data node_modules pnpm-lock.yaml package-lock.json",
     "clean:content": "rm -rf .data",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
@@ -18,9 +19,9 @@
     "test:ui": "vitest --ui",
     "test:run": "vitest run",
     "typecheck": "nuxt typecheck",
-    "bench:filters": "bun run scripts/benchmark-article-filters.ts",
-    "decklists:add-gradients": "bun run scripts/add-header-gradients.ts",
-    "decklists:verify-gradients": "bun run scripts/verify-header-gradients.ts",
+    "bench:filters": "node scripts/benchmark-article-filters.ts",
+    "decklists:add-gradients": "node scripts/add-header-gradients.ts",
+    "decklists:verify-gradients": "node scripts/verify-header-gradients.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
@@ -58,16 +59,11 @@
     "vue-echarts": "^8.0.1",
     "yaml": "^2.9.0"
   },
-  "overrides": {
-    "nuxt-schema-org": "6.0.4",
-    "@unhead/vue": "3.2.3"
-  },
   "devDependencies": {
     "@iconify-json/lucide": "^1.2.120",
     "@iconify-json/simple-icons": "^1.2.92",
     "@takumi-rs/wasm": "2.5.2",
     "@types/better-sqlite3": "^7.6.13",
-    "@types/bun": "^1.3.14",
     "@vitejs/plugin-vue": "^6.0.8",
     "@vueuse/core": "^14.3.0",
     "@vueuse/nuxt": "^14.3.0",
