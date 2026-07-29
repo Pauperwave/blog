@@ -12,5 +12,10 @@
   ],
   "rules": {
     "test-only-dependency": "off"
+  },
+  "duplicates": {
+    "ignore": [
+      "app/components/charts/**"
+    ]
   }
 }
