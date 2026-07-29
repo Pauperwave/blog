@@ -109,8 +109,8 @@ Nell'albero, ogni percorso verso destra è un nuovo tentativo. Anche se ogni sin
 
 Considerando mani realisticamente tenibili e una probabilità base del 14.54%:
 
-| Scenario           | Probabilità cumulativa |
-| ------------------- | ----------------------- |
+| Scenario            | Probabilità cumulativa |
+| ------------------- | :---------------------: |
 | Nessun mulligan     | 14.54%                  |
 | Fino a 1 mulligan   | 26.97%                  |
 | Fino a 2 mulligan   | 37.59%                  |

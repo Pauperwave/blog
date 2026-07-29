@@ -89,12 +89,12 @@ Più del doppio del Tron Naturale.
 E non è un caso: [[Expedition Map]] trasforma ogni coppia di terre del Tron in un potenziale Tron completo.
 Senza Mappa, servono combinazioni da tre carte specifiche; con Mappa, bastano combinazioni da due carte specifiche più una generica (la Mappa stessa).
 
-### Quanto conta la Mappa? Molto più di quanto pensi
+### La Mappa conta molto più di quanto pensi
 
 Il rapporto è netto:
 
 | Configurazione                | Probabilità |
-| ----------------------------- | ----------- |
+| ----------------------------- | :---------: |
 | Tron Naturale                 | 4.71%       |
 | Tron Assistito (via Mappa)    | 10.20%      |
 | **Tron al Turno 3 (totale)**  | **14.91%**  |
@@ -147,7 +147,7 @@ Ogni mulligan che non trova Tron "usa" un tentativo, ma la probabilità cumulati
 ### I numeri, tentativo per tentativo
 
 | Tentativi           | Tron Naturale | Tron Assistito | Tron T3 |
-| ------------------- | ------------- | -------------- | ------- |
+| ------------------- | :-----------: | :------------: | :-----: |
 | 1 (nessun mulligan) | 4.71%         | 10.20%         | 14.91%  |
 | 2 (mulligan a 6)    | 9.19%         | 19.36%         | 27.60%  |
 | 3 (mulligan a 5)    | 13.46%        | 27.52%         | 38.90%  |
@@ -184,8 +184,8 @@ Quasi un lancio di moneta.
 
 ## I numeri riassunti
 
-|                               | Valore              |
-| ----------------------------- | ------------------- |
+|  Evento                       | Valore              |
+| ----------------------------- | :-----------------: |
 | Tron Naturale (mano di 7)     | 4.71% (1 su 21)     |
 | Tron Assistito (mano di 7)    | 10.20% (1 su 10)    |
 | **Tron T3 (mano di 7)**       | **14.91% (1 su 7)** |
@@ -201,7 +201,7 @@ Per controllare la correttezza di questi risultati, li abbiamo verificati simula
 I risultati simulati coincidono con i calcoli teorici con un margine d'errore inferiore a 0.1%:
 
 | Evento         | Teorico | Simulato | Errore |
-| -------------- | ------- | -------- | ------ |
+| -------------- | :-----: | :------: | :----: |
 | Tron Naturale  | 4.71%   | 4.70%    | 0.01%  |
 | Tron Assistito | 10.20%  | 10.25%   | 0.05%  |
 | Tron T3        | 14.91%  | 14.95%   | 0.04%  |

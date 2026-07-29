@@ -1,6 +1,6 @@
 ---
 title: "Numero Atteso di Creature con Winding Way e Lead the Stampede"
-description: "Winding Way o Lead the Stampede: cosa compra quel mana in più?"
+description: "Confrontiamo matematicamente Winding Way e Lead the Stampede per capire quanto valore aggiunge davvero quella quinta carta rivelata, al costo di un mana in più."
 tags:
   - Meta
   - Data Analysis
@@ -55,14 +55,13 @@ Inserisci i tuoi dati, e il resto è automatico.
 [[Winding Way]] rivela le prime quattro carte del grimorio e mette in mano tutte le creature tra esse. Il numero di creature trovate non è "casuale" nel senso colloquiale del termine: segue una distribuzione statistica precisa (*ipergeometrica*), calcolabile carta per carta.
 
 ### Il quadro completo
-
 | Creature rivelate | Probabilità |
-| ------------------ | ----------- |
-| 0                   | 1.2%        |
-| 1                   | 10.8%       |
-| 2                   | 32.5%       |
-| 3                   | 39.3%       |
-| 4                   | 16.2%       |
+| :---------------: | :---------: |
+| 0                 | 1.2%        |
+| 1                 | 10.8%       |
+| 2                 | 32.5%       |
+| 3                 | 39.3%       |
+| 4                 | 16.2%       |
 
 ::bar-chart
 ---
@@ -90,13 +89,13 @@ Adesso aggiungiamo quella quinta carta. Stessi presupposti, stesso grimorio.
 ### Il quadro completo
 
 | Creature rivelate | Probabilità |
-| ------------------ | ----------- |
-| 0                   | 0.4%        |
-| 1                   | 4.3%        |
-| 2                   | 18.5%       |
-| 3                   | 35.7%       |
-| 4                   | 31.2%       |
-| 5                   | 9.9%        |
+| :---------------: | :---------: |
+| 0                 | 0.4%        |
+| 1                 | 4.3%        |
+| 2                 | 18.5%       |
+| 3                 | 35.7%       |
+| 4                 | 31.2%       |
+| 5                 | 9.9%        |
 
 ::bar-chart
 ---
@@ -159,14 +158,14 @@ Il messaggio è chiaro: quel mana in più "ruba" probabilità dai risultati medi
 ### I numeri riassunti
 
 |                     | Winding Way | Lead the Stampede |
-| ------------------- | ----------- | ------------------ |
-| Costo               | 2 mana      | 3 mana             |
-| Carte guardate       | 4           | 5                   |
-| Creature attese      | 2.6         | 3.2                 |
-| P(zero creature)     | 1.2%        | 0.4%                |
-| P(≥2 creature)       | 88%         | 95%                 |
-| P(≥3 creature)       | 55%         | 77%                 |
-| P(≥4 creature)       | 16%         | 41%                 |
+| ------------------- | :---------: | :---------------: |
+| Costo               | 2 mana      | 3 mana            |
+| Carte guardate      | 4           | 5                 |
+| Creature attese     | 2.6         | 3.2               |
+| P(zero creature)    | 1.2%        | 0.4%              |
+| P(≥2 creature)      | 88%         | 95%               |
+| P(≥3 creature)      | 55%         | 77%               |
+| P(≥4 creature)      | 16%         | 41%               |
 
 Due numeri saltano all'occhio: la probabilità di trovare **3 o più creature** passa da 55% a 77% — un salto di **22 punti percentuali**, e la probabilità di trovare **4 o più creature** passa da 16% a 41% — più del doppio. In molti matchup, questa è la differenza tra vincere e perdere lo scambio di risorse.
 
@@ -193,12 +192,12 @@ Nella distribuzione cumulativa, per ogni soglia, [[Lead the Stampede]] raggiunge
 La densità di creature nel mazzo è la leva che amplifica (o smorza) tutto quello che abbiamo visto. La relazione è quasi lineare:
 
 | Creature nel mazzo | Winding Way (attesa) | Lead the Stampede (attesa) |
-| ------------------- | ---------------------- | ---------------------------- |
-| 36                   | 2.4                     | 3.0                           |
-| 37                   | 2.5                     | 3.1                           |
-| 38                   | 2.6                     | 3.2                           |
-| 39                   | 2.6                     | 3.3                           |
-| 40                   | 2.7                     | 3.4                           |
+| :----------------: | :------------------: | :------------------------: |
+| 36                 | 2.4                  | 3.0                        |
+| 37                 | 2.5                  | 3.1                        |
+| 38                 | 2.6                  | 3.2                        |
+| 39                 | 2.6                  | 3.3                        |
+| 40                 | 2.7                  | 3.4                        |
 
 ::line-chart
 ---
