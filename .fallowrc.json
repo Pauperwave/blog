@@ -15,7 +15,8 @@
   },
   "duplicates": {
     "ignore": [
-      "app/components/charts/**"
+      "app/components/charts/**",
+      "modules/**"
     ]
   }
 }
