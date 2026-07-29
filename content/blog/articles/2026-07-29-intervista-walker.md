@@ -5,7 +5,7 @@ tags:
   - Meta
 date: 2026-07-29
 author: Pietro Bragioto
-thumbnail: /assets/blog/art/arb-55-godtracker-of-jund.jpg
+thumbnail: /assets/blog/arts/arb-55-godtracker-of-jund.jpg
 published: true
 ---
 
