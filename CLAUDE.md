@@ -4,19 +4,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands
 
-Package manager/runtime: **Bun**. Standard scripts are in `package.json` (`dev`, `build`, `generate`, `preview`, `typecheck`, `lint`/`lint:fix`, `download-cards`, ...).
+Package manager: **pnpm**. Runtime: **Node** (pinned via `volta` in `package.json`) — standalone scripts under `scripts/` run directly via `node` (Node's native TypeScript type-stripping, no transpiler needed). Standard scripts are in `package.json` (`dev`, `build`, `generate`, `preview`, `typecheck`, `lint`/`lint:fix`, `download-cards`, ...).
 
 Testing is **Vitest**, run through package.json scripts:
 
 ```bash
-bun run test                              # watch mode
-bun run test:run                          # single run (CI)
-bun run test:ui                           # Vitest browser UI
-bun run test:run -- path/to/file.test.ts  # single file
-bun run test:run -- -t "test name"        # single test by name
+pnpm run test                              # watch mode
+pnpm run test:run                          # single run (CI)
+pnpm run test:ui                           # Vitest browser UI
+pnpm run test:run -- path/to/file.test.ts  # single file
+pnpm run test:run -- -t "test name"        # single test by name
 ```
-
-⚠️ **Never run bare `bun test`.** Bun reserves that command for its own native test runner, which also picks up `*.test.ts` files but is not what this project is written against — it fails on `better-sqlite3` (unsupported under Bun's runtime) and doesn't run Vitest-specific APIs correctly. Always go through `bun run test*` so the Vitest scripts run instead.
 
 ## Architecture
 

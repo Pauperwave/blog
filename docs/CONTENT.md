@@ -522,7 +522,7 @@ Reference in content using the `/articles/*` alias, not the full path:
 #### 6. Preview
 
 ```bash
-bun dev
+pnpm dev
 # Navigate to http://localhost:3000/articles/2026-01-17-mono-blue-control-guide
 ```
 

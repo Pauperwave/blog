@@ -7,9 +7,9 @@ Built with Nuxt 4 + Nuxt Content, with a custom content pipeline that turns `[[C
 ## Getting started
 
 ```sh
-bun install
-bun run download-cards   # build the local card database (Scryfall bulk data)
-bun run dev
+pnpm install
+pnpm run download-cards   # build the local card database (Scryfall bulk data)
+pnpm run dev
 ```
 
 The dev server runs on `http://localhost:3000` (falls back to `3001` if busy).

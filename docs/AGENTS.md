@@ -3,7 +3,8 @@
 Quick reference guide for AI agents working on this project.
 
 ## Technology Stack
-- **Runtime:** Bun
+- **Package manager:** pnpm
+- **Runtime:** Node (standalone scripts run via `node`, no transpiler needed)
 - **Framework:** Nuxt 4 (SSG mode)
 - **UI:** Vue 3 + Nuxt UI 4
 - **Styling:** Tailwind CSS
@@ -15,22 +16,22 @@ Quick reference guide for AI agents working on this project.
 
 ```bash
 # Install dependencies
-bun install
+pnpm install
 
 # Start dev server (port 3000, fallback 3001)
-bun dev
+pnpm dev
 
 # Run tests (watch mode)
-bun test
+pnpm test
 
 # Run tests once
-bun test:run
+pnpm test:run
 
 # Build for production
-bun run build
+pnpm run build
 
 # Generate static site
-bun run generate
+pnpm run generate
 ```
 
 ## Code Style
@@ -99,7 +100,7 @@ For detailed information, see:
 
 **Before any git operations:**
 1. Never push without explicit user permission
-2. Never push without testing with `bun dev` first
+2. Never push without testing with `pnpm dev` first
 3. Always test changes locally before committing
 4. Always ask for confirmation before pushing to remote
 

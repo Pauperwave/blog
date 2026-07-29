@@ -16,12 +16,10 @@ async function processFile(filePath: string): Promise<void> {
   if (decklists.length === 0) return
 
   for (const decklist of decklists) {
-    let detected: string | null = null
-    let colors: string[] = []
+    let detected: string | null
+    let colors: string[]
     try {
-      const result = await detectDeckColors(decklist.cards)
-      detected = result.gradient
-      colors = result.colors
+      ({ gradient: detected, colors } = await detectDeckColors(decklist.cards))
     } catch (error) {
       console.error(`  Error analyzing ${decklist.name}:`, error)
       continue
