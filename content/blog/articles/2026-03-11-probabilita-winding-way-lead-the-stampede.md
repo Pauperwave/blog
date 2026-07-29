@@ -1,5 +1,5 @@
 ---
-title: "Numero Atteso di Creature con Winding Way e Lead the Stampede"
+title: "Winding Way o Lead the Stampede: cosa compra quel mana in più?"
 description: "Confrontiamo matematicamente Winding Way e Lead the Stampede per capire quanto valore aggiunge davvero quella quinta carta rivelata, al costo di un mana in più."
 tags:
   - Meta
@@ -10,9 +10,15 @@ thumbnail: /assets/blog/arts/otc-213-winding-way.jpg
 published: true
 ---
 
-# Numero Atteso di Creature con Winding Way e Lead the Stampede
+## Il dilemma da due o tre mana
 
-*[[Winding Way]] o [[Lead the Stampede]]: cosa compra quel mana in più?*
+Lanci [[Winding Way]], chiami "creature", incroci le dita. Dal grimorio ne emergono… due. Onesto, sì. Ma non abbastanza.
+
+Poi l'avversario fa lo stesso con [[Lead the Stampede]]: cinque carte rivelate, quattro creature in mano. Partita ribaltata. E tu resti lì a chiederti: *un singolo mana in più fa davvero tutta questa differenza?*
+
+La risposta breve: sì, più di quanto pensi. La risposta lunga è il resto di questo articolo.
+
+Sono Hypergeomancer, matematico e giocatore competitivo di Magic. Quello che segue non è un manuale su quale carta scegliere, ma una radiografia di cosa succede esattamente quando passi da quattro a cinque carte rivelate. Niente formule complicate, solo numeri concreti e qualche grafico che parla da solo.
 
 ::magic-cards
 ---
@@ -24,25 +30,15 @@ layout: hand
 ---
 ::
 
-## Il dilemma da due o tre mana
-
-Lanci [[Winding Way]], chiami "creature", incroci le dita. Dal grimorio ne emergono… due. Onesto, sì. Ma non abbastanza.
-
-Poi l'avversario fa lo stesso con [[Lead the Stampede]]: cinque carte rivelate, quattro creature in mano. Partita ribaltata. E tu resti lì a chiederti: *un singolo mana in più fa davvero tutta questa differenza?*
-
-La risposta breve: sì, più di quanto pensi. La risposta lunga è il resto di questo articolo.
-
-Sono Hypergeomancer, matematico e giocatore competitivo di Magic. Quello che segue non è un manuale su quale carta scegliere — è una radiografia di cosa succede esattamente quando passi da quattro a cinque carte rivelate. Niente formule complicate, solo numeri concreti e qualche grafico che parla da solo.
-
 ## Lo scenario di riferimento
 
-Per fare un confronto sensato servono numeri fissi. Prendiamo un mazzo a base creature tipico del Pauper — Elfi o Spia, per intenderci:
+Per fare un confronto sensato servono numeri fissi. Prendiamo un mazzo a base creature tipico del Pauper (Elfi o Spia, per intenderci):
 
 - Mazzo da 60 carte
 - 38 creature totali
 - 22 non-creature (terre, istantanei, stregonerie)
 
-A metà partita: 4 carte in mano (2 creature, 2 non-creature), 5 creature e 3 non-creature visibili tra campo e cimitero. Restano **48 carte nel grimorio, di cui 31 creature** — una densità di 64.6%.
+A metà partita: 4 carte in mano (2 creature, 2 non-creature), 5 creature e 3 non-creature visibili tra campo e cimitero. Restano **48 carte nel grimorio, di cui 31 creature**, una densità di 64.6%.
 
 Questo scenario è specifico, certo. Ma è realistico, e ci serve come banco di prova. Per calcolare le probabilità nella *tua* configurazione di gioco, ho creato un calcolatore interattivo:
 
@@ -76,7 +72,7 @@ data:
 ---
 ::
 
-Il valore atteso è di circa **2.6 creature** per utilizzo. Non è una garanzia — è la media intorno a cui oscillano i risultati nel lungo periodo. Il picco cade a **3 creature**, che si verifica in oltre un terzo dei lanci.
+Il valore atteso è di circa **2.6 creature** per utilizzo, questo numero rappresenta la media intorno a cui oscillano i risultati nel lungo periodo. Il picco cade a **3 creature**, che si verifica in oltre un terzo dei lanci.
 
 Il temuto "miss" (zero creature) capita circa nell'**1.2% dei casi**. Raro, ma non impossibile: in una sessione di 80 partite, aspettati di vederlo almeno una volta.
 
@@ -84,7 +80,7 @@ La notizia buona è che la probabilità di trovare **almeno 2 creature** è circ
 
 ## *Lead the Stampede*: il profilo di 5 carte
 
-Adesso aggiungiamo quella quinta carta. Stessi presupposti, stesso grimorio.
+Adesso aggiungiamo quella quinta carta. Stessi presupposti, stesso momento della partita ipotetica, stesso grimorio.
 
 ### Il quadro completo
 
@@ -111,11 +107,11 @@ data:
 ---
 ::
 
-Il valore atteso sale a **3.2 creature** — esattamente il 25% in più, perché si guarda il 25% in più di carte. Fin qui, nessuna sorpresa: il rapporto è perfettamente proporzionale.
+Il valore atteso sale a **3.2 creature**, esattamente il 25% in più, perché si guarda il 25% in più di carte. Fin qui, nessuna sorpresa: il rapporto è perfettamente proporzionale.
 
-Ma i numeri interessanti sono altrove. Il "miss" crolla a **0.4%**: tre volte più raro. Servono circa 250 partite per vederne uno. E la probabilità di pescare **almeno 2 creature** sale a **95%** — quasi una certezza.
+Ma i numeri interessanti sono altrove. Il "miss" crolla a **0.4%**: tre volte più raro. Servono circa 250 partite per vederne uno. E la probabilità di pescare **almeno 2 creature** sale a **95%**: quasi una certezza.
 
-C'è anche un fenomeno più sottile: la distribuzione non si limita a spostarsi; cambia *forma*. Diventa leggermente più asimmetrica verso destra (in statistica, questo fenomeno si chiama *skewness*): i risultati abbondanti — 4 o 5 creature — diventano molto più probabili. Quanto più probabili? Vediamolo.
+C'è anche un fenomeno più sottile: la distribuzione non si limita a spostarsi; cambia *forma*. Diventa leggermente più asimmetrica verso destra (in statistica, questo fenomeno si chiama *skewness*): i risultati abbondanti (4 o 5 creature) diventano molto più probabili. Quanto più probabili? Vediamolo.
 
 ## La radiografia del mana extra
 
@@ -133,7 +129,7 @@ series:
 ---
 ::
 
-Guardiamo il grafico: non è solo uno spostamento uniforme. La barra a "2 creature" si riduce drasticamente, quella a "4 creature" quasi raddoppia, e compare un'intera colonna nuova a "5". Il mana extra non aggiunge semplicemente una carta alla media — **redistribuisce la probabilità** verso i risultati più ricchi.
+Guardiamo il grafico: non è solo uno spostamento uniforme. La barra a "2 creature" si riduce drasticamente, quella a "4 creature" quasi raddoppia, e compare un'intera colonna nuova a "5". Il mana extra non aggiunge semplicemente una carta alla media, ma **redistribuisce la probabilità** verso i risultati più ricchi.
 
 ### Il delta, punto per punto
 
@@ -153,7 +149,7 @@ data:
 ---
 ::
 
-Il messaggio è chiaro: quel mana in più "ruba" probabilità dai risultati mediocri (0, 1, 2 creature) e la "regala" ai risultati forti (4 e 5 creature). Il risultato intermedio — 3 creature — resta quasi invariato, funzionando da punto di equilibrio tra le due distribuzioni.
+Il messaggio è chiaro: quel mana in più "ruba" probabilità dai risultati mediocri (0, 1, 2 creature) e la "regala" ai risultati forti (4 e 5 creature). Il risultato intermedio di 3 creature resta quasi invariato, funzionando da punto di equilibrio tra le due distribuzioni.
 
 ### I numeri riassunti
 
@@ -167,11 +163,11 @@ Il messaggio è chiaro: quel mana in più "ruba" probabilità dai risultati medi
 | P(≥3 creature)      | 55%         | 77%               |
 | P(≥4 creature)      | 16%         | 41%               |
 
-Due numeri saltano all'occhio: la probabilità di trovare **3 o più creature** passa da 55% a 77% — un salto di **22 punti percentuali**, e la probabilità di trovare **4 o più creature** passa da 16% a 41% — più del doppio. In molti matchup, questa è la differenza tra vincere e perdere lo scambio di risorse.
+Due numeri saltano all'occhio: la probabilità di trovare **3 o più creature** passa da 55% a 77%, un salto di **22 punti percentuali**, e la probabilità di trovare **4 o più creature** passa da 16% a 41% - più del doppio. In molti matchup, questa è la differenza tra vincere e perdere lo scambio di risorse.
 
 ### Dove va a finire la varianza?
 
-C'è un altro effetto, meno ovvio ma altrettanto importante. Il mana extra non compra solo creature in più — compra anche **consistenza**. La varianza (cioè l'oscillazione casuale dei risultati attorno alla media) si riduce in proporzione.
+C'è un altro effetto, meno ovvio ma altrettanto importante. Oltre che a un maggior numero di creature, quel mana extra compra anche la **consistenza**. La varianza (cioè l'oscillazione casuale dei risultati attorno alla media) si riduce in proporzione.
 
 ::line-chart
 ---
@@ -185,7 +181,7 @@ series:
 ---
 ::
 
-Nella distribuzione cumulativa, per ogni soglia, [[Lead the Stampede]] raggiunge il 100% più lentamente — segno che i risultati si concentrano più in alto. In concreto: con [[Winding Way]], per essere "quasi sicuro" (≥ 90%) di trovare almeno n creature, puoi contare su n = 1. Con [[Lead the Stampede]], puoi contare su n = 2. Sembra poco, ma al tavolo significa pianificare il turno sapendo che la carta *quasi certamente* restituirà abbastanza risorse per rimanere in partita.
+Nella distribuzione cumulativa, per ogni soglia, [[Lead the Stampede]] raggiunge il 100% più lentamente, segno che i risultati si concentrano più in alto. In concreto: con [[Winding Way]], per essere "quasi sicuro" (≥ 90%) di trovare almeno n creature, puoi contare su n = 1. Con [[Lead the Stampede]], puoi contare su n = 2. Sembra poco, ma al tavolo significa pianificare il turno sapendo che la carta *quasi certamente* restituirà abbastanza risorse per rimanere in partita.
 
 ## Quanto conta la densità di creature?
 
@@ -219,17 +215,17 @@ C'è un dettaglio che i giocatori più attenti coglieranno: le probabilità camb
 
 Chi risolve la carta sa esattamente quante creature ha in mano, e può fare una stima più precisa di quante ne restano nel grimorio. L'avversario, invece, conosce solo le carte visibili in gioco e al cimitero.
 
-La differenza numerica è piccola — nell'ordine di un punto percentuale — ma è matematicamente reale. Per chi gioca Elfi o Spia e si chiede se "valga la pena" giocare la carta in un determinato turno, la conoscenza della propria mano è un vantaggio concreto nel lungo periodo: non un dettaglio filosofico, ma un fattore che la distribuzione ipergeometrica cattura con precisione.
+La differenza numerica è piccola (nell'ordine di un punto percentuale) ma è matematicamente reale. Per chi gioca Elfi o Spia e si chiede se "valga la pena" giocare la carta in un determinato turno, la conoscenza della propria mano è un vantaggio concreto nel lungo periodo: non un dettaglio filosofico, ma un fattore che la distribuzione ipergeometrica cattura con precisione.
 
 ## Conclusione: cosa compra il mana extra
 
 Riassumendo, quel terzo mana compra tre cose:
 
-1. **Più creature in media** — 3.2 invece di 2.6, un aumento proporzionale di 25%.
-2. **Una redistribuzione della probabilità verso l'alto** — i risultati "forti" (≥ 4 creature) passano da 16% a 41%, più del doppio.
-3. **Meno varianza** — il rischio di risultati deludenti (0 o 1 creature) si dimezza: da 12% a 4.7%.
+1. **Più creature in media** - 3.2 invece di 2.6, un aumento proporzionale di 25%.
+2. **Una redistribuzione della probabilità verso l'alto** - i risultati "forti" (≥ 4 creature) passano da 16% a 41%, più del doppio.
+3. **Meno varianza** - il rischio di risultati deludenti (0 o 1 creature) si dimezza: da 12% a 4.7%.
 
-Nove volte su dieci, [[Winding Way]] restituisce almeno due creature. È una carta solida, e il mana risparmiato conta. Ma la domanda vera non è quante creature trovi in media — è quante ne trovi quando ne hai davvero bisogno. Ed è lì che la distribuzione di [[Lead the Stampede]] racconta una storia diversa.
+Nove volte su dieci, [[Winding Way]] restituisce almeno due creature. È una carta solida, e il mana risparmiato conta. Ma la domanda vera non è quante creature trovi in media, è quante ne trovi quando ne hai davvero bisogno. Ed è lì che la distribuzione di [[Lead the Stampede]] racconta una storia diversa.
 
 ---
 

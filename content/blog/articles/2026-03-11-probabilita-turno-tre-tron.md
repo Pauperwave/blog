@@ -10,19 +10,6 @@ thumbnail: /assets/blog/arts/atq-85b-urza-s-tower.jpg
 published: true
 ---
 
-# Il sogno del turno 3
-
-::magic-cards
----
-cards:
-  - Urza's Tower
-  - Urza's Power Plant
-  - Urza's Mine
-caption: "Le tre terre del Tron"
-layout: hand
----
-::
-
 Assemblare Tron al turno 3 è la miglior partenza del mazzo e spesso porta a vincere direttamente la partita.
 Tutto, dalla costruzione della lista alle scelte di mulligan, ruota attorno a una singola domanda: quanto spesso è davvero possibile assemblare le tre terre il più rapidamente possibile?
 
@@ -34,6 +21,17 @@ Vedremo come cambiano le cose al variare delle configurazioni e perché alcune c
 
 Sono Hypergeomancer, matematico e giocatore competitivo di Magic.
 Quello che segue non è una guida strategica, ma un'analisi quantitativa: l'obiettivo non è più intuire, ma misurare.
+
+::magic-cards
+---
+cards:
+  - Urza's Tower
+  - Urza's Power Plant
+  - Urza's Mine
+caption: "Le tre terre del Tron"
+layout: hand
+---
+::
 
 ## Lo scenario di riferimento
 

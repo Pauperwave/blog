@@ -10,7 +10,13 @@ thumbnail: /assets/blog/arts/lci-151-goblin-tomb-raider.jpg
 published: true
 ---
 
-# Quanto spesso apriamo con Great Furnace e Goblin Tomb Raider?
+## Introduzione
+
+Nel Pauper moderno, poche partenze mettono pressione quanto [[Great Furnace]] seguita da [[Goblin Tomb Raider]]. È una combinazione semplice ma estremamente efficace, una delle linee di gioco più esplosive di Mono-Red Rally.
+
+Il Tomb Raider, supportato da una terra artefatto come [[Great Furnace]], può infliggere rapidamente una quantità di danni elevata rispetto al mana investito, costringendo spesso l'avversario a reagire immediatamente, anche quando non sarebbe pronto a farlo.
+
+Ma al di là della percezione al tavolo, rimane una domanda fondamentale: *quanto spesso questa partenza avviene davvero?*
 
 ::magic-cards
 ---
@@ -26,14 +32,6 @@ caption: "La combo emblematica di Mono-Red Rally."
 arch: 20.5 # opzionale, apertura totale del ventaglio in gradi (solo layout: fan)
 ---
 ::
-
-## Introduzione
-
-Nel Pauper moderno, poche partenze mettono pressione quanto [[Great Furnace]] seguita da [[Goblin Tomb Raider]]. È una combinazione semplice ma estremamente efficace, una delle linee di gioco più esplosive di Mono-Red Rally.
-
-Il Tomb Raider, supportato da una terra artefatto come [[Great Furnace]], può infliggere rapidamente una quantità di danni elevata rispetto al mana investito, costringendo spesso l'avversario a reagire immediatamente, anche quando non sarebbe pronto a farlo.
-
-Ma al di là della percezione al tavolo, rimane una domanda fondamentale: *quanto spesso questa partenza avviene davvero?*
 
 Sono Hypergeomancer, matematico e giocatore competitivo di Magic. Negli anni ho imparato che comprendere la matematica dietro il gioco offre un vantaggio reale, non solo teorico: un approccio che mi ha portato, tra gli altri risultati, alla Top 8 del Paupergeddon.
 
@@ -121,7 +119,7 @@ Questo spiega perché la combo sembri più frequente di quanto suggerisca il 14.
 
 Il punto chiave non è che il giocatore debba mulligare aggressivamente *solo* per cercare la combo - un giocatore esperto mulliga per trovare mani funzionali, non per inseguire aperture specifiche. Tuttavia, ogni volta che si decide di fare mulligan per qualsiasi ragione (terra mancante, curva sbagliata, mano non tenibile), si ottiene automaticamente un nuovo tentativo indipendente di trovare la combo. È questo effetto collaterale dei mulligan strategici che fa crescere la probabilità cumulativa, non una ricerca forzata.
 
-Per l'avversario, questo significa che anche quando Mono-Red mulliga - magari per ragioni completamente diverse - la minaccia della combo resta concreta e statisticamente più probabile di quanto sembrasse dalla prima mano.
+Per l'avversario, questo significa che anche quando Mono-Red mulliga (magari per ragioni completamente diverse) la minaccia della combo resta concreta e statisticamente più probabile di quanto sembrasse dalla prima mano.
 
 ## Validazione Monte Carlo
 
