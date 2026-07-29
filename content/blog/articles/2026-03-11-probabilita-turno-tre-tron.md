@@ -1,6 +1,6 @@
 ---
 title: "Quanto è probabile assemblare Tron al turno 3?"
-description: "Avere Tron al turno 3 è davvero così comune come sembra? Scopri cosa rivelano matematica e simulazioni sulle probabilità reali e sul vero valore di Expedition Map."
+description: "Matematica e simulazioni per capire le vere probabilità di Tron al turno 3 e il valore di Expedition Map."
 tags:
   - Meta
   - Data Analysis
@@ -9,6 +9,8 @@ author: Hypergeomancer
 thumbnail: /assets/blog/arts/atq-85b-urza-s-tower.jpg
 published: true
 ---
+
+## Introduzione
 
 Assemblare Tron al turno 3 è la miglior partenza del mazzo e spesso porta a vincere direttamente la partita.
 Tutto, dalla costruzione della lista alle scelte di mulligan, ruota attorno a una singola domanda: quanto spesso è davvero possibile assemblare le tre terre il più rapidamente possibile?

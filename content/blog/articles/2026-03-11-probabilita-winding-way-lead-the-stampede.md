@@ -1,6 +1,6 @@
 ---
 title: "Winding Way o Lead the Stampede: cosa compra quel mana in più?"
-description: "Confrontiamo matematicamente Winding Way e Lead the Stampede per capire quanto valore aggiunge davvero quella quinta carta rivelata, al costo di un mana in più."
+description: "Analizziamo dati e probabilità per capire il vero valore della quinta carta."
 tags:
   - Meta
   - Data Analysis
@@ -10,7 +10,7 @@ thumbnail: /assets/blog/arts/otc-213-winding-way.jpg
 published: true
 ---
 
-## Il dilemma da due o tre mana
+## Introduzione
 
 Lanci [[Winding Way]], chiami "creature", incroci le dita. Dal grimorio ne emergono… due. Onesto, sì. Ma non abbastanza.
 
@@ -209,7 +209,7 @@ series:
 
 Due osservazioni: ogni creatura aggiuntiva nel mazzo vale circa **0.07–0.10 creature in più** per utilizzo di queste stregonerie. Non sembra molto, ma moltiplicato per il numero di partite e di utilizzi per partita, la differenza diventa percettibile. Inoltre, il **gap tra le due carte resta costante** a circa 0.6 creature, indipendentemente dalla densità. Il vantaggio di [[Lead the Stampede]] non si erode e non si amplifica: è strutturale nel design della carta.
 
-## Una curiosità sull'informazione asimmetrica
+## Curiosità sull'informazione asimmetrica
 
 C'è un dettaglio che i giocatori più attenti coglieranno: le probabilità cambiano a seconda di quante informazioni si hanno sulla composizione della mano.
 
@@ -217,7 +217,7 @@ Chi risolve la carta sa esattamente quante creature ha in mano, e può fare una 
 
 La differenza numerica è piccola (nell'ordine di un punto percentuale) ma è matematicamente reale. Per chi gioca Elfi o Spia e si chiede se "valga la pena" giocare la carta in un determinato turno, la conoscenza della propria mano è un vantaggio concreto nel lungo periodo: non un dettaglio filosofico, ma un fattore che la distribuzione ipergeometrica cattura con precisione.
 
-## Conclusione: cosa compra il mana extra
+## Conclusione
 
 Riassumendo, quel terzo mana compra tre cose:
 
