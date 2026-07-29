@@ -18,7 +18,7 @@ node_modules
 # Scryfall bulk data cache
 # Added pre-built Pauper cards database
 # server/database/cards.db
-server/database/oracle-cards.json
+server/database/oracle-cards.jsonl
 
 .vercel
 .env*.local

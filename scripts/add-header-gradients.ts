@@ -1,4 +1,4 @@
-#!/usr/bin/env bun
+#!/usr/bin/env node
 /**
  * Script to automatically detect and add headerGradient to decklists
  * Analyzes card mana costs to determine deck colors
@@ -6,8 +6,8 @@
 
 import { readFile, writeFile } from 'fs/promises'
 import { join } from 'path'
-import { closeDatabase } from '../server/utils/card-database'
-import { detectDeckColors, getDecklistFiles, parseDecklist } from './lib/decklist-gradient'
+import { closeDatabase } from '../server/utils/card-database.ts'
+import { detectDeckColors, getDecklistFiles, parseDecklist } from './lib/decklist-gradient.ts'
 
 async function processFile(filePath: string): Promise<void> {
   console.log(`\n📄 Processing: ${filePath}`)

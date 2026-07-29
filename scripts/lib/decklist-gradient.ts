@@ -5,7 +5,7 @@
 
 import { readdirSync } from 'fs'
 import { join } from 'path'
-import { getCardsByNames } from '../../server/utils/card-database'
+import { getCardsByNames } from '../../server/utils/card-database.ts'
 
 // Color mapping from mana symbols
 const COLOR_SYMBOLS: Record<string, string> = {

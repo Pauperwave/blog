@@ -1,3 +1,4 @@
+import { glob, readFile } from 'node:fs/promises'
 import { join, relative, sep } from 'node:path'
 import { parse as parseYaml } from 'yaml'
 
@@ -141,12 +142,8 @@ const parseArgs = () => {
 const walkMarkdownFiles = async (dir: string): Promise<string[]> => {
   const files: string[] = []
 
-  for (const pattern of ['**/*.md', '**/*.mdc']) {
-    const glob = new Bun.Glob(pattern)
-
-    for await (const relativePath of glob.scan({ cwd: dir })) {
-      files.push(join(dir, relativePath))
-    }
+  for await (const relativePath of glob('**/*.{md,mdc}', { cwd: dir })) {
+    files.push(join(dir, relativePath))
   }
 
   return files
@@ -184,7 +181,7 @@ const loadPublishedArticlesFromContent = async (config: ReturnType<typeof parseA
     const files = await walkMarkdownFiles(collectionDir)
 
     for (const filePath of files) {
-      const source = await Bun.file(filePath).text()
+      const source = await readFile(filePath, 'utf-8')
       const frontmatter = extractFrontmatter(source)
       if (!frontmatter) continue
 

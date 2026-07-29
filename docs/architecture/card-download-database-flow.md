@@ -13,12 +13,12 @@ Nuxt 4. I dati delle carte vengono scaricati da Scryfall e salvati in un databas
 **Entry point:** `scripts/download-bulk-data.ts`
 
 1. **Fetch Bulk Data Info** — chiama `https://api.scryfall.com/bulk-data`, trova il bulk data type `oracle_cards`.
-2. **Download Bulk Data** — crea `server/database/` se necessario, scarica il JSON compresso in `server/database/oracle-cards.json` (~168 MB, gitignored).
-3. **Create Database Schema** — crea `server/database/cards.db` (SQLite, **committato in git** nonostante il nome suggerisca il contrario — solo `oracle-cards.json` è gitignored) con tabelle `cards` (name PK, mana_cost, image_url, back_image_url, indexed_at) e `metadata` (key PK, value, updated_at), più indice su `cards.name`.
-4. **Import Pauper Cards** — legge `oracle-cards.json`, filtra `legalities.pauper === 'legal' || 'banned'`, svuota la tabella (`DELETE FROM cards`) e reimporta da zero ad ogni run. Qualunque carta con `card_faces` (transform, modal DFC, reversible card, ma anche split/adventure e layout più recenti come "prepare") viene inserita **due volte**: una riga con il nome completo Scryfall (`"Fronte // Retro"`, usato dalle decklist incollate da MTGO) e una riga alias con il solo nome della prima faccia (usato da `[[Card Name]]`) — entrambe con `back_image_url` valorizzato quando la seconda faccia ha un'immagine propria (transform/modal DFC; per split/adventure resta vuoto perché condividono un'unica immagine). Il calcolo del nome-alias è centralizzato in un unico punto dello script, indipendente da quale ramo (immagine per-faccia vs immagine unica top-level) ha risolto `image_url`/`mana_cost` — vedi il commento sopra `cardsToInsert` in `scripts/download-bulk-data.ts`.
+2. **Download Bulk Data** — crea `server/database/` se necessario, scarica il file gzip da `jsonl_download_uri` (Scryfall non offre più un download JSON semplice, solo JSONL gzippato) e lo decomprime al volo in `server/database/oracle-cards.jsonl` (gitignored) — un oggetto card per riga, nessun array che le racchiude.
+3. **Create Database Schema** — crea `server/database/cards.db` (SQLite, **committato in git** nonostante il nome suggerisca il contrario — solo `oracle-cards.jsonl` è gitignored) con tabelle `cards` (name PK, mana_cost, image_url, back_image_url, indexed_at) e `metadata` (key PK, value, updated_at), più indice su `cards.name`.
+4. **Import Pauper Cards** — legge `oracle-cards.jsonl` riga per riga (`JSON.parse` per riga, non un unico array), filtra `legalities.pauper === 'legal' || 'banned'`, svuota la tabella (`DELETE FROM cards`) e reimporta da zero ad ogni run. Qualunque carta con `card_faces` (transform, modal DFC, reversible card, ma anche split/adventure e layout più recenti come "prepare") viene inserita **due volte**: una riga con il nome completo Scryfall (`"Fronte // Retro"`, usato dalle decklist incollate da MTGO) e una riga alias con il solo nome della prima faccia (usato da `[[Card Name]]`) — entrambe con `back_image_url` valorizzato quando la seconda faccia ha un'immagine propria (transform/modal DFC; per split/adventure resta vuoto perché condividono un'unica immagine). Il calcolo del nome-alias è centralizzato in un unico punto dello script, indipendente da quale ramo (immagine per-faccia vs immagine unica top-level) ha risolto `image_url`/`mana_cost` — vedi il commento sopra `cardsToInsert` in `scripts/download-bulk-data.ts`.
 
 **Trigger:**
-- Manuale: `bun run download-cards`
+- Manuale: `pnpm run download-cards`
 - **Non automatico** — non ci sono hook `prebuild`/`pregenerate` in `package.json`. Il DB va rigenerato a mano quando serve (es. dopo un aggiornamento delle legalità Pauper) e deve esistere prima di `dev`/`build`, altrimenti i transformer ripiegano sulla Scryfall API carta per carta (più lento).
 
 ---
@@ -60,7 +60,7 @@ Il componente riceve dati **già risolti** (mana cost, immagine) direttamente ne
 ## Data Flow Summary
 
 ```
-Scryfall API → download-bulk-data.ts → oracle-cards.json (168 MB, gitignored)
+Scryfall API → download-bulk-data.ts → oracle-cards.jsonl (gitignored, gunzipped on the fly)
                                     ↓
                               cards.db (~2 MB, solo Pauper-legal, gitignored)
                                     ↓
@@ -76,7 +76,7 @@ Scryfall API → download-bulk-data.ts → oracle-cards.json (168 MB, gitignored
 
 ## Current State
 
-- `cards.db` **è committato in git** (vedi `.gitignore`: la riga che lo escluderebbe è commentata); solo `oracle-cards.json` è gitignored. Va comunque rigenerato in locale con `bun run download-cards` dopo un aggiornamento delle legalità Pauper o dei dati Scryfall, e il risultato va committato.
+- `cards.db` **è committato in git** (vedi `.gitignore`: la riga che lo escluderebbe è commentata); solo `oracle-cards.jsonl` è gitignored. Va comunque rigenerato in locale con `pnpm run download-cards` dopo un aggiornamento delle legalità Pauper o dei dati Scryfall, e il risultato va committato.
 - Nessun endpoint `/api/cards` — tutta la risoluzione carte avviene a build time.
 - Filtro legalità Pauper applicato in fase di import.
 - Simboli di mana renderizzati via CSS (`mana-font`) lato frontend.

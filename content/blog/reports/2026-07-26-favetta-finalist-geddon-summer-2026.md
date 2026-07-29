@@ -11,7 +11,7 @@ published: true
 date: 2026-07-26
 author: Alessandro Moretti
 thumbnail: /assets/blog/arts/tmt-14-leonardo-big-brother.jpg
---- 
+---
 
 Ciao Gente! Sono Giovanni Favetta, assiduo frequentatore dei Paupergeddon e vice-referente di Lega Pauper Genova.
 
