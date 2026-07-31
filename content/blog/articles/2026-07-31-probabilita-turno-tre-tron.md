@@ -4,7 +4,7 @@ description: "Matematica e simulazioni per capire le vere probabilità di Tron a
 tags:
   - Meta
   - Data Analysis
-date: 2026-03-11
+date: 2026-07-31
 author: Hypergeomancer
 thumbnail: /assets/blog/arts/atq-85b-urza-s-tower.jpg
 published: true
