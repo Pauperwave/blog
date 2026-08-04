@@ -11,6 +11,10 @@ Obiettivo: coprire i costi di hosting/mantenimento, target indicativo ~20€/mes
 
 Da decidere: quale delle due (o entrambe), dove posizionarle nel layout, e se serve una pagina `/supporta` o basta un widget nel footer. Non ancora promosso a `BACKLOG.md` — manca una decisione su quale strada seguire prima che sia un item implementabile.
 
+## Show the back face of double-faced cards
+
+`magic-card-tooltip` (and by extension `[[Card Name]]` inline references) currently can't show the second face of a double-faced card — only the front face is ever displayed. Already flagged inline in `content/docs/componenti.md` ("Alcuni casi limite"), tracked here so it doesn't only live as a caution note.
+
 ## Verify `hand` layout against a live magic.wizards.com session
 
 `magic-cards`' `layout: hand` is only partially reverse-engineered — 2 of 5 card slot positions were captured live (from "Design Files: Urza's Destiny, Part 3", the one article found using `config="hand"`), the rest is extrapolated. Unverified: the other 3 slot positions, and whether hovering a hand card repositions siblings the way `fan` does. See `docs/architecture/2026-07-10-magic-cards-component-research.md` for what's confirmed vs. assumed.
