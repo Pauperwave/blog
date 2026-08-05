@@ -4,14 +4,6 @@ const props = defineProps<{
   rating: number
 }>()
 
-const stars = computed(() =>
-  Array.from({ length: 10 }, (_, i) => {
-    if (i < Math.floor(props.rating)) return 'full'
-    if (i === Math.floor(props.rating) && props.rating % 1 >= 0.5) return 'half'
-    return 'empty'
-  })
-)
-
 const badgeColor = computed(() => {
   if (props.rating >= 8) return 'success'
   if (props.rating >= 6) return 'primary'
@@ -27,16 +19,14 @@ const badgeColor = computed(() => {
         Voto complessivo per <MagicCardTooltip :name="cardName" />
       </h2>
 
-      <div class="flex flex-wrap justify-center items-center gap-1">
-        <div v-for="(state, i) in stars" :key="i" class="relative size-5">
-          <UIcon name="i-lucide-star" class="size-5 text-gray-300 dark:text-gray-600" />
-          <UIcon
-            v-if="state !== 'empty'"
-            :name="state === 'half' ? 'i-lucide-star-half' : 'i-lucide-star'"
-            class="absolute inset-0 size-5 text-yellow-500"
-          />
-        </div>
-      </div>
+      <UInputRating
+        :model-value="rating"
+        :length="10"
+        :step="0.5"
+        readonly
+        icon="i-lucide-star"
+        color="warning"
+      />
 
       <UBadge
         :color="badgeColor"
