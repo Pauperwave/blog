@@ -59,7 +59,7 @@ The problem is they are typically so strong and easy to spot that if such a comb
 If 1 and 2 are very hard to find, and 4 is typically too many, the 3-cards group is the ground where you often end up finding your supplies: make sure they are not rotten, though!
 Here are some tips: 
 
-- They get significantly better if you have more than 4 copies of at least one of the pieces (like [[Devoted Druid]] + [[Guac & Marshmallow Pizza]] + [[Retraction Helix]]/[[Banishing Knack]]);
+- They get significantly better if you have more than 4 copies of at least one of the pieces (like [[Devoted Druid]] + [[Guac & Marshmallow Pizza]] + [[Retraction Helix]] / [[Banishing Knack]]);
 
 - They also get better when they are 2 card combos for infinite mana + a random mana sink (for example [[Pili-Pala]] + [[Careful Cultivation]]), because most of the time you can just use the mana to dig through your deck with the draw spells you already play or you can turn good cards on their own into finishers ([[Nyxborn Hydra]], [[Stormshriek Feral]], etc).
 
@@ -76,10 +76,10 @@ Once Tron is assembled, drawing cards is easy, for you have a lot of mana, and t
 Ask yourself: if I play this combo, which draw engine will this combo benefit more from? It's not like we need to reinvent the wheel: we all know that Pauper has some card advantage mechanisms that are better than others.
 The [[Ichor Wellspring]] + dispute effects is by far the best one, up there with the creature-centric [[Lead the Stampede]] + [[Winding Way]].
 The rummage effects + Eidolons is one that has been floating around since the downshift of Izzet Charm, but just recently it was put into fruition thanks to new printings like [[Abandon Attachments]] and [[Pursue the Past]].
-There is also the [[Pursue the Past]]/Flashback cards mechanism that you find in the Naya Cazzate deck popularized by Tommaso Loss and Lorenzo Montana, but that's more for midrange decks with, maybe, a combo as a plan B.
+There is also the [[Pursue the Past]] / Flashback cards mechanism that you find in the Naya Cazzate deck popularized by Tommaso Loss and Lorenzo Montana, but that's more for midrange decks with, maybe, a combo as a plan B.
 
 If you think about it, the best combo decks of the last few years relied on one of those engines: Glee Combo and Altar Tron on disputes, Walls Spy on the green one and Boros Tribe on Eidolons.
-[[Seeker of Skybreak]]+[[Hawkeye's Bow]] lived for just a week, and it won multiple tournaments in the Naya Cazzate shell.
+[[Seeker of Skybreak]] + [[Hawkeye's Bow]] lived for just a week, and it won multiple tournaments in the Naya Cazzate shell.
 It also won a challenge in the golden hands of Alessandro Piraccini: we cooked a list that relied on a shell very similar to my version of Pizza Combo, using [[Perilous Research]] + [[Cryogen Relic]], basically the blue version of the dispute package.
 
 The ability of most combo decks to win games is mostly predicated on their ability to see cards: you need to find your combo pieces in time and you need to find ways to beat interaction.
