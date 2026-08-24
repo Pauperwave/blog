@@ -5,7 +5,7 @@ tags:
   - Meta
 date: 2026-08-24
 author: Pietro Bragioto
-thumbnail: /assets/blog/arts/mh2-240-the-underworld-cookbook
+thumbnail: /assets/blog/arts/mh2-240-the-underworld-cookbook.jpg
 published: true
 ---
 
