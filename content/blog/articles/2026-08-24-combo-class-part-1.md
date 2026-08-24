@@ -116,13 +116,17 @@ It’s by no means a complete collection, just a quick way to summarize things.
 In the table below, you’ll also find some examples with a number between 0 and 2.
 0 stands for “useless form of interaction against this combo”, 1 is for “works but it’s not super effective” and 2 stands for “very good vs the combo”.
 
-::image-caption
----
-src: /assets/blog/articles/tabella-giorgio-lesson-1.png
-alt: ""
-caption: ""
----
-::
+|                         | Glee Combo | Pizza Combo | Spy Combo | Altar Tron |
+| ----------------------- | ---------- | ----------- | --------- | ---------- |
+| Black removal           | 1          | 1           | 0         | 0          |
+| Red removal             | 1          | 2           | 0         | 0          |
+| Sorcery speed removal   | 0          | 2           | 0         | 0          |
+| Lava Dart               | 1          | 1           | 0         | 0          |
+| Krark-Clan Shaman (KCS) | 1          | 1           | 2         | 0          |
+| Dispel                  | 0          | 2           | 0         | 0          |
+| Duress                  | 1          | 2           | 0         | 2          |
+| Graveyard Hate          | 0          | 0           | 2         | 2          |
+| Disenchant effect       | 1          | 0           | 0         | 2          |
 
 Looking at the table, you see that Glee Combo is the one that can be interacted with in more ways yet is the strongest.
 Why is that? Firstly, as already stated, resiliency is not everything.
