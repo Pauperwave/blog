@@ -13,11 +13,9 @@ date: 2026-08-30
 Secret Lair: The Zeta Set is the hot topic among Pauper enthusiasts.
 I'm Alessandro Moretti, MtG content creator and this article is the written media related to my most recent video on the argument.
 
-[ITA Video on Youtube](/youtu.be/6bFz0cx7_c4) 
-
-[ENG Video on Youtube](/youtu.be/DjrUK4_KtP8) 
-
-[You can check my link-tree to find out all my content](/linktr.ee/adeptoterra)
+  -[ITA Video on Youtube](/youtu.be/6bFz0cx7_c4) 
+  -[ENG Video on Youtube](/youtu.be/DjrUK4_KtP8) 
+  -[You can check my link-tree to find out all my content](/linktr.ee/adeptoterra)
 
 
 ## Table of Contents
@@ -45,12 +43,14 @@ A total amount of 12 cards are now common and we already know those cards will n
 ---
 src: /articles/Screenshot 2026-08-29 203126.png
 alt: "Gavin Verhey, PFP"
+caption: ""
 ---
 ::
 ::image-caption
 ---
 src: /articles/Screenshot 2026-08-29 203150.png
 alt: "Gavin Verhey, PFP"
+caption: ""
 ---
 ::
 
