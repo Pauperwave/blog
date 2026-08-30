@@ -12,8 +12,8 @@ date: 2026-08-30
 
 Secret Lair: The Zeta Set is the hot topic among Pauper enthusiasts.
 I'm Alessandro Moretti, MtG content creator and this article is the written media related to my most recent video on the argument.
-[ITA Video on Youtube](/youtu.be/6bFz0cx7_c4)
-[ENG Video on Youtube](/youtu.be/DjrUK4_KtP8)
+[ITA Video on Youtube](/youtu.be/6bFz0cx7_c4) 
+[ENG Video on Youtube](/youtu.be/DjrUK4_KtP8) 
 [You can check my link-tree to find out all my content](/linktr.ee/adeptoterra)
 
 ## Table of Contents
@@ -153,7 +153,7 @@ If you are expecting to see pricy old school cards to be printed as common in fu
 
 Notes:
   1. https://www.youtube.com/watch?v=rdKTX3eN988  
-  2. https://www.golocalprov.com/business/  hasbro-ceo-cocks-and-execs-sued-for-alleged-securities-violations 
+  2. https://www.golocalprov.com/business/hasbro-ceo-cocks-and-execs-sued-for-alleged-securities-violations 
   3. https://rhodeislandcurrent.com/wp-content/uploads/2026/01/MTG-gov.uscourts.rid_.61353.1.0.pdf  
   4. https://static.blbglaw.com/docs/November%2026%2C%202025%20-%20Amended%20Complaint_Hasbro.pdf 
 
