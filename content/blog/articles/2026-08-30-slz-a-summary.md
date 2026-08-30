@@ -7,29 +7,30 @@ published: true
 tags:
   - Meta
 thumbnail: /arts/slz-330-baleful-strix.jpg
+date: 2026-08-30
 ---
 
 Secret Lair: The Zeta Set is the hot topic among Pauper enthusiasts.
 I'm Alessandro Moretti, MtG content creator and this article is the written media related to my most recent video on the argument.
-[ITA Video on Youtube](https://youtu.be/6bFz0cx7_c4)
-[ENG Video on Youtube](https://youtu.be/DjrUK4_KtP8)
-[You can check my link-tree to find out all my content](https://linktr.ee/adeptoterra)
+[ITA Video on Youtube](/youtu.be/6bFz0cx7_c4)
+[ENG Video on Youtube](/youtu.be/DjrUK4_KtP8)
+[You can check my link-tree to find out all my content](/linktr.ee/adeptoterra)
 
-##Table of Contents
+## Table of Contents
 
-1. What is happening?
-2. What is SLZ, what is SLD?
-3. What defines the legality of cards in Pauper?
-4. The case of MTGO Promo Cards
-5. MtG Arena (Pioneer Masters and Rebalanced cards)
-6. Pratical issues with SLZ
-7. Price and availability
-8. Power Level and Pauper
-9. Moral Compass and Format Phylosophy
+  1. What is happening? 
+  2. What is SLZ, what is SLD? 
+  3. What defines the legality of cards in Pauper? 
+  4. The case of MTGO Promo Cards 
+  5. MtG Arena (Pioneer Masters and Rebalanced cards) 
+  6. Pratical issues with SLZ 
+  7. Price and availability 
+  8. Power Level and Pauper 
+  9. Moral Compass and Format Phylosophy 
 
 ---
 
-##1 - What is happening?
+## 1 - What is happening?
 
 The recent discussions about Secret Lair Zet, downgrading powerful cards from the whole history of Magic, to common rarity is very entertaining.
 
@@ -38,21 +39,21 @@ It is, for sure, the most hated pauper related argument of recent history, even 
 A total amount of 12 cards are now common and we already know those cards will not be legal in Pauper even thought a fair amount of people are arguing that, by becoming common, they are eligible of playability in the all-commons format.
 ::image-carousel
 ---
-images:
-  - /articles/Screenshot 2026-08-29 203126.png
-  - /articles/Screenshot 2026-08-29 203150.png
-    alt: "Gavin Verhey, PFP"
+  images:
+    - /articles/Screenshot 2026-08-29 203126.png
+    - /articles/Screenshot 2026-08-29 203150.png
+      alt: "Gavin Verhey, PFP"
 ---
 ::
 Source:
-- https://bsky.app/profile/gavinverhey.bsky.social/post/3mtu55rdm4c2f
-- https://bsky.app/profile/gavinverhey.bsky.social/post/3mtugshsb4s2k
+  - https://bsky.app/profile/gavinverhey.bsky.social/post/3mtu55rdm4c2f 
+  - https://bsky.app/profile/gavinverhey.bsky.social/post/3mtugshsb4s2k 
 
 As you can read in these Twitter / Blue Sky statements, the current defining rules of the format will get an update in order to force out of legality - and out of the format - the downgraded cards from products such as Secret Lair Zeta.
 
 ---
 
-##2 - What is SLZ, what is SLD?
+## 2 - What is SLZ, what is SLD?
 
 Secret Lair drops are card products based on out-of-MtG culture elements. They are not released as traditional product (from re-seller or local shop to customers) but, instead, are directly sold from the producer to the, supposed, final purchaser (WotC doesn't officialy recognise the secondary market)¹².
 Secret Lair: the Zeta Set is, for the first time, a randomized SLD product purchesable in 7-cards boosters. For that reason, the product came with rarities (common, uncommon, rare and mythic) other than Rare (as it is used in the traditional SLD) and with a different and new set name and code (SLZ)³.
@@ -61,14 +62,14 @@ This product is not meant to be playable in any limited format (draft, sealed, e
 SLZ is a separate set from SLD but it is not the first SL product (or set) having more than the Rare rarity: in SLD Dandan there are common, uncommon and rare cards, even thought there's no change of previous rarities beside up-grading to rare for a few cards with new promo art (Dandan, Arcane Denial, Memory Lapse, etc.)⁴.
 
 Notes:
-1. https://secretlair.wizards.com/eu/en/about-us
-2. https://mtg.wiki/page/Secret_Lair
-3. https://mtg.wiki/page/Secret_Lair:_The_Zeta_Set
-4. https://magic.wizards.com/en/news/announcements/from-the-chaos-vault-secret-lair-dandan-decklist
+  1. https://secretlair.wizards.com/eu/en/about-us 
+  2. https://mtg.wiki/page/Secret_Lair 
+  3. https://mtg.wiki/page/Secret_Lair:_The_Zeta_Set 
+  4. https://magic.wizards.com/en/news/announcements/from-the-chaos-vault-secret-lair-dandan-decklist 
 
 ---
 
-##3 - What defines the legality of cards in Pauper?
+## 3 - What defines the legality of cards in Pauper?
 
 Per the rules, cards printed as common in any set or product in paper and on Magic Online.¹ At least for now.
 
@@ -92,37 +93,37 @@ Without any specific statement from Wizards of the Coast it is complex to name t
 The shooting star set symbol is commonly used by promo cards (promo cards set symbol changed many times over the years and based on the product) and by SLD cards. SLZ doesn't have a set symbol.
 
 Notes:
-1. https://magic.wizards.com/en/formats/pauper
-2. https://www.legapauperitalia.it/statements/zeta-20260827
-3. https://mtg.wiki/page/Chronicles
-4. https://mtg.wiki/page/Promotional_card
-5. https://mtg.fandom.com/wiki/The_Lord_of_the_Rings:_Tales_of_Middle-earth/Holiday_Release
+  1. https://magic.wizards.com/en/formats/pauper  
+  2. https://www.legapauperitalia.it/statements/zeta-20260827 
+  3. https://mtg.wiki/page/Chronicles 
+  4. https://mtg.wiki/page/Promotional_card 
+  5. https://mtg.fandom.com/wiki/The_Lord_of_the_Rings:_Tales_of_Middle-earth/Holiday_Release 
 
 ---
 
-##4 - The case of MTGO Promo Cards
+## 4 - The case of MTGO Promo Cards
 
 The line "Common promo cards are only legal if the card meets that qualification."¹ came from a time when three promo cards were, by mistake or by the online platform bug, wrongly set as common on MTGO.²
 Hada Freeblade, Spatial Contortion and Circle of Flame were never common and they were then banned (without appearing on the Pauper format banlist) as mere formality. Now their rarity has been fixed at uncommon, as this was supposed to be.
 Magic Online promos rarities reflect their related set rarity, similarly of how Friday Night Magic promo packs have standard legal promos.
 
 Notes:
-1. https://magic.wizards.com/en/formats/pauper
-2. https://web.archive.org/web/20190124170714/https://magic.wizards.com/en/articles/archive/news/january-21-2019-banned-and-restricted-announcement
+  1. https://magic.wizards.com/en/formats/pauper  
+  2. https://web.archive.org/web/20190124170714/https://magic.wizards.com/en/articles/archive/news/january-21-2019-banned-and-restricted-announcement 
 
 ---
 
-##5 - MtG Arena (Pioneer Masters and Rebalanced cards)
+## 5 - MtG Arena (Pioneer Masters and Rebalanced cards)
 
 Arena has unique cards, with specific mechanics and cards printed only on Arena and not available by any legal means on Magic Online or in paper. And that's the biggest argument to not make Arena common-only cards legal in Pauper.
 On one hand it is relevant to note the presence of a cycle of spell-lands but, on the other hand, you can easily understand the weirdness of having staple cards (i.e. Moon-Circuit Hacker) with a different printed text, based on where you play it.¹
 The most resonable solution is dividing MtG Arena from MTGO and Tabletop.
 
 Notes:
-1. https://scryfall.com/search?q=s%3Apio+game%3Aarena+r%3Ac+-f%3Apauper&unique=cards&as=grid&order=name
+  1. https://scryfall.com/search?q=s%3Apio+game%3Aarena+r%3Ac+-f%3Apauper&unique=cards&as=grid&order=name 
 ---
 
-##6 - Pratical issues with SLZ
+## 6 - Pratical issues with SLZ
 Arena is an issue due to the nature of the product, not allowing you to play a specific variant of the card due to a rewording not applied to the printed card.
 If, hypotethically speaking, tomorrow WotC wants to add rebalanced cards to tabletop Magic, the choice would eventually a bit of confusion to the people, not understanding which version of the card is the right one.
 And that's the reason why rewording doesn't happen so often (e.g. Lurrus of the Dream-Den).
@@ -137,11 +138,11 @@ And that's the weird, or troublesome, part.
 The additional annoying thing is finalizing the format bounduaries. Should we stop at SLZ, or should we "pre-ban" Commander and additional products (Utrom Monitor)? Are Universe Beyond supposed to be legal (because you may see them as elements out of the format phylosophy)?
 
 Notes:
-1. https://mtg.wiki/page/Pauper#cite_note-23
+  1. https://mtg.wiki/page/Pauper#cite_note-23  
 
 ---
 
-##7 - Price and availability
+## 7 - Price and availability
 
 Some questions that may rose are related to the price and the availability of new staples pushed in by SLZ in the Pauper format.
 Of course, I am assuming in the unlikely scenario of SLZ cards becoming pauper legal.
@@ -151,14 +152,14 @@ If you are expecting to see pricy old school cards to be printed as common in fu
 -Copper Tablet being printed in the same SLZ. Card used to be an uncommon from the very first origin set expansions. Despite being low in poer level the reprint is not common, not uncommon, but Mythic. There's no reason for WotC to lower the rarity of pricy cards, just think of Rhystic Study, because WotC is incentivized of keeping at high value the cards they are printing.
 
 Notes:
-1. https://www.youtube.com/watch?v=rdKTX3eN988
-2. https://www.golocalprov.com/business/hasbro-ceo-cocks-and-execs-sued-for-alleged-securities-violations
-3. https://rhodeislandcurrent.com/wp-content/uploads/2026/01/MTG-gov.uscourts.rid_.61353.1.0.pdf
-4. https://static.blbglaw.com/docs/November%2026%2C%202025%20-%20Amended%20Complaint_Hasbro.pdf
+  1. https://www.youtube.com/watch?v=rdKTX3eN988  
+  2. https://www.golocalprov.com/business/  hasbro-ceo-cocks-and-execs-sued-for-alleged-securities-violations 
+  3. https://rhodeislandcurrent.com/wp-content/uploads/2026/01/MTG-gov.uscourts.rid_.61353.1.0.pdf  
+  4. https://static.blbglaw.com/docs/November%2026%2C%202025%20-%20Amended%20Complaint_Hasbro.pdf 
 
 ---
 
-##8 - Power Level and Pauper
+## 8 - Power Level and Pauper
 
 From my point of view (I play Pauper since 2016) the power level of the format is already skewed compared to what it used to be.
 10 years ago Palace Sentinels and Urzalands where the ban-talk. Now those cards are still boring to play against but they are tame.
@@ -170,7 +171,7 @@ This is a statement based on how (most of) the major rotations of the metagame, 
 
 ---
 
-##9 - Moral Compass and Format Phylosophy
+## 9 - Moral Compass and Format Phylosophy
 The decision of not allowing The Zeta Set in Pauper can be seen as a moralistic one. There is for sure the good will of Gavin Verhey and the Pauper Format Panel over this choice.
 And I should say my thanks to them, to the PFP, for the fast response they gave to the community.
 If we look at other formats, or other card games, the ones curating the banlist aren't so close to the community as Gavin is.
@@ -194,8 +195,8 @@ One side believes changing the metagame by not changing the rules is right.
 On the other side is the opposite: changing the rules to not change the meta.
 
 The Leopard is an italian novel based during the unification of Italy. A quote from the protagonist of this book, a prince of the old nobility of the Two Sicilies Kingdom is very well suited to end this article:
->Change everything to change nothing
-> ⁓*Giuseppe Tomasi di Lampedusa, The Leopard*
+  > Change everything to change nothing 
+  >   ⁓*Giuseppe Tomasi di Lampedusa, The Leopard*  
 
 
 
