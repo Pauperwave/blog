@@ -12,9 +12,13 @@ date: 2026-08-30
 
 Secret Lair: The Zeta Set is the hot topic among Pauper enthusiasts.
 I'm Alessandro Moretti, MtG content creator and this article is the written media related to my most recent video on the argument.
+
 [ITA Video on Youtube](/youtu.be/6bFz0cx7_c4) 
+
 [ENG Video on Youtube](/youtu.be/DjrUK4_KtP8) 
+
 [You can check my link-tree to find out all my content](/linktr.ee/adeptoterra)
+
 
 ## Table of Contents
 
@@ -37,14 +41,19 @@ The recent discussions about Secret Lair Zet, downgrading powerful cards from th
 It is, for sure, the most hated pauper related argument of recent history, even more debated than High Tide or Seeker of Skybreak bans.
 
 A total amount of 12 cards are now common and we already know those cards will not be legal in Pauper even thought a fair amount of people are arguing that, by becoming common, they are eligible of playability in the all-commons format.
-::image-carousel
+::image-caption
 ---
-  images:
-    - /articles/Screenshot 2026-08-29 203126.png
-    - /articles/Screenshot 2026-08-29 203150.png
-      alt: "Gavin Verhey, PFP"
+src: /articles/Screenshot 2026-08-29 203126.png
+alt: "Gavin Verhey, PFP"
 ---
 ::
+::image-caption
+---
+src: /articles/Screenshot 2026-08-29 203150.png
+alt: "Gavin Verhey, PFP"
+---
+::
+
 Source:
   - https://bsky.app/profile/gavinverhey.bsky.social/post/3mtu55rdm4c2f 
   - https://bsky.app/profile/gavinverhey.bsky.social/post/3mtugshsb4s2k 
