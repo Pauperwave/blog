@@ -35,6 +35,35 @@ Dulcis in fundo, se avete qualche bella foto da voler pubblicare nel vostro repo
 
 ## Convenzioni
 
+Prima del racconto dei turni, aprite il report con la decklist giocata usando il blocco `::magic-decklist`:
+
+```
+::magic-decklist
+---
+name: Mono Blue Control
+player: Alessandro Moretti
+description: Decklist vincente al Paupergeddon Lucca Winter 2025
+placement: 1° posto
+---
+Creatures
+2 Murmuring Mystic
+4 Cryptic Serpent
+
+Instants
+4 Brainstorm
+4 Counterspell
+
+Lands
+16 Island
+
+Sideboard
+4 Hydroblast
+2 Blue Elemental Blast
+::
+```
+
+`name`, `player`, `description` e `placement` vanno nel frontmatter del blocco; il corpo elenca le carte una per riga nel formato `quantità nome carta`, raggruppate per sezione (`Creatures`, `Instants`, `Sorceries`, `Artifacts`, `Lands`, `Sideboard`, ...). Il risultato è una card con intestazione (nome mazzo, piazzamento, giocatore), le sezioni della lista con conteggio e costo di mana per carta, e la sideboard separata in fondo.
+
 Per raccontare un turno, suggerisco vivamente — anzi, raccomando fortemente — di seguire la seguente struttura:
 
 - Turno "n": "archetipo" di "cognome+nome player"
