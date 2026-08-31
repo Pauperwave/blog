@@ -23,6 +23,7 @@ c'è `CONTENT.md`).
 - [ ] ogni carta effettivamente citata nel testo è racchiusa in `[[ ]]` (facile dimenticarne qualcuna dentro parentesi o elenchi)
 - [ ] i nomi di prodotti/set (Chronicles, TMNT Team-Up, un drop specifico di Secret Lair...) **non** vanno racchiusi in `[[ ]]`, riservato alle singole carte. Se utile, rimanda invece alla pagina del set su Scryfall, tenendo conto che i drop di Secret Lair non hanno un codice set individuale (condividono tutti `sld`)
 - [ ] se `server/database/cards.db` è disallineato (manca un set uscito di recente), esegui `pnpm run download-cards` prima di pubblicare
+- [ ] nessun `[[ ]]` è incollato subito dopo un trattino puntato senza spazio (es. `-[[Copper Tablet]]`): MDC non riconosce il componente in quel punto e lo mostra come testo letterale (`:MagicCardTooltip{...}`) invece di renderizzarlo — serve lo spazio dopo il `-` (`- [[Copper Tablet]]`), che tra l'altro lo rende anche un elenco puntato vero e proprio
 
 ## Collegamenti
 
@@ -35,6 +36,9 @@ c'è `CONTENT.md`).
 - [ ] nessuna virgoletta/apostrofo curvo (`’ “ ”`): esegui `pnpm run fix-apostrophe -- <percorso>` per normalizzare in `'` dritto
 - [ ] gli articoli in inglese sono stati riletti per la grammatica (accordo soggetto-verbo, ausiliari mancanti, falsi amici come "argument" per "topic"): non dare per scontato che un testo dal suono naturale sia privo di errori
 - [ ] le intestazioni nel corpo partono da `##` (h2), perché il `title` nell'intestazione viene già renderizzato come `<h1>` della pagina
+- [ ] c'è una riga vuota prima e dopo i blocchi `::componente`/`::/componente` — attaccati al testo circostante rischiano di non essere riconosciuti
+- [ ] c'è lo spazio dopo il `#`/`##`/`###` nelle intestazioni (`## Titolo`, non `##Titolo`)
+- [ ] c'è lo spazio dopo il `-`/`1.` negli elenchi puntati e numerati (`- voce`, non `-voce`)
 
 ## Immagini
 
