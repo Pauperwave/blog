@@ -1,6 +1,7 @@
 ---
 title: "Combo-cooking class with GiorgioCombo"
 description: "Lesson Two"
+language: english
 tags:
   - Meta
 date: 2026-08-31

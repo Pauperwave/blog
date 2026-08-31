@@ -4,6 +4,7 @@ author: Alessandro Moretti
 category: article
 description: "Secret Lair: The Zeta Set. A somewhat new MtG product that is probably better to not have"
 published: true
+language: english
 tags:
   - Meta
 thumbnail: /arts/slz-330-baleful-strix.jpg
