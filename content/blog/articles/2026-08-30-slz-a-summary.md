@@ -97,7 +97,7 @@ The most "purist" view on this argument is that cutting stuff which isn't standa
 On the contrary, the most "liberal" approach, instead, is just allowing every common card besides those in the B&R List.
 
 An argument which came on the web (on Discord, Reddit, etc.) is how Secret Lairs aren't Pauper legal because, in fact, they are promo cards (but it doesn't seem to be the case).
-Promo cards can be a purchasable item, see convention promos, and Secret Lair cards can be promo cards (see [[Lightning Bolt]] SLP - Secret Lair Prize - from Gen Con).⁴
+Promo cards can be a purchasable item, see convention promos, and Secret Lair cards can be promo cards (see [[Lightning Bolt]] [SLP](https://scryfall.com/card/slp/21/lightning-bolt) - Secret Lair Prize - from Gen Con).⁴
 SLD and SLZ are indeed meant to be limited print runs, similar to promo cards and specific time products (see LotR Holiday Release).⁵
 Without any specific statement from Wizards of the Coast it is complex to name the nature of the product, as it can be applied to pretty much any kind of traditional MtG related product or set. The shared factors between Secret Lair products are just their release, distribution and production.
 The shooting star set symbol is commonly used by promo cards (promo cards set symbol changed many times over the years and based on the product) and by SLD cards. SLZ doesn't have a set symbol.
@@ -158,8 +158,8 @@ Some questions that may arise are related to the price and the availability of n
 Of course, I am assuming in the unlikely scenario of SLZ cards becoming pauper legal.
 
 If you are expecting to see pricy old school cards to be printed as common in future SL it is very unlikely. I can present you two reasons for that:
--SL is a way for WotC to get money from the secondary market by printing chase cards and high on demand old staples (Hasbro CEO got sued, in part, for that¹²³⁴).
--[[Copper Tablet]] was printed in the same SLZ. Card used to be an uncommon from the very first origin set expansions. Despite being low in power level the reprint is not common, not uncommon, but Mythic. There's no reason for WotC to lower the rarity of pricy cards, just think of [[Rhystic Study]], because WotC is incentivized to keep at high value the cards they are printing.
+- SL is a way for WotC to get money from the secondary market by printing chase cards and high on demand old staples (Hasbro CEO got sued, in part, for that¹²³⁴).
+- [[Copper Tablet]] was printed in the same SLZ. Card used to be an uncommon from the very first origin set expansions. Despite being low in power level the reprint is not common, not uncommon, but Mythic. There's no reason for WotC to lower the rarity of pricy cards, just think of [[Rhystic Study]], because WotC is incentivized to keep at high value the cards they are printing.
 
 Notes:
   1. [YouTube video](https://www.youtube.com/watch?v=rdKTX3eN988)
