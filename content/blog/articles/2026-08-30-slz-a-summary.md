@@ -13,9 +13,9 @@ date: 2026-08-30
 Secret Lair: The Zeta Set is the hot topic among Pauper enthusiasts.
 I'm Alessandro Moretti, MtG content creator and this article is the written media related to my most recent video on the argument.
 
-  -[ITA Video on Youtube](https://youtu.be/6bFz0cx7_c4) 
-  -[ENG Video on Youtube](https://youtu.be/DjrUK4_KtP8) 
-  -[You can check my link-tree to find out all my content](https://linktr.ee/adeptoterra)
+  - [ITA Video on Youtube](https://youtu.be/6bFz0cx7_c4) 
+  - [ENG Video on Youtube](https://youtu.be/DjrUK4_KtP8) 
+  - [You can check my link-tree to find out all my content](https://linktr.ee/adeptoterra)
 
 
 ## Table of Contents
@@ -55,8 +55,8 @@ caption: ""
 ::
 
 Source:
-  - https://bsky.app/profile/gavinverhey.bsky.social/post/3mtu55rdm4c2f 
-  - https://bsky.app/profile/gavinverhey.bsky.social/post/3mtugshsb4s2k 
+  - [Gavin Verhey - Bluesky post](https://bsky.app/profile/gavinverhey.bsky.social/post/3mtu55rdm4c2f)
+  - [Gavin Verhey - Bluesky follow-up post](https://bsky.app/profile/gavinverhey.bsky.social/post/3mtugshsb4s2k)
 
 As you can read in these Twitter / Blue Sky statements, the current defining rules of the format will get an update in order to force out of legality - and out of the format - the downgraded cards from products such as Secret Lair Zeta.
 
@@ -71,10 +71,10 @@ This product is not meant to be playable in any limited format (draft, sealed, e
 SLZ is a separate set from SLD but it is not the first SL product (or set) having more than the Rare rarity: in SLD Dandan there are common, uncommon and rare cards, even thought there's no change of previous rarities beside up-grading to rare for a few cards with new promo art (Dandan, Arcane Denial, Memory Lapse, etc.)⁴.
 
 Notes:
-  1. https://secretlair.wizards.com/eu/en/about-us 
-  2. https://mtg.wiki/page/Secret_Lair 
-  3. https://mtg.wiki/page/Secret_Lair:_The_Zeta_Set 
-  4. https://magic.wizards.com/en/news/announcements/from-the-chaos-vault-secret-lair-dandan-decklist 
+  1. [Secret Lair - About Us](https://secretlair.wizards.com/eu/en/about-us)
+  2. [Secret Lair - MTG Wiki](https://mtg.wiki/page/Secret_Lair)
+  3. [Secret Lair: The Zeta Set - MTG Wiki](https://mtg.wiki/page/Secret_Lair:_The_Zeta_Set)
+  4. [From the Chaos Vault: Secret Lair Dandan Decklist](https://magic.wizards.com/en/news/announcements/from-the-chaos-vault-secret-lair-dandan-decklist)
 
 ---
 
@@ -102,11 +102,11 @@ Without any specific statement from Wizards of the Coast it is complex to name t
 The shooting star set symbol is commonly used by promo cards (promo cards set symbol changed many times over the years and based on the product) and by SLD cards. SLZ doesn't have a set symbol.
 
 Notes:
-  1. https://magic.wizards.com/en/formats/pauper  
-  2. https://www.legapauperitalia.it/statements/zeta-20260827 
-  3. https://mtg.wiki/page/Chronicles 
-  4. https://mtg.wiki/page/Promotional_card 
-  5. https://mtg.fandom.com/wiki/The_Lord_of_the_Rings:_Tales_of_Middle-earth/Holiday_Release 
+  1. [Pauper Format Rules - Wizards of the Coast](https://magic.wizards.com/en/formats/pauper)
+  2. [Lega Pauper Italia - Zeta Set open letter](https://www.legapauperitalia.it/statements/zeta-20260827)
+  3. [Chronicles - MTG Wiki](https://mtg.wiki/page/Chronicles)
+  4. [Promotional Card - MTG Wiki](https://mtg.wiki/page/Promotional_card)
+  5. [The Lord of the Rings: Tales of Middle-earth Holiday Release - MTG Fandom](https://mtg.fandom.com/wiki/The_Lord_of_the_Rings:_Tales_of_Middle-earth/Holiday_Release)
 
 ---
 
@@ -117,8 +117,8 @@ Hada Freeblade, Spatial Contortion and Circle of Flame were never common and the
 Magic Online promos rarities reflect their related set rarity, similarly of how Friday Night Magic promo packs have standard legal promos.
 
 Notes:
-  1. https://magic.wizards.com/en/formats/pauper  
-  2. https://web.archive.org/web/20190124170714/https://magic.wizards.com/en/articles/archive/news/january-21-2019-banned-and-restricted-announcement 
+  1. [Pauper Format Rules - Wizards of the Coast](https://magic.wizards.com/en/formats/pauper)
+  2. [January 21, 2019 Banned and Restricted Announcement (Wayback Machine)](https://web.archive.org/web/20190124170714/https://magic.wizards.com/en/articles/archive/news/january-21-2019-banned-and-restricted-announcement)
 
 ---
 
@@ -129,7 +129,7 @@ On one hand it is relevant to note the presence of a cycle of spell-lands but, o
 The most resonable solution is dividing MtG Arena from MTGO and Tabletop.
 
 Notes:
-  1. https://scryfall.com/search?q=s%3Apio+game%3Aarena+r%3Ac+-f%3Apauper&unique=cards&as=grid&order=name 
+  1. [Scryfall search - Arena-only commons not legal in Pauper](https://scryfall.com/search?q=s%3Apio+game%3Aarena+r%3Ac+-f%3Apauper&unique=cards&as=grid&order=name)
 ---
 
 ## 6 - Pratical issues with SLZ
@@ -147,7 +147,7 @@ And that's the weird, or troublesome, part.
 The additional annoying thing is finalizing the format bounduaries. Should we stop at SLZ, or should we "pre-ban" Commander and additional products (Utrom Monitor)? Are Universe Beyond supposed to be legal (because you may see them as elements out of the format phylosophy)?
 
 Notes:
-  1. https://mtg.wiki/page/Pauper#cite_note-23  
+  1. [Pauper - MTG Wiki (cite note 23)](https://mtg.wiki/page/Pauper#cite_note-23)
 
 ---
 
@@ -161,10 +161,10 @@ If you are expecting to see pricy old school cards to be printed as common in fu
 -Copper Tablet being printed in the same SLZ. Card used to be an uncommon from the very first origin set expansions. Despite being low in poer level the reprint is not common, not uncommon, but Mythic. There's no reason for WotC to lower the rarity of pricy cards, just think of Rhystic Study, because WotC is incentivized of keeping at high value the cards they are printing.
 
 Notes:
-  1. https://www.youtube.com/watch?v=rdKTX3eN988  
-  2. https://www.golocalprov.com/business/hasbro-ceo-cocks-and-execs-sued-for-alleged-securities-violations 
-  3. https://rhodeislandcurrent.com/wp-content/uploads/2026/01/MTG-gov.uscourts.rid_.61353.1.0.pdf  
-  4. https://static.blbglaw.com/docs/November%2026%2C%202025%20-%20Amended%20Complaint_Hasbro.pdf 
+  1. [YouTube video](https://www.youtube.com/watch?v=rdKTX3eN988)
+  2. [GoLocalProv - Hasbro CEO and execs sued for alleged securities violations](https://www.golocalprov.com/business/hasbro-ceo-cocks-and-execs-sued-for-alleged-securities-violations)
+  3. [Rhode Island Current - Hasbro securities lawsuit complaint (PDF)](https://rhodeislandcurrent.com/wp-content/uploads/2026/01/MTG-gov.uscourts.rid_.61353.1.0.pdf)
+  4. [BLBG Law - Amended Complaint against Hasbro (PDF)](https://static.blbglaw.com/docs/November%2026%2C%202025%20-%20Amended%20Complaint_Hasbro.pdf)
 
 ---
 
