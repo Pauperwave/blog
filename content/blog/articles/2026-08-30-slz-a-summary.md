@@ -13,9 +13,9 @@ date: 2026-08-30
 Secret Lair: The Zeta Set is the hot topic among Pauper enthusiasts.
 I'm Alessandro Moretti, MtG content creator and this article is the written media related to my most recent video on the argument.
 
-  -[ITA Video on Youtube](/youtu.be/6bFz0cx7_c4) 
-  -[ENG Video on Youtube](/youtu.be/DjrUK4_KtP8) 
-  -[You can check my link-tree to find out all my content](/linktr.ee/adeptoterra)
+  -[ITA Video on Youtube](https://youtu.be/6bFz0cx7_c4) 
+  -[ENG Video on Youtube](https://youtu.be/DjrUK4_KtP8) 
+  -[You can check my link-tree to find out all my content](https://linktr.ee/adeptoterra)
 
 
 ## Table of Contents
