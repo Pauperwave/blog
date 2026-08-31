@@ -21,6 +21,7 @@
     "typecheck": "nuxt typecheck",
     "bench:filters": "node scripts/benchmark-article-filters.ts",
     "decklists:add-gradients": "node scripts/add-header-gradients.ts",
+    "fix-apostrophe": "node scripts/fix-apostrophe.mjs",
     "decklists:verify-gradients": "node scripts/verify-header-gradients.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
