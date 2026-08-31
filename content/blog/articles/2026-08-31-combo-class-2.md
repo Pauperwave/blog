@@ -20,11 +20,11 @@ This time we will see how to mix the main ingredients to lay the basis for a goo
 You had a promising idea; now what? Well, now you need to find the right shell for the deck. 
 The first thing to decide is if it will be a full combo deck or a hybrid deck.
 
-The former is a deck that focuses solely on the combo with close to zero B-plans, while the latter is usually a control or midrange deck with a combo in.
+The former is a deck that focuses solely on the combo with close to zero B-plans, while the latter is usually a control or midrange deck with a combo in it.
 Before we dive into the topic, let's settle some nomenclature.
 I like to call the combo pieces with capital letters, for example, Glee combo is A+B, while Pizza Combo is A+B+C.
 
-Many times I heard people say you could build combo decks as full combos or hybrid ones according to your “playstyle”.
+I've often heard people say you could build combo decks as full combos or hybrid ones according to your “playstyle”.
 Let me be clear on this: I really dislike this view. If you want to win, then it's not a matter of playstyle.
 Some decks work better in a certain way for reasons briefly explained in the previous lesson.
 Yes, you could try to build a Familiars deck as a full combo deck with fewer control elements and ways to speed up the kill, but you will just win fewer games in a competitive setting.
@@ -217,7 +217,7 @@ headerGradient: simic
 ::
 
 I could play more than 6 copies of [[Retraction Helix]], but I don't see the benefit of having a million copies of C if I lack A or B.
-I much rather have more draw spells to increase the chances of having A and B faster.
+I would much rather have more draw spells to increase the chances of having A and B faster.
 
 ::magic-cards
 ---
@@ -333,9 +333,9 @@ Deciding how many copies of the combo you want to play is a delicate balance, an
 
 ## Tutors
 
-Tutors do a great job at adding consistency. Unfortunately, there are no good tutors in Pauper.
+Tutors do a great job of adding consistency. Unfortunately, there are no good tutors in Pauper.
 In some decks you could play something like [[Trinket Mage]], transmute cards or [[Mystical Teachings]], but those cards are so slow that they will very rarely be useful in the faster matchups.
-And guess what? Faster matchups is where you need them the most, for in slower matchups a proper draw engine will mostly do just fine without tutors.
+And guess what? Faster matchups are where you need them the most, for in slower matchups a proper draw engine will mostly do just fine without tutors.
 There are some rare exceptions, Goblin Combo being one, but for the most part there are no good decks for the good tutors available.
 
 Here's a list of interesting tutors in the Pauper card pool.
@@ -350,7 +350,7 @@ I consider these cards to be worth keeping in mind, even though they don't have 
 ## Refining the draw engine
 
 As I said in the previous article, which draw engine you play mostly depends on the combo itself: for example, the Spy deck needs to have many creatures in order to cut lands and to provide lethal [[Lotleth Giant]]s.
-It is also forced to play green because of [[Land Grant]], so it's only natural they play [[Lead the Stampede]] and [[Winding Way]].
+It is also forced to play green because of [[Land Grant]], so it's only natural it plays [[Lead the Stampede]] and [[Winding Way]].
 
 Most of the time the path is clear on what to play, but that doesn't mean deciding the actual numbers is easy: you know you will put fresh onion in the sauce, but how much you will put in and how big you will slice it is a refined taste.
 In order to properly solve this puzzle, you should consider the Pauper metagame as it is now. The strongest and most played decks are Jund Wildfire, Affinity, Mono Red Madness, Mono Blue Terror and Naya Gates.
@@ -488,7 +488,7 @@ How many cards you devote to speed and how many to the grinding power depend on 
 For example, how useful are the cards for reasons other than the drawing power? In Altar Tron, Eviscerator's Insight is also a way to kill Myr Retriever, thus getting back an Ashnod's Altar that got countered.
 If it wasn't for that extra utility, I might have just played 1 or even 0.
 
-Note that some amount of card advantage is also a way to go faster in a sense: if you play ways to go up on cards, you can mulligan slow hands at 7 or 6 even vs an unknown opponent.
+Note that some amount of card advantage is also a way to go faster in a sense: if you play ways to gain card advantage, you can mulligan slow hands at 7 or 6 even vs an unknown opponent.
 If you play little to no card advantage, you tend to keep slow hands in G1 and hope it's a slower MU, for you wouldn't recover from a mulligan.
 
 ## Recap
