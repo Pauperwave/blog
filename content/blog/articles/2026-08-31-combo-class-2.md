@@ -284,7 +284,7 @@ headerGradient: abzan
 
 As further proof, look at the latest iteration of this deck I am playing: here I show [[Commune with Nature]], which is not a combo card, just to make clear the difference with the other version.
 The former doesn't have the green cantrip. The idea is that, since the 4 mana En-Kor is significantly worse than the one mana alternative, I try to play more cantrips in order to find the better one more often.
-It's also clearly better to have Commune instead of [[Spirit En-Kor]] when you already have an En-Kor and you need a B.
+It's also clearly better to have Commune instead of [[Spirit en-Kor]] when you already have an En-Kor and you need a B.
 So here I trimmed on A and, as a compensation, I also cut B to fit an additional Commune with Nature.
 The 4th copy of Commune is a replacement for another card in the deck, but that's not the point here.
 Again, I don't benefit from having a B if I don't also have an A, so it makes sense to trim on both halves of the combo for additional draw power.
@@ -457,7 +457,7 @@ Still, I have Fanatical Offering and Nihil Spellbomb for when being fast is not 
 ::magic-cards
 ---
 cards:
-  - Giant's Bolder
+  - Giant's Boulder
   - Candy Trail
   - Ancient Stirrings
   - Bonder's Ornament
@@ -474,7 +474,7 @@ player:
 placement: 
 headerGradient: golgari
 ---
-4 Giant's Bolder
+4 Giant's Boulder
 4 Candy Trail
 4 Ancient Stirrings
 4 Bonder's Ornament
