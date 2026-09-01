@@ -6,7 +6,6 @@
   "scripts": {
     "download-cards": "node scripts/download-bulk-data.ts",
     "build": "nuxt build",
-    "update-cards": "pnpm run download-cards",
     "dev": "nuxt dev",
     "dev:clean": "rm -rf .nuxt .data && nuxt dev",
     "clean": "nuxt cleanup",
