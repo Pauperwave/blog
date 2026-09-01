@@ -140,7 +140,6 @@ export default defineNuxtConfig({
     },
   },
   modules: [
-    "nuxt-studio",
     "@nuxt/eslint",
     "@nuxt/image",
     "@nuxt/ui",
@@ -185,22 +184,6 @@ export default defineNuxtConfig({
     "~/assets/css/main.css",
     "katex/dist/katex.min.css",
   ],
-  studio: {
-    // Studio admin route (default: '/_studio')
-    route: '/editor',
-
-    // Git repository configuration
-    repository: {
-      provider: 'github',
-      owner: 'Pauperwave',
-      repo: 'blog',
-      branch: 'main',
-      private: true,
-    },
-    i18n: {
-      defaultLocale: 'it'
-    }
-  },
   // Disable payload extraction to prevent _payload.json 404 errors on Vercel
   vite: {
     css: {
@@ -297,9 +280,6 @@ export default defineNuxtConfig({
     '/articles/0000-00-00-chart-demo-template': { prerender: false },
     '/reports/0000-00-00-report-template': { prerender: false },
     '/spoilers/0000-00-00-spoiler-template': { prerender: false },
-    // Nuxt Studio admin - requires SSR
-    '/editor': { ssr: true },
-    '/editor/**': { ssr: true },
     // Code of Conduct and Statuto
     '/docs/**': { prerender: true, headers: { 'Cache-Control': 'public, max-age=3600, s-maxage=86400' } },
     // Author profile pages: prerendered explicitly (see the prerender:routes hook above),

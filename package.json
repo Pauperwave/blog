@@ -48,7 +48,6 @@
     "nuxt": "^4.5.1",
     "nuxt-echarts": "1.0.1",
     "nuxt-schema-org": "^6.0.4",
-    "nuxt-studio": "1.7.0",
     "nuxt-swiper": "2.0.2",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
