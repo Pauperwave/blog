@@ -96,6 +96,11 @@ export default defineNuxtConfig({
   ogImage: {
     zeroRuntime: true,
     buildCache: true,
+    // Manual escape hatch: buildCache's key hashes the .takumi.vue template
+    // file and og:image props, but NOT global CSS/UnoCSS or font config — a
+    // design-only change there wouldn't bust the cache on its own. Bump this
+    // string after such a change to force a full re-render.
+    cacheVersion: 'v1',
     security: {
       // Default 15s is shorter than the takumi prerender worker's own internal 30s
       // timeout (nuxt-og-image's node-dev binding spawns a real Node worker_threads
