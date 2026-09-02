@@ -98,13 +98,12 @@ describe('magic-cards layout', () => {
   })
 
   describe('handCardTransform', () => {
-    it('applies the -10 percentage point lift on hover (index 0 of 5, at the base)', () => {
-      expect(handCardTransform(0, 5, null)).toBe('translateX(-120%) translateY(65%)')
-      expect(handCardTransform(0, 5, 0)).toBe('translateX(-120%) translateY(55%)')
-    })
-
-    it('does not lift non-hovered cards', () => {
-      expect(handCardTransform(1, 5, 0)).toBe('translateX(-60%) translateY(25%)')
+    it('matches handPosition, unaffected by hover', () => {
+      // The hovered card must not reposition itself: moving it under a stationary
+      // cursor triggers a mouseleave/mouseenter flicker that can permanently steal
+      // hover to a neighboring card. See the comment on handCardTransform.
+      expect(handCardTransform(0, 5)).toBe('translateX(-120%) translateY(65%)')
+      expect(handCardTransform(1, 5)).toBe('translateX(-60%) translateY(25%)')
     })
   })
 
@@ -114,7 +113,7 @@ describe('magic-cards layout', () => {
     })
 
     it('delegates to hand formula when layout is hand', () => {
-      expect(cardTransform(0, 5, 'hand', 20.5, null)).toBe(handCardTransform(0, 5, null))
+      expect(cardTransform(0, 5, 'hand', 20.5, null)).toBe(handCardTransform(0, 5))
     })
   })
 

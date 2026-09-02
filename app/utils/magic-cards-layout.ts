@@ -66,10 +66,16 @@ export function handPosition(index: number, total: number): { x: number, y: numb
   }
 }
 
-export function handCardTransform(index: number, total: number, hoveredIndex: number | null): string {
+// The hovered card does NOT reposition itself: shifting the hovered element's own
+// translateY moves it out from under a stationary cursor, which fires mouseleave,
+// snaps it back, re-fires mouseenter, and so on — an infinite hover flicker that
+// eventually settles on a neighboring card (whichever ends up stacked on top),
+// making the originally-hovered card stop responding until the mouse physically
+// moves again. Highlighting is handled by the z-index boost + dimming the others
+// instead (see Cards.vue / cardFilter), neither of which move the hovered card.
+export function handCardTransform(index: number, total: number): string {
   const { x, y } = handPosition(index, total)
-  const lift = hoveredIndex === index ? y - 10 : y
-  return `translateX(${x}%) translateY(${lift}%)`
+  return `translateX(${x}%) translateY(${y}%)`
 }
 
 export function cardTransform(
@@ -80,7 +86,7 @@ export function cardTransform(
   hoveredIndex: number | null
 ): string {
   return layout === 'hand'
-    ? handCardTransform(index, total, hoveredIndex)
+    ? handCardTransform(index, total)
     : fanCardTransform(index, total, arch, hoveredIndex)
 }
 
