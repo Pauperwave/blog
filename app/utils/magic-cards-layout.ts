@@ -20,8 +20,12 @@ export function fanRotation(index: number, total: number, arch: number): number 
 // stacked UNDER the hovered one (index <= hoveredIndex, since a later DOM index paints
 // on top) get a mild uniform rotation amplification; cards stacked ON TOP of it
 // (index > hoveredIndex) have to visibly move aside to reveal it, so they rotate
-// further out and shift right by SPREAD (15% of their own width). The hovered card
-// itself follows the "under" formula too, plus a -18px lift.
+// further out and shift right by SPREAD (15% of their own width). The live site also
+// lifts the hovered card itself by -18px, but we don't replicate that: moving the
+// hovered element's own position under a stationary cursor triggers a mouseleave/
+// mouseenter flicker that can permanently steal hover to a neighboring card (same
+// class of bug fixed for the `hand` layout's lift in handCardTransform). Highlighting
+// relies on the z-index boost + dimming the others instead, neither of which move it.
 export function fanCardTransform(
   index: number,
   total: number,
@@ -35,8 +39,7 @@ export function fanCardTransform(
   const scaled = base * (1 + SPREAD / 2)
 
   if (index <= hoveredIndex) {
-    const lift = index === hoveredIndex ? -18 : 0
-    return `rotate(${scaled}deg) translateY(${lift}px)`
+    return `rotate(${scaled}deg)`
   }
 
   const k = index - hoveredIndex

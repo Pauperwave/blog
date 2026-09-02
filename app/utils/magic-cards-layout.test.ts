@@ -52,29 +52,28 @@ describe('magic-cards layout', () => {
       expect(fanCardTransform(0, 5, 20.5, null)).toBe('rotate(-8.2deg)')
     })
 
-    it('matches verified hover values for the leftmost card hovered (index 0 of 5)', () => {
-      // Captured directly from magic.wizards.com while hovering the leftmost card.
-      expect(fanCardTransform(0, 5, 20.5, 0)).toBe('rotate(-8.815deg) translateY(-18px)')
+    it('rotates without lifting the hovered card itself (index 0 of 5 hovered) — no self-move on hover', () => {
+      expect(fanCardTransform(0, 5, 20.5, 0)).toBe('rotate(-8.815deg)')
       expectRotateTransform(fanCardTransform(1, 5, 20.5, 0), -2.1575, ' translateX(15%)')
       expect(fanCardTransform(2, 5, 20.5, 0)).toBe('rotate(1.5deg) translateX(15%)')
       expectRotateTransform(fanCardTransform(3, 5, 20.5, 0), 5.1575, ' translateX(15%)')
       expect(fanCardTransform(4, 5, 20.5, 0)).toBe('rotate(8.815deg) translateX(15%)')
     })
 
-    it('matches verified hover values for the center card hovered (index 2 of 5)', () => {
-      expect(fanCardTransform(0, 5, 20.5, 2)).toBe('rotate(-8.815deg) translateY(0px)')
-      expect(fanCardTransform(1, 5, 20.5, 2)).toBe('rotate(-4.4075deg) translateY(0px)')
-      expect(fanCardTransform(2, 5, 20.5, 2)).toBe('rotate(0deg) translateY(-18px)')
+    it('rotates without lifting when the center card is hovered (index 2 of 5)', () => {
+      expect(fanCardTransform(0, 5, 20.5, 2)).toBe('rotate(-8.815deg)')
+      expect(fanCardTransform(1, 5, 20.5, 2)).toBe('rotate(-4.4075deg)')
+      expect(fanCardTransform(2, 5, 20.5, 2)).toBe('rotate(0deg)')
       expect(fanCardTransform(3, 5, 20.5, 2)).toBe('rotate(6.6575deg) translateX(15%)')
       expect(fanCardTransform(4, 5, 20.5, 2)).toBe('rotate(10.315deg) translateX(15%)')
     })
 
-    it('matches verified hover values for the rightmost card hovered (index 4 of 5)', () => {
-      expect(fanCardTransform(0, 5, 20.5, 4)).toBe('rotate(-8.815deg) translateY(0px)')
-      expect(fanCardTransform(1, 5, 20.5, 4)).toBe('rotate(-4.4075deg) translateY(0px)')
-      expect(fanCardTransform(2, 5, 20.5, 4)).toBe('rotate(0deg) translateY(0px)')
-      expect(fanCardTransform(3, 5, 20.5, 4)).toBe('rotate(4.4075deg) translateY(0px)')
-      expect(fanCardTransform(4, 5, 20.5, 4)).toBe('rotate(8.815deg) translateY(-18px)')
+    it('rotates without lifting when the rightmost card is hovered (index 4 of 5)', () => {
+      expect(fanCardTransform(0, 5, 20.5, 4)).toBe('rotate(-8.815deg)')
+      expect(fanCardTransform(1, 5, 20.5, 4)).toBe('rotate(-4.4075deg)')
+      expect(fanCardTransform(2, 5, 20.5, 4)).toBe('rotate(0deg)')
+      expect(fanCardTransform(3, 5, 20.5, 4)).toBe('rotate(4.4075deg)')
+      expect(fanCardTransform(4, 5, 20.5, 4)).toBe('rotate(8.815deg)')
     })
   })
 
