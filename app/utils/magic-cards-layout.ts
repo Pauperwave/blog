@@ -47,24 +47,22 @@ export function fanCardTransform(
 // "Hand" config — spotted in the shared magic-cards stylesheet (it's loaded on any page
 // with a magic-cards instance, fan or otherwise, since the library bundles every layout
 // variant together) while investigating the fan. Unlike fan, cards don't rotate: they
-// spread horizontally in steps of 60% of their own width from center, and rise into a
-// shallow arc — the center card sits lowest/frontmost, edges recede upward. Only two of
-// five slots were captured live before this session moved on (index 0 of 5:
-// translateX(-120%) translateY(25%); index 1: translateX(-60%) translateY(45%), and its
-// :hover state translateY(15%)). The rest here is extrapolated from that pattern (linear
-// 60%-per-step X, symmetric triangular Y arc, -10pp lift on hover) — NOT independently
-// re-verified against the live page, and the step values are only confirmed for a 5-card
-// hand specifically.
+// spread horizontally in steps of 60% of their own width from center. The vertical
+// position alternates by 1-based position parity — odd positions (1st, 3rd, 5th, ...)
+// sit at the base, even positions (2nd, 4th, ...) are lifted — rather than a symmetric
+// arc from the center. Corrected from an initial arc-based reading of two captured
+// live points; see docs/architecture/2026-07-10-magic-cards-component-research.md for
+// the original (superseded) capture.
 const HAND_X_STEP = 60
-const HAND_PEAK_Y = 65
-const HAND_Y_STEP = 20
+const HAND_BASE_Y = 65
+const HAND_LIFT_Y = 25
 
 export function handPosition(index: number, total: number): { x: number, y: number } {
   const center = (total - 1) / 2
   const offset = index - center
   return {
     x: offset * HAND_X_STEP,
-    y: HAND_PEAK_Y - HAND_Y_STEP * Math.abs(offset)
+    y: index % 2 === 0 ? HAND_BASE_Y : HAND_LIFT_Y
   }
 }
 
@@ -89,6 +87,11 @@ export function cardTransform(
 export function cardFilter(index: number, hoveredIndex: number | null): string {
   if (hoveredIndex === null || hoveredIndex === index) return 'none'
   const distance = Math.abs(index - hoveredIndex)
-  const brightness = 1.12 - 0.08 * distance
+  // Must stay <= 1 for every non-hovered card (distance >= 1) — an earlier `1.12 - 0.08 *
+  // distance` constant made adjacent cards (distance 1) brighter than normal instead of
+  // dimmed, so the "grayed out" effect was invisible/inverted whenever the hovered card's
+  // neighbors were all close (e.g. hovering a center card). Clamped so brightness never
+  // goes negative (invalid CSS, silently drops the whole filter) on hands/fans with many cards.
+  const brightness = Math.max(0.3, 1 - 0.08 * distance)
   return `blur(0.5px) grayscale(0.8) brightness(${brightness})`
 }

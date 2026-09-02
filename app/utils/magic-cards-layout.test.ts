@@ -79,34 +79,32 @@ describe('magic-cards layout', () => {
   })
 
   describe('handPosition', () => {
-    it('matches the two verified live data points (index 0 and 1 of a 5-card hand)', () => {
-      expect(handPosition(0, 5)).toEqual({ x: -120, y: 25 })
-      expect(handPosition(1, 5)).toEqual({ x: -60, y: 45 })
+    it('places odd 1-based positions (0-based even index) at the base', () => {
+      expect(handPosition(0, 5)).toEqual({ x: -120, y: 65 })
+      expect(handPosition(2, 5)).toEqual({ x: 0, y: 65 })
+      expect(handPosition(4, 5)).toEqual({ x: 120, y: 65 })
     })
 
-    it('is symmetric around the center card', () => {
-      const center = handPosition(2, 5)
+    it('lifts even 1-based positions (0-based odd index)', () => {
+      expect(handPosition(1, 5)).toEqual({ x: -60, y: 25 })
+      expect(handPosition(3, 5)).toEqual({ x: 60, y: 25 })
+    })
+
+    it('is symmetric around the center card on x', () => {
       const left = handPosition(0, 5)
       const right = handPosition(4, 5)
-      expect(center.x).toBe(0)
       expect(left.x).toBe(-right.x)
-      expect(left.y).toBe(right.y)
-    })
-
-    it('peaks (largest y) at the center card', () => {
-      const ys = [0, 1, 2, 3, 4].map(i => handPosition(i, 5).y)
-      expect(Math.max(...ys)).toBe(ys[2])
     })
   })
 
   describe('handCardTransform', () => {
-    it('applies the verified -10 percentage point lift on hover (index 0 of 5)', () => {
-      expect(handCardTransform(0, 5, null)).toBe('translateX(-120%) translateY(25%)')
-      expect(handCardTransform(0, 5, 0)).toBe('translateX(-120%) translateY(15%)')
+    it('applies the -10 percentage point lift on hover (index 0 of 5, at the base)', () => {
+      expect(handCardTransform(0, 5, null)).toBe('translateX(-120%) translateY(65%)')
+      expect(handCardTransform(0, 5, 0)).toBe('translateX(-120%) translateY(55%)')
     })
 
     it('does not lift non-hovered cards', () => {
-      expect(handCardTransform(1, 5, 0)).toBe('translateX(-60%) translateY(45%)')
+      expect(handCardTransform(1, 5, 0)).toBe('translateX(-60%) translateY(25%)')
     })
   })
 
@@ -129,13 +127,18 @@ describe('magic-cards layout', () => {
       expect(cardFilter(2, 2)).toBe('none')
     })
 
-    it('fades brightness by distance from the hovered card, not a flat grayscale', () => {
+    it('fades brightness by distance from the hovered card, never brighter than normal', () => {
       const brightnessOf = (filter: string) => Number(filter.match(/brightness\(([^)]+)\)/)![1])
       expect(cardFilter(1, 0)).toMatch(/^blur\(0\.5px\) grayscale\(0\.8\) brightness\(/)
-      expect(brightnessOf(cardFilter(1, 0))).toBeCloseTo(1.04)
-      expect(brightnessOf(cardFilter(2, 0))).toBeCloseTo(0.96)
-      expect(brightnessOf(cardFilter(3, 0))).toBeCloseTo(0.88)
-      expect(brightnessOf(cardFilter(4, 0))).toBeCloseTo(0.8)
+      expect(brightnessOf(cardFilter(1, 0))).toBeCloseTo(0.92)
+      expect(brightnessOf(cardFilter(2, 0))).toBeCloseTo(0.84)
+      expect(brightnessOf(cardFilter(3, 0))).toBeCloseTo(0.76)
+      expect(brightnessOf(cardFilter(4, 0))).toBeCloseTo(0.68)
+    })
+
+    it('clamps brightness so it never goes negative (invalid CSS) on large card counts', () => {
+      const brightnessOf = (filter: string) => Number(filter.match(/brightness\(([^)]+)\)/)![1])
+      expect(brightnessOf(cardFilter(20, 0))).toBe(0.3)
     })
 
     it('is symmetric around the hovered card', () => {

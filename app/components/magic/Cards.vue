@@ -19,6 +19,14 @@ const {
   layout = 'fan'
 } = defineProps<Props>()
 
+const MAX_CARDS = 7
+
+if (cards.length > MAX_CARDS) {
+  console.warn(`magic-cards: received ${cards.length} cards, showing only the first ${MAX_CARDS}`)
+}
+
+const visibleCards = computed(() => cards.slice(0, MAX_CARDS))
+
 const hoveredIndex = ref<number | null>(null)
 </script>
 
@@ -30,7 +38,7 @@ const hoveredIndex = ref<number | null>(null)
     regardless of which config the page author chose. -->
     <div class="md:hidden flex gap-4 overflow-x-auto justify-center mask-[linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
       <MagicCard
-        v-for="card in cards"
+        v-for="card in visibleCards"
         :key="card"
         :card="card"
         class="shrink-0"
@@ -49,17 +57,17 @@ const hoveredIndex = ref<number | null>(null)
       :class="layout === 'hand' ? 'min-h-125 lg:min-h-150' : 'min-h-75 lg:min-h-90'"
     >
       <div
-        v-for="(card, idx) in cards"
+        v-for="(card, idx) in visibleCards"
         :key="card"
         class="absolute left-1/2 top-6 -translate-x-1/2"
-        :style="{ zIndex: idx }"
+        :style="{ zIndex: hoveredIndex === idx ? visibleCards.length : idx }"
       >
         <MagicCard
           :card="card"
           img-class="w-48 lg:w-56"
           class="fan-card"
           :style="{
-            transform: cardTransform(idx, cards.length, layout, arch, hoveredIndex),
+            transform: cardTransform(idx, visibleCards.length, layout, arch, hoveredIndex),
             filter: cardFilter(idx, hoveredIndex)
           }"
           @mouseenter="hoveredIndex = idx"
