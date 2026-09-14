@@ -123,6 +123,56 @@ description:
 [...]
 ```
 
+::download-text-button
+---
+filename: esempio-report.txt
+label: Scarica l'esempio in formato .txt
+content: |
+  # Giorno 1
+
+  ## Turno 1: Elfi di Moretti Alessandro
+
+  Conosco l'oppo ed è la decima volta che ci troviamo a turno 1 in un qualsivoglia torneo (bla bla bla [...])
+
+  ### Game 1
+
+  ([...])
+
+  ### Sideboard
+
+  ::magic-sideboard-guide
+  ---
+  matchup: Mono R Madness
+  description: 
+  ---
+  #in
+  4 Blue Elemental Blast
+  1 Hydroblast
+  2 Dispel
+  #out
+  4 The Modern Age // Vector Glider
+  3 Thraben Charm
+  ::
+
+  (Eventuale spiegazione della sidata)
+
+  ### Game 2
+
+  ([...])
+
+  ### Game 3
+
+  ([...])
+
+  - Match: `1-2`
+  - Score: `0-1`
+
+  # Giorno 2
+
+  [...]
+---
+::
+
 Il blocco `::magic-sideboard-guide` va nella sezione "Sideboard": la riga `matchup` indica l'avversario o l'archetipo affrontato, `#in` e `#out` elencano le carte in entrata e in uscita nel formato `quantità nome carta` (una carta per riga). Se esiste un piano alternativo, aggiungete una terza sezione `#out-alt` con le carte da togliere in quel caso.
 
 Il risultato è una card con due colonne affiancate, "Sideboard In" e "Sideboard Out", ciascuna con il conteggio totale delle carte tra parentesi nell'intestazione; ogni carta mostra quantità, nome (con tooltip al passaggio del mouse) e costo di mana. Se è presente `#out-alt`, compare sotto "Sideboard Out" separata da un divisore con l'etichetta "Alternativa".
