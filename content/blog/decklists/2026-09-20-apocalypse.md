@@ -22,7 +22,7 @@ N.B. Top 8 Splitted
 ::magic-decklist
 ---
 name: Spy
-player: 
+player: Efrem Perotti
 placement: Top 8 Split
 headerGradient: golgari
 ---
@@ -69,7 +69,7 @@ Sideboard
 ::magic-decklist
 ---
 name: U Terror
-player: 
+player: Matteo Arzani
 placement: Top 8 Split
 headerGradient: monoblue
 ---
@@ -108,7 +108,7 @@ Sideboard
 ::magic-decklist
 ---
 name: U Faeries
-player: 
+player: Alberto Gaggero
 placement: Top 8 Split
 headerGradient: monoblue
 ---
@@ -258,7 +258,7 @@ Sideboard
 ::magic-decklist
 ---
 name: Bogle
-player: 
+player: David Melo Diez
 placement: Top 8 Split
 headerGradient: selesnya
 ---
@@ -302,7 +302,7 @@ Sideboard
 ::magic-decklist
 ---
 name: BG Fog
-player: 
+player: Giulio Carlini
 placement: Top 8 Split
 headerGradient: sultai
 ---
@@ -351,7 +351,7 @@ Sideboard
 ::magic-decklist
 ---
 name: Boros Kitty
-player: 
+player: Luca Traverso
 placement: Top 8 Split
 headerGradient: boros
 ---
