@@ -8,7 +8,7 @@ location: Albissola Marina, Savona
 date: 2026-09-20
 author: Pietro Bragioto
 thumbnail: /assets/blog/events/2026-09-19-20-Apocalypse.jpeg
-published: false
+published: true
 ---
 
 | Informazione | Dettagli |
