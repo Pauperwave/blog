@@ -39,9 +39,11 @@ const GRADIENT_CLASSES: Record<ManaCombination, string> = {
 }
 
 // Heading/Subheading con testo chiaro in dark mode
+// Note: jeskai and bant excluded despite being multicolor - their amber-100
+// mid-gradient stop is too light for light text to stay readable
 const LIGHT_TEXT = new Set<ManaCombination>([
   'monoblue', 'monoblack', 'monored', 'monogreen', 'gruul',
-  'dimir', 'izzet', 'selesnya', 'boros', 'simic', 'sultai', 'jeskai', 'bant',
+  'dimir', 'izzet', 'selesnya', 'boros', 'simic', 'sultai',
   'golgari', 'rakdos', 'grixis', 'jund', 'temur', 'naya'
 ])
 
@@ -54,7 +56,7 @@ const MONO_PLACEMENT = new Set<ManaCombination>([
 // Note: boros, selesnya, naya use light heading text but dark placement text
 // monowhite/colorless: light background in both modes, placement stays dark
 const DARK_PLACEMENT = new Set<ManaCombination>([
-  'boros', 'selesnya', 'naya', 'monowhite', 'colorless'
+  'bant', 'boros', 'colorless', 'jeskai', 'monowhite', 'naya', 'selesnya'
 ])
 
 /**
