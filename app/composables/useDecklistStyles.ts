@@ -1,13 +1,13 @@
 import type { ManaCombination } from '~/components/magic/card/ManaSymbol.vue'
 
 const GRADIENT_CLASSES: Record<ManaCombination, string> = {
-  // Mono colors
-  monowhite: 'bg-gradient-to-r from-amber-100 via-amber-100 to-transparent',
-  monoblue: 'bg-gradient-to-r from-blue-600 via-blue-600 to-transparent',
-  monoblack: 'bg-gradient-to-r from-gray-950 via-gray-950 to-transparent',
-  monored: 'bg-gradient-to-r from-red-600 via-red-600 to-transparent',
-  monogreen: 'bg-gradient-to-r from-green-600 via-green-600 to-transparent',
-  colorless: 'bg-gradient-to-r from-gray-300 via-gray-300 to-transparent',
+  // Mono colors: solid background, no gradient
+  monowhite: 'bg-amber-100',
+  monoblue: 'bg-blue-600',
+  monoblack: 'bg-gray-950',
+  monored: 'bg-red-600',
+  monogreen: 'bg-green-600',
+  colorless: 'bg-gray-300',
 
   // Two-color combinations (Ally colors - adiacenti nel cerchio di mana)
   azorius: 'bg-gradient-to-r from-amber-100 to-blue-600',
@@ -47,13 +47,14 @@ const LIGHT_TEXT = new Set<ManaCombination>([
 
 // Mono colori: scuro in light mode, chiaro in dark mode
 const MONO_PLACEMENT = new Set<ManaCombination>([
-  'monowhite', 'monoblue', 'monoblack', 'monored', 'monogreen', 'colorless'
+  'monoblue', 'monoblack', 'monored', 'monogreen'
 ])
 
 // Placement scuro in entrambe le modalità
 // Note: boros, selesnya, naya use light heading text but dark placement text
+// monowhite/colorless: light background in both modes, placement stays dark
 const DARK_PLACEMENT = new Set<ManaCombination>([
-  'boros', 'selesnya', 'naya'
+  'boros', 'selesnya', 'naya', 'monowhite', 'colorless'
 ])
 
 /**
