@@ -93,6 +93,8 @@ That’s because protection spells are useless in race matchups, while more comb
 
 ## Which protection spells?
 
+Let's see how to decide the better ones. There are mainly 2 things to consider:
+
 ## What to protect from?
 
 Another important aspect is what to protect from.
