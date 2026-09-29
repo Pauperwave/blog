@@ -123,7 +123,7 @@ Let’s now see some examples form my decklists:
 cards:
   - Tamiyo's Safekeeping
   - Dispel
-  - Origin of the Metalbending
+  - Origin of Metalbending
   - Guac & Marshmallow Pizza
   - Banishing Knack
   - Retraction Helix
@@ -141,7 +141,7 @@ headerGradient: simic
 ---
 4 Tamiyo's Safekeeping
 4 Dispel
-1 Origin of the Metalbending
+1 Origin of Metalbending
 4 Guac & Marshmallow Pizza
 3 Banishing Knack
 3 Retraction Helix
