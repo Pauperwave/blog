@@ -6,7 +6,7 @@ tags:
 location: Mori, Rovereto
 date: 2026-10-04
 author: Pietro Bragioto
-thumbnail: /assets/blog/events/events/2026-10-03-radioatog.jpg
+thumbnail: /assets/blog/events/2026-10-03-radioatog.jpg
 published: true
 ---
 
