@@ -7,7 +7,7 @@ location: Mori, Rovereto
 date: 2026-10-04
 author: Pietro Bragioto
 thumbnail: /assets/blog/events/events/2026-10-03-radioatog.jpg
-published: false
+published: true
 ---
 
 | Informazione | Dettagli |
@@ -16,11 +16,87 @@ published: false
 | Data | 4 Ottobre 2026 |
 | Struttura del torneo | 7 Swiss Rounds + Top 8 |
 
+
+::magic-decklist
+---
+name: R Madness
+player: Andrea Sadocco
+placement: Winner
+headerGradient: monored
+---
+Creatures
+4 Voldaren Epicure
+4 Sneaky Snacker
+4 Guttersnipe
+
+Instants
+4 Lava Dart
+4 Lightning Bolt
+4 Fiery Temper
+4 Fireblast
+
+Sorceries
+2 Faithless Looting
+4 Grab the Prize
+4 Highway Robbery
+
+Artifacts
+4 Melded Moxite
+
+Lands
+18 Mountain
+
+Sideboard
+4 Pyroblast
+3 Red Elemental Blast
+4 Searing Blaze
+3 Soul-Guide Lantern
+1 Crimson Fleet Commodore
+::
+
+::magic-decklist
+---
+name: R Madness
+player: Luca Bozzato
+placement: Finalist
+headerGradient: monored
+---
+Creatures
+4 Voldaren Epicure
+4 Sneaky Snacker
+4 Guttersnipe
+
+Instants
+4 Lava Dart
+4 Lightning Bolt
+4 Fiery Temper
+4 Fireblast
+
+Sorceries
+2 Faithless Looting
+4 Grab the Prize
+4 Highway Robbery
+
+Artifacts
+4 Melded Moxite
+
+Lands
+18 Mountain
+
+Sideboard
+4 Pyroblast
+2 Red Elemental Blast
+3 Relic of Progenitus
+3 Searing Blaze
+2 Smash to Smithereens
+1 Crimson Fleet Commodore
+::
+
 ::magic-decklist
 ---
 name: R Madness
 player: Nahuel Coliva
-placement: 
+placement: Top 4
 headerGradient: monored
 ---
 Creatures
@@ -57,7 +133,7 @@ Sideboard
 ---
 name: R Madness
 player: Matteo Rullo
-placement: 
+placement: Top 4
 headerGradient: monored
 ---
 Creatures
@@ -94,7 +170,7 @@ Sideboard
 ---
 name: W Suicide
 player: Diego Lacedonia
-placement: 
+placement: Top 8
 headerGradient: monowhite
 ---
 Creatures
@@ -128,45 +204,8 @@ Sideboard
 ::magic-decklist
 ---
 name: R Madness
-player: Andrea Sadocco
-placement: 
-headerGradient: monored
----
-Creatures
-4 Voldaren Epicure
-4 Sneaky Snacker
-4 Guttersnipe
-
-Instants
-4 Lava Dart
-4 Lightning Bolt
-4 Fiery Temper
-4 Fireblast
-
-Sorceries
-2 Faithless Looting
-4 Grab the Prize
-4 Highway Robbery
-
-Artifacts
-4 Melded Moxite
-
-Lands
-18 Mountain
-
-Sideboard
-4 Pyroblast
-3 Red Elemental Blast
-4 Searing Blaze
-3 Soul-Guide Lantern
-1 Crimson Fleet Commodore
-::
-
-::magic-decklist
----
-name: R Madness
 player: Francesco Dotta
-placement: 
+placement: Top 8
 headerGradient: monored
 ---
 Creatures
@@ -201,47 +240,9 @@ Sideboard
 
 ::magic-decklist
 ---
-name: R Madness
-player: Luca Bozzato
-placement: 
-headerGradient: monored
----
-Creatures
-4 Voldaren Epicure
-4 Sneaky Snacker
-4 Guttersnipe
-
-Instants
-4 Lava Dart
-4 Lightning Bolt
-4 Fiery Temper
-4 Fireblast
-
-Sorceries
-2 Faithless Looting
-4 Grab the Prize
-4 Highway Robbery
-
-Artifacts
-4 Melded Moxite
-
-Lands
-18 Mountain
-
-Sideboard
-4 Pyroblast
-2 Red Elemental Blast
-3 Relic of Progenitus
-3 Searing Blaze
-2 Smash to Smithereens
-1 Crimson Fleet Commodore
-::
-
-::magic-decklist
----
 name: U Terror
 player: Edoardo Mondi
-placement: 
+placement: Top 8
 headerGradient: monoblue
 ---
 Creatures
@@ -281,7 +282,7 @@ Sideboard
 ---
 name: Elves
 player: Andrea Simonetta
-placement: 
+placement: Top 8
 headerGradient: monogreen
 ---
 Creatures
