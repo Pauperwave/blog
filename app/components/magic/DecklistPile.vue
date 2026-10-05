@@ -28,11 +28,12 @@ const spreadStyle = (index: number) => {
       :style="spread ? spreadStyle(index) : undefined"
     >
       <!-- Radius in % keeps the tooltip's corner proportions (12px on a 280px card) at any size, zoom included -->
+      <!-- pointer-events-none: the zoomed image doesn't capture hover, so neighbouring cards stay reachable -->
       <img
         :src="card.imageUrl"
         :alt="card.name"
         crossorigin="anonymous"
-        class="block aspect-[488/680] h-auto w-full rounded-[4.3%/3.1%] motion-safe:transition-transform motion-safe:duration-150 motion-safe:group-hover:scale-200"
+        class="pointer-events-none block aspect-[488/680] h-auto w-full rounded-[4.3%/3.1%] motion-safe:transition-transform motion-safe:duration-150 motion-safe:group-hover:scale-200"
       >
     </li>
   </ul>
