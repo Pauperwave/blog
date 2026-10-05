@@ -50,7 +50,7 @@ const artCard = computed(() => pickDeckArtCard(cards))
             <span v-if="header.placement"> · {{ header.placement }}</span>
           </p>
         </div>
-        <div class="flex flex-wrap items-center gap-x-8 gap-y-2">
+        <div class="flex items-center gap-x-6">
           <DecklistColorBars :pips="stats.pips" />
           <DecklistTypeCounts :counts="stats.typeCounts" />
         </div>
