@@ -44,3 +44,19 @@ export function formatDecklistForMTGO(
 
   return [...mainLines, ...sideLines].join('\n')
 }
+
+/**
+ * Format decklist for MTG Arena: same lines as MTGO, preceded by the "Deck" header Arena's importer expects
+ * @param mainDeckSections - Array of main deck section names
+ * @param cardsBySection - Object mapping section names to card arrays
+ * @param hasSideboard - Whether the decklist has a sideboard
+ * @returns Formatted decklist string for MTG Arena
+ */
+export function formatDecklistForArena(
+  mainDeckSections: string[],
+  cardsBySection: Record<string, Array<{ quantity: number; name: string }>>,
+  hasSideboard: boolean
+): string {
+  return `Deck
+${formatDecklistForMTGO(mainDeckSections, cardsBySection, hasSideboard)}`
+}

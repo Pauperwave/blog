@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { formatDecklistForMTGO, safeParse } from '#shared/utils'
+import { formatDecklistForArena, formatDecklistForMTGO, safeParse } from '#shared/utils'
 import { provideDecklistContext, type DecklistContext } from '~/composables/useDecklistContext'
 import { useDecklistStyles } from '~/composables/useDecklistStyles'
 import type { ManaCombination } from './card/ManaSymbol.vue'
@@ -76,9 +76,10 @@ provideDecklistContext(computed(() => ({
   cards: swipeCards.value
 })))
 
-// Copy decklist to clipboard (MTGO format)
-async function copyDecklist() {
-  const decklistText = formatDecklistForMTGO(
+// Copy decklist to clipboard in the import format of the given client
+async function copyDecklist(format: 'mtgo' | 'arena') {
+  const formatDecklist = format === 'arena' ? formatDecklistForArena : formatDecklistForMTGO
+  const decklistText = formatDecklist(
     mainDeckSections.value,
     cardsBySection.value,
     hasSideboard.value
@@ -159,7 +160,17 @@ async function copyDecklist() {
             title="Copia decklist"
             aria-label="Copia decklist negli appunti"
             label="Copia per MTGO"
-            @click="copyDecklist"
+            @click="copyDecklist('mtgo')"
+          />
+          <UButton
+            icon="i-lucide-gamepad-2"
+            size="sm"
+            variant="subtle"
+            class="cursor-pointer"
+            title="Copia decklist per MTG Arena"
+            aria-label="Copia decklist per MTG Arena"
+            label="Esporta su Arena"
+            @click="copyDecklist('arena')"
           />
           <UButton
             v-if="isMobile"
