@@ -20,6 +20,7 @@
 const props = defineProps<{
   symbol?: string           // Es: "{U}", "{2}", "{R/G}", "wubrg" - Formato Scryfall o sequenza colori
   combination?: ManaCombination  // Es: "azorius", "gruul", "jund" - Nome della combinazione
+  plain?: boolean           // Simbolo senza il cerchio colorato esterno, prende il colore del testo
 }>()
 
 /**
@@ -143,7 +144,7 @@ const colorSymbols = computed(() => {
 })
 
 // Helper per generare la classe CSS
-const manaClass = (symbol: string) => `ms ms-${getManaClass(symbol)} ms-cost`
+const manaClass = (symbol: string) => `ms ms-${getManaClass(symbol)}${props.plain ? '' : ' ms-cost'}`
 </script>
 
 <template>
@@ -175,7 +176,7 @@ const manaClass = (symbol: string) => `ms ms-${getManaClass(symbol)} ms-cost`
 @import "mana-font/css/mana.css";
 
 i.ms {
-  font-size: 14px;
+  font-size: var(--mana-size, 14px);
   vertical-align: middle;
   /* Disabilita Tailwind spacing sugli elementi <i> con classi ms-* */
   margin-inline-start: 0 !important;
