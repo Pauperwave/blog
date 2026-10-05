@@ -9,10 +9,8 @@ const maxCurveCount = computed(() => Math.max(...stats.curve.map(bucket => bucke
 const maxPipCount = computed(() => Math.max(...stats.pips.map(pip => pip.count), 1))
 
 const keyFigures = computed(() => [
-  { label: 'Main deck', value: stats.mainCount },
   { label: 'Terre', value: stats.landCount },
-  { label: 'Costo medio', value: stats.averageManaValue.toFixed(2) },
-  { label: 'Sideboard', value: stats.sideboardCount }
+  { label: 'Costo medio', value: stats.averageManaValue.toFixed(2) }
 ])
 </script>
 

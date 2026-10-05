@@ -10,8 +10,6 @@ export interface DeckStats {
   pips: { color: 'W' | 'U' | 'B' | 'R' | 'G'; count: number }[]
   averageManaValue: number
   landCount: number
-  mainCount: number
-  sideboardCount: number
 }
 
 const COLORS = ['W', 'U', 'B', 'R', 'G'] as const
@@ -77,8 +75,6 @@ export function computeDeckStats(cardsBySection: Record<string, DeckStatsCard[]>
     })),
     pips: COLORS.filter(color => pipCounts[color]).map(color => ({ color, count: pipCounts[color] ?? 0 })),
     averageManaValue: nonLandCount ? totalManaValue / nonLandCount : 0,
-    landCount,
-    mainCount: nonLandCount + landCount,
-    sideboardCount: sumQuantities(cardsBySection['Sideboard'])
+    landCount
   }
 }

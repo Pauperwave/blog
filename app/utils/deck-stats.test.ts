@@ -70,17 +70,14 @@ describe('deck stats', () => {
       ])
     })
 
-    it('counts lands, main deck and sideboard', () => {
-      const stats = computeDeckStats(cardsBySection)
-      expect(stats.landCount).toBe(10)
-      expect(stats.mainCount).toBe(17)
-      expect(stats.sideboardCount).toBe(3)
+    it('counts lands', () => {
+      expect(computeDeckStats(cardsBySection).landCount).toBe(10)
     })
 
     it('handles an empty deck', () => {
       const stats = computeDeckStats({})
       expect(stats.averageManaValue).toBe(0)
-      expect(stats.mainCount).toBe(0)
+      expect(stats.landCount).toBe(0)
     })
   })
 })
