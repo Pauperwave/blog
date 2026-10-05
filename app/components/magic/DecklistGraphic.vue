@@ -1,7 +1,9 @@
 <script setup lang="ts">
+// Opaque and self-contained (no controls inside) so it can be rendered to an image. Keep a single
+// root element with no comment before it, or $el stops being that element and the export fails.
+// Fixed width: header and footer sit exactly on the margins of the deck (main deck + sideboard)
 import type { DecklistContext } from '~/composables/useDecklistContext'
 import type { DeckStats } from '~/utils/deck-stats'
-import MagicCardManaSymbol from './card/ManaSymbol.vue'
 import DecklistArt from './DecklistArt.vue'
 import DecklistColorBars from './DecklistColorBars.vue'
 import DecklistCurveChart from './DecklistCurveChart.vue'
@@ -25,10 +27,7 @@ const mainPiles = computed(() => chunk(copiesOf(cards.filter(card => card.sectio
 const sideboardCopies = computed(() => copiesOf(cards.filter(card => card.section === 'Sideboard')))
 
 // Representative card art, taken from the deck's own card images (no extra requests)
-const artCard = computed(() => {
-  const name = findDeckArtCard(header.name)
-  return cards.find(card => card.name === name)
-})
+const artCard = computed(() => pickDeckArtCard(cards))
 
 const typeCounts = computed(() => {
   const counts = new Map<string, number>()
@@ -41,39 +40,29 @@ const typeCounts = computed(() => {
 </script>
 
 <template>
-  <!-- Opaque and self-contained (no controls inside) so it can be rendered to an image.
-       Fixed width: header and footer sit exactly on the margins of the deck (main deck + sideboard) -->
   <div class="flex w-[68rem] flex-col gap-6 bg-default p-6">
-    <header class="flex items-start justify-between gap-x-10 gap-y-4 rounded-xl border border-default bg-elevated px-6 py-5">
-      <div class="flex items-start gap-5">
-        <DecklistArt
-          v-if="artCard"
-          :src="toArtCropUrl(artCard.imageUrl)"
-          :card="artCard.name"
-        />
-        <div class="flex flex-col gap-3">
-          <div class="flex flex-col gap-1">
-            <div class="flex items-center gap-3">
-              <h2 class="m-0 text-4xl font-extrabold leading-tight">
-                {{ header.name }}
-              </h2>
-              <MagicCardManaSymbol
-                v-if="header.headerGradient"
-                :combination="header.headerGradient"
-              />
-            </div>
-            <p class="m-0 text-xl font-semibold text-muted">
-              {{ header.player }}
-              <span v-if="header.placement"> · {{ header.placement }}</span>
-            </p>
-          </div>
-          <div class="flex flex-wrap items-center gap-x-8 gap-y-2">
-            <DecklistColorBars :pips="stats.pips" />
-            <DecklistTypeCounts :counts="typeCounts" />
-          </div>
+    <header class="relative flex items-stretch justify-between gap-x-10 overflow-hidden rounded-xl border border-default bg-elevated px-6 py-5 shadow-sm">
+      <DecklistArt
+        v-if="artCard"
+        :src="toArtCropUrl(artCard.imageUrl)"
+        :card="artCard.name"
+      />
+      <div class="relative flex flex-col justify-between gap-5">
+        <div class="flex flex-col gap-1.5">
+          <h2 class="m-0 text-5xl font-light leading-none tracking-tight">
+            {{ header.name }}
+          </h2>
+          <p class="m-0 text-xl font-semibold text-muted">
+            {{ header.player }}
+            <span v-if="header.placement"> · {{ header.placement }}</span>
+          </p>
+        </div>
+        <div class="flex flex-wrap items-center gap-x-8 gap-y-2">
+          <DecklistColorBars :pips="stats.pips" />
+          <DecklistTypeCounts :counts="typeCounts" />
         </div>
       </div>
-      <DecklistCurveChart :curve="stats.curve" class="h-24 shrink-0" />
+      <DecklistCurveChart :curve="stats.curve" class="relative h-28 shrink-0 self-end rounded-lg bg-default/70 px-4 py-3" />
     </header>
 
     <!-- Card width is 9rem everywhere: main deck columns and sideboard (9rem + 1.5rem left/right offset) -->

@@ -8,10 +8,14 @@ defineProps<{
 </script>
 
 <template>
-  <img
-    :src="src"
-    :alt="card"
-    crossorigin="anonymous"
-    class="aspect-[626/457] h-32 shrink-0 rounded-xl object-cover shadow-md ring-1 ring-default"
-  >
+  <!-- Background layer: the art fades out towards the text, no mask so it renders the same in an exported image -->
+  <div class="pointer-events-none absolute inset-0">
+    <img
+      :src="src"
+      :alt="card"
+      crossorigin="anonymous"
+      class="size-full object-cover object-[50%_25%] opacity-50"
+    >
+    <div class="absolute inset-0 bg-gradient-to-r from-elevated from-30% via-elevated/70 to-transparent" />
+  </div>
 </template>

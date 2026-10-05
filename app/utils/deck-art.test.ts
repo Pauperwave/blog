@@ -1,19 +1,29 @@
 import { describe, it, expect } from 'vitest'
-import { findDeckArtCard, toArtCropUrl } from './deck-art'
+import { pickDeckArtCard, toArtCropUrl } from './deck-art'
 
 describe('deck art', () => {
-  describe('findDeckArtCard', () => {
-    it('finds the card for a madness deck whatever the colors in the name', () => {
-      expect(findDeckArtCard('R Madness')).toBe('Guttersnipe')
-      expect(findDeckArtCard('Rakdos Madness')).toBe('Guttersnipe')
+  describe('pickDeckArtCard', () => {
+    const cards = [
+      { name: 'Guttersnipe', section: 'Creatures', quantity: 2 },
+      { name: 'Lightning Bolt', section: 'Instants', quantity: 4 },
+      { name: 'Mountain', section: 'Lands', quantity: 14 },
+      { name: 'Pyroblast', section: 'Sideboard', quantity: 4 }
+    ]
+
+    it('picks the most played non-land main deck card', () => {
+      expect(pickDeckArtCard(cards)?.name).toBe('Lightning Bolt')
     })
 
-    it('is case insensitive', () => {
-      expect(findDeckArtCard('BR MADNESS')).toBe('Guttersnipe')
+    it('keeps the first card on a tie', () => {
+      expect(pickDeckArtCard([cards[0]!, { name: 'Other', section: 'Creatures', quantity: 2 }])?.name).toBe('Guttersnipe')
     })
 
-    it('returns undefined for an archetype without a representative card', () => {
-      expect(findDeckArtCard('Affinity')).toBeUndefined()
+    it('ignores lands and sideboard', () => {
+      expect(pickDeckArtCard([cards[2]!, cards[3]!])).toBeUndefined()
+    })
+
+    it('returns undefined for an empty deck', () => {
+      expect(pickDeckArtCard([])).toBeUndefined()
     })
   })
 
