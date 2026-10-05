@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { formatDecklistForArena, formatDecklistForMTGO, safeParse } from '#shared/utils'
-import { provideDecklistContext, type DecklistHeaderInfo, type DecklistSwipeCard } from '~/composables/useDecklistContext'
+import { provideDecklistContext, type DecklistHeaderInfo } from '~/composables/useDecklistContext'
+import { uniqueDeckCards } from '~/utils/deck-cards'
 import { useDecklistStyles } from '~/composables/useDecklistStyles'
 import type { ManaCombination } from './card/ManaSymbol.vue'
 import DecklistHeader from './DecklistHeader.vue'
@@ -33,7 +34,7 @@ const anchorId = computed(() =>
     : `deck-${slugify(props.name)}`
 )
 
-const toast = useToast()
+const { copyToClipboard } = useCopyToClipboard()
 
 const SECTIONS = ['Creatures', 'Instants', 'Sorceries', 'Artifacts', 'Enchantments', 'Lands', 'Sideboard'] as const
 
@@ -72,20 +73,8 @@ const headerInfo = computed<DecklistHeaderInfo>(() => ({
   headerGradient: props.headerGradient
 }))
 
-// Unique cards per section, in list order: what the card viewers (modal, overlay) walk through
-const swipeCards = computed(() => {
-  const seen = new Set<string>()
-  const result: DecklistSwipeCard[] = []
-  for (const section of SECTIONS) {
-    for (const card of cardsBySection.value[section] ?? []) {
-      const key = `${section}-${card.name}`
-      if (!card.imageUrl || seen.has(key)) continue
-      seen.add(key)
-      result.push({ name: card.name, section, quantity: card.quantity, imageUrl: card.imageUrl, backImageUrl: card.backImageUrl })
-    }
-  }
-  return result
-})
+// What the card viewers (modal, overlay) walk through
+const deckCards = computed(() => uniqueDeckCards(cardsBySection.value, SECTIONS))
 
 const openOverlay = () => {
   overlayRequested.value = true
@@ -98,7 +87,7 @@ const openCard = (name: string, section: string) => {
     openOverlay()
     return
   }
-  const index = swipeCards.value.findIndex(card => card.name === name && (!section || card.section === section))
+  const index = deckCards.value.findIndex(card => card.name === name && (!section || card.section === section))
   if (index < 0) return
   cardModalIndex.value = index
   cardModalRequested.value = true
@@ -108,30 +97,15 @@ const openCard = (name: string, section: string) => {
 provideDecklistContext({ openCard })
 
 // Copy decklist to clipboard in the import format of the given client
-async function copyDecklist(format: 'mtgo' | 'arena') {
+function copyDecklist(format: 'mtgo' | 'arena') {
   const formatDecklist = format === 'arena' ? formatDecklistForArena : formatDecklistForMTGO
-  const decklistText = formatDecklist(
-    mainDeckSections.value,
-    cardsBySection.value,
-    hasSideboard.value
+  return copyToClipboard(
+    formatDecklist(mainDeckSections.value, cardsBySection.value, hasSideboard.value),
+    {
+      successDescription: 'Decklist copiata negli appunti',
+      errorDescription: 'Impossibile copiare la decklist negli appunti'
+    }
   )
-
-  try {
-    await navigator.clipboard.writeText(decklistText)
-    toast.add({
-      title: 'Copiato!',
-      description: 'Decklist copiata negli appunti',
-      icon: 'i-lucide-check',
-      color: 'success'
-    })
-  } catch {
-    toast.add({
-      title: 'Copia non riuscita',
-      description: 'Impossibile copiare la decklist negli appunti',
-      icon: 'i-lucide-x',
-      color: 'error'
-    })
-  }
 }
 </script>
 
@@ -229,7 +203,7 @@ async function copyDecklist(format: 'mtgo' | 'arena') {
       v-if="!isMobile && overlayRequested"
       v-model:open="showOverlay"
       :header="headerInfo"
-      :cards="swipeCards"
+      :cards="deckCards"
       :stats="deckStats"
     />
 
@@ -238,7 +212,7 @@ async function copyDecklist(format: 'mtgo' | 'arena') {
       v-if="isMobile && cardModalRequested"
       v-model:open="showCardModal"
       :header="headerInfo"
-      :cards="swipeCards"
+      :cards="deckCards"
       :start-index="cardModalIndex"
     />
 

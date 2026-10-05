@@ -1,14 +1,6 @@
 import type { InjectionKey } from 'vue'
 import type { ManaCombination } from '~/components/magic/card/ManaSymbol.vue'
 
-export interface DecklistSwipeCard {
-  name: string
-  section: string
-  quantity: number
-  imageUrl: string
-  backImageUrl?: string
-}
-
 export interface DecklistHeaderInfo {
   name: string
   player?: string

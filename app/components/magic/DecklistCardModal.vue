@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import type { DecklistHeaderInfo, DecklistSwipeCard } from '~/composables/useDecklistContext'
+import type { DecklistHeaderInfo } from '~/composables/useDecklistContext'
+import type { DeckCard } from '~/utils/deck-cards'
 import { useDecklistStyles } from '~/composables/useDecklistStyles'
 import DecklistHeader from './DecklistHeader.vue'
 
 const { header, cards, startIndex } = defineProps<{
   header: DecklistHeaderInfo
-  cards: DecklistSwipeCard[]
+  cards: DeckCard[]
   startIndex: number
 }>()
 
