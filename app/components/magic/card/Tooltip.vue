@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { injectDecklistContext } from '~/composables/useDecklistContext'
+import { useDecklistStyles } from '~/composables/useDecklistStyles'
+
 interface Props {
   name: string
   image?: string
@@ -6,9 +9,11 @@ interface Props {
   backImage?: string
   /** Scryfall set code — when given, `image` is resolved to that specific printing. */
   set?: string
+  /** Decklist section the card sits in — tells apart the same card in main deck and sideboard. */
+  section?: string
 }
 
-const { name, image = '', backImage = '', set = '' } = defineProps<Props>()
+const { name, image = '', backImage = '', set = '', section = '' } = defineProps<Props>()
 
 const cardLabel = computed(() => set ? `${name} (${set})` : name)
 
@@ -19,9 +24,14 @@ const showModal = ref(false)
 // Composables
 const { isMobile } = useDevice()
 
-// Provided by Decklist: lets the mobile modal swipe through the deck's cards
-const swipeCards = inject<ComputedRef<{ name: string; imageUrl: string; backImageUrl?: string }[]> | null>('decklistSwipeCards', null)
-const swipeStartIndex = computed(() => swipeCards?.value.findIndex(card => card.name === name) ?? -1)
+// Provided by Decklist: deck header + cards the mobile modal can swipe through
+const deck = injectDecklistContext()
+const swipeStartIndex = computed(() =>
+  deck?.value.cards.findIndex(card => card.name === name && (!section || card.section === section)) ?? -1
+)
+const currentIndex = ref(swipeStartIndex.value)
+const currentCard = computed(() => deck?.value.cards[currentIndex.value])
+const { headerClass } = useDecklistStyles(deck?.value.header.headerGradient)
 
 const reference = computed(() => ({
   getBoundingClientRect: () => ({
@@ -106,19 +116,33 @@ const handleClick = () => {
     }"
   >
     <template #content>
-      <UCarousel
-        v-if="swipeCards && swipeStartIndex >= 0"
-        v-slot="{ item }"
-        :items="swipeCards"
-        :start-index="swipeStartIndex"
-        class="p-4"
-      >
-        <MagicCardFlipImage
-          :image="item.imageUrl"
-          :back-image="item.backImageUrl"
-          :label="item.name"
-        />
-      </UCarousel>
+      <div v-if="deck && currentCard" class="flex flex-col gap-3 p-4">
+        <div class="rounded-xl p-4" :class="headerClass">
+          <MagicDecklistHeader v-bind="deck.header" />
+        </div>
+        <UCarousel
+          v-slot="{ item }"
+          :items="deck.cards"
+          :start-index="swipeStartIndex"
+          :ui="{ item: 'basis-[85%]' }"
+          @select="currentIndex = $event"
+        >
+          <MagicCardFlipImage
+            :image="item.imageUrl"
+            :back-image="item.backImageUrl"
+            :label="item.name"
+            compact
+          />
+        </UCarousel>
+        <div class="text-center text-white">
+          <p class="m-0 font-semibold">
+            {{ currentCard.quantity }}× {{ currentCard.name }}
+          </p>
+          <p class="m-0 text-sm opacity-80">
+            {{ currentCard.section }} · {{ currentIndex + 1 }} / {{ deck.cards.length }}
+          </p>
+        </div>
+      </div>
       <div v-else class="p-4">
         <MagicCardFlipImage :image="image" :back-image="backImage" :label="cardLabel" />
       </div>

@@ -4,9 +4,11 @@ interface Props {
   /** Second face's image, for transform/modal double-faced cards. A button below the image toggles it. */
   backImage?: string
   label: string
+  /** Smaller max height, to leave room for content around the image */
+  compact?: boolean
 }
 
-const { image, backImage = '', label } = defineProps<Props>()
+const { image, backImage = '', label, compact = false } = defineProps<Props>()
 
 const showBack = ref(false)
 // Matches Scryfall's own card page exactly (measured live): flipping to the
@@ -25,7 +27,7 @@ const toggleFace = () => {
     <!-- 3D flip, same technique as Scryfall's own card page: both faces
          stacked with backface-visibility hidden, back pre-rotated 180deg,
          and the wrapper rotates on toggle. -->
-    <div class="relative max-w-full max-h-[75vh]" style="perspective: 1200px;">
+    <div class="relative max-w-full" :class="compact ? 'max-h-[55vh]' : 'max-h-[75vh]'" style="perspective: 1200px;">
       <div
         class="relative"
         :style="{
@@ -37,7 +39,8 @@ const toggleFace = () => {
         <img
           :src="image"
           :alt="label"
-          class="block max-w-full max-h-[75vh] rounded-xl shadow-2xl"
+          class="block max-w-full rounded-xl shadow-2xl"
+          :class="compact ? 'max-h-[55vh]' : 'max-h-[75vh]'"
           style="backface-visibility: hidden;"
         >
         <img
