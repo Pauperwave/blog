@@ -75,3 +75,20 @@ export function orderByMultiple<T>(
     return 0
   })
 }
+/**
+ * Splits an array into consecutive chunks of at most `size` items.
+ *
+ * @param array - Array to split
+ * @param size - Maximum chunk length
+ * @returns Array of chunks, the last one may be shorter
+ *
+ * @example
+ * chunk([1, 2, 3, 4, 5], 2) // [[1, 2], [3, 4], [5]]
+ */
+export function chunk<T>(array: T[], size: number): T[][] {
+  const chunks: T[][] = []
+  for (let i = 0; i < array.length; i += size) {
+    chunks.push(array.slice(i, i + size))
+  }
+  return chunks
+}

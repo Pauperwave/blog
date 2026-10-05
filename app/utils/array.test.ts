@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { intersection, orderBy } from './array'
+import { chunk, intersection, orderBy } from './array'
 
 describe('array utilities', () => {
   describe('intersection', () => {
@@ -148,6 +148,19 @@ describe('array utilities', () => {
       expect(related[1]?.title).toBe('Article 4') // 2 matches
       // Articles 2 and 3 both have 1 match, order preserved from input
       expect(related[2]?.title).toBe('Article 2') // 1 match
+    })
+  })
+  describe('chunk', () => {
+    it('splits an array into chunks of the given size', () => {
+      expect(chunk([1, 2, 3, 4], 2)).toEqual([[1, 2], [3, 4]])
+    })
+
+    it('keeps the remainder in a shorter last chunk', () => {
+      expect(chunk([1, 2, 3, 4, 5], 4)).toEqual([[1, 2, 3, 4], [5]])
+    })
+
+    it('returns an empty array for an empty input', () => {
+      expect(chunk([], 4)).toEqual([])
     })
   })
 })
