@@ -132,6 +132,8 @@ const footerSocialLinks = [
               Le immagini delle carte sono recuperate da <ULink to="https://scryfall.com" target="_blank" class="underline">Scryfall</ULink>. Questo sito non è prodotto, affiliato o supportato dalla <ULink to="https://company.wizards.com/" target="_blank" class="underline">Wizards of the Coast</ULink>.
             </p>
           </div>
+
+          <VersionBadge />
         </div>
       </UContainer>
     </template>

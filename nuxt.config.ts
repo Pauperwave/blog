@@ -1,3 +1,4 @@
+import { execSync } from "node:child_process"
 import { readdirSync, readFileSync } from "node:fs"
 import { fileURLToPath } from "node:url"
 import { definePerson } from "nuxt-schema-org/schema"
@@ -48,9 +49,26 @@ const isOldArticleRoute = (route: string): boolean => {
 }
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
+// Commit hash + date come from git at build time so they also show locally;
+// Vercel's VERCEL_GIT_COMMIT_SHA wins when set. Both fall back to "" if git
+// isn't available at all (e.g. a tarball deploy with no .git).
+function gitLog(format: string): string {
+  try {
+    return execSync(`git log -1 --format=${format}`).toString().trim()
+  } catch {
+    return ""
+  }
+}
+
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
+  runtimeConfig: {
+    public: {
+      gitCommitSha: process.env.VERCEL_GIT_COMMIT_SHA ?? gitLog("%H"),
+      gitCommitDate: gitLog("%cI")
+    }
+  },
   components: [
     {
       path: '~/components/charts',
