@@ -50,6 +50,21 @@ const mainDeckSections = computed(() =>
 
 const hasSideboard = computed(() => (cardsBySection.value['Sideboard'] ?? []).length > 0)
 
+// Unique cards with art in list order, so the mobile card modal can swipe between them
+const swipeCards = computed(() => {
+  const seen = new Set<string>()
+  const result: { name: string; imageUrl: string; backImageUrl?: string }[] = []
+  for (const section of SECTIONS) {
+    for (const card of cardsBySection.value[section] ?? []) {
+      if (!card.imageUrl || seen.has(card.name)) continue
+      seen.add(card.name)
+      result.push({ name: card.name, imageUrl: card.imageUrl, backImageUrl: card.backImageUrl })
+    }
+  }
+  return result
+})
+provide('decklistSwipeCards', swipeCards)
+
 // Copy decklist to clipboard (MTGO format)
 async function copyDecklist() {
   const decklistText = formatDecklistForMTGO(

@@ -12,19 +12,16 @@ const { name, image = '', backImage = '', set = '' } = defineProps<Props>()
 
 const cardLabel = computed(() => set ? `${name} (${set})` : name)
 
-const showBack = ref(false)
-// Matches Scryfall's own card page exactly (measured live): flipping to the
-// back face takes 750ms, flipping back to the front takes 200ms — two
-// different transition durations depending on the target state, not a
-// single symmetric one.
-const flipDuration = computed(() => showBack.value ? '750ms' : '200ms')
-
 const tooltipOpen = ref(false)
 const anchor = ref({ x: 0, y: 0 })
 const showModal = ref(false)
 
 // Composables
 const { isMobile } = useDevice()
+
+// Provided by Decklist: lets the mobile modal swipe through the deck's cards
+const swipeCards = inject<ComputedRef<{ name: string; imageUrl: string; backImageUrl?: string }[]> | null>('decklistSwipeCards', null)
+const swipeStartIndex = computed(() => swipeCards?.value.findIndex(card => card.name === name) ?? -1)
 
 const reference = computed(() => ({
   getBoundingClientRect: () => ({
@@ -57,13 +54,6 @@ const handleClick = () => {
   if (isMobile) showModal.value = true
 }
 
-const toggleFace = () => {
-  if (backImage) showBack.value = !showBack.value
-}
-
-watch(showModal, (open) => {
-  if (!open) showBack.value = false
-})
 </script>
 
 <template>
@@ -116,44 +106,21 @@ watch(showModal, (open) => {
     }"
   >
     <template #content>
-      <div class="flex flex-col items-center gap-3 p-4">
-        <!-- 3D flip, same technique as Scryfall's own card page: both faces
-             stacked with backface-visibility hidden, back pre-rotated 180deg,
-             and the wrapper rotates on toggle. -->
-        <div class="relative max-w-full max-h-[75vh]" style="perspective: 1200px;">
-          <div
-            class="relative"
-            :style="{
-              transformStyle: 'preserve-3d',
-              transform: showBack ? 'rotateY(180deg)' : 'rotateY(0deg)',
-              transition: `transform ${flipDuration}`
-            }"
-          >
-            <img
-              :src="image"
-              :alt="cardLabel"
-              class="block max-w-full max-h-[75vh] rounded-xl shadow-2xl"
-              style="backface-visibility: hidden;"
-            >
-            <img
-              v-if="backImage"
-              :src="backImage"
-              :alt="`${cardLabel} (back face)`"
-              class="absolute inset-0 w-full h-full rounded-xl shadow-2xl object-cover"
-              style="backface-visibility: hidden; transform: rotateY(180deg);"
-            >
-          </div>
-        </div>
-        <UButton
-          v-if="backImage"
-          icon="i-lucide-repeat"
-          label="Transform"
-          aria-label="Transform card"
-          size="lg"
-          color="neutral"
-          variant="solid"
-          @click="toggleFace"
+      <UCarousel
+        v-if="swipeCards && swipeStartIndex >= 0"
+        v-slot="{ item }"
+        :items="swipeCards"
+        :start-index="swipeStartIndex"
+        class="p-4"
+      >
+        <MagicCardFlipImage
+          :image="item.imageUrl"
+          :back-image="item.backImageUrl"
+          :label="item.name"
         />
+      </UCarousel>
+      <div v-else class="p-4">
+        <MagicCardFlipImage :image="image" :back-image="backImage" :label="cardLabel" />
       </div>
     </template>
   </UModal>
