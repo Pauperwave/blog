@@ -5,7 +5,7 @@ import { useDecklistStyles } from '~/composables/useDecklistStyles'
 interface Props {
   name: string
   image?: string
-  /** Second face's image, for transform/modal double-faced cards. Mobile only — a button below the preview toggles it. */
+  /** Second face's image, for transform/modal double-faced cards. A button below the preview toggles it in the modal. */
   backImage?: string
   /** Scryfall set code — when given, `image` is resolved to that specific printing. */
   set?: string
@@ -61,7 +61,8 @@ const handlePointerMove = (ev: PointerEvent) => {
 }
 
 const handleClick = () => {
-  if (isMobile) showModal.value = true
+  tooltipOpen.value = false
+  showModal.value = true
 }
 
 </script>
@@ -84,10 +85,10 @@ const handleClick = () => {
     }"
   >
     <span
-      class="font-semibold text-primary"
-      :class="isMobile ? 'cursor-pointer underline' : 'cursor-help'"
-      :role="isMobile ? 'button' : undefined"
-      :aria-label="isMobile ? `View ${cardLabel} card image` : undefined"
+      class="font-semibold text-primary cursor-pointer"
+      :class="{ underline: isMobile }"
+      role="button"
+      :aria-label="`View ${cardLabel} card image`"
       @pointerenter="handlePointerEnter"
       @pointerleave="handlePointerLeave"
       @pointermove="handlePointerMove"
@@ -105,7 +106,7 @@ const handleClick = () => {
     </template>
   </UTooltip>
 
-  <!-- Mobile Modal -->
+  <!-- Card modal: tap on mobile, click on desktop -->
   <UModal
     v-model:open="showModal"
     :title="cardLabel"
@@ -124,7 +125,8 @@ const handleClick = () => {
           v-slot="{ item }"
           :items="deck.cards"
           :start-index="swipeStartIndex"
-          :ui="{ container: '-ms-2', item: 'basis-[92%] ps-2' }"
+          :arrows="!isMobile"
+          :ui="{ container: '-ms-2', item: 'basis-[92%] ps-2', prev: 'sm:start-2', next: 'sm:end-2' }"
           @select="currentIndex = $event"
         >
           <MagicCardFlipImage
