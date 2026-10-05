@@ -5,6 +5,7 @@ import { useDecklistStyles } from '~/composables/useDecklistStyles'
 import type { ManaCombination } from './card/ManaSymbol.vue'
 import DecklistHeader from './DecklistHeader.vue'
 import DecklistSection from './DecklistSection.vue'
+import DecklistStats from './DecklistStats.vue'
 
 /**
  * Props for Decklist component
@@ -51,6 +52,10 @@ const mainDeckSections = computed(() =>
 )
 
 const hasSideboard = computed(() => (cardsBySection.value['Sideboard'] ?? []).length > 0)
+
+const { isMobile } = useDevice()
+const showStats = ref(false)
+const deckStats = computed(() => computeDeckStats(cardsBySection.value))
 
 // Lets the mobile card modal show the deck header and swipe between the deck's cards
 const swipeCards = computed(() => {
@@ -156,8 +161,30 @@ async function copyDecklist() {
             label="Copia per MTGO"
             @click="copyDecklist"
           />
+          <UButton
+            v-if="isMobile"
+            icon="i-lucide-chart-column"
+            size="sm"
+            variant="subtle"
+            class="cursor-pointer"
+            aria-label="Mostra le statistiche del mazzo"
+            label="Statistiche"
+            @click="showStats = true"
+          />
         </div>
       </template>
     </UCard>
+
+    <!-- Mobile stats overlay -->
+    <UModal
+      v-if="isMobile"
+      v-model:open="showStats"
+      :title="`Statistiche - ${name}`"
+      :description="`Statistiche del mazzo ${name}`"
+    >
+      <template #body>
+        <DecklistStats :stats="deckStats" />
+      </template>
+    </UModal>
   </div>
 </template>
