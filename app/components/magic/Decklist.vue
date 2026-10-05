@@ -2,7 +2,6 @@
 import { formatDecklistForMTGO, safeParse } from '#shared/utils'
 import { useDecklistStyles } from '~/composables/useDecklistStyles'
 import MagicCardManaSymbol, { type ManaCombination } from './card/ManaSymbol.vue'
-import DecklistCarousel from './DecklistCarousel.vue'
 import DecklistSection from './DecklistSection.vue'
 
 /**
@@ -50,22 +49,6 @@ const mainDeckSections = computed(() =>
 )
 
 const hasSideboard = computed(() => (cardsBySection.value['Sideboard'] ?? []).length > 0)
-
-const { isMobile } = useDevice()
-
-// Unique cards with art, in list order (SECTIONS ends with Sideboard)
-const carouselCards = computed(() => {
-  const seen = new Set<string>()
-  const result: { name: string; imageUrl: string }[] = []
-  for (const section of SECTIONS) {
-    for (const card of cardsBySection.value[section] ?? []) {
-      if (!card.imageUrl || seen.has(card.name)) continue
-      seen.add(card.name)
-      result.push({ name: card.name, imageUrl: card.imageUrl })
-    }
-  }
-  return result
-})
 
 // Copy decklist to clipboard (MTGO format)
 async function copyDecklist() {
@@ -142,10 +125,6 @@ async function copyDecklist() {
 
       <!-- Body - Two-column layout -->
       <template v-if="!props.headerOnly" #default>
-        <DecklistCarousel
-          v-if="isMobile && carouselCards.length"
-          :cards="carouselCards"
-        />
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8">
           <!-- Main Deck (Left) -->
           <div>
