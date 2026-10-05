@@ -3,7 +3,7 @@
 // root element with no comment before it, or $el stops being that element and the export fails.
 // Fixed width: header and footer sit exactly on the margins of the deck (main deck + sideboard)
 import type { DecklistHeaderInfo } from '~/composables/useDecklistContext'
-import type { DeckCard } from '~/utils/deck-cards'
+import { expandCopies, type DeckCard } from '~/utils/deck-cards'
 import type { DeckStats } from '~/utils/deck-stats'
 import DecklistArt from './DecklistArt.vue'
 import DecklistColorBars from './DecklistColorBars.vue'
@@ -19,25 +19,13 @@ const { header, cards } = defineProps<{
 
 const PILE_SIZE = 4
 
-// Every copy is its own card, in list order (MTGGoldfish visual deck style)
-const copiesOf = (list: DeckCard[]) =>
-  list.flatMap(card => Array.from({ length: card.quantity }, () => card))
-
+// Every copy is its own card, in list order (MTGGoldfish visual deck style).
 // Main deck: piles of 4 copies. Sideboard: a single pile.
-const mainPiles = computed(() => chunk(copiesOf(cards.filter(card => card.section !== 'Sideboard')), PILE_SIZE))
-const sideboardCopies = computed(() => copiesOf(cards.filter(card => card.section === 'Sideboard')))
+const mainPiles = computed(() => chunk(expandCopies(cards.filter(card => card.section !== 'Sideboard')), PILE_SIZE))
+const sideboardCopies = computed(() => expandCopies(cards.filter(card => card.section === 'Sideboard')))
 
 // Representative card art, taken from the deck's own card images (no extra requests)
 const artCard = computed(() => pickDeckArtCard(cards))
-
-const typeCounts = computed(() => {
-  const counts = new Map<string, number>()
-  for (const card of cards) {
-    if (card.section === 'Sideboard') continue
-    counts.set(card.section, (counts.get(card.section) ?? 0) + card.quantity)
-  }
-  return [...counts].map(([section, count]) => ({ section, count }))
-})
 </script>
 
 <template>
@@ -60,7 +48,7 @@ const typeCounts = computed(() => {
         </div>
         <div class="flex flex-wrap items-center gap-x-8 gap-y-2">
           <DecklistColorBars :pips="stats.pips" />
-          <DecklistTypeCounts :counts="typeCounts" />
+          <DecklistTypeCounts :counts="stats.typeCounts" />
         </div>
       </div>
       <DecklistCurveChart :curve="stats.curve" class="relative h-28 shrink-0 self-end rounded-lg bg-default/70 px-4 py-3" />

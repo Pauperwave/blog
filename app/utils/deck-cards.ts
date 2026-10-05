@@ -32,3 +32,8 @@ export function uniqueDeckCards(cardsBySection: Record<string, ParsedDeckCard[]>
 
   return result
 }
+
+/** One entry per copy: a card with quantity 4 appears 4 times. */
+export function expandCopies<T extends { quantity: number }>(cards: T[]): T[] {
+  return cards.flatMap(card => Array.from({ length: card.quantity }, () => card))
+}

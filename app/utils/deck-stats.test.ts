@@ -79,5 +79,13 @@ describe('deck stats', () => {
       expect(stats.averageManaValue).toBe(0)
       expect(stats.landCount).toBe(0)
     })
+
+    it('counts cards per type in section order, without sideboard or empty types', () => {
+      expect(computeDeckStats(cardsBySection).typeCounts).toEqual([
+        { section: 'Creatures', count: 4 },
+        { section: 'Instants', count: 3 },
+        { section: 'Lands', count: 10 }
+      ])
+    })
   })
 })

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { uniqueDeckCards } from './deck-cards'
+import { expandCopies, uniqueDeckCards } from './deck-cards'
 
 const sections = ['Creatures', 'Instants', 'Sideboard']
 
@@ -43,5 +43,17 @@ describe('uniqueDeckCards', () => {
       Lands: [{ name: 'Island', quantity: 10, imageUrl: 'island.jpg' }]
     }
     expect(uniqueDeckCards(cardsBySection, sections)).toEqual([])
+  })
+})
+
+describe('expandCopies', () => {
+  it('repeats each card once per copy, keeping the order', () => {
+    const bolt = { name: 'Lightning Bolt', quantity: 3 }
+    const snipe = { name: 'Guttersnipe', quantity: 1 }
+    expect(expandCopies([bolt, snipe]).map(card => card.name)).toEqual(['Lightning Bolt', 'Lightning Bolt', 'Lightning Bolt', 'Guttersnipe'])
+  })
+
+  it('returns an empty list for no cards', () => {
+    expect(expandCopies([])).toEqual([])
   })
 })

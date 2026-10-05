@@ -10,9 +10,13 @@ export interface DeckStats {
   pips: { color: 'W' | 'U' | 'B' | 'R' | 'G'; count: number }[]
   averageManaValue: number
   landCount: number
+  /** Cards per type in the main deck (sideboard excluded), only types that appear, in section order */
+  typeCounts: { section: string; count: number }[]
 }
 
 const COLORS = ['W', 'U', 'B', 'R', 'G'] as const
+const NON_LAND_SECTIONS = ['Creatures', 'Instants', 'Sorceries', 'Artifacts', 'Enchantments']
+const MAIN_DECK_SECTIONS = [...NON_LAND_SECTIONS, 'Lands']
 const MAX_CURVE_VALUE = 7
 
 /** Mana value of a cost like "{2}{U}{U}"; split/DFC costs ("{1}{R} // {2}{U}") use the first face. */
@@ -47,8 +51,7 @@ export function countColorPips(manaCost: string): Record<string, number> {
 const sumQuantities = (cards: DeckStatsCard[] = []) => cards.reduce((total, card) => total + card.quantity, 0)
 
 export function computeDeckStats(cardsBySection: Record<string, DeckStatsCard[]>): DeckStats {
-  const nonLandSections = ['Creatures', 'Instants', 'Sorceries', 'Artifacts', 'Enchantments']
-  const nonLandCards = nonLandSections.flatMap(section => cardsBySection[section] ?? [])
+  const nonLandCards = NON_LAND_SECTIONS.flatMap(section => cardsBySection[section] ?? [])
 
   const curveCounts = Array.from({ length: MAX_CURVE_VALUE + 1 }, () => 0)
   const pipCounts: Record<string, number> = {}
@@ -75,6 +78,9 @@ export function computeDeckStats(cardsBySection: Record<string, DeckStatsCard[]>
     })),
     pips: COLORS.filter(color => pipCounts[color]).map(color => ({ color, count: pipCounts[color] ?? 0 })),
     averageManaValue: nonLandCount ? totalManaValue / nonLandCount : 0,
-    landCount
+    landCount,
+    typeCounts: MAIN_DECK_SECTIONS
+      .map(section => ({ section, count: sumQuantities(cardsBySection[section]) }))
+      .filter(type => type.count > 0)
   }
 }
