@@ -10,6 +10,7 @@ import { pipeline } from 'stream/promises'
 import { createGunzip } from 'zlib'
 import Database from 'better-sqlite3'
 import { readFile } from 'fs/promises'
+import { applyBasicLandOverrides } from './basic-lands.ts'
 
 const BULK_DATA_API = 'https://api.scryfall.com/bulk-data'
 const DB_PATH = './server/database/cards.db'
@@ -301,6 +302,9 @@ async function main() {
 
     // Step 4: Import Pauper cards
     await importPauperCards(db)
+
+    console.log('🏞️  Pinning basic lands to Theros Beyond Death printings...')
+    await applyBasicLandOverrides(db, SCRYFALL_HEADERS)
 
     // Step 5: Show stats
     const stats = db.prepare('SELECT COUNT(*) as count FROM cards').get() as { count: number }
