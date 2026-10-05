@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { formatDecklistForArena, formatDecklistForMTGO, safeParse } from '#shared/utils'
+import { DECK_SECTIONS, MAIN_DECK_SECTIONS, SIDEBOARD_SECTION, formatDecklistForArena, formatDecklistForMTGO, safeParse } from '#shared/utils'
 import { provideDecklistContext, type DecklistHeaderInfo } from '~/composables/useDecklistContext'
 import { uniqueDeckCards } from '~/utils/deck-cards'
 import { useDecklistStyles } from '~/composables/useDecklistStyles'
@@ -36,8 +36,6 @@ const anchorId = computed(() =>
 
 const { copyToClipboard } = useCopyToClipboard()
 
-const SECTIONS = ['Creatures', 'Instants', 'Sorceries', 'Artifacts', 'Enchantments', 'Lands', 'Sideboard'] as const
-
 const { headerClass } = useDecklistStyles(props.headerGradient)
 
 const cardsBySection = computed(() =>
@@ -49,10 +47,11 @@ const counts = computed(() =>
 )
 
 const mainDeckSections = computed(() =>
-  SECTIONS.filter(s => s !== 'Sideboard' && (cardsBySection.value[s] ?? []).length > 0)
+  MAIN_DECK_SECTIONS.filter(section => (cardsBySection.value[section] ?? []).length > 0)
 )
 
-const hasSideboard = computed(() => (cardsBySection.value['Sideboard'] ?? []).length > 0)
+const sideboardCards = computed(() => cardsBySection.value[SIDEBOARD_SECTION] ?? [])
+const hasSideboard = computed(() => sideboardCards.value.length > 0)
 
 const { isMobile } = useDevice()
 const showStats = ref(false)
@@ -74,7 +73,7 @@ const headerInfo = computed<DecklistHeaderInfo>(() => ({
 }))
 
 // What the card viewers (modal, overlay) walk through
-const deckCards = computed(() => uniqueDeckCards(cardsBySection.value, SECTIONS))
+const deckCards = computed(() => uniqueDeckCards(cardsBySection.value, DECK_SECTIONS))
 
 const openOverlay = () => {
   overlayRequested.value = true
@@ -146,9 +145,9 @@ function copyDecklist(format: 'mtgo' | 'arena') {
           <!-- Sideboard (Right) -->
           <div v-if="hasSideboard">
             <DecklistSection
-              section="Sideboard"
-              :cards="cardsBySection['Sideboard'] ?? []"
-              :count="counts['Sideboard'] ?? 0"
+              :section="SIDEBOARD_SECTION"
+              :cards="sideboardCards"
+              :count="counts[SIDEBOARD_SECTION] ?? 0"
             />
           </div>
         </div>

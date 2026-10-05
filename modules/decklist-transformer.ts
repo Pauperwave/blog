@@ -8,7 +8,7 @@ import { createRegExp, digit, whitespace, oneOrMore, char } from 'magic-regexp'
 
 import { getCardsByNames } from '#server/utils/card-database'
 import type { ParsedCard } from '#shared/types'
-import { slugify, buildLog } from '#shared/utils'
+import { DECK_SECTIONS, isDeckSection, slugify, buildLog, type DeckSection } from '#shared/utils'
 import { getFencedRanges, isInsideFence } from './card-tooltip-transformer'
 
 export default defineNuxtModule({
@@ -170,36 +170,8 @@ const CARD_PATTERN = createRegExp(
   oneOrMore(char).grouped()
 )
 
-const SECTION_HEADERS: Record<string, string> = {
-  'Creatures': 'Creatures',
-  'Instants': 'Instants',
-  'Sorceries': 'Sorceries',
-  'Artifacts': 'Artifacts',
-  'Enchantments': 'Enchantments',
-  'Lands': 'Lands',
-  'Sideboard': 'Sideboard',
-}
-
-const SECTION_ORDER = [
-  'Creatures',
-  'Instants',
-  'Sorceries',
-  'Artifacts',
-  'Enchantments',
-  'Lands',
-  'Sideboard'
-]
-
 async function parseDecklist(rawText: string): Promise<Record<string, ParsedCard[]>> {
-  const grouped: Record<string, ParsedCard[]> = {
-    'Creatures': [],
-    'Instants': [],
-    'Sorceries': [],
-    'Artifacts': [],
-    'Enchantments': [],
-    'Lands': [],
-    'Sideboard': [],
-  }
+  const grouped: Record<string, ParsedCard[]> = Object.fromEntries(DECK_SECTIONS.map(section => [section, []]))
 
   const lines = rawText.split('\n')
 
@@ -209,7 +181,7 @@ async function parseDecklist(rawText: string): Promise<Record<string, ParsedCard
     const trimmed = line.trim()
     if (!trimmed) continue
 
-    if (SECTION_HEADERS[trimmed]) continue
+    if (isDeckSection(trimmed)) continue
 
     const match = trimmed.match(CARD_PATTERN)
     if (match && match[1] && match[2]) {
@@ -233,13 +205,13 @@ async function parseDecklist(rawText: string): Promise<Record<string, ParsedCard
   }
 
   // Second pass: build the grouped structure with mana costs
-  let currentSection: keyof typeof grouped = 'Creatures'
+  let currentSection: DeckSection = DECK_SECTIONS[0]
   for (const line of lines) {
     const trimmed = line.trim()
     if (!trimmed) continue
 
-    if (SECTION_HEADERS[trimmed]) {
-      currentSection = SECTION_HEADERS[trimmed] as keyof typeof grouped
+    if (isDeckSection(trimmed)) {
+      currentSection = trimmed
       continue
     }
 
@@ -263,7 +235,7 @@ async function parseDecklist(rawText: string): Promise<Record<string, ParsedCard
   }
 
   const result: Record<string, ParsedCard[]> = {}
-  for (const section of SECTION_ORDER) {
+  for (const section of DECK_SECTIONS) {
     const cards = grouped[section]
     if (cards && cards.length > 0) {
       result[section] = cards

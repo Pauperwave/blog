@@ -1,4 +1,16 @@
 <script setup lang="ts">
+import type { MainDeckSection } from '#shared/utils'
+
+// mana-font icon of each section; typed on the shared sections, so a new section can't miss its icon
+const TYPE_ICONS: Record<MainDeckSection, string> = {
+  Creatures: 'creature',
+  Instants: 'instant',
+  Sorceries: 'sorcery',
+  Artifacts: 'artifact',
+  Enchantments: 'enchantment',
+  Lands: 'land'
+}
+
 const props = defineProps<{
   type: string
   size?: 'sm' | 'md' | 'lg'
@@ -14,19 +26,7 @@ const sizeClass = computed(() => {
   return map[size]
 })
 
-const typeClass = computed(() => {
-  const key = props.type.trim().toLowerCase()
-  const map: Record<string, string> = {
-    artifacts: 'artifact',
-    creatures: 'creature',
-    enchantments: 'enchantment',
-    instants: 'instant',
-    lands: 'land',
-    sorceries: 'sorcery',
-  }
-
-  return map[key]
-})
+const typeClass = computed(() => TYPE_ICONS[props.type as MainDeckSection] as string | undefined)
 </script>
 
 <template>

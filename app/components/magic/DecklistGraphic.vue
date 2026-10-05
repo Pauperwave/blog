@@ -2,6 +2,7 @@
 // Opaque and self-contained (no controls inside) so it can be rendered to an image. Keep a single
 // root element with no comment before it, or $el stops being that element and the export fails.
 // Fixed width: header and footer sit exactly on the margins of the deck (main deck + sideboard)
+import { SIDEBOARD_SECTION } from '#shared/utils'
 import type { DecklistHeaderInfo } from '~/composables/useDecklistContext'
 import { expandCopies, type DeckCard } from '~/utils/deck-cards'
 import type { DeckStats } from '~/utils/deck-stats'
@@ -21,8 +22,8 @@ const PILE_SIZE = 4
 
 // Every copy is its own card, in list order (MTGGoldfish visual deck style).
 // Main deck: piles of 4 copies. Sideboard: a single pile.
-const mainPiles = computed(() => chunk(expandCopies(cards.filter(card => card.section !== 'Sideboard')), PILE_SIZE))
-const sideboardCopies = computed(() => expandCopies(cards.filter(card => card.section === 'Sideboard')))
+const mainPiles = computed(() => chunk(expandCopies(cards.filter(card => card.section !== SIDEBOARD_SECTION)), PILE_SIZE))
+const sideboardCopies = computed(() => expandCopies(cards.filter(card => card.section === SIDEBOARD_SECTION)))
 
 // Representative card art, taken from the deck's own card images (no extra requests)
 const artCard = computed(() => pickDeckArtCard(cards))

@@ -1,3 +1,5 @@
+import { LAND_SECTION, MAIN_DECK_SECTIONS, NON_LAND_SECTIONS } from '#shared/utils'
+
 export interface DeckStatsCard {
   quantity: number
   manaCost: string
@@ -15,8 +17,6 @@ export interface DeckStats {
 }
 
 const COLORS = ['W', 'U', 'B', 'R', 'G'] as const
-const NON_LAND_SECTIONS = ['Creatures', 'Instants', 'Sorceries', 'Artifacts', 'Enchantments']
-const MAIN_DECK_SECTIONS = [...NON_LAND_SECTIONS, 'Lands']
 const MAX_CURVE_VALUE = 7
 
 /** Mana value of a cost like "{2}{U}{U}"; split/DFC costs ("{1}{R} // {2}{U}") use the first face. */
@@ -69,7 +69,7 @@ export function computeDeckStats(cardsBySection: Record<string, DeckStatsCard[]>
   }
 
   const nonLandCount = sumQuantities(nonLandCards)
-  const landCount = sumQuantities(cardsBySection['Lands'])
+  const landCount = sumQuantities(cardsBySection[LAND_SECTION])
 
   return {
     curve: curveCounts.map((count, value) => ({
