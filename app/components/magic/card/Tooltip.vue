@@ -30,6 +30,10 @@ const swipeStartIndex = computed(() =>
   deck?.value.cards.findIndex(card => card.name === name && (!section || card.section === section)) ?? -1
 )
 const currentIndex = ref(swipeStartIndex.value)
+// The carousel remounts at swipeStartIndex on every open, so the caption must restart there too
+watch(showModal, (open) => {
+  if (open) currentIndex.value = swipeStartIndex.value
+})
 const currentCard = computed(() => deck?.value.cards[currentIndex.value])
 const { headerClass } = useDecklistStyles(deck?.value.header.headerGradient)
 
