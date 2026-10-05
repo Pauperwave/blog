@@ -1,7 +1,10 @@
 <script setup lang="ts">
 // Opaque and self-contained (no controls inside) so it can be rendered to an image. Keep a single
 // root element with no comment before it, or $el stops being that element and the export fails.
-// Fixed width: header and footer sit exactly on the margins of the deck (main deck + sideboard)
+// Fixed width: header and footer sit exactly on the margins of the deck (main deck + sideboard).
+// Card sizes come from the CSS variables on the root, also read by DecklistPile:
+// --card-w card width, --card-offset sideboard left/right stagger, --card-strip visible title strip of a piled card
+// Root width: 6 cards (5 columns + sideboard) + sideboard offset + 12.5rem of padding, gaps and the vertical label
 import { SIDEBOARD_SECTION } from '#shared/utils'
 import type { DecklistHeaderInfo } from '~/composables/useDecklistContext'
 import { expandCopies, type DeckCard } from '~/utils/deck-cards'
@@ -30,7 +33,7 @@ const artCard = computed(() => pickDeckArtCard(cards))
 </script>
 
 <template>
-  <div class="flex w-[68rem] flex-col gap-6 bg-default p-6">
+  <div class="flex w-[calc(var(--card-w)*6_+_var(--card-offset)_+_12.5rem)] flex-col gap-6 bg-default p-6 [--card-offset:1.5rem] [--card-strip:2.25rem] [--card-w:9rem]">
     <header class="relative flex items-stretch justify-between gap-x-10 overflow-hidden rounded-xl border border-default bg-elevated px-6 py-5 shadow-sm">
       <DecklistArt
         v-if="artCard"
@@ -55,10 +58,9 @@ const artCard = computed(() => pickDeckArtCard(cards))
       <DecklistCurveChart :curve="stats.curve" class="relative h-28 shrink-0 self-end rounded-lg bg-default/70 px-4 py-3" />
     </header>
 
-    <!-- Card width is 9rem everywhere: main deck columns and sideboard (9rem + 1.5rem left/right offset) -->
     <div class="flex items-stretch justify-between gap-8">
       <!-- 60 cards: 15 piles of 4 in a 5x3 grid -->
-      <div class="grid shrink-0 grid-cols-[repeat(5,9rem)] items-start gap-x-4 gap-y-6">
+      <div class="grid shrink-0 grid-cols-[repeat(5,var(--card-w))] items-start gap-x-4 gap-y-6">
         <DecklistPile
           v-for="(pile, pileIndex) in mainPiles"
           :key="pileIndex"
@@ -71,7 +73,7 @@ const artCard = computed(() => pickDeckArtCard(cards))
           SIDEBOARD
         </span>
         <!-- Cards spread over the main deck's height, so both end on the same bottom edge -->
-        <div class="relative min-h-[37rem] w-42">
+        <div class="relative min-h-[37rem] w-[calc(var(--card-w)+var(--card-offset))]">
           <DecklistPile :cards="sideboardCopies" spread />
         </div>
       </section>

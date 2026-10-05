@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// Sizes come from CSS variables set by DecklistGraphic: --card-strip (visible title strip) and --card-offset (sideboard stagger)
 const { cards, spread = false } = defineProps<{
   cards: { name: string; imageUrl: string }[]
   /** Fill the parent's height with full cards, alternating left and right, first at the top and last at the bottom */
@@ -22,8 +23,8 @@ const spreadStyle = (index: number) => {
       :key="index"
       class="m-0 p-0"
       :class="spread
-        ? ['absolute inset-x-0 hover:z-10', index % 2 === 0 ? 'pe-6' : 'ps-6']
-        : 'relative h-9 overflow-hidden last:h-auto last:overflow-visible hover:z-10 hover:overflow-visible'"
+        ? ['absolute inset-x-0 hover:z-10', index % 2 === 0 ? 'pe-(--card-offset)' : 'ps-(--card-offset)']
+        : 'relative h-(--card-strip) overflow-hidden last:h-auto last:overflow-visible hover:z-10 hover:overflow-visible'"
       :style="spread ? spreadStyle(index) : undefined"
     >
       <img
