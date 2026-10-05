@@ -1,0 +1,37 @@
+<script setup lang="ts">
+const { cards, spread = false } = defineProps<{
+  cards: { name: string; imageUrl: string }[]
+  /** Fill the parent's height with full cards, alternating left and right, first at the top and last at the bottom */
+  spread?: boolean
+}>()
+
+const spreadStyle = (index: number) => {
+  const fraction = cards.length > 1 ? (index / (cards.length - 1)) * 100 : 0
+  return { top: `${fraction}%`, transform: `translateY(-${fraction}%)` }
+}
+</script>
+
+<template>
+  <!-- Stack: every card but the last is clipped to its title strip, hover reveals it fully -->
+  <ul
+    class="m-0 list-none p-0"
+    :class="{ 'absolute inset-0': spread }"
+  >
+    <li
+      v-for="(card, index) in cards"
+      :key="index"
+      class="m-0 p-0"
+      :class="spread
+        ? ['absolute inset-x-0 hover:z-10', index % 2 === 0 ? 'pe-6' : 'ps-6']
+        : 'relative h-9 overflow-hidden last:h-auto last:overflow-visible hover:z-10 hover:overflow-visible'"
+      :style="spread ? spreadStyle(index) : undefined"
+    >
+      <img
+        :src="card.imageUrl"
+        :alt="card.name"
+        crossorigin="anonymous"
+        class="block aspect-[488/680] h-auto w-full rounded-xl"
+      >
+    </li>
+  </ul>
+</template>
