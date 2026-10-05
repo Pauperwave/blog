@@ -27,7 +27,11 @@ defineProps<{
           :back-image="card.backImageUrl"
           :section="section"
         />
-        <MagicCardManaCost v-if="card.manaCost" :cost="card.manaCost" class="min-w-24 justify-start" />
+        <MagicCardManaCost
+          v-if="card.manaCost"
+          :cost="card.manaCost"
+          class="min-w-24 justify-start"
+        />
       </li>
     </ul>
   </div>
