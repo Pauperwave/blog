@@ -8,21 +8,13 @@ const { pips } = defineProps<{
 // Below this share the segment is too narrow to fit the mana symbol
 const MIN_PERCENT_FOR_SYMBOL = 12
 
-const COLOR_STYLES = {
-  W: { name: 'Bianco', fill: 'bg-amber-100 text-gray-900' },
-  U: { name: 'Blu', fill: 'bg-blue-600 text-white' },
-  B: { name: 'Nero', fill: 'bg-gray-950 text-white' },
-  R: { name: 'Rosso', fill: 'bg-red-600 text-white' },
-  G: { name: 'Verde', fill: 'bg-green-600 text-white' }
-} as const
-
 const totalPips = computed(() => pips.reduce((total, pip) => total + pip.count, 0))
 
 const segments = computed(() => pips.map((pip) => {
   const percent = Math.round((pip.count / totalPips.value) * 100)
   return {
     ...pip,
-    ...COLOR_STYLES[pip.color],
+    ...MANA_COLOR_STYLES[pip.color],
     percent,
     showSymbol: percent >= MIN_PERCENT_FOR_SYMBOL
   }

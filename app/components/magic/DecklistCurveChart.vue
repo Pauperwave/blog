@@ -18,7 +18,7 @@ const maxCount = computed(() => Math.max(...curve.map(bucket => bucket.count), 1
     >
       <span class="text-xs font-semibold leading-none">{{ bucket.count || '' }}</span>
       <div
-        class="w-full rounded-t-sm bg-current opacity-70"
+        class="w-full rounded-t-sm bg-primary"
         :style="{ height: `${(bucket.count / maxCount) * 100}%` }"
       />
       <span class="text-xs leading-none">{{ bucket.label }}</span>

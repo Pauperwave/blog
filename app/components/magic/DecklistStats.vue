@@ -64,7 +64,8 @@ const keyFigures = computed(() => [
           <MagicCardManaSymbol :symbol="`{${pip.color}}`" />
           <div class="h-3 flex-1 overflow-hidden rounded bg-elevated">
             <div
-              class="h-full rounded bg-primary"
+              class="h-full rounded"
+              :class="MANA_COLOR_STYLES[pip.color].fill"
               :style="{ width: `${(pip.count / maxPipCount) * 100}%` }"
             />
           </div>
