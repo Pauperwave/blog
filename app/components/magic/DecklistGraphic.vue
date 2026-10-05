@@ -1,0 +1,108 @@
+<script setup lang="ts">
+import type { DecklistContext } from '~/composables/useDecklistContext'
+import type { DeckStats } from '~/utils/deck-stats'
+import MagicCardManaSymbol from './card/ManaSymbol.vue'
+import DecklistArt from './DecklistArt.vue'
+import DecklistColorBars from './DecklistColorBars.vue'
+import DecklistCurveChart from './DecklistCurveChart.vue'
+import DecklistPile from './DecklistPile.vue'
+import DecklistTypeCounts from './DecklistTypeCounts.vue'
+
+const { header, cards } = defineProps<{
+  header: DecklistContext['header']
+  cards: DecklistContext['cards']
+  stats: DeckStats
+}>()
+
+const PILE_SIZE = 4
+
+// Every copy is its own card, in list order (MTGGoldfish visual deck style)
+const copiesOf = (list: DecklistContext['cards']) =>
+  list.flatMap(card => Array.from({ length: card.quantity }, () => card))
+
+// Main deck: piles of 4 copies. Sideboard: a single pile.
+const mainPiles = computed(() => chunk(copiesOf(cards.filter(card => card.section !== 'Sideboard')), PILE_SIZE))
+const sideboardCopies = computed(() => copiesOf(cards.filter(card => card.section === 'Sideboard')))
+
+// Representative card art, taken from the deck's own card images (no extra requests)
+const artCard = computed(() => {
+  const name = findDeckArtCard(header.name)
+  return cards.find(card => card.name === name)
+})
+
+const typeCounts = computed(() => {
+  const counts = new Map<string, number>()
+  for (const card of cards) {
+    if (card.section === 'Sideboard') continue
+    counts.set(card.section, (counts.get(card.section) ?? 0) + card.quantity)
+  }
+  return [...counts].map(([section, count]) => ({ section, count }))
+})
+</script>
+
+<template>
+  <!-- Opaque and self-contained (no controls inside) so it can be rendered to an image -->
+  <div class="flex flex-col bg-default">
+    <header class="flex flex-wrap items-start justify-between gap-x-10 gap-y-4 border-b border-default bg-elevated px-6 py-5 pe-16">
+      <div class="flex items-start gap-5">
+        <DecklistArt
+          v-if="artCard"
+          :src="toArtCropUrl(artCard.imageUrl)"
+          :card="artCard.name"
+        />
+        <div class="flex flex-col gap-3">
+          <div class="flex flex-col gap-1">
+            <div class="flex items-center gap-3">
+              <h2 class="m-0 text-4xl font-extrabold leading-tight">
+                {{ header.name }}
+              </h2>
+              <MagicCardManaSymbol
+                v-if="header.headerGradient"
+                :combination="header.headerGradient"
+              />
+            </div>
+            <p class="m-0 text-xl font-semibold text-muted">
+              {{ header.player }}
+              <span v-if="header.placement"> · {{ header.placement }}</span>
+            </p>
+          </div>
+          <div class="flex flex-wrap items-center gap-x-8 gap-y-2">
+            <DecklistColorBars :pips="stats.pips" />
+            <DecklistTypeCounts :counts="typeCounts" />
+          </div>
+        </div>
+      </div>
+      <DecklistCurveChart :curve="stats.curve" class="me-12 h-24" />
+    </header>
+
+    <!-- Card width is 9rem everywhere: main deck columns and sideboard (9rem + 1.5rem left/right offset) -->
+    <div class="flex items-stretch justify-center gap-8 p-6">
+      <!-- 60 cards: 15 piles of 4 in a 5x3 grid -->
+      <div class="grid shrink-0 grid-cols-[repeat(5,9rem)] items-start gap-x-4 gap-y-6">
+        <DecklistPile
+          v-for="(pile, pileIndex) in mainPiles"
+          :key="pileIndex"
+          :cards="pile"
+        />
+      </div>
+
+      <section v-if="sideboardCopies.length" class="flex shrink-0 gap-4">
+        <span class="self-center rotate-180 text-3xl font-extrabold tracking-[0.3em] [writing-mode:vertical-rl]">
+          SIDEBOARD
+        </span>
+        <!-- Cards spread over the main deck's height, so both end on the same bottom edge -->
+        <div class="relative min-h-[37rem] w-42">
+          <DecklistPile :cards="sideboardCopies" spread />
+        </div>
+      </section>
+    </div>
+
+    <footer class="flex items-end justify-between gap-6 px-6 pb-4">
+      <MagicCopyright />
+      <div class="flex shrink-0 items-center gap-2">
+        <img src="/favicon.ico" alt="" class="size-8">
+        <span class="text-lg font-bold">Pauperwave</span>
+      </div>
+    </footer>
+  </div>
+</template>

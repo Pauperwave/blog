@@ -62,7 +62,8 @@ const handlePointerMove = (ev: PointerEvent) => {
 
 const handleClick = () => {
   tooltipOpen.value = false
-  showModal.value = true
+  if (!isMobile && deck) deck.value.openOverlay()
+  else showModal.value = true
 }
 
 </script>
@@ -106,7 +107,7 @@ const handleClick = () => {
     </template>
   </UTooltip>
 
-  <!-- Card modal: tap on mobile, click on desktop -->
+  <!-- Card modal: swipeable deck cards on mobile, single card on desktop outside decklists -->
   <UModal
     v-model:open="showModal"
     :title="cardLabel"
@@ -125,8 +126,7 @@ const handleClick = () => {
           v-slot="{ item }"
           :items="deck.cards"
           :start-index="swipeStartIndex"
-          :arrows="!isMobile"
-          :ui="{ container: '-ms-2', item: 'basis-[92%] ps-2', prev: 'sm:start-2', next: 'sm:end-2' }"
+          :ui="{ container: '-ms-2', item: 'basis-[92%] ps-2' }"
           @select="currentIndex = $event"
         >
           <MagicCardFlipImage

@@ -55,6 +55,10 @@ const hasSideboard = computed(() => (cardsBySection.value['Sideboard'] ?? []).le
 
 const { isMobile } = useDevice()
 const showStats = ref(false)
+// Loaded on first open only, so decklists that never open it don't pay for it
+const DecklistOverlay = defineAsyncComponent(() => import('./DecklistOverlay.vue'))
+const showOverlay = ref(false)
+const overlayRequested = ref(false)
 const deckStats = computed(() => computeDeckStats(cardsBySection.value))
 
 // Lets the mobile card modal show the deck header and swipe between the deck's cards
@@ -71,9 +75,16 @@ const swipeCards = computed(() => {
   }
   return result
 })
+
+const openOverlay = () => {
+  overlayRequested.value = true
+  showOverlay.value = true
+}
+
 provideDecklistContext(computed(() => ({
   header: { name: props.name, player: props.player, placement: props.placement, headerGradient: props.headerGradient },
-  cards: swipeCards.value
+  cards: swipeCards.value,
+  openOverlay
 })))
 
 // Copy decklist to clipboard in the import format of the given client
@@ -173,18 +184,25 @@ async function copyDecklist(format: 'mtgo' | 'arena') {
             @click="copyDecklist('arena')"
           />
           <UButton
-            v-if="isMobile"
-            icon="i-lucide-chart-column"
+            :icon="isMobile ? 'i-lucide-chart-column' : 'i-lucide-layout-grid'"
             size="sm"
             variant="subtle"
             class="cursor-pointer"
-            aria-label="Mostra le statistiche del mazzo"
-            label="Statistiche"
-            @click="showStats = true"
+            :label="isMobile ? 'Statistiche' : 'Vista visuale'"
+            @click="isMobile ? showStats = true : openOverlay()"
           />
         </div>
       </template>
     </UCard>
+
+    <!-- Desktop overlay: card grid + stats -->
+    <DecklistOverlay
+      v-if="!isMobile && overlayRequested"
+      v-model:open="showOverlay"
+      :header="{ name, player, placement, headerGradient }"
+      :cards="swipeCards"
+      :stats="deckStats"
+    />
 
     <!-- Mobile stats overlay -->
     <UModal

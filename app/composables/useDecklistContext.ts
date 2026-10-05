@@ -18,6 +18,8 @@ export interface DecklistContext {
   }
   /** Unique cards per section, in list order */
   cards: DecklistSwipeCard[]
+  /** Opens the desktop deck overlay */
+  openOverlay: () => void
 }
 
 const DECKLIST_CONTEXT_KEY: InjectionKey<ComputedRef<DecklistContext>> = Symbol('decklistContext')
