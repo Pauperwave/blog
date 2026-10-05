@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { toCanvas } from 'html-to-image'
-import type { DecklistContext } from '~/composables/useDecklistContext'
+import type { DecklistHeaderInfo, DecklistSwipeCard } from '~/composables/useDecklistContext'
 import type { DeckStats } from '~/utils/deck-stats'
 import DecklistGraphic from './DecklistGraphic.vue'
 
 const { header } = defineProps<{
-  header: DecklistContext['header']
-  cards: DecklistContext['cards']
+  header: DecklistHeaderInfo
+  cards: DecklistSwipeCard[]
   stats: DeckStats
 }>()
 

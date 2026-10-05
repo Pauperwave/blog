@@ -9,21 +9,20 @@ export interface DecklistSwipeCard {
   backImageUrl?: string
 }
 
-export interface DecklistContext {
-  header: {
-    name: string
-    player?: string
-    placement?: string
-    headerGradient?: ManaCombination
-  }
-  /** Unique cards per section, in list order */
-  cards: DecklistSwipeCard[]
-  /** Opens the desktop deck overlay */
-  openOverlay: () => void
+export interface DecklistHeaderInfo {
+  name: string
+  player?: string
+  placement?: string
+  headerGradient?: ManaCombination
 }
 
-const DECKLIST_CONTEXT_KEY: InjectionKey<ComputedRef<DecklistContext>> = Symbol('decklistContext')
+export interface DecklistContext {
+  /** Opens the card viewer on the given card: swipeable modal on mobile, deck overlay on desktop */
+  openCard: (name: string, section: string) => void
+}
 
-export const provideDecklistContext = (context: ComputedRef<DecklistContext>) => provide(DECKLIST_CONTEXT_KEY, context)
+const DECKLIST_CONTEXT_KEY: InjectionKey<DecklistContext> = Symbol('decklistContext')
+
+export const provideDecklistContext = (context: DecklistContext) => provide(DECKLIST_CONTEXT_KEY, context)
 
 export const injectDecklistContext = () => inject(DECKLIST_CONTEXT_KEY, null)

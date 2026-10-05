@@ -2,7 +2,7 @@
 // Opaque and self-contained (no controls inside) so it can be rendered to an image. Keep a single
 // root element with no comment before it, or $el stops being that element and the export fails.
 // Fixed width: header and footer sit exactly on the margins of the deck (main deck + sideboard)
-import type { DecklistContext } from '~/composables/useDecklistContext'
+import type { DecklistHeaderInfo, DecklistSwipeCard } from '~/composables/useDecklistContext'
 import type { DeckStats } from '~/utils/deck-stats'
 import DecklistArt from './DecklistArt.vue'
 import DecklistColorBars from './DecklistColorBars.vue'
@@ -11,15 +11,15 @@ import DecklistPile from './DecklistPile.vue'
 import DecklistTypeCounts from './DecklistTypeCounts.vue'
 
 const { header, cards } = defineProps<{
-  header: DecklistContext['header']
-  cards: DecklistContext['cards']
+  header: DecklistHeaderInfo
+  cards: DecklistSwipeCard[]
   stats: DeckStats
 }>()
 
 const PILE_SIZE = 4
 
 // Every copy is its own card, in list order (MTGGoldfish visual deck style)
-const copiesOf = (list: DecklistContext['cards']) =>
+const copiesOf = (list: DecklistSwipeCard[]) =>
   list.flatMap(card => Array.from({ length: card.quantity }, () => card))
 
 // Main deck: piles of 4 copies. Sideboard: a single pile.

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { injectDecklistContext } from '~/composables/useDecklistContext'
-import { useDecklistStyles } from '~/composables/useDecklistStyles'
 
 interface Props {
   name: string
@@ -20,22 +19,14 @@ const cardLabel = computed(() => set ? `${name} (${set})` : name)
 const tooltipOpen = ref(false)
 const anchor = ref({ x: 0, y: 0 })
 const showModal = ref(false)
+// Mounted on first use: most card names never open the standalone modal
+const modalRequested = ref(false)
 
 // Composables
 const { isMobile } = useDevice()
 
-// Provided by Decklist: deck header + cards the mobile modal can swipe through
+// Provided by Decklist: its shared viewer (swipeable modal / overlay) opens on this card
 const deck = injectDecklistContext()
-const swipeStartIndex = computed(() =>
-  deck?.value.cards.findIndex(card => card.name === name && (!section || card.section === section)) ?? -1
-)
-const currentIndex = ref(swipeStartIndex.value)
-// The carousel remounts at swipeStartIndex on every open, so the caption must restart there too
-watch(showModal, (open) => {
-  if (open) currentIndex.value = swipeStartIndex.value
-})
-const currentCard = computed(() => deck?.value.cards[currentIndex.value])
-const { headerClass } = useDecklistStyles(deck?.value.header.headerGradient)
 
 const reference = computed(() => ({
   getBoundingClientRect: () => ({
@@ -66,10 +57,13 @@ const handlePointerMove = (ev: PointerEvent) => {
 
 const handleClick = () => {
   tooltipOpen.value = false
-  if (!isMobile && deck) deck.value.openOverlay()
-  else showModal.value = true
+  if (deck) {
+    deck.openCard(name, section)
+    return
+  }
+  modalRequested.value = true
+  showModal.value = true
 }
-
 </script>
 
 <template>
@@ -111,8 +105,9 @@ const handleClick = () => {
     </template>
   </UTooltip>
 
-  <!-- Card modal: swipeable deck cards on mobile, single card on desktop outside decklists -->
+  <!-- Standalone card modal, for card names outside a decklist (a decklist has its own shared viewer) -->
   <UModal
+    v-if="modalRequested"
     v-model:open="showModal"
     :title="cardLabel"
     :description="`${cardLabel} card image`"
@@ -122,34 +117,7 @@ const handleClick = () => {
     }"
   >
     <template #content>
-      <div v-if="deck && currentCard" class="flex flex-col gap-3 p-2">
-        <div class="rounded-xl p-4" :class="headerClass">
-          <MagicDecklistHeader v-bind="deck.header" />
-        </div>
-        <UCarousel
-          v-slot="{ item }"
-          :items="deck.cards"
-          :start-index="swipeStartIndex"
-          :ui="{ container: '-ms-2', item: 'basis-[92%] ps-2' }"
-          @select="currentIndex = $event"
-        >
-          <MagicCardFlipImage
-            :image="item.imageUrl"
-            :back-image="item.backImageUrl"
-            :label="item.name"
-            compact
-          />
-        </UCarousel>
-        <div class="text-center text-white">
-          <p class="m-0 font-semibold">
-            {{ currentCard.quantity }}× {{ currentCard.name }}
-          </p>
-          <p class="m-0 text-sm opacity-80">
-            {{ currentCard.section }} · {{ currentIndex + 1 }} / {{ deck.cards.length }}
-          </p>
-        </div>
-      </div>
-      <div v-else class="p-4">
+      <div class="p-4">
         <MagicCardFlipImage :image="image" :back-image="backImage" :label="cardLabel" />
       </div>
     </template>

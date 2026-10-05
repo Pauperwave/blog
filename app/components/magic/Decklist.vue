@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { formatDecklistForArena, formatDecklistForMTGO, safeParse } from '#shared/utils'
-import { provideDecklistContext, type DecklistContext } from '~/composables/useDecklistContext'
+import { provideDecklistContext, type DecklistHeaderInfo, type DecklistSwipeCard } from '~/composables/useDecklistContext'
 import { useDecklistStyles } from '~/composables/useDecklistStyles'
 import type { ManaCombination } from './card/ManaSymbol.vue'
 import DecklistHeader from './DecklistHeader.vue'
@@ -57,14 +57,25 @@ const { isMobile } = useDevice()
 const showStats = ref(false)
 // Loaded on first open only, so decklists that never open it don't pay for it
 const DecklistOverlay = defineAsyncComponent(() => import('./DecklistOverlay.vue'))
+const DecklistCardModal = defineAsyncComponent(() => import('./DecklistCardModal.vue'))
 const showOverlay = ref(false)
 const overlayRequested = ref(false)
+const showCardModal = ref(false)
+const cardModalRequested = ref(false)
+const cardModalIndex = ref(0)
 const deckStats = computed(() => computeDeckStats(cardsBySection.value))
 
-// Lets the mobile card modal show the deck header and swipe between the deck's cards
+const headerInfo = computed<DecklistHeaderInfo>(() => ({
+  name: props.name,
+  player: props.player,
+  placement: props.placement,
+  headerGradient: props.headerGradient
+}))
+
+// Unique cards per section, in list order: what the card viewers (modal, overlay) walk through
 const swipeCards = computed(() => {
   const seen = new Set<string>()
-  const result: DecklistContext['cards'] = []
+  const result: DecklistSwipeCard[] = []
   for (const section of SECTIONS) {
     for (const card of cardsBySection.value[section] ?? []) {
       const key = `${section}-${card.name}`
@@ -81,11 +92,20 @@ const openOverlay = () => {
   showOverlay.value = true
 }
 
-provideDecklistContext(computed(() => ({
-  header: { name: props.name, player: props.player, placement: props.placement, headerGradient: props.headerGradient },
-  cards: swipeCards.value,
-  openOverlay
-})))
+// Tapping a card name opens the swipeable modal on mobile, the deck overlay on desktop
+const openCard = (name: string, section: string) => {
+  if (!isMobile) {
+    openOverlay()
+    return
+  }
+  const index = swipeCards.value.findIndex(card => card.name === name && (!section || card.section === section))
+  if (index < 0) return
+  cardModalIndex.value = index
+  cardModalRequested.value = true
+  showCardModal.value = true
+}
+
+provideDecklistContext({ openCard })
 
 // Copy decklist to clipboard in the import format of the given client
 async function copyDecklist(format: 'mtgo' | 'arena') {
@@ -208,9 +228,18 @@ async function copyDecklist(format: 'mtgo' | 'arena') {
     <DecklistOverlay
       v-if="!isMobile && overlayRequested"
       v-model:open="showOverlay"
-      :header="{ name, player, placement, headerGradient }"
+      :header="headerInfo"
       :cards="swipeCards"
       :stats="deckStats"
+    />
+
+    <!-- Mobile card modal: swipe between the deck's cards -->
+    <DecklistCardModal
+      v-if="isMobile && cardModalRequested"
+      v-model:open="showCardModal"
+      :header="headerInfo"
+      :cards="swipeCards"
+      :start-index="cardModalIndex"
     />
 
     <!-- Stats overlay -->
