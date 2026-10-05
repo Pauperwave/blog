@@ -116,7 +116,7 @@ const handleClick = () => {
     }"
   >
     <template #content>
-      <div v-if="deck && currentCard" class="flex flex-col gap-3 p-4">
+      <div v-if="deck && currentCard" class="flex flex-col gap-3 p-2">
         <div class="rounded-xl p-4" :class="headerClass">
           <MagicDecklistHeader v-bind="deck.header" />
         </div>
@@ -124,7 +124,7 @@ const handleClick = () => {
           v-slot="{ item }"
           :items="deck.cards"
           :start-index="swipeStartIndex"
-          :ui="{ item: 'basis-[85%]' }"
+          :ui="{ container: '-ms-2', item: 'basis-[92%] ps-2' }"
           @select="currentIndex = $event"
         >
           <MagicCardFlipImage
