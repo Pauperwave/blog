@@ -21,7 +21,7 @@ const spreadStyle = (index: number) => {
     <li
       v-for="(card, index) in cards"
       :key="index"
-      class="m-0 p-0"
+      class="group m-0 p-0"
       :class="spread
         ? ['absolute inset-x-0 hover:z-10', index % 2 === 0 ? 'pe-(--card-offset)' : 'ps-(--card-offset)']
         : 'relative h-(--card-strip) overflow-hidden last:h-auto last:overflow-visible hover:z-10 hover:overflow-visible'"
@@ -31,7 +31,7 @@ const spreadStyle = (index: number) => {
         :src="card.imageUrl"
         :alt="card.name"
         crossorigin="anonymous"
-        class="block aspect-[488/680] h-auto w-full rounded-xl"
+        class="block aspect-[488/680] h-auto w-full rounded-xl motion-safe:transition-transform motion-safe:duration-150 motion-safe:group-hover:scale-125"
       >
     </li>
   </ul>
