@@ -27,11 +27,12 @@ const spreadStyle = (index: number) => {
         : 'relative h-(--card-strip) overflow-hidden last:h-auto last:overflow-visible hover:z-10 hover:overflow-visible'"
       :style="spread ? spreadStyle(index) : undefined"
     >
+      <!-- Radius in % keeps the tooltip's corner proportions (12px on a 280px card) at any size, zoom included -->
       <img
         :src="card.imageUrl"
         :alt="card.name"
         crossorigin="anonymous"
-        class="block aspect-[488/680] h-auto w-full rounded-xl motion-safe:transition-transform motion-safe:duration-150 motion-safe:group-hover:scale-200"
+        class="block aspect-[488/680] h-auto w-full rounded-[4.3%/3.1%] motion-safe:transition-transform motion-safe:duration-150 motion-safe:group-hover:scale-200"
       >
     </li>
   </ul>
