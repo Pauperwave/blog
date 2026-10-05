@@ -31,7 +31,7 @@ const spreadStyle = (index: number) => {
         :src="card.imageUrl"
         :alt="card.name"
         crossorigin="anonymous"
-        class="block aspect-[488/680] h-auto w-full rounded-xl motion-safe:transition-transform motion-safe:duration-150 motion-safe:group-hover:scale-125"
+        class="block aspect-[488/680] h-auto w-full rounded-xl motion-safe:transition-transform motion-safe:duration-150 motion-safe:group-hover:scale-200"
       >
     </li>
   </ul>
