@@ -41,9 +41,10 @@ const typeCounts = computed(() => {
 </script>
 
 <template>
-  <!-- Opaque and self-contained (no controls inside) so it can be rendered to an image -->
-  <div class="flex flex-col bg-default">
-    <header class="flex flex-wrap items-start justify-between gap-x-10 gap-y-4 border-b border-default bg-elevated px-6 py-5 pe-16">
+  <!-- Opaque and self-contained (no controls inside) so it can be rendered to an image.
+       Fixed width: header and footer sit exactly on the margins of the deck (main deck + sideboard) -->
+  <div class="flex w-[68rem] flex-col gap-6 bg-default p-6">
+    <header class="flex items-start justify-between gap-x-10 gap-y-4 rounded-xl border border-default bg-elevated px-6 py-5">
       <div class="flex items-start gap-5">
         <DecklistArt
           v-if="artCard"
@@ -72,11 +73,11 @@ const typeCounts = computed(() => {
           </div>
         </div>
       </div>
-      <DecklistCurveChart :curve="stats.curve" class="me-12 h-24" />
+      <DecklistCurveChart :curve="stats.curve" class="h-24 shrink-0" />
     </header>
 
     <!-- Card width is 9rem everywhere: main deck columns and sideboard (9rem + 1.5rem left/right offset) -->
-    <div class="flex items-stretch justify-center gap-8 p-6">
+    <div class="flex items-stretch justify-between gap-8">
       <!-- 60 cards: 15 piles of 4 in a 5x3 grid -->
       <div class="grid shrink-0 grid-cols-[repeat(5,9rem)] items-start gap-x-4 gap-y-6">
         <DecklistPile
@@ -97,7 +98,7 @@ const typeCounts = computed(() => {
       </section>
     </div>
 
-    <footer class="flex items-end justify-between gap-6 px-6 pb-4">
+    <footer class="flex items-end justify-between gap-6">
       <MagicCopyright />
       <div class="flex shrink-0 items-center gap-2">
         <img src="/favicon.ico" alt="" class="size-8">
