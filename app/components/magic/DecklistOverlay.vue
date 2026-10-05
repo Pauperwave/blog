@@ -26,13 +26,15 @@ const fileName = computed(() => deckImageFileName(header))
     :description="`Carte del mazzo ${header.name}`"
   >
     <template #content>
-      <div class="relative h-full overflow-auto pt-14">
-        <div class="absolute end-3 top-3 z-20 flex items-center gap-2">
+      <!-- .self: only clicks on the empty side areas close it, not clicks on the graphic -->
+      <div class="relative h-full overflow-auto pt-14" @click.self="open = false">
+        <!-- pointer-events-none: the empty parts of the bar still close the overlay on click -->
+        <div class="pointer-events-none absolute inset-x-3 top-3 z-20 flex items-center justify-center gap-2">
           <UButton
             icon="i-lucide-copy"
             size="sm"
             variant="subtle"
-            class="cursor-pointer"
+            class="pointer-events-auto cursor-pointer"
             label="Copia immagine"
             :loading="isExporting"
             @click="copyImage"
@@ -41,7 +43,7 @@ const fileName = computed(() => deckImageFileName(header))
             icon="i-lucide-download"
             size="sm"
             variant="subtle"
-            class="cursor-pointer"
+            class="pointer-events-auto cursor-pointer"
             label="Scarica immagine"
             :loading="isExporting"
             @click="downloadImage(fileName)"
@@ -50,7 +52,7 @@ const fileName = computed(() => deckImageFileName(header))
             icon="i-lucide-x"
             color="neutral"
             variant="ghost"
-            class="cursor-pointer"
+            class="pointer-events-auto absolute end-0 cursor-pointer"
             aria-label="Chiudi"
             @click="open = false"
           />
