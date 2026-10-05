@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { toBlob } from 'html-to-image'
+import { toCanvas } from 'html-to-image'
 import type { DecklistContext } from '~/composables/useDecklistContext'
 import type { DeckStats } from '~/utils/deck-stats'
 import DecklistGraphic from './DecklistGraphic.vue'
@@ -16,14 +16,24 @@ const toast = useToast()
 const graphic = useTemplateRef<InstanceType<typeof DecklistGraphic>>('graphic')
 const isExporting = ref(false)
 
-const fileName = computed(() => `${[header.name, header.player].filter((part): part is string => Boolean(part)).map(slugify).join('-')}.png`)
+// pauperwave-deck-player-placement.jpg
+const fileName = computed(() => {
+  const parts = ['pauperwave', header.name, header.player, header.placement]
+  return `${parts.filter((part): part is string => Boolean(part)).map(slugify).join('-')}.jpg`
+})
 
-async function renderImage(): Promise<Blob> {
+// JPEG for the download (the PNG of this photo-heavy image is ~6 MB, social networks recompress anyway),
+// PNG for the clipboard (the only image type ClipboardItem reliably accepts)
+const DOWNLOAD_QUALITY = 0.9
+
+async function renderImage(type: 'image/png' | 'image/jpeg'): Promise<Blob> {
   const element = graphic.value?.$el as HTMLElement | undefined
   if (!element) throw new Error('Graphic area not mounted')
 
-  // pixelRatio 2 for a sharp image on social feeds
-  const blob = await toBlob(element, { pixelRatio: 2, cacheBust: true })
+  // pixelRatio 2 for a sharp image on social feeds. margin 0: the clone would otherwise keep the
+  // computed auto margins (px) of the centered element, shifting the content and cropping the right edge
+  const canvas = await toCanvas(element, { pixelRatio: 2, cacheBust: true, style: { margin: '0' } })
+  const blob = await new Promise<Blob | null>(resolve => canvas.toBlob(resolve, type, DOWNLOAD_QUALITY))
   if (!blob) throw new Error('Image rendering failed')
   return blob
 }
@@ -31,14 +41,15 @@ async function renderImage(): Promise<Blob> {
 async function downloadImage() {
   isExporting.value = true
   try {
-    const url = URL.createObjectURL(await renderImage())
+    const url = URL.createObjectURL(await renderImage('image/jpeg'))
     const link = document.createElement('a')
     link.href = url
     link.download = fileName.value
     link.click()
     URL.revokeObjectURL(url)
     toast.add({ title: 'Immagine scaricata', icon: 'i-lucide-check', color: 'success' })
-  } catch {
+  } catch (error) {
+    console.error('[DecklistOverlay] image download failed', error)
     toast.add({ title: 'Download non riuscito', description: 'Impossibile generare l\'immagine', icon: 'i-lucide-x', color: 'error' })
   } finally {
     isExporting.value = false
@@ -49,9 +60,10 @@ async function copyImage() {
   isExporting.value = true
   try {
     // The promise goes straight into ClipboardItem: Safari only allows the write inside the click gesture
-    await navigator.clipboard.write([new ClipboardItem({ 'image/png': renderImage() })])
+    await navigator.clipboard.write([new ClipboardItem({ 'image/png': renderImage('image/png') })])
     toast.add({ title: 'Immagine copiata', description: 'Incollala dove vuoi', icon: 'i-lucide-check', color: 'success' })
-  } catch {
+  } catch (error) {
+    console.error('[DecklistOverlay] image copy failed', error)
     toast.add({ title: 'Copia non riuscita', description: 'Impossibile copiare l\'immagine negli appunti', icon: 'i-lucide-x', color: 'error' })
   } finally {
     isExporting.value = false
