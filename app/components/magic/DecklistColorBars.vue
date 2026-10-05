@@ -40,7 +40,7 @@ const segments = computed(() => pips.map((pip) => {
     <div
       v-for="segment in segments"
       :key="segment.color"
-      class="flex min-w-0 items-center justify-center [--mana-size:22px]"
+      class="flex min-w-0 items-center justify-center [--mana-size:16px]"
       :class="segment.fill"
       :style="{ flexGrow: segment.count, flexBasis: 0 }"
       :title="`${segment.name}: ${segment.percent}%`"
