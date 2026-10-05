@@ -184,12 +184,21 @@ async function copyDecklist(format: 'mtgo' | 'arena') {
             @click="copyDecklist('arena')"
           />
           <UButton
-            :icon="isMobile ? 'i-lucide-chart-column' : 'i-lucide-layout-grid'"
+            icon="i-lucide-chart-column"
             size="sm"
             variant="subtle"
             class="cursor-pointer"
-            :label="isMobile ? 'Statistiche' : 'Vista visuale'"
-            @click="isMobile ? showStats = true : openOverlay()"
+            label="Statistiche"
+            @click="showStats = true"
+          />
+          <UButton
+            v-if="!isMobile"
+            icon="i-lucide-layout-grid"
+            size="sm"
+            variant="subtle"
+            class="cursor-pointer"
+            label="Vista visuale"
+            @click="openOverlay"
           />
         </div>
       </template>
@@ -204,9 +213,8 @@ async function copyDecklist(format: 'mtgo' | 'arena') {
       :stats="deckStats"
     />
 
-    <!-- Mobile stats overlay -->
+    <!-- Stats overlay -->
     <UModal
-      v-if="isMobile"
       v-model:open="showStats"
       :title="`Statistiche - ${name}`"
       :description="`Statistiche del mazzo ${name}`"
