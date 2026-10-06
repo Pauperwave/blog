@@ -76,6 +76,11 @@ const headerInfo = computed<DecklistHeaderInfo>(() => ({
 // What the card viewers (modal, overlay) walk through
 const deckCards = computed(() => uniqueDeckCards(cardsBySection.value, DECK_SECTIONS))
 
+const openOverlay = () => {
+  overlayRequested.value = true
+  showOverlay.value = true
+}
+
 const route = useRoute()
 const router = useRouter()
 const { origin } = useRequestURL()
@@ -91,11 +96,6 @@ onMounted(() => {
   const isPreviewLink = route.query[DECK_PREVIEW_QUERY] !== undefined && route.hash === `#${anchorId.value}`
   if (!isMobile && isPreviewLink) openOverlay()
 })
-
-const openOverlay = () => {
-  overlayRequested.value = true
-  showOverlay.value = true
-}
 
 // Tapping a card name opens the swipeable modal on mobile, the deck overlay on desktop
 const openCard = (name: string, section: string) => {
