@@ -2,7 +2,7 @@
 
 Documento vivo per tracciare avanzamento, architettura e decisioni. Aggiornare quando cambiano scope, stack o convenzioni rilevanti — non per ogni commit (per quello vedi `docs/CHANGELOG.md`).
 
-**Ultimo aggiornamento:** 2026-07-23
+**Ultimo aggiornamento:** 2026-10-06
 
 ---
 
@@ -34,6 +34,7 @@ Vedi il root `CLAUDE.md` per i dettagli che attraversano più file (content pipe
 - `docs/architecture/card-download-database-flow.md` — flusso Scryfall → SQLite → risoluzione a build time.
 - `docs/architecture/2026-07-10-magic-cards-component-research.md` — reverse engineering del componente `::magic-cards`.
 - `docs/architecture/author-system-improvements.md` — stato del sistema autori.
+- `docs/architecture/decklist-visual-view.md` — "Vista visuale" delle decklist: overlay, statistiche interattive, curva colorata, link `?preview`.
 
 ---
 
@@ -71,3 +72,12 @@ Le decisioni architetturali che *non* sono già ovvie dal codice o coperte dal r
 - **Chiarimento importante (2026-07-24):** il "Vue Component Props Editor" di Studio **riconosce correttamente** `::magic-decklist`/`::magic-sideboard-guide` come componenti — il banner "Conflitto rilevato" non è un problema di parsing MDC. Trovato nel bundle client (`node_modules/nuxt-studio/dist/app/main-*.js`): la funzione di confronto è un banale `content.trim() === websiteContent.trim()` tra il file su GitHub e il contenuto servito dal sito pubblicato — un controllo pensato per rilevare deploy non ancora propagati, che però va sempre in falso positivo su questo progetto perché il sito pubblicato mostra sempre la forma *espansa* post-transform (mai identica al sorgente grezzo, per design). Non verificato empiricamente se il banner blocchi il salvataggio o sia solo un avviso — non testato oltre, perché nel frattempo è stata presa la decisione (utente, 2026-07-24) di procedere comunque con l'editor custom, indipendentemente dall'esito di quel test.
 - **Decisione finale (utente, 2026-07-24):** procedere con un editor custom basato su TipTap (via `UEditor` di `@nuxt/ui`, già disponibile nella versione installata `4.9.0` — nessun bump richiesto) invece di continuare a investire su Nuxt Studio. Vedi `docs/BACKLOG.md` #4 per il piano.
 - **Rimozione completa (2026-09-01):** Nuxt Studio non era mai stato effettivamente disinstallato dopo questa decisione — il modulo, la sua configurazione e le routeRules di `/editor` erano ancora nel codice, inutilizzati (integrazione mai completata). Rimossi: dipendenza `nuxt-studio` da `package.json`, blocco `studio: {...}` e voce `"nuxt-studio"` da `modules` in `nuxt.config.ts`, routeRules `/editor`/`/editor/**`. Nessun file custom da rimuovere in `app/`/`server/` (l'integrazione era puramente config-driven). Da fare manualmente, fuori dal repo: rimuovere le env var `STUDIO_*` da Vercel e dai file `.env`/`.env.local` locali, ed eventualmente disattivare/eliminare la GitHub OAuth App creata per l'auth. `docs/BACKLOG.md` #4 (editor custom) resta l'unico piano concreto per un editor web sui contenuti.
+
+### ADR-004 — Vista visuale: tipo della sideboard da `type_line`, link `?preview` prima del fragment
+
+- **Contesto (2026-10-06):** la vista visuale evidenzia le carte al passaggio del mouse su tipi, curva e colori. Le carte del main deck hanno già la sezione per tipo (scritta dall'autore nel markdown), ma la sideboard è una lista unica: non c'era modo di sapere il tipo delle sue carte, e il costo di mana era l'unico dato disponibile.
+- **Decisione 1 — tipo dal database:** `cards.db` ora salva `type_line` (era già letto da Scryfall ma scartato). Per le sole carte della sideboard il transformer imposta `typeSection` con `sectionFromTypeLine`; per i multitipo vince il primo in questa priorità: Creature, Land, Instant, Sorcery, Artifact, Enchantment (una creatura artefatto è una creatura, una terra artefatto è una terra). `cards.db` è stato rigenerato: stesse 11.091 carte, costi e immagini invariati, in più la colonna.
+- **Decisione 2 — formato dei link:** il parametro che apre la vista visuale va **prima** del fragment (`…?preview#deck-…`). Dopo il `#` farebbe parte dell'id dell'ancora (`deck-…?preview`) e lo scroll all'ancora si romperebbe. Il pulsante "Condividi" dell'overlay copia il link con `?preview`; quello nel footer della decklist copia solo il fragment, perché funziona anche su mobile (dove non c'è l'overlay) e non apre nulla a chi riceve il link.
+- **Decisione 3 — multicolore nella curva:** un segmento multicolore non si può dividere per colore con i soli totali, quindi `computeDeckStats` conta anche, per ogni colonna, quante carte multicolore hanno ciascun colore; così il segmento oro resta a colori solo per le carte che contengono il colore evidenziato (coerente con le carte evidenziate nella griglia).
+- **Refactoring collaterale (stesso giorno):** `deck-stats.ts` diviso in `mana-cost`, `deck-stats`, `deck-highlight`, `curve-display`; estratti `useDeckHighlight`, `useDeckPreviewLink` e `copyLink`; `getFencedRanges` spostato in `modules/utils/fence.ts`; `toCardData` unifica le tre mappature riga→carta di `card-database.ts`; tipi delle sezioni ristretti a `DeckSection`. Aggiunto `pnpm run check:loose-types`. Dettaglio commit per commit: `docs/CHANGELOG.md`, voce 2026-10-06.
+- **Da fare dopo:** migrare i componenti da `const props = defineProps(...)`/`withDefaults` alla destrutturazione reattiva di Vue 3.5; i `loose types` residui segnalati dallo script (casi giustificati in `modules/` e `server/utils/card-database.ts`) vanno rivisti uno per uno.
