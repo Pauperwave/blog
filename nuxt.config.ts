@@ -4,6 +4,10 @@ import { fileURLToPath } from "node:url"
 import { definePerson } from "nuxt-schema-org/schema"
 import appMeta from "./app/app.meta"
 
+// Cache-Control of the prerendered pages: 1 hour browser / 1 day CDN, or 1 day browser / 1 week CDN
+const CACHE_SHORT = 'public, max-age=3600, s-maxage=86400'
+const CACHE_LONG = 'public, max-age=86400, s-maxage=604800'
+
 /**
  * Reads content/authors/*.yml directly (avoids depending on Nuxt Content's
  * runtime query API, which isn't available in this build-time Nitro hook)
@@ -129,7 +133,8 @@ export default defineNuxtConfig({
       // 20000ms both failed, 29000ms succeeds twice cleanly — so the real cold-start
       // time is somewhere in the 20-29s range. Kept at 29000 (close to the hard 30s
       // ceiling) rather than narrowing further, since finding the exact minimum isn't
-      // worth more ~110s build cycles — see docs/audits/2026-07-11-build-performance-investigation.md.
+      // worth more ~110s build cycles — see
+      // docs/audits/2026-07-11-build-performance-investigation.md.
       renderTimeout: 29000
     }
   },
@@ -223,8 +228,10 @@ export default defineNuxtConfig({
       }
     }
   },
-  // Also note that your routeRules with '/articles/**': { prerender: true } and the nitro.prerender.crawlLinks are complementary
-  // the route rules mark those patterns as prerenderable, while crawlLinks is what actually discovers the concrete URLs.
+  // Also note that your routeRules with '/articles/**': { prerender: true } and the
+  // nitro.prerender.crawlLinks are complementary
+  // the route rules mark those patterns as prerenderable, while crawlLinks is what actually
+  // discovers the concrete URLs.
   nitro: {
     preset: 'vercel',
     // disables sourcemaps for server functions
@@ -283,11 +290,11 @@ export default defineNuxtConfig({
   },
   routeRules: {
     // Homepage pre-rendered at build time with cache headers
-    '/': { prerender: true, headers: { 'Cache-Control': 'public, max-age=3600, s-maxage=86400' } },
+    '/': { prerender: true, headers: { 'Cache-Control': CACHE_SHORT } },
     // Articles index page - always prerendered
-    '/articles': { prerender: true, headers: { 'Cache-Control': 'public, max-age=3600, s-maxage=86400' } },
+    '/articles': { prerender: true, headers: { 'Cache-Control': CACHE_SHORT } },
     // Individual articles: prerendered with long cache (rarely change after publication)
-    '/articles/**': { prerender: true, headers: { 'Cache-Control': 'public, max-age=86400, s-maxage=604800' } },
+    '/articles/**': { prerender: true, headers: { 'Cache-Control': CACHE_LONG } },
     // Exclude template files from prerendering. Empirically confirmed redundant for the
     // crawl-based generate flow today (published:false content is never linked anywhere,
     // so crawlLinks never reaches these routes regardless) — kept anyway as cheap, explicit
@@ -299,11 +306,11 @@ export default defineNuxtConfig({
     '/reports/0000-00-00-report-template': { prerender: false },
     '/spoilers/0000-00-00-spoiler-template': { prerender: false },
     // Code of Conduct and Statuto
-    '/docs/**': { prerender: true, headers: { 'Cache-Control': 'public, max-age=3600, s-maxage=86400' } },
+    '/docs/**': { prerender: true, headers: { 'Cache-Control': CACHE_SHORT } },
     // Author profile pages: prerendered explicitly (see the prerender:routes hook above),
     // since author cards link via programmatic navigation with no crawlable <a href>.
-    '/authors': { prerender: true, headers: { 'Cache-Control': 'public, max-age=3600, s-maxage=86400' } },
-    '/authors/**': { prerender: true, headers: { 'Cache-Control': 'public, max-age=3600, s-maxage=86400' } },
+    '/authors': { prerender: true, headers: { 'Cache-Control': CACHE_SHORT } },
+    '/authors/**': { prerender: true, headers: { 'Cache-Control': CACHE_SHORT } },
     // Static assets with long cache
     '/_nuxt/**': { headers: { 'Cache-Control': 'public, max-age=31536000, immutable' } },
     '/assets/**': { headers: { 'Cache-Control': 'public, max-age=31536000, immutable' } }

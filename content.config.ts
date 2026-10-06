@@ -13,7 +13,8 @@ const publishedFilter = (entry: { published?: boolean }) =>
   entry?.published !== false
 
 /**
- * Base schema shared across all blog content types (articles, tutorials, decklists, reports, spoilers).
+ * Base schema shared across all blog content types (articles, tutorials, decklists, reports,
+ * spoilers).
  * Individual collections extend this with their own category literal and extra fields.
  */
 const baseContentSchema = z.object({

@@ -17,7 +17,13 @@ import { join, relative } from 'node:path'
 import ts from 'typescript'
 import { parse as parseSfc } from 'vue/compiler-sfc'
 
-type Kind = 'any' | 'as unknown as' | 'Function type' | 'Object type' | 'ts directive' | 'eslint-disable any'
+type Kind =
+  | 'any'
+  | 'as unknown as'
+  | 'Function type'
+  | 'Object type'
+  | 'ts directive'
+  | 'eslint-disable any'
 
 interface Finding {
   file: string
@@ -41,21 +47,31 @@ function collectFiles(dir: string): string[] {
   })
 }
 
-/** Loose types found in TypeScript source; lines are shifted by lineOffset for script blocks inside a .vue file. */
+/** Loose types in TypeScript source; lines are shifted by lineOffset for .vue script blocks. */
 function analyze(source: string, file: string, lineOffset: number): Finding[] {
   const findings: Finding[] = []
   const lines = source.split('\n')
-  const sourceFile = ts.createSourceFile(file, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS)
+  const sourceFile = ts.createSourceFile(
+    file, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS
+  )
 
   const add = (kind: Kind, position: number) => {
     const { line, character } = sourceFile.getLineAndCharacterOfPosition(position)
-    findings.push({ file, line: line + 1 + lineOffset, column: character + 1, kind, code: (lines[line] ?? '').trim() })
+    findings.push({
+      file,
+      line: line + 1 + lineOffset,
+      column: character + 1,
+      kind,
+      code: (lines[line] ?? '').trim()
+    })
   }
 
   const visit = (node: ts.Node) => {
     if (node.kind === ts.SyntaxKind.AnyKeyword) add('any', node.getStart(sourceFile))
 
-    if (ts.isAsExpression(node) && ts.isAsExpression(node.expression) && node.expression.type.kind === ts.SyntaxKind.UnknownKeyword) {
+    const isDoubleAssertion = ts.isAsExpression(node) && ts.isAsExpression(node.expression)
+      && node.expression.type.kind === ts.SyntaxKind.UnknownKeyword
+    if (isDoubleAssertion) {
       add('as unknown as', node.getStart(sourceFile))
     }
 
@@ -96,7 +112,8 @@ const findings = (dirs.length > 0 ? dirs : DEFAULT_DIRS)
   .sort((a, b) => a.file.localeCompare(b.file) || a.line - b.line || a.column - b.column)
 
 for (const finding of findings) {
-  console.log(`${finding.file}:${finding.line}:${finding.column}  ${finding.kind.padEnd(18)} ${finding.code}`)
+  const position = `${finding.file}:${finding.line}:${finding.column}`
+  console.log(`${position}  ${finding.kind.padEnd(18)} ${finding.code}`)
 }
 
 if (findings.length === 0) {
@@ -105,6 +122,7 @@ if (findings.length === 0) {
   const perKind = Object.entries(Object.groupBy(findings, finding => finding.kind))
     .map(([kind, items]) => `${kind}: ${items?.length ?? 0}`)
     .join(', ')
-  console.log(`\n${findings.length} loose type${findings.length === 1 ? '' : 's'} found (${perKind})`)
+  const noun = findings.length === 1 ? 'loose type' : 'loose types'
+  console.log(`\n${findings.length} ${noun} found (${perKind})`)
   process.exitCode = 1
 }

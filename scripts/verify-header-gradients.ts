@@ -25,7 +25,8 @@ async function processFile(filePath: string): Promise<void> {
       continue
     }
 
-    const hasMismatch = decklist.existingGradient && detected && decklist.existingGradient !== detected
+    const hasMismatch = decklist.existingGradient && detected
+      && decklist.existingGradient !== detected
     const hasNoGradient = !decklist.existingGradient
 
     if (hasMismatch) {

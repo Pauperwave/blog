@@ -236,7 +236,9 @@ export function getDecklistFiles(decklistsDir = 'content/blog/decklists'): strin
  * Fetch card data for a decklist's cards and derive its color identity and
  * suggested headerGradient value.
  */
-export async function detectDeckColors(cards: string[]): Promise<{ gradient: string | null, colors: string[] }> {
+export async function detectDeckColors(
+  cards: string[]
+): Promise<{ gradient: string | null, colors: string[] }> {
   const cardDataMap = await getCardsByNames(cards)
   const deckColors = new Set<string>()
 

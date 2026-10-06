@@ -84,7 +84,9 @@ const getAuthorSlug = (authorName: string) => authorName.toLowerCase().replace(/
 const buildCountOptions = (counts: Record<string, number>) =>
   Object.entries(counts)
     .map(([value, count]) => ({ value, count }))
-    .sort((a, b) => (b.count !== a.count ? b.count - a.count : a.value.localeCompare(b.value, 'it')))
+    .sort((a, b) => (
+      b.count !== a.count ? b.count - a.count : a.value.localeCompare(b.value, 'it')
+    ))
 
 const buildLocationFilterOptions = (locationCounts: Record<string, number>) =>
   buildCountOptions(locationCounts).map(({ value, count }) => ({ location: value, count }))
@@ -92,7 +94,10 @@ const buildLocationFilterOptions = (locationCounts: Record<string, number>) =>
 const buildTagFilterOptions = (tagCounts: Record<string, number>) =>
   buildCountOptions(tagCounts).map(({ value, count }) => ({ tag: value, count }))
 
-const buildAuthorFilterOptions = (authorCounts: Record<string, number>, authorsMap: Record<string, BenchmarkAuthor>) =>
+const buildAuthorFilterOptions = (
+  authorCounts: Record<string, number>,
+  authorsMap: Record<string, BenchmarkAuthor>
+) =>
   Object.entries(authorCounts)
     .map(([authorKey, count]) => {
       const authorName = authorsMap[authorKey]?.name || authorKey
@@ -251,7 +256,10 @@ const loadPublishedArticlesFromContent = async (config: ReturnType<typeof parseA
 const generateSyntheticDataset = (config: ReturnType<typeof parseArgs>) => {
   const rng = createRng(config.seed)
 
-  const authorKeys = Array.from({ length: config.authors }, (_, i) => `author-${String(i + 1).padStart(3, '0')}`)
+  const authorKeys = Array.from(
+    { length: config.authors },
+    (_, i) => `author-${String(i + 1).padStart(3, '0')}`
+  )
   const authorsMap = authorKeys.reduce((acc, key, index) => {
     acc[key] = { name: `Author ${String(index + 1).padStart(3, '0')}` }
     return acc
@@ -319,9 +327,15 @@ const buildQueriesFromContentDataset = (
   )]
 
   const queries: FilterQuery[] = Array.from({ length: config.queries }, () => ({
-    category: categoryPool.length && rng() < 0.45 ? categoryPool[randInt(rng, categoryPool.length)] : null,
-    author: authorSlugPool.length && rng() < 0.25 ? authorSlugPool[randInt(rng, authorSlugPool.length)] : null,
-    location: locationPool.length && rng() < 0.3 ? locationPool[randInt(rng, locationPool.length)] : null,
+    category: categoryPool.length && rng() < 0.45
+      ? categoryPool[randInt(rng, categoryPool.length)]
+      : null,
+    author: authorSlugPool.length && rng() < 0.25
+      ? authorSlugPool[randInt(rng, authorSlugPool.length)]
+      : null,
+    location: locationPool.length && rng() < 0.3
+      ? locationPool[randInt(rng, locationPool.length)]
+      : null,
     tag: tagPool.length && rng() < 0.3 ? tagPool[randInt(rng, tagPool.length)] : null
   }))
 
@@ -346,11 +360,17 @@ const generateDataset = async (config: ReturnType<typeof parseArgs>) => {
 }
 
 const getArticleTopicTagsLegacy = (article: BenchmarkArticle) => {
-  const normalizedLocationSet = new Set(getStringArray(article.locations).map(location => normalizeFilterValue(location)))
-  return getStringArray(article.tags).filter(tag => !normalizedLocationSet.has(normalizeFilterValue(tag)))
+  const normalizedLocationSet = new Set(
+    getStringArray(article.locations).map(location => normalizeFilterValue(location))
+  )
+  return getStringArray(article.tags)
+    .filter(tag => !normalizedLocationSet.has(normalizeFilterValue(tag)))
 }
 
-const buildLegacyFilterOptions = (articles: BenchmarkArticle[], authorsMap: Record<string, BenchmarkAuthor>) => {
+const buildLegacyFilterOptions = (
+  articles: BenchmarkArticle[],
+  authorsMap: Record<string, BenchmarkAuthor>
+) => {
   const categoryFilterOptions = Object.entries(CATEGORY_LABELS).map(([category, label]) => ({
     category,
     label,
@@ -405,12 +425,18 @@ const filterArticlesLegacy = (
   })
 }
 
-const prepareOptimizedState = (articles: BenchmarkArticle[], authorsMap: Record<string, BenchmarkAuthor>): OptimizedPreparedState => {
+const prepareOptimizedState = (
+  articles: BenchmarkArticle[],
+  authorsMap: Record<string, BenchmarkAuthor>
+): OptimizedPreparedState => {
   const prepared = articles.map((article) => {
     const authorName = authorsMap[article.author]?.name || article.author
     const authorSlug = getAuthorSlug(authorName)
-    const normalizedLocationSet = new Set(getStringArray(article.locations).map(location => normalizeFilterValue(location)))
-    const topicTags = getStringArray(article.tags).filter(tag => !normalizedLocationSet.has(normalizeFilterValue(tag)))
+    const normalizedLocationSet = new Set(
+      getStringArray(article.locations).map(location => normalizeFilterValue(location))
+    )
+    const topicTags = getStringArray(article.tags)
+      .filter(tag => !normalizedLocationSet.has(normalizeFilterValue(tag)))
     const normalizedTopicTagSet = new Set(topicTags.map(tag => normalizeFilterValue(tag)))
 
     return {
@@ -455,7 +481,10 @@ const prepareOptimizedState = (articles: BenchmarkArticle[], authorsMap: Record<
   }
 }
 
-const buildOptimizedFilterOptions = (state: OptimizedPreparedState, authorsMap: Record<string, BenchmarkAuthor>) => {
+const buildOptimizedFilterOptions = (
+  state: OptimizedPreparedState,
+  authorsMap: Record<string, BenchmarkAuthor>
+) => {
   const categoryFilterOptions = Object.entries(CATEGORY_LABELS).map(([category, label]) => ({
     category,
     label,
@@ -478,8 +507,10 @@ const filterArticlesOptimized = (state: OptimizedPreparedState, query: FilterQue
   state.prepared.forEach((item) => {
     const matchesCategory = !query.category || item.article.category === query.category
     const matchesAuthor = !query.author || item.authorSlug === query.author
-    const matchesLocation = !normalizedSelectedLocation || item.normalizedLocationSet.has(normalizedSelectedLocation)
-    const matchesTag = !normalizedSelectedTag || item.normalizedTopicTagSet.has(normalizedSelectedTag)
+    const matchesLocation = !normalizedSelectedLocation
+      || item.normalizedLocationSet.has(normalizedSelectedLocation)
+    const matchesTag = !normalizedSelectedTag
+      || item.normalizedTopicTagSet.has(normalizedSelectedTag)
 
     if (matchesCategory && matchesAuthor && matchesLocation && matchesTag) {
       filtered.push(item.article)
@@ -578,7 +609,10 @@ const validateEquivalence = (
   const a = optionsFingerprint(legacyOptions)
   const b = optionsFingerprint(optimizedOptions)
 
-  if (a.category !== b.category || a.author !== b.author || a.location !== b.location || a.tag !== b.tag) {
+  if (
+    a.category !== b.category || a.author !== b.author
+    || a.location !== b.location || a.tag !== b.tag
+  ) {
     throw new Error('Filter option outputs differ between legacy and optimized implementations.')
   }
 
@@ -599,7 +633,9 @@ const validateEquivalence = (
       const legacyTags = getArticleTopicTagsLegacy(article).join('|')
       const optimizedTags = getArticleTopicTagsOptimized(optimizedState, article).join('|')
       if (legacyTags !== optimizedTags) {
-        throw new Error(`Topic tag mismatch on sample query ${index + 1}, article index ${articleIndex + 1}.`)
+        throw new Error(
+          `Topic tag mismatch on sample query ${index + 1}, article index ${articleIndex + 1}.`
+        )
       }
     })
   })
@@ -619,16 +655,24 @@ const main = async () => {
     throw new Error('No published articles found for benchmarking.')
   }
 
-  const distinctLocations = new Set(articles.flatMap(article => getStringArray(article.locations))).size
-  const distinctTopicTags = new Set(articles.flatMap(article => getArticleTopicTagsLegacy(article))).size
+  const distinctLocations = new Set(
+    articles.flatMap(article => getStringArray(article.locations))
+  ).size
+  const distinctTopicTags = new Set(
+    articles.flatMap(article => getArticleTopicTagsLegacy(article))
+  ).size
   const distinctAuthors = Object.keys(authorsMap).length
 
   console.log('Benchmark config')
   console.log(`  mode=${config.mode}`)
   console.log(`  seed=${config.seed}`)
-  console.log(`  articles=${articles.length}, authors=${distinctAuthors}, locations=${distinctLocations}, tags=${distinctTopicTags}`)
+  console.log(
+    `  articles=${articles.length}, authors=${distinctAuthors}, locations=${distinctLocations}, tags=${distinctTopicTags}`
+  )
   if (config.mode === 'synthetic') {
-    console.log(`  synthetic-shape: authors=${config.authors}, locations=${config.locations}, tags=${config.tags}`)
+    console.log(
+      `  synthetic-shape: authors=${config.authors}, locations=${config.locations}, tags=${config.tags}`
+    )
   }
   if (config.limit > 0) {
     console.log(`  limit=${config.limit}`)
@@ -688,12 +732,15 @@ const main = async () => {
   const checksumsMatch = legacyChecksums.every(v => v === referenceChecksum)
     && optimizedChecksums.every(v => v === referenceChecksum)
 
+  const summarize = (times: number[]) =>
+    `${fmt(average(times))} / ${fmt(min(times))} / ${fmt(max(times))}`
+
   console.log('Summary (ms)')
-  console.log(`  legacy cold avg/min/max : ${fmt(average(legacyColdTimes))} / ${fmt(min(legacyColdTimes))} / ${fmt(max(legacyColdTimes))}`)
-  console.log(`  legacy warm avg/min/max : ${fmt(average(legacyWarmTimes))} / ${fmt(min(legacyWarmTimes))} / ${fmt(max(legacyWarmTimes))}`)
-  console.log(`  opt cold avg/min/max    : ${fmt(average(optimizedColdTimes))} / ${fmt(min(optimizedColdTimes))} / ${fmt(max(optimizedColdTimes))}`)
-  console.log(`  opt prepare avg/min/max : ${fmt(average(optimizedPrepareTimes))} / ${fmt(min(optimizedPrepareTimes))} / ${fmt(max(optimizedPrepareTimes))}`)
-  console.log(`  opt warm avg/min/max    : ${fmt(average(optimizedWarmTimes))} / ${fmt(min(optimizedWarmTimes))} / ${fmt(max(optimizedWarmTimes))}`)
+  console.log(`  legacy cold avg/min/max : ${summarize(legacyColdTimes)}`)
+  console.log(`  legacy warm avg/min/max : ${summarize(legacyWarmTimes)}`)
+  console.log(`  opt cold avg/min/max    : ${summarize(optimizedColdTimes)}`)
+  console.log(`  opt prepare avg/min/max : ${summarize(optimizedPrepareTimes)}`)
+  console.log(`  opt warm avg/min/max    : ${summarize(optimizedWarmTimes)}`)
 
   const coldSpeedup = average(legacyColdTimes) / average(optimizedColdTimes)
   const warmSpeedup = average(legacyWarmTimes) / average(optimizedWarmTimes)

@@ -1,6 +1,7 @@
 /**
  * Pins the five basic lands to their Theros Beyond Death printings, so the whole blog shows the
- * same lands. Scryfall's oracle-cards bulk file has one arbitrary printing per card, hence the override.
+ * same lands. Scryfall's oracle-cards bulk file has one arbitrary printing per card, hence the
+ * override.
  */
 
 import type Database from 'better-sqlite3'
@@ -22,17 +23,24 @@ interface PrintingResponse {
   image_uris?: { normal?: string }
 }
 
-export async function applyBasicLandOverrides(db: Database.Database, headers: Record<string, string>): Promise<void> {
+export async function applyBasicLandOverrides(
+  db: Database.Database,
+  headers: Record<string, string>
+): Promise<void> {
   const update = db.prepare('UPDATE cards SET image_url = ?, back_image_url = NULL WHERE name = ?')
 
   for (const { name, number } of BASIC_LAND_PRINTINGS) {
     const response = await fetch(`https://api.scryfall.com/cards/${SET_CODE}/${number}`, { headers })
-    if (!response.ok) throw new Error(`Scryfall ${SET_CODE}/${number} (${name}) failed: ${response.status}`)
+    if (!response.ok) {
+      throw new Error(`Scryfall ${SET_CODE}/${number} (${name}) failed: ${response.status}`)
+    }
 
     const printing = await response.json() as PrintingResponse
     const imageUrl = printing.image_uris?.normal
     if (printing.name !== name || printing.set !== SET_CODE || !imageUrl) {
-      throw new Error(`Unexpected printing for ${SET_CODE}/${number}: expected ${name}, got ${printing.name} (${printing.set})`)
+      throw new Error(
+        `Unexpected printing for ${SET_CODE}/${number}: expected ${name}, got ${printing.name} (${printing.set})`
+      )
     }
 
     update.run(imageUrl, name)

@@ -94,7 +94,8 @@ async function fetchBulkDataInfo(): Promise<BulkDataInfo> {
     throw new Error('Oracle Cards bulk data not found')
   }
 
-  console.log(`✅ Found bulk data (${(oracleCards.compressed_size / 1024 / 1024).toFixed(2)} MB compressed)`)
+  const compressedMb = (oracleCards.compressed_size / 1024 / 1024).toFixed(2)
+  console.log(`✅ Found bulk data (${compressedMb} MB compressed)`)
   console.log(`📅 Last updated: ${oracleCards.updated_at}`)
 
   return oracleCards
@@ -108,7 +109,9 @@ async function downloadBulkData(downloadUri: string): Promise<void> {
     mkdirSync('./server/database', { recursive: true })
   }
 
-  const response = await fetch(downloadUri, { headers: { 'User-Agent': SCRYFALL_HEADERS['User-Agent'] } })
+  const response = await fetch(downloadUri, {
+    headers: { 'User-Agent': SCRYFALL_HEADERS['User-Agent'] }
+  })
   if (!response.ok || !response.body) {
     throw new Error(`Failed to download: ${response.statusText}`)
   }
@@ -185,7 +188,9 @@ async function importPauperCards(db: Database): Promise<void> {
     card.legalities.pauper === 'legal' || card.legalities.pauper === 'banned'
   )
 
-  console.log(`✅ Found ${pauperCards.length} Pauper-legal + Banned cards out of ${allCards.length} total`)
+  console.log(
+    `✅ Found ${pauperCards.length} Pauper-legal + Banned cards out of ${allCards.length} total`
+  )
 
   // Full resync from a fresh bulk snapshot each run — clear out cards from previous
   // runs that no longer appear (renamed/reprinted under a different name upstream,
