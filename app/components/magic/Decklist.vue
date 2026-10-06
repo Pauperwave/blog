@@ -2,7 +2,6 @@
 import { DECK_SECTIONS, MAIN_DECK_SECTIONS, SIDEBOARD_SECTION, formatDecklistForArena, formatDecklistForMTGO, safeParse } from '#shared/utils'
 import { provideDecklistContext, type DecklistHeaderInfo } from '~/composables/useDecklistContext'
 import { uniqueDeckCards } from '~/utils/deck-cards'
-import { DECK_PREVIEW_QUERY, deckPreviewPath } from '~/utils/deck-preview'
 import { useDecklistStyles } from '~/composables/useDecklistStyles'
 import type { ManaCombination } from './card/ManaSymbol.vue'
 import DecklistHeader from './DecklistHeader.vue'
@@ -83,23 +82,7 @@ const openOverlay = () => {
   showOverlay.value = true
 }
 
-const route = useRoute()
-const router = useRouter()
-const { origin } = useRequestURL()
-const previewPath = computed(() => deckPreviewPath(route.path, anchorId.value))
-const shareUrl = computed(() => `${origin}${previewPath.value}`)
-// The footer button shares the plain anchor: it works on mobile too, where there is no visual view
-const deckUrl = computed(() => `${origin}${route.path}#${anchorId.value}`)
-
-// The URL follows the overlay, so it can be shared, and opening it from a link works on load
-watch(showOverlay, (open) => {
-  router.replace(open ? previewPath.value : { path: route.path, hash: `#${anchorId.value}` })
-})
-
-onMounted(() => {
-  const isPreviewLink = route.query[DECK_PREVIEW_QUERY] !== undefined && route.hash === `#${anchorId.value}`
-  if (!isMobile && isPreviewLink) openOverlay()
-})
+const { previewUrl: shareUrl, deckUrl } = useDeckPreviewLink(anchorId, showOverlay, openOverlay)
 
 // Tapping a card name opens the swipeable modal on mobile, the deck overlay on desktop
 const openCard = (name: string, section: string) => {
