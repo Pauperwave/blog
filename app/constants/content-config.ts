@@ -121,7 +121,27 @@ const HOME_SECTION_TITLES: Record<CategoryType, string> = {
 // ============================================================================
 
 /**
- * Query all collections in the correct order defined by CONTENT_TYPE_ORDER.
+ * Fields the article lists (home, articles index, authors, related articles) read. The `body` is
+ * left out on purpose: it is most of a page payload's weight and only the article page needs it.
+ */
+const LIST_FIELDS = [
+  'path',
+  'title',
+  'description',
+  'date',
+  'tags',
+  'decks',
+  'location',
+  'author',
+  'thumbnail',
+  'published',
+  'category',
+  'language',
+  'readingTime'
+] as const
+
+/**
+ * Query all collections in the order defined by CONTENT_TYPE_ORDER, without the article body.
  *
  * @returns Promise resolving to an array of collection data arrays
  *
@@ -133,7 +153,7 @@ const HOME_SECTION_TITLES: Record<CategoryType, string> = {
  */
 export async function queryAllCollections() {
   const queries = CONTENT_TYPE_ORDER.map(type =>
-    queryCollection(COLLECTION_NAMES[type]).all()
+    queryCollection(COLLECTION_NAMES[type]).select(...LIST_FIELDS).all()
   )
   return await Promise.all(queries)
 }
