@@ -141,7 +141,12 @@ const getThumbnailSrc = (thumbnail: unknown) => {
                   <NuxtImg
                     :src="featuredThumbnailSrc"
                     :alt="featuredArticle.title"
-                    loading="lazy"
+                    loading="eager"
+                    fetchpriority="high"
+                    width="800"
+                    height="288"
+                    sizes="sm:100vw lg:800px"
+                    format="webp"
                     class="h-48 md:h-72 w-full object-cover"
                   />
                 </div>
