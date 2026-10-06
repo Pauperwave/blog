@@ -1,0 +1,14 @@
+{
+  // Type check of the standalone scripts (run with node): not covered by `nuxt typecheck`
+  "extends": "../.nuxt/tsconfig.node.json",
+  "compilerOptions": {
+    "lib": ["ESNext"],
+    "types": ["node"]
+  },
+  "include": [
+    "./**/*.ts",
+    "../server/utils/card-database.ts",
+    "../shared/utils/build-log.ts"
+  ],
+  "exclude": []
+}
