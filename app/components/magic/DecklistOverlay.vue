@@ -5,16 +5,23 @@ import { deckImageFileName } from '~/utils/deck-image'
 import type { DeckStats } from '~/utils/deck-stats'
 import DecklistGraphic from './DecklistGraphic.vue'
 
-const { header } = defineProps<{
+const { header, shareUrl } = defineProps<{
   header: DecklistHeaderInfo
   cards: DeckCard[]
   stats: DeckStats
+  /** Link that opens this overlay directly */
+  shareUrl: string
 }>()
 
 const open = defineModel<boolean>('open', { required: true })
 
 const graphic = useTemplateRef<InstanceType<typeof DecklistGraphic>>('graphic')
 const { isExporting, downloadImage, copyImage } = useElementImageExport(() => graphic.value?.$el)
+const { copyToClipboard } = useCopyToClipboard()
+const copyShareUrl = () => copyToClipboard(shareUrl, {
+  successDescription: 'Link copiato negli appunti',
+  errorDescription: 'Impossibile copiare il link negli appunti'
+})
 const fileName = computed(() => deckImageFileName(header))
 </script>
 
@@ -47,6 +54,14 @@ const fileName = computed(() => deckImageFileName(header))
             label="Scarica immagine"
             :loading="isExporting"
             @click="downloadImage(fileName)"
+          />
+          <UButton
+            icon="i-lucide-share-2"
+            size="sm"
+            variant="subtle"
+            class="pointer-events-auto cursor-pointer"
+            label="Condividi"
+            @click="copyShareUrl"
           />
           <UButton
             icon="i-lucide-x"

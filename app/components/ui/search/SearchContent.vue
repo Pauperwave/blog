@@ -95,7 +95,7 @@ const groups = computed(() => [
       .flatMap(f => f._decks.map(d => ({
         label: d.name,
         suffix: [d.player, f.title].filter(Boolean).join(' · '),
-        to: `${f.id}#${d.anchorId}`,
+        to: deckPreviewPath(f.id, d.anchorId),
         icon: 'i-lucide-layers',
       })))
   },

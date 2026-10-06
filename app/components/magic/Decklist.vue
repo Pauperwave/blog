@@ -2,6 +2,7 @@
 import { DECK_SECTIONS, MAIN_DECK_SECTIONS, SIDEBOARD_SECTION, formatDecklistForArena, formatDecklistForMTGO, safeParse } from '#shared/utils'
 import { provideDecklistContext, type DecklistHeaderInfo } from '~/composables/useDecklistContext'
 import { uniqueDeckCards } from '~/utils/deck-cards'
+import { DECK_PREVIEW_QUERY, deckPreviewPath } from '~/utils/deck-preview'
 import { useDecklistStyles } from '~/composables/useDecklistStyles'
 import type { ManaCombination } from './card/ManaSymbol.vue'
 import DecklistHeader from './DecklistHeader.vue'
@@ -74,6 +75,22 @@ const headerInfo = computed<DecklistHeaderInfo>(() => ({
 
 // What the card viewers (modal, overlay) walk through
 const deckCards = computed(() => uniqueDeckCards(cardsBySection.value, DECK_SECTIONS))
+
+const route = useRoute()
+const router = useRouter()
+const { origin } = useRequestURL()
+const previewPath = computed(() => deckPreviewPath(route.path, anchorId.value))
+const shareUrl = computed(() => `${origin}${previewPath.value}`)
+
+// The URL follows the overlay, so it can be shared, and opening it from a link works on load
+watch(showOverlay, (open) => {
+  router.replace(open ? previewPath.value : { path: route.path, hash: `#${anchorId.value}` })
+})
+
+onMounted(() => {
+  const isPreviewLink = route.query[DECK_PREVIEW_QUERY] !== undefined && route.hash === `#${anchorId.value}`
+  if (!isMobile && isPreviewLink) openOverlay()
+})
 
 const openOverlay = () => {
   overlayRequested.value = true
@@ -204,6 +221,7 @@ function copyDecklist(format: 'mtgo' | 'arena') {
       :header="headerInfo"
       :cards="deckCards"
       :stats="deckStats"
+      :share-url="shareUrl"
     />
 
     <!-- Mobile card modal: swipe between the deck's cards -->
