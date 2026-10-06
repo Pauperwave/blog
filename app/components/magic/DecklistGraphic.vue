@@ -5,12 +5,10 @@
 // Card sizes come from the CSS variables on the root, also read by DecklistPile:
 // --card-w card width, --card-offset sideboard left/right stagger, --card-strip visible title strip of a piled card
 // Root width: 6 cards (5 columns + sideboard) + sideboard offset + 12.5rem of padding, gaps and the vertical label
-import { SIDEBOARD_SECTION, type MainDeckSection } from '#shared/utils'
+import { SIDEBOARD_SECTION } from '#shared/utils'
 import type { DecklistHeaderInfo } from '~/composables/useDecklistContext'
 import { expandCopies, type DeckCard } from '~/utils/deck-cards'
-import type { DeckHighlight } from '~/utils/deck-highlight'
 import type { DeckStats } from '~/utils/deck-stats'
-import type { DeckColor } from '~/utils/mana-cost'
 import DecklistArt from './DecklistArt.vue'
 import DecklistColorBars from './DecklistColorBars.vue'
 import DecklistCurveChart from './DecklistCurveChart.vue'
@@ -30,21 +28,7 @@ const PILE_SIZE = 4
 const mainPiles = computed(() => chunk(expandCopies(cards.filter(card => card.section !== SIDEBOARD_SECTION)), PILE_SIZE))
 const sideboardCopies = computed(() => expandCopies(cards.filter(card => card.section === SIDEBOARD_SECTION)))
 
-// Stat under the mouse: the cards outside of it are dimmed
-const highlight = ref<DeckHighlight | null>(null)
-const highlightedColor = computed(() => highlight.value?.kind === 'color' ? highlight.value.color : null)
-const highlightedBucket = computed(() => highlight.value?.kind === 'curve' ? highlight.value.bucket : null)
-const highlightedSection = computed(() => highlight.value?.kind === 'type' ? highlight.value.section : null)
-
-const onColorHover = (color: DeckColor | null) => {
-  highlight.value = color ? { kind: 'color', color } : null
-}
-const onTypeHover = (section: MainDeckSection | null) => {
-  highlight.value = section ? { kind: 'type', section } : null
-}
-const onCurveHover = (bucket: number | null) => {
-  highlight.value = bucket === null ? null : { kind: 'curve', bucket }
-}
+const { highlight, highlightedColor, highlightedBucket, highlightedSection, onColorHover, onTypeHover, onCurveHover } = useDeckHighlight()
 
 // Representative card art, taken from the deck's own card images (no extra requests)
 const artCard = computed(() => pickDeckArtCard(cards))
