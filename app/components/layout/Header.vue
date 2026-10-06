@@ -27,8 +27,10 @@ const navItems: NavigationMenuItem[] = [
     </template>
     <!-- Desktop -->
     <template #default>
-      <!-- <UNavigationMenu :items="navItems" /> -->
-      <SearchButton class="hidden lg:flex" :collapsed="false" />
+      <div class="hidden items-center gap-4 lg:flex">
+        <UNavigationMenu :items="navItems" />
+        <SearchButton :collapsed="false" />
+      </div>
     </template>
     <!-- Mobile slideover -->
     <template #body>
