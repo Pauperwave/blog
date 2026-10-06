@@ -8,7 +8,13 @@ export interface DeckStatsCard {
 
 export interface DeckStats {
   /** Non-land main deck cards per mana value, last bucket is "7+", split by card color */
-  curve: { label: string; count: number; colors: Partial<Record<CurveColor, number>> }[]
+  curve: {
+    label: string
+    count: number
+    colors: Partial<Record<CurveColor, number>>
+    /** Of the multicolor cards, how many have each color (a card counts once for each of its colors) */
+    multicolor: Partial<Record<DeckColor, number>>
+  }[]
   /** Color pips in non-land main deck costs, only colors that appear */
   pips: { color: DeckColor; count: number }[]
   averageManaValue: number
@@ -49,16 +55,32 @@ export function parseManaValue(manaCost: string): number {
   }, 0)
 }
 
-/** The colored segments of a curve column, bottom to top, only the colors that appear. */
-export function curveSegments(colors: Partial<Record<CurveColor, number>>) {
-  return CURVE_COLORS
-    .map(color => ({ color, count: colors[color] ?? 0, ...CURVE_COLOR_STYLES[color] }))
-    .filter(segment => segment.count > 0)
+/**
+ * The colored segments of a curve column, bottom to top, only the colors that appear.
+ * With a highlighted color, the segments of the other colors are dimmed and the multicolor one splits
+ * into the cards that have the color and the ones that don't.
+ */
+export function curveSegments(bucket: Pick<DeckStats['curve'][number], 'colors' | 'multicolor'>, highlightColor: DeckColor | null = null) {
+  return CURVE_COLORS.flatMap((color) => {
+    const count = bucket.colors[color] ?? 0
+    const style = CURVE_COLOR_STYLES[color]
+
+    if (color === 'M' && highlightColor) {
+      const matching = bucket.multicolor[highlightColor] ?? 0
+      return [
+        { color, count: matching, dimmed: false, ...style },
+        { color, count: count - matching, dimmed: true, ...style }
+      ].filter(segment => segment.count > 0)
+    }
+
+    if (count === 0) return []
+    return [{ color, count, dimmed: highlightColor !== null && color !== highlightColor, ...style }]
+  })
 }
 
 /** Tooltip of a curve column: its cost, how many cards and the split by color. */
 export function curveTooltip(bucket: DeckStats['curve'][number]): string {
-  const breakdown = curveSegments(bucket.colors).map(segment => `${segment.name} ${segment.count}`).join(', ')
+  const breakdown = curveSegments(bucket).map(segment => `${segment.name} ${segment.count}`).join(', ')
   return `Costo ${bucket.label}: ${bucket.count}${breakdown ? ` (${breakdown})` : ''}`
 }
 
@@ -116,7 +138,8 @@ export function computeDeckStats(cardsBySection: Record<string, DeckStatsCard[]>
   const curve: DeckStats['curve'] = Array.from({ length: MAX_CURVE_VALUE + 1 }, (_, value) => ({
     label: value === MAX_CURVE_VALUE ? `${MAX_CURVE_VALUE}+` : String(value),
     count: 0,
-    colors: {}
+    colors: {},
+    multicolor: {}
   }))
   const pipCounts: Record<string, number> = {}
   let totalManaValue = 0
@@ -127,6 +150,12 @@ export function computeDeckStats(cardsBySection: Record<string, DeckStatsCard[]>
       const curveColor = cardCurveColor(card.manaCost)
       bucket.count += card.quantity
       bucket.colors[curveColor] = (bucket.colors[curveColor] ?? 0) + card.quantity
+
+      if (curveColor === 'M') {
+        for (const color of Object.keys(countColorPips(card.manaCost)) as DeckColor[]) {
+          bucket.multicolor[color] = (bucket.multicolor[color] ?? 0) + card.quantity
+        }
+      }
     }
     totalManaValue += parseManaValue(card.manaCost) * card.quantity
 

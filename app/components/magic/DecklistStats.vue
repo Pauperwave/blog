@@ -46,7 +46,7 @@ const keyFigures = computed(() => [
             <span class="text-sm font-semibold">{{ bucket.count || '' }}</span>
             <DecklistCurveBar
               v-if="bucket.count"
-              :colors="bucket.colors"
+              :bucket="bucket"
               class="w-full"
               :style="{ height: `${(bucket.count / maxCurveCount) * 100}%` }"
             />

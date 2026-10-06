@@ -45,7 +45,7 @@ const roomForLabel = computed(() => curve.slice(-LABEL_COLUMNS).some(bucket => b
         <span class="text-xs font-semibold leading-none">{{ bucket.count || '' }}</span>
         <DecklistCurveBar
           v-if="bucket.count"
-          :colors="bucket.colors"
+          :bucket="bucket"
           :highlight-color="highlightColor"
           class="w-full motion-safe:transition-[filter] motion-safe:duration-400"
           :class="{ grayscale: highlightBucket !== null && highlightBucket !== index }"

@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { curveSegments, type CurveColor, type DeckColor } from '~/utils/deck-stats'
+import { curveSegments, type DeckColor, type DeckStats } from '~/utils/deck-stats'
 
-const { colors, highlightColor = null } = defineProps<{
-  /** Cards of the column per color; the segments stack from the bottom in color order */
-  colors: Partial<Record<CurveColor, number>>
+const { bucket, highlightColor = null } = defineProps<{
+  /** Column of the curve; its segments stack from the bottom in color order */
+  bucket: DeckStats['curve'][number]
   /** The other colors turn grayscale */
   highlightColor?: DeckColor | null
 }>()
 
-const segments = computed(() => curveSegments(colors))
+const segments = computed(() => curveSegments(bucket, highlightColor))
 </script>
 
 <template>
@@ -16,9 +16,9 @@ const segments = computed(() => curveSegments(colors))
   <div class="flex flex-col-reverse overflow-hidden rounded-t-sm ring-1 ring-default">
     <div
       v-for="segment in segments"
-      :key="segment.color"
+      :key="`${segment.color}-${segment.dimmed}`"
       class="motion-safe:transition-[filter] motion-safe:duration-400"
-      :class="[segment.fill, { grayscale: highlightColor && highlightColor !== segment.color }]"
+      :class="[segment.fill, { grayscale: segment.dimmed }]"
       :style="{ flexGrow: segment.count, flexBasis: 0 }"
     />
   </div>
