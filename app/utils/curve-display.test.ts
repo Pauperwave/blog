@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { curveSegments, curveTooltip } from './curve-display'
+import { curveLegend, curveSegments, curveTooltip } from './curve-display'
 
 describe('curveSegments', () => {
   type Column = Parameters<typeof curveSegments>[0]
@@ -50,5 +50,26 @@ describe('curveTooltip', () => {
 
   it('leaves the split out of an empty column', () => {
     expect(curveTooltip({ label: '0', count: 0, colors: {}, multicolor: {} })).toBe('Costo 0: 0')
+  })
+})
+
+describe('curveLegend', () => {
+  const bucket = (colors: Parameters<typeof curveSegments>[0]['colors']) =>
+    ({ label: '1', count: 1, colors, multicolor: {} })
+
+  it('lists the colors found in any column, in color order', () => {
+    const legend = curveLegend([bucket({ R: 2, C: 1 }), bucket({ W: 1 }), bucket({ R: 1, M: 2 })])
+    expect(legend.map(entry => entry.color)).toEqual(['W', 'R', 'M', 'C'])
+  })
+
+  it('gives the name and fill of each color', () => {
+    expect(curveLegend([bucket({ M: 1 })])).toEqual([
+      { color: 'M', name: 'Multicolore', fill: 'bg-yellow-500 text-gray-900' }
+    ])
+  })
+
+  it('leaves out colors with no cards and gives nothing for an empty curve', () => {
+    expect(curveLegend([bucket({ U: 0 })])).toEqual([])
+    expect(curveLegend([])).toEqual([])
   })
 })

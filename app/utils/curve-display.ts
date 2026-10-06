@@ -29,6 +29,13 @@ export function curveSegments(
   })
 }
 
+/** The colors that appear in at least one column of the curve, in color order, for a legend. */
+export function curveLegend(curve: DeckStats['curve']) {
+  return CURVE_COLORS
+    .filter(color => curve.some(bucket => (bucket.colors[color] ?? 0) > 0))
+    .map(color => ({ color, ...CURVE_COLOR_STYLES[color] }))
+}
+
 /** Tooltip of a curve column: its cost, how many cards and the split by color. */
 export function curveTooltip(bucket: DeckStats['curve'][number]): string {
   const breakdown = curveSegments(bucket)

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { curveTooltip } from '~/utils/curve-display'
+import { curveLegend, curveTooltip } from '~/utils/curve-display'
 import type { DeckStats } from '~/utils/deck-stats'
 import DecklistCurveBar from './DecklistCurveBar.vue'
 
@@ -8,6 +8,7 @@ const { stats } = defineProps<{
 }>()
 
 const maxCurveCount = computed(() => Math.max(...stats.curve.map(bucket => bucket.count), 1))
+const legend = computed(() => curveLegend(stats.curve))
 const maxPipCount = computed(() => Math.max(...stats.pips.map(pip => pip.count), 1))
 
 const keyFigures = computed(() => [
@@ -55,6 +56,19 @@ const keyFigures = computed(() => [
           </div>
         </UTooltip>
       </div>
+      <ul class="m-0 mt-3 flex list-none flex-wrap gap-x-4 gap-y-1 p-0 text-sm">
+        <li
+          v-for="entry in legend"
+          :key="entry.color"
+          class="flex items-center gap-1.5"
+        >
+          <span
+            class="size-3 rounded-sm ring-1 ring-default"
+            :class="entry.fill"
+          />
+          {{ entry.name }}
+        </li>
+      </ul>
     </section>
 
     <section v-if="stats.pips.length">
