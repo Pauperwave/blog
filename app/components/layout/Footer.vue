@@ -133,7 +133,18 @@ const footerSocialLinks = [
             </p>
           </div>
 
-          <VersionBadge />
+          <div class="flex flex-wrap items-center justify-center gap-x-2 font-mono text-sm text-dimmed">
+            <VersionBadge />
+            <span class="hidden sm:inline">•</span>
+            <p class="m-0">
+              Sviluppo del blog a cura di
+              <ULink
+                to="https://github.com/emanuelenardi"
+                target="_blank"
+                class="underline"
+              >Emanuele Nardi</ULink>
+            </p>
+          </div>
         </div>
       </UContainer>
     </template>
