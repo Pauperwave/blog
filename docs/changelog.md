@@ -24,7 +24,7 @@ Documentazione: `docs/architecture/decklist-visual-view.md`.
 - `server/utils/card-database.ts`: `toCardData(row)` unifica la mappatura riga→`CardData` (tre copie), rimossa una mappa `dbCardsByLowercase` mai letta, i `console.log` informativi passano da `buildLog` (i problemi veri restano `console.warn`/`console.error`).
 - Tipi: `isNonLandSection` (type guard, via i cast), `DeckCard.section`/`ParsedCard.section` come `DeckSection`, `SideboardGuideCard` per la guida alla sideboard (che riusava `ParsedCard` con `in`/`out`), `Map<string, CardData>` al posto di `Map<string, any>` nei transformer, rimosso il blocco commentato del pulsante "Editor" dall'header.
 - Classi Tailwind canoniche al posto dei valori arbitrari (`min-h-148`, `brightness-60`, `aspect-488/680`, ...).
-- Nuovo script `pnpm run check:loose-types` (`scripts/check-loose-types.ts`): elenca `any`, `as unknown as`, `Function`/`Object`, `@ts-ignore` e `eslint-disable` di `no-explicit-any`, anche negli script dei `.vue`. Esce con 1 se trova qualcosa; oggi segnala i casi giustificati in `modules/`, `scripts/download-bulk-data.ts` e `server/utils/card-database.ts`.
+- Nuovo script `pnpm run check:loose-types` (`scripts/check-loose-types.ts`): elenca `any`, `as unknown as`, `Function`/`Object`, `@ts-ignore` e `eslint-disable` di `no-explicit-any`, anche negli script dei `.vue`. Esce con 1 se trova qualcosa che non è accettato con un commento `// loose-ok: <motivo>`. Primo passaggio: 14 casi trovati, 12 eliminati (handle di `better-sqlite3` tipizzato in `card-database.ts` e nel transformer dei tooltip, `Readable.fromWeb` nello script di download, un solo helper `onContentFileBeforeParse` al posto di tre cast), 2 accettati: l'import di `#content` e il cast dell'hook di Nuxt Content.
 
 ---
 
