@@ -65,6 +65,6 @@ Misurate su un mazzo da 75 immagini (overlay aperto), con hover simulato: l'aggi
 
 ## Limiti noti
 
-- I tooltip dei grafici sono `UTooltip` (hover/focus): su mobile il dettaglio per colore della curva potrebbe non aprirsi con un tocco, e il pannello Statistiche non ha una legenda per oro e grigio.
+- I tooltip dei grafici sono `UTooltip` (hover/focus): su mobile il dettaglio per colore della curva potrebbe non aprirsi con un tocco. Per questo il pannello Statistiche ha una legenda sotto la curva (`curveLegend`, solo i colori presenti) che spiega anche oro (multicolore) e grigio (incolore).
 - L'immagine dell'header è la carta più giocata non-terra del main deck; a parità vince la prima nell'ordine delle sezioni (`pickDeckArtCard`). Non c'è un campo frontmatter per sceglierla a mano.
 - La sideboard viene valutata per costo e tipo solo se `cards.db` ha `type_line` per quelle carte; carte non trovate nel database restano senza tipo (`neutral`).
