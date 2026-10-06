@@ -3,6 +3,31 @@ title: Changelog
 description: Registro delle modifiche tecniche al progetto
 ---
 
+## 2026-10-06
+
+### Feat: vista visuale delle decklist interattiva
+
+Documentazione: `docs/architecture/decklist-visual-view.md`.
+
+- **Skeleton di caricamento** per le carte e per l'immagine dell'header dell'overlay (`USkeleton`), al posto delle immagini che comparivano a scatti.
+- **Evidenziazione al passaggio del mouse** su tipi, colonne della curva e barra dei colori: le carte fuori dalla statistica diventano `grayscale-80 brightness-60`, quelle evidenziate si mostrano intere davanti alle altre. Le carte della sideboard partecipano (per costo; per tipo grazie a `type_line`). `highlightState` in `deck-highlight.ts`.
+- **Statistiche nell'header:** tooltip `UTooltip` al posto dei `title` nativi, numero di simboli di mana nei segmenti della barra colori, "Costo medio" sul grafico, sottolineatura e zoom del tipo selezionato, cursore a manina, titolo e giocatore sulla stessa riga, layout ristretto per non uscire dall'header con 6 tipi.
+- **Curva colorata** (`DecklistCurveBar`): colonne impilate per colore (W U B R G, multicolore oro, incolore grigio); il segmento multicolore si divide in base al colore evidenziato (`multicolor` per colonna in `computeDeckStats`). Anche nel pannello Statistiche, con i tooltip.
+- **Link condivisibili:** `?preview#ancora` apre la vista visuale (`useDeckPreviewLink`, `deck-preview.ts`), `router.replace` mantiene l'URL in sincronia con l'overlay, la ricerca usa i link `?preview`, pulsante "Condividi" nell'overlay (`?preview`) e nel footer della decklist (solo `#ancora`).
+- **Tipo delle carte della sideboard:** `cards.db` salva `type_line` (rigenerato, 11.091 carte invariate più la colonna); il transformer imposta `typeSection` per la sideboard (`sectionFromTypeLine`, priorità Creature, Land, Instant, Sorcery, Artifact, Enchantment).
+- **Altro:** descrizione del modale Statistiche = giocatore e piazzamento (non più un duplicato del titolo); link "Autori" di nuovo nel menu desktop (era commentato dal 2026-03).
+
+### Refactor
+
+- `app/utils/deck-stats.ts` diviso in `mana-cost.ts`, `deck-stats.ts`, `deck-highlight.ts`, `curve-display.ts` (test spostati di conseguenza).
+- Estratti `useDeckHighlight`, `useDeckPreviewLink` e `copyLink` (in `useCopyToClipboard`); `getFencedRanges`/`isInsideFence` spostati in `modules/utils/fence.ts`.
+- `server/utils/card-database.ts`: `toCardData(row)` unifica la mappatura riga→`CardData` (tre copie), rimossa una mappa `dbCardsByLowercase` mai letta, i `console.log` informativi passano da `buildLog` (i problemi veri restano `console.warn`/`console.error`).
+- Tipi: `isNonLandSection` (type guard, via i cast), `DeckCard.section`/`ParsedCard.section` come `DeckSection`, `SideboardGuideCard` per la guida alla sideboard (che riusava `ParsedCard` con `in`/`out`), `Map<string, CardData>` al posto di `Map<string, any>` nei transformer, rimosso il blocco commentato del pulsante "Editor" dall'header.
+- Classi Tailwind canoniche al posto dei valori arbitrari (`min-h-148`, `brightness-60`, `aspect-488/680`, ...).
+- Nuovo script `pnpm run check:loose-types` (`scripts/check-loose-types.ts`): elenca `any`, `as unknown as`, `Function`/`Object`, `@ts-ignore` e `eslint-disable` di `no-explicit-any`, anche negli script dei `.vue`. Esce con 1 se trova qualcosa; oggi segnala i casi giustificati in `modules/`, `scripts/download-bulk-data.ts` e `server/utils/card-database.ts`.
+
+---
+
 ## 2026-06-18
 
 ### Fix: crash al runtime causato da nuxt-schema-org 6.2.1
