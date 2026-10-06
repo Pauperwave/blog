@@ -15,7 +15,7 @@ Documentazione: `docs/architecture/decklist-visual-view.md`.
 - **Curva colorata** (`DecklistCurveBar`): colonne impilate per colore (W U B R G, multicolore oro, incolore grigio); il segmento multicolore si divide in base al colore evidenziato (`multicolor` per colonna in `computeDeckStats`). Anche nel pannello Statistiche, con i tooltip e una legenda dei colori presenti (`curveLegend`).
 - **Link condivisibili:** `?preview#ancora` apre la vista visuale (`useDeckPreviewLink`, `deck-preview.ts`), `router.replace` mantiene l'URL in sincronia con l'overlay, la ricerca usa i link `?preview`, pulsante "Condividi" nell'overlay (`?preview`) e nel footer della decklist (solo `#ancora`).
 - **Tipo delle carte della sideboard:** `cards.db` salva `type_line` (rigenerato, 11.091 carte invariate più la colonna); il transformer imposta `typeSection` per la sideboard (`sectionFromTypeLine`, priorità Creature, Land, Instant, Sorcery, Artifact, Enchantment).
-- **Altro:** descrizione del modale Statistiche = giocatore e piazzamento (non più un duplicato del titolo); link "Autori" di nuovo nel menu desktop (era commentato dal 2026-03).
+- **Altro:** il footer dell'immagine della vista visuale usa il logo `public/logo/pauperwave.png` (scritta art déco del marchio) invece di favicon e testo in Geist; descrizione del modale Statistiche = giocatore e piazzamento (non più un duplicato del titolo); link "Autori" di nuovo nel menu desktop (era commentato dal 2026-03).
 
 ### Fix: script rotti e non controllati
 

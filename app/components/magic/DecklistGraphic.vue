@@ -114,10 +114,13 @@ const artCard = computed(() => pickDeckArtCard(cards))
 
     <footer class="flex items-end justify-between gap-6">
       <MagicCopyright />
-      <div class="flex shrink-0 items-center gap-2">
-        <img src="/favicon.ico" alt="" class="size-8">
-        <span class="text-lg font-bold">Pauperwave</span>
-      </div>
+      <!-- The logo carries the brand lettering, so the export needs no font -->
+      <img
+        src="/logo/pauperwave.png"
+        alt="Pauperwave"
+        crossorigin="anonymous"
+        class="h-10 w-auto shrink-0"
+      >
     </footer>
   </div>
 </template>
