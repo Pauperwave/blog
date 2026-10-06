@@ -17,6 +17,11 @@ Documentazione: `docs/architecture/decklist-visual-view.md`.
 - **Tipo delle carte della sideboard:** `cards.db` salva `type_line` (rigenerato, 11.091 carte invariate più la colonna); il transformer imposta `typeSection` per la sideboard (`sectionFromTypeLine`, priorità Creature, Land, Instant, Sorcery, Artifact, Enchantment).
 - **Altro:** descrizione del modale Statistiche = giocatore e piazzamento (non più un duplicato del titolo); link "Autori" di nuovo nel menu desktop (era commentato dal 2026-03).
 
+### Fix: script rotti e non controllati
+
+- `decklists:verify-gradients` e `decklists:add-gradients` crashavano (`ERR_PACKAGE_IMPORT_NOT_DEFINED`) da quando `server/utils/card-database.ts` importava `buildLog` da `#shared/utils`, alias che Node puro non risolve. Ora l'import è relativo (`../../shared/utils/build-log.ts`). Nessun controllo lo aveva segnalato perché `nuxt typecheck` non guarda `scripts/`.
+- Nuovo `scripts/tsconfig.json` e `pnpm run typecheck:scripts` (incluso in `pnpm run typecheck`): controlla gli script con le librerie di Node e le stesse opzioni strict del progetto. Corretti gli errori trovati: accessi a indici di array con `noUncheckedIndexedAccess` in `add-header-gradients.ts`, `decklist-gradient.ts` (con un helper `readFrontmatterValue` al posto di quattro regex ripetute) e `benchmark-article-filters.ts` (helper `pickOne`), e i tipi in `download-bulk-data.ts` (`Database.Database`, risposta JSON tipizzata, `frontFace`).
+
 ### Refactor
 
 - `app/utils/deck-stats.ts` diviso in `mana-cost.ts`, `deck-stats.ts`, `deck-highlight.ts`, `curve-display.ts` (test spostati di conseguenza).
