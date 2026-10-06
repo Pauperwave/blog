@@ -18,6 +18,7 @@
     "test:ui": "vitest --ui",
     "test:run": "vitest run",
     "typecheck": "nuxt typecheck",
+    "check:loose-types": "node scripts/check-loose-types.ts",
     "bench:filters": "node scripts/benchmark-article-filters.ts",
     "decklists:add-gradients": "node scripts/add-header-gradients.ts",
     "fix-apostrophe": "node scripts/fix-apostrophe.mjs",
