@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { curveSegments, type DeckColor, type DeckStats } from '~/utils/deck-stats'
+import { curveTooltip, type DeckColor, type DeckStats } from '~/utils/deck-stats'
 import DecklistCurveBar from './DecklistCurveBar.vue'
 
 const { curve, average, highlightBucket = null, highlightColor = null } = defineProps<{
@@ -23,13 +23,6 @@ const LABEL_COLUMNS = 4
 const TALL_SHARE = 0.75
 const roomForLabel = computed(() => curve.slice(-LABEL_COLUMNS).some(bucket => bucket.count >= maxCount.value * TALL_SHARE))
 
-const buckets = computed(() => curve.map((bucket) => {
-  const breakdown = curveSegments(bucket.colors).map(segment => `${segment.name} ${segment.count}`).join(', ')
-  return {
-    ...bucket,
-    tooltip: `Costo ${bucket.label}: ${bucket.count}${breakdown ? ` (${breakdown})` : ''}`
-  }
-}))
 </script>
 
 <template>
@@ -39,9 +32,9 @@ const buckets = computed(() => curve.map((bucket) => {
       Costo medio <span class="font-semibold tabular-nums">{{ average.toFixed(2) }}</span>
     </p>
     <UTooltip
-      v-for="(bucket, index) in buckets"
+      v-for="(bucket, index) in curve"
       :key="bucket.label"
-      :text="bucket.tooltip"
+      :text="curveTooltip(bucket)"
     >
       <div
         class="flex h-full flex-1 cursor-pointer flex-col items-center justify-end gap-1"

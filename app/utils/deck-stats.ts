@@ -56,6 +56,12 @@ export function curveSegments(colors: Partial<Record<CurveColor, number>>) {
     .filter(segment => segment.count > 0)
 }
 
+/** Tooltip of a curve column: its cost, how many cards and the split by color. */
+export function curveTooltip(bucket: DeckStats['curve'][number]): string {
+  const breakdown = curveSegments(bucket.colors).map(segment => `${segment.name} ${segment.count}`).join(', ')
+  return `Costo ${bucket.label}: ${bucket.count}${breakdown ? ` (${breakdown})` : ''}`
+}
+
 /** Color of a card from its cost: hybrid symbols count for both their colors, so they make it multicolor. */
 export function cardCurveColor(manaCost: string): CurveColor {
   const colors = Object.keys(countColorPips(manaCost)) as DeckColor[]

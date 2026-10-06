@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { cardCurveColor, computeDeckStats, countColorPips, curveSegments, highlightState, parseManaValue } from './deck-stats'
+import { cardCurveColor, computeDeckStats, countColorPips, curveSegments, curveTooltip, highlightState, parseManaValue } from './deck-stats'
 
 describe('deck stats', () => {
   describe('parseManaValue', () => {
@@ -168,5 +168,15 @@ describe('curveSegments', () => {
 
   it('gives nothing for an empty column', () => {
     expect(curveSegments({})).toEqual([])
+  })
+})
+
+describe('curveTooltip', () => {
+  it('gives the cost, the card count and the split by color', () => {
+    expect(curveTooltip({ label: '2', count: 5, colors: { R: 3, C: 2 } })).toBe('Costo 2: 5 (Rosso 3, Incolore 2)')
+  })
+
+  it('leaves the split out of an empty column', () => {
+    expect(curveTooltip({ label: '0', count: 0, colors: {} })).toBe('Costo 0: 0')
   })
 })

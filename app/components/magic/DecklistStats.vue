@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { DeckStats } from '~/utils/deck-stats'
+import { curveTooltip, type DeckStats } from '~/utils/deck-stats'
 import DecklistCurveBar from './DecklistCurveBar.vue'
 
 const { stats } = defineProps<{
@@ -37,20 +37,22 @@ const keyFigures = computed(() => [
         Curva di mana
       </h3>
       <div class="flex h-40 items-end gap-2">
-        <div
+        <UTooltip
           v-for="bucket in stats.curve"
           :key="bucket.label"
-          class="flex h-full flex-1 flex-col items-center justify-end gap-1"
+          :text="curveTooltip(bucket)"
         >
-          <span class="text-sm font-semibold">{{ bucket.count || '' }}</span>
-          <DecklistCurveBar
-            v-if="bucket.count"
-            :colors="bucket.colors"
-            class="w-full"
-            :style="{ height: `${(bucket.count / maxCurveCount) * 100}%` }"
-          />
-          <span class="text-sm opacity-80">{{ bucket.label }}</span>
-        </div>
+          <div class="flex h-full flex-1 flex-col items-center justify-end gap-1">
+            <span class="text-sm font-semibold">{{ bucket.count || '' }}</span>
+            <DecklistCurveBar
+              v-if="bucket.count"
+              :colors="bucket.colors"
+              class="w-full"
+              :style="{ height: `${(bucket.count / maxCurveCount) * 100}%` }"
+            />
+            <span class="text-sm opacity-80">{{ bucket.label }}</span>
+          </div>
+        </UTooltip>
       </div>
     </section>
 
