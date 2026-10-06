@@ -34,7 +34,7 @@ const fileName = computed(() => deckImageFileName(header))
   >
     <template #content>
       <!-- .self: only clicks on the empty side areas close it, not clicks on the graphic -->
-      <div class="relative h-full overflow-auto pt-14" @click.self="open = false">
+      <div class="relative h-full overflow-auto pt-10" @click.self="open = false">
         <!-- pointer-events-none: the empty parts of the bar still close the overlay on click -->
         <div class="pointer-events-none absolute inset-x-3 top-3 z-20 flex items-center justify-center gap-2">
           <UButton

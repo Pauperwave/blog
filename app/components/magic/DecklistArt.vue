@@ -17,7 +17,7 @@ const loaded = ref(false)
       :src="src"
       :alt="card"
       crossorigin="anonymous"
-      class="size-full object-cover object-[50%_25%] opacity-50"
+      class="size-full object-cover object-[50%_25%] opacity-75"
       :class="{ hidden: !loaded }"
       @load="loaded = true"
     >
