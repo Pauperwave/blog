@@ -83,7 +83,8 @@ export function buildScryfallCardUrl(parsed: ScryfallParsedCard): string {
     return `${SCRYFALL_API_BASE}/cards/${parsed.set}/${parsed.collector_number}`
   } else if (parsed.set) {
     // Case: set only → /cards/named?exact=...&set=...
-    return `${SCRYFALL_API_BASE}/cards/named?exact=${encodeURIComponent(parsed.name)}&set=${parsed.set}`
+    return `${SCRYFALL_API_BASE}/cards/named?exact=${encodeURIComponent(parsed.name)}`
+      + `&set=${parsed.set}`
   }
   // Case: name only → /cards/named?exact=...
   return `${SCRYFALL_API_BASE}/cards/named?exact=${encodeURIComponent(parsed.name)}`

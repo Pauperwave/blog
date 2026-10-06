@@ -21,7 +21,7 @@ describe('Card Database', () => {
       expect(card).toBeNull()
     })
 
-    it('should resolve a back face image for a transform card, keyed by its front face name', async () => {
+    it('should resolve a back face image for a transform card by its front face name', async () => {
       const card = await getCardByName('Delver of Secrets')
       expect(card).not.toBeNull()
       expect(card?.imageUrl).toBeTruthy()

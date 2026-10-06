@@ -1,5 +1,12 @@
 import { describe, it, expect } from 'vitest'
-import { DECK_SECTIONS, MAIN_DECK_SECTIONS, NON_LAND_SECTIONS, isDeckSection, isNonLandSection, sectionFromTypeLine } from './deck-sections'
+import {
+  DECK_SECTIONS,
+  MAIN_DECK_SECTIONS,
+  NON_LAND_SECTIONS,
+  isDeckSection,
+  isNonLandSection,
+  sectionFromTypeLine
+} from './deck-sections'
 
 describe('deck sections', () => {
   it('puts the sideboard last', () => {
@@ -7,11 +14,13 @@ describe('deck sections', () => {
   })
 
   it('leaves the sideboard out of the main deck sections', () => {
-    expect(MAIN_DECK_SECTIONS).toEqual(['Creatures', 'Instants', 'Sorceries', 'Artifacts', 'Enchantments', 'Lands'])
+    expect(MAIN_DECK_SECTIONS)
+      .toEqual(['Creatures', 'Instants', 'Sorceries', 'Artifacts', 'Enchantments', 'Lands'])
   })
 
   it('leaves lands out of the non-land sections', () => {
-    expect(NON_LAND_SECTIONS).toEqual(['Creatures', 'Instants', 'Sorceries', 'Artifacts', 'Enchantments'])
+    expect(NON_LAND_SECTIONS)
+      .toEqual(['Creatures', 'Instants', 'Sorceries', 'Artifacts', 'Enchantments'])
   })
 
   it('recognizes section names exactly', () => {

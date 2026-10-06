@@ -46,7 +46,8 @@ export function formatDecklistForMTGO(
 }
 
 /**
- * Format decklist for MTG Arena: same lines as MTGO, preceded by the "Deck" header Arena's importer expects
+ * Format decklist for MTG Arena: same lines as MTGO, preceded by the "Deck" header Arena's
+ * importer expects
  * @param mainDeckSections - Array of main deck section names
  * @param cardsBySection - Object mapping section names to card arrays
  * @param hasSideboard - Whether the decklist has a sideboard
