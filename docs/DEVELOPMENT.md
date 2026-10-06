@@ -66,6 +66,7 @@ function calculateTotal(items: any) {
 - Prefer arrow functions
 - Use type inference when obvious
 - Explicit return types for exported functions
+- No loose types: avoid `any`, `as unknown as`, `Function`/`Object` types and `@ts-ignore`-style directives. `pnpm run check:loose-types` lists them (it reads the script blocks of `.vue` files too) and exits with 1 when it finds any; a few justified ones exist in `modules/` and `server/utils/card-database.ts` (dynamic imports and the better-sqlite3 handle)
 
 ### Naming Conventions
 
@@ -260,12 +261,16 @@ const card = await getCardByName('Lightning Bolt')
 
 ```sql
 CREATE TABLE cards (
-  id TEXT PRIMARY KEY,
-  name TEXT NOT NULL,
+  name TEXT PRIMARY KEY,
   mana_cost TEXT,
-  image_url TEXT
+  image_url TEXT,
+  indexed_at INTEGER,
+  back_image_url TEXT,  -- second face of transform/modal double-faced cards
+  type_line TEXT        -- Scryfall type line, e.g. "Artifact Creature — Myr"
 )
 ```
+
+(`back_image_url` and `type_line` are added by migrations in `scripts/download-bulk-data.ts` on databases created before them. See `docs/architecture/card-download-database-flow.md` for the full flow.)
 
 ---
 
