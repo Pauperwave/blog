@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { CURVE_COLORS, type DeckColor, type DeckStats } from '~/utils/deck-stats'
+import { curveSegments, type DeckColor, type DeckStats } from '~/utils/deck-stats'
+import DecklistCurveBar from './DecklistCurveBar.vue'
 
 const { curve, average, highlightBucket = null, highlightColor = null } = defineProps<{
   curve: DeckStats['curve']
@@ -23,13 +24,9 @@ const TALL_SHARE = 0.75
 const roomForLabel = computed(() => curve.slice(-LABEL_COLUMNS).some(bucket => bucket.count >= maxCount.value * TALL_SHARE))
 
 const buckets = computed(() => curve.map((bucket) => {
-  const segments = CURVE_COLORS
-    .map(color => ({ color, count: bucket.colors[color] ?? 0, ...CURVE_COLOR_STYLES[color] }))
-    .filter(segment => segment.count > 0)
-  const breakdown = segments.map(segment => `${segment.name} ${segment.count}`).join(', ')
+  const breakdown = curveSegments(bucket.colors).map(segment => `${segment.name} ${segment.count}`).join(', ')
   return {
     ...bucket,
-    segments,
     tooltip: `Costo ${bucket.label}: ${bucket.count}${breakdown ? ` (${breakdown})` : ''}`
   }
 }))
@@ -53,21 +50,14 @@ const buckets = computed(() => curve.map((bucket) => {
         @mouseleave="emit('hover', null)"
       >
         <span class="text-xs font-semibold leading-none">{{ bucket.count || '' }}</span>
-        <!-- Segments stack from the bottom in color order; the ring keeps the white and black ones visible -->
-        <div
+        <DecklistCurveBar
           v-if="bucket.count"
-          class="flex w-full flex-col-reverse overflow-hidden rounded-t-sm ring-1 ring-default motion-safe:transition-[filter] motion-safe:duration-400"
+          :colors="bucket.colors"
+          :highlight-color="highlightColor"
+          class="w-full motion-safe:transition-[filter] motion-safe:duration-400"
           :class="{ grayscale: highlightBucket !== null && highlightBucket !== index }"
           :style="{ height: `${(bucket.count / maxCount) * 100}%` }"
-        >
-          <div
-            v-for="segment in bucket.segments"
-            :key="segment.color"
-            :class="[segment.fill, { grayscale: highlightColor && highlightColor !== segment.color }]"
-            class="motion-safe:transition-[filter] motion-safe:duration-400"
-            :style="{ flexGrow: segment.count, flexBasis: 0 }"
-          />
-        </div>
+        />
         <span class="text-xs leading-none">{{ bucket.label }}</span>
       </div>
     </UTooltip>

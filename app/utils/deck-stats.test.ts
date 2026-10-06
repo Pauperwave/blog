@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { cardCurveColor, computeDeckStats, countColorPips, highlightState, parseManaValue } from './deck-stats'
+import { cardCurveColor, computeDeckStats, countColorPips, curveSegments, highlightState, parseManaValue } from './deck-stats'
 
 describe('deck stats', () => {
   describe('parseManaValue', () => {
@@ -153,5 +153,20 @@ describe('cardCurveColor', () => {
   it('gives colorless to cards without colored symbols', () => {
     expect(cardCurveColor('{3}')).toBe('C')
     expect(cardCurveColor('')).toBe('C')
+  })
+})
+
+describe('curveSegments', () => {
+  it('lists the colors that appear, bottom to top in color order', () => {
+    const segments = curveSegments({ C: 1, R: 3, W: 2 })
+    expect(segments.map(segment => [segment.color, segment.count])).toEqual([['W', 2], ['R', 3], ['C', 1]])
+  })
+
+  it('leaves out colors with no cards', () => {
+    expect(curveSegments({ U: 0, G: 4 }).map(segment => segment.color)).toEqual(['G'])
+  })
+
+  it('gives nothing for an empty column', () => {
+    expect(curveSegments({})).toEqual([])
   })
 })

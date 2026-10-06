@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { DeckStats } from '~/utils/deck-stats'
+import DecklistCurveBar from './DecklistCurveBar.vue'
 
 const { stats } = defineProps<{
   stats: DeckStats
@@ -42,8 +43,10 @@ const keyFigures = computed(() => [
           class="flex h-full flex-1 flex-col items-center justify-end gap-1"
         >
           <span class="text-sm font-semibold">{{ bucket.count || '' }}</span>
-          <div
-            class="w-full rounded-t bg-primary"
+          <DecklistCurveBar
+            v-if="bucket.count"
+            :colors="bucket.colors"
+            class="w-full"
             :style="{ height: `${(bucket.count / maxCurveCount) * 100}%` }"
           />
           <span class="text-sm opacity-80">{{ bucket.label }}</span>

@@ -1,4 +1,5 @@
 import { LAND_SECTION, MAIN_DECK_SECTIONS, NON_LAND_SECTIONS, SIDEBOARD_SECTION } from '#shared/utils'
+import { CURVE_COLOR_STYLES } from './mana-colors'
 
 export interface DeckStatsCard {
   quantity: number
@@ -46,6 +47,13 @@ export function parseManaValue(manaCost: string): number {
     const generic = content.match(/^(\d+)\//)
     return total + (generic ? Number(generic[1]) : 1)
   }, 0)
+}
+
+/** The colored segments of a curve column, bottom to top, only the colors that appear. */
+export function curveSegments(colors: Partial<Record<CurveColor, number>>) {
+  return CURVE_COLORS
+    .map(color => ({ color, count: colors[color] ?? 0, ...CURVE_COLOR_STYLES[color] }))
+    .filter(segment => segment.count > 0)
 }
 
 /** Color of a card from its cost: hybrid symbols count for both their colors, so they make it multicolor. */
