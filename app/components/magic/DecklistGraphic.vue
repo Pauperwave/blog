@@ -5,7 +5,7 @@
 // Card sizes come from the CSS variables on the root, also read by DecklistPile:
 // --card-w card width, --card-offset sideboard left/right stagger, --card-strip visible title strip of a piled card
 // Root width: 6 cards (5 columns + sideboard) + sideboard offset + 12.5rem of padding, gaps and the vertical label
-import { SIDEBOARD_SECTION } from '#shared/utils'
+import { SIDEBOARD_SECTION, type MainDeckSection } from '#shared/utils'
 import type { DecklistHeaderInfo } from '~/composables/useDecklistContext'
 import { expandCopies, type DeckCard } from '~/utils/deck-cards'
 import type { DeckColor, DeckHighlight, DeckStats } from '~/utils/deck-stats'
@@ -37,7 +37,7 @@ const highlightedSection = computed(() => highlight.value?.kind === 'type' ? hig
 const onColorHover = (color: DeckColor | null) => {
   highlight.value = color ? { kind: 'color', color } : null
 }
-const onTypeHover = (section: string | null) => {
+const onTypeHover = (section: MainDeckSection | null) => {
   highlight.value = section ? { kind: 'type', section } : null
 }
 const onCurveHover = (bucket: number | null) => {

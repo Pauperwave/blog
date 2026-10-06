@@ -6,7 +6,7 @@ import type { FileBeforeParseHook } from '@nuxt/content'
 import { createRegExp, digit, whitespace, oneOrMore, char } from 'magic-regexp'
 
 import { getCardsByNames } from '#server/utils/card-database'
-import type { ParsedCard } from '#shared/types'
+import type { SideboardGuideCard, SideboardGuideSection } from '#shared/types'
 import { buildLog } from '#shared/utils'
 import { getFencedRanges, isInsideFence } from './card-tooltip-transformer'
 
@@ -139,9 +139,9 @@ const CARD_PATTERN = createRegExp(
 )
 
 async function parseSideboardGuide(rawText: string): Promise<{
-  cardsIn: ParsedCard[]
-  cardsOut: ParsedCard[]
-  cardsOutAlt: ParsedCard[]
+  cardsIn: SideboardGuideCard[]
+  cardsOut: SideboardGuideCard[]
+  cardsOutAlt: SideboardGuideCard[]
 }> {
   const sections = {
     in: [] as string[],
@@ -212,9 +212,9 @@ async function parseSideboardGuide(rawText: string): Promise<{
 async function parseCardSection(
   lines: string[],
   cardDataMap: Map<string, any>,
-  section: string
-): Promise<ParsedCard[]> {
-  const cards: ParsedCard[] = []
+  section: SideboardGuideSection
+): Promise<SideboardGuideCard[]> {
+  const cards: SideboardGuideCard[] = []
 
   for (const line of lines) {
     const match = line.match(CARD_PATTERN)
@@ -225,7 +225,7 @@ async function parseCardSection(
       cards.push({
         quantity: parseInt(match[1], 10),
         name: cardName,
-        section: section || '',
+        section,
         manaCost: cardData?.manaCost || '',
         imageUrl: cardData?.imageUrl || '',
         backImageUrl: cardData?.backImageUrl || undefined
@@ -262,9 +262,9 @@ function logSectionsAndDatabaseLookup(
 
 function logSideboardGuideTransformation(
   props: Record<string, string>,
-  cardsIn: ParsedCard[],
-  cardsOut: ParsedCard[],
-  cardsOutAlt: ParsedCard[]
+  cardsIn: SideboardGuideCard[],
+  cardsOut: SideboardGuideCard[],
+  cardsOutAlt: SideboardGuideCard[]
 ): void {
   buildLog(`   📋 Frontmatter props:`, props)
   buildLog(`\n   🎯 Final Parsed Object:`)

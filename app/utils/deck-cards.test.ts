@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { expandCopies, uniqueDeckCards } from './deck-cards'
 
-const sections = ['Creatures', 'Instants', 'Sideboard']
+const sections = ['Creatures', 'Instants', 'Sideboard'] as const
 
 describe('uniqueDeckCards', () => {
   it('follows the given section order, not the order of the keys', () => {
@@ -22,7 +22,7 @@ describe('uniqueDeckCards', () => {
   })
 
   it('takes the type of a sideboard card from its type section, unknown if missing', () => {
-    const cardsBySection = {
+    const cardsBySection: Parameters<typeof uniqueDeckCards>[0] = {
       Sideboard: [
         { name: 'Pyroblast', quantity: 2, imageUrl: 'pyroblast.jpg', typeSection: 'Instants' },
         { name: 'Mystery', quantity: 1, imageUrl: 'mystery.jpg' }

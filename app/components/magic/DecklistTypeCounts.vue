@@ -1,12 +1,14 @@
 <script setup lang="ts">
+import type { MainDeckSection } from '#shared/utils'
+
 const { counts, highlightSection = null } = defineProps<{
-  counts: { section: string; count: number }[]
+  counts: { section: MainDeckSection; count: number }[]
   /** Underlined */
-  highlightSection?: string | null
+  highlightSection?: MainDeckSection | null
 }>()
 
 const emit = defineEmits<{
-  hover: [section: string | null]
+  hover: [section: MainDeckSection | null]
 }>()
 
 </script>

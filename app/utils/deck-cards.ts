@@ -1,14 +1,14 @@
-import { SIDEBOARD_SECTION } from '#shared/utils'
+import { SIDEBOARD_SECTION, type DeckSection, type MainDeckSection } from '#shared/utils'
 
 export interface DeckCard {
   name: string
-  section: string
+  section: DeckSection
   quantity: number
   imageUrl: string
   backImageUrl?: string
   manaCost: string
   /** Section its type belongs to: its own section in the main deck, derived from the type line in the sideboard (unknown if missing). */
-  type?: string
+  type?: MainDeckSection
 }
 
 interface ParsedDeckCard {
@@ -17,14 +17,14 @@ interface ParsedDeckCard {
   imageUrl?: string
   backImageUrl?: string
   manaCost?: string
-  typeSection?: string
+  typeSection?: MainDeckSection
 }
 
 /**
  * Cards of a decklist in section order, one entry per card and section (the same card in main deck
  * and sideboard gives two entries). Cards without an image are left out: they cannot be shown.
  */
-export function uniqueDeckCards(cardsBySection: Record<string, ParsedDeckCard[]>, sections: readonly string[]): DeckCard[] {
+export function uniqueDeckCards(cardsBySection: Record<string, ParsedDeckCard[]>, sections: readonly DeckSection[]): DeckCard[] {
   const seen = new Set<string>()
   const result: DeckCard[] = []
 

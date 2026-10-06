@@ -100,12 +100,12 @@ describe('deck stats', () => {
 })
 
 describe('highlightState', () => {
-  const bolt = { section: 'Instants', type: 'Instants', manaCost: '{R}' }
-  const guttersnipe = { section: 'Creatures', type: 'Creatures', manaCost: '{2}{R}' }
-  const island = { section: 'Lands', type: 'Lands', manaCost: '' }
-  const pyroblast = { section: 'Sideboard', type: 'Instants', manaCost: '{R}' }
-  const untypedSideboardCard = { section: 'Sideboard', manaCost: '{R}' }
-  const sideboardPlains = { section: 'Sideboard', manaCost: '' }
+  const bolt = { section: 'Instants', type: 'Instants', manaCost: '{R}' } as const
+  const guttersnipe = { section: 'Creatures', type: 'Creatures', manaCost: '{2}{R}' } as const
+  const island = { section: 'Lands', type: 'Lands', manaCost: '' } as const
+  const pyroblast = { section: 'Sideboard', type: 'Instants', manaCost: '{R}' } as const
+  const untypedSideboardCard = { section: 'Sideboard', manaCost: '{R}' } as const
+  const sideboardPlains = { section: 'Sideboard', manaCost: '' } as const
 
   it('matches a type by the section of its type, sideboard included', () => {
     expect(highlightState(bolt, { kind: 'type', section: 'Instants' })).toBe('match')

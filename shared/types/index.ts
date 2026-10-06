@@ -1,3 +1,5 @@
+import type { DeckSection, MainDeckSection } from '../utils/deck-sections'
+
 /**
  * Type definitions for Magic decklist components
  */
@@ -15,15 +17,27 @@ export interface ParsedCardLine {
   name: string
 }
 
+/** Which list of a sideboard guide a card belongs to */
+export type SideboardGuideSection = 'in' | 'out' | 'out-alt'
+
+export interface SideboardGuideCard {
+  quantity: number
+  name: string
+  section: SideboardGuideSection
+  manaCost: string
+  imageUrl: string
+  backImageUrl?: string
+}
+
 export interface ParsedCard {
   quantity: number
   name: string
-  section: string
+  section: DeckSection
   manaCost: string
   imageUrl: string
   backImageUrl?: string
   /** Section its type belongs to, set only for sideboard cards (the sideboard is not sorted by type) */
-  typeSection?: string
+  typeSection?: MainDeckSection
 }
 
 /**
