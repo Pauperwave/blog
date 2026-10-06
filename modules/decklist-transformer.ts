@@ -9,7 +9,7 @@ import { createRegExp, digit, whitespace, oneOrMore, char } from 'magic-regexp'
 import { getCardsByNames, type CardData } from '#server/utils/card-database'
 import type { ParsedCard } from '#shared/types'
 import { DECK_SECTIONS, SIDEBOARD_SECTION, isDeckSection, sectionFromTypeLine, slugify, buildLog, type DeckSection } from '#shared/utils'
-import { getFencedRanges, isInsideFence } from './card-tooltip-transformer'
+import { getFencedRanges, isInsideFence } from './utils/fence'
 
 export default defineNuxtModule({
   meta: {

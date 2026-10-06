@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { getFencedRanges, isInsideFence } from './card-tooltip-transformer'
+import { getFencedRanges, isInsideFence } from './fence'
 
 describe('getFencedRanges / isInsideFence', () => {
   it('protects a triple-backtick fenced block', () => {
