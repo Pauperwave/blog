@@ -88,6 +88,8 @@ const router = useRouter()
 const { origin } = useRequestURL()
 const previewPath = computed(() => deckPreviewPath(route.path, anchorId.value))
 const shareUrl = computed(() => `${origin}${previewPath.value}`)
+// The footer button shares the plain anchor: it works on mobile too, where there is no visual view
+const deckUrl = computed(() => `${origin}${route.path}#${anchorId.value}`)
 
 // The URL follows the overlay, so it can be shared, and opening it from a link works on load
 watch(showOverlay, (open) => {
@@ -113,6 +115,11 @@ const openCard = (name: string, section: string) => {
 }
 
 provideDecklistContext({ openCard })
+
+const shareDeck = () => copyToClipboard(deckUrl.value, {
+  successDescription: 'Link copiato negli appunti',
+  errorDescription: 'Impossibile copiare il link negli appunti'
+})
 
 // Copy decklist to clipboard in the import format of the given client
 function copyDecklist(format: 'mtgo' | 'arena') {
@@ -211,6 +218,14 @@ function copyDecklist(format: 'mtgo' | 'arena') {
             class="cursor-pointer"
             label="Vista visuale"
             @click="openOverlay"
+          />
+          <UButton
+            icon="i-lucide-share-2"
+            size="sm"
+            variant="subtle"
+            class="cursor-pointer"
+            label="Condividi"
+            @click="shareDeck"
           />
         </div>
       </template>
