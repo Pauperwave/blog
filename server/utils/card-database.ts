@@ -9,6 +9,8 @@ export interface CardData {
   imageUrl: string
   /** Second face's image, for transform/modal double-faced cards. */
   backImageUrl?: string
+  /** Scryfall type line, e.g. "Artifact Creature — Myr". */
+  typeLine: string
 }
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -84,7 +86,8 @@ export async function getCardByName(name: string): Promise<CardData | null> {
     name: row.name,
     manaCost: row.mana_cost || '',
     imageUrl: row.image_url,
-    backImageUrl: row.back_image_url || undefined
+    backImageUrl: row.back_image_url || undefined,
+    typeLine: row.type_line || ''
   }
 }
 
@@ -109,7 +112,8 @@ export async function getCardsByNames(names: string[]): Promise<Map<string, Card
       name: row.name,
       manaCost: row.mana_cost || '',
       imageUrl: row.image_url,
-      backImageUrl: row.back_image_url || undefined
+      backImageUrl: row.back_image_url || undefined,
+    typeLine: row.type_line || ''
     }
     result.set(row.name, cardData)
     // Store by lowercase for fallback matching
@@ -132,7 +136,8 @@ export async function getCardsByNames(names: string[]): Promise<Map<string, Card
           name: caseInsensitiveRow.name,
           manaCost: caseInsensitiveRow.mana_cost || '',
           imageUrl: caseInsensitiveRow.image_url,
-          backImageUrl: caseInsensitiveRow.back_image_url || undefined
+          backImageUrl: caseInsensitiveRow.back_image_url || undefined,
+          typeLine: caseInsensitiveRow.type_line || ''
         }
         result.set(name, cardData)
       } else {

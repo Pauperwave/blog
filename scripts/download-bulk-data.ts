@@ -79,6 +79,7 @@ interface Card {
   manaCost: string
   imageUrl: string
   backImageUrl: string
+  typeLine: string
 }
 
 async function fetchBulkDataInfo(): Promise<BulkDataInfo> {
@@ -147,6 +148,9 @@ async function createDatabase(): Promise<Database> {
   if (!existingColumns.some(col => col.name === 'back_image_url')) {
     db.exec('ALTER TABLE cards ADD COLUMN back_image_url TEXT;')
   }
+  if (!existingColumns.some(col => col.name === 'type_line')) {
+    db.exec('ALTER TABLE cards ADD COLUMN type_line TEXT;')
+  }
 
   // Remove legacy table no longer used (we render mana symbols with CSS).
   db.exec('DROP TABLE IF EXISTS mana_symbols;')
@@ -190,8 +194,8 @@ async function importPauperCards(db: Database): Promise<void> {
 
   // Prepare insert statement
   const insert = db.prepare(`
-    INSERT OR REPLACE INTO cards (name, mana_cost, image_url, back_image_url)
-    VALUES (?, ?, ?, ?)
+    INSERT OR REPLACE INTO cards (name, mana_cost, image_url, back_image_url, type_line)
+    VALUES (?, ?, ?, ?, ?)
   `)
 
   // Transform and insert cards. Double-faced cards are looked up two different ways
@@ -256,9 +260,10 @@ async function importPauperCards(db: Database): Promise<void> {
       frontFaceName = card.card_faces[0].name
     }
 
-    const rows: Card[] = [{ name: card.name, manaCost, imageUrl, backImageUrl }]
+    const typeLine = card.type_line || ''
+    const rows: Card[] = [{ name: card.name, manaCost, imageUrl, backImageUrl, typeLine }]
     if (frontFaceName) {
-      rows.push({ name: frontFaceName, manaCost, imageUrl, backImageUrl })
+      rows.push({ name: frontFaceName, manaCost, imageUrl, backImageUrl, typeLine })
     }
     return rows
   })
@@ -268,7 +273,7 @@ async function importPauperCards(db: Database): Promise<void> {
   // Use transaction for batch insert
   const insertMany = db.transaction((cards: Card[]) => {
     for (const card of cards) {
-      insert.run(card.name, card.manaCost, card.imageUrl, card.backImageUrl || null)
+      insert.run(card.name, card.manaCost, card.imageUrl, card.backImageUrl || null, card.typeLine)
     }
   })
 
