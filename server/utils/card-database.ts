@@ -13,6 +13,22 @@ export interface CardData {
   typeLine: string
 }
 
+interface CardRow {
+  name: string
+  mana_cost: string | null
+  image_url: string
+  back_image_url: string | null
+  type_line: string | null
+}
+
+const toCardData = (row: CardRow): CardData => ({
+  name: row.name,
+  manaCost: row.mana_cost || '',
+  imageUrl: row.image_url,
+  backImageUrl: row.back_image_url || undefined,
+  typeLine: row.type_line || ''
+})
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type DatabaseInstance = any
 
@@ -76,19 +92,11 @@ export async function getCardByName(name: string): Promise<CardData | null> {
     throw new Error('Database not available')
   }
 
-  const row = db.prepare(`
+  const row: CardRow | undefined = db.prepare(`
     SELECT * FROM cards WHERE name = ? LIMIT 1
   `).get(name)
 
-  if (!row) return null
-
-  return {
-    name: row.name,
-    manaCost: row.mana_cost || '',
-    imageUrl: row.image_url,
-    backImageUrl: row.back_image_url || undefined,
-    typeLine: row.type_line || ''
-  }
+  return row ? toCardData(row) : null
 }
 
 export async function getCardsByNames(names: string[]): Promise<Map<string, CardData>> {
@@ -101,23 +109,10 @@ export async function getCardsByNames(names: string[]): Promise<Map<string, Card
   const placeholders = names.map(() => '?').join(',')
   const query = `SELECT * FROM cards WHERE name IN (${placeholders})`
 
-  const rows = db.prepare(query).all(...names)
-
-  // Build a case-insensitive lookup from ALL database rows (not just matched ones)
-  // This is necessary because case-insensitive lookups won't work if exact matches fail
-  const dbCardsByLowercase = new Map<string, CardData>()
+  const rows: CardRow[] = db.prepare(query).all(...names)
 
   for (const row of rows) {
-    const cardData = {
-      name: row.name,
-      manaCost: row.mana_cost || '',
-      imageUrl: row.image_url,
-      backImageUrl: row.back_image_url || undefined,
-    typeLine: row.type_line || ''
-    }
-    result.set(row.name, cardData)
-    // Store by lowercase for fallback matching
-    dbCardsByLowercase.set(row.name.toLowerCase(), cardData)
+    result.set(row.name, toCardData(row))
   }
 
   // For names that weren't found exactly, try case-insensitive match
@@ -127,19 +122,12 @@ export async function getCardsByNames(names: string[]): Promise<Map<string, Card
       const lowercaseName = name.toLowerCase()
 
       // Query database for case-insensitive match using LOWER function
-      const caseInsensitiveRow = db.prepare(`
+      const caseInsensitiveRow: CardRow | undefined = db.prepare(`
         SELECT * FROM cards WHERE LOWER(name) = ? LIMIT 1
       `).get(lowercaseName)
 
       if (caseInsensitiveRow) {
-        const cardData = {
-          name: caseInsensitiveRow.name,
-          manaCost: caseInsensitiveRow.mana_cost || '',
-          imageUrl: caseInsensitiveRow.image_url,
-          backImageUrl: caseInsensitiveRow.back_image_url || undefined,
-          typeLine: caseInsensitiveRow.type_line || ''
-        }
-        result.set(name, cardData)
+        result.set(name, toCardData(caseInsensitiveRow))
       } else {
         // Left out of the result map (not inserted with a guessed Scryfall
         // URL) — callers already treat a missing entry as "no image". Logged
