@@ -73,7 +73,7 @@ const cardVariantClasses = computed(() =>
     variant="naked"
     :class="[
       'group border rounded-xl p-4 backdrop-blur-sm',
-      'transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:scale-[1.02]',
+      'transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:scale-102',
       cardVariantClasses
     ]"
   >

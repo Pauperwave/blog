@@ -49,7 +49,7 @@ const artCard = computed(() => pickDeckArtCard(cards))
 </script>
 
 <template>
-  <div class="flex w-[calc(var(--card-w)*6_+_var(--card-offset)_+_12.5rem)] flex-col gap-6 bg-default p-6 [--card-offset:1.5rem] [--card-strip:2.25rem] [--card-w:9rem]">
+  <div class="flex w-[calc(var(--card-w)*6+var(--card-offset)+12.5rem)] flex-col gap-6 bg-default p-6 [--card-offset:1.5rem] [--card-strip:2.25rem] [--card-w:9rem]">
     <header class="relative flex items-stretch justify-between gap-x-6 overflow-hidden rounded-xl border border-default bg-elevated px-6 py-5 shadow-sm">
       <DecklistArt
         v-if="artCard"
@@ -106,7 +106,7 @@ const artCard = computed(() => pickDeckArtCard(cards))
           SIDEBOARD
         </span>
         <!-- Cards spread over the main deck's height, so both end on the same bottom edge -->
-        <div class="relative min-h-[37rem] w-[calc(var(--card-w)+var(--card-offset))]">
+        <div class="relative min-h-148 w-[calc(var(--card-w)+var(--card-offset))]">
           <DecklistPile :cards="sideboardCopies" :highlight="highlight" spread />
         </div>
       </section>

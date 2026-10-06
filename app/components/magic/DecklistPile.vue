@@ -29,7 +29,7 @@ const itemClass = (card: DeckCard, index: number) => {
 
 const imageClass = (card: DeckCard, index: number) => [
   loaded.has(index) ? 'block' : 'hidden',
-  { 'grayscale-[0.8] brightness-[0.6]': isDimmed(card) }
+  { 'grayscale-80 brightness-60': isDimmed(card) }
 ]
 
 const spreadStyle = (index: number) => {
@@ -56,13 +56,13 @@ const spreadStyle = (index: number) => {
       <!-- In flow with the same box as the image, so it matches the card exactly; the hidden image still loads -->
       <USkeleton
         v-if="!loaded.has(index)"
-        class="pointer-events-none block aspect-[488/680] h-auto w-full rounded-[4.3%/3.1%]"
+        class="pointer-events-none block aspect-488/680 h-auto w-full rounded-[4.3%/3.1%]"
       />
       <img
         :src="card.imageUrl"
         :alt="card.name"
         crossorigin="anonymous"
-        class="pointer-events-none aspect-[488/680] h-auto w-full rounded-[4.3%/3.1%] motion-safe:[transition:transform_150ms,filter_400ms] motion-safe:group-hover:scale-200"
+        class="pointer-events-none aspect-488/680 h-auto w-full rounded-[4.3%/3.1%] motion-safe:[transition:transform_150ms,filter_400ms] motion-safe:group-hover:scale-200"
         :class="imageClass(card, index)"
         @load="loaded.add(index)"
       >

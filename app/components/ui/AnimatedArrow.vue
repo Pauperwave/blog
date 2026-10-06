@@ -50,10 +50,10 @@ const rootClass = computed(() => {
 }
 
 .arrow-line {
-  @apply absolute top-[50%] left-0 translate-y-[-50%] origin-left h-[calc(var(--icon-size)/12)] group-hover:w-(--length) w-0 rounded-full bg-current;
+  @apply absolute top-1/2 left-0 -translate-y-1/2 origin-left h-[calc(var(--icon-size)/12)] group-hover:w-(--length) w-0 rounded-full bg-current;
 }
 
 .arrow-head {
-  @apply absolute top-[50%] translate-x-[-55%] translate-y-[-50%] left-0 text-current group-hover:left-(--length) h-(--icon-size) w-(--icon-size);
+  @apply absolute top-1/2 -translate-x-[55%] -translate-y-1/2 left-0 text-current group-hover:left-(--length) h-(--icon-size) w-(--icon-size);
 }
 </style>

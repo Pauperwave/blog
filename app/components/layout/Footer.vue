@@ -86,7 +86,7 @@ const footerSocialLinks = [
             to="/docs/codice-di-condotta"
             color="neutral"
             variant="link"
-            class="underline py-1.5 px-2 min-h-[44px] md:min-h-0 md:py-0.5 flex items-center"
+            class="underline py-1.5 px-2 min-h-11 md:min-h-0 md:py-0.5 flex items-center"
           >
             Codice di Condotta
           </NuxtLink>
@@ -94,7 +94,7 @@ const footerSocialLinks = [
             to="/docs/statuto"
             color="neutral"
             variant="link"
-            class="underline py-1.5 px-2 min-h-[44px] md:min-h-0 md:py-0.5 flex items-center"
+            class="underline py-1.5 px-2 min-h-11 md:min-h-0 md:py-0.5 flex items-center"
           >
             Statuto dell'Associazione
           </NuxtLink>
@@ -102,7 +102,7 @@ const footerSocialLinks = [
             to="https://pauperwave.org"
             color="neutral"
             variant="link"
-            class="underline py-1.5 px-2 min-h-[44px] md:min-h-0 md:py-0.5 flex items-center"
+            class="underline py-1.5 px-2 min-h-11 md:min-h-0 md:py-0.5 flex items-center"
           >
             Chi siamo
           </NuxtLink>
@@ -110,7 +110,7 @@ const footerSocialLinks = [
             to="https://tinyurl.com/adesione-pauperwave"
             color="neutral"
             variant="link"
-            class="underline py-1.5 px-2 min-h-[44px] md:min-h-0 md:py-0.5 flex items-center"
+            class="underline py-1.5 px-2 min-h-11 md:min-h-0 md:py-0.5 flex items-center"
           >
             Associati ora
           </NuxtLink>
