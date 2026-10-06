@@ -146,6 +146,10 @@ export interface DecklistInfo {
   existingGradient: string | null
 }
 
+/** Value of a `key: value` frontmatter line, or undefined when the line is for another key. */
+const readFrontmatterValue = (line: string, key: string): string | undefined =>
+  line.match(new RegExp(`^${key}:\\s*(.+)$`))?.[1]?.trim()
+
 /**
  * Parse every `::magic-decklist` block out of a decklist markdown file.
  * Returns all decklists found, regardless of whether they already carry a
@@ -157,7 +161,7 @@ export function parseDecklist(content: string, filePath: string): DecklistInfo[]
 
   let i = 0
   while (i < lines.length) {
-    const line = lines[i]
+    const line = lines[i] ?? ''
 
     if (line.trim() === '::magic-decklist') {
       const startLine = i
@@ -171,17 +175,12 @@ export function parseDecklist(content: string, filePath: string): DecklistInfo[]
       i++ // Skip the opening ---
 
       // Parse frontmatter
-      while (i < lines.length && lines[i].trim() !== '---') {
-        const fmLine = lines[i].trim() // Trim to handle CRLF
-        const nameMatch = fmLine.match(/^name:\s*(.+)$/)
-        const playerMatch = fmLine.match(/^player:\s*(.+)$/)
-        const placementMatch = fmLine.match(/^placement:\s*(.+)$/)
-        const gradientMatch = fmLine.match(/^headerGradient:\s*(.+)$/)
-
-        if (nameMatch) name = nameMatch[1].trim()
-        if (playerMatch) player = playerMatch[1].trim()
-        if (placementMatch) placement = placementMatch[1].trim()
-        if (gradientMatch) existingGradient = gradientMatch[1].trim()
+      while (i < lines.length && lines[i]?.trim() !== '---') {
+        const fmLine = (lines[i] ?? '').trim() // Trim to handle CRLF
+        name = readFrontmatterValue(fmLine, 'name') ?? name
+        player = readFrontmatterValue(fmLine, 'player') ?? player
+        placement = readFrontmatterValue(fmLine, 'placement') ?? placement
+        existingGradient = readFrontmatterValue(fmLine, 'headerGradient') ?? existingGradient
 
         i++
       }
@@ -190,8 +189,8 @@ export function parseDecklist(content: string, filePath: string): DecklistInfo[]
 
       // Parse cards until :: or Sideboard section
       // Note: We stop at "Sideboard" to only analyze maindeck colors
-      while (i < lines.length && lines[i].trim() !== '::') {
-        const cardLine = lines[i].trim()
+      while (i < lines.length && lines[i]?.trim() !== '::') {
+        const cardLine = (lines[i] ?? '').trim()
 
         // Stop parsing when we hit the Sideboard section
         if (cardLine.toLowerCase() === 'sideboard') {
@@ -200,9 +199,9 @@ export function parseDecklist(content: string, filePath: string): DecklistInfo[]
         }
 
         // Match lines like "4 Lightning Bolt" or "4 Myr Enforcer"
-        const cardMatch = cardLine.match(/^\d+\s+(.+)$/)
-        if (cardMatch) {
-          cards.push(cardMatch[1].trim())
+        const cardName = cardLine.match(/^\d+\s+(.+)$/)?.[1]?.trim()
+        if (cardName) {
+          cards.push(cardName)
         }
         i++
       }

@@ -44,13 +44,13 @@ async function processFile(filePath: string): Promise<void> {
 
       // Find the opening --- after ::magic-decklist
       let openMarker = adjustedStartLine + 1
-      while (openMarker < lines.length && lines[openMarker].trim() !== '---') {
+      while (openMarker < lines.length && lines[openMarker]?.trim() !== '---') {
         openMarker++
       }
 
       // Find the closing --- of the frontmatter
       let closeMarker = openMarker + 1
-      while (closeMarker < lines.length && lines[closeMarker].trim() !== '---') {
+      while (closeMarker < lines.length && lines[closeMarker]?.trim() !== '---') {
         closeMarker++
       }
 
