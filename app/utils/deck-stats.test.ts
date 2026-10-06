@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { computeDeckStats, countColorPips, matchesHighlight, parseManaValue } from './deck-stats'
+import { cardCurveColor, computeDeckStats, countColorPips, highlightState, parseManaValue } from './deck-stats'
 
 describe('deck stats', () => {
   describe('parseManaValue', () => {
@@ -53,6 +53,14 @@ describe('deck stats', () => {
       expect(curve.at(-1)?.label).toBe('7+')
     })
 
+    it('splits each curve bucket by card color', () => {
+      const { curve } = computeDeckStats({
+        Creatures: [{ quantity: 3, manaCost: '{1}{R}' }, { quantity: 2, manaCost: '{1}{R}{U}' }, { quantity: 1, manaCost: '{2}' }]
+      })
+      expect(curve[2]?.colors).toEqual({ R: 3, C: 1 })
+      expect(curve[3]?.colors).toEqual({ M: 2 })
+    })
+
     it('puts expensive cards in the last bucket', () => {
       const { curve } = computeDeckStats({ Creatures: [{ quantity: 1, manaCost: '{8}' }] })
       expect(curve.at(-1)?.count).toBe(1)
@@ -90,32 +98,58 @@ describe('deck stats', () => {
   })
 })
 
-describe('matchesHighlight', () => {
+describe('highlightState', () => {
   const bolt = { section: 'Instants', manaCost: '{R}' }
   const guttersnipe = { section: 'Creatures', manaCost: '{2}{R}' }
   const island = { section: 'Lands', manaCost: '' }
   const pyroblast = { section: 'Sideboard', manaCost: '{R}' }
+  const sideboardPlains = { section: 'Sideboard', manaCost: '' }
 
-  it('matches a type by section, sideboard included in none', () => {
-    expect(matchesHighlight(bolt, { kind: 'type', section: 'Instants' })).toBe(true)
-    expect(matchesHighlight(guttersnipe, { kind: 'type', section: 'Instants' })).toBe(false)
-    expect(matchesHighlight(pyroblast, { kind: 'type', section: 'Instants' })).toBe(false)
+  it('matches a type by section', () => {
+    expect(highlightState(bolt, { kind: 'type', section: 'Instants' })).toBe('match')
+    expect(highlightState(guttersnipe, { kind: 'type', section: 'Instants' })).toBe('dim')
+  })
+
+  it('leaves the sideboard alone for a type, since it has none', () => {
+    expect(highlightState(pyroblast, { kind: 'type', section: 'Instants' })).toBe('neutral')
   })
 
   it('matches a curve bucket by mana value, capping at the last bucket', () => {
-    expect(matchesHighlight(bolt, { kind: 'curve', bucket: 1 })).toBe(true)
-    expect(matchesHighlight(guttersnipe, { kind: 'curve', bucket: 1 })).toBe(false)
-    expect(matchesHighlight({ section: 'Creatures', manaCost: '{9}' }, { kind: 'curve', bucket: 7 })).toBe(true)
+    expect(highlightState(bolt, { kind: 'curve', bucket: 1 })).toBe('match')
+    expect(highlightState(guttersnipe, { kind: 'curve', bucket: 1 })).toBe('dim')
+    expect(highlightState({ section: 'Creatures', manaCost: '{9}' }, { kind: 'curve', bucket: 7 })).toBe('match')
   })
 
   it('matches a color when its cost has that pip', () => {
-    expect(matchesHighlight(guttersnipe, { kind: 'color', color: 'R' })).toBe(true)
-    expect(matchesHighlight(guttersnipe, { kind: 'color', color: 'U' })).toBe(false)
+    expect(highlightState(guttersnipe, { kind: 'color', color: 'R' })).toBe('match')
+    expect(highlightState(guttersnipe, { kind: 'color', color: 'U' })).toBe('dim')
   })
 
-  it('leaves lands and the sideboard out of curve and color highlights', () => {
-    expect(matchesHighlight(island, { kind: 'curve', bucket: 0 })).toBe(false)
-    expect(matchesHighlight(pyroblast, { kind: 'curve', bucket: 1 })).toBe(false)
-    expect(matchesHighlight(pyroblast, { kind: 'color', color: 'R' })).toBe(false)
+  it('evaluates sideboard spells by cost for curve and colors', () => {
+    expect(highlightState(pyroblast, { kind: 'curve', bucket: 1 })).toBe('match')
+    expect(highlightState(pyroblast, { kind: 'color', color: 'R' })).toBe('match')
+    expect(highlightState(pyroblast, { kind: 'color', color: 'U' })).toBe('dim')
+  })
+
+  it('dims lands, sideboard ones included, for curve and colors', () => {
+    expect(highlightState(island, { kind: 'curve', bucket: 0 })).toBe('dim')
+    expect(highlightState(sideboardPlains, { kind: 'curve', bucket: 0 })).toBe('dim')
+    expect(highlightState(sideboardPlains, { kind: 'color', color: 'R' })).toBe('dim')
+  })
+})
+
+describe('cardCurveColor', () => {
+  it('gives the color of a mono-colored card', () => {
+    expect(cardCurveColor('{2}{U}{U}')).toBe('U')
+  })
+
+  it('gives multicolor to cards with more than one color, hybrid included', () => {
+    expect(cardCurveColor('{R}{G}')).toBe('M')
+    expect(cardCurveColor('{W/U}')).toBe('M')
+  })
+
+  it('gives colorless to cards without colored symbols', () => {
+    expect(cardCurveColor('{3}')).toBe('C')
+    expect(cardCurveColor('')).toBe('C')
   })
 })

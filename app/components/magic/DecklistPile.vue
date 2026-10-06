@@ -1,25 +1,26 @@
 <script setup lang="ts">
 // Sizes come from CSS variables set by DecklistGraphic: --card-strip (visible title strip) and --card-offset (sideboard stagger)
 import type { DeckCard } from '~/utils/deck-cards'
-import { matchesHighlight, type DeckHighlight } from '~/utils/deck-stats'
+import { highlightState, type DeckHighlight } from '~/utils/deck-stats'
 
 const { cards, spread = false, highlight = null } = defineProps<{
   cards: DeckCard[]
   /** Fill the parent's height with full cards, alternating left and right, first at the top and last at the bottom */
   spread?: boolean
-  /** Cards outside of it are dimmed */
+  /** Cards outside of it are dimmed, the ones it says nothing about are left alone */
   highlight?: DeckHighlight | null
 }>()
 
 // Indexes of the images already loaded; the others show a skeleton
 const loaded = reactive(new Set<number>())
 
-const isHighlighted = (card: DeckCard) => highlight !== null && matchesHighlight(card, highlight)
-const isDimmed = (card: DeckCard) => highlight !== null && !isHighlighted(card)
+const stateOf = (card: DeckCard) => highlight ? highlightState(card, highlight) : 'neutral'
+const isHighlighted = (card: DeckCard) => stateOf(card) === 'match'
+const isDimmed = (card: DeckCard) => stateOf(card) === 'dim'
 
 // Spread: full cards alternating left and right. Pile: clipped to the title strip, a highlighted card is shown whole in front
 const itemClass = (card: DeckCard, index: number) => {
-  if (spread) return ['absolute inset-x-0 hover:z-10', index % 2 === 0 ? 'pe-(--card-offset)' : 'ps-(--card-offset)']
+  if (spread) return ['absolute inset-x-0 hover:z-10', isHighlighted(card) ? 'z-10' : '', index % 2 === 0 ? 'pe-(--card-offset)' : 'ps-(--card-offset)']
   return [
     'relative h-(--card-strip) last:h-auto last:overflow-visible hover:z-10 hover:overflow-visible',
     isHighlighted(card) ? 'z-10 overflow-visible' : 'overflow-hidden'
