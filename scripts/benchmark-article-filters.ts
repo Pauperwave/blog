@@ -120,6 +120,12 @@ const createRng = (seed: number) => {
 
 const randInt = (rng: () => number, maxExclusive: number) => Math.floor(rng() * maxExclusive)
 
+const pickOne = <T>(rng: () => number, pool: readonly T[]): T => {
+  const item = pool[randInt(rng, pool.length)]
+  if (item === undefined) throw new Error('Cannot pick from an empty pool')
+  return item
+}
+
 const sampleUnique = <T>(rng: () => number, pool: T[], count: number): T[] => {
   if (count <= 0) return []
   if (count >= pool.length) return [...pool]
@@ -129,7 +135,7 @@ const sampleUnique = <T>(rng: () => number, pool: T[], count: number): T[] => {
     picked.add(randInt(rng, pool.length))
   }
 
-  return [...picked].map(index => pool[index])
+  return [...picked].flatMap(index => pool[index] ?? [])
 }
 
 const parseArgs = () => {
@@ -137,7 +143,7 @@ const parseArgs = () => {
   const argv = process.argv.slice(2)
 
   for (let i = 0; i < argv.length; i += 1) {
-    const token = argv[i]
+    const token = argv[i] ?? ''
     if (!token.startsWith('--')) continue
 
     const [rawKey, inlineValue] = token.slice(2).split('=')
@@ -181,7 +187,7 @@ const extractFrontmatter = (source: string): Record<string, unknown> | null => {
   const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/)
   if (!match) return null
 
-  const parsed = parseYaml(match[1])
+  const parsed = parseYaml(match[1] ?? '')
   if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) return null
 
   return parsed as Record<string, unknown>
@@ -274,7 +280,7 @@ const generateSyntheticDataset = (config: ReturnType<typeof parseArgs>) => {
     const tags = [...topicTags]
 
     if (rng() < 0.35) {
-      tags.push(locations[randInt(rng, locations.length)])
+      tags.push(pickOne(rng, locations))
     }
 
     if (rng() < 0.15) {
@@ -284,14 +290,14 @@ const generateSyntheticDataset = (config: ReturnType<typeof parseArgs>) => {
     return {
       id: index + 1,
       path: `/articles/${index + 1}`,
-      category: CATEGORIES[randInt(rng, CATEGORIES.length)],
-      author: authorKeys[randInt(rng, authorKeys.length)],
+      category: pickOne(rng, CATEGORIES),
+      author: pickOne(rng, authorKeys),
       locations,
       tags
     }
   })
 
-  const authorSlugs = authorKeys.map(key => getAuthorSlug(authorsMap[key].name))
+  const authorSlugs = authorKeys.map(key => getAuthorSlug(authorsMap[key]?.name ?? key))
 
   const queries: FilterQuery[] = Array.from({ length: config.queries }, () => {
     const useCategory = rng() < 0.45
@@ -300,10 +306,10 @@ const generateSyntheticDataset = (config: ReturnType<typeof parseArgs>) => {
     const useTag = rng() < 0.3
 
     return {
-      category: useCategory ? CATEGORIES[randInt(rng, CATEGORIES.length)] : null,
-      author: useAuthor ? authorSlugs[randInt(rng, authorSlugs.length)] : null,
-      location: useLocation ? locationPool[randInt(rng, locationPool.length)] : null,
-      tag: useTag ? tagPool[randInt(rng, tagPool.length)] : null
+      category: useCategory ? pickOne(rng, CATEGORIES) : null,
+      author: useAuthor && authorSlugs.length > 0 ? pickOne(rng, authorSlugs) : null,
+      location: useLocation && locationPool.length > 0 ? pickOne(rng, locationPool) : null,
+      tag: useTag && tagPool.length > 0 ? pickOne(rng, tagPool) : null
     }
   })
 
@@ -328,15 +334,15 @@ const buildQueriesFromContentDataset = (
 
   const queries: FilterQuery[] = Array.from({ length: config.queries }, () => ({
     category: categoryPool.length && rng() < 0.45
-      ? categoryPool[randInt(rng, categoryPool.length)]
+      ? pickOne(rng, categoryPool)
       : null,
     author: authorSlugPool.length && rng() < 0.25
-      ? authorSlugPool[randInt(rng, authorSlugPool.length)]
+      ? pickOne(rng, authorSlugPool)
       : null,
     location: locationPool.length && rng() < 0.3
-      ? locationPool[randInt(rng, locationPool.length)]
+      ? pickOne(rng, locationPool)
       : null,
-    tag: tagPool.length && rng() < 0.3 ? tagPool[randInt(rng, tagPool.length)] : null
+    tag: tagPool.length && rng() < 0.3 ? pickOne(rng, tagPool) : null
   }))
 
   return {
