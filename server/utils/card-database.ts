@@ -4,7 +4,7 @@ import { existsSync } from 'fs'
 import { fileURLToPath } from 'url'
 import type BetterSqlite3 from 'better-sqlite3'
 
-import { buildLog } from '#shared/utils'
+import { buildLog } from '../../shared/utils/build-log.ts'
 
 export interface CardData {
   name: string
