@@ -1,46 +1,12 @@
 <script setup lang="ts">
 
-const nuxtApp = useNuxtApp()
+const { files, status, load } = useSearchIndex()
+const { open } = useContentSearch()
 
-const { data: files } = useLazyAsyncData(
-  'search',
-  async () => {
-
-    const [decklists, articles, reports, tutorials, spoilers, decklistDocs] = await Promise.all([
-      queryCollectionSearchSections('decklists'),
-      queryCollectionSearchSections('articles'),
-      queryCollectionSearchSections('reports'),
-      queryCollectionSearchSections('tutorials'),
-      queryCollectionSearchSections('spoilers'),
-      queryCollection('decklists').select('path', '_decks').all(),
-    ])
-
-    // 4. NUOVO: costruisce la mappa path -> deck
-    const decksByPath = new Map(decklistDocs.map(doc => [doc.path, doc._decks ?? []]))
-
-    return [
-      ...decklists.map(f => ({ ...f, _collection: 'decklists' })),
-      ...articles.map(f => ({ ...f, _collection: 'articles' })),
-      ...reports.map(f => ({ ...f, _collection: 'reports' })),
-      ...tutorials.map(f => ({ ...f, _collection: 'tutorials' })),
-      ...spoilers.map(f => ({ ...f, _collection: 'spoilers' })),
-    ]
-      .filter(f => f.title?.trim() !== '' && !f.id.includes('template') && f.level === 1)
-      .map(f => ({
-        id: f.id,
-        title: f.title,
-        _collection: f._collection,
-        _date: f.id.match(/\d{4}-\d{2}-\d{2}/)?.[0] ?? '',
-        _summary: f.content?.trim().replace(/\s+/g, ' ').slice(0, 100) ?? '',
-        _decks: decksByPath.get(f.id) ?? [],
-      }))
-      .sort((a, b) => b._date.localeCompare(a._date))
-  },
-  {
-    server: false,
-    getCachedData: key => nuxtApp.payload.data[key] ?? nuxtApp.static.data[key],
-  }
-)
+// The index is not loaded with the page: it starts when the search opens or the button is near
+watch(open, (isOpen) => {
+  if (isOpen) load()
+})
 
 const searchTerm = ref('')
 
@@ -131,6 +97,7 @@ const fuseOptions = {
       placeholder="Cerca..."
       :groups="groups"
       :color-mode="false"
+      :loading="status === 'pending'"
       :fuse="fuseOptions"
     >
       <template #empty>
