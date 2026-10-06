@@ -17,6 +17,17 @@ Documentazione: `docs/architecture/decklist-visual-view.md`.
 - **Tipo delle carte della sideboard:** `cards.db` salva `type_line` (rigenerato, 11.091 carte invariate più la colonna); il transformer imposta `typeSection` per la sideboard (`sectionFromTypeLine`, priorità Creature, Land, Instant, Sorcery, Artifact, Enchantment).
 - **Altro:** il footer del sito mostra "Sviluppo del blog a cura di Emanuele Nardi" accanto al badge della versione (con il nome che rimanda al profilo GitHub); il footer dell'immagine della vista visuale usa il logo `public/logo/pauperwave.png` (scritta art déco del marchio) invece di favicon e testo in Geist; descrizione del modale Statistiche = giocatore e piazzamento (non più un duplicato del titolo); link "Autori" di nuovo nel menu desktop (era commentato dal 2026-03).
 
+### Perf: Lighthouse mobile 52-54, FCP 2,9-3,6 s
+
+Misurato con Lighthouse 13 (mobile, rete simulata) su `https://blog.pauperwave.org/`: punteggio 54, FCP 3,6 s, 154 richieste e 4,6 MB. Cause trovate e interventi:
+
+- **Indice di ricerca caricato su ogni pagina (~1,3 MB):** `SearchContent` stava nel layout e lanciava subito la query sul client, scaricando il WASM di SQLite di Nuxt Content (403 KiB) e i dump SQL di tutte le collezioni (decklist 758 KiB). Ora la query sta in `useSearchIndex` e parte solo quando la ricerca si apre o il mouse/dito si avvicina al pulsante; la ricerca mostra `loading` finché non è pronta.
+- **Payload da 6,1 MB (464 KiB compresso) per home e `/articles`:** `queryAllCollections()` faceva `.all()` e portava l'intero `body` di ogni contenuto (85% del payload, deserializzato sul thread principale). Ora seleziona solo i campi delle liste (`LIST_FIELDS` in `content-config.ts`); il `body` lo legge solo la pagina del singolo articolo.
+- **Immagine LCP della home:** era `loading="lazy"`, senza dimensioni e a grandezza originale (252 KiB, `srcset` 1x/2x identico). Ora `loading="eager"`, `fetchpriority="high"`, `width`/`height`/`sizes` e webp.
+- **Miniature delle card:** `sizes`, `width`/`height` e webp (prima la stessa immagine originale a ogni densità).
+
+Non ancora affrontati: avatar degli autori serviti dal file originale (fino a 175 KiB per 32 px), 97 richieste JS con 254 KiB inutilizzati, CSS d'ingresso che blocca il rendering (~410 ms).
+
 ### Fix: script rotti e non controllati
 
 - `decklists:verify-gradients` e `decklists:add-gradients` crashavano (`ERR_PACKAGE_IMPORT_NOT_DEFINED`) da quando `server/utils/card-database.ts` importava `buildLog` da `#shared/utils`, alias che Node puro non risolve. Ora l'import è relativo (`../../shared/utils/build-log.ts`). Nessun controllo lo aveva segnalato perché `nuxt typecheck` non guarda `scripts/`.
