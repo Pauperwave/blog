@@ -1,0 +1,15 @@
+{
+  // Type check of the build-time content modules: not covered by `nuxt typecheck`
+  "extends": "../.nuxt/tsconfig.node.json",
+  "compilerOptions": {
+    "lib": ["ESNext"],
+    "types": ["node"],
+    "paths": {
+      "#shared": ["../shared"],
+      "#shared/*": ["../shared/*"],
+      "#server/*": ["../server/*"]
+    }
+  },
+  "include": ["./**/*.ts"],
+  "exclude": []
+}
