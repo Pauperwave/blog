@@ -66,6 +66,7 @@ function calculateTotal(items: any) {
 - Prefer arrow functions
 - Use type inference when obvious
 - Explicit return types for exported functions
+- Max 100 characters per line (`max-len` in `.ts`, `vue/max-len` in `.vue`, enforced by `pnpm run lint`). Exempt: URLs, regex literals, lines that are only a string (long Tailwind class lists, Italian copy) and, in templates, attribute values and text
 - No loose types: avoid `any`, `as unknown as`, `Function`/`Object` types and `@ts-ignore`-style directives. `pnpm run check:loose-types` lists them (it reads the script blocks of `.vue` files too) and exits with 1 when it finds any; a few justified ones exist in `modules/` and `server/utils/card-database.ts` (dynamic imports and the better-sqlite3 handle)
 
 ### Naming Conventions
