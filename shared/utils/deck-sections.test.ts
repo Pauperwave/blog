@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { DECK_SECTIONS, MAIN_DECK_SECTIONS, NON_LAND_SECTIONS, isDeckSection, sectionFromTypeLine } from './deck-sections'
+import { DECK_SECTIONS, MAIN_DECK_SECTIONS, NON_LAND_SECTIONS, isDeckSection, isNonLandSection, sectionFromTypeLine } from './deck-sections'
 
 describe('deck sections', () => {
   it('puts the sideboard last', () => {
@@ -48,5 +48,18 @@ describe('sectionFromTypeLine', () => {
   it('gives undefined for types without a section', () => {
     expect(sectionFromTypeLine('Planeswalker — Jace')).toBeUndefined()
     expect(sectionFromTypeLine('')).toBeUndefined()
+  })
+})
+
+describe('isNonLandSection', () => {
+  it('accepts the typed main deck sections', () => {
+    expect(isNonLandSection('Creatures')).toBe(true)
+    expect(isNonLandSection('Enchantments')).toBe(true)
+  })
+
+  it('rejects lands, the sideboard and anything else', () => {
+    expect(isNonLandSection('Lands')).toBe(false)
+    expect(isNonLandSection('Sideboard')).toBe(false)
+    expect(isNonLandSection('Planeswalkers')).toBe(false)
   })
 })

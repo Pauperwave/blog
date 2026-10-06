@@ -1,4 +1,4 @@
-import { LAND_SECTION, MAIN_DECK_SECTIONS, NON_LAND_SECTIONS, SIDEBOARD_SECTION } from '#shared/utils'
+import { LAND_SECTION, MAIN_DECK_SECTIONS, NON_LAND_SECTIONS, SIDEBOARD_SECTION, isNonLandSection } from '#shared/utils'
 import { CURVE_COLOR_STYLES } from './mana-colors'
 
 export interface DeckStatsCard {
@@ -112,7 +112,7 @@ export type HighlightState = 'match' | 'dim' | 'neutral'
 
 /** Spells whose cost counts for curve and colors: non-land main deck cards and sideboard cards with a cost (the sideboard has no lands list). */
 const hasCountedCost = (card: { section: string; manaCost: string }) =>
-  (NON_LAND_SECTIONS as readonly string[]).includes(card.section)
+  isNonLandSection(card.section)
   || (card.section === SIDEBOARD_SECTION && card.manaCost !== '')
 
 /** How a card looks while a stat is hovered: part of it, not part of it, or unknown. */

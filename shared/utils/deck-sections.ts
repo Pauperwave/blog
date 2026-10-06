@@ -28,6 +28,10 @@ export function sectionFromTypeLine(typeLine: string): MainDeckSection | undefin
   return TYPE_SECTIONS.find(([type]) => types.includes(type))?.[1]
 }
 
-export function isDeckSection(value: string): value is DeckSection {
-  return (DECK_SECTIONS as readonly string[]).includes(value)
-}
+export type NonLandSection = (typeof NON_LAND_SECTIONS)[number]
+
+const isOneOf = <T extends string>(values: readonly T[], value: string): value is T => (values as readonly string[]).includes(value)
+
+export const isDeckSection = (value: string): value is DeckSection => isOneOf(DECK_SECTIONS, value)
+
+export const isNonLandSection = (value: string): value is NonLandSection => isOneOf(NON_LAND_SECTIONS, value)
