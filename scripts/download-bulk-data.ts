@@ -86,10 +86,10 @@ interface Card {
 async function fetchBulkDataInfo(): Promise<BulkDataInfo> {
   console.log('📡 Fetching bulk data information...')
   const response = await fetch(BULK_DATA_API, { headers: SCRYFALL_HEADERS })
-  const data = await response.json()
+  const data = await response.json() as { data: BulkDataInfo[] }
 
   // Find the Oracle Cards bulk data
-  const oracleCards = data.data.find((item: BulkDataInfo) => item.type === 'oracle_cards')
+  const oracleCards = data.data.find(item => item.type === 'oracle_cards')
 
   if (!oracleCards) {
     throw new Error('Oracle Cards bulk data not found')
@@ -125,7 +125,7 @@ async function downloadBulkData(downloadUri: string): Promise<void> {
   console.log('✅ Download complete')
 }
 
-async function createDatabase(): Promise<Database> {
+async function createDatabase(): Promise<Database.Database> {
   console.log('🗄️  Creating SQLite database...')
 
   const db = new Database(DB_PATH)
@@ -168,7 +168,7 @@ async function createDatabase(): Promise<Database> {
   return db
 }
 
-async function importPauperCards(db: Database): Promise<void> {
+async function importPauperCards(db: Database.Database): Promise<void> {
   console.log('📖 Reading and filtering cards...')
 
   const fileContent = await readFile(TEMP_FILE, 'utf-8')
@@ -209,6 +209,7 @@ async function importPauperCards(db: Database): Promise<void> {
     let imageUrl: string
     let backImageUrl = ''
     let frontFaceName: string | undefined
+    const frontFace = card.card_faces?.[0]
 
     // Priority 1: Top-level image_uris (normal, adventure, split, flip, etc.)
     if (card.image_uris) {
@@ -216,14 +217,13 @@ async function importPauperCards(db: Database): Promise<void> {
       imageUrl = card.image_uris.normal || card.image_uris.large || ''
     }
     // Priority 2: card_faces with images (transform, modal_dfc, reversible_card)
-    else if (card.card_faces && card.card_faces.length > 0 && card.card_faces[0].image_uris) {
-      manaCost = card.card_faces[0].mana_cost || card.mana_cost || ''
-      imageUrl = card.card_faces[0].image_uris.normal ||
-        card.card_faces[0].image_uris.large || ''
+    else if (frontFace?.image_uris) {
+      manaCost = frontFace.mana_cost || card.mana_cost || ''
+      imageUrl = frontFace.image_uris.normal || frontFace.image_uris.large || ''
 
       // Second face's own image (transform/modal_dfc cards flip to a distinct back face;
       // reversible_card's "back" is just an alternate art of the same front, still useful)
-      const backFace = card.card_faces[1]
+      const backFace = card.card_faces?.[1]
       if (backFace?.image_uris) {
         backImageUrl = backFace.image_uris.normal || backFace.image_uris.large || ''
       }
@@ -237,7 +237,7 @@ async function importPauperCards(db: Database): Promise<void> {
     // Handle split-style layouts (split, adventure, "prepare", etc.): card_faces holds
     // two named halves but the image lives at the top level, not per-face — combine
     // mana costs from both faces since neither branch above does it for this shape.
-    if (card.card_faces && card.card_faces.length > 1 && !card.card_faces[0].image_uris) {
+    if (card.card_faces && card.card_faces.length > 1 && !frontFace?.image_uris) {
       const faceCosts = card.card_faces
         .map(face => face.mana_cost)
         .filter(cost => cost && cost.trim() !== '')
