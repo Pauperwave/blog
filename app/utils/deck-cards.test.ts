@@ -17,8 +17,18 @@ describe('uniqueDeckCards', () => {
       Creatures: [{ name: 'Delver', quantity: 3, imageUrl: 'front.jpg', backImageUrl: 'back.jpg' }]
     }
     expect(uniqueDeckCards(cardsBySection, sections)).toEqual([
-      { name: 'Delver', section: 'Creatures', quantity: 3, imageUrl: 'front.jpg', backImageUrl: 'back.jpg', manaCost: '' }
+      { name: 'Delver', section: 'Creatures', quantity: 3, imageUrl: 'front.jpg', backImageUrl: 'back.jpg', manaCost: '', type: 'Creatures' }
     ])
+  })
+
+  it('takes the type of a sideboard card from its type section, unknown if missing', () => {
+    const cardsBySection = {
+      Sideboard: [
+        { name: 'Pyroblast', quantity: 2, imageUrl: 'pyroblast.jpg', typeSection: 'Instants' },
+        { name: 'Mystery', quantity: 1, imageUrl: 'mystery.jpg' }
+      ]
+    }
+    expect(uniqueDeckCards(cardsBySection, sections).map(card => card.type)).toEqual(['Instants', undefined])
   })
 
   it('gives one entry per section for a card in main deck and sideboard', () => {

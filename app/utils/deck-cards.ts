@@ -1,3 +1,5 @@
+import { SIDEBOARD_SECTION } from '#shared/utils'
+
 export interface DeckCard {
   name: string
   section: string
@@ -5,6 +7,8 @@ export interface DeckCard {
   imageUrl: string
   backImageUrl?: string
   manaCost: string
+  /** Section its type belongs to: its own section in the main deck, derived from the type line in the sideboard (unknown if missing). */
+  type?: string
 }
 
 interface ParsedDeckCard {
@@ -13,6 +17,7 @@ interface ParsedDeckCard {
   imageUrl?: string
   backImageUrl?: string
   manaCost?: string
+  typeSection?: string
 }
 
 /**
@@ -28,7 +33,7 @@ export function uniqueDeckCards(cardsBySection: Record<string, ParsedDeckCard[]>
       const key = `${section}-${card.name}`
       if (!card.imageUrl || seen.has(key)) continue
       seen.add(key)
-      result.push({ name: card.name, section, quantity: card.quantity, imageUrl: card.imageUrl, backImageUrl: card.backImageUrl, manaCost: card.manaCost ?? '' })
+      result.push({ name: card.name, section, quantity: card.quantity, imageUrl: card.imageUrl, backImageUrl: card.backImageUrl, manaCost: card.manaCost ?? '', type: section === SIDEBOARD_SECTION ? card.typeSection : section })
     }
   }
 

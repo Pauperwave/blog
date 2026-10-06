@@ -99,19 +99,21 @@ describe('deck stats', () => {
 })
 
 describe('highlightState', () => {
-  const bolt = { section: 'Instants', manaCost: '{R}' }
-  const guttersnipe = { section: 'Creatures', manaCost: '{2}{R}' }
-  const island = { section: 'Lands', manaCost: '' }
-  const pyroblast = { section: 'Sideboard', manaCost: '{R}' }
+  const bolt = { section: 'Instants', type: 'Instants', manaCost: '{R}' }
+  const guttersnipe = { section: 'Creatures', type: 'Creatures', manaCost: '{2}{R}' }
+  const island = { section: 'Lands', type: 'Lands', manaCost: '' }
+  const pyroblast = { section: 'Sideboard', type: 'Instants', manaCost: '{R}' }
+  const untypedSideboardCard = { section: 'Sideboard', manaCost: '{R}' }
   const sideboardPlains = { section: 'Sideboard', manaCost: '' }
 
-  it('matches a type by section', () => {
+  it('matches a type by the section of its type, sideboard included', () => {
     expect(highlightState(bolt, { kind: 'type', section: 'Instants' })).toBe('match')
+    expect(highlightState(pyroblast, { kind: 'type', section: 'Instants' })).toBe('match')
     expect(highlightState(guttersnipe, { kind: 'type', section: 'Instants' })).toBe('dim')
   })
 
-  it('leaves the sideboard alone for a type, since it has none', () => {
-    expect(highlightState(pyroblast, { kind: 'type', section: 'Instants' })).toBe('neutral')
+  it('leaves a card of unknown type alone', () => {
+    expect(highlightState(untypedSideboardCard, { kind: 'type', section: 'Instants' })).toBe('neutral')
   })
 
   it('matches a curve bucket by mana value, capping at the last bucket', () => {

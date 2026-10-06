@@ -80,11 +80,11 @@ const hasCountedCost = (card: { section: string; manaCost: string }) =>
   || (card.section === SIDEBOARD_SECTION && card.manaCost !== '')
 
 /** How a card looks while a stat is hovered: part of it, not part of it, or unknown. */
-export function highlightState(card: { section: string; manaCost: string }, highlight: DeckHighlight): HighlightState {
+export function highlightState(card: { section: string; manaCost: string; type?: string }, highlight: DeckHighlight): HighlightState {
   if (highlight.kind === 'type') {
-    // The sideboard is a single list with no types, so a type says nothing about it
-    if (card.section === SIDEBOARD_SECTION) return 'neutral'
-    return card.section === highlight.section ? 'match' : 'dim'
+    // A sideboard card whose type is unknown (no type line in the database) is left alone
+    if (!card.type) return 'neutral'
+    return card.type === highlight.section ? 'match' : 'dim'
   }
 
   if (!hasCountedCost(card)) return 'dim'
