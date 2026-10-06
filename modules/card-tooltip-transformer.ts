@@ -1,7 +1,15 @@
 // ./modules/card-tooltip-transformer.ts
 import { defineNuxtModule } from '@nuxt/kit'
 import type { FileBeforeParseHook } from '@nuxt/content'
-import { createRegExp, exactly, oneOrMore, charNotIn, maybe, whitespace, global } from 'magic-regexp'
+import {
+  createRegExp,
+  exactly,
+  oneOrMore,
+  charNotIn,
+  maybe,
+  whitespace,
+  global
+} from 'magic-regexp'
 import { join, dirname } from 'path'
 import { existsSync } from 'fs'
 import { fileURLToPath } from 'url'
@@ -20,8 +28,10 @@ export default defineNuxtModule({
     buildLog('🚀 [Card Tooltip Transformer] MODULE LOADED!')
 
     // Initialize database connection at build time
-    const dbPath = join(dirname(fileURLToPath(import.meta.url)), '..', 'server', 'database', 'cards.db')
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Dynamic import requires any type
+    const dbPath = join(
+      dirname(fileURLToPath(import.meta.url)), '..', 'server', 'database', 'cards.db'
+    )
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Dynamic import needs any
     let db: any = null
 
     if (existsSync(dbPath)) {
@@ -94,7 +104,7 @@ const patternSimple = createRegExp(
   [global]
 )
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Dynamic import requires any type
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Dynamic import needs any
 async function getCardImages(db: any, cardName: string, set?: string): Promise<CardImages> {
   // The local DB is built from Scryfall's "oracle_cards" bulk file, which only ever
   // stores one representative printing per card (no set column) — it can't answer a
@@ -109,7 +119,9 @@ async function getCardImages(db: any, cardName: string, set?: string): Promise<C
         return { image: row.image_url, backImage: row.back_image_url || null }
       }
     } catch (error) {
-      buildLog(`⚠️  [Card Tooltip Transformer] Failed to query database for "${cardName}": ${error}`)
+      buildLog(
+        `⚠️  [Card Tooltip Transformer] Failed to query database for "${cardName}": ${error}`
+      )
     }
   }
 
@@ -119,7 +131,9 @@ async function getCardImages(db: any, cardName: string, set?: string): Promise<C
   try {
     const setParam = set ? `&set=${encodeURIComponent(set)}` : ''
     const lookupUrl = `${SCRYFALL_API_BASE}/cards/named?exact=${encodeURIComponent(cardName)}${setParam}`
-    buildLog(`🌐 [Card Tooltip Transformer] Fetching from Scryfall: ${cardName}${set ? ` (${set})` : ''}`)
+    buildLog(
+      `🌐 [Card Tooltip Transformer] Fetching from Scryfall: ${cardName}${set ? ` (${set})` : ''}`
+    )
 
     // Scryfall rejects requests without an identifying User-Agent (returns 400) —
     // Node's built-in fetch doesn't set one by default, unlike curl/browsers.
@@ -131,21 +145,29 @@ async function getCardImages(db: any, cardName: string, set?: string): Promise<C
     })
     if (response.ok) {
       const card = await response.json() as ScryfallCard
-      const front = extractImageUrl(card) || `${SCRYFALL_API_BASE}/cards/named?exact=${encodeURIComponent(cardName)}${setParam}&format=image`
+      const front = extractImageUrl(card)
+        || `${SCRYFALL_API_BASE}/cards/named?exact=${encodeURIComponent(cardName)}${setParam}&format=image`
       const back = extractBackImageUrl(card)
 
       // If the reference names the card's *back* face directly (e.g.
       // [[Insectile Aberration]] for Delver of Secrets), show that face
       // first — the flip control then reveals the front face instead.
       const backFaceName = card.card_faces?.[1]?.name
-      const requestedIsBackFace = !!back && !!backFaceName && backFaceName.toLowerCase() === cardName.toLowerCase()
+      const requestedIsBackFace = !!back && !!backFaceName
+        && backFaceName.toLowerCase() === cardName.toLowerCase()
 
-      return requestedIsBackFace ? { image: back, backImage: front } : { image: front, backImage: back }
+      return requestedIsBackFace
+        ? { image: back, backImage: front }
+        : { image: front, backImage: back }
     }
 
-    buildLog(`⚠️  [Card Tooltip Transformer] Scryfall lookup failed for "${cardName}" (${response.status})`)
+    buildLog(
+      `⚠️  [Card Tooltip Transformer] Scryfall lookup failed for "${cardName}" (${response.status})`
+    )
   } catch (error) {
-    buildLog(`⚠️  [Card Tooltip Transformer] Failed to fetch from Scryfall for "${cardName}": ${error}`)
+    buildLog(
+      `⚠️  [Card Tooltip Transformer] Failed to fetch from Scryfall for "${cardName}": ${error}`
+    )
   }
 
   // Last resort: the lazy image redirect endpoint, without back-face support.
@@ -156,7 +178,7 @@ async function getCardImages(db: any, cardName: string, set?: string): Promise<C
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Dynamic import requires any type
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Dynamic import needs any
 async function transformCardTooltips(content: string, filePath: string, db: any): Promise<string> {
   const transformations: CardTransformation[] = []
   const replacements: Array<{ start: number, end: number, text: string }> = []
@@ -171,7 +193,8 @@ async function transformCardTooltips(content: string, filePath: string, db: any)
 
     const cleanName = match[1].trim()
     const cleanSet = match[2].trim()
-    const { image: imageUrl, backImage: backImageUrl } = await getCardImages(db, cleanName, cleanSet)
+    const { image: imageUrl, backImage: backImageUrl }
+      = await getCardImages(db, cleanName, cleanSet)
 
     transformations.push({
       original: match[0],
@@ -244,7 +267,12 @@ function logTransformations(
     buildLog(`         └─ Card: "${t.cardName}"${t.set ? ` (Set: ${t.set})` : ''}`)
     buildLog(`         └─ Image URL: ${t.imageUrl || 'Not found in database'}`)
     if (t.backImageUrl) buildLog(`         └─ Back Image URL: ${t.backImageUrl}`)
-    buildLog(`         └─ Component: :MagicCardTooltip{name="${t.cardName}"${t.set ? ` set="${t.set}"` : ''}${t.imageUrl ? ` image="${t.imageUrl}"` : ''}${t.backImageUrl ? ` backImage="${t.backImageUrl}"` : ''}}`)
+    const setAttr = t.set ? ` set="${t.set}"` : ''
+    const imageAttr = t.imageUrl ? ` image="${t.imageUrl}"` : ''
+    const backImageAttr = t.backImageUrl ? ` backImage="${t.backImageUrl}"` : ''
+    buildLog(
+      `         └─ Component: :MagicCardTooltip{name="${t.cardName}"${setAttr}${imageAttr}${backImageAttr}}`
+    )
   })
 
   buildLog(`   ✅ Card tooltips transformed successfully\n`)

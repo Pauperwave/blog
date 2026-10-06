@@ -35,7 +35,9 @@ describe('Card Tooltip Transformer', () => {
       // Mock the transform function logic
       const cardName = 'Lightning Bolt'
 
-      const row = db.prepare('SELECT image_url FROM cards WHERE name = ? LIMIT 1').get(cardName) as { image_url: string } | undefined
+      const row = db
+        .prepare('SELECT image_url FROM cards WHERE name = ? LIMIT 1')
+        .get(cardName) as { image_url: string } | undefined
       const imageUrl = row?.image_url || null
 
       expect(imageUrl).toBe('https://cards.scryfall.io/normal/en/lea/1.jpg')
@@ -48,7 +50,9 @@ describe('Card Tooltip Transformer', () => {
 
       const cards = ['Lightning Bolt', 'Counterspell', 'Grizzly Bears']
       const results = cards.map(cardName => {
-        const row = db.prepare('SELECT image_url FROM cards WHERE name = ? LIMIT 1').get(cardName) as { image_url: string } | undefined
+        const row = db
+          .prepare('SELECT image_url FROM cards WHERE name = ? LIMIT 1')
+          .get(cardName) as { image_url: string } | undefined
         return { name: cardName, imageUrl: row?.image_url || null }
       })
 
@@ -62,7 +66,9 @@ describe('Card Tooltip Transformer', () => {
     it('should return null for non-existent card', () => {
       const db = createTestDatabase()
 
-      const row = db.prepare('SELECT image_url FROM cards WHERE name = ? LIMIT 1').get('Nonexistent Card') as { image_url: string } | undefined
+      const row = db
+        .prepare('SELECT image_url FROM cards WHERE name = ? LIMIT 1')
+        .get('Nonexistent Card') as { image_url: string } | undefined
       const imageUrl = row?.image_url || null
 
       expect(imageUrl).toBeNull()
@@ -73,7 +79,10 @@ describe('Card Tooltip Transformer', () => {
     it('should resolve a back face image for double-faced cards', () => {
       const db = createTestDatabase()
 
-      const row = db.prepare('SELECT image_url, back_image_url FROM cards WHERE name = ? LIMIT 1').get('Delver of Secrets') as { image_url: string, back_image_url: string | null } | undefined
+      type ImageRow = { image_url: string, back_image_url: string | null }
+      const row = db
+        .prepare('SELECT image_url, back_image_url FROM cards WHERE name = ? LIMIT 1')
+        .get('Delver of Secrets') as ImageRow | undefined
 
       expect(row?.image_url).toBe('https://cards.scryfall.io/normal/front/1/delver.jpg')
       expect(row?.back_image_url).toBe('https://cards.scryfall.io/normal/back/1/delver.jpg')
@@ -84,7 +93,9 @@ describe('Card Tooltip Transformer', () => {
     it('should have a null back face image for single-faced cards', () => {
       const db = createTestDatabase()
 
-      const row = db.prepare('SELECT back_image_url FROM cards WHERE name = ? LIMIT 1').get('Lightning Bolt') as { back_image_url: string | null } | undefined
+      const row = db
+        .prepare('SELECT back_image_url FROM cards WHERE name = ? LIMIT 1')
+        .get('Lightning Bolt') as { back_image_url: string | null } | undefined
 
       expect(row?.back_image_url).toBeNull()
 

@@ -8,7 +8,15 @@ import { createRegExp, digit, whitespace, oneOrMore, char } from 'magic-regexp'
 
 import { getCardsByNames, type CardData } from '#server/utils/card-database'
 import type { ParsedCard } from '#shared/types'
-import { DECK_SECTIONS, SIDEBOARD_SECTION, isDeckSection, sectionFromTypeLine, slugify, buildLog, type DeckSection } from '#shared/utils'
+import {
+  DECK_SECTIONS,
+  SIDEBOARD_SECTION,
+  isDeckSection,
+  sectionFromTypeLine,
+  slugify,
+  buildLog,
+  type DeckSection
+} from '#shared/utils'
 import { getFencedRanges, isInsideFence } from './utils/fence'
 
 export default defineNuxtModule({
@@ -170,7 +178,9 @@ const CARD_PATTERN = createRegExp(
 )
 
 async function parseDecklist(rawText: string): Promise<Record<string, ParsedCard[]>> {
-  const grouped: Record<string, ParsedCard[]> = Object.fromEntries(DECK_SECTIONS.map(section => [section, []]))
+  const grouped: Record<string, ParsedCard[]> = Object.fromEntries(
+    DECK_SECTIONS.map(section => [section, []])
+  )
 
   const lines = rawText.split('\n')
 
@@ -228,7 +238,9 @@ async function parseDecklist(rawText: string): Promise<Record<string, ParsedCard
           manaCost: cardData?.manaCost || '',
           imageUrl: cardData?.imageUrl || '',
           backImageUrl: cardData?.backImageUrl || undefined,
-          typeSection: currentSection === SIDEBOARD_SECTION && cardData?.typeLine ? sectionFromTypeLine(cardData.typeLine) : undefined
+          typeSection: currentSection === SIDEBOARD_SECTION && cardData?.typeLine
+            ? sectionFromTypeLine(cardData.typeLine)
+            : undefined
         })
       }
     }
@@ -245,7 +257,9 @@ async function parseDecklist(rawText: string): Promise<Record<string, ParsedCard
   return result
 }
 
-function calculateSectionCounts(cardsBySection: Record<string, ParsedCard[]>): Record<string, number> {
+function calculateSectionCounts(
+  cardsBySection: Record<string, ParsedCard[]>
+): Record<string, number> {
   const counts: Record<string, number> = {}
 
   for (const [section, cards] of Object.entries(cardsBySection)) {
