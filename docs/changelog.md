@@ -20,6 +20,7 @@ Documentazione: `docs/architecture/decklist-visual-view.md`.
 ### Fix: script rotti e non controllati
 
 - `decklists:verify-gradients` e `decklists:add-gradients` crashavano (`ERR_PACKAGE_IMPORT_NOT_DEFINED`) da quando `server/utils/card-database.ts` importava `buildLog` da `#shared/utils`, alias che Node puro non risolve. Ora l'import è relativo (`../../shared/utils/build-log.ts`). Nessun controllo lo aveva segnalato perché `nuxt typecheck` non guarda `scripts/`.
+- Nuovo `modules/tsconfig.json` e `pnpm run typecheck:modules` (incluso in `pnpm run typecheck`): anche `modules/` non era controllato da `nuxt typecheck`. Con gli alias `#shared`/`#server` risolti compila senza errori.
 - Nuovo `scripts/tsconfig.json` e `pnpm run typecheck:scripts` (incluso in `pnpm run typecheck`): controlla gli script con le librerie di Node e le stesse opzioni strict del progetto. Corretti gli errori trovati: accessi a indici di array con `noUncheckedIndexedAccess` in `add-header-gradients.ts`, `decklist-gradient.ts` (con un helper `readFrontmatterValue` al posto di quattro regex ripetute) e `benchmark-article-filters.ts` (helper `pickOne`), e i tipi in `download-bulk-data.ts` (`Database.Database`, risposta JSON tipizzata, `frontFace`).
 
 ### Refactor
