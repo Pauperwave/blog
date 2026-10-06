@@ -65,6 +65,8 @@ const showCardModal = ref(false)
 const cardModalRequested = ref(false)
 const cardModalIndex = ref(0)
 const deckStats = computed(() => computeDeckStats(cardsBySection.value))
+// Without player or placement the modal has no visible description (Nuxt UI adds a hidden one)
+const statsDescription = computed(() => [props.player, props.placement].filter(Boolean).join(' · ') || undefined)
 
 const headerInfo = computed<DecklistHeaderInfo>(() => ({
   name: props.name,
@@ -237,7 +239,7 @@ function copyDecklist(format: 'mtgo' | 'arena') {
     <UModal
       v-model:open="showStats"
       :title="`Statistiche - ${name}`"
-      :description="`Statistiche del mazzo ${name}`"
+      :description="statsDescription"
     >
       <template #body>
         <DecklistStats :stats="deckStats" />
