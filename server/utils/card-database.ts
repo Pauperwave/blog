@@ -2,6 +2,7 @@
 import { join, dirname } from 'path'
 import { existsSync } from 'fs'
 import { fileURLToPath } from 'url'
+import type BetterSqlite3 from 'better-sqlite3'
 
 import { buildLog } from '#shared/utils'
 
@@ -31,8 +32,7 @@ const toCardData = (row: CardRow): CardData => ({
   typeLine: row.type_line || ''
 })
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-type DatabaseInstance = any
+type DatabaseInstance = BetterSqlite3.Database
 
 let dbInstance: DatabaseInstance | null = null
 
@@ -95,9 +95,9 @@ export async function getCardByName(name: string): Promise<CardData | null> {
     throw new Error('Database not available')
   }
 
-  const row: CardRow | undefined = db.prepare(`
+  const row = db.prepare(`
     SELECT * FROM cards WHERE name = ? LIMIT 1
-  `).get(name)
+  `).get(name) as CardRow | undefined
 
   return row ? toCardData(row) : null
 }
@@ -108,11 +108,15 @@ export async function getCardsByNames(names: string[]): Promise<Map<string, Card
 
   if (names.length === 0) return result
 
+  if (!db) {
+    throw new Error('Database not available')
+  }
+
   // First, try exact matches
   const placeholders = names.map(() => '?').join(',')
   const query = `SELECT * FROM cards WHERE name IN (${placeholders})`
 
-  const rows: CardRow[] = db.prepare(query).all(...names)
+  const rows = db.prepare(query).all(...names) as CardRow[]
 
   for (const row of rows) {
     result.set(row.name, toCardData(row))
@@ -125,9 +129,9 @@ export async function getCardsByNames(names: string[]): Promise<Map<string, Card
       const lowercaseName = name.toLowerCase()
 
       // Query database for case-insensitive match using LOWER function
-      const caseInsensitiveRow: CardRow | undefined = db.prepare(`
+      const caseInsensitiveRow = db.prepare(`
         SELECT * FROM cards WHERE LOWER(name) = ? LIMIT 1
-      `).get(lowercaseName)
+      `).get(lowercaseName) as CardRow | undefined
 
       if (caseInsensitiveRow) {
         result.set(name, toCardData(caseInsensitiveRow))
