@@ -16,13 +16,15 @@ describe('highlightState', () => {
   })
 
   it('leaves a card of unknown type alone', () => {
-    expect(highlightState(untypedSideboardCard, { kind: 'type', section: 'Instants' })).toBe('neutral')
+    expect(highlightState(untypedSideboardCard, { kind: 'type', section: 'Instants' }))
+      .toBe('neutral')
   })
 
   it('matches a curve bucket by mana value, capping at the last bucket', () => {
     expect(highlightState(bolt, { kind: 'curve', bucket: 1 })).toBe('match')
     expect(highlightState(guttersnipe, { kind: 'curve', bucket: 1 })).toBe('dim')
-    expect(highlightState({ section: 'Creatures', manaCost: '{9}' }, { kind: 'curve', bucket: 7 })).toBe('match')
+    expect(highlightState({ section: 'Creatures', manaCost: '{9}' }, { kind: 'curve', bucket: 7 }))
+      .toBe('match')
   })
 
   it('matches a color when its cost has that pip', () => {

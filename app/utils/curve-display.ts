@@ -4,10 +4,14 @@ import { CURVE_COLORS, type DeckColor } from './mana-cost'
 
 /**
  * The colored segments of a curve column, bottom to top, only the colors that appear.
- * With a highlighted color, the segments of the other colors are dimmed and the multicolor one splits
+ * With a highlighted color, the segments of the other colors are dimmed and the multicolor one
+ * splits
  * into the cards that have the color and the ones that don't.
  */
-export function curveSegments(bucket: Pick<DeckStats['curve'][number], 'colors' | 'multicolor'>, highlightColor: DeckColor | null = null) {
+export function curveSegments(
+  bucket: Pick<DeckStats['curve'][number], 'colors' | 'multicolor'>,
+  highlightColor: DeckColor | null = null
+) {
   return CURVE_COLORS.flatMap((color) => {
     const count = bucket.colors[color] ?? 0
     const style = CURVE_COLOR_STYLES[color]
@@ -27,6 +31,8 @@ export function curveSegments(bucket: Pick<DeckStats['curve'][number], 'colors' 
 
 /** Tooltip of a curve column: its cost, how many cards and the split by color. */
 export function curveTooltip(bucket: DeckStats['curve'][number]): string {
-  const breakdown = curveSegments(bucket).map(segment => `${segment.name} ${segment.count}`).join(', ')
+  const breakdown = curveSegments(bucket)
+    .map(segment => `${segment.name} ${segment.count}`)
+    .join(', ')
   return `Costo ${bucket.label}: ${bucket.count}${breakdown ? ` (${breakdown})` : ''}`
 }

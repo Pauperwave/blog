@@ -34,7 +34,8 @@ describe('magic-cards layout', () => {
     })
 
     it('converges toward arch as more cards are added, rather than growing past it', () => {
-      const spread = (total: number) => fanRotation(total - 1, total, 20.5) - fanRotation(0, total, 20.5)
+      const spread = (total: number) =>
+        fanRotation(total - 1, total, 20.5) - fanRotation(0, total, 20.5)
       expect(spread(3)).toBeLessThan(20.5)
       expect(spread(10)).toBeLessThan(20.5)
       expect(spread(10)).toBeGreaterThan(spread(3))
@@ -96,7 +97,7 @@ describe('magic-cards layout', () => {
       expect(cardFilter(2, 2)).toBe('none')
     })
 
-    it('fades brightness by distance from the hovered card — adjacent cards end up brighter than normal, matching the live site', () => {
+    it('fades brightness by distance; adjacent cards end up brighter than normal', () => {
       const brightnessOf = (filter: string) => Number(filter.match(/brightness\(([^)]+)\)/)![1])
       expect(cardFilter(1, 0)).toMatch(/^blur\(0\.5px\) grayscale\(0\.8\) brightness\(/)
       expect(brightnessOf(cardFilter(1, 0))).toBeCloseTo(1.04)
@@ -134,7 +135,7 @@ describe('magic-cards layout', () => {
   })
 
   describe('handZIndex', () => {
-    it('elevates only the two cards immediately adjacent to the center (verified for 5 cards)', () => {
+    it('elevates only the two cards adjacent to the center (verified for 5 cards)', () => {
       expect(handZIndex(0, 5)).toBe(0)
       expect(handZIndex(1, 5)).toBe(1)
       expect(handZIndex(2, 5)).toBe(0)

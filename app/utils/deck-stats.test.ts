@@ -18,7 +18,11 @@ describe('deck stats', () => {
 
     it('splits each curve bucket by card color', () => {
       const { curve } = computeDeckStats({
-        Creatures: [{ quantity: 3, manaCost: '{1}{R}' }, { quantity: 2, manaCost: '{1}{R}{U}' }, { quantity: 1, manaCost: '{2}' }]
+        Creatures: [
+          { quantity: 3, manaCost: '{1}{R}' },
+          { quantity: 2, manaCost: '{1}{R}{U}' },
+          { quantity: 1, manaCost: '{2}' }
+        ]
       })
       expect(curve[2]?.colors).toEqual({ R: 3, C: 1 })
       expect(curve[3]?.colors).toEqual({ M: 2 })

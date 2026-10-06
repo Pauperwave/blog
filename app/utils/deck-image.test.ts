@@ -12,6 +12,7 @@ describe('deckImageFileName', () => {
   })
 
   it('does not leave empty parts behind', () => {
-    expect(deckImageFileName({ name: 'Affinity', player: '', placement: 'Top 8' })).toBe('pauperwave-affinity-top-8.jpg')
+    expect(deckImageFileName({ name: 'Affinity', player: '', placement: 'Top 8' }))
+      .toBe('pauperwave-affinity-top-8.jpg')
   })
 })

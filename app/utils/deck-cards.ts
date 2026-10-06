@@ -7,7 +7,10 @@ export interface DeckCard {
   imageUrl: string
   backImageUrl?: string
   manaCost: string
-  /** Section its type belongs to: its own section in the main deck, derived from the type line in the sideboard (unknown if missing). */
+  /**
+   * Section its type belongs to: its own in the main deck, derived from the type line in the
+   * sideboard (unknown if missing).
+   */
   type?: MainDeckSection
 }
 
@@ -24,7 +27,10 @@ interface ParsedDeckCard {
  * Cards of a decklist in section order, one entry per card and section (the same card in main deck
  * and sideboard gives two entries). Cards without an image are left out: they cannot be shown.
  */
-export function uniqueDeckCards(cardsBySection: Record<string, ParsedDeckCard[]>, sections: readonly DeckSection[]): DeckCard[] {
+export function uniqueDeckCards(
+  cardsBySection: Record<string, ParsedDeckCard[]>,
+  sections: readonly DeckSection[]
+): DeckCard[] {
   const seen = new Set<string>()
   const result: DeckCard[] = []
 
@@ -33,7 +39,15 @@ export function uniqueDeckCards(cardsBySection: Record<string, ParsedDeckCard[]>
       const key = `${section}-${card.name}`
       if (!card.imageUrl || seen.has(key)) continue
       seen.add(key)
-      result.push({ name: card.name, section, quantity: card.quantity, imageUrl: card.imageUrl, backImageUrl: card.backImageUrl, manaCost: card.manaCost ?? '', type: section === SIDEBOARD_SECTION ? card.typeSection : section })
+      result.push({
+        name: card.name,
+        section,
+        quantity: card.quantity,
+        imageUrl: card.imageUrl,
+        backImageUrl: card.backImageUrl,
+        manaCost: card.manaCost ?? '',
+        type: section === SIDEBOARD_SECTION ? card.typeSection : section
+      })
     }
   }
 

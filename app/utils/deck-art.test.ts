@@ -15,7 +15,8 @@ describe('deck art', () => {
     })
 
     it('keeps the first card on a tie', () => {
-      expect(pickDeckArtCard([cards[0]!, { name: 'Other', section: 'Creatures', quantity: 2 }])?.name).toBe('Guttersnipe')
+      const other = { name: 'Other', section: 'Creatures', quantity: 2 }
+      expect(pickDeckArtCard([cards[0]!, other])?.name).toBe('Guttersnipe')
     })
 
     it('ignores lands and sideboard', () => {

@@ -9,7 +9,9 @@ export type CurveColor = DeckColor | 'M' | 'C'
 /** Order of the segments in a curve bar, bottom to top. */
 export const CURVE_COLORS: readonly CurveColor[] = [...COLORS, 'M', 'C']
 
-/** Mana value of a cost like "{2}{U}{U}"; split/DFC costs ("{1}{R} // {2}{U}") use the first face. */
+/**
+ * Mana value of a cost like "{2}{U}{U}"; split/DFC costs ("{1}{R} // {2}{U}") use the first face.
+ */
 export function parseManaValue(manaCost: string): number {
   const firstFace = manaCost.split(' // ')[0] ?? ''
   const symbols = firstFace.match(/\{[^}]+\}/g) ?? []
@@ -38,7 +40,7 @@ export function countColorPips(manaCost: string): Record<string, number> {
   return pips
 }
 
-/** Color of a card from its cost: hybrid symbols count for both their colors, so they make it multicolor. */
+/** Color of a card from its cost: a hybrid symbol counts for both colors, making it multicolor. */
 export function cardCurveColor(manaCost: string): CurveColor {
   const colors = Object.keys(countColorPips(manaCost)) as DeckColor[]
   if (colors.length > 1) return 'M'

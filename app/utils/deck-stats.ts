@@ -1,5 +1,19 @@
-import { LAND_SECTION, MAIN_DECK_SECTIONS, NON_LAND_SECTIONS, type MainDeckSection } from '#shared/utils'
-import { COLORS, MAX_CURVE_VALUE, cardCurveColor, countColorPips, curveBucket, parseManaValue, type CurveColor, type DeckColor } from './mana-cost'
+import {
+  LAND_SECTION,
+  MAIN_DECK_SECTIONS,
+  NON_LAND_SECTIONS,
+  type MainDeckSection
+} from '#shared/utils'
+import {
+  COLORS,
+  MAX_CURVE_VALUE,
+  cardCurveColor,
+  countColorPips,
+  curveBucket,
+  parseManaValue,
+  type CurveColor,
+  type DeckColor
+} from './mana-cost'
 
 export interface DeckStatsCard {
   quantity: number
@@ -12,18 +26,19 @@ export interface DeckStats {
     label: string
     count: number
     colors: Partial<Record<CurveColor, number>>
-    /** Of the multicolor cards, how many have each color (a card counts once for each of its colors) */
+    /** Of the multicolor cards, how many have each color (a card counts once per color) */
     multicolor: Partial<Record<DeckColor, number>>
   }[]
   /** Color pips in non-land main deck costs, only colors that appear */
   pips: { color: DeckColor; count: number }[]
   averageManaValue: number
   landCount: number
-  /** Cards per type in the main deck (sideboard excluded), only types that appear, in section order */
+  /** Cards per type in the main deck (no sideboard), only types that appear, in section order */
   typeCounts: { section: MainDeckSection; count: number }[]
 }
 
-const sumQuantities = (cards: DeckStatsCard[] = []) => cards.reduce((total, card) => total + card.quantity, 0)
+const sumQuantities = (cards: DeckStatsCard[] = []) =>
+  cards.reduce((total, card) => total + card.quantity, 0)
 
 export function computeDeckStats(cardsBySection: Record<string, DeckStatsCard[]>): DeckStats {
   const nonLandCards = NON_LAND_SECTIONS.flatMap(section => cardsBySection[section] ?? [])
@@ -62,7 +77,9 @@ export function computeDeckStats(cardsBySection: Record<string, DeckStatsCard[]>
 
   return {
     curve,
-    pips: COLORS.filter(color => pipCounts[color]).map(color => ({ color, count: pipCounts[color] ?? 0 })),
+    pips: COLORS
+      .filter(color => pipCounts[color])
+      .map(color => ({ color, count: pipCounts[color] ?? 0 })),
     averageManaValue: nonLandCount ? totalManaValue / nonLandCount : 0,
     landCount,
     typeCounts: MAIN_DECK_SECTIONS

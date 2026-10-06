@@ -8,7 +8,8 @@ export function getYoutubeVideoId(url: string): string | null {
 }
 
 /**
- * Returns YouTube's static thumbnail URL for a video, or null if the URL isn't recognized as YouTube.
+ * Returns YouTube's static thumbnail URL for a video, or null if the URL isn't recognized as
+ * YouTube.
  */
 export function getYoutubeThumbnail(url: string): string | null {
   const id = getYoutubeVideoId(url)
