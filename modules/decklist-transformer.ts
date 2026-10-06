@@ -6,7 +6,7 @@ import { defineNuxtModule } from '@nuxt/kit'
 import type { FileBeforeParseHook } from '@nuxt/content'
 import { createRegExp, digit, whitespace, oneOrMore, char } from 'magic-regexp'
 
-import { getCardsByNames } from '#server/utils/card-database'
+import { getCardsByNames, type CardData } from '#server/utils/card-database'
 import type { ParsedCard } from '#shared/types'
 import { DECK_SECTIONS, SIDEBOARD_SECTION, isDeckSection, sectionFromTypeLine, slugify, buildLog, type DeckSection } from '#shared/utils'
 import { getFencedRanges, isInsideFence } from './card-tooltip-transformer'
@@ -23,7 +23,6 @@ export default defineNuxtModule({
       handler: (ctx: FileBeforeParseHook) => void | Promise<void>
     ) => void
 
-    /* eslint-disable @typescript-eslint/no-explicit-any */
     hookContentBeforeParse('content:file:beforeParse', async (ctx: FileBeforeParseHook) => {
       const file = ctx.file || ctx
 
@@ -193,7 +192,7 @@ async function parseDecklist(rawText: string): Promise<Record<string, ParsedCard
   const dbPath = join(process.cwd(), 'server', 'database', 'cards.db')
   const dbExists = existsSync(dbPath)
 
-  let cardDataMap: Map<string, any> = new Map()
+  let cardDataMap: Map<string, CardData> = new Map()
 
   if (dbExists) {
     cardDataMap = await getCardsByNames(Array.from(cardNames))
@@ -260,7 +259,7 @@ function calculateSectionCounts(cardsBySection: Record<string, ParsedCard[]>): R
 // LOGGING FUNCTIONS
 // ============================================================================
 
-function logDatabaseLookup(cardNames: Set<string>, cardDataMap: Map<string, any>): void {
+function logDatabaseLookup(cardNames: Set<string>, cardDataMap: Map<string, CardData>): void {
   buildLog(`   🔍 Found ${cardNames.size} unique card names`)
   buildLog(`   💾 Loaded ${cardDataMap.size}/${cardNames.size} cards from database`)
 
