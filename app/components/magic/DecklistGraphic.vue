@@ -31,6 +31,7 @@ const sideboardCopies = computed(() => expandCopies(cards.filter(card => card.se
 // Stat under the mouse: the cards outside of it are dimmed
 const highlight = ref<DeckHighlight | null>(null)
 const highlightedColor = computed(() => highlight.value?.kind === 'color' ? highlight.value.color : null)
+const highlightedBucket = computed(() => highlight.value?.kind === 'curve' ? highlight.value.bucket : null)
 const highlightedSection = computed(() => highlight.value?.kind === 'type' ? highlight.value.section : null)
 
 const onColorHover = (color: DeckColor | null) => {
@@ -82,6 +83,7 @@ const artCard = computed(() => pickDeckArtCard(cards))
       <DecklistCurveChart
         :curve="stats.curve"
         :average="stats.averageManaValue"
+        :highlight-bucket="highlightedBucket"
         :highlight-color="highlightedColor"
         @hover="onCurveHover"
         class="relative h-28 min-w-64 flex-1 self-end rounded-lg bg-default/70 px-3 py-3"

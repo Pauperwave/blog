@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { CURVE_COLORS, type DeckColor, type DeckStats } from '~/utils/deck-stats'
 
-const { curve, average, highlightColor = null } = defineProps<{
+const { curve, average, highlightBucket = null, highlightColor = null } = defineProps<{
   curve: DeckStats['curve']
   /** Average mana value of the non-land cards */
   average: number
+  /** The other columns turn grayscale */
+  highlightBucket?: number | null
   /** While a color is hovered elsewhere, the other colors turn grayscale */
   highlightColor?: DeckColor | null
 }>()
@@ -54,7 +56,8 @@ const buckets = computed(() => curve.map((bucket) => {
         <!-- Segments stack from the bottom in color order; the ring keeps the white and black ones visible -->
         <div
           v-if="bucket.count"
-          class="flex w-full flex-col-reverse overflow-hidden rounded-t-sm ring-1 ring-default"
+          class="flex w-full flex-col-reverse overflow-hidden rounded-t-sm ring-1 ring-default motion-safe:transition-[filter] motion-safe:duration-400"
+          :class="{ grayscale: highlightBucket !== null && highlightBucket !== index }"
           :style="{ height: `${(bucket.count / maxCount) * 100}%` }"
         >
           <div
