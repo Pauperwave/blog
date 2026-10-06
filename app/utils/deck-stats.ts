@@ -1,5 +1,6 @@
 import { LAND_SECTION, MAIN_DECK_SECTIONS, NON_LAND_SECTIONS, SIDEBOARD_SECTION, isNonLandSection, type DeckSection, type MainDeckSection } from '#shared/utils'
 import { CURVE_COLOR_STYLES } from './mana-colors'
+import { COLORS, CURVE_COLORS, MAX_CURVE_VALUE, cardCurveColor, countColorPips, curveBucket, parseManaValue, type CurveColor, type DeckColor } from './mana-cost'
 
 export interface DeckStatsCard {
   quantity: number
@@ -23,37 +24,11 @@ export interface DeckStats {
   typeCounts: { section: MainDeckSection; count: number }[]
 }
 
-const COLORS = ['W', 'U', 'B', 'R', 'G'] as const
-const MAX_CURVE_VALUE = 7
-
-export type DeckColor = typeof COLORS[number]
-
-/** Color of a card for the curve: one of the five, multicolor (M) or colorless (C). */
-export type CurveColor = DeckColor | 'M' | 'C'
-
-/** Order of the segments in a curve bar, bottom to top. */
-export const CURVE_COLORS: readonly CurveColor[] = [...COLORS, 'M', 'C']
-
 /** The part of the deck a hovered stat stands for: a card type, a curve bucket or a color. */
 export type DeckHighlight =
   | { kind: 'type'; section: MainDeckSection }
   | { kind: 'curve'; bucket: number }
   | { kind: 'color'; color: DeckColor }
-
-/** Mana value of a cost like "{2}{U}{U}"; split/DFC costs ("{1}{R} // {2}{U}") use the first face. */
-export function parseManaValue(manaCost: string): number {
-  const firstFace = manaCost.split(' // ')[0] ?? ''
-  const symbols = firstFace.match(/\{[^}]+\}/g) ?? []
-
-  return symbols.reduce((total, symbol) => {
-    const content = symbol.slice(1, -1)
-    if (/^\d+$/.test(content)) return total + Number(content)
-    if (/^[XYZ]$/.test(content)) return total
-    // Hybrid with a generic part ({2/W}) is worth that number, any other symbol is worth 1
-    const generic = content.match(/^(\d+)\//)
-    return total + (generic ? Number(generic[1]) : 1)
-  }, 0)
-}
 
 /**
  * The colored segments of a curve column, bottom to top, only the colors that appear.
@@ -83,30 +58,6 @@ export function curveTooltip(bucket: DeckStats['curve'][number]): string {
   const breakdown = curveSegments(bucket).map(segment => `${segment.name} ${segment.count}`).join(', ')
   return `Costo ${bucket.label}: ${bucket.count}${breakdown ? ` (${breakdown})` : ''}`
 }
-
-/** Color of a card from its cost: hybrid symbols count for both their colors, so they make it multicolor. */
-export function cardCurveColor(manaCost: string): CurveColor {
-  const colors = Object.keys(countColorPips(manaCost)) as DeckColor[]
-  if (colors.length > 1) return 'M'
-  return colors[0] ?? 'C'
-}
-
-/** Colored pips of a cost, hybrid symbols count once for each color they contain. */
-export function countColorPips(manaCost: string): Record<string, number> {
-  const firstFace = manaCost.split(' // ')[0] ?? ''
-  const pips: Record<string, number> = {}
-
-  for (const symbol of firstFace.match(/\{[^}]+\}/g) ?? []) {
-    for (const color of symbol.match(/[WUBRG]/g) ?? []) {
-      pips[color] = (pips[color] ?? 0) + 1
-    }
-  }
-
-  return pips
-}
-
-/** Curve bucket of a cost: its mana value, capped at the last ("7+") bucket. */
-const curveBucket = (manaCost: string) => Math.min(parseManaValue(manaCost), MAX_CURVE_VALUE)
 
 export type HighlightState = 'match' | 'dim' | 'neutral'
 

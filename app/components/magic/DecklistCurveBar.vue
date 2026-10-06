@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { curveSegments, type DeckColor, type DeckStats } from '~/utils/deck-stats'
+import { curveSegments, type DeckStats } from '~/utils/deck-stats'
+import type { DeckColor } from '~/utils/mana-cost'
 
 const { bucket, highlightColor = null } = defineProps<{
   /** Column of the curve; its segments stack from the bottom in color order */

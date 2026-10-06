@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { curveTooltip, type DeckColor, type DeckStats } from '~/utils/deck-stats'
+import { curveTooltip, type DeckStats } from '~/utils/deck-stats'
+import type { DeckColor } from '~/utils/mana-cost'
 import DecklistCurveBar from './DecklistCurveBar.vue'
 
 const { curve, average, highlightBucket = null, highlightColor = null } = defineProps<{

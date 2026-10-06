@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import type { DeckColor, DeckStats } from '~/utils/deck-stats'
+import type { DeckStats } from '~/utils/deck-stats'
+import type { DeckColor } from '~/utils/mana-cost'
 
 const { pips, highlightColor = null } = defineProps<{
   pips: DeckStats['pips']
