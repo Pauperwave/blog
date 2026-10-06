@@ -26,5 +26,10 @@ export function useCopyToClipboard() {
     }
   }
 
-  return { copyToClipboard }
+  const copyLink = (url: string) => copyToClipboard(url, {
+    successDescription: 'Link copiato negli appunti',
+    errorDescription: 'Impossibile copiare il link negli appunti'
+  })
+
+  return { copyToClipboard, copyLink }
 }

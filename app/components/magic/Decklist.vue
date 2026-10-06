@@ -34,7 +34,7 @@ const anchorId = computed(() =>
     : `deck-${slugify(props.name)}`
 )
 
-const { copyToClipboard } = useCopyToClipboard()
+const { copyToClipboard, copyLink } = useCopyToClipboard()
 
 const { headerClass } = useDecklistStyles(props.headerGradient)
 
@@ -98,11 +98,6 @@ const openCard = (name: string, section: string) => {
 }
 
 provideDecklistContext({ openCard })
-
-const shareDeck = () => copyToClipboard(deckUrl.value, {
-  successDescription: 'Link copiato negli appunti',
-  errorDescription: 'Impossibile copiare il link negli appunti'
-})
 
 // Copy decklist to clipboard in the import format of the given client
 function copyDecklist(format: 'mtgo' | 'arena') {
@@ -208,7 +203,7 @@ function copyDecklist(format: 'mtgo' | 'arena') {
             variant="subtle"
             class="cursor-pointer"
             label="Condividi"
-            @click="shareDeck"
+            @click="copyLink(deckUrl)"
           />
         </div>
       </template>

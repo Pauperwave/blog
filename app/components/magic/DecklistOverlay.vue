@@ -17,11 +17,7 @@ const open = defineModel<boolean>('open', { required: true })
 
 const graphic = useTemplateRef<InstanceType<typeof DecklistGraphic>>('graphic')
 const { isExporting, downloadImage, copyImage } = useElementImageExport(() => graphic.value?.$el)
-const { copyToClipboard } = useCopyToClipboard()
-const copyShareUrl = () => copyToClipboard(shareUrl, {
-  successDescription: 'Link copiato negli appunti',
-  errorDescription: 'Impossibile copiare il link negli appunti'
-})
+const { copyLink } = useCopyToClipboard()
 const fileName = computed(() => deckImageFileName(header))
 </script>
 
@@ -61,7 +57,7 @@ const fileName = computed(() => deckImageFileName(header))
             variant="subtle"
             class="pointer-events-auto cursor-pointer"
             label="Condividi"
-            @click="copyShareUrl"
+            @click="copyLink(shareUrl)"
           />
           <UButton
             icon="i-lucide-x"
