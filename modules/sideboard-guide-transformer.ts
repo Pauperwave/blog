@@ -2,12 +2,12 @@
 import { existsSync } from 'fs'
 import { join } from 'path'
 import { defineNuxtModule } from '@nuxt/kit'
-import type { FileBeforeParseHook } from '@nuxt/content'
 import { createRegExp, digit, whitespace, oneOrMore, char } from 'magic-regexp'
 
 import { getCardsByNames, type CardData } from '#server/utils/card-database'
 import type { SideboardGuideCard, SideboardGuideSection } from '#shared/types'
 import { buildLog } from '#shared/utils'
+import { onContentFileBeforeParse } from './utils/content-hook'
 import { getFencedRanges, isInsideFence } from './utils/fence'
 
 export default defineNuxtModule({
@@ -17,12 +17,7 @@ export default defineNuxtModule({
   setup(_options, nuxt) {
     buildLog('🚀 [Sideboard Guide Transformer] MODULE LOADED!')
 
-    const hookContentBeforeParse = nuxt.hook as unknown as (
-      name: 'content:file:beforeParse',
-      handler: (ctx: FileBeforeParseHook) => void | Promise<void>
-    ) => void
-
-    hookContentBeforeParse('content:file:beforeParse', async (ctx: FileBeforeParseHook) => {
+    onContentFileBeforeParse(nuxt, async (ctx) => {
       const file = ctx.file || ctx
 
       const allowedFolders = [

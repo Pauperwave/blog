@@ -1,6 +1,6 @@
 // ./modules/card-tooltip-transformer.ts
 import { defineNuxtModule } from '@nuxt/kit'
-import type { FileBeforeParseHook } from '@nuxt/content'
+import type BetterSqlite3 from 'better-sqlite3'
 import {
   createRegExp,
   exactly,
@@ -16,6 +16,7 @@ import { fileURLToPath } from 'url'
 
 import { buildLog, extractImageUrl, extractBackImageUrl } from '#shared/utils'
 import type { ScryfallCard } from '#shared/types'
+import { onContentFileBeforeParse } from './utils/content-hook'
 import { getFencedRanges, isInsideFence } from './utils/fence'
 
 const SCRYFALL_API_BASE = 'https://api.scryfall.com'
@@ -31,8 +32,7 @@ export default defineNuxtModule({
     const dbPath = join(
       dirname(fileURLToPath(import.meta.url)), '..', 'server', 'database', 'cards.db'
     )
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Dynamic import needs any
-    let db: any = null
+    let db: BetterSqlite3.Database | null = null
 
     if (existsSync(dbPath)) {
       try {
@@ -46,13 +46,8 @@ export default defineNuxtModule({
       buildLog(`⚠️  [Card Tooltip Transformer] Database not found at: ${dbPath}`)
     }
 
-    const hookContentBeforeParse = nuxt.hook as unknown as (
-      name: 'content:file:beforeParse',
-      handler: (ctx: FileBeforeParseHook) => void | Promise<void>
-    ) => void
-
     // Hook into content:file:beforeParse to transform markdown before parsing
-    hookContentBeforeParse('content:file:beforeParse', async (ctx: FileBeforeParseHook) => {
+    onContentFileBeforeParse(nuxt, async (ctx) => {
       const file = ctx.file || ctx
 
       if (file.extension === '.md') {
@@ -104,8 +99,11 @@ const patternSimple = createRegExp(
   [global]
 )
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Dynamic import needs any
-async function getCardImages(db: any, cardName: string, set?: string): Promise<CardImages> {
+async function getCardImages(
+  db: BetterSqlite3.Database | null,
+  cardName: string,
+  set?: string
+): Promise<CardImages> {
   // The local DB is built from Scryfall's "oracle_cards" bulk file, which only ever
   // stores one representative printing per card (no set column) — it can't answer a
   // set-specific request, so skip it and go straight to Scryfall when a set is given.
@@ -178,8 +176,11 @@ async function getCardImages(db: any, cardName: string, set?: string): Promise<C
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Dynamic import needs any
-async function transformCardTooltips(content: string, filePath: string, db: any): Promise<string> {
+async function transformCardTooltips(
+  content: string,
+  filePath: string,
+  db: BetterSqlite3.Database | null
+): Promise<string> {
   const transformations: CardTransformation[] = []
   const replacements: Array<{ start: number, end: number, text: string }> = []
   const fencedRanges = getFencedRanges(content)
