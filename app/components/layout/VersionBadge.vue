@@ -45,8 +45,8 @@ const updatedAtText = computed(() => {
 </script>
 
 <template>
-  <p v-if="shortSha || updatedLabel" class="text-xs text-dimmed text-center">
-    <span v-if="shortSha" class="font-mono">{{ shortSha }}</span>
+  <p v-if="shortSha || updatedLabel" class="font-mono text-sm text-dimmed text-center">
+    <span v-if="shortSha">{{ shortSha }}</span>
     <span v-if="shortSha && updatedLabel"> • </span>
     <UTooltip v-if="updatedLabel" :text="updatedAtText">
       <span class="cursor-default">{{ updatedLabel }}</span>
