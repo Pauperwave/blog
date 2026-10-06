@@ -17,11 +17,13 @@
     <MagicCardManaSymbol symbol="wub" />
 -->
 <script setup lang="ts">
-const props = defineProps<{
+interface Props {
   symbol?: string           // Es: "{U}", "{2}", "{R/G}", "wubrg" - Formato Scryfall o sequenza colori
   combination?: ManaCombination  // Es: "azorius", "gruul", "jund" - Nome della combinazione
   plain?: boolean           // Simbolo senza il cerchio colorato esterno, prende il colore del testo
-}>()
+}
+
+const { symbol = undefined, combination = undefined, plain = false } = defineProps<Props>()
 
 /**
  * Converte un simbolo in formato Scryfall (es: "{U}", "{R/G}")
@@ -112,16 +114,16 @@ export type ManaCombination = keyof typeof combinationMap
 // Risolve la sequenza colori da symbol o combination
 const resolvedSequence = computed((): string | null => {
   // Priorità alla prop combination
-  if (props.combination) {
-    const sequence = combinationMap[props.combination]
+  if (combination) {
+    const sequence = combinationMap[combination]
     if (sequence) {
       return sequence
     }
-    console.warn(`[ManaSymbol] Unknown combination: "${props.combination}"`)
+    console.warn(`[ManaSymbol] Unknown combination: "${combination}"`)
   }
   // Fallback alla prop symbol
-  if (props.symbol) {
-    return props.symbol
+  if (symbol) {
+    return symbol
   }
   return null
 })
@@ -144,7 +146,7 @@ const colorSymbols = computed(() => {
 })
 
 // Helper per generare la classe CSS
-const manaClass = (symbol: string) => `ms ms-${getManaClass(symbol)}${props.plain ? '' : ' ms-cost'}`
+const manaClass = (symbol: string) => `ms ms-${getManaClass(symbol)}${plain ? '' : ' ms-cost'}`
 </script>
 
 <template>

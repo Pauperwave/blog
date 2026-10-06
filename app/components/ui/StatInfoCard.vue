@@ -6,21 +6,19 @@ interface Props {
   valueClass?: string
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  valueClass: 'text-2xl'
-})
+const { label, value, description, valueClass = 'text-2xl' } = defineProps<Props>()
 </script>
 
 <template>
   <UCard class="bg-white/80 dark:bg-gray-900/70 backdrop-blur-sm">
     <p class="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">
-      {{ props.label }}
+      {{ label }}
     </p>
-    <p :class="['mt-1 font-bold', props.valueClass]">
-      {{ props.value }}
+    <p :class="['mt-1 font-bold', valueClass]">
+      {{ value }}
     </p>
     <p class="text-sm text-gray-600 dark:text-gray-400">
-      {{ props.description }}
+      {{ description }}
     </p>
   </UCard>
 </template>

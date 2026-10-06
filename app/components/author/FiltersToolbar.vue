@@ -9,7 +9,7 @@ interface Props {
   resultsCount: number
 }
 
-const props = defineProps<Props>()
+const { modelValue, showOnlyActive, sortMode, hasActiveFilters, resultsCount } = defineProps<Props>()
 
 const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void
@@ -17,7 +17,7 @@ const emit = defineEmits<{
   (event: 'set-sort', value: SortMode): void
 }>()
 
-const trimmedQuery = computed(() => props.modelValue.trim())
+const trimmedQuery = computed(() => modelValue.trim())
 </script>
 
 <template>
@@ -26,7 +26,7 @@ const trimmedQuery = computed(() => props.modelValue.trim())
       <div class="flex flex-col lg:flex-row lg:items-center gap-3">
         <div class="w-full lg:max-w-md">
           <UInput
-            :model-value="props.modelValue"
+            :model-value="modelValue"
             placeholder="Cerca per nome, nickname o bio..."
             class="w-full"
             @update:model-value="emit('update:modelValue', String($event ?? ''))"
@@ -35,7 +35,7 @@ const trimmedQuery = computed(() => props.modelValue.trim())
 
         <div class="flex items-center gap-2 flex-wrap">
           <UButton
-            :variant="props.showOnlyActive ? 'solid' : 'outline'"
+            :variant="showOnlyActive ? 'solid' : 'outline'"
             color="primary"
             size="sm"
             @click="emit('toggle-active')"
@@ -44,7 +44,7 @@ const trimmedQuery = computed(() => props.modelValue.trim())
           </UButton>
 
           <UButton
-            :variant="props.sortMode === 'articles' ? 'solid' : 'outline'"
+            :variant="sortMode === 'articles' ? 'solid' : 'outline'"
             color="neutral"
             size="sm"
             @click="emit('set-sort', 'articles')"
@@ -53,7 +53,7 @@ const trimmedQuery = computed(() => props.modelValue.trim())
           </UButton>
 
           <UButton
-            :variant="props.sortMode === 'recent' ? 'solid' : 'outline'"
+            :variant="sortMode === 'recent' ? 'solid' : 'outline'"
             color="neutral"
             size="sm"
             @click="emit('set-sort', 'recent')"
@@ -62,7 +62,7 @@ const trimmedQuery = computed(() => props.modelValue.trim())
           </UButton>
 
           <UButton
-            :variant="props.sortMode === 'name' ? 'solid' : 'outline'"
+            :variant="sortMode === 'name' ? 'solid' : 'outline'"
             color="neutral"
             size="sm"
             @click="emit('set-sort', 'name')"
@@ -71,7 +71,7 @@ const trimmedQuery = computed(() => props.modelValue.trim())
           </UButton>
 
           <UButton
-            v-if="props.hasActiveFilters"
+            v-if="hasActiveFilters"
             variant="ghost"
             color="neutral"
             size="sm"
@@ -83,7 +83,7 @@ const trimmedQuery = computed(() => props.modelValue.trim())
       </div>
 
       <div class="flex items-center justify-between gap-2 flex-wrap text-sm text-gray-600 dark:text-gray-400">
-        <span>{{ props.resultsCount }} risultati</span>
+        <span>{{ resultsCount }} risultati</span>
         <span v-if="trimmedQuery">
           Ricerca: "{{ trimmedQuery }}"
         </span>

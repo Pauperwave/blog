@@ -11,13 +11,14 @@ const TYPE_ICONS: Record<MainDeckSection, string> = {
   Lands: 'land'
 }
 
-const props = defineProps<{
+interface Props {
   type: string
   size?: 'sm' | 'md' | 'lg'
-}>()
+}
+
+const { type, size = 'md' } = defineProps<Props>()
 
 const sizeClass = computed(() => {
-  const size = props.size || 'md'
   const map: Record<'sm' | 'md' | 'lg', string> = {
     sm: 'ms-size-sm',
     md: 'ms-size-md',
@@ -26,7 +27,7 @@ const sizeClass = computed(() => {
   return map[size]
 })
 
-const typeClass = computed(() => TYPE_ICONS[props.type as MainDeckSection] as string | undefined)
+const typeClass = computed(() => TYPE_ICONS[type as MainDeckSection] as string | undefined)
 </script>
 
 <template>

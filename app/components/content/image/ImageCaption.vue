@@ -5,10 +5,7 @@ interface Props {
   caption?: string
 }
 
-withDefaults(defineProps<Props>(), {
-  alt: '',
-  caption: ''
-})
+const { src, alt = '', caption = '' } = defineProps<Props>()
 </script>
 
 <template>

@@ -17,27 +17,21 @@ interface Props {
   countLabel?: string
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  socials: null,
-  variant: 'icons',
-  maxItems: undefined,
-  showCount: false,
-  countLabel: 'social'
-})
+const { socials = null, variant = 'icons', maxItems = undefined, showCount = false, countLabel = 'social' } = defineProps<Props>()
 
 const visibleSocials = computed<VisibleSocial[]>(() => {
-  if (!props.socials) return []
+  if (!socials) return []
 
   return AUTHOR_SOCIAL_LINKS.reduce<VisibleSocial[]>((acc, social) => {
-    const url = props.socials?.[social.key]
+    const url = socials?.[social.key]
     if (url) acc.push({ ...social, url })
     return acc
   }, [])
 })
 
 const renderedSocials = computed(() => {
-  if (typeof props.maxItems !== 'number') return visibleSocials.value
-  return visibleSocials.value.slice(0, props.maxItems)
+  if (typeof maxItems !== 'number') return visibleSocials.value
+  return visibleSocials.value.slice(0, maxItems)
 })
 </script>
 

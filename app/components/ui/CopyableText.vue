@@ -4,18 +4,20 @@ import type { DropdownMenuItem } from "@nuxt/ui"
 const clipboard = useClipboard()
 const copied = ref<boolean>(false)
 
-const props = defineProps<{
-  content: string;
+interface Props {
+  content: string
   items?: DropdownMenuItem[]
-}>()
+}
+
+const { content, items = [] } = defineProps<Props>()
 
 const emit = defineEmits<{
   (e: "click", val: string, ev: MouseEvent): void
 }>()
 
 function onClick(event: MouseEvent) {
-  emit("click", props.content, event)
-  clipboard.copy(props.content)
+  emit("click", content, event)
+  clipboard.copy(content)
   copied.value = true
   setTimeout(() => {
     return (copied.value = false)
@@ -42,7 +44,7 @@ function onClick(event: MouseEvent) {
     />
     <UDropdownMenu
       v-if="(items?.length ?? 0) > 0"
-      :items="props.items ?? []"
+      :items="items"
     >
       <UButton
         color="neutral"

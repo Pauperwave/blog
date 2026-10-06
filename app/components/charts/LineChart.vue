@@ -5,7 +5,7 @@ type LineSeriesItem = {
   data: number[]
 }
 
-const props = defineProps<{
+interface Props {
   title?: string
   description?: string
   categories?: string[]
@@ -15,16 +15,28 @@ const props = defineProps<{
   smooth?: boolean
   height?: string
   yAxisName?: string
-}>()
+}
+
+const {
+  title = undefined,
+  description = undefined,
+  categories = [],
+  series = [],
+  stacked = false,
+  area = undefined,
+  smooth = false,
+  height = '500px',
+  yAxisName = undefined
+} = defineProps<Props>()
 
 const theme = useChartTheme()
 const { isMobile } = useDevice()
 
-const showsArea = computed(() => props.area ?? props.stacked ?? false)
+const showsArea = computed(() => area ?? stacked)
 
 const chartOption = computed(() => ({
   title: {
-    text: props.title ?? '',
+    text: title ?? '',
     top: 0,
     textStyle: theme.baseTextStyle.value,
   },
@@ -36,8 +48,8 @@ const chartOption = computed(() => ({
   },
   legend: {
     type: 'scroll',
-    top: props.title ? 36 : 0,
-    data: (props.series ?? []).map(s => s.name),
+    top: title ? 36 : 0,
+    data: series.map(s => s.name),
     textStyle: theme.baseTextStyle.value,
   },
   textStyle: theme.baseTextStyle.value,
@@ -46,13 +58,13 @@ const chartOption = computed(() => ({
     left: '3%',
     right: '4%',
     bottom: '8%',
-    top: props.title ? '25%' : '18%',
+    top: title ? '25%' : '18%',
     containLabel: true,
   },
   xAxis: {
     type: 'category',
     boundaryGap: false,
-    data: props.categories ?? [],
+    data: categories,
     axisLabel: {
       color: theme.colors.value.textSecondary,
       fontSize: isMobile ? 11 : 12,
@@ -63,20 +75,20 @@ const chartOption = computed(() => ({
   },
   yAxis: {
     type: 'value',
-    name: props.yAxisName,
+    name: yAxisName,
     nameTextStyle: { color: theme.colors.value.textSecondary },
     axisLabel: { color: theme.colors.value.textSecondary },
     axisLine: { lineStyle: { color: theme.colors.value.axisLine } },
     splitLine: { lineStyle: { color: theme.colors.value.splitLine } },
   },
-  series: (props.series ?? []).map((s, i) => {
+  series: series.map((s, i) => {
     const color = theme.colors.value.palette[i % theme.colors.value.palette.length]
     return {
       name: s.name,
       type: 'line',
-      stack: props.stacked ? 'total' : undefined,
+      stack: stacked ? 'total' : undefined,
       areaStyle: showsArea.value ? { opacity: 0.6, color } : undefined,
-      smooth: props.smooth ?? false,
+      smooth,
       symbol: 'circle',
       symbolSize: 6,
       itemStyle: { color },
@@ -93,12 +105,12 @@ const chartOption = computed(() => ({
       id="line-chart"
       :title="title"
       :desc="description"
-      :style="{ height: height ?? '500px' }"
+      :style="{ height: height }"
       :option="chartOption"
       autoresize
     />
     <template #fallback>
-      <div :style="{ height: height ?? '500px' }" />
+      <div :style="{ height: height }" />
     </template>
   </client-only>
 </template>

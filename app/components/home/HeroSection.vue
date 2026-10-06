@@ -24,13 +24,10 @@ interface Props {
   authorsMap: Record<string, Author>
 }
 
-const props = defineProps<Props>()
+const { articles, freshThisWeekCount, categoryHighlights, authorsMap } = defineProps<Props>()
 
-const articles = computed(() => props.articles)
-const topCategoryHighlights = computed(() => props.categoryHighlights)
-
-const featuredArticle = computed(() => articles.value[0] || null)
-const heroSecondaryArticles = computed(() => articles.value.slice(1, 5))
+const featuredArticle = computed(() => articles[0] || null)
+const heroSecondaryArticles = computed(() => articles.slice(1, 5))
 const featuredThumbnailSrc = computed(() =>
   featuredArticle.value ? getThumbnailSrc(featuredArticle.value.thumbnail) : undefined
 )
@@ -41,7 +38,7 @@ const isFeaturedLeagueArticle = computed(() =>
 const getAuthorsData = (article: AnyArticle) => {
   const authorNames = normalizeAuthors(article.author)
   return authorNames.map(name => ({
-    data: props.authorsMap[name],
+    data: authorsMap[name],
     name
   })).filter((item): item is { data: Author; name: string } => Boolean(item.data))
 }
@@ -71,7 +68,7 @@ const getThumbnailSrc = (thumbnail: unknown) => {
               color="warning"
               variant="subtle"
             >
-              {{ props.freshThisWeekCount }} nuovi questa settimana
+              {{ freshThisWeekCount }} nuovi questa settimana
             </UBadge>
           </div>
 
@@ -103,7 +100,7 @@ const getThumbnailSrc = (thumbnail: unknown) => {
 
           <div class="mt-3 flex flex-wrap gap-2">
             <NuxtLink
-              v-for="item in topCategoryHighlights"
+              v-for="item in categoryHighlights"
               :key="`hero-category-${item.category}`"
               :to="`/articles?category=${item.category}`"
               class="inline-flex items-center gap-2 rounded-full border border-gray-200 dark:border-gray-700 bg-white/70 dark:bg-gray-900/60 px-3 py-1.5 text-xs md:text-sm text-gray-700 dark:text-gray-300 hover:border-primary-400 hover:text-primary transition-colors"

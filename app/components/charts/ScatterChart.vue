@@ -10,7 +10,7 @@ type ScatterSeriesItem = {
   data: ScatterPoint[]
 }
 
-const props = defineProps<{
+interface Props {
   title?: string
   description?: string
   series?: ScatterSeriesItem[]
@@ -18,16 +18,26 @@ const props = defineProps<{
   yAxisName?: string
   symbolSize?: number
   height?: string
-}>()
+}
+
+const {
+  title = undefined,
+  description = undefined,
+  series = [],
+  xAxisName = undefined,
+  yAxisName = undefined,
+  symbolSize = 12,
+  height = '500px'
+} = defineProps<Props>()
 
 const theme = useChartTheme()
 const { isMobile } = useDevice()
 
-const hasMultipleSeries = computed(() => (props.series ?? []).length > 1)
+const hasMultipleSeries = computed(() => series.length > 1)
 
 const chartOption = computed(() => ({
   title: {
-    text: props.title ?? '',
+    text: title ?? '',
     top: 0,
     textStyle: theme.baseTextStyle.value,
   },
@@ -40,8 +50,8 @@ const chartOption = computed(() => ({
   legend: hasMultipleSeries.value
     ? {
         type: 'scroll',
-        top: props.title ? 36 : 0,
-        data: (props.series ?? []).map(s => s.name),
+        top: title ? 36 : 0,
+        data: series.map(s => s.name),
         textStyle: theme.baseTextStyle.value,
       }
     : undefined,
@@ -51,12 +61,12 @@ const chartOption = computed(() => ({
     left: '3%',
     right: '4%',
     bottom: '8%',
-    top: hasMultipleSeries.value ? (props.title ? '30%' : '18%') : (props.title ? '20%' : '10%'),
+    top: hasMultipleSeries.value ? (title ? '30%' : '18%') : (title ? '20%' : '10%'),
     containLabel: true,
   },
   xAxis: {
     type: 'value',
-    name: props.xAxisName,
+    name: xAxisName,
     nameTextStyle: { color: theme.colors.value.textSecondary },
     axisLabel: { color: theme.colors.value.textSecondary, fontSize: isMobile ? 11 : 12 },
     axisLine: { lineStyle: { color: theme.colors.value.axisLine } },
@@ -64,16 +74,16 @@ const chartOption = computed(() => ({
   },
   yAxis: {
     type: 'value',
-    name: props.yAxisName,
+    name: yAxisName,
     nameTextStyle: { color: theme.colors.value.textSecondary },
     axisLabel: { color: theme.colors.value.textSecondary },
     axisLine: { lineStyle: { color: theme.colors.value.axisLine } },
     splitLine: { lineStyle: { color: theme.colors.value.splitLine } },
   },
-  series: (props.series ?? []).map((s, i) => ({
+  series: series.map((s, i) => ({
     name: s.name,
     type: 'scatter',
-    symbolSize: props.symbolSize ?? 12,
+    symbolSize: symbolSize,
     itemStyle: {
       color: theme.colors.value.palette[i % theme.colors.value.palette.length],
       opacity: 0.85,
@@ -89,12 +99,12 @@ const chartOption = computed(() => ({
       id="scatter-chart"
       :title="title"
       :desc="description"
-      :style="{ height: height ?? '500px' }"
+      :style="{ height: height }"
       :option="chartOption"
       autoresize
     />
     <template #fallback>
-      <div :style="{ height: height ?? '500px' }" />
+      <div :style="{ height: height }" />
     </template>
   </client-only>
 </template>

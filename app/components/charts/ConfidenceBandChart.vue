@@ -7,7 +7,7 @@ type ConfidenceBandPoint = {
   upper: number
 }
 
-const props = defineProps<{
+interface Props {
   title?: string
   description?: string
   data?: ConfidenceBandPoint[]
@@ -16,25 +16,36 @@ const props = defineProps<{
   smooth?: boolean
   height?: string
   yAxisName?: string
-}>()
+}
+
+const {
+  title = undefined,
+  description = undefined,
+  data = [],
+  seriesName = undefined,
+  bandLabel = undefined,
+  smooth = false,
+  height = '500px',
+  yAxisName = undefined
+} = defineProps<Props>()
 
 const theme = useChartTheme()
 const { isMobile } = useDevice()
 
-const valueLabel = computed(() => props.seriesName ?? props.title ?? 'Value')
-const band = computed(() => props.bandLabel ?? 'Confidence Band')
+const valueLabel = computed(() => seriesName ?? title ?? 'Value')
+const band = computed(() => bandLabel ?? 'Confidence Band')
 
-const categories = computed(() => (props.data ?? []).map(d => String(d.x)))
-const lowerValues = computed(() => (props.data ?? []).map(d => d.lower))
-const bandValues = computed(() => (props.data ?? []).map(d => d.upper - d.lower))
-const values = computed(() => (props.data ?? []).map(d => d.value))
+const categories = computed(() => data.map(d => String(d.x)))
+const lowerValues = computed(() => data.map(d => d.lower))
+const bandValues = computed(() => data.map(d => d.upper - d.lower))
+const values = computed(() => data.map(d => d.value))
 
 const chartOption = computed(() => {
   const color = theme.colors.value.palette[0]
 
   return {
     title: {
-      text: props.title ?? '',
+      text: title ?? '',
       top: 0,
       textStyle: theme.baseTextStyle.value,
     },
@@ -44,14 +55,14 @@ const chartOption = computed(() => {
       borderColor: theme.colors.value.tooltipBorder,
       textStyle: { color: theme.colors.value.text },
       formatter: (params: Array<{ dataIndex: number }>) => {
-        const point = props.data?.[params[0]?.dataIndex ?? 0]
+        const point = data[params[0]?.dataIndex ?? 0]
         if (!point) return ''
         return `${point.x}<br/>${valueLabel.value}: ${point.value}<br/>Range: ${point.lower} – ${point.upper}`
       },
     },
     legend: {
       type: 'scroll',
-      top: props.title ? 36 : 0,
+      top: title ? 36 : 0,
       data: [valueLabel.value, band.value],
       textStyle: theme.baseTextStyle.value,
     },
@@ -61,7 +72,7 @@ const chartOption = computed(() => {
       left: '3%',
       right: '4%',
       bottom: '8%',
-      top: props.title ? '25%' : '18%',
+      top: title ? '25%' : '18%',
       containLabel: true,
     },
     xAxis: {
@@ -78,7 +89,7 @@ const chartOption = computed(() => {
     },
     yAxis: {
       type: 'value',
-      name: props.yAxisName,
+      name: yAxisName,
       nameTextStyle: { color: theme.colors.value.textSecondary },
       axisLabel: { color: theme.colors.value.textSecondary },
       axisLine: { lineStyle: { color: theme.colors.value.axisLine } },
@@ -112,7 +123,7 @@ const chartOption = computed(() => {
         type: 'line',
         symbol: 'circle',
         symbolSize: 6,
-        smooth: props.smooth ?? false,
+        smooth,
         lineStyle: { color, width: 2 },
         itemStyle: { color },
         z: 10,
@@ -129,12 +140,12 @@ const chartOption = computed(() => {
       id="confidence-band-chart"
       :title="title"
       :desc="description"
-      :style="{ height: height ?? '500px' }"
+      :style="{ height: height }"
       :option="chartOption"
       autoresize
     />
     <template #fallback>
-      <div :style="{ height: height ?? '500px' }" />
+      <div :style="{ height: height }" />
     </template>
   </client-only>
 </template>

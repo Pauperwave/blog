@@ -2,12 +2,14 @@
 import type { Author } from '~/composables/useAuthor'
 import { getAuthorSlug } from '~/composables/useAuthorSlug'
 
-const props = defineProps<{
+interface Props {
   author: Author
-}>()
+}
+
+const { author } = defineProps<Props>()
 
 const handleAuthorClick = () => {
-  navigateTo(`/authors/${getAuthorSlug(props.author.name)}`)
+  navigateTo(`/authors/${getAuthorSlug(author.name)}`)
 }
 </script>
 

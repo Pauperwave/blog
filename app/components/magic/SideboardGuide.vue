@@ -7,13 +7,21 @@ interface ParsedCard {
   manaCost: string
 }
 
-const props = defineProps<{
+interface Props {
   matchup?: string
   description?: string
   cardsInParsed?: string
   cardsOutParsed?: string
   cardsOutAltParsed?: string
-}>()
+}
+
+const {
+  matchup = undefined,
+  description = undefined,
+  cardsInParsed = undefined,
+  cardsOutParsed = undefined,
+  cardsOutAltParsed = undefined
+} = defineProps<Props>()
 
 // Parse pre-fetched card data from props
 const parseCards = (json: string | undefined, propName: string): ParsedCard[] => {
@@ -26,9 +34,9 @@ const parseCards = (json: string | undefined, propName: string): ParsedCard[] =>
   }
 }
 
-const cardsIn = computed(() => parseCards(props.cardsInParsed, 'cardsInParsed'))
-const cardsOut = computed(() => parseCards(props.cardsOutParsed, 'cardsOutParsed'))
-const cardsOutAlt = computed(() => parseCards(props.cardsOutAltParsed, 'cardsOutAltParsed'))
+const cardsIn = computed(() => parseCards(cardsInParsed, 'cardsInParsed'))
+const cardsOut = computed(() => parseCards(cardsOutParsed, 'cardsOutParsed'))
+const cardsOutAlt = computed(() => parseCards(cardsOutAltParsed, 'cardsOutAltParsed'))
 
 const hasAlternative = computed(() => cardsOutAlt.value.length > 0)
 
@@ -52,16 +60,16 @@ const totalOut = computed(() => {
       <div class="flex items-center justify-between">
         <div>
           <h3
-            v-if="props.matchup"
+            v-if="matchup"
             class="text-lg font-semibold"
           >
-            vs {{ props.matchup }}
+            vs {{ matchup }}
           </h3>
           <p
-            v-if="props.description"
+            v-if="description"
             class="text-sm text-gray-400 mt-1"
           >
-            {{ props.description }}
+            {{ description }}
           </p>
         </div>
       </div>

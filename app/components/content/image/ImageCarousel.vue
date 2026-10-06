@@ -8,15 +8,13 @@ interface Props {
   images?: (string | ImageItem)[]
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  images: () => []
-})
+const { images = [] } = defineProps<Props>()
 
 // Parse images immediately so they're available for SSR fallback
 const parsedImages = computed<ImageItem[]>(() => {
-  if (props.images.length === 0) return []
+  if (images.length === 0) return []
 
-  return props.images.map((img) => {
+  return images.map((img) => {
     // Check if it's already an object with src and alt
     if (typeof img === 'object' && img.src) {
       return {

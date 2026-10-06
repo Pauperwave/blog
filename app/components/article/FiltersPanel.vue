@@ -49,7 +49,26 @@ interface Props {
   deckFilterOptions: DeckFilterOption[]
 }
 
-const props = defineProps<Props>()
+const {
+  resultsCount,
+  totalCount,
+  hasActiveFilters,
+  selectedCategory,
+  selectedCategoryLabel,
+  selectedAuthor,
+  selectedAuthorLabel,
+  selectedLocation,
+  selectedLocationLabel,
+  selectedTag,
+  selectedTagLabel,
+  selectedDeck,
+  selectedDeckLabel,
+  categoryFilterOptions,
+  authorFilterOptions,
+  locationFilterOptions,
+  tagFilterOptions,
+  deckFilterOptions
+} = defineProps<Props>()
 
 const emit = defineEmits<{
   'set-category': [value: string | null]
@@ -65,7 +84,7 @@ const mainPanelOpen = ref(true)
 
 // Transform options for FilterSection component
 const categoryOptions = computed(() =>
-  props.categoryFilterOptions.map(item => ({
+  categoryFilterOptions.map(item => ({
     value: item.category,
     label: item.label,
     count: item.count
@@ -73,7 +92,7 @@ const categoryOptions = computed(() =>
 )
 
 const authorOptions = computed(() =>
-  props.authorFilterOptions.map(author => ({
+  authorFilterOptions.map(author => ({
     value: author.slug,
     label: author.name,
     count: author.count
@@ -81,7 +100,7 @@ const authorOptions = computed(() =>
 )
 
 const locationOptions = computed(() =>
-  props.locationFilterOptions.map(location => ({
+  locationFilterOptions.map(location => ({
     value: normalizeArticleFilterValue(location.location),
     label: location.location,
     count: location.count
@@ -89,7 +108,7 @@ const locationOptions = computed(() =>
 )
 
 const tagOptions = computed(() =>
-  props.tagFilterOptions.map(tag => ({
+  tagFilterOptions.map(tag => ({
     value: normalizeArticleFilterValue(tag.tag),
     label: tag.tag,
     count: tag.count
@@ -97,7 +116,7 @@ const tagOptions = computed(() =>
 )
 
 const deckOptions = computed(() =>
-  props.deckFilterOptions.map(deck => ({
+  deckFilterOptions.map(deck => ({
     value: normalizeArticleFilterValue(deck.tag),
     label: deck.tag,
     count: deck.count
@@ -113,46 +132,46 @@ const activeFilters = computed(() => {
     clear: () => void
   }> = []
 
-  if (props.selectedCategoryLabel) {
+  if (selectedCategoryLabel) {
     filters.push({
       type: 'Categoria',
-      label: props.selectedCategoryLabel,
+      label: selectedCategoryLabel,
       color: 'neutral',
       clear: () => emit('set-category', null)
     })
   }
 
-  if (props.selectedAuthorLabel) {
+  if (selectedAuthorLabel) {
     filters.push({
       type: 'Autore',
-      label: props.selectedAuthorLabel,
+      label: selectedAuthorLabel,
       color: 'neutral',
       clear: () => emit('set-author', null)
     })
   }
 
-  if (props.selectedLocationLabel) {
+  if (selectedLocationLabel) {
     filters.push({
       type: 'Luogo',
-      label: props.selectedLocationLabel,
+      label: selectedLocationLabel,
       color: 'info',
       clear: () => emit('set-location', null)
     })
   }
 
-  if (props.selectedTagLabel) {
+  if (selectedTagLabel) {
     filters.push({
       type: 'Tag',
-      label: props.selectedTagLabel,
+      label: selectedTagLabel,
       color: 'primary',
       clear: () => emit('set-tag', null)
     })
   }
 
-  if (props.selectedDeckLabel) {
+  if (selectedDeckLabel) {
     filters.push({
       type: 'Deck',
-      label: props.selectedDeckLabel,
+      label: selectedDeckLabel,
       color: 'warning',
       clear: () => emit('set-deck', null)
     })

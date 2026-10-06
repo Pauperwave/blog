@@ -1,13 +1,15 @@
 <script setup lang="ts">
-const props = defineProps<{
+interface Props {
   cardName: string
   rating: number
-}>()
+}
+
+const { cardName, rating } = defineProps<Props>()
 
 const badgeColor = computed(() => {
-  if (props.rating >= 8) return 'success'
-  if (props.rating >= 6) return 'primary'
-  if (props.rating >= 4) return 'warning'
+  if (rating >= 8) return 'success'
+  if (rating >= 6) return 'primary'
+  if (rating >= 4) return 'warning'
   return 'error'
 })
 </script>

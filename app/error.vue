@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import type { NuxtError } from '#app'
 
-const props = defineProps<{
+interface Props {
   error: NuxtError
-}>()
+}
+
+const { error } = defineProps<Props>()
 
 // title: 404 Not Found
 useSeoMeta({
-  title: `${props.error.status} ${props.error.statusText}`,
-  description: props.error.statusText,
+  title: `${error.status} ${error.statusText}`,
+  description: error.statusText,
 })
 </script>
 

@@ -5,12 +5,19 @@ type ChartDataItem = {
   name: string
 }
 
-const props = defineProps<{
+interface Props {
   title?: string
   description?: string
   data?: ChartDataItem[]
   height?: string
-}>()
+}
+
+const {
+  title = undefined,
+  description = undefined,
+  data = [],
+  height = '500px'
+} = defineProps<Props>()
 
 const theme = useChartTheme()
 // Same isMobile source every other chart component uses (BarChart,
@@ -21,7 +28,7 @@ const { isMobile } = useDevice()
 
 const chartOption = computed(() => ({
   title: {
-    text: props.title ?? '',
+    text: title ?? '',
     textStyle: theme.baseTextStyle.value,
   },
   tooltip: {
@@ -39,20 +46,20 @@ const chartOption = computed(() => ({
         orient: 'horizontal',
         top: 'bottom',
         left: 'center',
-        data: (props.data ?? []).map(d => d.name),
+        data: data.map(d => d.name),
         textStyle: theme.baseTextStyle.value,
       }
     : {
         top: '25%',
         orient: 'vertical',
         left: 'left',
-        data: (props.data ?? []).map(d => d.name),
+        data: data.map(d => d.name),
         textStyle: theme.baseTextStyle.value,
       },
   series: [{
     type: 'pie',
-    data: props.data ?? [],
-    name: props.title,
+    data,
+    name: title,
     center: isMobile ? ['50%', '42%'] : ['50%', '45%'],
     radius: isMobile ? ['35%', '58%'] : ['45%', '70%'],
     padAngle: 2,
@@ -87,13 +94,13 @@ const chartOption = computed(() => ({
       id="pie-chart"
       :title="title"
       :desc="description"
-      :style="{ height: height ?? '500px' }"
+      :style="{ height: height }"
       :option="chartOption"
       autoresize
     />
     <template #fallback>
       <div
-        :style="{ height: height ?? '500px' }"
+        :style="{ height: height }"
       />
     </template>
   </client-only>

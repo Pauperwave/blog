@@ -1,21 +1,23 @@
 <script setup lang="ts">
 import type { ButtonProps } from "@nuxt/ui"
 
-const props = defineProps<{
+interface Props {
   size?: ButtonProps["size"]
-}>()
+}
 
-const size = computed(() => {
-  if (!props.size) return "20px"
-  if (["xs", "sm"].includes(props.size)) return "16px"
-  if (["lg", "xl"].includes(props.size)) return "24px"
+const { size = undefined } = defineProps<Props>()
+
+const iconSize = computed(() => {
+  if (!size) return "20px"
+  if (["xs", "sm"].includes(size)) return "16px"
+  if (["lg", "xl"].includes(size)) return "24px"
   return "20px"
 })
 
 const rootClass = computed(() => {
-  if (!props.size) return "gap-3"
-  if (["xs", "sm"].includes(props.size)) return "gap-2"
-  if (["lg", "xl"].includes(props.size)) return "gap-4"
+  if (!size) return "gap-3"
+  if (["xs", "sm"].includes(size)) return "gap-2"
+  if (["lg", "xl"].includes(size)) return "gap-4"
   return "gap-3"
 })
 </script>
@@ -40,7 +42,7 @@ const rootClass = computed(() => {
 @reference "~/assets/css/main.css";
 
 * {
-  --icon-size: v-bind(size);
+  --icon-size: v-bind(iconSize);
   --length: calc(var(--icon-size) / 2);
   transition: all 200ms ease-out;
 }

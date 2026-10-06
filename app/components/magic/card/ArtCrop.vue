@@ -2,21 +2,23 @@
 import { useScryfallCard } from '~/composables/useScryfallCard'
 import { extractImageUrl } from '#shared/utils'
 
-const props = defineProps<{
+interface Props {
   card: string
   caption?: string
   crop?: {
     height?: 'small' | 'medium' | 'large' | 'xl'
     position?: 'top' | 'center' | 'bottom'
   }
-}>()
+}
 
-const { cardData, loading, error } = useScryfallCard(props.card)
+const { card, caption = '', crop = undefined } = defineProps<Props>()
+
+const { cardData, loading, error } = useScryfallCard(card)
 
 const artCropUrl = computed(() => extractImageUrl(cardData.value, 'art_crop'))
 
 const heightClass = computed(() => {
-  if (!props.crop) return '' // No fixed height - show full art crop
+  if (!crop) return '' // No fixed height - show full art crop
 
   const heights = {
     small: 'h-32',
@@ -24,24 +26,24 @@ const heightClass = computed(() => {
     large: 'h-64',
     xl: 'h-96'
   }
-  return heights[props.crop.height || 'medium']
+  return heights[crop.height || 'medium']
 })
 
 const positionClass = computed(() => {
-  if (!props.crop) return '' // No object positioning needed
+  if (!crop) return '' // No object positioning needed
 
   const positions = {
     top: 'object-top',
     center: 'object-center',
     bottom: 'object-bottom'
   }
-  return positions[props.crop.position || 'center']
+  return positions[crop.position || 'center']
 })
 
 const imageClasses = computed(() => {
   const classes = ['w-full', 'rounded-xl']
 
-  if (props.crop) {
+  if (crop) {
     classes.push('object-cover', heightClass.value, positionClass.value)
   }
 

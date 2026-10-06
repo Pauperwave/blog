@@ -17,17 +17,13 @@ interface Props {
   maxHeight?: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  color: 'neutral',
-  defaultOpen: true,
-  maxHeight: false
-})
+const { label, pluralLabel, color = 'neutral', options, selectedValue, allLabel, defaultOpen = true, maxHeight = false } = defineProps<Props>()
 
 const emit = defineEmits<{
   select: [value: string | null]
 }>()
 
-const isOpen = ref(props.defaultOpen)
+const isOpen = ref(defaultOpen)
 </script>
 
 <template>

@@ -1,10 +1,12 @@
 <script setup lang="ts">
-const props = defineProps<{
+interface Props {
   name: string
   rating: number
-}>()
+}
 
-const { data: author, error } = await useAuthor(props.name)
+const { name, rating } = defineProps<Props>()
+
+const { data: author, error } = await useAuthor(name)
 </script>
 
 <template>

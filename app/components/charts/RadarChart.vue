@@ -10,22 +10,30 @@ type RadarSeriesItem = {
   values: number[]
 }
 
-const props = defineProps<{
+interface Props {
   title?: string
   description?: string
   indicators?: RadarIndicator[]
   series?: RadarSeriesItem[]
   height?: string
-}>()
+}
+
+const {
+  title = undefined,
+  description = undefined,
+  indicators = [],
+  series = [],
+  height = '500px'
+} = defineProps<Props>()
 
 const theme = useChartTheme()
 const { isMobile } = useDevice()
 
-const hasMultipleSeries = computed(() => (props.series ?? []).length > 1)
+const hasMultipleSeries = computed(() => series.length > 1)
 
 const chartOption = computed(() => ({
   title: {
-    text: props.title ?? '',
+    text: title ?? '',
     top: 0,
     textStyle: theme.baseTextStyle.value,
   },
@@ -39,15 +47,15 @@ const chartOption = computed(() => ({
     ? {
         type: 'scroll',
         bottom: 0,
-        data: (props.series ?? []).map(s => s.name),
+        data: series.map(s => s.name),
         textStyle: theme.baseTextStyle.value,
       }
     : undefined,
   textStyle: theme.baseTextStyle.value,
   backgroundColor: 'transparent',
   radar: {
-    indicator: (props.indicators ?? []).map(i => ({ name: i.name, max: i.max })),
-    center: ['50%', props.title ? '55%' : '52%'],
+    indicator: indicators.map(i => ({ name: i.name, max: i.max })),
+    center: ['50%', title ? '55%' : '52%'],
     radius: isMobile ? '55%' : '65%',
     axisName: {
       color: theme.colors.value.textSecondary,
@@ -59,7 +67,7 @@ const chartOption = computed(() => ({
   },
   series: [{
     type: 'radar',
-    data: (props.series ?? []).map((s, i) => {
+    data: series.map((s, i) => {
       const color = theme.colors.value.palette[i % theme.colors.value.palette.length]
       return {
         name: s.name,
@@ -79,12 +87,12 @@ const chartOption = computed(() => ({
       id="radar-chart"
       :title="title"
       :desc="description"
-      :style="{ height: height ?? '500px' }"
+      :style="{ height: height }"
       :option="chartOption"
       autoresize
     />
     <template #fallback>
-      <div :style="{ height: height ?? '500px' }" />
+      <div :style="{ height: height }" />
     </template>
   </client-only>
 </template>

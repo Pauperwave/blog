@@ -11,7 +11,7 @@ import DecklistStats from './DecklistStats.vue'
 /**
  * Props for Decklist component
  */
-const props = defineProps<{
+interface Props {
   /** Deck name */
   name: string
   /** Player name (optional) */
@@ -26,24 +26,34 @@ const props = defineProps<{
   headerGradient?: ManaCombination
   /** Show only the header, hide body and footer (default: false) */
   headerOnly?: boolean
-}>()
+}
+
+const {
+  name,
+  player = undefined,
+  placement = undefined,
+  parsedCards = undefined,
+  sectionCounts = undefined,
+  headerGradient = undefined,
+  headerOnly = false
+} = defineProps<Props>()
 
 const anchorId = computed(() =>
-  props.player
-    ? `deck-${slugify(props.name)}-${slugify(props.player)}`
-    : `deck-${slugify(props.name)}`
+  player
+    ? `deck-${slugify(name)}-${slugify(player)}`
+    : `deck-${slugify(name)}`
 )
 
 const { copyToClipboard, copyLink } = useCopyToClipboard()
 
-const { headerClass } = useDecklistStyles(props.headerGradient)
+const { headerClass } = useDecklistStyles(headerGradient)
 
 const cardsBySection = computed(() =>
-  safeParse<Record<string, ParsedCard[]>>(props.parsedCards, {}, 'parsedCards')
+  safeParse<Record<string, ParsedCard[]>>(parsedCards, {}, 'parsedCards')
 )
 
 const counts = computed(() =>
-  safeParse<Record<string, number>>(props.sectionCounts, {}, 'sectionCounts')
+  safeParse<Record<string, number>>(sectionCounts, {}, 'sectionCounts')
 )
 
 const mainDeckSections = computed(() =>
@@ -65,13 +75,13 @@ const cardModalRequested = ref(false)
 const cardModalIndex = ref(0)
 const deckStats = computed(() => computeDeckStats(cardsBySection.value))
 // Without player or placement the modal has no visible description (Nuxt UI adds a hidden one)
-const statsDescription = computed(() => [props.player, props.placement].filter(Boolean).join(' · ') || undefined)
+const statsDescription = computed(() => [player, placement].filter(Boolean).join(' · ') || undefined)
 
 const headerInfo = computed<DecklistHeaderInfo>(() => ({
-  name: props.name,
-  player: props.player,
-  placement: props.placement,
-  headerGradient: props.headerGradient
+  name,
+  player,
+  placement,
+  headerGradient
 }))
 
 // What the card viewers (modal, overlay) walk through
@@ -133,7 +143,7 @@ function copyDecklist(format: 'mtgo' | 'arena') {
       </template>
 
       <!-- Body - Two-column layout -->
-      <template v-if="!props.headerOnly" #default>
+      <template v-if="!headerOnly" #default>
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8">
           <!-- Main Deck (Left) -->
           <div>
@@ -158,7 +168,7 @@ function copyDecklist(format: 'mtgo' | 'arena') {
       </template>
 
       <!-- Footer -->
-      <template v-if="!props.headerOnly" #footer>
+      <template v-if="!headerOnly" #footer>
         <div class="flex gap-2 flex-wrap">
           <UButton
             icon="i-lucide-copy"

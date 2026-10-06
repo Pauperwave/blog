@@ -1,16 +1,18 @@
 <!-- app\components\Magic\CardManaCost.vue -->
 <script setup lang="ts">
-const props = defineProps<{
+interface Props {
   cost: string  // Es: "{2}{U}{U}" or "{1}{R} // {2}{U}" for split cards
-}>()
+}
+
+const { cost } = defineProps<Props>()
 
 // Parse mana cost in simboli individuali
 // Handles split cards with // separator
 const symbols = computed(() => {
-  if (!props.cost) return []
+  if (!cost) return []
 
   // Split by // separator for split cards
-  const parts = props.cost.split(' // ')
+  const parts = cost.split(' // ')
   const result: string[] = []
 
   for (const part of parts) {
