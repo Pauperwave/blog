@@ -38,6 +38,7 @@ import type {
   DecklistsCollectionItem,
   ReportsCollectionItem,
   SpoilersCollectionItem
+// loose-ok: '#content' is a virtual module whose types the type check cannot resolve
 // @ts-expect-error - '#content' is a Nuxt virtual module with generated types
 } from '#content'
 

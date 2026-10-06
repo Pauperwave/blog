@@ -8,8 +8,9 @@
  *   - eslint-disable comments for no-explicit-any
  *
  * Reads the script blocks of .vue files too (templates are not checked).
+ * A justified case is accepted with a `loose-ok: <reason>` comment on its line or the line above.
  * Usage: node scripts/check-loose-types.ts [dir ...]   (default: app server shared modules scripts)
- * Exits with 1 when something is found.
+ * Exits with 1 when something that is not accepted is found.
  */
 
 import { readdirSync, readFileSync } from 'node:fs'
@@ -37,6 +38,7 @@ const DEFAULT_DIRS = ['app', 'server', 'shared', 'modules', 'scripts']
 const SKIPPED_DIRS = new Set(['node_modules', '.nuxt', '.output', '.data', '.vercel', 'dist'])
 const SOURCE_FILE = /\.(ts|mts|vue)$/
 const TS_DIRECTIVE = /(?:\/\/|\/\*)\s*@ts-(?:ignore|nocheck|expect-error)\b/
+const ACCEPT_MARKER = /loose-ok:/
 const ESLINT_DISABLE_ANY = /(?:\/\/|\/\*)\s*eslint-disable(?:-next-line|-line)?\b[^\n]*no-explicit-any/
 
 function collectFiles(dir: string): string[] {
@@ -46,6 +48,8 @@ function collectFiles(dir: string): string[] {
     return SOURCE_FILE.test(entry.name) && !entry.name.endsWith('.d.ts') ? [path] : []
   })
 }
+
+let acceptedCount = 0
 
 /** Loose types in TypeScript source; lines are shifted by lineOffset for .vue script blocks. */
 function analyze(source: string, file: string, lineOffset: number): Finding[] {
@@ -57,6 +61,10 @@ function analyze(source: string, file: string, lineOffset: number): Finding[] {
 
   const add = (kind: Kind, position: number) => {
     const { line, character } = sourceFile.getLineAndCharacterOfPosition(position)
+    if (ACCEPT_MARKER.test(lines[line] ?? '') || ACCEPT_MARKER.test(lines[line - 1] ?? '')) {
+      acceptedCount++
+      return
+    }
     findings.push({
       file,
       line: line + 1 + lineOffset,
@@ -117,7 +125,8 @@ for (const finding of findings) {
 }
 
 if (findings.length === 0) {
-  console.log('No loose types found.')
+  const accepted = acceptedCount > 0 ? ` (${acceptedCount} accepted with loose-ok)` : ''
+  console.log(`No loose types found${accepted}.`)
 } else {
   const perKind = Object.entries(Object.groupBy(findings, finding => finding.kind))
     .map(([kind, items]) => `${kind}: ${items?.length ?? 0}`)
