@@ -17,7 +17,7 @@ describe('uniqueDeckCards', () => {
       Creatures: [{ name: 'Delver', quantity: 3, imageUrl: 'front.jpg', backImageUrl: 'back.jpg' }]
     }
     expect(uniqueDeckCards(cardsBySection, sections)).toEqual([
-      { name: 'Delver', section: 'Creatures', quantity: 3, imageUrl: 'front.jpg', backImageUrl: 'back.jpg' }
+      { name: 'Delver', section: 'Creatures', quantity: 3, imageUrl: 'front.jpg', backImageUrl: 'back.jpg', manaCost: '' }
     ])
   })
 

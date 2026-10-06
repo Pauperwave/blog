@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { computeDeckStats, countColorPips, parseManaValue } from './deck-stats'
+import { computeDeckStats, countColorPips, matchesHighlight, parseManaValue } from './deck-stats'
 
 describe('deck stats', () => {
   describe('parseManaValue', () => {
@@ -87,5 +87,35 @@ describe('deck stats', () => {
         { section: 'Lands', count: 10 }
       ])
     })
+  })
+})
+
+describe('matchesHighlight', () => {
+  const bolt = { section: 'Instants', manaCost: '{R}' }
+  const guttersnipe = { section: 'Creatures', manaCost: '{2}{R}' }
+  const island = { section: 'Lands', manaCost: '' }
+  const pyroblast = { section: 'Sideboard', manaCost: '{R}' }
+
+  it('matches a type by section, sideboard included in none', () => {
+    expect(matchesHighlight(bolt, { kind: 'type', section: 'Instants' })).toBe(true)
+    expect(matchesHighlight(guttersnipe, { kind: 'type', section: 'Instants' })).toBe(false)
+    expect(matchesHighlight(pyroblast, { kind: 'type', section: 'Instants' })).toBe(false)
+  })
+
+  it('matches a curve bucket by mana value, capping at the last bucket', () => {
+    expect(matchesHighlight(bolt, { kind: 'curve', bucket: 1 })).toBe(true)
+    expect(matchesHighlight(guttersnipe, { kind: 'curve', bucket: 1 })).toBe(false)
+    expect(matchesHighlight({ section: 'Creatures', manaCost: '{9}' }, { kind: 'curve', bucket: 7 })).toBe(true)
+  })
+
+  it('matches a color when its cost has that pip', () => {
+    expect(matchesHighlight(guttersnipe, { kind: 'color', color: 'R' })).toBe(true)
+    expect(matchesHighlight(guttersnipe, { kind: 'color', color: 'U' })).toBe(false)
+  })
+
+  it('leaves lands and the sideboard out of curve and color highlights', () => {
+    expect(matchesHighlight(island, { kind: 'curve', bucket: 0 })).toBe(false)
+    expect(matchesHighlight(pyroblast, { kind: 'curve', bucket: 1 })).toBe(false)
+    expect(matchesHighlight(pyroblast, { kind: 'color', color: 'R' })).toBe(false)
   })
 })

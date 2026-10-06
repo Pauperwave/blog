@@ -4,6 +4,7 @@ export interface DeckCard {
   quantity: number
   imageUrl: string
   backImageUrl?: string
+  manaCost: string
 }
 
 interface ParsedDeckCard {
@@ -11,6 +12,7 @@ interface ParsedDeckCard {
   quantity: number
   imageUrl?: string
   backImageUrl?: string
+  manaCost?: string
 }
 
 /**
@@ -26,7 +28,7 @@ export function uniqueDeckCards(cardsBySection: Record<string, ParsedDeckCard[]>
       const key = `${section}-${card.name}`
       if (!card.imageUrl || seen.has(key)) continue
       seen.add(key)
-      result.push({ name: card.name, section, quantity: card.quantity, imageUrl: card.imageUrl, backImageUrl: card.backImageUrl })
+      result.push({ name: card.name, section, quantity: card.quantity, imageUrl: card.imageUrl, backImageUrl: card.backImageUrl, manaCost: card.manaCost ?? '' })
     }
   }
 

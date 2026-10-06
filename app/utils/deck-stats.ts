@@ -9,7 +9,7 @@ export interface DeckStats {
   /** Non-land main deck cards per mana value, last bucket is "7+" */
   curve: { label: string; count: number }[]
   /** Color pips in non-land main deck costs, only colors that appear */
-  pips: { color: 'W' | 'U' | 'B' | 'R' | 'G'; count: number }[]
+  pips: { color: DeckColor; count: number }[]
   averageManaValue: number
   landCount: number
   /** Cards per type in the main deck (sideboard excluded), only types that appear, in section order */
@@ -18,6 +18,14 @@ export interface DeckStats {
 
 const COLORS = ['W', 'U', 'B', 'R', 'G'] as const
 const MAX_CURVE_VALUE = 7
+
+export type DeckColor = typeof COLORS[number]
+
+/** The part of the deck a hovered stat stands for: a card type, a curve bucket or a color. */
+export type DeckHighlight =
+  | { kind: 'type'; section: string }
+  | { kind: 'curve'; bucket: number }
+  | { kind: 'color'; color: DeckColor }
 
 /** Mana value of a cost like "{2}{U}{U}"; split/DFC costs ("{1}{R} // {2}{U}") use the first face. */
 export function parseManaValue(manaCost: string): number {
@@ -48,6 +56,17 @@ export function countColorPips(manaCost: string): Record<string, number> {
   return pips
 }
 
+/** Curve bucket of a cost: its mana value, capped at the last ("7+") bucket. */
+const curveBucket = (manaCost: string) => Math.min(parseManaValue(manaCost), MAX_CURVE_VALUE)
+
+/** Whether a card is part of what the highlight stands for; curve and colors only cover non-land main deck cards, like the stats. */
+export function matchesHighlight(card: { section: string; manaCost: string }, highlight: DeckHighlight): boolean {
+  if (highlight.kind === 'type') return card.section === highlight.section
+  if (!(NON_LAND_SECTIONS as readonly string[]).includes(card.section)) return false
+  if (highlight.kind === 'curve') return curveBucket(card.manaCost) === highlight.bucket
+  return highlight.color in countColorPips(card.manaCost)
+}
+
 const sumQuantities = (cards: DeckStatsCard[] = []) => cards.reduce((total, card) => total + card.quantity, 0)
 
 export function computeDeckStats(cardsBySection: Record<string, DeckStatsCard[]>): DeckStats {
@@ -59,7 +78,7 @@ export function computeDeckStats(cardsBySection: Record<string, DeckStatsCard[]>
 
   for (const card of nonLandCards) {
     const manaValue = parseManaValue(card.manaCost)
-    const bucket = Math.min(manaValue, MAX_CURVE_VALUE)
+    const bucket = curveBucket(card.manaCost)
     curveCounts[bucket] = (curveCounts[bucket] ?? 0) + card.quantity
     totalManaValue += manaValue * card.quantity
 
