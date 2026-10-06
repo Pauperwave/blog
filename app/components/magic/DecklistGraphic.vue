@@ -8,7 +8,7 @@
 import { SIDEBOARD_SECTION } from '#shared/utils'
 import type { DecklistHeaderInfo } from '~/composables/useDecklistContext'
 import { expandCopies, type DeckCard } from '~/utils/deck-cards'
-import type { DeckStats } from '~/utils/deck-stats'
+import type { DeckHighlight, DeckStats } from '~/utils/deck-stats'
 import DecklistArt from './DecklistArt.vue'
 import DecklistColorBars from './DecklistColorBars.vue'
 import DecklistCurveChart from './DecklistCurveChart.vue'
@@ -27,6 +27,9 @@ const PILE_SIZE = 4
 // Main deck: piles of 4 copies. Sideboard: a single pile.
 const mainPiles = computed(() => chunk(expandCopies(cards.filter(card => card.section !== SIDEBOARD_SECTION)), PILE_SIZE))
 const sideboardCopies = computed(() => expandCopies(cards.filter(card => card.section === SIDEBOARD_SECTION)))
+
+// Stat under the mouse: the cards outside of it are dimmed
+const highlight = ref<DeckHighlight | null>(null)
 
 // Representative card art, taken from the deck's own card images (no extra requests)
 const artCard = computed(() => pickDeckArtCard(cards))
@@ -51,11 +54,21 @@ const artCard = computed(() => pickDeckArtCard(cards))
           </p>
         </div>
         <div class="flex items-center gap-x-6">
-          <DecklistColorBars :pips="stats.pips" />
-          <DecklistTypeCounts :counts="stats.typeCounts" />
+          <DecklistColorBars
+            :pips="stats.pips"
+            @hover="color => highlight = color ? { kind: 'color', color } : null"
+          />
+          <DecklistTypeCounts
+            :counts="stats.typeCounts"
+            @hover="section => highlight = section ? { kind: 'type', section } : null"
+          />
         </div>
       </div>
-      <DecklistCurveChart :curve="stats.curve" class="relative h-28 shrink-0 self-end rounded-lg bg-default/70 px-4 py-3" />
+      <DecklistCurveChart
+        :curve="stats.curve"
+        @hover="bucket => highlight = bucket === null ? null : { kind: 'curve', bucket }"
+        class="relative h-28 shrink-0 self-end rounded-lg bg-default/70 px-4 py-3"
+      />
     </header>
 
     <div class="flex items-stretch justify-between gap-8">
@@ -65,6 +78,7 @@ const artCard = computed(() => pickDeckArtCard(cards))
           v-for="(pile, pileIndex) in mainPiles"
           :key="pileIndex"
           :cards="pile"
+          :highlight="highlight"
         />
       </div>
 
@@ -74,7 +88,7 @@ const artCard = computed(() => pickDeckArtCard(cards))
         </span>
         <!-- Cards spread over the main deck's height, so both end on the same bottom edge -->
         <div class="relative min-h-[37rem] w-[calc(var(--card-w)+var(--card-offset))]">
-          <DecklistPile :cards="sideboardCopies" spread />
+          <DecklistPile :cards="sideboardCopies" :highlight="highlight" spread />
         </div>
       </section>
     </div>

@@ -1,8 +1,12 @@
 <script setup lang="ts">
-import type { DeckStats } from '~/utils/deck-stats'
+import type { DeckColor, DeckStats } from '~/utils/deck-stats'
 
 const { pips } = defineProps<{
   pips: DeckStats['pips']
+}>()
+
+const emit = defineEmits<{
+  hover: [color: DeckColor | null]
 }>()
 
 // Below this share the segment is too narrow to fit the mana symbol
@@ -36,6 +40,8 @@ const segments = computed(() => pips.map((pip) => {
       :class="segment.fill"
       :style="{ flexGrow: segment.count, flexBasis: 0 }"
       :title="`${segment.name}: ${segment.percent}%`"
+      @mouseenter="emit('hover', segment.color)"
+      @mouseleave="emit('hover', null)"
     >
       <MagicCardManaSymbol
         v-if="segment.showSymbol"
