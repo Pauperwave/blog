@@ -30,6 +30,7 @@ Nuxt 4. I dati delle carte vengono scaricati da Scryfall e salvati in un databas
 - `getCardByName(name)` — lookup singolo per nome esatto.
 - `getCardsByNames(names[])` — lookup batch con query parametrizzata, ritorna `Map<name, CardData>`.
 - Connessione singleton, apertura in sola lettura.
+- `CardData` (`name`, `manaCost`, `imageUrl`, `backImageUrl?`, `typeLine`) viene costruito da una riga con un'unica funzione, `toCardData`, usata da entrambi i lookup. Il log informativo (database trovato, driver usato) passa da `buildLog`, quindi compare solo con `PW_VERBOSE_BUILD_LOGS=1`; i problemi veri (database non trovato, carta non trovata) restano `console.warn`/`console.error` e si vedono in ogni build.
 
 Queste funzioni vengono chiamate **direttamente dai moduli Nuxt in fase di build**, non da un endpoint HTTP: `server/api/` è attualmente vuota, non esiste un `/api/cards`.
 
