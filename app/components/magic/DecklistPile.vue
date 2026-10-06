@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // Sizes come from CSS variables set by DecklistGraphic: --card-strip (visible title strip) and --card-offset (sideboard stagger)
 import type { DeckCard } from '~/utils/deck-cards'
-import { highlightState, type DeckHighlight } from '~/utils/deck-stats'
+import { highlightState, type DeckHighlight } from '~/utils/deck-highlight'
 
 const { cards, spread = false, highlight = null } = defineProps<{
   cards: DeckCard[]

@@ -1,4 +1,4 @@
-import { LAND_SECTION, MAIN_DECK_SECTIONS, NON_LAND_SECTIONS, SIDEBOARD_SECTION, isNonLandSection, type DeckSection, type MainDeckSection } from '#shared/utils'
+import { LAND_SECTION, MAIN_DECK_SECTIONS, NON_LAND_SECTIONS, type MainDeckSection } from '#shared/utils'
 import { CURVE_COLOR_STYLES } from './mana-colors'
 import { COLORS, CURVE_COLORS, MAX_CURVE_VALUE, cardCurveColor, countColorPips, curveBucket, parseManaValue, type CurveColor, type DeckColor } from './mana-cost'
 
@@ -23,12 +23,6 @@ export interface DeckStats {
   /** Cards per type in the main deck (sideboard excluded), only types that appear, in section order */
   typeCounts: { section: MainDeckSection; count: number }[]
 }
-
-/** The part of the deck a hovered stat stands for: a card type, a curve bucket or a color. */
-export type DeckHighlight =
-  | { kind: 'type'; section: MainDeckSection }
-  | { kind: 'curve'; bucket: number }
-  | { kind: 'color'; color: DeckColor }
 
 /**
  * The colored segments of a curve column, bottom to top, only the colors that appear.
@@ -57,28 +51,6 @@ export function curveSegments(bucket: Pick<DeckStats['curve'][number], 'colors' 
 export function curveTooltip(bucket: DeckStats['curve'][number]): string {
   const breakdown = curveSegments(bucket).map(segment => `${segment.name} ${segment.count}`).join(', ')
   return `Costo ${bucket.label}: ${bucket.count}${breakdown ? ` (${breakdown})` : ''}`
-}
-
-export type HighlightState = 'match' | 'dim' | 'neutral'
-
-/** Spells whose cost counts for curve and colors: non-land main deck cards and sideboard cards with a cost (the sideboard has no lands list). */
-const hasCountedCost = (card: { section: DeckSection; manaCost: string }) =>
-  isNonLandSection(card.section)
-  || (card.section === SIDEBOARD_SECTION && card.manaCost !== '')
-
-/** How a card looks while a stat is hovered: part of it, not part of it, or unknown. */
-export function highlightState(card: { section: DeckSection; manaCost: string; type?: MainDeckSection }, highlight: DeckHighlight): HighlightState {
-  if (highlight.kind === 'type') {
-    // A sideboard card whose type is unknown (no type line in the database) is left alone
-    if (!card.type) return 'neutral'
-    return card.type === highlight.section ? 'match' : 'dim'
-  }
-
-  if (!hasCountedCost(card)) return 'dim'
-  const matches = highlight.kind === 'curve'
-    ? curveBucket(card.manaCost) === highlight.bucket
-    : highlight.color in countColorPips(card.manaCost)
-  return matches ? 'match' : 'dim'
 }
 
 const sumQuantities = (cards: DeckStatsCard[] = []) => cards.reduce((total, card) => total + card.quantity, 0)
