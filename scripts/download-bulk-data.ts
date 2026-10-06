@@ -6,6 +6,7 @@
  */
 
 import { createWriteStream, existsSync, mkdirSync, statSync } from 'fs'
+import { Readable } from 'stream'
 import { pipeline } from 'stream/promises'
 import { createGunzip } from 'zlib'
 import Database from 'better-sqlite3'
@@ -119,12 +120,7 @@ async function downloadBulkData(downloadUri: string): Promise<void> {
   // Scryfall serves the file as opaque gzip (no Content-Encoding header, so
   // fetch won't auto-decompress it) — gunzip on the fly into a plain JSONL file.
   const fileStream = createWriteStream(TEMP_FILE)
-  await pipeline(
-    /* eslint-disable @typescript-eslint/no-explicit-any */
-    response.body as any,
-    createGunzip(),
-    fileStream
-  )
+  await pipeline(Readable.fromWeb(response.body), createGunzip(), fileStream)
 
   console.log('✅ Download complete')
 }
