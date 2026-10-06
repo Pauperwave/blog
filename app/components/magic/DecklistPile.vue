@@ -6,7 +6,10 @@ const { cards, spread = false } = defineProps<{
   spread?: boolean
 }>()
 
-const spreadStyle = (index: number) => {
+// Indexes of the images already loaded; the others show a skeleton
+const loaded = reactive(new Set<number>())
+
+const spreadStyle =(index: number) => {
   const fraction = cards.length > 1 ? (index / (cards.length - 1)) * 100 : 0
   return { top: `${fraction}%`, transform: `translateY(-${fraction}%)` }
 }
@@ -29,11 +32,18 @@ const spreadStyle = (index: number) => {
     >
       <!-- Radius in % keeps the tooltip's corner proportions (12px on a 280px card) at any size, zoom included -->
       <!-- pointer-events-none: the zoomed image doesn't capture hover, so neighbouring cards stay reachable -->
+      <!-- In flow with the same box as the image, so it matches the card exactly; the hidden image still loads -->
+      <USkeleton
+        v-if="!loaded.has(index)"
+        class="pointer-events-none block aspect-[488/680] h-auto w-full rounded-[4.3%/3.1%]"
+      />
       <img
         :src="card.imageUrl"
         :alt="card.name"
         crossorigin="anonymous"
-        class="pointer-events-none block aspect-[488/680] h-auto w-full rounded-[4.3%/3.1%] motion-safe:transition-transform motion-safe:duration-150 motion-safe:group-hover:scale-200"
+        class="pointer-events-none aspect-[488/680] h-auto w-full rounded-[4.3%/3.1%] motion-safe:transition-transform motion-safe:duration-150 motion-safe:group-hover:scale-200"
+        :class="loaded.has(index) ? 'block' : 'hidden'"
+        @load="loaded.add(index)"
       >
     </li>
   </ul>
