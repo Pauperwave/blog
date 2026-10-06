@@ -5,7 +5,7 @@ import { defineNuxtModule } from '@nuxt/kit'
 import type { FileBeforeParseHook } from '@nuxt/content'
 import { createRegExp, digit, whitespace, oneOrMore, char } from 'magic-regexp'
 
-import { getCardsByNames } from '#server/utils/card-database'
+import { getCardsByNames, type CardData } from '#server/utils/card-database'
 import type { SideboardGuideCard, SideboardGuideSection } from '#shared/types'
 import { buildLog } from '#shared/utils'
 import { getFencedRanges, isInsideFence } from './card-tooltip-transformer'
@@ -22,7 +22,6 @@ export default defineNuxtModule({
       handler: (ctx: FileBeforeParseHook) => void | Promise<void>
     ) => void
 
-    /* eslint-disable @typescript-eslint/no-explicit-any */
     hookContentBeforeParse('content:file:beforeParse', async (ctx: FileBeforeParseHook) => {
       const file = ctx.file || ctx
 
@@ -190,7 +189,7 @@ async function parseSideboardGuide(rawText: string): Promise<{
   const dbPath = join(process.cwd(), 'server', 'database', 'cards.db')
   const dbExists = existsSync(dbPath)
 
-  let cardDataMap: Map<string, any> = new Map()
+  let cardDataMap: Map<string, CardData> = new Map()
 
   if (dbExists) {
     cardDataMap = await getCardsByNames(Array.from(cardNames))
@@ -211,7 +210,7 @@ async function parseSideboardGuide(rawText: string): Promise<{
 
 async function parseCardSection(
   lines: string[],
-  cardDataMap: Map<string, any>,
+  cardDataMap: Map<string, CardData>,
   section: SideboardGuideSection
 ): Promise<SideboardGuideCard[]> {
   const cards: SideboardGuideCard[] = []
@@ -243,7 +242,7 @@ async function parseCardSection(
 function logSectionsAndDatabaseLookup(
   sections: { in: string[], out: string[], outAlt: string[] },
   cardNames: Set<string>,
-  cardDataMap: Map<string, any>
+  cardDataMap: Map<string, CardData>
 ): void {
   buildLog(`   📦 Sections found:`)
   buildLog(`      └─ #in: ${sections.in.length} lines`)
