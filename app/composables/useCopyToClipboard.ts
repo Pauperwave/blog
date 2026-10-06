@@ -7,7 +7,13 @@ interface CopyMessages {
 export function useCopyToClipboard() {
   const toast = useToast()
 
-  async function copyToClipboard(text: string, { successDescription = 'Copiato negli appunti', errorDescription = 'Impossibile copiare negli appunti' }: CopyMessages = {}) {
+  async function copyToClipboard(
+    text: string,
+    {
+      successDescription = 'Copiato negli appunti',
+      errorDescription = 'Impossibile copiare negli appunti'
+    }: CopyMessages = {}
+  ) {
     try {
       await navigator.clipboard.writeText(text)
       toast.add({

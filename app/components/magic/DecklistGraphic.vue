@@ -3,8 +3,10 @@
 // root element with no comment before it, or $el stops being that element and the export fails.
 // Fixed width: header and footer sit exactly on the margins of the deck (main deck + sideboard).
 // Card sizes come from the CSS variables on the root, also read by DecklistPile:
-// --card-w card width, --card-offset sideboard left/right stagger, --card-strip visible title strip of a piled card
-// Root width: 6 cards (5 columns + sideboard) + sideboard offset + 12.5rem of padding, gaps and the vertical label
+// --card-w card width, --card-offset sideboard left/right stagger,
+// --card-strip visible title strip of a piled card
+// Root width: 6 cards (5 columns + sideboard) + sideboard offset
+// + 12.5rem of padding, gaps and the vertical label
 import { SIDEBOARD_SECTION } from '#shared/utils'
 import type { DecklistHeaderInfo } from '~/composables/useDecklistContext'
 import { expandCopies, type DeckCard } from '~/utils/deck-cards'
@@ -25,10 +27,22 @@ const PILE_SIZE = 4
 
 // Every copy is its own card, in list order (MTGGoldfish visual deck style).
 // Main deck: piles of 4 copies. Sideboard: a single pile.
-const mainPiles = computed(() => chunk(expandCopies(cards.filter(card => card.section !== SIDEBOARD_SECTION)), PILE_SIZE))
-const sideboardCopies = computed(() => expandCopies(cards.filter(card => card.section === SIDEBOARD_SECTION)))
+const mainPiles = computed(() =>
+  chunk(expandCopies(cards.filter(card => card.section !== SIDEBOARD_SECTION)), PILE_SIZE)
+)
+const sideboardCopies = computed(() =>
+  expandCopies(cards.filter(card => card.section === SIDEBOARD_SECTION))
+)
 
-const { highlight, highlightedColor, highlightedBucket, highlightedSection, onColorHover, onTypeHover, onCurveHover } = useDeckHighlight()
+const {
+  highlight,
+  highlightedColor,
+  highlightedBucket,
+  highlightedSection,
+  onColorHover,
+  onTypeHover,
+  onCurveHover
+} = useDeckHighlight()
 
 // Representative card art, taken from the deck's own card images (no extra requests)
 const artCard = computed(() => pickDeckArtCard(cards))

@@ -9,7 +9,13 @@ interface Props {
   resultsCount: number
 }
 
-const { modelValue, showOnlyActive, sortMode, hasActiveFilters, resultsCount } = defineProps<Props>()
+const {
+  modelValue,
+  showOnlyActive,
+  sortMode,
+  hasActiveFilters,
+  resultsCount
+} = defineProps<Props>()
 
 const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void

@@ -126,7 +126,11 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
     }
   })
 
-  const categoryFilterOptions = computed<Array<{ category: string; label: string; count: number }>>(() =>
+  const categoryFilterOptions = computed<Array<{
+    category: string
+    label: string
+    count: number
+  }>>(() =>
     Object.entries(categoryLabels).map(([category, label]) => ({
       category,
       label,
@@ -141,7 +145,8 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
   })
 
   const getArticleTopicTags = (article: AnyArticle) =>
-    preparedArticleFiltersByRef.value.get(article)?.topicTags || buildArticleTopicTags(article, globalNormalizedLocationSet.value)
+    preparedArticleFiltersByRef.value.get(article)?.topicTags
+      || buildArticleTopicTags(article, globalNormalizedLocationSet.value)
 
   const authorFilterOptions = computed<Array<{ name: string; slug: string; count: number }>>(() => {
     return (Object.entries(filterCounts.value.authorCounts) as Array<[string, number]>)
@@ -193,12 +198,14 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
 
   const selectedCategoryLabel = computed<string | null>(() => {
     if (!selectedCategory.value) return null
-    return categoryLabels[selectedCategory.value as keyof typeof categoryLabels] || selectedCategory.value
+    return categoryLabels[selectedCategory.value as keyof typeof categoryLabels]
+      || selectedCategory.value
   })
 
   const selectedAuthorLabel = computed<string | null>(() => {
     if (!selectedAuthor.value) return null
-    return authorSlugToName.value[selectedAuthor.value] || getAuthorNameFromSlug(selectedAuthor.value)
+    return authorSlugToName.value[selectedAuthor.value]
+      || getAuthorNameFromSlug(selectedAuthor.value)
   })
 
   const selectedLocationLabel = computed<string | null>(() => {
@@ -235,24 +242,41 @@ export const useArticlesFilters = ({ articles, authorsMap }: UseArticlesFiltersO
   })
 
   const hasActiveFilters = computed(() =>
-    !!selectedCategory.value || !!selectedAuthor.value || !!selectedLocation.value || !!selectedTag.value || !!selectedDeck.value
+    !!selectedCategory.value
+      || !!selectedAuthor.value
+      || !!selectedLocation.value
+      || !!selectedTag.value
+      || !!selectedDeck.value
   )
 
   const filteredArticles = computed(() => {
     const category = selectedCategory.value
     const author = selectedAuthor.value
-    const normalizedSelectedLocation = selectedLocation.value ? normalizeArticleFilterValue(selectedLocation.value) : null
-    const normalizedSelectedTag = selectedTag.value ? normalizeArticleFilterValue(selectedTag.value) : null
-    const normalizedSelectedDeck = selectedDeck.value ? normalizeArticleFilterValue(selectedDeck.value) : null
+    const normalizedSelectedLocation = selectedLocation.value
+      ? normalizeArticleFilterValue(selectedLocation.value)
+      : null
+    const normalizedSelectedTag = selectedTag.value
+      ? normalizeArticleFilterValue(selectedTag.value)
+      : null
+    const normalizedSelectedDeck = selectedDeck.value
+      ? normalizeArticleFilterValue(selectedDeck.value)
+      : null
 
     const filtered: AnyArticle[] = []
 
     preparedArticleFilters.value.forEach((item) => {
       const matchesCategory = !category || item.article.category === category
       const matchesAuthor = !author || item.authorSlug === author
-      const matchesLocation = !normalizedSelectedLocation || item.normalizedLocation === normalizedSelectedLocation
-      const matchesTag = !normalizedSelectedTag || item.normalizedTopicTagSet.has(normalizedSelectedTag)
-      const matchesDeck = !normalizedSelectedDeck || (item.article.decks && item.article.decks.some((deck: string) => normalizeArticleFilterValue(deck) === normalizedSelectedDeck))
+      const matchesLocation = !normalizedSelectedLocation
+        || item.normalizedLocation === normalizedSelectedLocation
+      const matchesTag = !normalizedSelectedTag
+        || item.normalizedTopicTagSet.has(normalizedSelectedTag)
+      const matchesDeck = !normalizedSelectedDeck || (
+        item.article.decks
+        && item.article.decks.some(
+          (deck: string) => normalizeArticleFilterValue(deck) === normalizedSelectedDeck
+        )
+      )
 
       if (matchesCategory && matchesAuthor && matchesLocation && matchesTag && matchesDeck) {
         filtered.push(item.article)

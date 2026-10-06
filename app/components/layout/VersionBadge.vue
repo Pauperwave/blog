@@ -21,7 +21,13 @@ onMounted(() => {
 onUnmounted(() => clearInterval(tick))
 
 const relativeFormat = new Intl.RelativeTimeFormat('it', { numeric: 'always' })
-const RELATIVE_UNITS = { minutes: 'minute', hours: 'hour', days: 'day', months: 'month', years: 'year' } as const
+const RELATIVE_UNITS = {
+  minutes: 'minute',
+  hours: 'hour',
+  days: 'day',
+  months: 'month',
+  years: 'year'
+} as const
 
 const updatedLabel = computed(() => {
   if (!gitCommitDate || !now.value) return ''
@@ -33,7 +39,8 @@ const updatedLabel = computed(() => {
 
 const updatedAtText = computed(() => {
   if (!gitCommitDate) return ''
-  return new Intl.DateTimeFormat('it-IT', { dateStyle: 'long', timeStyle: 'short' }).format(new Date(gitCommitDate))
+  return new Intl.DateTimeFormat('it-IT', { dateStyle: 'long', timeStyle: 'short' })
+    .format(new Date(gitCommitDate))
 })
 </script>
 

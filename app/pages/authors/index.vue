@@ -283,7 +283,9 @@ useSeoMeta({
               <StatInfoCard
                 label="Top autore"
                 :value="topAuthor?.name || 'N/D'"
-                :description="topAuthor ? `${topAuthor.articleCount} articoli pubblicati` : 'Nessun dato disponibile'"
+                :description="topAuthor
+                  ? `${topAuthor.articleCount} articoli pubblicati`
+                  : 'Nessun dato disponibile'"
                 value-class="text-lg truncate"
               />
             </div>

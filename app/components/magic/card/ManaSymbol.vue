@@ -18,9 +18,12 @@
 -->
 <script setup lang="ts">
 interface Props {
-  symbol?: string           // Es: "{U}", "{2}", "{R/G}", "wubrg" - Formato Scryfall o sequenza colori
-  combination?: ManaCombination  // Es: "azorius", "gruul", "jund" - Nome della combinazione
-  plain?: boolean           // Simbolo senza il cerchio colorato esterno, prende il colore del testo
+  /** Es: "{U}", "{2}", "{R/G}", "wubrg" - Formato Scryfall o sequenza colori */
+  symbol?: string
+  /** Es: "azorius", "gruul", "jund" - Nome della combinazione */
+  combination?: ManaCombination
+  /** Simbolo senza il cerchio colorato esterno, prende il colore del testo */
+  plain?: boolean
 }
 
 const { symbol = undefined, combination = undefined, plain = false } = defineProps<Props>()

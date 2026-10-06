@@ -18,7 +18,9 @@ export interface AuthorSocialLinkDefinition {
   hoverClass: string
 }
 
-const AUTHOR_SOCIAL_KEYS: AuthorSocialKey[] = ['twitter', 'github', 'youtube', 'twitch', 'website', 'reddit']
+const AUTHOR_SOCIAL_KEYS: AuthorSocialKey[] = [
+  'twitter', 'github', 'youtube', 'twitch', 'website', 'reddit'
+]
 
 export const AUTHOR_SOCIAL_LINKS: AuthorSocialLinkDefinition[] = AUTHOR_SOCIAL_KEYS.map(key => ({
   key,

@@ -273,7 +273,9 @@ const activeFilters = computed(() => {
             all-label="Tutte le localita"
             color="info"
             :options="locationOptions"
-            :selected-value="selectedLocation ? normalizeArticleFilterValue(selectedLocation) : null"
+            :selected-value="
+              selectedLocation ? normalizeArticleFilterValue(selectedLocation) : null
+            "
             :default-open="false"
             @select="emit('set-location', $event)"
           />

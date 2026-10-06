@@ -15,6 +15,7 @@ export interface DecklistContext {
 
 const DECKLIST_CONTEXT_KEY: InjectionKey<DecklistContext> = Symbol('decklistContext')
 
-export const provideDecklistContext = (context: DecklistContext) => provide(DECKLIST_CONTEXT_KEY, context)
+export const provideDecklistContext = (context: DecklistContext) =>
+  provide(DECKLIST_CONTEXT_KEY, context)
 
 export const injectDecklistContext = () => inject(DECKLIST_CONTEXT_KEY, null)

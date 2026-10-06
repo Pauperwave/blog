@@ -37,7 +37,8 @@ export const useRelatedArticles = (data: Ref<AnyArticle | null>) => {
     ).map(item => item.article)
 
     if (sorted.length < MAX_RELATED_ARTICLES) {
-      sorted = orderBy(filtered, a => new Date(a.date).getTime(), 'desc').slice(0, MAX_RELATED_ARTICLES)
+      sorted = orderBy(filtered, a => new Date(a.date).getTime(), 'desc')
+        .slice(0, MAX_RELATED_ARTICLES)
     }
 
     const links = sorted.slice(0, MAX_RELATED_ARTICLES)

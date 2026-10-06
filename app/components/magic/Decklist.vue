@@ -1,5 +1,12 @@
 <script setup lang="ts">
-import { DECK_SECTIONS, MAIN_DECK_SECTIONS, SIDEBOARD_SECTION, formatDecklistForArena, formatDecklistForMTGO, safeParse } from '#shared/utils'
+import {
+  DECK_SECTIONS,
+  MAIN_DECK_SECTIONS,
+  SIDEBOARD_SECTION,
+  formatDecklistForArena,
+  formatDecklistForMTGO,
+  safeParse
+} from '#shared/utils'
 import { provideDecklistContext, type DecklistHeaderInfo } from '~/composables/useDecklistContext'
 import { uniqueDeckCards } from '~/utils/deck-cards'
 import { useDecklistStyles } from '~/composables/useDecklistStyles'
@@ -75,7 +82,9 @@ const cardModalRequested = ref(false)
 const cardModalIndex = ref(0)
 const deckStats = computed(() => computeDeckStats(cardsBySection.value))
 // Without player or placement the modal has no visible description (Nuxt UI adds a hidden one)
-const statsDescription = computed(() => [player, placement].filter(Boolean).join(' · ') || undefined)
+const statsDescription = computed(() =>
+  [player, placement].filter(Boolean).join(' · ') || undefined
+)
 
 const headerInfo = computed<DecklistHeaderInfo>(() => ({
   name,
@@ -100,7 +109,9 @@ const openCard = (name: string, section: string) => {
     openOverlay()
     return
   }
-  const index = deckCards.value.findIndex(card => card.name === name && (!section || card.section === section))
+  const index = deckCards.value.findIndex(
+    card => card.name === name && (!section || card.section === section)
+  )
   if (index < 0) return
   cardModalIndex.value = index
   cardModalRequested.value = true

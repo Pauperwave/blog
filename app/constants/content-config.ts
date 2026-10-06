@@ -31,9 +31,15 @@
  * We suppress this error below with @ts-expect-error to keep the IDE clean.
  */
 
-// @ts-expect-error - '#content' is a Nuxt virtual module with auto-generated types from content.config.ts
 // These types are created at build time by @nuxt/content and are not available to static analysis
-import type { ArticlesCollectionItem, TutorialsCollectionItem, DecklistsCollectionItem, ReportsCollectionItem, SpoilersCollectionItem } from '#content'
+import type {
+  ArticlesCollectionItem,
+  TutorialsCollectionItem,
+  DecklistsCollectionItem,
+  ReportsCollectionItem,
+  SpoilersCollectionItem
+// @ts-expect-error - '#content' is a Nuxt virtual module with generated types
+} from '#content'
 
 /**
  * Union type combining all article collection item types.

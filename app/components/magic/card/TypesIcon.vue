@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { MainDeckSection } from '#shared/utils'
 
-// mana-font icon of each section; typed on the shared sections, so a new section can't miss its icon
+// mana-font icon of each section; typed on the shared sections, so a new one can't miss its icon
 const TYPE_ICONS: Record<MainDeckSection, string> = {
   Creatures: 'creature',
   Instants: 'instant',

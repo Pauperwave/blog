@@ -13,11 +13,20 @@ interface Props {
   viewAllText?: string;
 }
 
-const { title, category, articles, authorsMap, maxItems = 3, viewAllText = 'Vedi tutti' } = defineProps<Props>()
+const {
+  title,
+  category,
+  articles,
+  authorsMap,
+  maxItems = 3,
+  viewAllText = 'Vedi tutti'
+} = defineProps<Props>()
 
 const getArticleAuthorData = (article: AnyArticle): Author[] => {
   const authorNames = normalizeAuthors(article.author)
-  return authorNames.map(name => authorsMap[name]).filter((author): author is Author => Boolean(author))
+  return authorNames
+    .map(name => authorsMap[name])
+    .filter((author): author is Author => Boolean(author))
 }
 </script>
 

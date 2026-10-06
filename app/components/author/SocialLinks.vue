@@ -17,7 +17,13 @@ interface Props {
   countLabel?: string
 }
 
-const { socials = null, variant = 'icons', maxItems = undefined, showCount = false, countLabel = 'social' } = defineProps<Props>()
+const {
+  socials = null,
+  variant = 'icons',
+  maxItems = undefined,
+  showCount = false,
+  countLabel = 'social'
+} = defineProps<Props>()
 
 const visibleSocials = computed<VisibleSocial[]>(() => {
   if (!socials) return []
@@ -38,7 +44,9 @@ const renderedSocials = computed(() => {
 <template>
   <div
     v-if="renderedSocials.length > 0"
-    :class="variant === 'labels' ? 'flex items-center gap-4 flex-wrap' : 'flex items-center gap-2 text-gray-500 dark:text-gray-400'"
+    :class="variant === 'labels'
+      ? 'flex items-center gap-4 flex-wrap'
+      : 'flex items-center gap-2 text-gray-500 dark:text-gray-400'"
   >
     <template v-if="variant === 'labels'">
       <ULink

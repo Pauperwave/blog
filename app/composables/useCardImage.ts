@@ -23,10 +23,17 @@ import { resolveCardImageUrl } from '#shared/utils'
  * const imageUrl = useCardImage('Lightning Bolt')
  * const imageUrlWithSet = useCardImage('Lightning Bolt', undefined, 'UMA')
  * const imageUrlWithProvided = useCardImage('Lightning Bolt', 'https://example.com/image.jpg')
- * const imageUrlWithCustomCache = useCardImage('Lightning Bolt', undefined, undefined, { cacheKey: 'my-cache' })
+ * const imageUrlWithCustomCache = useCardImage(
+ *   'Lightning Bolt', undefined, undefined, { cacheKey: 'my-cache' }
+ * )
  * ```
  */
-export function useCardImage(name: string, image?: string, set?: string, options?: { cacheKey?: string }) {
+export function useCardImage(
+  name: string,
+  image?: string,
+  set?: string,
+  options?: { cacheKey?: string }
+) {
   const imageUrl = ref<string | null>(image || null)
   const cacheKey = options?.cacheKey || 'card-tooltip-image-cache'
   const imageCache = useState<Record<string, string>>(cacheKey, () => ({}))

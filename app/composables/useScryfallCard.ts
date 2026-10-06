@@ -15,7 +15,8 @@ import type {
  *
  * Includes caching to avoid redundant network requests.
  *
- * @param cardString - Card identifier string or ref (e.g., "Lightning Bolt", "Lightning Bolt (UMA) 123")
+ * @param cardString - Card identifier string or ref (e.g., "Lightning Bolt",
+ *   "Lightning Bolt (UMA) 123")
  * @returns Object containing:
  *   - cardData: Scryfall card data or null
  *   - loading: Whether fetch is in progress

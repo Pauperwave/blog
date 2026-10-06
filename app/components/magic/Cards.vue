@@ -4,11 +4,14 @@ import { fanCardTransform, cardFilter, handPosition, handZIndex } from '~/utils/
 interface Props {
   cards: string[]
   caption?: string
-  /** Total rotation arch in degrees, matches magic.wizards.com's `overall-arch` (default: 20.5). Fan-only. */
+  /** Total rotation arch in degrees, as WotC's `overall-arch` (default: 20.5). Fan-only */
   arch?: number
-  /** Layout style, matches magic.wizards.com's `config` values: 'fan' (default) or 'hand'. Below the `md`
-   * breakpoint this is ignored — cards always fall back to a plain scroll strip (WotC's own component does
-   * the same: the swiper/gallery swap on mobile isn't a selectable config, it's automatic infrastructure). */
+  /**
+   * Layout style, as magic.wizards.com's `config` values: 'fan' (default) or 'hand'. Below the `md`
+   * breakpoint this is ignored — cards always fall back to a plain scroll strip (WotC's own
+   * component does the same: the swiper/gallery swap on mobile isn't a selectable config, it's
+   * automatic infrastructure).
+   */
   layout?: 'fan' | 'hand'
 }
 
@@ -70,7 +73,9 @@ function handCardStyle(idx: number, total: number) {
         :key="card"
         class="absolute left-1/2 top-6 -translate-x-1/2 card-slot"
         :class="layout === 'hand' ? 'hand-slot' : undefined"
-        :style="layout === 'hand' ? { '--hand-z': handZIndex(idx, visibleCards.length) } : undefined"
+        :style="layout === 'hand'
+          ? { '--hand-z': handZIndex(idx, visibleCards.length) }
+          : undefined"
       >
         <MagicCard
           v-if="layout === 'hand'"

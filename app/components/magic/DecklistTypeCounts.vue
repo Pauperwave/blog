@@ -20,7 +20,7 @@ const emit = defineEmits<{
       :key="type.section"
       :text="type.section"
     >
-      <!-- The invisible top border keeps the icon centered once the bottom one becomes the underline -->
+      <!-- The invisible top border keeps the icon centered when the bottom one is the underline -->
       <span
         class="inline-flex cursor-pointer items-center gap-1.5 border-y-3 border-transparent py-1.5 motion-safe:transition-transform motion-safe:duration-150"
         :class="{ 'scale-110 border-b-current!': highlightSection === type.section }"

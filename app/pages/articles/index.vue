@@ -41,6 +41,11 @@ const { data: authorsMapData } = await useAsyncData<Record<string, Author>>(
 
 const authorsMap = computed(() => authorsMapData.value ?? {})
 
+const getArticleAuthors = (article: AnyArticle) =>
+  normalizeAuthors(article.author)
+    .map(name => authorsMap.value[name])
+    .filter((author): author is Author => Boolean(author))
+
 // OG Image for articles list page
 defineOgImage('Page.takumi', {
   title: 'Tutti gli Articoli',
@@ -108,7 +113,9 @@ const {
       <UEmpty
         v-if="(filteredArticles?.length ?? 0) <= 0"
         title="Nessun articolo trovato"
-        :description="hasActiveFilters ? 'Nessun articolo corrisponde ai filtri selezionati.' : 'Non ci sono articoli disponibili.'"
+        :description="hasActiveFilters
+          ? 'Nessun articolo corrisponde ai filtri selezionati.'
+          : 'Non ci sono articoli disponibili.'"
         variant="naked"
         :actions="[{ label: 'Torna alla home', to: '/' }]"
       />
@@ -120,7 +127,7 @@ const {
           v-for="article in filteredArticles"
           :key="article.path"
           :article="article"
-          :author-data="normalizeAuthors(article.author).map(name => authorsMap[name]).filter((author): author is Author => Boolean(author))"
+          :author-data="getArticleAuthors(article)"
           :topic-tags="getArticleTopicTags(article)"
           :badge="getBadge(article.date)"
         />

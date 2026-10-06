@@ -1,7 +1,7 @@
 <script setup lang="ts">
 interface Props {
   image: string
-  /** Second face's image, for transform/modal double-faced cards. A button below the image toggles it. */
+  /** Second face's image, for transform/modal double-faced cards. A button below toggles it. */
   backImage?: string
   label: string
   /** Smaller max height, to leave room for content around the image */

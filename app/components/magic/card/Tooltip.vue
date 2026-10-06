@@ -4,7 +4,7 @@ import { injectDecklistContext } from '~/composables/useDecklistContext'
 interface Props {
   name: string
   image?: string
-  /** Second face's image, for transform/modal double-faced cards. A button below the preview toggles it in the modal. */
+  /** Second face's image, for double-faced cards. A button in the modal toggles it. */
   backImage?: string
   /** Scryfall set code — when given, `image` is resolved to that specific printing. */
   set?: string
@@ -105,7 +105,7 @@ const handleClick = () => {
     </template>
   </UTooltip>
 
-  <!-- Standalone card modal, for card names outside a decklist (a decklist has its own shared viewer) -->
+  <!-- Standalone card modal, for card names outside a decklist (which has its own viewer) -->
   <UModal
     v-if="modalRequested"
     v-model:open="showModal"

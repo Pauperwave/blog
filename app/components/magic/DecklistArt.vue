@@ -10,7 +10,10 @@ const loaded = ref(false)
 </script>
 
 <template>
-  <!-- Background layer: the art fades out towards the text, no mask so it renders the same in an exported image -->
+  <!--
+    Background layer: the art fades out towards the text,
+    no mask so it renders the same in an exported image
+  -->
   <div class="pointer-events-none absolute inset-0">
     <USkeleton v-if="!loaded" class="size-full rounded-none" />
     <img

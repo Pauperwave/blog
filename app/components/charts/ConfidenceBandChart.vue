@@ -57,7 +57,8 @@ const chartOption = computed(() => {
       formatter: (params: Array<{ dataIndex: number }>) => {
         const point = data[params[0]?.dataIndex ?? 0]
         if (!point) return ''
-        return `${point.x}<br/>${valueLabel.value}: ${point.value}<br/>Range: ${point.lower} – ${point.upper}`
+        return `${point.x}<br/>${valueLabel.value}: ${point.value}<br/>`
+          + `Range: ${point.lower} – ${point.upper}`
       },
     },
     legend: {

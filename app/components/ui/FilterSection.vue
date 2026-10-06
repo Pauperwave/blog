@@ -17,7 +17,16 @@ interface Props {
   maxHeight?: boolean
 }
 
-const { label, pluralLabel, color = 'neutral', options, selectedValue, allLabel, defaultOpen = true, maxHeight = false } = defineProps<Props>()
+const {
+  label,
+  pluralLabel,
+  color = 'neutral',
+  options,
+  selectedValue,
+  allLabel,
+  defaultOpen = true,
+  maxHeight = false
+} = defineProps<Props>()
 
 const emit = defineEmits<{
   select: [value: string | null]

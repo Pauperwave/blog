@@ -3,7 +3,13 @@ import MagicCardTypesIcon from './card/TypesIcon.vue'
 
 defineProps<{
   section: string
-  cards: Array<{ quantity: number; name: string; imageUrl?: string; backImageUrl?: string; manaCost?: string }>
+  cards: Array<{
+    quantity: number
+    name: string
+    imageUrl?: string
+    backImageUrl?: string
+    manaCost?: string
+  }>
   count: number
 }>()
 </script>

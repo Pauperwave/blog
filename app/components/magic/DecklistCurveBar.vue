@@ -14,7 +14,7 @@ const segments = computed(() => curveSegments(bucket, highlightColor))
 </script>
 
 <template>
-  <!-- The ring keeps the white and black segments visible; size and position come from the parent -->
+  <!-- The ring keeps the white and black segments visible; the parent sets size and position -->
   <div class="flex flex-col-reverse overflow-hidden rounded-t-sm ring-1 ring-default">
     <div
       v-for="segment in segments"

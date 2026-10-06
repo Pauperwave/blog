@@ -20,10 +20,13 @@ const emit = defineEmits<{
 
 const maxCount = computed(() => Math.max(...curve.map(bucket => bucket.count), 1))
 
-// The average label sits over the last columns: if one of them is nearly as tall as the highest, the bars make room for it
+// The average label sits over the last columns: if one is nearly as tall as the highest,
+// the bars make room for it
 const LABEL_COLUMNS = 4
 const TALL_SHARE = 0.75
-const roomForLabel = computed(() => curve.slice(-LABEL_COLUMNS).some(bucket => bucket.count >= maxCount.value * TALL_SHARE))
+const roomForLabel = computed(() =>
+  curve.slice(-LABEL_COLUMNS).some(bucket => bucket.count >= maxCount.value * TALL_SHARE)
+)
 
 </script>
 

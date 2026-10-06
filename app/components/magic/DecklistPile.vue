@@ -1,11 +1,12 @@
 <script setup lang="ts">
-// Sizes come from CSS variables set by DecklistGraphic: --card-strip (visible title strip) and --card-offset (sideboard stagger)
+// Sizes come from CSS variables set by DecklistGraphic:
+// --card-strip (visible title strip) and --card-offset (sideboard stagger)
 import type { DeckCard } from '~/utils/deck-cards'
 import { highlightState, type DeckHighlight } from '~/utils/deck-highlight'
 
 const { cards, spread = false, highlight = null } = defineProps<{
   cards: DeckCard[]
-  /** Fill the parent's height with full cards, alternating left and right, first at the top and last at the bottom */
+  /** Fill the parent's height with full cards, alternating left and right, first on top */
   spread?: boolean
   /** Cards outside of it are dimmed, the ones it says nothing about are left alone */
   highlight?: DeckHighlight | null
@@ -18,9 +19,16 @@ const stateOf = (card: DeckCard) => highlight ? highlightState(card, highlight) 
 const isHighlighted = (card: DeckCard) => stateOf(card) === 'match'
 const isDimmed = (card: DeckCard) => stateOf(card) === 'dim'
 
-// Spread: full cards alternating left and right. Pile: clipped to the title strip, a highlighted card is shown whole in front
+// Spread: full cards alternating left and right.
+// Pile: clipped to the title strip, a highlighted card is shown whole in front
 const itemClass = (card: DeckCard, index: number) => {
-  if (spread) return ['absolute inset-x-0 hover:z-10', isHighlighted(card) ? 'z-10' : '', index % 2 === 0 ? 'pe-(--card-offset)' : 'ps-(--card-offset)']
+  if (spread) {
+    return [
+      'absolute inset-x-0 hover:z-10',
+      isHighlighted(card) ? 'z-10' : '',
+      index % 2 === 0 ? 'pe-(--card-offset)' : 'ps-(--card-offset)'
+    ]
+  }
   return [
     'relative h-(--card-strip) last:h-auto last:overflow-visible hover:z-10 hover:overflow-visible',
     isHighlighted(card) ? 'z-10 overflow-visible' : 'overflow-hidden'
@@ -39,7 +47,10 @@ const spreadStyle = (index: number) => {
 </script>
 
 <template>
-  <!-- Stack: every card but the last is clipped to its title strip, hover reveals it fully, and so does a highlighted card, in front of the others -->
+  <!--
+    Stack: every card but the last is clipped to its title strip. Hover reveals it fully,
+    and so does a highlighted card, in front of the others
+  -->
   <ul
     class="m-0 list-none p-0"
     :class="{ 'absolute inset-0': spread }"
@@ -51,9 +62,9 @@ const spreadStyle = (index: number) => {
       :class="itemClass(card, index)"
       :style="spread ? spreadStyle(index) : undefined"
     >
-      <!-- Radius in % keeps the tooltip's corner proportions (12px on a 280px card) at any size, zoom included -->
-      <!-- pointer-events-none: the zoomed image doesn't capture hover, so neighbouring cards stay reachable -->
-      <!-- In flow with the same box as the image, so it matches the card exactly; the hidden image still loads -->
+      <!-- Radius in % keeps the tooltip's corner proportions (12px on a 280px card) at any size -->
+      <!-- pointer-events-none: the zoomed image takes no hover, neighbours stay reachable -->
+      <!-- In flow with the same box as the image, so it matches; the hidden image still loads -->
       <USkeleton
         v-if="!loaded.has(index)"
         class="pointer-events-none block aspect-488/680 h-auto w-full rounded-[4.3%/3.1%]"
