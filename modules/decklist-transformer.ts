@@ -8,7 +8,7 @@ import { createRegExp, digit, whitespace, oneOrMore, char } from 'magic-regexp'
 
 import { getCardsByNames } from '#server/utils/card-database'
 import type { ParsedCard } from '#shared/types'
-import { DECK_SECTIONS, isDeckSection, slugify, buildLog, type DeckSection } from '#shared/utils'
+import { DECK_SECTIONS, SIDEBOARD_SECTION, isDeckSection, sectionFromTypeLine, slugify, buildLog, type DeckSection } from '#shared/utils'
 import { getFencedRanges, isInsideFence } from './card-tooltip-transformer'
 
 export default defineNuxtModule({
@@ -228,7 +228,8 @@ async function parseDecklist(rawText: string): Promise<Record<string, ParsedCard
           section: currentSection,
           manaCost: cardData?.manaCost || '',
           imageUrl: cardData?.imageUrl || '',
-          backImageUrl: cardData?.backImageUrl || undefined
+          backImageUrl: cardData?.backImageUrl || undefined,
+          typeSection: currentSection === SIDEBOARD_SECTION && cardData?.typeLine ? sectionFromTypeLine(cardData.typeLine) : undefined
         })
       }
     }

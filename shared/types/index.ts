@@ -22,6 +22,8 @@ export interface ParsedCard {
   manaCost: string
   imageUrl: string
   backImageUrl?: string
+  /** Section its type belongs to, set only for sideboard cards (the sideboard is not sorted by type) */
+  typeSection?: string
 }
 
 /**
