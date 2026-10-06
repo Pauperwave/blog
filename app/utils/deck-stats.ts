@@ -1,6 +1,5 @@
 import { LAND_SECTION, MAIN_DECK_SECTIONS, NON_LAND_SECTIONS, type MainDeckSection } from '#shared/utils'
-import { CURVE_COLOR_STYLES } from './mana-colors'
-import { COLORS, CURVE_COLORS, MAX_CURVE_VALUE, cardCurveColor, countColorPips, curveBucket, parseManaValue, type CurveColor, type DeckColor } from './mana-cost'
+import { COLORS, MAX_CURVE_VALUE, cardCurveColor, countColorPips, curveBucket, parseManaValue, type CurveColor, type DeckColor } from './mana-cost'
 
 export interface DeckStatsCard {
   quantity: number
@@ -22,35 +21,6 @@ export interface DeckStats {
   landCount: number
   /** Cards per type in the main deck (sideboard excluded), only types that appear, in section order */
   typeCounts: { section: MainDeckSection; count: number }[]
-}
-
-/**
- * The colored segments of a curve column, bottom to top, only the colors that appear.
- * With a highlighted color, the segments of the other colors are dimmed and the multicolor one splits
- * into the cards that have the color and the ones that don't.
- */
-export function curveSegments(bucket: Pick<DeckStats['curve'][number], 'colors' | 'multicolor'>, highlightColor: DeckColor | null = null) {
-  return CURVE_COLORS.flatMap((color) => {
-    const count = bucket.colors[color] ?? 0
-    const style = CURVE_COLOR_STYLES[color]
-
-    if (color === 'M' && highlightColor) {
-      const matching = bucket.multicolor[highlightColor] ?? 0
-      return [
-        { color, count: matching, dimmed: false, ...style },
-        { color, count: count - matching, dimmed: true, ...style }
-      ].filter(segment => segment.count > 0)
-    }
-
-    if (count === 0) return []
-    return [{ color, count, dimmed: highlightColor !== null && color !== highlightColor, ...style }]
-  })
-}
-
-/** Tooltip of a curve column: its cost, how many cards and the split by color. */
-export function curveTooltip(bucket: DeckStats['curve'][number]): string {
-  const breakdown = curveSegments(bucket).map(segment => `${segment.name} ${segment.count}`).join(', ')
-  return `Costo ${bucket.label}: ${bucket.count}${breakdown ? ` (${breakdown})` : ''}`
 }
 
 const sumQuantities = (cards: DeckStatsCard[] = []) => cards.reduce((total, card) => total + card.quantity, 0)

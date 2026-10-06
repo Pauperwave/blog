@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { curveTooltip, type DeckStats } from '~/utils/deck-stats'
+import { curveTooltip } from '~/utils/curve-display'
+import type { DeckStats } from '~/utils/deck-stats'
 import DecklistCurveBar from './DecklistCurveBar.vue'
 
 const { stats } = defineProps<{

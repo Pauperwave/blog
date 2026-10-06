@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { curveSegments, type DeckStats } from '~/utils/deck-stats'
+import { curveSegments } from '~/utils/curve-display'
+import type { DeckStats } from '~/utils/deck-stats'
 import type { DeckColor } from '~/utils/mana-cost'
 
 const { bucket, highlightColor = null } = defineProps<{
