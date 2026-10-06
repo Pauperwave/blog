@@ -26,6 +26,15 @@ const {
   categoryLabel = null
 } = defineProps<Props>()
 
+// Sized to the grid column (3 or 4 per row), so the browser gets a small webp and not the original
+const thumbnail = computed(() => ({
+  src: article.thumbnail,
+  sizes: 'sm:33vw lg:300px',
+  width: 400,
+  height: 210,
+  format: 'webp'
+}))
+
 const authorsList = computed<Author[]>(() => {
   return authorData ? (Array.isArray(authorData) ? authorData : [authorData]) : []
 })
@@ -66,7 +75,7 @@ const cardVariantClasses = computed(() =>
 <template>
   <UBlogPost
     :title="article.title"
-    :image="article.thumbnail"
+    :image="thumbnail"
     :badge="badge"
     :date="article.date"
     :to="article.path"
