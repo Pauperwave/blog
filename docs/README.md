@@ -13,6 +13,7 @@ Master index of all project documentation.
 | `CONTENT.md` | Full frontmatter reference, MDC syntax, decklist/card-reference syntax, image guidelines, publishing checklist | Content authoring |
 | `architecture/author-system-improvements.md` | Author system feature status: completed features and pending improvements | Feature reference |
 | `architecture/card-download-database-flow.md` | How card data flows from Scryfall into `server/database/cards.db` and gets resolved at build time by the content transformers | Data pipeline |
+| `architecture/decklist-visual-view.md` | How the decklist "Vista visuale" works: overlay and exportable graphic, interactive stats with hover highlighting, colored mana curve, `?preview` share links, sideboard card types from `type_line` | Component reference |
 | `architecture/2026-07-10-magic-cards-component-research.md` | Reverse-engineering notes for WotC's `<magic-cards>` web component (fan/hand layouts): what's verified live vs. extrapolated, with matched-articles data (`2026-07-10-magic-cards-fan-hand-matches.tsv`) | Component reference |
 | `audits/2026-07-11-build-performance-investigation.md` | Investigation into `bun run generate` slowness and a silent exit-code-5 failure; one fix reverted after breaking prod images, one kept | Performance history |
 | `PROGRESS.md` | Backward-looking curated architecture/decision history (ADRs); what's actually been done | Architecture history |
@@ -44,6 +45,11 @@ Master index of all project documentation.
 1. `CONTENT.md` — frontmatter reference, MDC syntax, publishing checklist
 2. `architecture/card-download-database-flow.md` — how `[[Card Name]]`/decklist card data resolves at build time
 3. `architecture/2026-07-10-magic-cards-component-research.md` — `::magic-cards` fan/hand layout internals
+
+### For Decklist UI Work
+
+1. `architecture/decklist-visual-view.md` — overlay, graphic, stats, highlight logic, preview links, file map
+2. `architecture/card-download-database-flow.md` — where card data (cost, images, type line) comes from
 
 ### For Performance/Build Work
 
