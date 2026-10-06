@@ -3,6 +3,8 @@ import { join, dirname } from 'path'
 import { existsSync } from 'fs'
 import { fileURLToPath } from 'url'
 
+import { buildLog } from '#shared/utils'
+
 export interface CardData {
   name: string
   manaCost: string
@@ -50,14 +52,14 @@ function getDbPath(): string {
 
   for (const path of possiblePaths) {
     if (existsSync(path)) {
-      console.log(`✅ Found database at: ${path}`)
+      buildLog(`✅ Found database at: ${path}`)
       return path
     }
   }
 
   // If no file found, log all attempts for debugging
-  console.log(`⚠️  Database not found at any expected location. Attempted paths:`)
-  possiblePaths.forEach(p => console.log(`   - ${p}`))
+  console.warn(`⚠️  Database not found at any expected location. Attempted paths:`)
+  possiblePaths.forEach(p => console.warn(`   - ${p}`))
 
   // Return the primary path anyway - let the database connection fail with a clear error
   return String(possiblePaths[0])
@@ -74,11 +76,11 @@ async function getDatabase(): Promise<DatabaseInstance | null> {
     try {
       const Database = (await import('better-sqlite3')).default
       dbInstance = new Database(dbPath, { readonly: true })
-      console.log('✅ Using better-sqlite3')
+      buildLog('✅ Using better-sqlite3')
       return dbInstance
     } catch (error) {
       const errorMsg = `better-sqlite3 failed: ${error instanceof Error ? error.message : String(error)}`
-      console.log(`❌ ${errorMsg}`)
+      console.error(`❌ ${errorMsg}`)
       throw new Error(`Failed to initialize database at ${dbPath}: ${errorMsg}`, { cause: error })
     }
   }
