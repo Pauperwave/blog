@@ -1,16 +1,18 @@
 <script setup lang="ts">
 import type { DeckColor, DeckStats } from '~/utils/deck-stats'
 
-const { pips } = defineProps<{
+const { pips, highlightColor = null } = defineProps<{
   pips: DeckStats['pips']
+  /** The other colors turn grayscale */
+  highlightColor?: DeckColor | null
 }>()
 
 const emit = defineEmits<{
   hover: [color: DeckColor | null]
 }>()
 
-// Below this share the segment is too narrow to fit the mana symbol
-const MIN_PERCENT_FOR_SYMBOL = 12
+// Below this share the segment is too narrow to fit the mana symbol and the pip count
+const MIN_PERCENT_FOR_LABEL = 16
 
 const totalPips = computed(() => pips.reduce((total, pip) => total + pip.count, 0))
 
@@ -20,7 +22,7 @@ const segments = computed(() => pips.map((pip) => {
     ...pip,
     ...MANA_COLOR_STYLES[pip.color],
     percent,
-    showSymbol: percent >= MIN_PERCENT_FOR_SYMBOL
+    showLabel: percent >= MIN_PERCENT_FOR_LABEL
   }
 }))
 </script>
@@ -33,21 +35,26 @@ const segments = computed(() => pips.map((pip) => {
     role="img"
     :aria-label="segments.map(segment => `${segment.name} ${segment.percent}%`).join(', ')"
   >
-    <div
+    <UTooltip
       v-for="segment in segments"
       :key="segment.color"
-      class="flex min-w-0 items-center justify-center [--mana-size:16px]"
-      :class="segment.fill"
-      :style="{ flexGrow: segment.count, flexBasis: 0 }"
-      :title="`${segment.name}: ${segment.percent}%`"
-      @mouseenter="emit('hover', segment.color)"
-      @mouseleave="emit('hover', null)"
+      :text="`${segment.name}: ${segment.count} simboli (${segment.percent}%)`"
     >
-      <MagicCardManaSymbol
-        v-if="segment.showSymbol"
-        :symbol="`{${segment.color}}`"
-        plain
-      />
-    </div>
+      <div
+        class="flex min-w-0 cursor-pointer items-center justify-center gap-1 text-sm font-semibold tabular-nums [--mana-size:16px] motion-safe:transition-[filter] motion-safe:duration-400"
+        :class="[segment.fill, { grayscale: highlightColor && highlightColor !== segment.color }]"
+        :style="{ flexGrow: segment.count, flexBasis: 0 }"
+        @mouseenter="emit('hover', segment.color)"
+        @mouseleave="emit('hover', null)"
+      >
+        <template v-if="segment.showLabel">
+          <MagicCardManaSymbol
+            :symbol="`{${segment.color}}`"
+            plain
+          />
+          {{ segment.count }}
+        </template>
+      </div>
+    </UTooltip>
   </div>
 </template>

@@ -8,7 +8,7 @@
 import { SIDEBOARD_SECTION } from '#shared/utils'
 import type { DecklistHeaderInfo } from '~/composables/useDecklistContext'
 import { expandCopies, type DeckCard } from '~/utils/deck-cards'
-import type { DeckHighlight, DeckStats } from '~/utils/deck-stats'
+import type { DeckColor, DeckHighlight, DeckStats } from '~/utils/deck-stats'
 import DecklistArt from './DecklistArt.vue'
 import DecklistColorBars from './DecklistColorBars.vue'
 import DecklistCurveChart from './DecklistCurveChart.vue'
@@ -30,6 +30,18 @@ const sideboardCopies = computed(() => expandCopies(cards.filter(card => card.se
 
 // Stat under the mouse: the cards outside of it are dimmed
 const highlight = ref<DeckHighlight | null>(null)
+const highlightedColor = computed(() => highlight.value?.kind === 'color' ? highlight.value.color : null)
+const highlightedSection = computed(() => highlight.value?.kind === 'type' ? highlight.value.section : null)
+
+const onColorHover = (color: DeckColor | null) => {
+  highlight.value = color ? { kind: 'color', color } : null
+}
+const onTypeHover = (section: string | null) => {
+  highlight.value = section ? { kind: 'type', section } : null
+}
+const onCurveHover = (bucket: number | null) => {
+  highlight.value = bucket === null ? null : { kind: 'curve', bucket }
+}
 
 // Representative card art, taken from the deck's own card images (no extra requests)
 const artCard = computed(() => pickDeckArtCard(cards))
@@ -37,14 +49,15 @@ const artCard = computed(() => pickDeckArtCard(cards))
 
 <template>
   <div class="flex w-[calc(var(--card-w)*6_+_var(--card-offset)_+_12.5rem)] flex-col gap-6 bg-default p-6 [--card-offset:1.5rem] [--card-strip:2.25rem] [--card-w:9rem]">
-    <header class="relative flex items-stretch justify-between gap-x-10 overflow-hidden rounded-xl border border-default bg-elevated px-6 py-5 shadow-sm">
+    <header class="relative flex items-stretch justify-between gap-x-6 overflow-hidden rounded-xl border border-default bg-elevated px-6 py-5 shadow-sm">
       <DecklistArt
         v-if="artCard"
         :src="toArtCropUrl(artCard.imageUrl)"
         :card="artCard.name"
       />
       <div class="relative flex flex-col justify-between gap-5">
-        <div class="flex flex-col gap-1.5">
+        <!-- Player next to the title; a long title pushes it to the next line -->
+        <div class="flex flex-wrap items-baseline gap-x-5 gap-y-1.5">
           <h2 class="m-0 text-5xl font-light leading-none tracking-tight">
             {{ header.name }}
           </h2>
@@ -56,18 +69,22 @@ const artCard = computed(() => pickDeckArtCard(cards))
         <div class="flex items-center gap-x-6">
           <DecklistColorBars
             :pips="stats.pips"
-            @hover="color => highlight = color ? { kind: 'color', color } : null"
+            :highlight-color="highlightedColor"
+            @hover="onColorHover"
           />
           <DecklistTypeCounts
             :counts="stats.typeCounts"
-            @hover="section => highlight = section ? { kind: 'type', section } : null"
+            :highlight-section="highlightedSection"
+            @hover="onTypeHover"
           />
         </div>
       </div>
       <DecklistCurveChart
         :curve="stats.curve"
-        @hover="bucket => highlight = bucket === null ? null : { kind: 'curve', bucket }"
-        class="relative h-28 shrink-0 self-end rounded-lg bg-default/70 px-4 py-3"
+        :average="stats.averageManaValue"
+        :highlight-color="highlightedColor"
+        @hover="onCurveHover"
+        class="relative h-28 min-w-64 flex-1 self-end rounded-lg bg-default/70 px-3 py-3"
       />
     </header>
 
