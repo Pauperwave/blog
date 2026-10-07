@@ -60,18 +60,22 @@ const artCard = computed(() => pickDeckArtCard(cards))
         :card="artCard.name"
       />
       <div class="relative flex flex-col justify-between gap-5">
-        <!-- Player next to the title; a long title pushes it to the next line -->
-        <div class="flex flex-wrap items-baseline gap-x-5 gap-y-1.5">
-          <h2 class="m-0 text-5xl font-light leading-none tracking-tight">
+        <!-- Player and price beside the title: two 24px lines are as tall as it, so no growth -->
+        <div class="flex items-center gap-x-5">
+          <h2 class="m-0 shrink-0 text-5xl font-light leading-none tracking-tight">
             {{ header.name }}
           </h2>
-          <p class="m-0 text-xl font-semibold text-muted">
-            {{ header.player }}
-            <span v-if="header.placement"> · {{ header.placement }}</span>
-          </p>
-          <p v-if="price" class="m-0 text-xl font-semibold text-muted">
-            ≈ {{ formatEur(price.eur) }} · {{ formatTix(price.tix) }}
-          </p>
+          <div class="flex min-w-0 flex-col text-lg font-semibold leading-6 text-muted">
+            <p class="m-0 truncate">
+              {{ header.player }}
+              <span v-if="header.placement"> · {{ header.placement }}</span>
+            </p>
+            <p class="m-0 min-h-6 truncate">
+              <template v-if="price">
+                ≈ {{ formatEur(price.eur) }} · {{ formatTix(price.tix) }}
+              </template>
+            </p>
+          </div>
         </div>
         <div class="flex items-center gap-x-6">
           <DecklistColorBars

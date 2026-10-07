@@ -61,7 +61,7 @@ Le colonne della curva sono impilate per colore, dal basso: W, U, B, R, G, poi m
 
 ## Prezzo del mazzo
 
-Il pannello Statistiche mostra "Prezzo stimato" (euro e tix MTGO, più il numero di carte senza prezzo) e l'header della vista visuale, quindi anche l'immagine esportata, mostra `≈ 118,32 € · 62,02 tix`.
+Il pannello Statistiche mostra "Prezzo stimato" (euro e tix MTGO, più il numero di carte senza prezzo) e l'header della vista visuale, quindi anche l'immagine esportata, mostra `≈ 118,32 € · 62,02 tix`. Il prezzo sta sotto il giocatore, in un blocco di due righe da 24 px accanto al titolo (alto quanto il titolo da 48 px): non può andare a capo né allargare l'header; un nome giocatore molto lungo viene troncato con i puntini.
 
 - **Fonte:** Scryfall, dal browser del visitatore, solo quando si apre il pannello o la vista visuale (`useDeckPrice` chiama `load()`), non con la pagina. Una sola richiesta `POST https://api.scryfall.com/cards/collection` per mazzo (massimo 75 nomi per richiesta, `fetchCardPrices` in `app/utils/deck-price.ts`). Scryfall risponde con `access-control-allow-origin: *`, quindi funziona dal browser.
 - **Nomi:** si chiede il nome della sola prima faccia: con il nome completo `Fronte // Retro` Scryfall risponde `not_found`.
