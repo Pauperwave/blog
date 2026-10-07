@@ -59,6 +59,16 @@ Le colonne della curva sono impilate per colore, dal basso: W, U, B, R, G, poi m
 - **URL che segue l'overlay:** aprendo l'overlay l'URL diventa `?preview#ancora` (`router.replace`, nessuna voce nella cronologia); chiudendolo resta il solo `#`.
 - **Due pulsanti "Condividi":** quello nell'overlay copia il link con `?preview` (apre la vista visuale); quello nel footer della decklist copia solo il `#ancora`, perché funziona anche su mobile dove non c'è l'overlay e porta chi riceve sul mazzo senza aprire nulla.
 
+## Prezzo del mazzo
+
+Il pannello Statistiche mostra "Prezzo stimato" (euro e tix MTGO, più il numero di carte senza prezzo) e l'header della vista visuale, quindi anche l'immagine esportata, mostra `≈ 118,32 € · 62,02 tix`.
+
+- **Fonte:** Scryfall, dal browser del visitatore, solo quando si apre il pannello o la vista visuale (`useDeckPrice` chiama `load()`), non con la pagina. Una sola richiesta `POST https://api.scryfall.com/cards/collection` per mazzo (massimo 75 nomi per richiesta, `fetchCardPrices` in `app/utils/deck-price.ts`). Scryfall risponde con `access-control-allow-origin: *`, quindi funziona dal browser.
+- **Nomi:** si chiede il nome della sola prima faccia: con il nome completo `Fronte // Retro` Scryfall risponde `not_found`.
+- **Terre base:** il prezzo della stampa predefinita non esiste, quindi valgono zero e non contano come "senza prezzo".
+- **Limite:** la ricerca per nome dà il prezzo della stampa predefinita di Scryfall, di solito più cara della più economica (esempio: Prismatic Strands 12,48 € contro 9,97 €), quindi è una stima per eccesso. Una stima per la stampa più economica richiederebbe una ricerca `unique:prints` per ogni carta.
+- **Stati:** finché il prezzo non c'è, la vista visuale non mostra nulla (l'immagine esportata prima del caricamento non lo contiene); il pannello mostra "…" e, se la richiesta fallisce, "n/d".
+
 ## Prestazioni
 
 Misurate su un mazzo da 75 immagini (overlay aperto), con hover simulato: l'aggiornamento dopo l'hover costa 4–8 ms e i frame durante la transizione dei filtri restano sotto i 16,7 ms. Il codice usa `defineAsyncComponent` per overlay e modale delle carte, quindi i mazzi che non li aprono non pagano nulla.
