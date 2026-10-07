@@ -1,19 +1,38 @@
 <script setup lang="ts">
 import { curveLegend, curveTooltip } from '~/utils/curve-display'
+import { formatEur, formatTix, type DeckPrice } from '~/utils/deck-price'
 import type { DeckStats } from '~/utils/deck-stats'
 import DecklistCurveBar from './DecklistCurveBar.vue'
 
-const { stats } = defineProps<{
+const { stats, price = null, priceFailed = false } = defineProps<{
   stats: DeckStats
+  /** Estimated price, once it has been loaded */
+  price?: DeckPrice | null
+  priceFailed?: boolean
 }>()
 
 const maxCurveCount = computed(() => Math.max(...stats.curve.map(bucket => bucket.count), 1))
 const legend = computed(() => curveLegend(stats.curve))
 const maxPipCount = computed(() => Math.max(...stats.pips.map(pip => pip.count), 1))
 
-const keyFigures = computed(() => [
+const priceFigure = computed(() => {
+  if (!price) return { value: priceFailed ? 'n/d' : '…', detail: 'Prezzi da Scryfall' }
+
+  const missing = price.missing > 0 ? ` · ${price.missing} carte senza prezzo` : ''
+  return { value: formatEur(price.eur), detail: `${formatTix(price.tix)}${missing}` }
+})
+
+interface KeyFigure {
+  label: string
+  value: string | number
+  detail?: string
+  wide?: boolean
+}
+
+const keyFigures = computed<KeyFigure[]>(() => [
   { label: 'Terre', value: stats.landCount },
-  { label: 'Costo medio', value: stats.averageManaValue.toFixed(2) }
+  { label: 'Costo medio', value: stats.averageManaValue.toFixed(2) },
+  { label: 'Prezzo stimato', ...priceFigure.value, wide: true }
 ])
 </script>
 
@@ -24,12 +43,16 @@ const keyFigures = computed(() => [
         v-for="figure in keyFigures"
         :key="figure.label"
         class="rounded-lg bg-elevated p-3"
+        :class="{ 'col-span-2': figure.wide }"
       >
         <p class="m-0 text-2xl font-bold leading-none">
           {{ figure.value }}
         </p>
         <p class="m-0 mt-1 text-sm opacity-80">
           {{ figure.label }}
+        </p>
+        <p v-if="figure.detail" class="m-0 mt-0.5 text-xs opacity-60">
+          {{ figure.detail }}
         </p>
       </div>
     </div>

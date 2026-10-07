@@ -2,13 +2,16 @@
 import type { DecklistHeaderInfo } from '~/composables/useDecklistContext'
 import type { DeckCard } from '~/utils/deck-cards'
 import { deckImageFileName } from '~/utils/deck-image'
+import type { DeckPrice } from '~/utils/deck-price'
 import type { DeckStats } from '~/utils/deck-stats'
 import DecklistGraphic from './DecklistGraphic.vue'
 
-const { header, shareUrl } = defineProps<{
+const { header, shareUrl, price = null } = defineProps<{
   header: DecklistHeaderInfo
   cards: DeckCard[]
   stats: DeckStats
+  /** Estimated price, once it has been loaded */
+  price?: DeckPrice | null
   /** Link that opens this overlay directly */
   shareUrl: string
 }>()
@@ -74,6 +77,7 @@ const fileName = computed(() => deckImageFileName(header))
           :header="header"
           :cards="cards"
           :stats="stats"
+          :price="price"
         />
       </div>
     </template>

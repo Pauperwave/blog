@@ -10,6 +10,7 @@
 import { SIDEBOARD_SECTION } from '#shared/utils'
 import type { DecklistHeaderInfo } from '~/composables/useDecklistContext'
 import { expandCopies, type DeckCard } from '~/utils/deck-cards'
+import { formatEur, formatTix, type DeckPrice } from '~/utils/deck-price'
 import type { DeckStats } from '~/utils/deck-stats'
 import DecklistArt from './DecklistArt.vue'
 import DecklistColorBars from './DecklistColorBars.vue'
@@ -17,10 +18,12 @@ import DecklistCurveChart from './DecklistCurveChart.vue'
 import DecklistPile from './DecklistPile.vue'
 import DecklistTypeCounts from './DecklistTypeCounts.vue'
 
-const { header, cards } = defineProps<{
+const { header, cards, price = null } = defineProps<{
   header: DecklistHeaderInfo
   cards: DeckCard[]
   stats: DeckStats
+  /** Estimated price, shown once it has been loaded */
+  price?: DeckPrice | null
 }>()
 
 const PILE_SIZE = 4
@@ -65,6 +68,9 @@ const artCard = computed(() => pickDeckArtCard(cards))
           <p class="m-0 text-xl font-semibold text-muted">
             {{ header.player }}
             <span v-if="header.placement"> · {{ header.placement }}</span>
+          </p>
+          <p v-if="price" class="m-0 text-xl font-semibold text-muted">
+            ≈ {{ formatEur(price.eur) }} · {{ formatTix(price.tix) }}
           </p>
         </div>
         <div class="flex items-center gap-x-6">

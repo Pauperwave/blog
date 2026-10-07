@@ -79,50 +79,50 @@ describe('computeDeckPrice', () => {
 
 describe('fetchCardPrices', () => {
   it('asks for the front face names once, without basic lands, and keys by them', async () => {
-    const fetcher = vi.fn().mockResolvedValue(scryfallResponse([
+    const fetcher = vi.fn<typeof fetch>().mockResolvedValue(scryfallResponse([
       { name: 'Delver of Secrets // Insectile Aberration', eur: '0.46', tix: '0.04' },
       { name: 'Lightning Bolt', eur: '0.83', tix: '0.02' }
     ]))
 
     const prices = await fetchCardPrices(
       ['Delver of Secrets // Insectile Aberration', 'Lightning Bolt', 'Lightning Bolt', 'Plains'],
-      fetcher as typeof fetch
+      fetcher
     )
 
     expect(fetcher).toHaveBeenCalledTimes(1)
-    const body = JSON.parse(fetcher.mock.calls[0]![1].body)
+    const body = JSON.parse(String(fetcher.mock.calls[0]![1]!.body))
     expect(body.identifiers).toEqual([{ name: 'Delver of Secrets' }, { name: 'Lightning Bolt' }])
     expect(prices.get('delver of secrets')).toEqual({ eur: 0.46, tix: 0.04 })
     expect(prices.get('lightning bolt')).toEqual({ eur: 0.83, tix: 0.02 })
   })
 
   it('turns a missing price into null', async () => {
-    const fetcher = vi.fn()
+    const fetcher = vi.fn<typeof fetch>()
       .mockResolvedValue(scryfallResponse([{ name: 'Odd Card', eur: null, tix: '0.5' }]))
-    const prices = await fetchCardPrices(['Odd Card'], fetcher as typeof fetch)
+    const prices = await fetchCardPrices(['Odd Card'], fetcher)
     expect(prices.get('odd card')).toEqual({ eur: null, tix: 0.5 })
   })
 
   it('splits more than 75 names into several requests', async () => {
-    const fetcher = vi.fn().mockResolvedValue(scryfallResponse([]))
+    const fetcher = vi.fn<typeof fetch>().mockResolvedValue(scryfallResponse([]))
     const names = Array.from({ length: 80 }, (_, index) => `Card ${index}`)
 
-    await fetchCardPrices(names, fetcher as typeof fetch)
+    await fetchCardPrices(names, fetcher)
 
     expect(fetcher).toHaveBeenCalledTimes(2)
-    expect(JSON.parse(fetcher.mock.calls[0]![1].body).identifiers).toHaveLength(75)
-    expect(JSON.parse(fetcher.mock.calls[1]![1].body).identifiers).toHaveLength(5)
+    expect(JSON.parse(String(fetcher.mock.calls[0]![1]!.body)).identifiers).toHaveLength(75)
+    expect(JSON.parse(String(fetcher.mock.calls[1]![1]!.body)).identifiers).toHaveLength(5)
   })
 
   it('does not call Scryfall for a deck of basic lands only', async () => {
-    const fetcher = vi.fn()
-    expect((await fetchCardPrices(['Plains', 'Island'], fetcher as typeof fetch)).size).toBe(0)
+    const fetcher = vi.fn<typeof fetch>()
+    expect((await fetchCardPrices(['Plains', 'Island'], fetcher)).size).toBe(0)
     expect(fetcher).not.toHaveBeenCalled()
   })
 
   it('throws when Scryfall answers with an error', async () => {
-    const fetcher = vi.fn().mockResolvedValue({ ok: false, status: 429 } as Response)
-    await expect(fetchCardPrices(['Lightning Bolt'], fetcher as typeof fetch))
+    const fetcher = vi.fn<typeof fetch>().mockResolvedValue({ ok: false, status: 429 } as Response)
+    await expect(fetchCardPrices(['Lightning Bolt'], fetcher))
       .rejects.toThrow('429')
   })
 })

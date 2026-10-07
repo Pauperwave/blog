@@ -81,6 +81,15 @@ const showCardModal = ref(false)
 const cardModalRequested = ref(false)
 const cardModalIndex = ref(0)
 const deckStats = computed(() => computeDeckStats(cardsBySection.value))
+
+// The price is looked up when a view that shows it opens (statistics or visual view)
+const cardsToPrice = computed(() =>
+  Object.values(cardsBySection.value).flat().map(({ name, quantity }) => ({ name, quantity }))
+)
+const { price, failed: priceFailed, load: loadPrice } = useDeckPrice(cardsToPrice)
+watch([showStats, showOverlay], ([statsOpen, overlayOpen]) => {
+  if (statsOpen || overlayOpen) loadPrice()
+})
 // Without player or placement the modal has no visible description (Nuxt UI adds a hidden one)
 const statsDescription = computed(() =>
   [player, placement].filter(Boolean).join(' · ') || undefined
@@ -237,6 +246,7 @@ function copyDecklist(format: 'mtgo' | 'arena') {
       :header="headerInfo"
       :cards="deckCards"
       :stats="deckStats"
+      :price="price"
       :share-url="shareUrl"
     />
 
@@ -256,7 +266,11 @@ function copyDecklist(format: 'mtgo' | 'arena') {
       :description="statsDescription"
     >
       <template #body>
-        <DecklistStats :stats="deckStats" />
+        <DecklistStats
+          :stats="deckStats"
+          :price="price"
+          :price-failed="priceFailed"
+        />
       </template>
     </UModal>
   </div>
