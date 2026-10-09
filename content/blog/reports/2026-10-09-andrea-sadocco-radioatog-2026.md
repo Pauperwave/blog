@@ -7,7 +7,7 @@ tags:
 decks:
 location: Mori, Rovereto
 published: true
-date: 2026-10-04
+date: 2026-10-09
 author: Pietro Bragioto
 thumbnail: /assets/blog/arts/chk-301-mountain.jpg
 ---
