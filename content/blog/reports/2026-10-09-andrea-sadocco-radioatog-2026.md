@@ -21,7 +21,7 @@ Altri tempi.
 
 ## A madness in a madness world
 
-Dopo un più che modesto risultato il giorno prima con i miei compagni di Trio, Monz e Prez, arrivando decimi su 34 team, ho deciso di portare il caro vecchio Mono Red Madness al singolo.
+Dopo un più che modesto risultato il giorno prima con i miei compagni di Trio, Monz e Prez, arrivando decimi su 36 team, ho deciso di portare il caro vecchio Mono Red Madness al singolo.
 Avendo in lega due massimi esponenti della Moxite, Pietro Bragioto e Matteo Rullo, non potevo esimermi dal giocare la lista più quadrata che ci sia, testando online è sempre stata la più performante a mio parere: più peschini, più stabilità, snacker più recursiva.
 
 La scelta del mazzo è dovuta a due fattori: il principale, lo ammetto, era quello di fare partite quanto più veloci e godermi il torneo nella sua parte più Gathering. In secondo luogo mi aspettavo la presenza di molti altri Madness e, testando i vari matchup, ho sempre notato una supremazia “psicologica” da parte di Madness: fare 16-18 danni dal nulla in un turno con questo mazzo è più che fattibile e la pressione psicologica è alta, soprattutto se già sei un mazzo che “rema” di suo.
