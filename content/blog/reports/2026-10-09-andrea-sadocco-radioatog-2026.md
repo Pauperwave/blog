@@ -79,7 +79,7 @@ matchup: Spy
 description:
 ---
 #in
-3 Soul's Guide Lantern
+3 Soul-Guide Lantern
 1 Searing Blaze
 #out
 4 Voldaren Epicure
