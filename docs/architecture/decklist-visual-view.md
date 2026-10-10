@@ -67,6 +67,7 @@ Il pannello Statistiche mostra "Prezzo stimato" (euro e tix MTGO, più il numero
 - **Nomi:** si chiede il nome della sola prima faccia: con il nome completo `Fronte // Retro` Scryfall risponde `not_found`.
 - **Terre base:** il prezzo della stampa predefinita non esiste, quindi valgono zero e non contano come "senza prezzo".
 - **Limite:** la ricerca per nome dà il prezzo della stampa predefinita di Scryfall, di solito più cara della più economica (esempio: Prismatic Strands 12,48 € contro 9,97 €), quindi è una stima per eccesso. Una stima per la stampa più economica richiederebbe una ricerca `unique:prints` per ogni carta.
+- **Interazione:** passando sul prezzo nell'header le 5 carte che pesano di più sul totale (`costliestLines`) restano a colori e in primo piano e le altre diventano grigie (`DeckHighlight` di tipo `price`, per chiave del nome della prima faccia); un tooltip le elenca con quantità e importo (`DecklistCostliestCards`) e il prezzo viene sottolineato. Passando su una carta compare un chip con "quantità × prezzo unitario": sta dentro il contenitore che si ingrandisce al 200% ed è rimpicciolito al 50% per mantenere la sua grandezza. Nel pannello Statistiche la stessa lista è sotto la tessera del prezzo, utile su mobile dove non c'è l'hover.
 - **Stati:** finché il prezzo non c'è, la vista visuale non mostra nulla (l'immagine esportata prima del caricamento non lo contiene); il pannello mostra "…" e, se la richiesta fallisce, "n/d".
 
 ## Prestazioni
