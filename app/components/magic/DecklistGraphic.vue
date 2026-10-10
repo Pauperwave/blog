@@ -14,7 +14,6 @@ import { formatEur, formatTix, type DeckPrice } from '~/utils/deck-price'
 import type { DeckStats } from '~/utils/deck-stats'
 import DecklistArt from './DecklistArt.vue'
 import DecklistColorBars from './DecklistColorBars.vue'
-import DecklistCostliestCards from './DecklistCostliestCards.vue'
 import DecklistCurveChart from './DecklistCurveChart.vue'
 import DecklistPile from './DecklistPile.vue'
 import DecklistTypeCounts from './DecklistTypeCounts.vue'
@@ -79,17 +78,13 @@ const artCard = computed(() => pickDeckArtCard(cards))
               <span v-if="header.placement"> · {{ header.placement }}</span>
             </p>
             <p class="m-0 min-h-6 truncate">
-              <UTooltip v-if="price" :content="{ side: 'bottom' }">
-                <span
-                  class="cursor-pointer"
-                  :class="{ 'underline decoration-2 underline-offset-4': highlightedPrice }"
-                  @mouseenter="onPriceHover(price)"
-                  @mouseleave="onPriceHover(null)"
-                >≈ {{ formatEur(price.eur) }} · {{ formatTix(price.tix) }}</span>
-                <template #content>
-                  <DecklistCostliestCards :price="price" />
-                </template>
-              </UTooltip>
+              <span
+                v-if="price"
+                class="cursor-pointer"
+                :class="{ 'underline decoration-2 underline-offset-4': highlightedPrice }"
+                @mouseenter="onPriceHover(price)"
+                @mouseleave="onPriceHover(null)"
+              >≈ {{ formatEur(price.eur) }} · {{ formatTix(price.tix) }}</span>
             </p>
           </div>
         </div>

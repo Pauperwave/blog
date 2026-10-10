@@ -43,6 +43,9 @@ const imageClass = (card: DeckCard, index: number) => [
   { 'grayscale-80 brightness-60': isDimmed(card) }
 ]
 
+// While the price is hovered its costliest cards zoom on their own, like a hovered card does
+const isPriceZoomed = (card: DeckCard) => highlight?.kind === 'price' && isHighlighted(card)
+
 const priceLabel = (card: DeckCard) => {
   const line = priceLines?.get(priceKey(card.name))
   return line ? `${card.quantity} × ${formatEur(line.unit)}` : null
@@ -73,9 +76,10 @@ const spreadStyle = (index: number) => {
       <!-- Radius in % keeps the tooltip's corner proportions (12px on a 280px card) at any size -->
       <!-- pointer-events-none: the zoomed image takes no hover, neighbours stay reachable -->
       <!-- In flow with the same box as the image, so it matches; the hidden image still loads -->
-      <!-- The wrapper zooms; the price chip is scaled back down by half so it keeps its size -->
+      <!-- The wrapper zooms by --zoom; the price chip scales by 1/--zoom to keep its size -->
       <div
-        class="pointer-events-none relative motion-safe:transition-transform motion-safe:duration-150 motion-safe:group-hover:scale-200"
+        class="pointer-events-none relative scale-(--zoom) group-hover:[--zoom:2] motion-safe:transition-transform motion-safe:duration-150"
+        :class="isPriceZoomed(card) ? '[--zoom:1.5]' : '[--zoom:1]'"
       >
         <USkeleton
           v-if="!loaded.has(index)"
@@ -91,7 +95,8 @@ const spreadStyle = (index: number) => {
         >
         <span
           v-if="priceLabel(card)"
-          class="absolute bottom-2 left-1/2 origin-bottom -translate-x-1/2 scale-50 whitespace-nowrap rounded-md bg-black/80 px-2 py-0.5 text-xs font-semibold tabular-nums text-white opacity-0 group-hover:opacity-100"
+          class="absolute bottom-2 left-1/2 origin-bottom -translate-x-1/2 scale-[calc(1/var(--zoom))] whitespace-nowrap rounded-md bg-black/80 px-2 py-0.5 text-xs font-semibold tabular-nums text-white group-hover:opacity-100 motion-safe:transition-[scale,opacity] motion-safe:duration-150"
+          :class="isPriceZoomed(card) ? 'opacity-100' : 'opacity-0'"
         >{{ priceLabel(card) }}</span>
       </div>
     </li>
