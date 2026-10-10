@@ -4,11 +4,21 @@ export interface CardPrice {
   tix: number | null
 }
 
+/** What one card weighs on the deck price: all its copies in euros, most expensive line first. */
+export interface PriceLine {
+  key: string
+  name: string
+  quantity: number
+  unit: number
+  total: number
+}
+
 /** Estimated price of a whole decklist. `missing` counts the cards Scryfall has no price for. */
 export interface DeckPrice {
   eur: number
   tix: number
   missing: number
+  lines: PriceLine[]
 }
 
 interface PricedCard {
@@ -30,7 +40,8 @@ export const isBasicLand = (name: string) => BASIC_LAND.test(name)
 /** Scryfall finds double-faced cards by their front face, not by the full "Front // Back" name. */
 export const frontFaceName = (name: string) => name.split(' // ')[0] ?? name
 
-const priceKey = (name: string) => frontFaceName(name).toLowerCase()
+/** Key of a card in the price maps and lines: the lowercase front face name. */
+export const priceKey = (name: string) => frontFaceName(name).toLowerCase()
 
 const toNumber = (value: string | null | undefined) => {
   const number = Number(value)
@@ -79,22 +90,36 @@ export function computeDeckPrice(
   cards: PricedCard[],
   prices: ReadonlyMap<string, CardPrice>
 ): DeckPrice {
-  const total: DeckPrice = { eur: 0, tix: 0, missing: 0 }
+  const total: DeckPrice = { eur: 0, tix: 0, missing: 0, lines: [] }
+  const lines = new Map<string, PriceLine>()
 
   for (const { name, quantity } of cards) {
     if (isBasicLand(name)) continue
 
-    const price = prices.get(priceKey(name))
+    const key = priceKey(name)
+    const price = prices.get(key)
     if (!price || (price.eur === null && price.tix === null)) {
       total.missing += quantity
       continue
     }
     total.eur += quantity * (price.eur ?? 0)
     total.tix += quantity * (price.tix ?? 0)
+
+    if (price.eur !== null) {
+      // The same card in main deck and sideboard is one line
+      const line = lines.get(key) ?? { key, name, quantity: 0, unit: price.eur, total: 0 }
+      line.quantity += quantity
+      line.total += quantity * price.eur
+      lines.set(key, line)
+    }
   }
 
+  total.lines = [...lines.values()].sort((a, b) => b.total - a.total)
   return total
 }
+
+/** The cards that weigh the most on the deck price. */
+export const costliestLines = (price: DeckPrice, count = 5) => price.lines.slice(0, count)
 
 const eurFormat = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' })
 const tixFormat = new Intl.NumberFormat('it-IT', {

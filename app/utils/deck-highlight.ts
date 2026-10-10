@@ -4,13 +4,18 @@ import {
   type DeckSection,
   type MainDeckSection
 } from '#shared/utils'
+import { priceKey } from './deck-price'
 import { countColorPips, curveBucket, type DeckColor } from './mana-cost'
 
-/** The part of the deck a hovered stat stands for: a card type, a curve bucket or a color. */
+/**
+ * The part of the deck a hovered stat stands for: a card type, a curve bucket, a color or the cards
+ * that weigh the most on the price (by price key).
+ */
 export type DeckHighlight =
   | { kind: 'type'; section: MainDeckSection }
   | { kind: 'curve'; bucket: number }
   | { kind: 'color'; color: DeckColor }
+  | { kind: 'price'; keys: ReadonlySet<string> }
 
 export type HighlightState = 'match' | 'dim' | 'neutral'
 
@@ -24,9 +29,13 @@ const hasCountedCost = (card: { section: DeckSection; manaCost: string }) =>
 
 /** How a card looks while a stat is hovered: part of it, not part of it, or unknown. */
 export function highlightState(
-  card: { section: DeckSection; manaCost: string; type?: MainDeckSection },
+  card: { name: string; section: DeckSection; manaCost: string; type?: MainDeckSection },
   highlight: DeckHighlight
 ): HighlightState {
+  if (highlight.kind === 'price') {
+    return highlight.keys.has(priceKey(card.name)) ? 'match' : 'dim'
+  }
+
   if (highlight.kind === 'type') {
     // A sideboard card whose type is unknown (no type line in the database) is left alone
     if (!card.type) return 'neutral'

@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import {
   computeDeckPrice,
+  costliestLines,
   fetchCardPrices,
   formatEur,
   formatTix,
@@ -47,7 +48,7 @@ describe('computeDeckPrice', () => {
       [{ name: 'Lightning Bolt', quantity: 4 }, { name: 'Delver of Secrets', quantity: 2 }],
       prices
     )
-    expect(price).toEqual({ eur: 4, tix: 0.28, missing: 0 })
+    expect(price).toMatchObject({ eur: 4, tix: 0.28, missing: 0 })
   })
 
   it('finds a double-faced card by its front face', () => {
@@ -60,7 +61,7 @@ describe('computeDeckPrice', () => {
 
   it('counts basic lands as free and not missing', () => {
     expect(computeDeckPrice([{ name: 'Mountain', quantity: 10 }], prices))
-      .toEqual({ eur: 0, tix: 0, missing: 0 })
+      .toMatchObject({ eur: 0, tix: 0, missing: 0 })
   })
 
   it('counts the copies of a card with no price as missing', () => {
@@ -68,12 +69,48 @@ describe('computeDeckPrice', () => {
       [{ name: 'Unknown Card', quantity: 3 }, { name: 'Lightning Bolt', quantity: 1 }],
       prices
     )
-    expect(price).toEqual({ eur: 0.5, tix: 0.02, missing: 3 })
+    expect(price).toMatchObject({ eur: 0.5, tix: 0.02, missing: 3 })
   })
 
   it('uses the currency that exists when the other is missing', () => {
     expect(computeDeckPrice([{ name: 'Odd Card', quantity: 2 }], prices))
-      .toEqual({ eur: 0, tix: 1, missing: 0 })
+      .toMatchObject({ eur: 0, tix: 1, missing: 0 })
+  })
+})
+
+describe('price lines', () => {
+  const prices = new Map([
+    ['lightning bolt', { eur: 0.5, tix: 0.02 }],
+    ['prismatic strands', { eur: 12, tix: 2 }],
+    ['odd card', { eur: null, tix: 0.5 }]
+  ])
+  const deck = [
+    { name: 'Lightning Bolt', quantity: 4 },
+    { name: 'Prismatic Strands', quantity: 2 },
+    { name: 'Prismatic Strands', quantity: 1 },
+    { name: 'Odd Card', quantity: 1 },
+    { name: 'Mountain', quantity: 8 }
+  ]
+
+  it('has one line per priced card, most expensive first, with the copies of a card summed', () => {
+    const { lines } = computeDeckPrice(deck, prices)
+    expect(lines.map(line => [line.key, line.quantity, line.unit, line.total]))
+      .toEqual([['prismatic strands', 3, 12, 36], ['lightning bolt', 4, 0.5, 2]])
+  })
+
+  it('leaves basic lands and cards with no euro price out of the lines', () => {
+    const { lines } = computeDeckPrice(deck, prices)
+    expect(lines.map(line => line.key)).not.toContain('odd card')
+    expect(lines.map(line => line.key)).not.toContain('mountain')
+  })
+
+  it('takes the costliest lines, five by default', () => {
+    const indexes = Array.from({ length: 8 }, (_, i) => i)
+    const many = new Map(indexes.map(i => [`card ${i}`, { eur: i + 1, tix: 0 }] as const))
+    const price = computeDeckPrice(indexes.map(i => ({ name: `Card ${i}`, quantity: 1 })), many)
+    expect(costliestLines(price).map(line => line.key))
+      .toEqual(['card 7', 'card 6', 'card 5', 'card 4', 'card 3'])
+    expect(costliestLines(price, 2)).toHaveLength(2)
   })
 })
 
