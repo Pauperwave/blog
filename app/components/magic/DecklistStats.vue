@@ -2,6 +2,7 @@
 import { curveLegend, curveTooltip } from '~/utils/curve-display'
 import { formatEur, formatTix, type DeckPrice } from '~/utils/deck-price'
 import type { DeckStats } from '~/utils/deck-stats'
+import DecklistCostliestCards from './DecklistCostliestCards.vue'
 import DecklistCurveBar from './DecklistCurveBar.vue'
 
 const { stats, price = null, priceFailed = false } = defineProps<{
@@ -27,12 +28,13 @@ interface KeyFigure {
   value: string | number
   detail?: string
   wide?: boolean
+  costliest?: DeckPrice
 }
 
 const keyFigures = computed<KeyFigure[]>(() => [
   { label: 'Terre', value: stats.landCount },
   { label: 'Costo medio', value: stats.averageManaValue.toFixed(2) },
-  { label: 'Prezzo stimato', ...priceFigure.value, wide: true }
+  { label: 'Prezzo stimato', ...priceFigure.value, wide: true, costliest: price ?? undefined }
 ])
 </script>
 
@@ -54,6 +56,12 @@ const keyFigures = computed<KeyFigure[]>(() => [
         <p v-if="figure.detail" class="m-0 mt-0.5 text-xs opacity-60">
           {{ figure.detail }}
         </p>
+        <div v-if="figure.costliest" class="mt-2">
+          <p class="m-0 mb-1 text-xs opacity-60">
+            Le carte più care
+          </p>
+          <DecklistCostliestCards :price="figure.costliest" />
+        </div>
       </div>
     </div>
 
