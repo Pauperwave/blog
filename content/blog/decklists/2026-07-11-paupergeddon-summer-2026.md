@@ -7,7 +7,7 @@ tags:
 location: Lucca
 date: 2026-07-11
 author: Pietro Bragioto
-thumbnail: /assets/blog/events/geddon-summer-2026.jpg
+thumbnail: /assets/blog/events/2026-07-10-12-geddon-summer-2026.jpg
 published: true
 ---
 

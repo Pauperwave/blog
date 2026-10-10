@@ -7,7 +7,7 @@ tags:
 location: Ferrara
 date: 2026-05-31
 author: Pietro Bragioto
-thumbnail: /assets/blog/events/Pauperiadi-Trio.jpeg
+thumbnail: /assets/blog/events/2026-05-31-pauperiadi-trio.jpeg
 published: true
 ---
 

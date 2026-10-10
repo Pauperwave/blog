@@ -7,7 +7,7 @@ tags:
 location: Sarzana
 date: 2026-06-28
 author: Pietro Bragioto
-thumbnail: /assets/blog/events/summer-is-magic-2026.jpg
+thumbnail: /assets/blog/events/2026-06-28-summer-is-magic-2026.jpg
 published: true
 ---
 

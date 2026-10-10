@@ -7,7 +7,7 @@ tags:
 location: Caserta
 date: 2026-05-31
 author: Pietro Bragioto
-thumbnail: /assets/blog/events/Rolling-Pauper-2026.jpg
+thumbnail: /assets/blog/events/2026-05-31-rolling-pauper-2026.jpg
 published: true
 ---
 
