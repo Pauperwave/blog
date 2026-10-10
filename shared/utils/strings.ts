@@ -1,12 +1,14 @@
 // shared\utils\strings.ts
+import _slugify from 'slugify'
+
+/**
+ * URL-friendly slug of any text, the same way the app and league projects do it: accents and
+ * ligatures are transliterated to plain letters ("Perù" is "peru"), the rest is lowercased and
+ * joined with hyphens, and any other character is dropped.
+ * Example: "Niccolò Machiavelli" -> "niccolo-machiavelli"
+ */
 export function slugify(text: string): string {
-  return text
-    .toLowerCase()
-    .trim()
-    .replace(/[_\s]+/g, '-')
-    .replace(/[^\w-]+/g, '')
-    .replace(/-{2,}/g, '-')
-    .replace(/^-+|-+$/g, '')
+  return _slugify(text, { lower: true, strict: true })
 }
 
 /**

@@ -93,6 +93,9 @@ importers:
       remark-reading-time:
         specifier: ^2.1.0
         version: 2.1.0
+      slugify:
+        specifier: 1.6.9
+        version: 1.6.9
       swiper:
         specifier: ^12.2.0
         version: 12.2.0

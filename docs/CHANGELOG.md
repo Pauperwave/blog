@@ -3,6 +3,15 @@ title: Changelog
 description: Registro delle modifiche tecniche al progetto
 ---
 
+## 2026-10-11
+
+### Fix: slug con lettere accentate e legature
+
+- **`slugify`** (`shared/utils/strings.ts`) usa ora il pacchetto `slugify` configurato come in `app` e `league` (`{ lower: true, strict: true }`), invece di una regex propria. La regex eliminava ogni lettera fuori dall'ASCII: `Perù` diventava `per`, `Niccolò` `niccol`, `Æther Vial` `ther-vial`, e un nome in greco o cirillico dava una stringa vuota.
+- **Dove si vede:** ancore dei mazzi (`#deck-<nome>-<giocatore>`), id nel sommario e nome del file scaricato dall'overlay (`deckImageFileName`). I nomi senza lettere accentate non cambiano; per gli altri cambia l'ancora, quindi un vecchio link `#deck-...` a un mazzo con accenti non punta più alla sezione.
+- **Differenze note:** il trattino basso non separa più le parole (`a_b` diventa `ab`) e i simboli diventano parole (`&` → `and`, `%` → `percent`).
+- Test in `shared/utils/strings.test.ts`.
+
 ## 2026-10-06
 
 ### Feat: vista visuale delle decklist interattiva
