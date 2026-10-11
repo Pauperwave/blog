@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { expandCopies, uniqueDeckCards } from './deck-cards'
+import { expandCopies, lastCopyIndexes, uniqueDeckCards } from './deck-cards'
 
 const sections = ['Creatures', 'Instants', 'Sideboard'] as const
 
@@ -76,5 +76,31 @@ describe('expandCopies', () => {
 
   it('returns an empty list for no cards', () => {
     expect(expandCopies([])).toEqual([])
+  })
+})
+
+describe('lastCopyIndexes', () => {
+  const card = (name: string) => ({ name })
+
+  it('marks the last copy of each card in one pile', () => {
+    const pile = [card('Bolt'), card('Bolt'), card('Snipe'), card('Bolt')]
+    expect(lastCopyIndexes([pile])).toEqual([new Set([2, 3])])
+  })
+
+  it('marks it in the pile where the last copy is when a card spans two piles', () => {
+    const piles = [
+      [card('Bolt'), card('Snipe'), card('Bolt'), card('Bolt')],
+      [card('Bolt'), card('Chart')]
+    ]
+    expect(lastCopyIndexes(piles)).toEqual([new Set([1]), new Set([0, 1])])
+  })
+
+  it('matches a double-faced card by its front face', () => {
+    const piles = [[card('Delver of Secrets // Insectile Aberration'), card('Delver of Secrets')]]
+    expect(lastCopyIndexes(piles)).toEqual([new Set([1])])
+  })
+
+  it('gives an empty set per pile when there are no cards', () => {
+    expect(lastCopyIndexes([[], []])).toEqual([new Set(), new Set()])
   })
 })

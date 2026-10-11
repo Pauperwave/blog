@@ -1,4 +1,5 @@
 import { SIDEBOARD_SECTION, type DeckSection, type MainDeckSection } from '#shared/utils'
+import { priceKey } from './deck-price'
 
 export interface DeckCard {
   name: string
@@ -57,4 +58,19 @@ export function uniqueDeckCards(
 /** One entry per copy: a card with quantity 4 appears 4 times. */
 export function expandCopies<T extends { quantity: number }>(cards: T[]): T[] {
   return cards.flatMap(card => Array.from({ length: card.quantity }, () => card))
+}
+
+/**
+ * For each pile, the indexes of the cards that are the last copy of their card in the whole list
+ * of piles (a card with several copies has one, the last one).
+ */
+export function lastCopyIndexes(piles: { name: string }[][]): Set<number>[] {
+  const last = new Map<string, { pile: number, index: number }>()
+  piles.forEach((pile, pileIndex) => {
+    pile.forEach((card, index) => last.set(priceKey(card.name), { pile: pileIndex, index }))
+  })
+
+  const result = piles.map(() => new Set<number>())
+  for (const { pile, index } of last.values()) result[pile]?.add(index)
+  return result
 }

@@ -5,7 +5,13 @@ import type { DeckCard } from '~/utils/deck-cards'
 import { highlightState, type DeckHighlight } from '~/utils/deck-highlight'
 import { formatEur, priceKey, type PriceLine } from '~/utils/deck-price'
 
-const { cards, spread = false, highlight = null, priceLines = null } = defineProps<{
+const {
+  cards,
+  spread = false,
+  highlight = null,
+  priceLines = null,
+  lastCopies = new Set()
+} = defineProps<{
   cards: DeckCard[]
   /** Fill the parent's height with full cards, alternating left and right, first on top */
   spread?: boolean
@@ -13,6 +19,8 @@ const { cards, spread = false, highlight = null, priceLines = null } = definePro
   highlight?: DeckHighlight | null
   /** Price of each card by price key, once loaded: shown on the hovered card */
   priceLines?: ReadonlyMap<string, PriceLine> | null
+  /** Indexes of the last copy of each card: the only ones that zoom when the price is hovered */
+  lastCopies?: ReadonlySet<number>
 }>()
 
 // Indexes of the images already loaded; the others show a skeleton
@@ -43,8 +51,9 @@ const imageClass = (card: DeckCard, index: number) => [
   { 'grayscale-80 brightness-60': isDimmed(card) }
 ]
 
-// While the price is hovered its costliest cards zoom on their own, like a hovered card does
-const isPriceZoomed = (card: DeckCard) => highlight?.kind === 'price' && isHighlighted(card)
+// While the price is hovered the last copy of each costliest card zooms, like a hovered one
+const isPriceZoomed = (card: DeckCard, index: number) =>
+  highlight?.kind === 'price' && isHighlighted(card) && lastCopies.has(index)
 
 const priceLabel = (card: DeckCard) => {
   const line = priceLines?.get(priceKey(card.name))
@@ -79,7 +88,7 @@ const spreadStyle = (index: number) => {
       <!-- The wrapper zooms by --zoom; the price chip scales by 1/--zoom to keep its size -->
       <div
         class="pointer-events-none relative scale-(--zoom) group-hover:[--zoom:2] motion-safe:transition-transform motion-safe:duration-150"
-        :class="isPriceZoomed(card) ? '[--zoom:1.5]' : '[--zoom:1]'"
+        :class="isPriceZoomed(card, index) ? '[--zoom:1.5]' : '[--zoom:1]'"
       >
         <USkeleton
           v-if="!loaded.has(index)"
@@ -96,7 +105,7 @@ const spreadStyle = (index: number) => {
         <span
           v-if="priceLabel(card)"
           class="absolute bottom-2 left-1/2 origin-bottom -translate-x-1/2 scale-[calc(1/var(--zoom))] whitespace-nowrap rounded-md bg-black/80 px-2 py-0.5 text-xs font-semibold tabular-nums text-white group-hover:opacity-100 motion-safe:transition-[scale,opacity] motion-safe:duration-150"
-          :class="isPriceZoomed(card) ? 'opacity-100' : 'opacity-0'"
+          :class="isPriceZoomed(card, index) ? 'opacity-100' : 'opacity-0'"
         >{{ priceLabel(card) }}</span>
       </div>
     </li>

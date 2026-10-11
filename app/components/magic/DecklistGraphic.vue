@@ -9,7 +9,7 @@
 // + 12.5rem of padding, gaps and the vertical label
 import { SIDEBOARD_SECTION } from '#shared/utils'
 import type { DecklistHeaderInfo } from '~/composables/useDecklistContext'
-import { expandCopies, type DeckCard } from '~/utils/deck-cards'
+import { expandCopies, lastCopyIndexes, type DeckCard } from '~/utils/deck-cards'
 import { formatEur, formatTix, type DeckPrice } from '~/utils/deck-price'
 import type { DeckStats } from '~/utils/deck-stats'
 import DecklistArt from './DecklistArt.vue'
@@ -48,6 +48,10 @@ const {
   onCurveHover,
   onPriceHover
 } = useDeckHighlight()
+
+// The last copy of each card, per pile: the one that zooms when the price is hovered
+const mainLastCopies = computed(() => lastCopyIndexes(mainPiles.value))
+const sideboardLastCopies = computed(() => lastCopyIndexes([sideboardCopies.value])[0])
 
 // Price of each card by key, for the chip on the hovered card
 const priceLines = computed(() =>
@@ -120,6 +124,7 @@ const artCard = computed(() => pickDeckArtCard(cards))
           :cards="pile"
           :highlight="highlight"
           :price-lines="priceLines"
+          :last-copies="mainLastCopies[pileIndex]"
         />
       </div>
 
@@ -133,6 +138,7 @@ const artCard = computed(() => pickDeckArtCard(cards))
             :cards="sideboardCopies"
             :highlight="highlight"
             :price-lines="priceLines"
+            :last-copies="sideboardLastCopies"
             spread
           />
         </div>
