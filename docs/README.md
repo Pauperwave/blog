@@ -16,6 +16,7 @@ Master index of all project documentation.
 | `architecture/decklist-visual-view.md` | How the decklist "Vista visuale" works: overlay and exportable graphic, interactive stats with hover highlighting, colored mana curve, `?preview` share links, sideboard card types from `type_line` | Component reference |
 | `architecture/2026-07-10-magic-cards-component-research.md` | Reverse-engineering notes for WotC's `<magic-cards>` web component (fan/hand layouts): what's verified live vs. extrapolated, with matched-articles data (`2026-07-10-magic-cards-fan-hand-matches.tsv`) | Component reference |
 | `audits/2026-07-11-build-performance-investigation.md` | Investigation into `bun run generate` slowness and a silent exit-code-5 failure; one fix reverted after breaking prod images, one kept | Performance history |
+| `audits/2026-10-15-full-application-audit.md` | Whole-app audit: lint/test/typecheck baseline, 107/142 sitemap URLs 404 in production (older articles), card-DB refresh guard, MDC escaping, a11y, dependency advisories, docs drift, prioritised fix order | Health / backlog source |
 | `PROGRESS.md` | Backward-looking curated architecture/decision history (ADRs); what's actually been done | Architecture history |
 | `CHANGELOG.md` | Raw commit-by-commit trail, newest first; the play-by-play behind `PROGRESS.md`'s distilled history | Architecture history |
 | `BACKLOG.md` | Forward-looking, committed work items ranked by priority (P1–P3) with effort estimates (S/M/L) | Roadmap |
@@ -79,7 +80,8 @@ docs/
 │   ├── 2026-07-10-magic-cards-component-research.md
 │   └── 2026-07-10-magic-cards-fan-hand-matches.tsv
 ├── audits/
-│   └── 2026-07-11-build-performance-investigation.md
+│   ├── 2026-07-11-build-performance-investigation.md
+│   └── 2026-10-15-full-application-audit.md
 └── superpowers/
     └── specs/
         └── 2026-05-19-editor-button-design.md
