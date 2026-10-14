@@ -5,7 +5,7 @@ language: english
 tags:
   - Meta
 date: 2026-08-24
-author: Pietro Bragioto
+author: Giorgio Venditti
 thumbnail: /assets/blog/arts/mh2-240-the-underworld-cookbook.jpg
 published: true
 ---

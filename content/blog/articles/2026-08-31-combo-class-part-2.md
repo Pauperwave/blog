@@ -5,7 +5,7 @@ language: english
 tags:
   - Meta
 date: 2026-08-31
-author: Pietro Bragioto
+author: Giorgio Venditti
 thumbnail: /assets/blog/arts/stx-90-unwilling-ingredient.jpg
 published: true
 ---

@@ -5,7 +5,7 @@ language: english
 tags:
   - Meta
 date: 2026-10-08
-author: Pietro Bragioto
+author: Giorgio Venditti
 thumbnail: /assets/blog/arts/snc-218-rocco-cabaretti-caterer.jpg
 published: true
 ---

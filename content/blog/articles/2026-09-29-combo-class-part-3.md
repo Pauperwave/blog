@@ -5,7 +5,7 @@ language: english
 tags:
   - Meta
 date: 2026-09-29
-author: Pietro Bragioto
+author: Giorgio Venditti
 thumbnail: /assets/blog/arts/food-token.jpg
 published: true
 ---
