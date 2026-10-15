@@ -29,29 +29,6 @@ const getAuthorSlugsAtBuildTime = (): string[] => {
     .map(name => name.toLowerCase().replace(/\s+/g, "-"))
 }
 
-/**
- * True for /articles/YYYY-MM-DD-... routes older than 3 months.
- *
- * Used by both prerender hooks below: `prerender:routes` removes old articles
- * from the initial crawl seed, but Nitro's crawler re-adds any route it finds
- * a link to (e.g. from an author page or "related articles" widget) via its
- * own `extractLinks` pass, which runs *after* `prerender:routes` and knows
- * nothing about this cutoff — so old articles kept reappearing in the final
- * build regardless of the seed-time filter. `prerender:generate` re-applies
- * this check per-route as each one is actually about to render, catching
- * routes rediscovered by the crawler too. Skipping there also happens before
- * Nitro extracts links from the page, so it prevents that stale article's own
- * OG image (and further links) from being discovered and rendered as well.
- */
-const isOldArticleRoute = (route: string): boolean => {
-  const match = route.match(/^\/articles\/(\d{4}-\d{2}-\d{2})/)
-  if (!match || !match[1]) return false
-
-  const threeMonthsAgo = new Date()
-  threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3)
-  return new Date(match[1]) < threeMonthsAgo
-}
-
 // https://nuxt.com/docs/api/configuration/nuxt-config
 // Commit hash + date come from git at build time so they also show locally;
 // Vercel's VERCEL_GIT_COMMIT_SHA wins when set. Both fall back to "" if git
@@ -266,25 +243,17 @@ export default defineNuxtConfig({
       // that default would suggest (something may already be overriding it).
       concurrency: 4
     },
-    // Filter routes to only prerender recent articles (< 3 months), and add
-    // author routes explicitly since the crawler can't discover them (see
-    // getAuthorSlugsAtBuildTime above).
+    // Add author routes explicitly since the crawler can't discover them (see
+    // getAuthorSlugsAtBuildTime above). A 3-month cutoff used to filter old
+    // articles out of the prerender here — removed 2026-10-15: on this fully
+    // static deployment "not prerendered" means 404 in production, see
+    // docs/audits/2026-10-15-full-application-audit.md (F1).
     hooks: {
       'prerender:routes' (routes: Set<string>) {
-        for (const route of routes) {
-          if (isOldArticleRoute(route)) routes.delete(route)
-        }
-
         routes.add('/authors')
         for (const slug of getAuthorSlugsAtBuildTime()) {
           routes.add(`/authors/${slug}`)
         }
-      },
-      // Catches old articles the crawler re-adds via extractLinks after the
-      // 'prerender:routes' seed-time filter above already ran — see
-      // isOldArticleRoute's own comment for why both hooks are needed.
-      'prerender:generate' (route) {
-        if (isOldArticleRoute(route.route)) route.skip = true
       }
     }
   },

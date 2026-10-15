@@ -36,9 +36,9 @@ The page collections `articles`, `tutorials`, `decklists`, `reports`, `spoilers`
 
 `app/pages/articles/[id].vue` resolves a route by trying each of the five page collections in turn (`queryCollection(collection).path(route.path).first()`) — there's no single canonical "content" collection.
 
-### Prerendering is hybrid, not pure SSG
+### Prerendering is full SSG — everything linked gets prerendered
 
-Nitro preset is `vercel`. `routeRules` in `nuxt.config.ts` prerenders `/`, `/articles`, `/docs/**` and `/articles/**`, but a `prerender:routes` hook filters `/articles/**` down to only articles dated within the last 3 months before the crawl runs — older articles are served on-demand, not statically generated. Relevant if an older article's content changes don't seem to "take" after `nuxt generate`.
+Nitro preset is `vercel`, but the deploy is 100% static (`nuxt generate` → `.vercel/output/static`, no serverless functions). Every published page is prerendered: `routeRules` covers `/`, `/articles`, `/articles/**`, `/docs/**`, `/authors/**`, and a `prerender:routes` hook adds `/authors/*` explicitly (author cards navigate programmatically, so the crawler can't discover them). A 3-month cutoff used to skip older articles here — removed 2026-10-15 because on a static deploy "not prerendered" means 404 in production (see `docs/audits/2026-10-15-full-application-audit.md`, F1). Don't reintroduce partial prerendering without a runtime fallback.
 
 ### Component auto-import prefixing drives MDC shortcode naming
 

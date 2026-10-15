@@ -5,7 +5,7 @@ Quick reference guide for AI agents working on this project.
 ## Technology Stack
 - **Package manager:** pnpm
 - **Runtime:** Node (standalone scripts run via `node`, no transpiler needed)
-- **Framework:** Nuxt 4 (hybrid prerendering via `nitro.preset: 'vercel'` — only `/`, `/articles`, `/docs/**` and recent articles (last 3 months) are prerendered; older articles and `/editor*` are server-rendered on demand)
+- **Framework:** Nuxt 4 (full SSG via `nitro.preset: 'vercel'` + `nuxt generate` — every published page is prerendered, no serverless functions; the former 3-month article cutoff was removed 2026-10-15, see `docs/audits/2026-10-15-full-application-audit.md` F1)
 - **UI:** Vue 3 + Nuxt UI 4
 - **Styling:** Tailwind CSS
 - **Language:** TypeScript (strict mode)

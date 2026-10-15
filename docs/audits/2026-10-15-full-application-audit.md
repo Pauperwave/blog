@@ -100,6 +100,16 @@ kind of mistaken assumption that audit documents for `_ipx`.
 Whatever is chosen, remove the stale claim from `CLAUDE.md` and `docs/AGENTS.md` (F13) and exclude
 whatever is not served from `sitemap.xml`.
 
+**Resolution (2026-10-15): option 1 implemented.** A timed full `pnpm run generate` without the
+cutoff settled it: 985 routes prerendered in 141.7 s, 3 m 53 s wall total, 0 errors, 0 OG-image
+timeouts, 133 article pages (vs 26), 225 MB output — doubling the routes added only ~22 s of
+prerender over the cutoff build, because the real July costs (OG cold-start, `_ipx`/filter-query
+waste) were fixed separately. `isOldArticleRoute` and the filtering in both prerender hooks were
+removed from `nuxt.config.ts` (the authors-route part of `prerender:routes` stays); `CLAUDE.md` and
+`docs/AGENTS.md` were corrected (also fixing the `/editor*` leftover in F13). The 404s disappear at
+the next production deploy; the week-long `s-maxage=604800` on cached 404 responses expires on its
+own or at the next cache-busting deploy.
+
 ## F2 — `::magic-cards` resolves card images live in the browser (Medium)
 
 `app/components/magic/Card.vue` uses `useScryfallCard`, which calls `fetch()` against
