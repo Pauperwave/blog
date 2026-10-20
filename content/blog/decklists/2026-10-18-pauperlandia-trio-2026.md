@@ -19,6 +19,8 @@ published: true
 
 N.B. Split in Finals
 
+N.B. 2 Squalifica del precedente finalista "Le Cime di Rapa" composto da Elia Ricci, Lorenzo Limongiello e Danielle Apollonio, causa "Lista Irregolare" di quest'ultimo.
+
 ## Finalist-Split: FNM Delta Comics
 
 ::magic-decklist
@@ -156,146 +158,7 @@ Sideboard
 1 Thorn of the Black Rose
 ::
 
-## Finalist-Split: Cime di Rapa
-
-::magic-decklist
----
-name: R Madness
-player: Elia Ricci
-placement: Finalist
-headerGradient: monored
----
-Creatures
-4 Voldaren Epicure
-4 Kessig Flamebreather
-4 Sneaky Snacker
-3 Guttersnipe
-
-Instants
-4 Lava Dart
-4 Lightning Bolt
-4 Fiery Temper
-3 Fireblast
-
-Sorceries
-3 Faithless Looting
-4 Grab the Prize
-4 Highway Robbery
-
-Lands
-19 Mountain
-
-Sideboard
-4 Pyroblast
-2 Red Elemental Blast
-3 Smash to Smithereens
-2 Cast into the Fire
-2 Relic of Progenitus
-1 Gorilla Shaman
-1 Searing Blaze
-::
-
-::magic-decklist
----
-name: Grixis Control
-player: Daniele Apollonio
-placement: Finalist
-headerGradient: grixis
----
-Creatures
-4 Baleful Strix
-3 Murmuring Mystic
-2 Thorn of the Black Rose
-
-Instants
-2 Cut Down
-2 Spell Pierce
-4 Counterspell
-2 Doom Blade
-1 Lose Focus
-4 Plunder the Trollshaws
-1 Suffocating Fumes
-4 Snuff Out
-
-Sorceries
-4 Preordain
-1 Extract a Confession
-4 Lórien Revealed
-
-Artifacts
-2 Campfire
-2 Soul-Guide Lantern
-
-Lands
-1 Dimir Aqueduct
-4 Contaminated Aquifer
-1 Volatile Fjord
-1 Bojuka Bog
-10 Snow-Covered Island
-1 Swamp
-
-Sideboard
-4 Hydroblast
-2 Blue Elemental Blast
-3 Vandalblast
-2 Arms of Hadar
-2 Mind Extraction
-1 Annul
-1 Soul-Guide Lantern
-::
-
-::magic-decklist
----
-name: Jund
-player: Lorenzo Limongiello
-placement: Finalist
-headerGradient: jund
----
-Creatures
-3 Krark-Clan Shaman
-4 Refurbished Familiar
-4 Writhing Chrysalis
-1 Nyxborn Hydra
-
-Instants
-1 Toxin Analysis
-4 Cast Down
-2 Eviscerator's Insight
-4 Fanatical Offering
-1 Pulse of Murasa
-
-Sorceries
-4 Cleansing Wildfire
-
-Artifacts
-1 Blood Fountain
-3 Nihil Spellbomb
-4 Ichor Wellspring
-2 Lembas
-1 Tithing Blade // Consuming Sepulcher
-
-Enchantment
-1 Makeshift Munitions
-
-Lands
-4 Drossforge Bridge
-4 Slagwoods Bridge
-2 Vault of Whispers
-4 Twisted Landscape
-3 Snow-Covered Swamp
-2 Snow-Covered Forest
-1 Snow-Covered Mountain
-
-Sideboard
-4 Duress
-4 Weather the Storm
-3 Breath Weapon
-2 Troublemaker Ouphe
-1 Ancient Grudge
-1 Terminate
-::
-
-## Top 4: I Pezzenti di Phyrexia
+## Finalist: I Pezzenti di Phyrexia
 
 ::magic-decklist
 ---
@@ -556,4 +419,128 @@ Sideboard
 3 Arms of Hadar
 2 Duress
 2 Relic of Progenitus
+::
+
+## Top 4: Me, you and Marzaboi
+
+::magic-decklist
+---
+name: Gardens
+player: Alessio Sposito 
+placement: Top 4
+headerGradient: golgari
+---
+Creatures
+2 Crypt Rats
+2 Thorn of the Black Rose
+1 Sagu Wildling // Roost Seek
+4 Troll of Khazad-dûm
+
+Instants
+3 Defile
+4 Cast Down
+3 Eviscerator's Insight
+4 Fanatical Offering
+1 Reckoner's Bargain
+1 Pulse of Murasa
+1 Snuff Out
+
+Sorceries
+2 Drown in Sorrow
+
+Artifacts
+2 Campfire
+3 Nihil Spellbomb
+4 Ichor Wellspring
+3 Lembas
+2 Tithing Blade // Consuming Sepulcher
+
+Lands
+1 Haunted Mire
+4 Khalni Garden
+2 Bojuka Bog
+1 Witch's Cottage
+8 Swamp
+2 Desert
+
+Sideboard
+4 Duress
+4 Weather the Storm
+3 Troublemaker Ouphe
+2 Accursed Marauder
+1 Drown in Sorrow
+1 Nihil Spellbomb
+::
+
+::magic-decklist
+---
+name: Elves
+player: Filippo Acquotti
+placement: Top 4
+headerGradient: monogreen
+---
+Creatures
+4 Elvish Mystic
+4 Fyndhorn Elves
+4 Quirion Ranger
+4 Masked Vandal
+4 Priest of Titania
+4 Timberwatch Elf
+4 Avenging Hunter
+3 Sagu Wildling // Roost Seek
+4 Generous Ent
+4 Nyxborn Hydra
+
+Sorceries
+2 Land Grant
+4 Winding Way
+4 Lead the Stampede
+
+Lands
+1 Gingerbread Cabin
+10 Forest
+
+Sideboard
+4 Faerie Macabre
+4 Spinewoods Paladin
+3 Monstrous Emergence
+3 Vitu-Ghazi Inspector
+1 Viridian Longbow
+::
+
+::magic-decklist
+---
+name: R Madness
+player: Francesco Marzano
+placement: Top 4
+headerGradient: monored
+---
+Creatures
+4 Voldaren Epicure
+4 Sneaky Snacker
+4 Guttersnipe
+
+Instants
+4 Lava Dart
+4 Lightning Bolt
+2 Twinned Vision
+4 Fiery Temper
+4 Fireblast
+
+Sorceries
+4 Grab the Prize
+4 Highway Robbery
+
+Artifacts
+3 Melded Moxite
+
+Lands
+19 Mountain
+
+Sideboard
+4 Pyroblast
+3 Red Elemental Blast
+4 Smash to Smithereens
+2 Crimson Fleet Commodore
+2 Searing Blaze
 ::
