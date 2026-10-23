@@ -26,7 +26,7 @@ I will highlight the flaws in the philosophy that led the Pauper Format Panel to
 ---
 cards:
   - Hawkeye's Bow
-  - Seeker of Skybreak ()
+  - Seeker of Skybreak
 caption: Seeker of Skybreak's combo
 ---
 ::
