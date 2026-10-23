@@ -18,6 +18,7 @@ description: Registro delle modifiche tecniche al progetto
 - **Ora:** il nuovo modulo `modules/card-component-transformer.ts` risolve le carte durante la build (DB locale per un nome semplice, API Scryfall per `(SET)`/`(SET) 123` e per le carte fuori dal DB) e aggiunge `images` / `image` al blocco; i componenti mostrano l'`<img>` già nell'HTML, con `loading="lazy"`. `useScryfallCard` è stato rimosso, `toArtCropUrl` è passato in `shared/utils/scryfall.ts`. Il fetch verso Scryfall (cache per URL, User-Agent, 500 ms tra le richieste e retry su 429, il limite di `/cards/named` è 2 al secondo) è condiviso con il tooltip transformer in `modules/utils/card-images.ts`.
 - **Da sapere:** una carta senza immagine ora produce un warning nel log di build, non solo un alert nella pagina. Le carte `Mountain` & co. in `::magic-cards` usano la stampa del DB (le terre base sono fissate a Theros Beyond Death), come mazzi e tooltip. Dopo aver cambiato il transformer serve `pnpm run clean:content`: Nuxt Content non rilancia `beforeParse` sui file invariati.
 - **Contenuto:** `Seeker of Skybreak ()` in `2026-07-05-descent-into-madness.md` (parentesi vuote, la carta non veniva mai trovata) corretto in `Seeker of Skybreak`.
+- **Backtick inline:** `getFencedRanges` (`modules/utils/fence.ts`) protegge ora anche i code span inline, non solo i blocchi recintati. Prima un esempio come `` `[[Card Name]]` `` in `content/docs/componenti.md` veniva trasformato in un tooltip vero (con 404 su Scryfall per "Card Name"); vale per tutti i transformer che usano l'utility.
 
 ## 2026-10-11
 

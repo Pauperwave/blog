@@ -58,6 +58,36 @@ describe('getFencedRanges / isInsideFence', () => {
     expect(isInsideFence(content.indexOf('[[Real Card]]'), ranges)).toBe(false)
   })
 
+  it('protects an inline code span but not the text around it', () => {
+    const content = 'syntax `[[Card Name]]` here, and [[Real Card]] there'
+    const ranges = getFencedRanges(content)
+
+    expect(isInsideFence(content.indexOf('[[Card Name]]'), ranges)).toBe(true)
+    expect(isInsideFence(content.indexOf('[[Real Card]]'), ranges)).toBe(false)
+  })
+
+  it('closes an inline code span with a run of the same length', () => {
+    const content = 'use ``a ` [[Span Card]]`` then [[Real Card]]'
+    const ranges = getFencedRanges(content)
+
+    expect(isInsideFence(content.indexOf('[[Span Card]]'), ranges)).toBe(true)
+    expect(isInsideFence(content.indexOf('[[Real Card]]'), ranges)).toBe(false)
+  })
+
+  it('does not protect text after a backtick that is never closed', () => {
+    const content = 'a stray ` backtick, then [[Real Card]]'
+    const ranges = getFencedRanges(content)
+
+    expect(isInsideFence(content.indexOf('[[Real Card]]'), ranges)).toBe(false)
+  })
+
+  it('does not let an inline code span cross a blank line', () => {
+    const content = ['an open `tick', '', '[[Real Card]] and a closing` tick'].join('\n')
+    const ranges = getFencedRanges(content)
+
+    expect(isInsideFence(content.indexOf('[[Real Card]]'), ranges)).toBe(false)
+  })
+
   it('protects everything after an unclosed fence rather than treating it as live', () => {
     const content = ['```md', '[[Fenced Card]]', 'no closing fence below'].join('\n')
     const ranges = getFencedRanges(content)

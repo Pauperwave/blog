@@ -1,10 +1,18 @@
 /**
- * Character ranges of fenced code blocks (``` or ~~~, any length ≥ 3, including
- * nested fences opened by a longer run of the same character per CommonMark).
+ * Character ranges of code in the markdown: fenced blocks and inline code spans.
  * `[[Card Name]]` occurrences inside these ranges are illustrative "raw syntax"
  * examples (e.g. in docs) and must not be transformed.
  */
 export function getFencedRanges(content: string): Array<[number, number]> {
+  const blocks = getFenceBlockRanges(content)
+  return [...blocks, ...getInlineCodeRanges(content, blocks)]
+}
+
+/**
+ * Fenced code blocks (``` or ~~~, any length ≥ 3, including nested fences opened
+ * by a longer run of the same character per CommonMark).
+ */
+function getFenceBlockRanges(content: string): Array<[number, number]> {
   const ranges: Array<[number, number]> = []
   const lines = content.split('\n')
 
@@ -39,6 +47,25 @@ export function getFencedRanges(content: string): Array<[number, number]> {
   // Unclosed fence (malformed markdown) — protect through end of file rather than
   // treat the rest of the document as live content.
   if (fenceChar !== null) ranges.push([fenceStart, content.length])
+
+  return ranges
+}
+
+// A run of N backticks, then the next run of exactly N (CommonMark code span)
+const inlineCodePattern = /(?<!`)(`+)(?!`)([\s\S]*?[^`])\1(?!`)/g
+
+/** Inline code spans outside the fenced blocks; like CommonMark's, they never cross a blank line */
+function getInlineCodeRanges(
+  content: string,
+  blocks: Array<[number, number]>
+): Array<[number, number]> {
+  const ranges: Array<[number, number]> = []
+
+  for (const match of content.matchAll(inlineCodePattern)) {
+    if (isInsideFence(match.index, blocks)) continue
+    if (/\n[ \t]*\r?\n/.test(match[2]!)) continue
+    ranges.push([match.index, match.index + match[0].length])
+  }
 
   return ranges
 }
