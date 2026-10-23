@@ -43,7 +43,7 @@ export interface ParsedCard {
 /**
  * Type definitions for Scryfall API
  */
-export type ScryfallImageType = 'normal' | 'large' | 'small' | 'art_crop'
+export type ScryfallImageType = 'grid' | 'display' | 'thumb' | 'art'
 
 export interface ScryfallParsedCard {
   name: string
@@ -54,19 +54,19 @@ export interface ScryfallParsedCard {
 export interface ScryfallCard {
   name: string
   image_uris?: {
-    normal?: string
-    large?: string
-    small?: string
-    art_crop?: string
+    grid?: string
+    display?: string
+    thumb?: string
+    art?: string
     png?: string
   }
   card_faces?: Array<{
     name?: string
     image_uris?: {
-      normal?: string
-      large?: string
-      small?: string
-      art_crop?: string
+      grid?: string
+      display?: string
+      thumb?: string
+      art?: string
       png?: string
     }
   }>

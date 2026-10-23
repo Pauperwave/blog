@@ -20,7 +20,7 @@ const REQUEST_DELAY_MS = 100
 interface PrintingResponse {
   name: string
   set: string
-  image_uris?: { normal?: string }
+  image_uris?: { grid?: string }
 }
 
 export async function applyBasicLandOverrides(
@@ -36,7 +36,7 @@ export async function applyBasicLandOverrides(
     }
 
     const printing = await response.json() as PrintingResponse
-    const imageUrl = printing.image_uris?.normal
+    const imageUrl = printing.image_uris?.grid
     if (printing.name !== name || printing.set !== SET_CODE || !imageUrl) {
       throw new Error(
         `Unexpected printing for ${SET_CODE}/${number}: expected ${name}, got ${printing.name} (${printing.set})`

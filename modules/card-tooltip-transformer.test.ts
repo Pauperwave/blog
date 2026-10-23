@@ -19,10 +19,10 @@ function createTestDatabase(): Database.Database {
     INSERT INTO cards (name, mana_cost, image_url, back_image_url) VALUES (?, ?, ?, ?)
   `)
 
-  stmt.run('Lightning Bolt', '{R}', 'https://cards.scryfall.io/normal/en/lea/1.jpg', null)
-  stmt.run('Counterspell', '{U}{U}', 'https://cards.scryfall.io/normal/en/lea/2.jpg', null)
-  stmt.run('Grizzly Bears', '{1}{G}', 'https://cards.scryfall.io/normal/en/lea/3.jpg', null)
-  stmt.run('Delver of Secrets', '{U}', 'https://cards.scryfall.io/normal/front/1/delver.jpg', 'https://cards.scryfall.io/normal/back/1/delver.jpg')
+  stmt.run('Lightning Bolt', '{R}', 'https://cards.scryfall.io/grid/en/lea/1.webp', null)
+  stmt.run('Counterspell', '{U}{U}', 'https://cards.scryfall.io/grid/en/lea/2.webp', null)
+  stmt.run('Grizzly Bears', '{1}{G}', 'https://cards.scryfall.io/grid/en/lea/3.webp', null)
+  stmt.run('Delver of Secrets', '{U}', 'https://cards.scryfall.io/grid/front/1/delver.webp', 'https://cards.scryfall.io/grid/back/1/delver.webp')
 
   return db
 }
@@ -40,7 +40,7 @@ describe('Card Tooltip Transformer', () => {
         .get(cardName) as { image_url: string } | undefined
       const imageUrl = row?.image_url || null
 
-      expect(imageUrl).toBe('https://cards.scryfall.io/normal/en/lea/1.jpg')
+      expect(imageUrl).toBe('https://cards.scryfall.io/grid/en/lea/1.webp')
 
       db.close()
     })
@@ -56,9 +56,9 @@ describe('Card Tooltip Transformer', () => {
         return { name: cardName, imageUrl: row?.image_url || null }
       })
 
-      expect(results[0]?.imageUrl).toBe('https://cards.scryfall.io/normal/en/lea/1.jpg')
-      expect(results[1]?.imageUrl).toBe('https://cards.scryfall.io/normal/en/lea/2.jpg')
-      expect(results[2]?.imageUrl).toBe('https://cards.scryfall.io/normal/en/lea/3.jpg')
+      expect(results[0]?.imageUrl).toBe('https://cards.scryfall.io/grid/en/lea/1.webp')
+      expect(results[1]?.imageUrl).toBe('https://cards.scryfall.io/grid/en/lea/2.webp')
+      expect(results[2]?.imageUrl).toBe('https://cards.scryfall.io/grid/en/lea/3.webp')
 
       db.close()
     })
@@ -84,8 +84,8 @@ describe('Card Tooltip Transformer', () => {
         .prepare('SELECT image_url, back_image_url FROM cards WHERE name = ? LIMIT 1')
         .get('Delver of Secrets') as ImageRow | undefined
 
-      expect(row?.image_url).toBe('https://cards.scryfall.io/normal/front/1/delver.jpg')
-      expect(row?.back_image_url).toBe('https://cards.scryfall.io/normal/back/1/delver.jpg')
+      expect(row?.image_url).toBe('https://cards.scryfall.io/grid/front/1/delver.webp')
+      expect(row?.back_image_url).toBe('https://cards.scryfall.io/grid/back/1/delver.webp')
 
       db.close()
     })
@@ -120,13 +120,13 @@ describe('Card Tooltip Transformer', () => {
   describe('component output format', () => {
     it('should generate correct component syntax with image URL', () => {
       const cardName = 'Lightning Bolt'
-      const imageUrl = 'https://cards.scryfall.io/normal/en/lea/1.jpg'
+      const imageUrl = 'https://cards.scryfall.io/grid/en/lea/1.webp'
 
       const component = imageUrl
         ? `:MagicCardTooltip{name="${cardName}" image="${imageUrl}"}`
         : `:MagicCardTooltip{name="${cardName}"}`
 
-      expect(component).toBe(':MagicCardTooltip{name="Lightning Bolt" image="https://cards.scryfall.io/normal/en/lea/1.jpg"}')
+      expect(component).toBe(':MagicCardTooltip{name="Lightning Bolt" image="https://cards.scryfall.io/grid/en/lea/1.webp"}')
     })
 
     it('should generate component without image URL when not found', () => {
@@ -143,35 +143,35 @@ describe('Card Tooltip Transformer', () => {
     it('should handle set parameter', () => {
       const cardName = 'Lightning Bolt'
       const set = 'UMA'
-      const imageUrl = 'https://cards.scryfall.io/normal/en/lea/1.jpg'
+      const imageUrl = 'https://cards.scryfall.io/grid/en/lea/1.webp'
 
       const component = imageUrl
         ? `:MagicCardTooltip{name="${cardName}" set="${set}" image="${imageUrl}"}`
         : `:MagicCardTooltip{name="${cardName}" set="${set}"}`
 
-      expect(component).toBe(':MagicCardTooltip{name="Lightning Bolt" set="UMA" image="https://cards.scryfall.io/normal/en/lea/1.jpg"}')
+      expect(component).toBe(':MagicCardTooltip{name="Lightning Bolt" set="UMA" image="https://cards.scryfall.io/grid/en/lea/1.webp"}')
     })
 
     it('should include a backImage attribute for double-faced cards', () => {
       const cardName = 'Delver of Secrets'
-      const imageUrl = 'https://cards.scryfall.io/normal/front/1/delver.jpg'
-      const backImageUrl = 'https://cards.scryfall.io/normal/back/1/delver.jpg'
+      const imageUrl = 'https://cards.scryfall.io/grid/front/1/delver.webp'
+      const backImageUrl = 'https://cards.scryfall.io/grid/back/1/delver.webp'
 
       const backImageAttr = backImageUrl ? ` backImage="${backImageUrl}"` : ''
       const component = `:MagicCardTooltip{name="${cardName}" image="${imageUrl}"${backImageAttr}}`
 
-      expect(component).toBe(':MagicCardTooltip{name="Delver of Secrets" image="https://cards.scryfall.io/normal/front/1/delver.jpg" backImage="https://cards.scryfall.io/normal/back/1/delver.jpg"}')
+      expect(component).toBe(':MagicCardTooltip{name="Delver of Secrets" image="https://cards.scryfall.io/grid/front/1/delver.webp" backImage="https://cards.scryfall.io/grid/back/1/delver.webp"}')
     })
 
     it('should omit the backImage attribute for single-faced cards', () => {
       const cardName = 'Lightning Bolt'
-      const imageUrl = 'https://cards.scryfall.io/normal/en/lea/1.jpg'
+      const imageUrl = 'https://cards.scryfall.io/grid/en/lea/1.webp'
       const backImageUrl: string | null = null
 
       const backImageAttr = backImageUrl ? ` backImage="${backImageUrl}"` : ''
       const component = `:MagicCardTooltip{name="${cardName}" image="${imageUrl}"${backImageAttr}}`
 
-      expect(component).toBe(':MagicCardTooltip{name="Lightning Bolt" image="https://cards.scryfall.io/normal/en/lea/1.jpg"}')
+      expect(component).toBe(':MagicCardTooltip{name="Lightning Bolt" image="https://cards.scryfall.io/grid/en/lea/1.webp"}')
     })
   })
 })

@@ -358,12 +358,12 @@ Ci sono due varianti di questo componente:
   ```md \[Versione minimale]
   [[Swords to Plowshares]]
   ```
-  Risultato: :magic-card-tooltip{image="https://cards.scryfall.io/normal/front/b/4/b4e9c870-23c0-413a-ae39-265f09da16d1.jpg?1782682546" name="Swords to Plowshares"}
+  Risultato: :magic-card-tooltip{image="https://cards.scryfall.io/grid/front/b/4/b4e9c870-23c0-413a-ae39-265f09da16d1.webp?1782682546" name="Swords to Plowshares"}
 - con la specifica del nome (`name`) e dell'espansione (`set`): spiegazione;
   ```md \[Versione minimale]
   [[Swords to Plowshares | spg]]
   ```
-  Risultato: :magic-card-tooltip{image="https://cards.scryfall.io/normal/front/8/0/80590c26-285e-4b7b-9ee5-62956dba4ad7.jpg?1782689989" name="Swords to Plowshares" set="spg"}
+  Risultato: :magic-card-tooltip{image="https://cards.scryfall.io/grid/front/8/0/80590c26-285e-4b7b-9ee5-62956dba4ad7.webp?1782689989" name="Swords to Plowshares" set="spg"}
 
 Il componente `magic-card-tooltip` viene riutilizzato all'interno del componente `magic-decklist` e del componente `magic-sideboard-guide` come potrai notare più avanti.
 

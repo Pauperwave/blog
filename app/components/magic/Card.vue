@@ -15,7 +15,7 @@ const {
 
 const { cardData, loading, error } = useScryfallCard(card)
 
-const imageUrl = computed(() => extractImageUrl(cardData.value, 'normal'))
+const imageUrl = computed(() => extractImageUrl(cardData.value, 'grid'))
 </script>
 
 <template>

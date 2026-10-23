@@ -12,7 +12,7 @@ const SCRYFALL_API_BASE = 'https://api.scryfall.com'
  */
 export function extractImageUrl(
   card: ScryfallCard | null,
-  imageType: ScryfallImageType = 'normal'
+  imageType: ScryfallImageType = 'grid'
 ): string | null {
   if (!card) return null
 
@@ -35,7 +35,7 @@ export function extractImageUrl(
  */
 export function extractBackImageUrl(
   card: ScryfallCard | null,
-  imageType: ScryfallImageType = 'normal'
+  imageType: ScryfallImageType = 'grid'
 ): string | null {
   return card?.card_faces?.[1]?.image_uris?.[imageType] ?? null
 }

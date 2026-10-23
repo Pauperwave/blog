@@ -47,23 +47,23 @@ interface ScryfallCard {
     pauper?: string
   }
   image_uris?: {
-    small: string
-    normal: string
-    large: string
+    thumb: string
+    grid: string
+    display: string
     png: string
-    art_crop: string
-    border_crop: string
+    art: string
+    crop: string
   }
   card_faces?: Array<{
     name?: string
     mana_cost?: string
     image_uris?: {
-      small: string
-      normal: string
-      large: string
+      thumb: string
+      grid: string
+      display: string
       png: string
-      art_crop: string
-      border_crop: string
+      art: string
+      crop: string
     }
   }>
   rarity: string
@@ -214,18 +214,18 @@ async function importPauperCards(db: Database.Database): Promise<void> {
     // Priority 1: Top-level image_uris (normal, adventure, split, flip, etc.)
     if (card.image_uris) {
       manaCost = card.mana_cost || ''
-      imageUrl = card.image_uris.normal || card.image_uris.large || ''
+      imageUrl = card.image_uris.grid || card.image_uris.display || ''
     }
     // Priority 2: card_faces with images (transform, modal_dfc, reversible_card)
     else if (frontFace?.image_uris) {
       manaCost = frontFace.mana_cost || card.mana_cost || ''
-      imageUrl = frontFace.image_uris.normal || frontFace.image_uris.large || ''
+      imageUrl = frontFace.image_uris.grid || frontFace.image_uris.display || ''
 
       // Second face's own image (transform/modal_dfc cards flip to a distinct back face;
       // reversible_card's "back" is just an alternate art of the same front, still useful)
       const backFace = card.card_faces?.[1]
       if (backFace?.image_uris) {
-        backImageUrl = backFace.image_uris.normal || backFace.image_uris.large || ''
+        backImageUrl = backFace.image_uris.grid || backFace.image_uris.display || ''
       }
     }
     // Fallback: no images found

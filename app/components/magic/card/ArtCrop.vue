@@ -15,7 +15,7 @@ const { card, caption = '', crop = undefined } = defineProps<Props>()
 
 const { cardData, loading, error } = useScryfallCard(card)
 
-const artCropUrl = computed(() => extractImageUrl(cardData.value, 'art_crop'))
+const artCropUrl = computed(() => extractImageUrl(cardData.value, 'art'))
 
 const heightClass = computed(() => {
   if (!crop) return '' // No fixed height - show full art crop

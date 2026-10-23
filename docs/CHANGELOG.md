@@ -3,6 +3,15 @@ title: Changelog
 description: Registro delle modifiche tecniche al progetto
 ---
 
+## 2026-10-23
+
+### Fix: immagini delle carte in WebP (deprecazione dei JPEG di Scryfall)
+
+- **Cosa cambia Scryfall:** dal 1° gennaio 2027 spariscono i JPEG `small`, `large`, `border_crop` e `art_crop` (e l'hotlink del PNG). Le chiavi sostitutive in `image_uris` sono WebP: `thumb`, `grid` (ex `normal`), `display`, `crop`, `art` (ex `art_crop`). Il vecchio `normal` resta solo come `jpeg`. Fonte: [New WebP images + JPEG Deprecations](https://scryfall.com/blog/new-webp-images-jpeg-deprecations-237).
+- **Codice:** `ScryfallImageType` e i tipi di `image_uris` usano le chiavi nuove; `Card.vue` legge `grid`, `ArtCrop.vue` legge `art`, `toArtCropUrl` sostituisce `/grid/` con `/art/` (prima `/normal/` con `/art_crop/`, che avrebbe smesso di funzionare). `scripts/download-bulk-data.ts` e `scripts/basic-lands.ts` salvano l'URL `grid`.
+- **`cards.db`** rigenerato: tutte le 11091 carte (e le 112 facce posteriori) puntano a `grid` WebP.
+- **Non toccato:** il redirect `/cards/named?format=image` (ultimo fallback del transformer e `useCardImage`) risolve ancora al JPEG `large`. La doc di `/cards/named` non elenca le versioni nuove e `version=grid` oggi viene ignorato.
+
 ## 2026-10-11
 
 ### Fix: slug con lettere accentate e legature
