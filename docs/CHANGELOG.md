@@ -12,6 +12,13 @@ description: Registro delle modifiche tecniche al progetto
 - **`cards.db`** rigenerato: tutte le 11091 carte (e le 112 facce posteriori) puntano a `grid` WebP.
 - **Non toccato:** il redirect `/cards/named?format=image` (ultimo fallback del transformer e `useCardImage`) risolve ancora al JPEG `large`. La doc di `/cards/named` non elenca le versioni nuove e `version=grid` oggi viene ignorato.
 
+### Perf: `::magic-cards` e `::magic-card-art-crop` risolti a build time
+
+- **Prima:** `Card.vue` e `ArtCrop.vue` chiamavano `api.scryfall.com/cards/named` dal browser di ogni lettore (`useScryfallCard`), una volta per carta e a ogni visita. L'HTML prerenderizzato conteneva solo lo skeleton, e la doc di Scryfall indica un limite di 2 richieste al secondo su quell'endpoint.
+- **Ora:** il nuovo modulo `modules/card-component-transformer.ts` risolve le carte durante la build (DB locale per un nome semplice, API Scryfall per `(SET)`/`(SET) 123` e per le carte fuori dal DB) e aggiunge `images` / `image` al blocco; i componenti mostrano l'`<img>` già nell'HTML, con `loading="lazy"`. `useScryfallCard` è stato rimosso, `toArtCropUrl` è passato in `shared/utils/scryfall.ts`. Il fetch verso Scryfall (cache per URL, User-Agent, 500 ms tra le richieste e retry su 429, il limite di `/cards/named` è 2 al secondo) è condiviso con il tooltip transformer in `modules/utils/card-images.ts`.
+- **Da sapere:** una carta senza immagine ora produce un warning nel log di build, non solo un alert nella pagina. Le carte `Mountain` & co. in `::magic-cards` usano la stampa del DB (le terre base sono fissate a Theros Beyond Death), come mazzi e tooltip. Dopo aver cambiato il transformer serve `pnpm run clean:content`: Nuxt Content non rilancia `beforeParse` sui file invariati.
+- **Contenuto:** `Seeker of Skybreak ()` in `2026-07-05-descent-into-madness.md` (parentesi vuote, la carta non veniva mai trovata) corretto in `Seeker of Skybreak`.
+
 ## 2026-10-11
 
 ### Fix: slug con lettere accentate e legature

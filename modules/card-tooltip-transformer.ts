@@ -10,12 +10,14 @@ import {
   whitespace,
   global
 } from 'magic-regexp'
-import { join, dirname } from 'path'
-import { existsSync } from 'fs'
-import { fileURLToPath } from 'url'
 
 import { buildLog, extractImageUrl, extractBackImageUrl } from '#shared/utils'
-import type { ScryfallCard } from '#shared/types'
+import {
+  openCardDatabase,
+  findDatabaseImages,
+  fetchScryfallCard,
+  type CardImages
+} from './utils/card-images'
 import { onContentFileBeforeParse } from './utils/content-hook'
 import { getFencedRanges, isInsideFence } from './utils/fence'
 
@@ -29,22 +31,7 @@ export default defineNuxtModule({
     buildLog('🚀 [Card Tooltip Transformer] MODULE LOADED!')
 
     // Initialize database connection at build time
-    const dbPath = join(
-      dirname(fileURLToPath(import.meta.url)), '..', 'server', 'database', 'cards.db'
-    )
-    let db: BetterSqlite3.Database | null = null
-
-    if (existsSync(dbPath)) {
-      try {
-        const Database = (await import('better-sqlite3')).default
-        db = new Database(dbPath, { readonly: true })
-        buildLog(`✅ [Card Tooltip Transformer] Database loaded (better-sqlite3): ${dbPath}`)
-      } catch (error) {
-        buildLog(`⚠️  [Card Tooltip Transformer] Failed to load database: ${error}`)
-      }
-    } else {
-      buildLog(`⚠️  [Card Tooltip Transformer] Database not found at: ${dbPath}`)
-    }
+    const db = await openCardDatabase()
 
     // Hook into content:file:beforeParse to transform markdown before parsing
     onContentFileBeforeParse(nuxt, async (ctx) => {
@@ -72,11 +59,6 @@ interface CardTransformation {
   set?: string
   imageUrl?: string
   backImageUrl?: string
-}
-
-interface CardImages {
-  image: string | null
-  backImage: string | null
 }
 
 // Pattern for [[cardName | set]] (with pipe separator)
@@ -107,69 +89,36 @@ async function getCardImages(
   // The local DB is built from Scryfall's "oracle_cards" bulk file, which only ever
   // stores one representative printing per card (no set column) — it can't answer a
   // set-specific request, so skip it and go straight to Scryfall when a set is given.
-  if (!set && db) {
-    try {
-      const row = db.prepare(`
-        SELECT image_url, back_image_url FROM cards WHERE name = ? LIMIT 1
-      `).get(cardName) as { image_url: string, back_image_url: string | null } | undefined
-
-      if (row?.image_url) {
-        return { image: row.image_url, backImage: row.back_image_url || null }
-      }
-    } catch (error) {
-      buildLog(
-        `⚠️  [Card Tooltip Transformer] Failed to query database for "${cardName}": ${error}`
-      )
-    }
+  if (!set) {
+    const fromDatabase = findDatabaseImages(db, cardName)
+    if (fromDatabase) return fromDatabase
   }
 
   // Fallback to Scryfall API. A set was requested, or the card isn't in the local
   // (Pauper-only) database — fetch the full card object so double-faced cards can
   // also resolve a back-face image, not just the lazy front-face redirect URL.
-  try {
-    const setParam = set ? `&set=${encodeURIComponent(set)}` : ''
-    const lookupUrl = `${SCRYFALL_API_BASE}/cards/named?exact=${encodeURIComponent(cardName)}${setParam}`
-    buildLog(
-      `🌐 [Card Tooltip Transformer] Fetching from Scryfall: ${cardName}${set ? ` (${set})` : ''}`
-    )
+  const setParam = set ? `&set=${encodeURIComponent(set)}` : ''
+  const card = await fetchScryfallCard(
+    `${SCRYFALL_API_BASE}/cards/named?exact=${encodeURIComponent(cardName)}${setParam}`
+  )
+  if (card) {
+    const front = extractImageUrl(card)
+      || `${SCRYFALL_API_BASE}/cards/named?exact=${encodeURIComponent(cardName)}${setParam}&format=image`
+    const back = extractBackImageUrl(card)
 
-    // Scryfall rejects requests without an identifying User-Agent (returns 400) —
-    // Node's built-in fetch doesn't set one by default, unlike curl/browsers.
-    const response = await fetch(lookupUrl, {
-      headers: {
-        'User-Agent': 'PauperwaveBlog/1.0 (+https://blog.pauperwave.org)',
-        'Accept': 'application/json'
-      }
-    })
-    if (response.ok) {
-      const card = await response.json() as ScryfallCard
-      const front = extractImageUrl(card)
-        || `${SCRYFALL_API_BASE}/cards/named?exact=${encodeURIComponent(cardName)}${setParam}&format=image`
-      const back = extractBackImageUrl(card)
+    // If the reference names the card's *back* face directly (e.g.
+    // [[Insectile Aberration]] for Delver of Secrets), show that face
+    // first — the flip control then reveals the front face instead.
+    const backFaceName = card.card_faces?.[1]?.name
+    const requestedIsBackFace = !!back && !!backFaceName
+      && backFaceName.toLowerCase() === cardName.toLowerCase()
 
-      // If the reference names the card's *back* face directly (e.g.
-      // [[Insectile Aberration]] for Delver of Secrets), show that face
-      // first — the flip control then reveals the front face instead.
-      const backFaceName = card.card_faces?.[1]?.name
-      const requestedIsBackFace = !!back && !!backFaceName
-        && backFaceName.toLowerCase() === cardName.toLowerCase()
-
-      return requestedIsBackFace
-        ? { image: back, backImage: front }
-        : { image: front, backImage: back }
-    }
-
-    buildLog(
-      `⚠️  [Card Tooltip Transformer] Scryfall lookup failed for "${cardName}" (${response.status})`
-    )
-  } catch (error) {
-    buildLog(
-      `⚠️  [Card Tooltip Transformer] Failed to fetch from Scryfall for "${cardName}": ${error}`
-    )
+    return requestedIsBackFace
+      ? { image: back, backImage: front }
+      : { image: front, backImage: back }
   }
 
   // Last resort: the lazy image redirect endpoint, without back-face support.
-  const setParam = set ? `&set=${encodeURIComponent(set)}` : ''
   return {
     image: `${SCRYFALL_API_BASE}/cards/named?exact=${encodeURIComponent(cardName)}${setParam}&format=image`,
     backImage: null

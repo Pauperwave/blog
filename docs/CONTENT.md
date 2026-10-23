@@ -584,7 +584,7 @@ caption: "Le opzioni a confronto"
 
 | Prop | Type | Required | Description |
 |------|------|----------|--------------|
-| `cards` | `string[]` | Yes | Card names, resolved client-side at runtime via the Scryfall API (`useScryfallCard`, cached in `useState`) — same mechanism as `magic-card-art-crop`, *not* the build-time DB lookup used by `[[Card Name]]` |
+| `cards` | `string[]` | Yes | Card names (`Name`, `Name (SET)` or `Name (SET) 123`). Their images are resolved at build time by `modules/card-component-transformer.ts` — the local DB for a plain name, the Scryfall API when a set is given or the card isn't in the DB — and added to the block as an `images` prop; the reader's browser never calls Scryfall. A card that can't be found logs a build warning and shows a "Card not found" alert |
 | `caption` | `string` | No | Text shown below the cards |
 | `arch` | `number` | No | Total rotation spread in degrees (default: `20.5`, matching the WotC blog's fan component). The step between adjacent cards is `arch / count`, so the spread converges toward `arch` as more cards are added rather than growing past it. Only applies to `layout: fan`. |
 | `layout` | `'fan' \| 'hand'` | No | `fan` (default) rotates cards around a shared pivot. `hand` skips rotation entirely — cards spread horizontally in fixed 60%-of-own-width steps and rise into a shallow arc (center card frontmost), like holding a hand of cards. ⚠️ The `hand` values were only partially captured live from magic.wizards.com (2 of 5 slot positions) and extrapolated for the rest — treat it as a reasonable approximation, not a byte-exact reproduction like `fan` is. |

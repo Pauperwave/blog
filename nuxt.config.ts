@@ -154,6 +154,7 @@ export default defineNuxtConfig({
     "nuxt-swiper",
     "@vercel/analytics",
     "./modules/card-tooltip-transformer",
+    "./modules/card-component-transformer",
     "./modules/decklist-transformer",
     "./modules/sideboard-guide-transformer",
   ],

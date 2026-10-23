@@ -38,9 +38,10 @@ Queste funzioni vengono chiamate **direttamente dai moduli Nuxt in fase di build
 
 ## Build-Time Content Transformation
 
-Tre moduli custom in `modules/`, registrati come ultimi in `nuxt.config.ts`, agganciati all'hook `content:file:beforeParse` di `@nuxt/content` — riscrivono il markdown grezzo **prima** che venga parsato:
+Quattro moduli custom in `modules/`, registrati come ultimi in `nuxt.config.ts`, agganciati all'hook `content:file:beforeParse` di `@nuxt/content` — riscrivono il markdown grezzo **prima** che venga parsato:
 
 - **`modules/card-tooltip-transformer.ts`** — converte `[[Card Name]]` / `[[Card Name|set]]` in `:MagicCardTooltip{...}`, risolvendo l'immagine da `cards.db` con fallback sulla Scryfall API (`GET /cards/named?exact=...&format=image`).
+- **`modules/card-component-transformer.ts`** — risolve a build time le immagini di `::magic-cards` e `::magic-card-art-crop` (blocco YAML o forma inline): DB per un nome semplice, Scryfall API se c'è un set (`Name (SET)` / `Name (SET) 123`) o la carta non è nel DB. Aggiunge il risultato al blocco — `images` (una URL `grid` per carta, `null` se non trovata) o `image` (URL `art`) — lasciando intatte le prop dell'autore. La logica sta in `modules/utils/card-components.ts` (pura, testata) e `modules/utils/card-images.ts` (DB e fetch condivisi col tooltip: cache per URL, User-Agent, 500 ms tra le richieste e retry su 429). Una carta non trovata scrive un warning nel log di build e il componente mostra l'alert "Card not found".
 - **`modules/decklist-transformer.ts`** — converte le decklist testuali dentro `::magic-decklist` in dati strutturati chiamando `getCardsByNames()`.
 - **`modules/sideboard-guide-transformer.ts`** — stessa logica per i blocchi `::magic-sideboard-guide`.
 
@@ -54,7 +55,7 @@ Il componente riceve dati **già risolti** (mana cost, immagine) direttamente ne
 
 - **`app/components/magic/Decklist.vue`** — renderizza main deck / sideboard con simboli di mana e preview immagine su hover (desktop) / modal (mobile), copia decklist in formato MTGO.
 - **`app/components/magic/card/Tooltip.vue`** — tooltip hover/tap per i riferimenti `[[Card]]` inline.
-- **`app/components/magic/Card.vue`** — visualizzazione di una singola carta (usata internamente da `Cards.vue`, non richiamata direttamente nei contenuti); questo fa fetch diretto dalla Scryfall API (non dal DB locale), supporta sintassi set/collector number.
+- **`app/components/magic/Card.vue`** e **`app/components/magic/card/ArtCrop.vue`** — mostrano l'URL `image` che il `card-component-transformer` ha già aggiunto (`Card.vue` è usato internamente da `Cards.vue`, non richiamato direttamente nei contenuti); senza `image` mostrano l'alert "Card not found". Il browser del lettore non chiama Scryfall.
 
 ---
 

@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import { fanCardTransform, cardFilter, handPosition, handZIndex } from '~/utils/magic-cards-layout'
 
-interface Props {
+const {
+  cards, images = [], caption = '', arch = 20.5, layout = 'fan'
+} = defineProps<{
   cards: string[]
+  /** The grid image URL of each card (null if not found), added at build time */
+  images?: Array<string | null>
   caption?: string
   /** Total rotation arch in degrees, as WotC's `overall-arch` (default: 20.5). Fan-only */
   arch?: number
@@ -13,14 +17,7 @@ interface Props {
    * automatic infrastructure).
    */
   layout?: 'fan' | 'hand'
-}
-
-const {
-  cards,
-  caption = '',
-  arch = 20.5,
-  layout = 'fan'
-} = defineProps<Props>()
+}>()
 
 const MAX_CARDS = 7
 
@@ -50,9 +47,10 @@ function handCardStyle(idx: number, total: number) {
     regardless of which config the page author chose. -->
     <div class="md:hidden flex gap-4 overflow-x-auto justify-center mask-[linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
       <MagicCard
-        v-for="card in visibleCards"
+        v-for="(card, idx) in visibleCards"
         :key="card"
         :card="card"
+        :image="images[idx]"
         class="shrink-0"
       />
     </div>
@@ -80,6 +78,7 @@ function handCardStyle(idx: number, total: number) {
         <MagicCard
           v-if="layout === 'hand'"
           :card="card"
+          :image="images[idx]"
           img-class="w-48 lg:w-56"
           class="hand-card"
           :style="handCardStyle(idx, visibleCards.length)"
@@ -89,6 +88,7 @@ function handCardStyle(idx: number, total: number) {
         <MagicCard
           v-else
           :card="card"
+          :image="images[idx]"
           img-class="w-48 lg:w-56"
           class="fan-card"
           :style="{

@@ -40,6 +40,11 @@ export function extractBackImageUrl(
   return card?.card_faces?.[1]?.image_uris?.[imageType] ?? null
 }
 
+/** Scryfall serves the art under the same path as the grid image */
+export function toArtCropUrl(imageUrl: string): string {
+  return imageUrl.replace('/grid/', '/art/')
+}
+
 /**
  * Parse card string into name + optional set + collector number
  * Formats supported:
@@ -75,7 +80,7 @@ export function parseCardString(raw: string): ScryfallParsedCard {
 
 /**
  * Build Scryfall API URL for exact card search
- * Used by Display and ArtCrop components
+ * Used by the card component transformer to resolve card images at build time
  */
 export function buildScryfallCardUrl(parsed: ScryfallParsedCard): string {
   if (parsed.set && parsed.collector_number) {

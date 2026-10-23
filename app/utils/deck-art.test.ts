@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { pickDeckArtCard, toArtCropUrl } from './deck-art'
+import { pickDeckArtCard } from './deck-art'
 
 describe('deck art', () => {
   describe('pickDeckArtCard', () => {
@@ -25,12 +25,6 @@ describe('deck art', () => {
 
     it('returns undefined for an empty deck', () => {
       expect(pickDeckArtCard([])).toBeUndefined()
-    })
-  })
-
-  describe('toArtCropUrl', () => {
-    it('swaps the grid image for the art', () => {
-      expect(toArtCropUrl('https://cards.scryfall.io/grid/front/f/6/id.webp?1')).toBe('https://cards.scryfall.io/art/front/f/6/id.webp?1')
     })
   })
 })

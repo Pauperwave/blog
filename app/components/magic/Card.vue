@@ -1,27 +1,21 @@
 <script setup lang="ts">
-import { useScryfallCard } from '~/composables/useScryfallCard'
-import { extractImageUrl } from '#shared/utils'
-
-interface Props {
-  card: string
-  /** Tailwind width classes for the card image and its loading skeleton. */
-  imgClass?: string
-}
+import { parseCardString } from '#shared/utils'
 
 const {
-  card,
-  imgClass = 'max-w-sm mx-auto'
-} = defineProps<Props>()
-
-const { cardData, loading, error } = useScryfallCard(card)
-
-const imageUrl = computed(() => extractImageUrl(cardData.value, 'grid'))
+  card, image = null, imgClass = 'max-w-sm mx-auto'
+} = defineProps<{
+  card: string
+  /** The grid image URL, added at build time by the card-component-transformer */
+  image?: string | null
+  /** Tailwind width classes for the card image. */
+  imgClass?: string
+}>()
 </script>
 
 <template>
   <div>
     <UAlert
-      v-if="error"
+      v-if="!image"
       color="error"
       variant="soft"
       title="Card not found"
@@ -29,16 +23,12 @@ const imageUrl = computed(() => extractImageUrl(cardData.value, 'grid'))
       icon="i-lucide-alert-circle"
     />
     <img
-      v-else-if="imageUrl && !loading"
-      :src="imageUrl"
-      :alt="cardData?.name"
+      v-else
+      :src="image"
+      :alt="parseCardString(card).name"
+      loading="lazy"
       :class="[imgClass, 'rounded-lg shadow-lg']"
       style="aspect-ratio: 265 / 370"
     >
-    <USkeleton
-      v-else
-      :class="[imgClass, 'rounded-lg']"
-      style="aspect-ratio: 265 / 370"
-    />
   </div>
 </template>

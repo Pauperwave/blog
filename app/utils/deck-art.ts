@@ -15,8 +15,3 @@ export function pickDeckArtCard<T extends ArtCandidate>(cards: T[]): T | undefin
       undefined
     )
 }
-
-/** Scryfall serves the art under the same path as the grid image */
-export function toArtCropUrl(imageUrl: string): string {
-  return imageUrl.replace('/grid/', '/art/')
-}

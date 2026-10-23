@@ -1,21 +1,18 @@
 <script setup lang="ts">
-import { useScryfallCard } from '~/composables/useScryfallCard'
-import { extractImageUrl } from '#shared/utils'
+import { parseCardString } from '#shared/utils'
 
-interface Props {
+const {
+  card, image = null, caption = '', crop = undefined
+} = defineProps<{
   card: string
+  /** The art image URL, added at build time by the card-component-transformer */
+  image?: string | null
   caption?: string
   crop?: {
     height?: 'small' | 'medium' | 'large' | 'xl'
     position?: 'top' | 'center' | 'bottom'
   }
-}
-
-const { card, caption = '', crop = undefined } = defineProps<Props>()
-
-const { cardData, loading, error } = useScryfallCard(card)
-
-const artCropUrl = computed(() => extractImageUrl(cardData.value, 'art'))
+}>()
 
 const heightClass = computed(() => {
   if (!crop) return '' // No fixed height - show full art crop
@@ -45,6 +42,9 @@ const imageClasses = computed(() => {
 
   if (crop) {
     classes.push('object-cover', heightClass.value, positionClass.value)
+  } else {
+    // Scryfall's art is 626x457: reserves the space before the image loads
+    classes.push('aspect-626/457')
   }
 
   return classes.filter(Boolean).join(' ')
@@ -55,7 +55,7 @@ const imageClasses = computed(() => {
 <template>
   <div class="my-8">
     <UAlert
-      v-if="error"
+      v-if="!image"
       color="error"
       variant="soft"
       title="Card not found"
@@ -63,13 +63,14 @@ const imageClasses = computed(() => {
       icon="i-lucide-alert-circle"
     />
     <figure
-      v-else-if="artCropUrl && !loading"
+      v-else
       class="space-y-2"
     >
       <img
-        :src="artCropUrl"
-        :alt="caption || cardData?.name"
+        :src="image"
+        :alt="caption || parseCardString(card).name"
         :class="imageClasses"
+        loading="lazy"
       >
       <figcaption
         v-if="caption"
@@ -78,10 +79,5 @@ const imageClasses = computed(() => {
         {{ caption }}
       </figcaption>
     </figure>
-    <USkeleton
-      v-else
-      class="w-full rounded-xl aspect-5/3"
-      :class="heightClass"
-    />
   </div>
 </template>
